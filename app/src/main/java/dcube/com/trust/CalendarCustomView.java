@@ -42,7 +42,6 @@ public class CalendarCustomView extends LinearLayout
 	private String dateFormat2;
 	private String dateFormat3;
 
-
 	// current displayed month
 	private Calendar currentDate = Calendar.getInstance();
 

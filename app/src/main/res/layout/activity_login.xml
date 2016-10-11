@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="dcube.com.trust.LoginActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:text="SignIn"
+        android:textColor="@color/white"
+        android:textSize="29sp"
+        android:id="@+id/signin_text"/>
+
+    <LinearLayout
+        android:layout_width="650dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="360dp"
+        android:background="@drawable/containerbox"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+
+    </LinearLayout>
+
+</RelativeLayout>

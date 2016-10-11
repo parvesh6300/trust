@@ -28,8 +28,7 @@
             android:textColor="@color/white"
             android:layout_centerInParent="true"
             android:textSize="20sp"/>
-        
-        
+
     </RelativeLayout>
 
     <dcube.com.trust.CalendarCustomView
