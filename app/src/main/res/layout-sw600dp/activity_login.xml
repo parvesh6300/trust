@@ -51,7 +51,7 @@
         <RelativeLayout
             android:layout_width="350dp"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal">
 
             <ImageView
@@ -75,7 +75,7 @@
         <LinearLayout
             android:layout_width="350dp"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
             android:weightSum="2">
@@ -141,9 +141,21 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@color/white"
             android:text="SignIn"
+            android:id="@+id/signin"
             android:gravity="center"
             android:textSize="30sp"
             android:typeface="monospace"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/greyed_out"
+            android:text="Forgot Password"
+            android:id="@+id/forgot"
+            android:typeface="monospace"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
 
     </LinearLayout>
 
