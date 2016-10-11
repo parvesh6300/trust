@@ -19,7 +19,7 @@ public class SplashActivity extends Activity {
                     e.printStackTrace();
                 }finally{
 
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, CalendarActivity.class);
                     startActivity(intent);
                 }
             }

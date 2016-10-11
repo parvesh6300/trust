@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="CalendarCustomView">
+        <attr name="dateFormat" format="string"/>
+    </declare-styleable>
+
 </resources>

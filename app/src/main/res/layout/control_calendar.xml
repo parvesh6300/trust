@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/purple">
+
+
+	<!-- date toolbar -->
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:background="@color/purple">
+
+		<!-- prev button -->
+		<ImageView
+			android:id="@+id/calendar_prev_button"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_centerVertical="true"
+			android:layout_alignParentLeft="true"
+			android:src="@drawable/circle_calendar"
+			android:layout_marginLeft="60dp"/>
+
+		<!-- date title -->
+		<TextView
+			android:id="@+id/calendar_month_display"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="@android:style/TextAppearance.Medium"
+			android:textColor="@color/white"
+			android:text="Month"
+			android:paddingTop="5dp"
+			android:layout_centerHorizontal="true"/>
+
+		<TextView
+			android:id="@+id/calendar_year_display"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="@android:style/TextAppearance.Medium"
+			android:textColor="@color/white"
+			android:text="year"
+			android:paddingBottom="10dp"
+			android:layout_alignParentBottom="true"
+			android:layout_centerHorizontal="true"/>
+
+
+		<!-- next button -->
+		<ImageView
+			android:id="@+id/calendar_next_button"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_centerVertical="true"
+			android:layout_alignParentRight="true"
+			android:src="@drawable/circle_calendar"
+			android:layout_marginRight="60dp"/>
+
+
+	</RelativeLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="0.5dp"
+		android:background="#659ECC"
+		android:layout_alignParentBottom="true"
+		/>
+	<!-- days header -->
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:background="@color/colorPrimary"
+		android:gravity="center">
+
+	<LinearLayout
+		android:id="@+id/calendar_header"
+		android:layout_width="320dp"
+		android:layout_height="match_parent"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:layout_gravity="center_horizontal">
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center_horizontal"
+			android:textColor="@color/white"
+			android:text="S"/>
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center_horizontal"
+			android:textColor="@color/white"
+			android:text="M"/>
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center_horizontal"
+			android:textColor="@color/white"
+			android:text="T"/>
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center_horizontal"
+			android:textColor="@color/white"
+			android:text="W"/>
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center_horizontal"
+			android:textColor="@color/white"
+			android:text="T"/>
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center_horizontal"
+			android:textColor="@color/white"
+			android:text="F"/>
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center_horizontal"
+			android:textColor="@color/white"
+			android:text="S"/>
+	</LinearLayout>
+
+	</RelativeLayout>
+
+	<!-- days view -->
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:background="#EDEDED">
+
+	<GridView
+		android:id="@+id/calendar_grid"
+		android:layout_width="320dp"
+		android:layout_height="match_parent"
+		android:numColumns="7"
+		android:layout_marginTop="10dp"
+		android:layout_gravity="center_horizontal"/>
+
+	</RelativeLayout>
+
+</LinearLayout>
