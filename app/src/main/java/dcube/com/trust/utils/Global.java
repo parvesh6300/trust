@@ -11,7 +11,6 @@ import java.util.HashMap;
 
 public class Global extends Application {
 
-    //Updated your class body:
     boolean readonly;
     boolean run;
     boolean fblogin;

@@ -10,19 +10,18 @@ import android.widget.TextView;
 
 import dcube.com.trust.R;
 
-public class FinanceAdapter extends BaseAdapter {
+public class NurseAdapter extends BaseAdapter {
 
     private Context context;
 
     public Integer[] mThumbIds = {
-            R.drawable.stockmanagement, R.drawable.salesanalytics,
-            R.drawable.money_bag, R.drawable.revenue,
-            R.drawable.expenses, R.drawable.support
+            R.drawable.addnewclient, R.drawable.searchclient,
+            R.drawable.support
     };
 
     private static LayoutInflater inflater = null;
 
-    public FinanceAdapter(Context context) {
+    public NurseAdapter(Context context) {
 
         this.context = context;
 
@@ -52,26 +51,18 @@ public class FinanceAdapter extends BaseAdapter {
 
     }
 
-
     @Override
     public View getView(final int position, final View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         Holder holder = new Holder();
 
         final View rowView;
-        rowView = inflater.inflate(R.layout.finance_grid_item, null);
+        rowView = inflater.inflate(R.layout.nurse_grid_item, null);
 
         holder.image = (ImageView) rowView.findViewById(R.id.gridimage);
         holder.notify = (TextView) rowView.findViewById(R.id.notify);
 
         holder.image.setImageResource(mThumbIds[position]);
-
-        if(position==0)
-        {
-            holder.notify.setVisibility(View.VISIBLE);
-            holder.notify.setText("2");
-
-        }
 
         /*rowView.setOnClickListener(new View.OnClickListener() {
             @Override

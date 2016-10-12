@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dcube.com.trust.AddClientActivity"
+    android:background="@drawable/background_1">
+
+    <LinearLayout
+        android:layout_width="500dp"
+        android:layout_height="700dp"
+        android:background="@drawable/form_back"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:elevation="4dp"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name  "
+                android:textSize="20sp"
+                android:typeface="monospace"
+                android:textColor="@color/purple"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:layout_width="280dp"
+                android:layout_height="match_parent"
+                android:typeface="monospace"
+                android:textColor="@color/textColor"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age Group"
+                android:textSize="20sp"
+                android:typeface="monospace"
+                android:textColor="@color/purple"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <Spinner
+                android:id="@+id/age_group"
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:prompt="@string/spinner_title"
+                android:layout_centerVertical="true"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact"
+                android:textSize="20sp"
+                android:typeface="monospace"
+                android:textColor="@color/purple"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/contact_text"/>
+
+            <EditText
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:typeface="monospace"
+                android:inputType="phone"
+                android:text="+255"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/textColor"
+                android:id="@+id/areacode"
+                android:layout_toRightOf="@id/contact_text"/>
+
+            <EditText
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:typeface="monospace"
+                android:inputType="phone"
+                android:textColor="@color/textColor"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/areacode"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emer. Contact"
+                android:textSize="20sp"
+                android:typeface="monospace"
+                android:textColor="@color/purple"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/emer_contact_text"/>
+
+            <EditText
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:typeface="monospace"
+                android:inputType="phone"
+                android:text="+255"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/textColor"
+                android:id="@+id/emer_areacode"
+                android:layout_toRightOf="@id/emer_contact_text"/>
+
+            <EditText
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:typeface="monospace"
+                android:inputType="phone"
+                android:textColor="@color/textColor"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/emer_areacode"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="170dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Medical History"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                android:typeface="monospace"
+                android:id="@+id/historytext"
+                android:textColor="@color/purple"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:typeface="monospace"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/historytext"
+                android:textColor="@color/textColor"
+                android:layout_centerInParent="true"
+                android:gravity="top|left"
+                android:padding="5dp"
+                android:background="@drawable/textarea"/>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/nurse">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/radioselected"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/nurse_radio"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nurse/Mid wife"
+                    android:textSize="20sp"
+                    android:id="@+id/nurse_text"
+                    android:typeface="monospace"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/textColor"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/finance">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/radiounselected"
+                    android:id="@+id/finance_radio"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Finance"
+                    android:id="@+id/finance_text"
+                    android:textSize="20sp"
+                    android:layout_centerInParent="true"
+                    android:typeface="monospace"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

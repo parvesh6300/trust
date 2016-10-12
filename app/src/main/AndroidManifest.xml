@@ -18,8 +18,14 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".FinanceHomeActivity"></activity>
+        <activity android:name=".LoginActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FinanceHomeActivity" />
+        <activity android:name=".NurseHomeActivity" />
+        <activity android:name=".AddClientActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

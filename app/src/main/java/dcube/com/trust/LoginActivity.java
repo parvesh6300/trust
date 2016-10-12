@@ -20,6 +20,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     TextView forgot;
     TextView signin;
 
+    static String role = "nurse";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         signin = (TextView) findViewById(R.id.signin);
         forgot.setPaintFlags(forgot.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-
         nurse.setOnClickListener(this);
         finance.setOnClickListener(this);
         signin.setOnClickListener(this);
-
     }
 
     @Override
@@ -56,6 +55,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 finance_radio.setImageResource(R.drawable.radiounselected);
                 finance_text.setTextColor(getResources().getColor(R.color.greyed_out));
 
+                role = "nurse";
+
                 break;
             }
 
@@ -67,12 +68,19 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 nurse_radio.setImageResource(R.drawable.radiounselected);
                 nurse_text.setTextColor(getResources().getColor(R.color.greyed_out));
 
+                role = "finance";
                 break;
             }
 
             case R.id.signin:
             {
-                Intent i = new Intent(LoginActivity.this,FinanceHomeActivity.class);
+                Intent i;
+
+                if(role.equals("nurse"))
+                     i = new Intent(LoginActivity.this,NurseHomeActivity.class);
+                else
+                     i = new Intent(LoginActivity.this,FinanceHomeActivity.class);
+
                 startActivity(i);
             }
         }
