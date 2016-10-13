@@ -15,7 +15,9 @@ public class NurseAdapter extends BaseAdapter {
     private Context context;
 
     public Integer[] mThumbIds = {
-            R.drawable.addnewclient, R.drawable.searchclient,
+            R.drawable.addnewclient,
+            R.drawable.searchclient,
+            R.drawable.products,
             R.drawable.support
     };
 

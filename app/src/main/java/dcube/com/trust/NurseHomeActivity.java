@@ -24,7 +24,6 @@ public class NurseHomeActivity extends Activity {
         gridView = (GridView) findViewById(R.id.grid_view);
         gridView.setAdapter(adapter);
 
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -35,11 +34,13 @@ public class NurseHomeActivity extends Activity {
 
                         startActivity(new Intent(NurseHomeActivity.this,AddClientActivity.class));
                         break;
+
+                    case 1:
+
+                        startActivity(new Intent(NurseHomeActivity.this,SearchClientActivity.class));
+                        break;
                 }
             }
         });
-
-
-
     }
 }

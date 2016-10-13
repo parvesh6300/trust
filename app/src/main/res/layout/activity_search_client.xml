@@ -16,12 +16,69 @@
         android:id="@+id/toplogo"/>
 
     <RelativeLayout
-        android:layout_width="500dp"
+        android:layout_width="550dp"
         android:layout_height="70dp"
         android:background="@drawable/searchback"
         android:layout_below="@id/toplogo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:id="@+id/search_layout">
+
+        <EditText
+            android:layout_width="450dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="Search Clients, UID, Name, Contact"
+            android:typeface="monospace"
+            android:layout_marginLeft="20dp"
+            android:textColorHint="@color/graytext"
+            android:textSize="20sp"/>
+        
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/searchbutton"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="550dp"
+        android:layout_height="70dp"
+        android:background="@drawable/searchback"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/search_layout">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"/>
+
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="90dp"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:typeface="monospace"
+            android:text="No Results"/>
+        
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/searchlist"/>
 
     </RelativeLayout>
 
