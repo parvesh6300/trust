@@ -4,16 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="dcube.com.trust.AddClientActivity"
+    tools:ignore="MissingPrefix"
     android:background="@drawable/background_1">
 
     <LinearLayout
         android:layout_width="500dp"
-        android:layout_height="700dp"
+        android:layout_height="750dp"
         android:background="@drawable/form_back"
         android:orientation="vertical"
         android:layout_marginTop="50dp"
         android:elevation="4dp"
         android:layout_centerHorizontal="true">
+
+
+        <TextView
+            android:background="@drawable/button_background"
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:text="Add Client"
+            android:id="@+id/addclient"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:typeface="monospace"/>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="400dp"
@@ -177,67 +202,342 @@
 
         </RelativeLayout>
 
-
-        <LinearLayout
-            android:layout_width="350dp"
-            android:layout_height="50dp"
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="70dp"
             android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_gravity="center_horizontal">
 
-            <RelativeLayout
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/nurse">
+                android:layout_height="30dp"
+                android:text="History of Contraceptives used"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                android:typeface="monospace"
+                android:id="@+id/contra_text"
+                android:textColor="@color/purple"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/radioselected"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:id="@+id/nurse_radio"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_below="@id/contra_text"
+                android:weightSum="3">
 
-                <TextView
+                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nurse/Mid wife"
-                    android:textSize="20sp"
-                    android:id="@+id/nurse_text"
+                    android:text="YES"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
                     android:typeface="monospace"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/textColor"/>
+                    />
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/finance">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/radiounselected"
-                    android:id="@+id/finance_radio"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true" />
-
-                <TextView
+                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Finance"
-                    android:id="@+id/finance_text"
-                    android:textSize="20sp"
-                    android:layout_centerInParent="true"
+                    android:text="NO"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="At one time, not now"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace"
+                    />
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Sex"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                android:typeface="monospace"
+                android:id="@+id/sex_text"
+                android:textColor="@color/purple"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_below="@id/sex_text"
+                android:layout_marginTop="10dp"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace"
+                    />
+
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Have Children"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                android:typeface="monospace"
+                android:id="@+id/child_text"
+                android:textColor="@color/purple"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_below="@id/child_text"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="YES"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
                     android:typeface="monospace"/>
 
-            </RelativeLayout>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NO"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace" />
 
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="190dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Ever Tested for HIV?"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                android:typeface="monospace"
+                android:id="@+id/hiv_text"
+                android:textColor="@color/purple"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_below="@id/hiv_text"
+                android:weightSum="4">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes, Within 6 months"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes, Within last 2 years"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes, More than 2 years"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace"/>
+
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="210dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="How you heard about clinic?"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                android:typeface="monospace"
+                android:id="@+id/heard_text"
+                android:textColor="@color/purple"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_below="@id/heard_text"
+                android:weightSum="5">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Social Media"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Radio"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Friends / Family "
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Flier"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="At an Event"
+                    android:buttonTint="@color/textColor"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp"
+                    android:typeface="monospace"
+                    />
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        <TextView
+            android:background="@drawable/button_background"
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:text="Add Client"
+            android:id="@+id/addclient"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:typeface="monospace"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+            
         </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 

@@ -29,8 +29,7 @@ public class NurseHomeActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-
-                switch (i)
+                switch(i)
                 {
                     case 0:
 

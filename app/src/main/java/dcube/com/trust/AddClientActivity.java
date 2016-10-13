@@ -20,6 +20,5 @@ public class AddClientActivity extends Activity {
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_dropdown_item, spinnerArray);
         age_group.setAdapter(spinnerArrayAdapter);
-
     }
 }
