@@ -7,29 +7,28 @@
     tools:ignore="MissingPrefix"
     android:background="@drawable/background_1">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:text="New User Registration"
+        android:id="@+id/addclienttext"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:typeface="monospace"/>
+
     <LinearLayout
         android:layout_width="500dp"
         android:layout_height="750dp"
         android:background="@drawable/form_back"
         android:orientation="vertical"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:elevation="4dp"
+        android:layout_below="@id/addclienttext"
         android:layout_centerHorizontal="true">
-
-
-        <TextView
-            android:background="@drawable/button_background"
-            android:layout_width="360dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:text="Add Client"
-            android:id="@+id/addclient"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:typeface="monospace"/>
-
 
         <ScrollView
             android:layout_width="match_parent"
@@ -169,6 +168,33 @@
                 android:layout_toRightOf="@id/emer_areacode"/>
 
         </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Area"
+                    android:textSize="20sp"
+                    android:typeface="monospace"
+                    android:textColor="@color/purple"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"/>
+
+                <Spinner
+                    android:id="@+id/area"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:prompt="@string/spinner_title"
+                    android:layout_centerVertical="true"/>
+
+
+            </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="400dp"
