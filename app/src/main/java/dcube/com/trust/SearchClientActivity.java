@@ -2,11 +2,13 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -21,6 +23,7 @@ public class SearchClientActivity extends Activity {
 
     Context context;
     ListView searchlist;
+
     MySpinnerAdapter adapter;
     CustomAdapter listadapter;
     EditText search;
@@ -47,15 +50,14 @@ public class SearchClientActivity extends Activity {
         branch.setAdapter(adapter);
 
         searchlist.setVisibility(View.INVISIBLE);
-
         search.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void afterTextChanged(Editable s) {
+
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
                 if(s.length() >1)
                 {
@@ -67,10 +69,15 @@ public class SearchClientActivity extends Activity {
                     searchlist.setVisibility(View.INVISIBLE);
                     resulttext.setVisibility(View.VISIBLE);
                 }
-
             }
         });
 
+        searchlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                startActivity(new Intent(SearchClientActivity.this,ClientHomeActivity.class));
+            }
+        });
     }
 }

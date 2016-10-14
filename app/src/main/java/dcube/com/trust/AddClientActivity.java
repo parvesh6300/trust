@@ -45,7 +45,6 @@ public class AddClientActivity extends Activity {
     public class CustomDialogClass extends Dialog{
 
         public Activity c;
-        public Dialog d;
         public Button ok;
 
         public CustomDialogClass(Activity a) {
@@ -64,6 +63,7 @@ public class AddClientActivity extends Activity {
             ok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     finish();
                 }
             });

@@ -16,7 +16,7 @@ public class ClientAdapter extends BaseAdapter {
 
     public Integer[] mThumbIds = {
             R.drawable.addnewappointment, R.drawable.products,
-            R.drawable.money_bag
+            R.drawable.money_bag,R.drawable.generateinvoice
     };
 
     private static LayoutInflater inflater = null;

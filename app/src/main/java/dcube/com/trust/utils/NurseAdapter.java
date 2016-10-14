@@ -18,6 +18,7 @@ public class NurseAdapter extends BaseAdapter {
             R.drawable.addnewclient,
             R.drawable.searchclient,
             R.drawable.products,
+            R.drawable.money_bag,
             R.drawable.support
     };
 

@@ -1,7 +1,10 @@
 package dcube.com.trust;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import dcube.com.trust.utils.ClientAdapter;
@@ -20,5 +23,25 @@ public class ClientHomeActivity extends Activity {
 
         gridView = (GridView) findViewById(R.id.grid_view);
         gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                switch(i)
+                {
+                    case 0:
+
+                        startActivity(new Intent(ClientHomeActivity.this,AddClientActivity.class));
+                        break;
+
+                    case 3:
+
+                        startActivity(new Intent(ClientHomeActivity.this,GenerateInvoiceActivity.class));
+                        break;
+                }
+            }
+        });
+
     }
 }
