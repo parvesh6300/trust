@@ -17,6 +17,7 @@ public class NurseAdapter extends BaseAdapter {
     public Integer[] mThumbIds = {
             R.drawable.addnewclient,
             R.drawable.searchclient,
+            R.drawable.calender,
             R.drawable.products,
             R.drawable.money_bag,
             R.drawable.support

@@ -8,13 +8,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
-
 public class GenerateInvoiceActivity extends FragmentActivity {
 
     TextView generate;
+    ViewPager pager;
 
     public static GenerateInvoiceActivity mInstance = null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +23,8 @@ public class GenerateInvoiceActivity extends FragmentActivity {
         mInstance = this;
         generate = (TextView) findViewById(R.id.generate);
 
-        ViewPager pager = (ViewPager) findViewById(R.id.viewPager);
+        pager = (ViewPager) findViewById(R.id.viewPager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {
@@ -48,7 +46,7 @@ public class GenerateInvoiceActivity extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
     }
 }

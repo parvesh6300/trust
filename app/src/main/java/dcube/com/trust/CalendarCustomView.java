@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -153,6 +154,7 @@ public class CalendarCustomView extends LinearLayout
 		});
 
 		// long-pressing a day
+/*
 		grid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
 		{
 
@@ -167,6 +169,25 @@ public class CalendarCustomView extends LinearLayout
 				return true;
 			}
 		});
+
+			*/
+
+
+		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View View, int i, long l) {
+
+//				TextView tv =(TextView) View.findViewById(R.id.textViewInYourList);//your textview id
+//				Toast.makeText(getContext(), "" + tv.getText().toString(), Toast.LENGTH_SHORT).show();
+//
+				eventHandler.onDayLongPress((Date)adapterView.getItemAtPosition(i));
+
+				Log.e("DAte","DAte "+adapterView.getItemAtPosition(i).toString());
+
+			}
+		});
+
+
 	}
 
 	/**
