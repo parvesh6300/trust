@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="500dp"
+    android:layout_height="700dp"
+    android:background="@drawable/form_back"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    android:elevation="4dp"
+    android:layout_below="@id/addclienttext"
+    android:layout_centerHorizontal="true">
+
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Payment Mode"
+            android:layout_alignParentTop="true"
+            android:textSize="20sp"
+            android:typeface="monospace"
+            android:id="@+id/hiv_text"
+            android:textColor="@color/purple"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_below="@id/hiv_text"
+            android:weightSum="4">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mPesa"
+                android:buttonTint="@color/textColor"
+                android:layout_weight="1"
+                android:textColor="@color/textColor"
+                android:textSize="15sp"
+                android:typeface="monospace"
+                android:checked="false" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cash"
+                android:buttonTint="@color/textColor"
+                android:layout_weight="1"
+                android:textColor="@color/textColor"
+                android:textSize="15sp"
+                android:typeface="monospace"
+                android:checked="false" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Insurance"
+                android:buttonTint="@color/textColor"
+                android:layout_weight="1"
+                android:textColor="@color/textColor"
+                android:textSize="15sp"
+                android:typeface="monospace"
+                android:checked="false" />
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount(TZS) "
+            android:textSize="20sp"
+            android:typeface="monospace"
+            android:textColor="@color/purple"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/contact_text"/>
+
+        <EditText
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:typeface="monospace"
+            android:inputType="number"
+            android:background="@drawable/textarea"
+            android:textColor="@color/textColor"
+            android:layout_marginLeft="10dp"
+            android:textSize="25sp"
+            android:gravity="right|center_vertical"
+            android:paddingRight="10dp"
+            android:layout_toRightOf="@id/contact_text" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Discount %"
+            android:textSize="20sp"
+            android:typeface="monospace"
+            android:textColor="@color/purple"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <EditText
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:typeface="monospace"
+            android:background="@drawable/textarea"
+            android:textColor="@color/textColor"
+            android:layout_centerInParent="true"
+            android:inputType="number"
+            android:textSize="25sp"
+            android:gravity="right|center_vertical"
+            android:paddingRight="10dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Payment "
+            android:layout_alignParentTop="true"
+            android:textSize="20sp"
+            android:typeface="monospace"
+            android:id="@+id/heard_text"
+            android:textColor="@color/purple"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_below="@id/heard_text"
+            android:weightSum="3">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Partial payment received"
+                android:buttonTint="@color/textColor"
+                android:layout_weight="1"
+                android:textColor="@color/textColor"
+                android:textSize="15sp"
+                android:typeface="monospace"
+                android:checked="false"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Partial payment received with grant"
+                android:buttonTint="@color/textColor"
+                android:layout_weight="1"
+                android:textColor="@color/textColor"
+                android:textSize="15sp"
+                android:typeface="monospace"
+                android:checked="false"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full payment received "
+                android:buttonTint="@color/textColor"
+                android:layout_weight="1"
+                android:textColor="@color/textColor"
+                android:textSize="15sp"
+                android:typeface="monospace"
+                android:checked="false"/>
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:text="Generate"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:typeface="monospace"
+            android:layout_margin="10dp"
+            android:id="@+id/generate"
+            android:background="@drawable/buttonback"/>
+
+        <TextView
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:text="Cancel"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:typeface="monospace"
+            android:layout_margin="10dp"
+            android:background="@drawable/buttonback"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+</LinearLayout>

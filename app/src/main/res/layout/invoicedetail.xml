@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="500dp"
+    android:layout_height="600dp"
+    android:orientation="vertical"
+    android:elevation="4dp"
+    android:layout_centerInParent="true"
+    android:background="@drawable/receipt_back"
+    android:layout_below="@id/addclienttext">
+
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount(TZS) :"
+            android:textSize="20sp"
+            android:typeface="monospace"
+            android:textColor="@color/purple"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/contact_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:typeface="monospace"
+            android:textColor="@color/textColor"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:id="@+id/amount"
+            android:text="2300"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/contact_text" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Discount    :"
+            android:textSize="20sp"
+            android:typeface="monospace"
+            android:textColor="@color/purple"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/discount_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:typeface="monospace"
+            android:textColor="@color/textColor"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:id="@+id/discount"
+            android:textStyle="bold"
+            android:text="230"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/discount_text" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Net Amount Paid:"
+            android:textSize="25sp"
+            android:typeface="monospace"
+            android:textColor="@color/purple"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:typeface="monospace"
+            android:textColor="@color/textColor"
+            android:layout_marginLeft="10dp"
+            android:textSize="25sp"
+            android:id="@+id/netamount"
+            android:text="2070"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/_text" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="By mPesa"
+            android:textSize="20sp"
+            android:typeface="monospace"
+            android:textColor="@color/purple"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/mode"/>
+        
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/stamp"
+        android:layout_gravity="right"
+        android:layout_marginRight="30dp"/>
+
+
+</LinearLayout>
+
+    </RelativeLayout>
