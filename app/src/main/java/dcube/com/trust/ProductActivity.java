@@ -2,6 +2,7 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import dcube.com.trust.utils.ProductListAdapter;
+import dcube.com.trust.utils.ProductSelectedAdapter;
 
 public class ProductActivity extends Activity{
 
@@ -113,6 +115,8 @@ public class ProductActivity extends Activity{
 
         public ListView selected;
 
+        ProductSelectedAdapter adapter;
+
         public CustomDialogClass(Activity a) {
             super(a);
             // TODO Auto-generated constructor stub
@@ -129,11 +133,22 @@ public class ProductActivity extends Activity{
             cancel = (TextView) findViewById(R.id.confirm);
             selected = (ListView) findViewById(R.id.selected_product_list);
 
+            adapter = new ProductSelectedAdapter(ProductActivity.this);
+            selected.setAdapter(adapter);
+
+            confirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    startActivity(new Intent(ProductActivity.this,GenerateInvoiceActivity.class));
+                }
+            });
+
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-
+                    dismiss();
                 }
             });
         }

@@ -16,22 +16,27 @@ public class ProductSelectedAdapter extends BaseAdapter {
 
     Context context;
     Global global;
-    static int quantity;
 
     ArrayList<String> name = new ArrayList<>();
     ArrayList<String> category = new ArrayList<>();
-    //ArrayList<String> quantity = new ArrayList<>();
+    ArrayList<String> quantity = new ArrayList<>();
+    ArrayList<String> price = new ArrayList<>();
 
     private static LayoutInflater inflater = null;
 
-    public ProductSelectedAdapter(Activity activity, ArrayList<String> name, ArrayList<String> category, ArrayList<String> quntity) {
+    public ProductSelectedAdapter(Activity activity) {
 
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        this.name = name;
-        this.category = category;
-        //this.quantity = quantity;
+        name.add("Fiesta");
+        category.add("Condom");
+        quantity.add("X 3");
+
+        name.add("Jadelle");
+        category.add("implant");
+        quantity.add("X 1");
+
     }
 
     @Override
@@ -57,8 +62,7 @@ public class ProductSelectedAdapter extends BaseAdapter {
         TextView name;
         TextView quantity;
         TextView category;
-        TextView add;
-        TextView minus;
+        TextView price;
     }
 
     @Override
@@ -68,40 +72,16 @@ public class ProductSelectedAdapter extends BaseAdapter {
         final Holder holder = new Holder();
 
         final View rowView;
-        rowView = inflater.inflate(R.layout.product_category_item, parent , false);
+        rowView = inflater.inflate(R.layout.product_selected_item, parent , false);
 
         holder.name = (TextView) rowView.findViewById(R.id.name);
         holder.quantity = (TextView) rowView.findViewById(R.id.quantity);
         holder.category = (TextView) rowView.findViewById(R.id.category);
-        holder.add = (TextView) rowView.findViewById(R.id.add);
-        holder.minus = (TextView) rowView.findViewById(R.id.minus);
+        holder.price = (TextView) rowView.findViewById(R.id.add);
 
         holder.name.setText(name.get(position));
         holder.category.setText(category.get(position));
-
-        holder.minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                quantity =  Integer.parseInt(holder.quantity.getText().toString());
-
-                if(Integer.parseInt(holder.quantity.getText().toString()) > 0) {
-                    quantity = quantity - 1;
-                }
-                   holder.quantity.setText(String.valueOf(quantity));
-            }
-        });
-
-        holder.add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                quantity =  Integer.parseInt(holder.quantity.getText().toString());
-
-                quantity = quantity + 1;
-                holder.quantity.setText(String.valueOf(quantity));
-            }
-        });
+        holder.quantity.setText(quantity.get(position));
 
         return rowView;
     }
