@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 
 public class GenerateInvoiceActivity extends FragmentActivity {
@@ -25,6 +27,15 @@ public class GenerateInvoiceActivity extends FragmentActivity {
 
         pager = (ViewPager) findViewById(R.id.viewPager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+
+        pager.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                return true;
+            }
+        });
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

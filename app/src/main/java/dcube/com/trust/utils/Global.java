@@ -15,7 +15,16 @@ public class Global extends Application {
     boolean run;
     boolean fblogin;
 
-    public ArrayList<HashMap<String, String>> ReviewListing;
+    public ArrayList<HashMap<String, String>> ProductListing;
+
+    public ArrayList<HashMap<String, String>> getProductListing() {
+        return ProductListing;
+    }
+
+    public void setProductListing(ArrayList<HashMap<String, String>> productListing) {
+        ProductListing = productListing;
+    }
+
     public ArrayList<HashMap<String, String>> LoginListing;
     public ArrayList<HashMap<String, String>> SignupListing;
     public ArrayList<HashMap<String, String>> SalonDetailListing;

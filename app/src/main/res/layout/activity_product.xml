@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dcube.com.trust.ProductActivity"
+    android:background="@drawable/background_1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Product"
+        android:textSize="30sp"
+        android:textAlignment="gravity"
+        android:gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:layout_marginTop="20sp"
+        android:id="@+id/header"
+        android:typeface="monospace"/>
+
+    <RelativeLayout
+        android:layout_width="550dp"
+        android:layout_height="70dp"
+        android:background="@drawable/searchback"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/search_layout"
+        android:layout_below="@id/header">
+
+        <EditText
+            android:layout_width="450dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="Search By Brand or Name"
+            android:typeface="monospace"
+            android:layout_marginLeft="20dp"
+            android:textColorHint="@color/graytext"
+            android:textSize="20sp"
+            android:id="@+id/search"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/searchbutton"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="500dp"
+        android:layout_height="600dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/form_back"
+        android:layout_below="@+id/search_layout"
+        android:layout_marginTop="20dp"
+        android:id="@+id/list_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:background="@color/textColor"
+            android:id="@+id/header1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="    PRODUCT"
+                android:textColor="@color/white"
+                android:typeface="monospace"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_weight="2"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="QUANTITY"
+                android:textColor="@color/white"
+                android:typeface="monospace"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/productlist"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/header1"
+            android:choiceMode="multipleChoice"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BUY"
+        android:textSize="30sp"
+        android:textAlignment="gravity"
+        android:textColor="@color/white"
+        android:layout_marginTop="20sp"
+        android:typeface="monospace"
+        android:textStyle="bold"
+        android:id="@+id/buy"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/list_layout"/>
+
+</RelativeLayout>

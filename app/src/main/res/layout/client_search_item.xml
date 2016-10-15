@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/name"
         android:layout_weight="1"
-        android:textColor="@color/white"
+        android:textColor="@color/textColor"
         android:textSize="30sp"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:typeface="monospace"
         />
     <TextView
@@ -21,9 +21,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/branch"
         android:layout_weight="1"
-        android:textColor="@color/white"
+        android:textColor="@color/textColor"
         android:textSize="30sp"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:typeface="monospace"
         />
     <TextView
@@ -31,9 +31,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/contact"
         android:layout_weight="1"
-        android:textColor="@color/white"
+        android:textColor="@color/textColor"
         android:textSize="30sp"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:typeface="monospace"
         />
 

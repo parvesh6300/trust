@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import dcube.com.trust.utils.CustomAdapter;
 
@@ -27,7 +26,6 @@ public class SearchClientActivity extends Activity {
     MySpinnerAdapter adapter;
     CustomAdapter listadapter;
     EditText search;
-    TextView resulttext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +36,6 @@ public class SearchClientActivity extends Activity {
 
         searchlist = (ListView) findViewById(R.id.searchlist);
         search = (EditText) findViewById(R.id.search);
-        resulttext = (TextView) findViewById(R.id.resulttext);
 
         adapter = new MySpinnerAdapter(context, android.R.layout.simple_spinner_item, ITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -62,12 +59,10 @@ public class SearchClientActivity extends Activity {
                 if(s.length() >1)
                 {
                     searchlist.setVisibility(View.VISIBLE);
-                    resulttext.setVisibility(View.INVISIBLE);
                 }
                 else
                 {
                     searchlist.setVisibility(View.INVISIBLE);
-                    resulttext.setVisibility(View.VISIBLE);
                 }
             }
         });

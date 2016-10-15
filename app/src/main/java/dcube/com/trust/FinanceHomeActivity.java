@@ -25,11 +25,9 @@ public class FinanceHomeActivity extends Activity {
         gridView = (GridView) findViewById(R.id.grid_view);
         gridView.setAdapter(adapter);
 
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
 
                 switch (i)
                 {

@@ -4,12 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20sp">
-
 
         <TextView
             android:id="@+id/tv_product"
@@ -18,7 +16,6 @@
             android:text="Product"
             android:textSize="30sp"
             android:textColor="@color/purple"/>
-
 
         <TextView
             android:id="@+id/tv_category"
@@ -41,7 +38,6 @@
             android:textAlignment="gravity"
             android:gravity="center_horizontal|center_vertical" />
 
-
         <TextView
             android:id="@+id/tv_quantity"
             android:layout_width="150sp"
@@ -56,14 +52,6 @@
             android:gravity="center_horizontal|center_vertical"
             android:background="@drawable/rounded_corner"/>
 
-
     </RelativeLayout>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5sp"
-        android:background="@color/gray"/>
-
 
 </LinearLayout>

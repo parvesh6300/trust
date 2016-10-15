@@ -23,61 +23,6 @@
         android:id="@+id/stock_list"
         android:layout_width="500dp"
         android:layout_height="700dp"
-        android:background="@drawable/form_back"
-        android:elevation="4dp"
-        android:layout_marginTop="30sp"
-        android:layout_gravity="center_horizontal"
-        />
-
-
-
-
- <!---->
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.5sp"-->
-        <!--android:background="@color/gray"/>-->
-
-
-    <!--<RelativeLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:padding="20sp">-->
-
-
-        <!--<TextView-->
-            <!--android:id="@+id/tv_cartegory_2"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Product 2"-->
-            <!--android:textSize="30sp"-->
-            <!--android:textColor="@color/white"/>-->
-
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Category 2"-->
-            <!--android:textSize="25sp"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:layout_below="@+id/tv_cartegory_2"-->
-            <!--android:layout_marginTop="10sp"/>-->
-
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Quantity"-->
-            <!--android:textSize="30sp"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginTop="10sp"/>-->
-
-
-    <!--</RelativeLayout>-->
-
-
-
-
+        android:background="@drawable/form_back"/>
 
 </LinearLayout>

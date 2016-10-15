@@ -39,7 +39,6 @@ public class AddClientActivity extends Activity {
                 cdd.show();
             }
         });
-
     }
 
     public class CustomDialogClass extends Dialog{

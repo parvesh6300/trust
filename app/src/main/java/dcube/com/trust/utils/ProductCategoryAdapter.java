@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import dcube.com.trust.R;
 
-public class CustomAdapter extends BaseAdapter {
+public class ProductCategoryAdapter extends BaseAdapter {
 
     Context context;
     Global global;
@@ -22,23 +22,19 @@ public class CustomAdapter extends BaseAdapter {
     ArrayList<String> contact = new ArrayList<>();
 
     private static LayoutInflater inflater = null;
-    public CustomAdapter(Activity activity) {
+
+    public ProductCategoryAdapter(Activity activity) {
 
         context = activity.getApplicationContext();
+
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        name.add("Khalfan");
-        name.add("Gheilani");
-        name.add("Hafiz");
-
-        branch.add("Dodoma");
-        branch.add("Dar Es Salaam");
-        branch.add("Morogoro");
-
-        contact.add("8879861183");
-        contact.add("8879861182");
-        contact.add("8879861184");
-
+        name.add("The contraceptive pill");
+        name.add("The implant");
+        name.add("The IUD");
+        name.add("The emergency pill");
+        name.add("Condoms");
+        name.add("Injectables");
     }
 
     @Override
@@ -62,8 +58,6 @@ public class CustomAdapter extends BaseAdapter {
     public class Holder
     {
         TextView name;
-        TextView branch;
-        TextView contact;
     }
 
     @Override
@@ -72,15 +66,10 @@ public class CustomAdapter extends BaseAdapter {
         Holder holder = new Holder();
 
         final View rowView;
-        rowView = inflater.inflate(R.layout.client_search_item, parent , false);
+        rowView = inflater.inflate(R.layout.product_category_item, parent , false);
 
         holder.name = (TextView) rowView.findViewById(R.id.name);
-        holder.branch = (TextView) rowView.findViewById(R.id.branch);
-        holder.contact = (TextView) rowView.findViewById(R.id.contact);
-
         holder.name.setText(name.get(position));
-        holder.branch.setText(branch.get(position));
-        holder.contact.setText(contact.get(position));
 
         return rowView;
     }

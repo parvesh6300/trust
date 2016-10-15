@@ -15,7 +15,6 @@ import dcube.com.trust.utils.CalendarListAdapter;
 
 public class CalendarActivity extends Activity
 {
-
     ListView list;
     CalendarListAdapter calendarListAdapter;
 
@@ -24,8 +23,6 @@ public class CalendarActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-
-        //list = (ListView)findViewById(R.id.list);
 
         calendarListAdapter= new CalendarListAdapter(this);
         //list.setAdapter(calendarListAdapter);

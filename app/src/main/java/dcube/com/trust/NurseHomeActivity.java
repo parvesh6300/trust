@@ -45,6 +45,12 @@ public class NurseHomeActivity extends Activity {
                         startActivity(new Intent(NurseHomeActivity.this,CalendarActivity.class));
                         break;
 
+                    case 3:
+
+                        startActivity(new Intent(NurseHomeActivity.this,ProductActivity.class));
+                        break;
+
+
                 }
             }
         });
