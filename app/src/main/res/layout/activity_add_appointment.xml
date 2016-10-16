@@ -9,25 +9,25 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
         android:text="New Appointment"
         android:id="@+id/addclienttext"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:typeface="monospace"/>
+        android:typeface="monospace"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:layout_width="500dp"
-        android:layout_height="550dp"
+        android:layout_height="480dp"
         android:background="@drawable/form_back"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
         android:elevation="4dp"
-        android:layout_below="@id/addclienttext"
-        android:layout_centerHorizontal="true">
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
 
         <LinearLayout
                     android:layout_width="400dp"
@@ -86,7 +86,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:textSize="25sp"
-                android:inputType="textNoSuggestions"
+                android:inputType="textEmailAddress"
                 />
 
         </LinearLayout>
@@ -124,43 +124,52 @@
             android:layout_width="400dp"
             android:layout_height="60dp"
             android:layout_marginTop="30dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:weightSum="2">
 
             <RelativeLayout
-                android:layout_width="150dp"
+                android:layout_width="180dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/textarea">
+                android:background="@drawable/textarea"
+                android:id="@+id/datepicker">
                 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:src="@drawable/calender"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Date"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:typeface="monospace"
                 android:textStyle="bold"
                 android:textColor="@color/textColor"
                 android:layout_gravity="center"
-                android:id="@+id/datepicker"
-                android:layout_centerInParent="true"/>
+                android:id="@+id/datepick"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:layout_centerVertical="true"/>
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="150dp"
+            <View
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/textarea">
+                />
+
+            <RelativeLayout
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/textarea"
+                android:layout_weight="1"
+                android:id="@+id/timepicker">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:src="@drawable/calender"
                     android:layout_centerVertical="true"/>
 
@@ -168,31 +177,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Time"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"
                     android:textStyle="bold"
                     android:textColor="@color/textColor"
-                    android:layout_centerInParent="true"
-                    android:id="@+id/timepicker"/>
+                    android:id="@+id/timepick"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="40dp"
+                    android:layout_centerVertical="true"/>
 
             </RelativeLayout>
-
-
 
         </LinearLayout>
 
         <TextView
-                    android:background="@drawable/button_background"
-                    android:layout_width="360dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/white"
-                    android:text="Add Appointment"
-                    android:id="@+id/addclient"
-                    android:gravity="center"
-                    android:textSize="30sp"
-                    android:typeface="monospace"/>
+            android:background="@drawable/button_background"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:text="Add Appointment"
+            android:id="@+id/add"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:typeface="monospace" />
 
     </LinearLayout>
 

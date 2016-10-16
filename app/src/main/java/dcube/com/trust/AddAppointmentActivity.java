@@ -1,9 +1,14 @@
 package dcube.com.trust;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -21,14 +26,22 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
     TextView date;
     TextView time;
+    TextView add;
+
+    RelativeLayout datepicker;
+    RelativeLayout timepicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_appointment);
 
-        date = (TextView) findViewById(R.id.datepicker);
-        time = (TextView) findViewById(R.id.timepicker);
+        datepicker = (RelativeLayout) findViewById(R.id.datepicker);
+        timepicker = (RelativeLayout) findViewById(R.id.timepicker);
+
+        date = (TextView) findViewById(R.id.datepick);
+        time = (TextView) findViewById(R.id.timepick);
+        add = (TextView) findViewById(R.id.add);
 
         String[] SERVICES = getResources().getStringArray(R.array.servicelist);
 
@@ -36,7 +49,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
         service = (BetterSpinner) findViewById(R.id.service);
         service.setAdapter(adapter);
 
-        date.setOnClickListener(new View.OnClickListener() {
+        datepicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -52,7 +65,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
             }
         });
 
-        time.setOnClickListener(new View.OnClickListener() {
+        timepicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -65,6 +78,14 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
                 tpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
                 tpd.show(getFragmentManager(), "Datepickerdialog");
+            }
+        });
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomDialogClass cdd = new CustomDialogClass(AddAppointmentActivity.this);
+                cdd.show();
             }
         });
 
@@ -92,5 +113,36 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
         String d = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
         date.setText(d);
     }
+
+    public class CustomDialogClass extends Dialog {
+
+        public Activity c;
+        public Button ok;
+
+        public CustomDialogClass(Activity a) {
+            super(a);
+            // TODO Auto-generated constructor stub
+            this.c = a;
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            setContentView(R.layout.custom_dialog);
+            ok = (Button) findViewById(R.id.btn_yes);
+
+            ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    finish();
+                }
+            });
+        }
+    }
+
+
+
 }
 
