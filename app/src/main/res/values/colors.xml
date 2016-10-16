@@ -17,4 +17,7 @@
     <color name="purple">#603370</color>
     <color name="textColor">#45265f</color>
 
+    <color name="mdtp_accent_color">#63307E</color>
+    <color name="mdtp_accent_color_dark">#603375</color>
+
 </resources>

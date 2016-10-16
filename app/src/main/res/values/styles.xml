@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/textColor</item>
+    </style>
+
     <declare-styleable name="CalendarCustomView">
         <attr name="dateFormat" format="string"/>
     </declare-styleable>

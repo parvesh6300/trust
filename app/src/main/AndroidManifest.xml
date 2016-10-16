@@ -33,14 +33,17 @@
             android:name=".SearchClientActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".GenerateInvoiceActivity"
+        <activity
+            android:name=".GenerateInvoiceActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".StockControl" />
         <activity android:name=".ProductCategoryActivity" />
-        <activity android:name=".ProductActivity"
+        <activity
+            android:name=".ProductActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
+        <activity android:name=".AddAppointmentActivity"></activity>
     </application>
 
 </manifest>

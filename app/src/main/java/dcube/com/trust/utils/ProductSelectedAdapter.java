@@ -31,11 +31,13 @@ public class ProductSelectedAdapter extends BaseAdapter {
 
         name.add("Fiesta");
         category.add("Condom");
-        quantity.add("X 3");
+        quantity.add("x 3");
+        price.add("1,500");
 
-        name.add("Jadelle");
-        category.add("implant");
-        quantity.add("X 1");
+        name.add("Sleek /safe load");
+        category.add("IUD");
+        quantity.add("x 1");
+        price.add("5,000");
 
     }
 
@@ -77,11 +79,12 @@ public class ProductSelectedAdapter extends BaseAdapter {
         holder.name = (TextView) rowView.findViewById(R.id.name);
         holder.quantity = (TextView) rowView.findViewById(R.id.quantity);
         holder.category = (TextView) rowView.findViewById(R.id.category);
-        holder.price = (TextView) rowView.findViewById(R.id.add);
+        holder.price = (TextView) rowView.findViewById(R.id.price);
 
         holder.name.setText(name.get(position));
         holder.category.setText(category.get(position));
         holder.quantity.setText(quantity.get(position));
+        holder.price.setText(price.get(position));
 
         return rowView;
     }

@@ -32,7 +32,7 @@ public class ClientHomeActivity extends Activity {
                 {
                     case 0:
 
-                        startActivity(new Intent(ClientHomeActivity.this,AddClientActivity.class));
+                        startActivity(new Intent(ClientHomeActivity.this,AddAppointmentActivity.class));
                         break;
 
                     case 3:
@@ -42,6 +42,5 @@ public class ClientHomeActivity extends Activity {
                 }
             }
         });
-
     }
 }

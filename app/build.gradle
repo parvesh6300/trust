@@ -23,8 +23,8 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
     compile 'com.github.ganfra:material-spinner:1.1.1'
-
+    compile 'com.weiwangcn.betterspinner:library:1.1.0'
+    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
 }

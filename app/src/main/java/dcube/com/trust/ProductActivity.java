@@ -72,8 +72,6 @@ public class ProductActivity extends Activity{
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
-                //Log.e("condom", "condom".substring(0,s.length()));
-
                 if(s.toString().equalsIgnoreCase("condom"))
                 {
                     name.add("Bull Condom");
@@ -115,7 +113,7 @@ public class ProductActivity extends Activity{
 
         public ListView selected;
 
-        ProductSelectedAdapter adapter;
+        ProductSelectedAdapter selectedAdapter;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -130,11 +128,11 @@ public class ProductActivity extends Activity{
             setContentView(R.layout.buy_product_dialog);
 
             confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.confirm);
+            cancel = (TextView) findViewById(R.id.cancel);
             selected = (ListView) findViewById(R.id.selected_product_list);
 
-            adapter = new ProductSelectedAdapter(ProductActivity.this);
-            selected.setAdapter(adapter);
+            selectedAdapter = new ProductSelectedAdapter(ProductActivity.this);
+            selected.setAdapter(selectedAdapter);
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override

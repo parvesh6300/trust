@@ -2,4 +2,21 @@
     <string name="app_name">Trust</string>
     <string name="spinner_title">Select</string>
 
+    <string-array name="servicelist">
+
+        <item>Comprehensive Post Abortion Care</item>
+        <item>Urine Pregnancy Test</item>
+        <item>Cervical Cancer Screening</item>
+        <item>Ultrasound</item>
+        <item>Blood Sugar Test</item>
+        <item>Pregnancy Test &amp; Analysis</item>
+        <item>HIV Counseling &amp; Testing</item>
+        <item>Antenatal Clinic</item>
+        <item>Urinalysis</item>
+        <item>IUCD Removal</item>
+        <item>Implant Removal</item>
+        <item>Breast exam</item>
+
+    </string-array>
+
 </resources>
