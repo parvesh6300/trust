@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.weiwangcn.betterspinner.library.BetterSpinner;
+
 public class AddClientActivity extends Activity {
 
     Context context;
@@ -18,6 +20,11 @@ public class AddClientActivity extends Activity {
     String[] spinnerArray = {"10-19","20-29","30-39","40+"};
     Spinner age_group;
     TextView addclient;
+
+
+    BetterSpinner area;
+
+    String[] ITEMS = {"Select Branch", "Arusha", "Dodoma", "Mwanza", "Dar Es Salaam", "Morogoro", "Mbeya", "Zanzibar"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +37,11 @@ public class AddClientActivity extends Activity {
 
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray);
         age_group.setAdapter(spinnerArrayAdapter);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ITEMS);
+        area = (BetterSpinner) findViewById(R.id.area);
+        area.setAdapter(adapter);
+
 
         addclient.setOnClickListener(new View.OnClickListener() {
             @Override

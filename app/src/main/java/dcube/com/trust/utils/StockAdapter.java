@@ -55,7 +55,7 @@ public class StockAdapter extends BaseAdapter {
 
         holder= new ViewHolder();
 
-        convertView = inflater.inflate(R.layout.viewstock,null);
+        convertView = inflater.inflate(R.layout.viewstock,viewGroup,false);
 
         holder.tv_product= (TextView)convertView.findViewById(R.id.tv_product);
         holder.tv_category= (TextView)convertView.findViewById(R.id.tv_category);

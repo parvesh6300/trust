@@ -185,7 +185,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"/>
 
-                <Spinner
+                <com.weiwangcn.betterspinner.library.BetterSpinner
                     android:id="@+id/area"
                     android:layout_width="180dp"
                     android:layout_height="match_parent"

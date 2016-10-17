@@ -1,7 +1,6 @@
 package dcube.com.trust;
 
-import android.app.Dialog;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 
 import dcube.com.trust.utils.StockAdapter;
 
-public class StockControl extends AppCompatActivity implements View.OnClickListener {
+public class StockControl extends Activity implements View.OnClickListener {
 
     TextView tv_quantity;
 
@@ -31,15 +30,9 @@ public class StockControl extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_stock_control);
 
-        getSupportActionBar().hide();
-
-
         tv_quantity=(TextView)findViewById(R.id.tv_quantity);
 
         stock_list=(ListView)findViewById(R.id.stock_list);
-
-
-
 
         fillCategoryInList();
         fillProductInList();
@@ -93,21 +86,16 @@ public class StockControl extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-
-
     @Override
     public void onClick(View view) {
 
         i=0;
 
+        //Dialog dialog = new Dialog(this);
 
-        Dialog dialog = new Dialog(this);
+        QuantityDialog dialog= new QuantityDialog(this,R.layout.quantitydialog);
 
-
-  //      QuantityDialog dialog1= new QuantityDialog(this,R.layout.quantitydialog);
-
-        dialog.setContentView(R.layout.quantitydialog);
+        //dialog.setContentView(R.layout.quantitydialog);
 
         final TextView tv_quantity= (TextView)dialog.findViewById(R.id.tv_quantity);
         TextView tv_plus= (TextView)dialog.findViewById(R.id.tv_plus);
@@ -142,14 +130,9 @@ public class StockControl extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
-
         dialog.setCancelable(true);
         dialog.create();
         dialog.show();
-
-
     }
-
 
 }
