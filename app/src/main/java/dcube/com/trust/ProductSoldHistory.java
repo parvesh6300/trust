@@ -26,7 +26,9 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
     SoldProductAdapter soldProductAdapter;
 
-    TextView tv_date_from;
+    TextView tv_date_from,tv_date_to;
+
+    DatePickerDialog dpd_from,dpd_to;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
 
         tv_date_from=(TextView)findViewById(R.id.tv_date_from);
+        tv_date_to=(TextView)findViewById(R.id.tv_date_to);
 
         fillProductInList();
         fillQuantityInList();
@@ -68,17 +71,24 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
         {
 
             Calendar now = Calendar.getInstance();
-            DatePickerDialog dpd = DatePickerDialog.newInstance(ProductSoldHistory.this,
+            dpd_from = DatePickerDialog.newInstance(ProductSoldHistory.this,
                     now.get(Calendar.YEAR),
                     now.get(Calendar.MONTH),
                     now.get(Calendar.DAY_OF_MONTH)
             );
-            dpd.show(getFragmentManager(), "Datepickerdialog");
+            dpd_from.show(getFragmentManager(), "Datepickerdialog");
 
         }
 
         if (view== lin_date_to)
         {
+            Calendar now = Calendar.getInstance();
+            dpd_to = DatePickerDialog.newInstance(ProductSoldHistory.this,
+                    now.get(Calendar.YEAR),
+                    now.get(Calendar.MONTH),
+                    now.get(Calendar.DAY_OF_MONTH)
+            );
+            dpd_to.show(getFragmentManager(), "Datepickerdialog");
 
         }
 
@@ -133,8 +143,19 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String d = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
-        tv_date_from.setText(d);
+
+        if (view== dpd_from)
+        {
+            String d = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
+            tv_date_from.setText(d);
+        }
+
+
+        if (view == dpd_to)
+        {
+            String d = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
+            tv_date_to.setText(d);
+        }
 
     }
 }
