@@ -15,7 +15,8 @@
         android:text="Product Sold History"
         android:textAlignment="gravity"
         android:textColor="@color/white"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        android:typeface="monospace"/>
 
 
     <LinearLayout
@@ -48,7 +49,8 @@
                     android:text="Date From"
                     android:textAlignment="gravity"
                     android:textColor="@color/purple"
-                    android:textSize="30sp" />
+                    android:textSize="30sp"
+                    android:typeface="monospace"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -58,7 +60,8 @@
                     android:text="Date To"
                     android:textAlignment="gravity"
                     android:textColor="@color/purple"
-                    android:textSize="30sp" />
+                    android:textSize="30sp"
+                    android:typeface="monospace"/>
 
 
             </LinearLayout>
@@ -94,7 +97,8 @@
                         android:textAlignment="gravity"
                         android:textColor="@color/purple"
                         android:textSize="25sp"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginLeft="10dp"
+                        android:typeface="monospace"/>
 
 
 
@@ -123,7 +127,8 @@
                         android:textAlignment="gravity"
                         android:textColor="@color/purple"
                         android:textSize="25sp"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginLeft="10dp"
+                        android:typeface="monospace"/>
 
 
                 </LinearLayout>

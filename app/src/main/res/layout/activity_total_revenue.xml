@@ -20,7 +20,8 @@
             android:text="Total Revenue Collected "
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:typeface="monospace"/>
 
 
     </RelativeLayout>
@@ -94,7 +95,8 @@
                 android:text="Total Revenue Collected: "
                 android:textAlignment="center"
                 android:textColor="@color/purple"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:typeface="monospace"/>
 
         </LinearLayout>
 
