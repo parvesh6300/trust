@@ -1,11 +1,8 @@
 package dcube.com.trust;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -57,50 +54,20 @@ public class WithDrawMoneyActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                ConfirmDialog cdd = new ConfirmDialog(WithDrawMoneyActivity.this);
-                cdd.show();
 
             }
         });
+
+
     }
 
-    public class ConfirmDialog extends Dialog{
 
-        public Activity c;
 
-        public TextView cancel;
-        public TextView confirm;
 
-        public ConfirmDialog(Context context) {
-            super(context);
-        }
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-            setContentView(R.layout.withdraw_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
 
-            confirm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                    dismiss();
-                    finish();
-                }
-            });
 
-            cancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                    dismiss();
-                }
-            });
-
-        }
-    }
 }

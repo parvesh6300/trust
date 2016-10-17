@@ -2,6 +2,8 @@ package dcube.com.trust;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -12,11 +14,16 @@ import java.util.ArrayList;
 public class TotalRevenue extends AppCompatActivity {
 
 
+    RadioGroup radio_group;
+    RadioButton radio_daily,radio_weekly,radio_monthly,radio_yearly;
+
     ArrayList<Double> time= new ArrayList<>();
     ArrayList<Double> revenue= new ArrayList<>();
 
     Double[] ar_time= new Double[]{};
     Double[] ar_revenue= new Double[]{};
+
+    GraphView graph;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +33,83 @@ public class TotalRevenue extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        GraphView graph = (GraphView) findViewById(R.id.graph);
+        graph = (GraphView) findViewById(R.id.graph);
 
         addValuesInList();
 
+        radio_group= (RadioGroup)findViewById(R.id.radio_group);
 
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+        radio_daily=(RadioButton)findViewById(R.id.radio_daily);
+        radio_weekly=(RadioButton)findViewById(R.id.radio_weekly);
+        radio_monthly=(RadioButton)findViewById(R.id.radio_monthly);
+        radio_yearly=(RadioButton)findViewById(R.id.radio_yearly);
 
 
-                new DataPoint(0, 0),
-                    new DataPoint(1, 5),
-                    new DataPoint(2, 3)
+
+
+        radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                if (radio_daily.isChecked())
+                {
+
+                    LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+
+
+                            new DataPoint(0, 0),
+                            new DataPoint(4, 2),
+                            new DataPoint(5, 5)
+                    });
+                    graph.addSeries(series);
+                }
+
+
+               else if (radio_monthly.isChecked())
+                {
+
+                    LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+
+
+                            new DataPoint(0, 0),
+                            new DataPoint(2, 4),
+                            new DataPoint(5, 2)
+                    });
+                    graph.addSeries(series);
+                }
+
+               else if (radio_weekly.isChecked())
+                {
+
+                    LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+
+
+                            new DataPoint(0, 0),
+                            new DataPoint(4, 5),
+                            new DataPoint(5, 3)
+                    });
+                    graph.addSeries(series);
+                }
+
+
+                else if (radio_yearly.isChecked())
+                {
+
+                    LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+
+
+                            new DataPoint(0, 0),
+                            new DataPoint(1, 5),
+                            new DataPoint(2, 3)
+                    });
+                    graph.addSeries(series);
+                }
+
+
+            }
         });
-        graph.addSeries(series);
+
+
 
 
         for (int i=0;i<5;i++)

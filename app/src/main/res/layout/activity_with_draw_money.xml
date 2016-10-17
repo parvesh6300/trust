@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="WithDraw Money Activity"
+        android:text="WithDraw Money"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
