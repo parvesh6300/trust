@@ -24,8 +24,10 @@ public class CalendarActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        list = (ListView) findViewById(R.id.list);
+
         calendarListAdapter= new CalendarListAdapter(this);
-        //list.setAdapter(calendarListAdapter);
+        list.setAdapter(calendarListAdapter);
 
         HashSet<Date> events = new HashSet<>();
         events.add(new Date());

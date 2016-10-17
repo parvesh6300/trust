@@ -88,7 +88,6 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                 cdd.show();
             }
         });
-
     }
 
     @Override
@@ -141,8 +140,5 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
             });
         }
     }
-
-
-
 }
 

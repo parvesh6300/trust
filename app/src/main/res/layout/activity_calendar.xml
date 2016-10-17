@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:id="@+id/header"
-        android:background="@color/purple">
+        android:background="@drawable/background_1">
         
         <ImageView
             android:layout_width="40dp"
@@ -34,7 +34,13 @@
     <dcube.com.trust.CalendarCustomView
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
         android:layout_below="@id/header"/>
+    
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@+id/calendar_view"
+        android:id="@+id/list"/>
 
 </RelativeLayout>

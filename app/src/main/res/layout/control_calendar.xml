@@ -10,8 +10,7 @@
 	<!-- date toolbar -->
 	<RelativeLayout
 		android:layout_width="match_parent"
-		android:layout_height="60dp"
-		android:background="@color/purple">
+		android:layout_height="60dp">
 
 		<!-- prev button -->
 		<ImageView
@@ -69,7 +68,6 @@
 	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="40dp"
-		android:background="@color/colorPrimary"
 		android:gravity="center">
 
 	<LinearLayout

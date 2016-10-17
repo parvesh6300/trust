@@ -35,37 +35,6 @@ public class CalendarListAdapter extends BaseAdapter {
 
     }
 
-    public class ViewHolder{
-
-        TextView tv_name,tv_time;
-
-    }
-
-
-
-    @Override
-    public View getView(int i, View convertView, ViewGroup viewGroup) {
-
-        ViewHolder holder= new ViewHolder();
-
-        convertView = inflater.inflate(R.layout.calendar_list,null);
-
-        holder.tv_name= (TextView)convertView.findViewById(R.id.tv_name);
-
-        holder.tv_time= (TextView)convertView.findViewById(R.id.tv_time);
-
-        holder.tv_name.setText(al_name.get(i));
-
-        Log.e("Name","Name "+al_name.get(i));
-
-        holder.tv_time.setText(al_time.get(i));
-
-        Log.e("Time","Time "+al_time.get(i));
-
-        return convertView;
-    }
-
-
     @Override
     public int getCount() {
         return al_name.size();
@@ -81,13 +50,31 @@ public class CalendarListAdapter extends BaseAdapter {
         return i;
     }
 
+    public class ViewHolder{
 
+        TextView tv_name,tv_time;
+
+    }
+
+
+    @Override
+    public View getView(int i, View convertView, ViewGroup viewGroup) {
+
+        ViewHolder holder= new ViewHolder();
+
+        convertView = inflater.inflate(R.layout.calendar_list,null);
+
+        holder.tv_name= (TextView)convertView.findViewById(R.id.tv_name);
+        holder.tv_time= (TextView)convertView.findViewById(R.id.tv_time);
+
+        holder.tv_name.setText(al_name.get(i));
+        holder.tv_time.setText(al_time.get(i));
+
+        return convertView;
+    }
 
     public void fillNameInList()
     {
-
-        Log.e("fillName","fillName in list");
-        Log.e("fillName","filltime in list");
 
         al_name.add("Evangle Omondi");
         al_name.add("Sausanfatimah");
@@ -99,7 +86,6 @@ public class CalendarListAdapter extends BaseAdapter {
         al_name.add("Peitersen");
 
     }
-
 
     public void fillTImeInList()
     {

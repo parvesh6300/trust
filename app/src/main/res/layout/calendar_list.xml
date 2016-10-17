@@ -30,7 +30,4 @@
         android:layout_below="@+id/tv_name"
         android:layout_marginTop="10sp"/>
 
-
-
-
 </RelativeLayout>
