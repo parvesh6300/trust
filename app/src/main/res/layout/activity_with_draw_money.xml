@@ -178,9 +178,9 @@
             android:hint="Specify Reason"
             android:maxLines="3"
             android:textColor="@color/purple"
-            android:textSize="30sp"
-            android:visibility="invisible" />
-
+            android:textSize="25sp"
+            android:visibility="invisible"
+            android:typeface="monospace"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
