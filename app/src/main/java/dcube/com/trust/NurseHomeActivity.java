@@ -40,10 +40,10 @@ public class NurseHomeActivity extends Activity {
                         startActivity(new Intent(NurseHomeActivity.this,SearchClientActivity.class));
                         break;
 
-                    case 2:
+                    /*case 2:
 
                         startActivity(new Intent(NurseHomeActivity.this,CalendarActivity.class));
-                        break;
+                        break;*/
 
                     case 3:
 

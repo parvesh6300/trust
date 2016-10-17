@@ -1,7 +1,7 @@
 package dcube.com.trust;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -11,7 +11,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 
-public class TotalRevenue extends AppCompatActivity {
+public class TotalRevenue extends Activity {
 
 
     RadioGroup radio_group;
@@ -30,9 +30,6 @@ public class TotalRevenue extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total_revenue);
 
-
-        getSupportActionBar().hide();
-
         graph = (GraphView) findViewById(R.id.graph);
 
         addValuesInList();
@@ -43,9 +40,6 @@ public class TotalRevenue extends AppCompatActivity {
         radio_weekly=(RadioButton)findViewById(R.id.radio_weekly);
         radio_monthly=(RadioButton)findViewById(R.id.radio_monthly);
         radio_yearly=(RadioButton)findViewById(R.id.radio_yearly);
-
-
-
 
         radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
