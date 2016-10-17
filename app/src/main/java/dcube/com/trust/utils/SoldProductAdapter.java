@@ -22,16 +22,19 @@ public class SoldProductAdapter extends BaseAdapter {
 
     ArrayList<String> al_quantity= new ArrayList<>();
     ArrayList<String> al_product_name= new ArrayList<>();
+    ArrayList<String> al_category= new ArrayList<>();
 
     ViewHolder holder;
 
     public LayoutInflater inflater;
 
 
-    public SoldProductAdapter(Context context, ArrayList<String> productname,ArrayList<String> quantity)
+    public SoldProductAdapter(Context context, ArrayList<String> productname,ArrayList<String> quantity,ArrayList<String> category)
     {
         this.al_product_name= productname;
         this.al_quantity= quantity;
+        this.al_category= category;
+
         this.mcontext=context;
 
         inflater= (LayoutInflater) mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -39,7 +42,7 @@ public class SoldProductAdapter extends BaseAdapter {
     }
 
     public class ViewHolder{
-        TextView tv_quantity,tv_product_name;
+        TextView tv_quantity,tv_product_name,tv_product_category;
     }
 
     @Override
@@ -52,6 +55,8 @@ public class SoldProductAdapter extends BaseAdapter {
 
         holder.tv_product_name= (TextView)convertview.findViewById(R.id.tv_product_name);
         holder.tv_quantity= (TextView)convertview.findViewById(R.id.tv_quantity);
+        holder.tv_product_category= (TextView)convertview.findViewById(R.id.tv_product_category);
+
 
 
         holder.tv_product_name.setText(al_product_name.get(position));
@@ -59,6 +64,8 @@ public class SoldProductAdapter extends BaseAdapter {
         Log.e("Product","Product "+al_product_name.get(position));
 
         holder.tv_quantity.setText(al_quantity.get(position));
+
+        holder.tv_product_category.setText(al_category.get(position));
 
         return convertview;
     }
