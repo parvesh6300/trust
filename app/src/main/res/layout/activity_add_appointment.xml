@@ -134,9 +134,10 @@
                 android:id="@+id/datepicker">
                 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/calender"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/cal_icon"
+                android:layout_marginLeft="20dp"
                 android:layout_centerVertical="true" />
 
             <TextView
@@ -150,7 +151,7 @@
                 android:layout_gravity="center"
                 android:id="@+id/datepick"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="20dp"
                 android:layout_centerVertical="true"/>
 
             </RelativeLayout>
@@ -168,10 +169,11 @@
                 android:id="@+id/timepicker">
 
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/calender"
-                    android:layout_centerVertical="true"/>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/clock"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -14,6 +14,7 @@ import dcube.com.trust.utils.StockAdapter;
 public class StockControl extends AppCompatActivity implements View.OnClickListener {
 
     TextView tv_quantity;
+
     ListView stock_list;
 
     int i;
@@ -29,43 +30,53 @@ public class StockControl extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_stock_control);
+
         getSupportActionBar().hide();
 
-        tv_quantity = (TextView)findViewById(R.id.tv_quantity);
-        stock_list = (ListView)findViewById(R.id.stock_list);
+
+        tv_quantity=(TextView)findViewById(R.id.tv_quantity);
+
+        stock_list=(ListView)findViewById(R.id.stock_list);
+
+
+
 
         fillCategoryInList();
         fillProductInList();
         fillQuantityInList();
 
+
         stockAdapter= new StockAdapter(this,al_product,al_category,al_quantity);
+
         stock_list.setAdapter(stockAdapter);
+
+//        tv_quantity.setOnClickListener(this);
     }
 
     public void fillProductInList()
     {
-        al_product.add("Product 1");
-        al_product.add("Product 2");
-        al_product.add("Product 3");
-        al_product.add("Product 4");
-        al_product.add("Product 5");
-        al_product.add("Product 6");
-        al_product.add("Product 7");
-        al_product.add("Product 8");
+        al_product.add("Bull Condom");
+        al_product.add("Fiesta");
+        al_product.add("Sleek/safe load");
+        al_product.add("Silverline");
+//        al_product.add("Product 5");
+//        al_product.add("Product 6");
+//        al_product.add("Product 7");
+//        al_product.add("Product 8");
 
 
     }
 
     public void fillCategoryInList()
     {
-        al_category.add("Category 1");
-        al_category.add("Category 2");
-        al_category.add("Category 3");
-        al_category.add("Category 4");
-        al_category.add("Category 5");
-        al_category.add("Category 6");
-        al_category.add("Category 7");
-        al_category.add("Category 8");
+        al_category.add("Condom");
+        al_category.add("IUD");
+        al_category.add("IUD");
+        al_category.add("IUD");
+//        al_category.add("Category 5");
+//        al_category.add("Category 6");
+//        al_category.add("Category 7");
+//        al_category.add("Category 8");
 
     }
 
@@ -82,24 +93,29 @@ public class StockControl extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+
+
     @Override
     public void onClick(View view) {
 
-        i = 0;
+        i=0;
+
 
         Dialog dialog = new Dialog(this);
 
-        //QuantityDialog dialog1= new QuantityDialog(this,R.layout.quantitydialog);
+
+  //      QuantityDialog dialog1= new QuantityDialog(this,R.layout.quantitydialog);
 
         dialog.setContentView(R.layout.quantitydialog);
 
-        final TextView tv_quantity = (TextView) dialog.findViewById(R.id.tv_quantity);
-        TextView tv_plus = (TextView) dialog.findViewById(R.id.tv_plus);
-        TextView tv_minus = (TextView) dialog.findViewById(R.id.tv_minus);
-        TextView tv_current_time = (TextView) dialog.findViewById(R.id.tv_current_time);
-        TextView tv_product_name = (TextView) dialog.findViewById(R.id.tv_product_name);
-        TextView tv_product_cat = (TextView) dialog.findViewById(R.id.tv_product_cat);
-        TextView tv_request = (TextView) dialog.findViewById(R.id.tv_request);
+        final TextView tv_quantity= (TextView)dialog.findViewById(R.id.tv_quantity);
+        TextView tv_plus= (TextView)dialog.findViewById(R.id.tv_plus);
+        TextView tv_minus= (TextView)dialog.findViewById(R.id.tv_minus);
+        TextView tv_current_time= (TextView)dialog.findViewById(R.id.tv_current_time);
+        TextView tv_product_name= (TextView)dialog.findViewById(R.id.tv_product_name);
+        TextView tv_product_cat= (TextView)dialog.findViewById(R.id.tv_product_cat);
+        TextView tv_request= (TextView)dialog.findViewById(R.id.tv_request);
 
         tv_plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +133,7 @@ public class StockControl extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
 
-                if (i > 0) {
+                if (i>0){
                     i--;
                 }
 
@@ -126,9 +142,14 @@ public class StockControl extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
+
         dialog.setCancelable(true);
         dialog.create();
         dialog.show();
 
+
     }
+
+
 }

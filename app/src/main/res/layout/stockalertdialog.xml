@@ -50,7 +50,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/tv_quantity"
             android:layout_marginTop="5sp"
-            android:background="@color/textColor" />
+            android:background="@color/divider" />
 
         <TextView
             android:id="@+id/tv_no"
@@ -63,6 +63,10 @@
             android:gravity="center_horizontal|center_vertical"
             android:textColor="@color/purple"/>
 
+
     </LinearLayout>
+
+
+
 
 </LinearLayout>
