@@ -36,7 +36,14 @@ public class FinanceHomeActivity extends Activity {
                         break;
 
                     case 1:
-                        //startActivity(new Intent(FinanceHomeActivity.this,ProductSoldHistory.class));
+                        startActivity(new Intent(FinanceHomeActivity.this,ProductSoldHistory.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(FinanceHomeActivity.this,WithDrawMoneyActivity.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(FinanceHomeActivity.this,TotalRevenue.class));
+                        break;
                 }
 
 

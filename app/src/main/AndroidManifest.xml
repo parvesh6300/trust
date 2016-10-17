@@ -43,7 +43,10 @@
             android:name=".ProductActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity android:name=".AddAppointmentActivity"></activity>
+        <activity android:name=".AddAppointmentActivity" />
+        <activity android:name=".ProductSoldHistory" />
+        <activity android:name=".TotalRevenue" />
+        <activity android:name=".WithDrawMoneyActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_1"
+    tools:context="dcube.com.trust.WithDrawMoneyActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:text="WithDraw Money Activity"
+        android:id="@+id/addclienttext"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" />
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/form_back"
+        android:paddingLeft="150dp"
+        android:paddingRight="50dp">
+
+
+
+        <TextView
+            android:id="@+id/tv_amount_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/purple"
+            android:text="Enter Amount"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            android:layout_marginTop="10dp"
+            />
+
+        <EditText
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter amount"
+            android:layout_marginLeft="20dp"
+            android:textSize="25sp"
+            android:layout_toRightOf="@+id/tv_amount_label"/>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="500dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
