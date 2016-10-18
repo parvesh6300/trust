@@ -46,7 +46,8 @@
             <RadioGroup
                 android:id="@+id/radio_group"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
 
                 <RadioButton
@@ -55,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:text="Daily"
                     android:textColor="@color/purple"
-                    android:textSize="30sp" />
+                    android:textSize="30sp"
+                    android:typeface="monospace"/>
 
                 <RadioButton
                     android:id="@+id/radio_weekly"
@@ -64,7 +66,8 @@
                     android:layout_marginTop="10dp"
                     android:text="Weekly"
                     android:textColor="@color/purple"
-                    android:textSize="30sp" />
+                    android:textSize="30sp"
+                    android:typeface="monospace"/>
 
                 <RadioButton
                     android:id="@+id/radio_monthly"
@@ -73,7 +76,8 @@
                     android:layout_marginTop="10dp"
                     android:text="Mothly"
                     android:textColor="@color/purple"
-                    android:textSize="30sp" />
+                    android:textSize="30sp"
+                    android:typeface="monospace"/>
 
                 <RadioButton
                     android:id="@+id/radio_yearly"
@@ -82,7 +86,8 @@
                     android:layout_marginTop="10dp"
                     android:text="Yearly"
                     android:textColor="@color/purple"
-                    android:textSize="30sp" />
+                    android:textSize="30sp"
+                    android:typeface="monospace"/>
 
 
             </RadioGroup>
@@ -92,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:text="Total Revenue Collected: "
+                android:text="Total Revenue Collected: 5,00,000 Tsh"
                 android:textAlignment="center"
                 android:textColor="@color/purple"
                 android:textSize="30sp"

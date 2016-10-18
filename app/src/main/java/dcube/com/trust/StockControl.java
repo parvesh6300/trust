@@ -2,7 +2,6 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 
 import dcube.com.trust.utils.StockAdapter;
 
-public class StockControl extends Activity implements View.OnClickListener {
+public class StockControl extends Activity  {
 
     TextView tv_quantity;
 
@@ -84,55 +83,6 @@ public class StockControl extends Activity implements View.OnClickListener {
         al_quantity.add("7");
         al_quantity.add("8");
 
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        i=0;
-
-        //Dialog dialog = new Dialog(this);
-
-        QuantityDialog dialog= new QuantityDialog(this,R.layout.quantitydialog);
-
-        //dialog.setContentView(R.layout.quantitydialog);
-
-        final TextView tv_quantity= (TextView)dialog.findViewById(R.id.tv_quantity);
-        TextView tv_plus= (TextView)dialog.findViewById(R.id.tv_plus);
-        TextView tv_minus= (TextView)dialog.findViewById(R.id.tv_minus);
-        TextView tv_current_time= (TextView)dialog.findViewById(R.id.tv_current_time);
-        TextView tv_product_name= (TextView)dialog.findViewById(R.id.tv_product_name);
-        TextView tv_product_cat= (TextView)dialog.findViewById(R.id.tv_product_cat);
-        TextView tv_request= (TextView)dialog.findViewById(R.id.tv_request);
-
-        tv_plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                i++;
-
-                tv_quantity.setText(String.valueOf(i));
-
-            }
-        });
-
-
-        tv_minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (i>0){
-                    i--;
-                }
-
-                tv_quantity.setText(String.valueOf(i));
-
-            }
-        });
-
-        dialog.setCancelable(true);
-        dialog.create();
-        dialog.show();
     }
 
 }

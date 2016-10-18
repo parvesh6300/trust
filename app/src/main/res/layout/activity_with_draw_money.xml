@@ -23,10 +23,11 @@
 
     <RelativeLayout
         android:layout_width="500dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/form_back"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/tv_amount_label"
@@ -38,18 +39,17 @@
             android:textColor="@color/purple"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:typeface="monospace"
-            android:layout_centerVertical="true"/>
+            android:typeface="monospace" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/tv_amount_label"
             android:hint="Enter amount"
             android:inputType="number"
             android:textSize="25sp"
-            android:layout_centerVertical="true"/>
+            android:typeface="monospace" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,147 +61,168 @@
             android:textSize="25sp"
             android:textStyle="bold"
             android:typeface="monospace"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"/>
 
-    </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="500dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/form_back"
-        android:orientation="vertical"
-        android:padding="10dp">
 
-        <RadioGroup
-            android:id="@+id/radio_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <RadioButton
-                android:id="@+id/radio_petty_cash"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Petty Cash"
-                android:textColor="@color/purple"
-                android:textSize="25sp"
-                android:typeface="monospace"
-                />
 
-            <RadioButton
-                android:id="@+id/radio_running_exp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Running Expenses"
-                android:textColor="@color/purple"
-                android:textSize="25sp"
-                android:typeface="monospace"
-                />
-
-            <RadioButton
-                android:id="@+id/radio_salary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Salaries"
-                android:textColor="@color/purple"
-                android:textSize="25sp"
-                android:typeface="monospace"
-                />
-
-            <RadioButton
-                android:id="@+id/radio_rent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Rent"
-                android:textColor="@color/purple"
-                android:textSize="25sp"
-                android:typeface="monospace"
-                />
-
-            <RadioButton
-                android:id="@+id/radio_consultancy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Consultancies"
-                android:textColor="@color/purple"
-                android:textSize="25sp"
-                android:typeface="monospace"
-                />
-
-            <RadioButton
-                android:id="@+id/radio_equipment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Equipment"
-                android:textColor="@color/purple"
-                android:textSize="25sp"
-                android:typeface="monospace"
-                />
-
-            <RadioButton
-                android:id="@+id/radio_commodity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Commodities"
-                android:textColor="@color/purple"
-                android:textSize="25sp"
-                android:typeface="monospace"
-                />
-
-            <RadioButton
-                android:id="@+id/radio_other"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Other"
-                android:textColor="@color/purple"
-                android:textSize="25sp"
-                android:typeface="monospace"
-                />
-
-        </RadioGroup>
-
-        <EditText
-            android:id="@+id/ed_other"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Specify Reason"
-            android:maxLines="3"
-            android:textColor="@color/purple"
-            android:textSize="25sp"
-            android:visibility="invisible"
-            android:typeface="monospace"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="50dp">
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_below="@+id/tv_amount_label">
 
 
             <TextView
-                android:id="@+id/tv_withdraw"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/button_background"
-                android:gravity="center"
-                android:text="WithDraw"
-                android:textAlignment="gravity"
-                android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Expenses"
+                android:textColor="@color/purple"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:layout_marginRight="20dp"/>
 
-        </RelativeLayout>
 
-    </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <RadioButton
+                    android:id="@+id/radio_petty_cash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Petty Cash"
+                    android:textColor="@color/purple"
+                    android:textSize="25sp"
+                    android:typeface="monospace"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radio_running_exp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Running Expenses"
+                    android:textColor="@color/purple"
+                    android:textSize="25sp"
+                    android:typeface="monospace"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radio_salary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Salaries"
+                    android:textColor="@color/purple"
+                    android:textSize="25sp"
+                    android:typeface="monospace"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radio_rent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Rent"
+                    android:textColor="@color/purple"
+                    android:textSize="25sp"
+                    android:typeface="monospace"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radio_consultancy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Consultancies"
+                    android:textColor="@color/purple"
+                    android:textSize="25sp"
+                    android:typeface="monospace"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radio_equipment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Equipment"
+                    android:textColor="@color/purple"
+                    android:textSize="25sp"
+                    android:typeface="monospace"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radio_commodity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Commodities"
+                    android:textColor="@color/purple"
+                    android:textSize="25sp"
+                    android:typeface="monospace"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radio_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Other"
+                    android:textColor="@color/purple"
+                    android:textSize="25sp"
+                    android:typeface="monospace"
+                    />
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/ed_other"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:hint="Specify Reason"
+                android:maxLines="3"
+                android:textColor="@color/purple"
+                android:textSize="25sp"
+                android:visibility="invisible"
+                android:typeface="monospace"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp">
+
+
+                <TextView
+                    android:id="@+id/tv_withdraw"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/button_background"
+                    android:gravity="center"
+                    android:text="WithDraw"
+                    android:typeface="monospace"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
 
 </LinearLayout>

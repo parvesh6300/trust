@@ -25,6 +25,7 @@ public class TotalRevenue extends Activity {
 
     GraphView graph;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +42,17 @@ public class TotalRevenue extends Activity {
         radio_monthly=(RadioButton)findViewById(R.id.radio_monthly);
         radio_yearly=(RadioButton)findViewById(R.id.radio_yearly);
 
+
+        graph.removeAllSeries();
+
         radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
                 if (radio_daily.isChecked())
                 {
+
+                    graph.removeAllSeries();
 
                     LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
 
@@ -62,6 +68,9 @@ public class TotalRevenue extends Activity {
                else if (radio_monthly.isChecked())
                 {
 
+
+                    graph.removeAllSeries();
+
                     LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
 
 
@@ -74,6 +83,8 @@ public class TotalRevenue extends Activity {
 
                else if (radio_weekly.isChecked())
                 {
+
+                    graph.removeAllSeries();
 
                     LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
 
@@ -89,6 +100,8 @@ public class TotalRevenue extends Activity {
                 else if (radio_yearly.isChecked())
                 {
 
+
+                    graph.removeAllSeries();
                     LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
 
 
