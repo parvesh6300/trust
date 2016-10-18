@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="Enter Amount"
             android:textColor="@color/purple"
             android:textSize="25sp"
@@ -49,13 +49,14 @@
             android:hint="Enter amount"
             android:inputType="number"
             android:textSize="25sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="Tsh"
             android:textColor="@color/purple"
             android:textSize="25sp"

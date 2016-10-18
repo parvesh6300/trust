@@ -46,11 +46,11 @@
         <activity android:name=".AddAppointmentActivity" />
         <activity android:name=".ProductSoldHistory" />
         <activity android:name=".TotalRevenue" />
-        <activity android:name=".WithDrawMoneyActivity"
-
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
+        <activity
+            android:name=".WithDrawMoneyActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".MoneyBankedActivity" />
+        <activity android:name=".AddExpenseActivity"></activity>
     </application>
 
 </manifest>
