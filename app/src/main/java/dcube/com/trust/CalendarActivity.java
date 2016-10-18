@@ -12,7 +12,6 @@ import java.util.HashSet;
 
 import dcube.com.trust.utils.CalendarListAdapter;
 
-
 public class CalendarActivity extends Activity
 {
     ListView list;

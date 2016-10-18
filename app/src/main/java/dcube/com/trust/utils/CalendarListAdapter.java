@@ -30,9 +30,9 @@ public class CalendarListAdapter extends BaseAdapter {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         Log.e("Adapter","Adapter Starts");
+
         fillNameInList();
         fillTImeInList();
-
     }
 
     @Override
@@ -53,16 +53,14 @@ public class CalendarListAdapter extends BaseAdapter {
     public class ViewHolder{
 
         TextView tv_name,tv_time;
-
     }
-
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
 
         ViewHolder holder= new ViewHolder();
 
-        convertView = inflater.inflate(R.layout.calendar_list,null);
+        convertView = inflater.inflate(R.layout.calendar_list,viewGroup,false);
 
         holder.tv_name= (TextView)convertView.findViewById(R.id.tv_name);
         holder.tv_time= (TextView)convertView.findViewById(R.id.tv_time);
@@ -92,14 +90,11 @@ public class CalendarListAdapter extends BaseAdapter {
         al_time.add("10:00 am");
         al_time.add("11:00 am");
         al_time.add("12:30 pm");
-        al_time.add("01:30 pm");
+        al_time.add("1:30 pm");
         al_time.add("2:00 pm");
         al_time.add("3:30 pm");
         al_time.add("4:15 pm");
         al_time.add("5:30 pm");
 
     }
-
-
-
 }
