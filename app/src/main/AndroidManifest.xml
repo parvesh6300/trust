@@ -50,7 +50,8 @@
             android:name=".WithDrawMoneyActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".MoneyBankedActivity" />
-        <activity android:name=".AddExpenseActivity"></activity>
+        <activity android:name=".AddExpenseActivity" />
+        <activity android:name=".BuyPlanActivity"></activity>
     </application>
 
 </manifest>

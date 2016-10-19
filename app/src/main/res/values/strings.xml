@@ -18,5 +18,6 @@
         <item>Breast exam</item>
 
     </string-array>
+    <string name="title_activity_buy_service">BuyServiceActivity</string>
 
 </resources>
