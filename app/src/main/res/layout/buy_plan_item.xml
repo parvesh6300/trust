@@ -7,7 +7,7 @@
     android:weightSum="3">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:id="@+id/name"
         android:textColor="@color/textColor"
@@ -19,7 +19,7 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:layout_width="60dp"
+        android:layout_width="162dp"
         android:layout_height="60dp"
         android:id="@+id/product_cost"
         android:textColor="@color/textColor"
@@ -33,7 +33,7 @@
         android:layout_centerInParent="true"/>
 
     <TextView
-        android:layout_width="60dp"
+        android:layout_width="166dp"
         android:layout_height="60dp"
         android:id="@+id/service_cost"
         android:textColor="@color/textColor"

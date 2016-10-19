@@ -193,7 +193,7 @@ public class StockAdapter extends BaseAdapter {
         TextView tv_message=(TextView)doneDialog.findViewById(R.id.tv_message);
         TextView tv_title=(TextView)doneDialog.findViewById(R.id.tv_title);
 
-        tv_title.setText("Confirmation Dialop");
+        tv_title.setText("Confirmation Dialog");
         tv_message.setText("Stock has been requested");
         tv_yes.setText("OK");
         tv_no.setVisibility(View.GONE);

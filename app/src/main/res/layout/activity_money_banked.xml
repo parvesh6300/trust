@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
-        android:text="New Appointment"
+        android:text="Deposit Money"
         android:id="@+id/addclienttext"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -49,6 +49,7 @@
                 android:text="Account Balance :"
                 android:textColor="@color/purple"
                 android:textSize="25sp"
+                android:textStyle="bold"
                 android:typeface="monospace" />
 
 
@@ -85,6 +86,7 @@
                 android:textColor="@color/purple"
                 android:textSize="25sp"
                 android:typeface="monospace"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
             <EditText
@@ -115,27 +117,10 @@
         </RelativeLayout>
 
 
-        <TextView
-            android:id="@+id/tv_history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Deposit History"
-            android:textSize="25sp"
-            android:textAlignment="center"
-            android:typeface="monospace"
-            android:textColor="@color/purple"/>
-
-
-        <ListView
-            android:id="@+id/list_deposit"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:padding="20dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp">
+            android:layout_height="80dp">
 
 
             <TextView
@@ -152,6 +137,29 @@
                 android:textSize="25sp" />
 
         </RelativeLayout>
+
+
+
+
+        <TextView
+            android:id="@+id/tv_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Deposit History"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            android:typeface="monospace"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/purple"/>
+
+
+        <ListView
+            android:id="@+id/list_deposit"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:padding="20dp"/>
+
 
 
 

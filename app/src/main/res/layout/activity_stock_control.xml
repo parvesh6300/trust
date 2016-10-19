@@ -16,8 +16,9 @@
         android:text="View Stock"
         android:textAlignment="gravity"
         android:textColor="@color/white"
-        android:textSize="40sp"
-        android:typeface="monospace" />
+        android:textSize="30sp"
+        android:typeface="monospace"
+        android:textStyle="bold"/>
 
 
     <RelativeLayout
@@ -44,11 +45,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="2"
-                android:text="    PRODUCT"
+                android:text="PRODUCT"
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:typeface="monospace" />
+                android:typeface="monospace"
+                android:layout_marginLeft="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,7 +62,8 @@
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:typeface="monospace" />
+                android:typeface="monospace"
+                android:layout_marginLeft="140dp"/>
 
         </LinearLayout>
 
@@ -69,6 +72,7 @@
             android:id="@+id/stock_list"
             android:layout_width="500dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/form_back"
             android:layout_below="@+id/header1"/>
 

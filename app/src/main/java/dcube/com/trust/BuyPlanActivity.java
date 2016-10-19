@@ -152,36 +152,25 @@ public class BuyPlanActivity extends Activity{
     }
 
     public  void addData(){
-        name.add("Bull Condom");
-        productCost.add("Condom");
-        serviceCost.add("5");
+        name.add("IUCD Sleek/Copper T/Safeload");
+        productCost.add("Tsh 5,000");
+        serviceCost.add("Tsh 20,000");
 
-        name.add("Fiesta");
-        productCost.add("Condom");
-        serviceCost.add("12");
+        name.add("Silverline");
+        productCost.add("Tsh 15,000");
+        serviceCost.add("Tsh 20,000");
 
-        name.add("Implanon Implants");
-        productCost.add("implant");
-        serviceCost.add("23");
+        name.add("CPAC + IUCD");
+        productCost.add("");
+        serviceCost.add("Tsh 150,000");
 
-        name.add("Jadelle");
-        productCost.add("implant");
-        serviceCost.add("7");
+        name.add("Gynaecologist");
+        productCost.add("");
+        serviceCost.add("Tsh 50,000");
 
-        name.add("Safe Load");
-        productCost.add("IUD");
-        serviceCost.add("4");
+        name.add("Family Planning Counseling");
+        productCost.add("Free");
+        serviceCost.add("Free");
 
-        name.add("Silverline IUD");
-        productCost.add("IUD");
-        serviceCost.add("18");
-
-        name.add("Trust Daisy");
-        productCost.add("Emergency Pill");
-        serviceCost.add("42");
-
-        name.add("Depo Provera Contraceptive");
-        productCost.add("Injectable");
-        serviceCost.add("6");
     }
 }

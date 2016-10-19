@@ -72,7 +72,7 @@ public class PlanListAdapter extends BaseAdapter {
         holder.service_cost = (TextView) rowView.findViewById(R.id.service_cost);
 
         holder.name.setText(name.get(position));
-        holder.service_cost.setText(serviceCost.get(position));
+        holder.product_cost.setText(serviceCost.get(position));
         holder.service_cost.setText(serviceCost.get(position));
 
         return rowView;

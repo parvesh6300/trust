@@ -8,17 +8,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:weightSum="3"
         android:background="@color/textColor"
-        android:layout_alignParentTop="true"
-        android:id="@+id/header">
+        android:id="@+id/header1">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="PRODUCT"
+            android:text="SERVICE"
             android:textColor="@color/white"
             android:typeface="monospace"
             android:textSize="25sp"
@@ -26,12 +25,12 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
-            />
+            android:layout_marginLeft="10dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="172dp"
             android:layout_height="wrap_content"
-            android:text="QUANTITY"
+            android:text="PRODUCT COST"
             android:textColor="@color/white"
             android:typeface="monospace"
             android:textSize="25sp"
@@ -41,9 +40,9 @@
             android:gravity="center" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="166dp"
             android:layout_height="wrap_content"
-            android:text="PRICE"
+            android:text="SERVICE COST"
             android:textColor="@color/white"
             android:typeface="monospace"
             android:textSize="25sp"
@@ -58,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="260dp"
         android:id="@+id/selected_product_list"
-        android:layout_below="@+id/header"/>
+        android:layout_below="@+id/header1"/>
 
     <LinearLayout
         android:layout_width="match_parent"

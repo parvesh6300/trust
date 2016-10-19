@@ -49,7 +49,7 @@ public class SoldProductAdapter extends BaseAdapter {
     public View getView(int position, View convertview, ViewGroup viewGroup) {
 
 
-            convertview= inflater.inflate(R.layout.soldproductlist, viewGroup, false );
+            convertview= inflater.inflate(R.layout.salesanalyticslist, viewGroup, false );
             holder= new ViewHolder();
 
 

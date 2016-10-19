@@ -47,11 +47,12 @@
                 android:textColor="@color/purple"
                 android:textSize="25sp"
                 android:typeface="monospace"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
             <EditText
                 android:id="@+id/ed_expense_amount"
-                android:layout_width="160dp"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/tv_amount_label"
@@ -92,16 +93,16 @@
                 android:textColor="@color/purple"
                 android:textSize="25sp"
                 android:typeface="monospace"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
             <EditText
                 android:id="@+id/ed_reason"
                 android:layout_width="320dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/tv_reason_label"
                 android:hint="Expense"
-                android:inputType="number"
                 android:textSize="25sp"
                 android:typeface="monospace"
                 />
@@ -119,6 +120,7 @@
             android:layout_marginTop="10dp"
             android:textAlignment="center"
             android:typeface="monospace"
+            android:textStyle="bold"
             android:textColor="@color/purple"/>
 
         <ListView

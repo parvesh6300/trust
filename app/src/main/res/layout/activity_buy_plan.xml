@@ -67,7 +67,7 @@
             android:id="@+id/header1">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="SERVICE"
                 android:textColor="@color/white"
@@ -75,10 +75,12 @@
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="172dp"
                 android:layout_height="wrap_content"
                 android:text="PRODUCT COST"
                 android:textColor="@color/white"
@@ -90,7 +92,7 @@
                 android:gravity="center" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="166dp"
                 android:layout_height="wrap_content"
                 android:text="SERVICE COST"
                 android:textColor="@color/white"
