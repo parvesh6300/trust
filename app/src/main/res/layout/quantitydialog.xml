@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="400dp"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:text="Request Stock"
         android:textSize="25sp"
         android:textColor="@color/white"
         android:textAlignment="gravity"
+        android:textStyle="bold"
+        android:typeface="monospace"
         android:gravity="center_vertical|center_horizontal"
-        android:background="@color/purple"/>
+        android:background="@color/textColor"/>
 
     <View
         android:layout_width="match_parent"
@@ -23,27 +25,42 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#bb9acc"
         android:padding="10sp">
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_quantity"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:text="0"-->
+            <!--android:textSize="80sp"-->
+            <!--android:typeface="monospace"/>-->
+
 
 
         <TextView
             android:id="@+id/tv_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/circle"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:typeface="monospace"
             android:text="0"
-            android:textSize="80sp"
-            android:typeface="monospace"/>
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_centerInParent="true"/>
 
         <TextView
             android:id="@+id/tv_plus"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:text="+"
-            android:textColor="@color/purple"
+            android:textColor="@color/textColor"
             android:textSize="40sp"
-            android:background="#bb9acc"
             android:layout_marginLeft="40dp"
             android:typeface="monospace"
             android:textAlignment="center"
@@ -55,9 +72,8 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:text="-"
-            android:textColor="@color/purple"
+            android:textColor="@color/textColor"
             android:textSize="40sp"
-            android:background="#bb9acc"
             android:layout_marginRight="40dp"
             android:typeface="monospace"
             android:textAlignment="center"
@@ -83,7 +99,7 @@
             android:layout_marginTop="5sp"
             android:text="2016 Oct 14 10:00"
             android:textSize="30sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/textColor"
             android:typeface="monospace"/>
 
 
@@ -99,7 +115,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15sp">
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
 
 
         <TextView
@@ -108,17 +125,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
             android:text="Product"
-            android:textSize="30sp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
             android:typeface="monospace"/>
 
         <TextView
             android:id="@+id/tv_product_cat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
             android:text="Category"
             android:textSize="25sp"
             android:typeface="monospace"
+            android:textColor="@color/textColor"
             android:layout_below="@+id/tv_product_name"/>
 
         <ImageView
@@ -131,17 +150,18 @@
     </RelativeLayout>
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5sp"
-        android:layout_below="@+id/tv_quantity"
-        android:layout_marginTop="5sp"
-        android:background="@color/divider" />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5sp"-->
+        <!--android:layout_below="@+id/tv_quantity"-->
+        <!--android:layout_marginTop="5sp"-->
+        <!--android:background="@color/divider" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:orientation="horizontal">
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/textColor">
 
 
         <TextView
@@ -151,17 +171,12 @@
             android:text="Cancel"
             android:layout_weight=".6"
             android:textAlignment="gravity"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:typeface="monospace"
+            android:textStyle="bold"
             android:gravity="center_horizontal|center_vertical"
-            android:textColor="@color/purple"/>
+            android:textColor="@color/white"/>
 
-        <View
-            android:layout_width=".5sp"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tv_quantity"
-            android:layout_marginTop="5sp"
-            android:background="@color/divider" />
 
         <TextView
             android:id="@+id/tv_request"
@@ -170,10 +185,11 @@
             android:text="Request Stock"
             android:layout_weight=".4"
             android:textAlignment="gravity"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:typeface="monospace"
+            android:textStyle="bold"
             android:gravity="center_horizontal|center_vertical"
-            android:textColor="@color/purple"/>
+            android:textColor="@color/white"/>
 
 
     </LinearLayout>

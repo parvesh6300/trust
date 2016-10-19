@@ -67,8 +67,11 @@ public class AddClientActivity extends Activity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
             requestWindowFeature(Window.FEATURE_NO_TITLE);
+
             setContentView(R.layout.custom_dialog);
+
             ok = (Button) findViewById(R.id.btn_yes);
 
             ok.setOnClickListener(new View.OnClickListener() {

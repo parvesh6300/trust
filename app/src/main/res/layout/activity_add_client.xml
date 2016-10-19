@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name  "
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:typeface="monospace"
                 android:textColor="@color/purple"
                 android:textStyle="bold"
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Age Group"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:textColor="@color/purple"
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contact"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:textColor="@color/purple"
@@ -143,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Emer. Contact"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:textColor="@color/purple"
@@ -184,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:text="Area"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     android:typeface="monospace"
                     android:textColor="@color/purple"
                     android:layout_alignParentLeft="true"
@@ -212,7 +212,7 @@
                 android:layout_height="30dp"
                 android:text="Medical History"
                 android:layout_alignParentTop="true"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:id="@+id/historytext"
@@ -245,7 +245,7 @@
                 android:layout_height="30dp"
                 android:text="History of Contraceptives used"
                 android:layout_alignParentTop="true"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:id="@+id/contra_text"
@@ -268,7 +268,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"
                     />
 
@@ -279,7 +279,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"
                     />
 
@@ -290,7 +290,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"
                     />
             </RadioGroup>
@@ -309,7 +309,7 @@
                 android:text="Sex"
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:typeface="monospace"
                 android:id="@+id/sex_text"
                 android:textColor="@color/purple"
@@ -332,7 +332,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"
                     />
 
@@ -343,7 +343,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"
                     />
 
@@ -362,7 +362,7 @@
                 android:layout_height="30dp"
                 android:text="Have Children"
                 android:layout_alignParentTop="true"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:id="@+id/child_text"
@@ -385,7 +385,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"/>
 
                 <RadioButton
@@ -395,7 +395,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace" />
 
             </RadioGroup>
@@ -413,7 +413,7 @@
                 android:layout_height="30dp"
                 android:text="Ever Tested for HIV?"
                 android:layout_alignParentTop="true"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:id="@+id/hiv_text"
@@ -436,7 +436,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace" />
 
                 <RadioButton
@@ -446,7 +446,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"/>
 
                 <RadioButton
@@ -456,7 +456,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"/>
 
                 <RadioButton
@@ -466,7 +466,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"/>
 
             </RadioGroup>
@@ -484,7 +484,7 @@
                 android:layout_height="30dp"
                 android:text="How you heard about clinic?"
                 android:layout_alignParentTop="true"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:id="@+id/heard_text"
@@ -507,7 +507,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace" />
 
                 <RadioButton
@@ -517,7 +517,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"
                     />
 
@@ -528,7 +528,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"
                     />
                 <RadioButton
@@ -538,7 +538,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"
                     />
                 <RadioButton
@@ -548,7 +548,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:typeface="monospace"
                     />
             </RadioGroup>

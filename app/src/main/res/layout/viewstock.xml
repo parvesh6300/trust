@@ -1,61 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-    <RelativeLayout
+
+    <TextView
+        android:id="@+id/tv_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20sp">
+        android:textColor="@color/textColor"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:text="Fiesta"
+        android:layout_gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/tv_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Product"
-            android:textSize="30sp"
-            android:typeface="monospace"
-            android:textColor="@color/purple"/>
+    <TextView
+        android:id="@+id/tv_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:text="Condom"
+        android:layout_below="@+id/tv_product"
+        android:layout_gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_centerVertical="true"/>
 
-        <TextView
-            android:id="@+id/tv_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Category"
-            android:textSize="25sp"
-            android:typeface="monospace"
-            android:textColor="@color/purple"
-            android:layout_below="@+id/tv_product"
-            android:layout_marginTop="10sp"/>
 
-        <TextView
-            android:id="@+id/tv_quantity_label"
-            android:layout_width="150sp"
-            android:layout_height="wrap_content"
-            android:text="Quantity"
-            android:textSize="20sp"
-            android:textColor="@color/purple"
-            android:layout_alignParentRight="true"
-            android:textAlignment="gravity"
-            android:typeface="monospace"
-            android:gravity="center_horizontal|center_vertical" />
+    <TextView
+        android:id="@+id/tv_quantity"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/circle"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:text="0"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentEnd="true"/>
 
-        <TextView
-            android:id="@+id/tv_quantity"
-            android:layout_width="150sp"
-            android:layout_height="50sp"
-            android:text="Quantity"
-            android:textSize="30sp"
-            android:textColor="@color/purple"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/tv_quantity_label"
-            android:textAlignment="gravity"
-            android:layout_marginTop="5sp"
-            android:typeface="monospace"
-            android:gravity="center_horizontal|center_vertical"
-            android:background="@drawable/rounded_corner"/>
 
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

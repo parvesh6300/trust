@@ -3,7 +3,6 @@ package dcube.com.trust.utils;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,7 @@ public class StockAdapter extends BaseAdapter {
     Dialog dialog;
     Dialog alertDialog;
 
-    ViewHolder holder;
+
 
     public  int quantity;
 
@@ -53,7 +52,7 @@ public class StockAdapter extends BaseAdapter {
     public View getView(final int i, View convertView, ViewGroup viewGroup) {
 
 
-        holder= new ViewHolder();
+        final ViewHolder holder= new ViewHolder();
 
         convertView = inflater.inflate(R.layout.viewstock,viewGroup,false);
 
@@ -63,23 +62,13 @@ public class StockAdapter extends BaseAdapter {
         holder.tv_quantity_label=(TextView)convertView.findViewById(R.id.tv_quantity_label);
 
         holder.tv_product.setText(al_product.get(i));
-
-        Log.e("Product","Product "+al_product.get(i));
-
         holder.tv_category.setText(al_category.get(i));
-
-        Log.e("Category","Category "+al_category.get(i));
-
         holder.tv_quantity.setText(al_quantity.get(i));
 
-        Log.e("Quantity","Quantity "+al_quantity.get(i));
 
         holder.tv_quantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                holder.tv_quantity.setBackgroundColor(Color.parseColor("#603370"));
-                holder.tv_quantity.setTextColor(Color.parseColor("#ffffff"));
 
                 dialog = new Dialog(mcontext);
 
@@ -95,7 +84,6 @@ public class StockAdapter extends BaseAdapter {
                 TextView tv_cancel=(TextView)dialog.findViewById(R.id.tv_cancel);
 
                 dialog.setCancelable(false);
-                dialog.create();
                 dialog.show();
 
                 tv_plus.setOnClickListener(new View.OnClickListener() {

@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Amount(Tsh) :"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:typeface="monospace"
             android:textColor="@color/purple"
             android:layout_alignParentLeft="true"
@@ -37,7 +37,7 @@
             android:typeface="monospace"
             android:textColor="@color/textColor"
             android:layout_marginLeft="10dp"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:id="@+id/amount"
             android:text="2300"
             android:textStyle="bold"
@@ -55,8 +55,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Discount    :"
-            android:textSize="20sp"
+            android:text="Discount      :"
+            android:textSize="25sp"
             android:typeface="monospace"
             android:textColor="@color/purple"
             android:layout_alignParentLeft="true"
@@ -69,7 +69,7 @@
             android:typeface="monospace"
             android:textColor="@color/textColor"
             android:layout_marginLeft="10dp"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:id="@+id/discount"
             android:textStyle="bold"
             android:text="230"
@@ -112,14 +112,15 @@
 
     <RelativeLayout
         android:layout_width="400dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="50dp">
+        android:layout_height="40dp"
+        android:layout_marginLeft="35dp"
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="By mPesa"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:typeface="monospace"
             android:textColor="@color/purple"
             android:layout_alignParentLeft="true"

@@ -8,14 +8,15 @@
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:text="Confirmation Dialog"
         android:textSize="25sp"
         android:textColor="@color/white"
         android:textAlignment="gravity"
         android:typeface="monospace"
+        android:textStyle="bold"
         android:gravity="center_vertical|center_horizontal"
-        android:background="@color/purple"/>
+        android:background="@color/textColor"/>
 
 
     <TextView
@@ -24,17 +25,17 @@
         android:layout_height="60dp"
         android:text="Are you sure....??"
         android:textSize="25sp"
-        android:textColor="@color/white"
+        android:textColor="@color/textColor"
         android:textAlignment="gravity"
         android:typeface="monospace"
-        android:gravity="center_vertical|center_horizontal"
-        android:background="#bb9acc"/>
+        android:gravity="center_vertical|center_horizontal" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:orientation="horizontal">
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/textColor">
 
 
         <TextView
@@ -44,17 +45,13 @@
             android:text="Yes"
             android:layout_weight=".6"
             android:textAlignment="gravity"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:typeface="monospace"
+            android:textStyle="bold"
             android:gravity="center_horizontal|center_vertical"
-            android:textColor="@color/purple"/>
+            android:textColor="@color/white"/>
 
-        <View
-            android:layout_width=".5sp"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tv_quantity"
-            android:layout_marginTop="5sp"
-            android:background="@color/divider" />
+
 
         <TextView
             android:id="@+id/tv_no"
@@ -63,10 +60,11 @@
             android:text="No"
             android:layout_weight=".4"
             android:textAlignment="gravity"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:typeface="monospace"
+            android:textStyle="bold"
             android:gravity="center_horizontal|center_vertical"
-            android:textColor="@color/purple"/>
+            android:textColor="@color/white"/>
 
 
     </LinearLayout>
