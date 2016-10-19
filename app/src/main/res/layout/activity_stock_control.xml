@@ -69,7 +69,6 @@
             android:id="@+id/stock_list"
             android:layout_width="500dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:background="@drawable/form_back"
             android:layout_below="@+id/header1"/>
 
