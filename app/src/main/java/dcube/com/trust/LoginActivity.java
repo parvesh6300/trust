@@ -13,8 +13,10 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
     RelativeLayout nurse;
     RelativeLayout finance;
+
     ImageView nurse_radio;
     ImageView finance_radio;
+
     TextView nurse_text;
     TextView finance_text;
     TextView forgot;
