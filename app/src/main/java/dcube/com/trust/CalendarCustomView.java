@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -51,8 +50,8 @@ public class CalendarCustomView extends LinearLayout
 
 	// internal components
 	private LinearLayout header;
-	private ImageView btnPrev;
-	private ImageView btnNext;
+	private TextView btnPrev;
+	private TextView btnNext;
 	private TextView txtMonth;
 	private TextView txtYear;
 	private TextView date;
@@ -104,7 +103,6 @@ public class CalendarCustomView extends LinearLayout
 				dateFormat1 = DATE_FORMAT1;
 			    dateFormat2 = DATE_FORMAT2;
 				dateFormat3 = DATE_FORMAT3;
-
 		}
 		finally
 		{
@@ -115,13 +113,12 @@ public class CalendarCustomView extends LinearLayout
 	{
 		// layout is inflated, assign local variables to components
 		header = (LinearLayout)findViewById(R.id.calendar_header);
-		btnPrev = (ImageView)findViewById(R.id.calendar_prev_button);
-		btnNext = (ImageView)findViewById(R.id.calendar_next_button);
+		btnPrev = (TextView)findViewById(R.id.calendar_prev_button);
+		btnNext = (TextView)findViewById(R.id.calendar_next_button);
 		txtMonth = (TextView)findViewById(R.id.calendar_month_display);
-		txtYear = (TextView)findViewById(R.id.calendar_year_display);
-		grid = (GridView)findViewById(R.id.calendar_grid);
-		btnPrev.setVisibility(View.GONE);
+		txtYear = (TextView)findViewById(R.id.year);
 
+		grid = (GridView)findViewById(R.id.calendar_grid);
 	}
 
 	private void assignClickHandlers()
@@ -135,8 +132,6 @@ public class CalendarCustomView extends LinearLayout
 
 				currentDate.add(Calendar.MONTH, 1);
 				updateCalendar();
-				btnPrev.setVisibility(View.VISIBLE);
-
 			}
 		});
 
@@ -153,26 +148,6 @@ public class CalendarCustomView extends LinearLayout
 			}
 		});
 
-		// long-pressing a day
-/*
-		grid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
-		{
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> view, View cell, int position, long id)
-			{
-				// handle long-press
-				if (eventHandler == null)
-					return false;
-
-				eventHandler.onDayLongPress((Date)view.getItemAtPosition(position));
-				return true;
-			}
-		});
-
-			*/
-
-
 		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View View, int i, long l) {
@@ -183,11 +158,8 @@ public class CalendarCustomView extends LinearLayout
 				eventHandler.onDayLongPress((Date)adapterView.getItemAtPosition(i));
 
 				Log.e("DAte","DAte "+adapterView.getItemAtPosition(i).toString());
-
 			}
 		});
-
-
 	}
 
 	/**
@@ -228,8 +200,54 @@ public class CalendarCustomView extends LinearLayout
 		SimpleDateFormat sdf2 = new SimpleDateFormat(dateFormat2);
 		SimpleDateFormat sdf3 = new SimpleDateFormat(dateFormat3);
 
-		txtMonth.setText(sdf1.format(currentDate.getTime()));
+		int month = calendar.get(Calendar.MONTH);
+
+		if(month < 11  && month > 0) {
+
+			txtMonth.setText(theMonth(month));
+			btnPrev.setText(theMonth(month-1));
+			btnNext.setText(theMonth(month+1));
+		}
+		else if(month == 12 || month == 11 || month == 0)
+		{
+
+			switch (month) {
+
+				case 12: {
+
+					txtMonth.setText("December");
+					btnPrev.setText("November");
+					btnNext.setText("January");
+
+					break;
+				}
+
+				case 11: {
+
+					txtMonth.setText("December");
+					btnPrev.setText("November");
+					btnNext.setText("January");
+
+					break;
+				}
+				case 0: {
+
+					txtMonth.setText("January");
+					btnPrev.setText("December");
+					btnNext.setText("February");
+
+					break;
+				}
+			}
+		}
+
+
 		txtYear.setText(sdf2.format(currentDate.getTime()));
+	}
+
+	public static String theMonth(int month){
+		String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+		return monthNames[month];
 	}
 
 	private class CalendarAdapter extends ArrayAdapter<Date>
@@ -265,6 +283,7 @@ public class CalendarCustomView extends LinearLayout
 
 			// if this day has an event, specify event image
 			view.setBackgroundResource(0);
+
 			if (eventDays != null)
 			{
 				for (Date eventDate : eventDays)
@@ -288,6 +307,9 @@ public class CalendarCustomView extends LinearLayout
 			{
 				// if this day is outside current month, grey it out
 				((TextView)view).setTextColor(getResources().getColor(R.color.greyed_out));
+				view.setAlpha(0.8f);
+				view.setBackgroundResource(R.drawable.white_circle);
+
 			}
 			else if (day == today.getDate())
 			{
@@ -295,6 +317,14 @@ public class CalendarCustomView extends LinearLayout
 				((TextView)view).setTextColor(getResources().getColor(R.color.white));
 				view.setBackgroundResource(R.drawable.circle_calendar);
 			}
+			else
+			{
+				// if it is today, set it to blue/bold
+				((TextView)view).setTextColor(getResources().getColor(R.color.textColor));
+				view.setBackgroundResource(R.drawable.white_circle);
+
+			}
+
 			// set text
 			((TextView)view).setText(String.valueOf(date.getDate()));
 

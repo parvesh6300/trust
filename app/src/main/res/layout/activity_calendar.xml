@@ -5,42 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CalendarActivity">
+    tools:context=".CalendarActivity"
+    android:background="@drawable/background_1">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:id="@+id/header"
-        android:background="@drawable/background_1">
-        
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/backarrow"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"/>
-        
+        android:id="@+id/header">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Calendar"
             android:textColor="@color/white"
             android:layout_centerInParent="true"
-            android:textSize="20sp"/>
+            android:textSize="30sp"
+            android:typeface="monospace"/>
         
     </RelativeLayout>
 
     <dcube.com.trust.CalendarCustomView
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="500dp"
         android:layout_below="@id/header"/>
     
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_width="500dp"
+        android:layout_height="200dp"
         android:layout_below="@+id/calendar_view"
-        android:id="@+id/list"/>
+        android:id="@+id/list"
+        android:layout_centerHorizontal="true"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="10dp"
+        android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
 
 </RelativeLayout>
