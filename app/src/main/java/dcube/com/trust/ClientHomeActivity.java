@@ -37,15 +37,20 @@ public class ClientHomeActivity extends Activity {
 
                     case 1:
 
-                        startActivity(new Intent(ClientHomeActivity.this,ProductActivity.class));
+                        startActivity(new Intent(ClientHomeActivity.this,ViewAppointmentActivity.class));
                         break;
 
                     case 2:
 
-                        startActivity(new Intent(ClientHomeActivity.this,BuyPlanActivity.class));
+                        startActivity(new Intent(ClientHomeActivity.this,ProductActivity.class));
                         break;
 
                     case 3:
+
+                        startActivity(new Intent(ClientHomeActivity.this,BuyPlanActivity.class));
+                        break;
+
+                    case 4:
 
                         startActivity(new Intent(ClientHomeActivity.this,GenerateInvoiceActivity.class));
                         break;

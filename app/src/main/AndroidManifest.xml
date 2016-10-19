@@ -17,10 +17,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".CalendarActivity" />
-        <activity android:name=".FinanceHomeActivity" />
-        <activity android:name=".NurseHomeActivity" />
-        <activity android:name=".ClientHomeActivity" />
+        <activity android:name=".CalendarActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FinanceHomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NurseHomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ClientHomeActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
@@ -45,13 +49,20 @@
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
         <activity android:name=".AddAppointmentActivity" />
         <activity android:name=".ProductSoldHistory" />
-        <activity android:name=".TotalRevenue" />
+        <activity android:name=".TotalRevenue"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".WithDrawMoneyActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".MoneyBankedActivity" />
-        <activity android:name=".AddExpenseActivity" />
-        <activity android:name=".BuyPlanActivity"></activity>
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MoneyBankedActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddExpenseActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".BuyPlanActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ViewAppointmentActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -19,8 +19,6 @@ public class NurseAdapter extends BaseAdapter {
             R.drawable.searchclient,
             R.drawable.calender,
             R.drawable.products,
-            R.drawable.money_bag,
-            R.drawable.support
     };
 
     private static LayoutInflater inflater = null;

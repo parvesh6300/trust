@@ -45,16 +45,12 @@ public class DepositAdapter extends BaseAdapter {
     public class ViewHolder{
 
         TextView tv_date,tv_month,tv_year,tv_detail,tv_amount;
-
     }
-
-
 
     @Override
     public View getView(int pos, View convertview, ViewGroup viewGroup) {
 
         ViewHolder holder= new ViewHolder();
-
 
         convertview= inflater.inflate(R.layout.depositlist,null);
 
@@ -64,10 +60,7 @@ public class DepositAdapter extends BaseAdapter {
         holder.tv_detail= (TextView)convertview.findViewById(R.id.tv_detail);
         holder.tv_amount= (TextView)convertview.findViewById(R.id.tv_amount);
 
-
         holder.tv_date.setText(al_date.get(pos));
-//        holder.tv_month.setText(cl.get(Calendar.MONTH));
-//        holder.tv_year.setText(cl.get(Calendar.YEAR));
         holder.tv_detail.setText(al_deposit_detail.get(pos));
         holder.tv_amount.setText(al_deposit_amount.get(pos)+" Tsh");
 

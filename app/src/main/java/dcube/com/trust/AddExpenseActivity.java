@@ -41,14 +41,5 @@ public class AddExpenseActivity extends Activity {
         depositAdapter= new DepositAdapter(this,al_date,al_expense_amount,al_expense_reason);
 
         list_expense.setAdapter(depositAdapter);
-
-
-
     }
-
-
-
-
-
-
 }
