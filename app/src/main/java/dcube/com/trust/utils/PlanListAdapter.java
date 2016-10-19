@@ -19,19 +19,19 @@ public class PlanListAdapter extends BaseAdapter {
     static int quantity;
 
     ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> category = new ArrayList<>();
-    //ArrayList<String> quantity = new ArrayList<>();
+    ArrayList<String> productCost = new ArrayList<>();
+    ArrayList<String> serviceCost = new ArrayList<>();
 
     private static LayoutInflater inflater = null;
 
-    public PlanListAdapter(Activity activity, ArrayList<String> name, ArrayList<String> category, ArrayList<String> quntity) {
+    public PlanListAdapter(Activity activity,ArrayList<String> name,ArrayList<String> productCost,ArrayList<String> serviceCost) {
 
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         this.name = name;
-        this.category = category;
-        //this.quantity = quantity;
+        this.productCost = productCost;
+        this.serviceCost = serviceCost;
     }
 
     @Override
@@ -52,13 +52,10 @@ public class PlanListAdapter extends BaseAdapter {
         return position;
     }
 
-    public class Holder
-    {
+    public class Holder {
         TextView name;
-        TextView quantity;
-        TextView category;
-        TextView add;
-        TextView minus;
+        TextView product_cost;
+        TextView service_cost;
     }
 
     @Override
@@ -68,16 +65,15 @@ public class PlanListAdapter extends BaseAdapter {
         final Holder holder = new Holder();
 
         final View rowView;
-        rowView = inflater.inflate(R.layout.product_category_item, parent , false);
+        rowView = inflater.inflate(R.layout.buy_plan_item, parent , false);
 
         holder.name = (TextView) rowView.findViewById(R.id.name);
-        holder.quantity = (TextView) rowView.findViewById(R.id.quantity);
-        holder.category = (TextView) rowView.findViewById(R.id.category);
-        holder.add = (TextView) rowView.findViewById(R.id.add);
-        holder.minus = (TextView) rowView.findViewById(R.id.minus);
+        holder.product_cost = (TextView) rowView.findViewById(R.id.product_cost);
+        holder.service_cost = (TextView) rowView.findViewById(R.id.service_cost);
 
         holder.name.setText(name.get(position));
-        holder.category.setText(category.get(position));
+        holder.service_cost.setText(serviceCost.get(position));
+        holder.service_cost.setText(serviceCost.get(position));
 
         return rowView;
     }
