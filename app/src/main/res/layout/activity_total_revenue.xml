@@ -58,6 +58,7 @@
                     android:text="Daily"
                     android:textColor="@color/purple"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     android:typeface="monospace"/>
 
                 <RadioButton
@@ -68,6 +69,7 @@
                     android:text="Weekly"
                     android:textColor="@color/purple"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     android:typeface="monospace"/>
 
                 <RadioButton
@@ -78,6 +80,7 @@
                     android:text="Mothly"
                     android:textColor="@color/purple"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     android:typeface="monospace"/>
 
                 <RadioButton
@@ -88,21 +91,48 @@
                     android:text="Yearly"
                     android:textColor="@color/purple"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     android:typeface="monospace"/>
 
 
             </RadioGroup>
 
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:text="Total Revenue Collected: 5,00,000 Tsh"
-                android:textAlignment="center"
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:typeface="monospace"/>
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="Total Revenue Collected: "
+                    android:layout_marginLeft="40dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="5,00,000 Tsh"
+                    android:textSize="30sp"
+                    android:textColor="@color/purple"
+                    android:typeface="monospace"/>
+
+
+
+
+
+            </LinearLayout>
+
+
+
 
         </LinearLayout>
 

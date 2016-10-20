@@ -5,62 +5,48 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import dcube.com.trust.utils.DepositAdapter;
+import dcube.com.trust.utils.PlanAdapter;
 
-public class MoneyBankedActivity extends Activity {
+public class ViewPlanActivity extends Activity {
 
+    ListView lv_plan;
+    PlanAdapter planAdapter;
 
-    ListView list_deposit;
-
-    DepositAdapter depositAdapter;
-
-    ArrayList<String> al_deposit_detail= new ArrayList<>();
-    ArrayList<String> al_deposit_amount= new ArrayList<>();
+    ArrayList<String> al_plan_name = new ArrayList<>();
     ArrayList<String> al_date= new ArrayList<>();
 
-    TextView tv_total_amount,tv_deposit;
-
-    EditText ed_deposit_amount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_money_banked);
-
-
-        list_deposit=(ListView)findViewById(R.id.list_deposit);
-        ed_deposit_amount=(EditText)findViewById(R.id.ed_deposit_amount);
-        tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
-        tv_deposit=(TextView)findViewById(R.id.tv_deposit);
-
-        depositAdapter= new DepositAdapter(this,al_date,al_deposit_detail,al_deposit_amount);
-        list_deposit.setAdapter(depositAdapter);
+        setContentView(R.layout.activity_view_plan);
 
 
-        tv_deposit.setOnClickListener(new View.OnClickListener() {
+        lv_plan=(ListView)findViewById(R.id.lv_plan);
+
+        planAdapter= new PlanAdapter(this,al_date,al_plan_name);
+        lv_plan.setAdapter(planAdapter);
+
+
+        lv_plan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                CustomDialogClass cdd = new CustomDialogClass(MoneyBankedActivity.this);
+                CustomDialogClass cdd= new CustomDialogClass(ViewPlanActivity.this);
                 cdd.show();
+
             }
         });
 
 
+
     }
-
-
-
-
-
 
 
     public class CustomDialogClass extends Dialog {
@@ -80,7 +66,7 @@ public class MoneyBankedActivity extends Activity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-            setContentView(R.layout.deposit_dialog);
+            setContentView(R.layout.renewplan_dialog);
 
             confirm = (TextView) findViewById(R.id.confirm);
             cancel = (TextView) findViewById(R.id.cancel);
@@ -91,6 +77,15 @@ public class MoneyBankedActivity extends Activity {
 
                     dismiss();
                     finish();
+
+
+                    Dialog dialog = new Dialog(c);
+                    dialog.setContentView(R.layout.custom_dialog);
+                    dialog.show();
+
+
+
+
 
                 }
             });
@@ -106,6 +101,7 @@ public class MoneyBankedActivity extends Activity {
 
         }
     }
+
 
 
 

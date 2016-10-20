@@ -153,20 +153,20 @@ public class BuyPlanActivity extends Activity{
 
     public  void addData(){
         name.add("IUCD Sleek/Copper T/Safeload");
-        productCost.add("Tsh 5,000");
-        serviceCost.add("Tsh 20,000");
+        productCost.add("5,000");
+        serviceCost.add("20,000");
 
         name.add("Silverline");
-        productCost.add("Tsh 15,000");
-        serviceCost.add("Tsh 20,000");
+        productCost.add("15,000");
+        serviceCost.add("20,000");
 
         name.add("CPAC + IUCD");
         productCost.add("");
-        serviceCost.add("Tsh 150,000");
+        serviceCost.add("150,000");
 
         name.add("Gynaecologist");
         productCost.add("");
-        serviceCost.add("Tsh 50,000");
+        serviceCost.add("50,000");
 
         name.add("Family Planning Counseling");
         productCost.add("Free");

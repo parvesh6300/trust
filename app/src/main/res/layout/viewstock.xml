@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingLeft="20dp"
-    android:paddingRight="40dp">
+    android:paddingRight="40dp"
+    android:id="@+id/rel_row">
 
 
     <TextView

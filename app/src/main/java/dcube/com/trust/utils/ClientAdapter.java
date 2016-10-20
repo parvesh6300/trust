@@ -19,6 +19,7 @@ public class ClientAdapter extends BaseAdapter {
             R.drawable.addnewappointment,
             R.drawable.products,
             R.drawable.money_bag,
+            R.drawable.money_bag,
             R.drawable.generateinvoice
     };
 

@@ -24,12 +24,27 @@ public class PaymentDetailFragment extends Fragment {
 
         nextFragment = viewPager.getCurrentItem() + 1;
 
+
+        TextView tv_cancel=(TextView)v.findViewById(R.id.tv_cancel);
+
         TextView generate = (TextView) v.findViewById(R.id.generate);
+
         generate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 viewPager.setCurrentItem(nextFragment);
                 }
         });
+
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
 
         return v;
     }

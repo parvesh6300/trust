@@ -6,19 +6,19 @@
     android:orientation="vertical"
     android:elevation="3dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Confirm Withdraw"
-            android:textColor="@color/white"
-            android:typeface="monospace"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:id="@+id/header"
-            android:background="@color/textColor"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Confirm Deposit"
+        android:textColor="@color/white"
+        android:typeface="monospace"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/header"
+        android:background="@color/textColor"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,6 +26,8 @@
         android:orientation="vertical"
         android:weightSum="3"
         android:layout_centerInParent="true">
+
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,10 +41,11 @@
             android:layout_gravity="center"
             android:gravity="center" />
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="WITHDRAW : 2,50,000 Tsh"
+            android:text="Deposit : 2,50,000 Tsh"
             android:textColor="@color/textColor"
             android:typeface="monospace"
             android:textSize="25sp"
@@ -51,10 +54,11 @@
             android:layout_gravity="center"
             android:gravity="center" />
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BALANCE : 7,50,000 Tsh"
+            android:text="BALANCE : 12,50,000 Tsh"
             android:textColor="@color/textColor"
             android:typeface="monospace"
             android:textSize="25sp"

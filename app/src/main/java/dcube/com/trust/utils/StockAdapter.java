@@ -2,11 +2,11 @@ package dcube.com.trust.utils;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -46,6 +46,7 @@ public class StockAdapter extends BaseAdapter {
     public class ViewHolder
     {
         TextView tv_product,tv_category,tv_quantity,tv_quantity_label;
+        RelativeLayout rel_row;
     }
 
     @Override
@@ -56,6 +57,7 @@ public class StockAdapter extends BaseAdapter {
 
         convertView = inflater.inflate(R.layout.viewstock,viewGroup,false);
 
+        holder.rel_row=(RelativeLayout)convertView.findViewById(R.id.rel_row);
         holder.tv_product= (TextView)convertView.findViewById(R.id.tv_product);
         holder.tv_category= (TextView)convertView.findViewById(R.id.tv_category);
         holder.tv_quantity= (TextView)convertView.findViewById(R.id.tv_quantity);
@@ -66,7 +68,7 @@ public class StockAdapter extends BaseAdapter {
         holder.tv_quantity.setText(al_quantity.get(i));
 
 
-        holder.tv_quantity.setOnClickListener(new View.OnClickListener() {
+        holder.rel_row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -74,7 +76,7 @@ public class StockAdapter extends BaseAdapter {
 
                 dialog.setContentView(R.layout.quantitydialog);
 
-                final TextView tv_quantity= (TextView)dialog.findViewById(R.id.tv_quantity);
+                final TextView tv_quantity1= (TextView)dialog.findViewById(R.id.tv_quantity);
                 TextView tv_plus= (TextView)dialog.findViewById(R.id.tv_plus);
                 TextView tv_minus= (TextView)dialog.findViewById(R.id.tv_minus);
                 TextView tv_current_time= (TextView)dialog.findViewById(R.id.tv_current_time);
@@ -86,12 +88,15 @@ public class StockAdapter extends BaseAdapter {
                 dialog.setCancelable(false);
                 dialog.show();
 
+                tv_product_name.setText(al_product.get(i));
+                tv_product_cat.setText(al_category.get(i));
+
                 tv_plus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
                         quantity++;
-                        tv_quantity.setText(String.valueOf(quantity));
+                        tv_quantity1.setText(String.valueOf(quantity));
                     }
                 });
 
@@ -104,7 +109,7 @@ public class StockAdapter extends BaseAdapter {
                             quantity--;
                         }
 
-                        tv_quantity.setText(String.valueOf(quantity));
+                        tv_quantity1.setText(String.valueOf(quantity));
                     }
                 });
 
@@ -113,11 +118,6 @@ public class StockAdapter extends BaseAdapter {
                     public void onClick(View view) {
 
                         dialog.cancel();
-
-                        holder.tv_quantity.setBackgroundResource(R.drawable.rounded_corner);
-                        holder.tv_quantity.setText(al_quantity.get(i));
-                        holder.tv_quantity.setTextColor(Color.parseColor("#603370"));
-
                     }
                 });
 

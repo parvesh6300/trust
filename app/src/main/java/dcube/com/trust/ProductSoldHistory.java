@@ -128,14 +128,14 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
     public void fillQuantityInList()
     {
-        al_quantity.add("1");
-        al_quantity.add("2");
-        al_quantity.add("3");
-        al_quantity.add("4");
+        al_quantity.add("10");
         al_quantity.add("5");
-        al_quantity.add("6");
-        al_quantity.add("7");
-        al_quantity.add("8");
+        al_quantity.add("15");
+        al_quantity.add("20");
+//        al_quantity.add("5");
+//        al_quantity.add("6");
+//        al_quantity.add("7");
+//        al_quantity.add("8");
 
     }
 
