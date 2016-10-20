@@ -119,7 +119,6 @@
 
         </LinearLayout>
 
-
         <TextView
             android:background="@drawable/button_background"
             android:layout_width="300dp"

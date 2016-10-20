@@ -20,6 +20,5 @@ public class ViewAppointmentActivity extends Activity {
         adapter = new FollowupListAdapter(this);
 
         followUpList.setAdapter(adapter);
-
     }
 }
