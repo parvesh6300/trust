@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -76,12 +77,27 @@ public class ViewPlanActivity extends Activity {
                 public void onClick(View view) {
 
                     dismiss();
-                    finish();
+                 //   finish();
 
 
-                    Dialog dialog = new Dialog(c);
+                    final Dialog dialog = new Dialog(c);
                     dialog.setContentView(R.layout.custom_dialog);
                     dialog.show();
+
+                    TextView text= (TextView)dialog.findViewById(R.id.text);
+                    Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
+
+                    text.setText("Renewed Successfully");
+
+                    btn_yes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialog.cancel();
+                            finish();
+
+                        }
+                    });
 
 
 
