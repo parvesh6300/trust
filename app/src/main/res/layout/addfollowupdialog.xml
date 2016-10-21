@@ -43,7 +43,7 @@
                     android:src="@drawable/cal_icon" />
 
                 <TextView
-                    android:id="@+id/datepick"
+                    android:id="@+id/tv_datepick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -77,7 +77,7 @@
                     android:src="@drawable/clock" />
 
                 <TextView
-                    android:id="@+id/timepick"
+                    android:id="@+id/tv_timepick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

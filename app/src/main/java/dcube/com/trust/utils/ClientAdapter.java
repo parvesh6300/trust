@@ -16,10 +16,10 @@ public class ClientAdapter extends BaseAdapter {
 
     public Integer[] mThumbIds = {
             R.drawable.addnewappointment,
-            R.drawable.addnewappointment,
-            R.drawable.products,
-            R.drawable.money_bag,
-            R.drawable.money_bag,
+            R.drawable.viewappointment,
+            R.drawable.buyproducts,
+            R.drawable.buyplan,
+            R.drawable.viewplans,
             R.drawable.generateinvoice
     };
 

@@ -119,18 +119,18 @@
 
         </LinearLayout>
 
+
         <TextView
-            android:background="@drawable/button_background"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:text="Add Appointment"
-            android:id="@+id/add"
-            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Follow Up History"
             android:textSize="25sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            android:background="@color/textColor"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginTop="15dp"/>
 
         <ListView
             android:layout_width="500dp"
@@ -142,6 +142,23 @@
             android:layout_gravity="center"
             android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
 
+        <TextView
+            android:background="@drawable/button_background"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:text="Add Follow Up"
+            android:id="@+id/tv_add_follow_up"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:typeface="monospace" />
+
+
     </LinearLayout>
+
+
+
 
 </RelativeLayout>
