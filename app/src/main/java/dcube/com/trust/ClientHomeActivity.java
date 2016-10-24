@@ -59,6 +59,11 @@ public class ClientHomeActivity extends Activity {
 
                         startActivity(new Intent(ClientHomeActivity.this,GenerateInvoiceActivity.class));
                         break;
+
+                    case 6:
+
+                        startActivity(new Intent(ClientHomeActivity.this,ViewPendingPaymentActivity.class));
+                        break;
                 }
             }
         });

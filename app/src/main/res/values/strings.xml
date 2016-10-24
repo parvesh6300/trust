@@ -19,5 +19,6 @@
 
     </string-array>
     <string name="title_activity_buy_service">BuyServiceActivity</string>
+    <string name="title_activity_view_services">ViewServicesActivity</string>
 
 </resources>

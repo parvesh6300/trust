@@ -20,7 +20,8 @@ public class ClientAdapter extends BaseAdapter {
             R.drawable.buyproducts,
             R.drawable.buyplan,
             R.drawable.viewplans,
-            R.drawable.generateinvoice
+            R.drawable.generateinvoice,
+            R.drawable.pendingpayment
     };
 
     private static LayoutInflater inflater = null;

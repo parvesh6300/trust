@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import dcube.com.trust.utils.PendingPaymentAdapter;
 
-public class ViewPaymentActivity extends Activity {
+public class ViewPendingPaymentActivity extends Activity {
 
 
     TextView tv_pay;
@@ -39,7 +39,7 @@ public class ViewPaymentActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(ViewPaymentActivity.this,GenerateInvoiceActivity.class));
+                startActivity(new Intent(ViewPendingPaymentActivity.this,GenerateInvoiceActivity.class));
             }
         });
 

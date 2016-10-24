@@ -20,8 +20,7 @@ public class FinanceAdapter extends BaseAdapter {
             R.drawable.depositmoney,
             R.drawable.revenue,
             R.drawable.expenses,
-            R.drawable.addexpensesone,
-            R.drawable.support
+            R.drawable.addexpensesone
     };
 
     private static LayoutInflater inflater = null;

@@ -152,12 +152,8 @@ public class CalendarCustomView extends LinearLayout
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View View, int i, long l) {
 
-//				TextView tv =(TextView) View.findViewById(R.id.textViewInYourList);//your textview id
-//				Toast.makeText(getContext(), "" + tv.getText().toString(), Toast.LENGTH_SHORT).show();
-//
 				eventHandler.onDayLongPress((Date)adapterView.getItemAtPosition(i));
-
-				Log.e("DAte","DAte "+adapterView.getItemAtPosition(i).toString());
+				Log.e("Date","Date "+adapterView.getItemAtPosition(i).toString());
 			}
 		});
 	}
@@ -202,13 +198,13 @@ public class CalendarCustomView extends LinearLayout
 
 		int month = calendar.get(Calendar.MONTH);
 
-		if(month < 11  && month > 0) {
+		if(month < 11  && month > 1) {
 
-			txtMonth.setText(theMonth(month));
-			btnPrev.setText(theMonth(month-1));
-			btnNext.setText(theMonth(month+1));
+			txtMonth.setText(theMonth(month-1));
+			btnPrev.setText(theMonth(month-2));
+			btnNext.setText(theMonth(month));
 		}
-		else if(month == 12 || month == 11 || month == 0)
+		else if(month == 12 || month == 11 || month == 0 || month == 1)
 		{
 
 			switch (month) {
@@ -238,14 +234,26 @@ public class CalendarCustomView extends LinearLayout
 
 					break;
 				}
+
+				case 1: {
+
+					txtMonth.setText("February");
+					btnPrev.setText("January");
+					btnNext.setText("March");
+
+					break;
+				}
+
 			}
 		}
 
+		txtYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
 
-		txtYear.setText(sdf2.format(currentDate.getTime()));
+		//txtYear.setText(sdf2.format(currentDate.getTime()));
 	}
 
 	public static String theMonth(int month){
+
 		String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 		return monthNames[month];
 	}

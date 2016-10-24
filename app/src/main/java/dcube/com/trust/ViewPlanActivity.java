@@ -28,12 +28,10 @@ public class ViewPlanActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_plan);
 
-
         lv_plan=(ListView)findViewById(R.id.lv_plan);
 
         planAdapter= new PlanAdapter(this,al_date,al_plan_name);
         lv_plan.setAdapter(planAdapter);
-
 
         lv_plan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -41,12 +39,8 @@ public class ViewPlanActivity extends Activity {
 
                 CustomDialogClass cdd= new CustomDialogClass(ViewPlanActivity.this);
                 cdd.show();
-
             }
         });
-
-
-
     }
 
 
@@ -95,14 +89,8 @@ public class ViewPlanActivity extends Activity {
 
                             dialog.cancel();
                             finish();
-
                         }
                     });
-
-
-
-
-
                 }
             });
 
@@ -113,12 +101,6 @@ public class ViewPlanActivity extends Activity {
                     dismiss();
                 }
             });
-
-
         }
     }
-
-
-
-
 }
