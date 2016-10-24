@@ -103,6 +103,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/tv_reason_label"
                 android:hint="Expense"
+                android:inputType="textNoSuggestions"
                 android:textSize="25sp"
                 android:typeface="monospace"
                 />
@@ -114,14 +115,16 @@
         <TextView
             android:id="@+id/tv_history"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="Expense History"
             android:textSize="25sp"
             android:layout_marginTop="10dp"
             android:textAlignment="center"
             android:typeface="monospace"
             android:textStyle="bold"
-            android:textColor="@color/purple"/>
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@color/textColor"/>
 
         <ListView
             android:id="@+id/list_expense"
@@ -151,11 +154,6 @@
 
         </RelativeLayout>
 
-
-
-
     </LinearLayout>
-
-
 
 </LinearLayout>

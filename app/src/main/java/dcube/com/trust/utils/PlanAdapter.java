@@ -87,11 +87,11 @@ public class PlanAdapter extends BaseAdapter {
         al_date.add("16");
         al_date.add("18");
 
-        al_plan_name.add("Product");
-        al_plan_name.add("Service");
-        al_plan_name.add("Product");
-        al_plan_name.add("Service");
-        al_plan_name.add("Product");
+        al_plan_name.add("Silverline + Implants");
+        al_plan_name.add("Injection Depo + Injection-Sayana");
+        al_plan_name.add("OCP's(3 Cycles) + EC(2 Packs)");
+        al_plan_name.add("HIV + Family Planning");
+        al_plan_name.add("Blood Sugar + Urine Analysis");
 
     }
 

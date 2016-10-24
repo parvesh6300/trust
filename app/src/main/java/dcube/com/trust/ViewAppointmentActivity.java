@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
-import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 import java.util.Calendar;
 
@@ -25,7 +24,7 @@ public class ViewAppointmentActivity extends Activity {
     ListView followUpList;
     FollowupListAdapter adapter;
 
-    BetterSpinner service;
+    TextView service;
 
     TextView tv_add_follow_up;
 
@@ -45,8 +44,8 @@ public class ViewAppointmentActivity extends Activity {
         String[] SERVICES = getResources().getStringArray(R.array.servicelist);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, SERVICES);
-        service = (BetterSpinner) findViewById(R.id.service);
-        service.setAdapter(adapter);
+        service = (TextView) findViewById(R.id.service);
+
 
 
         tv_add_follow_up.setOnClickListener(new View.OnClickListener() {

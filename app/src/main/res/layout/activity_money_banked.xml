@@ -144,14 +144,16 @@
         <TextView
             android:id="@+id/tv_history"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="Deposit History"
             android:textSize="25sp"
             android:textAlignment="center"
             android:typeface="monospace"
             android:layout_marginTop="10dp"
             android:textStyle="bold"
-            android:textColor="@color/purple"/>
+            android:gravity="center"
+            android:background="@color/textColor"
+            android:textColor="@color/white"/>
 
 
         <ListView

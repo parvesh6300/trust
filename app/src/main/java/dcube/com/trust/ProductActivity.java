@@ -24,9 +24,9 @@ public class ProductActivity extends Activity{
     ProductListAdapter adapter;
     TextView buy;
 
-    static ArrayList<String> name = new ArrayList<>();
-    static ArrayList<String> category = new ArrayList<>();
-    static ArrayList<String> quantity = new ArrayList<>();
+    ArrayList<String> name = new ArrayList<>();
+    ArrayList<String> category = new ArrayList<>();
+    ArrayList<String> quantity = new ArrayList<>();
 
     EditText search;
 

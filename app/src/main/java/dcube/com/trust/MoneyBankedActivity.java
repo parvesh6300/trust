@@ -59,10 +59,6 @@ public class MoneyBankedActivity extends Activity {
 
 
 
-
-
-
-
     public class CustomDialogClass extends Dialog {
 
         public Activity c;
