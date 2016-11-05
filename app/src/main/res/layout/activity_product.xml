@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Select Product"
         android:textSize="30sp"
+        android:textStyle="bold"
         android:textAlignment="gravity"
         android:gravity="center_horizontal"
         android:textColor="@color/white"

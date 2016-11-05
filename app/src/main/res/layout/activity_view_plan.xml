@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Plan"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:gravity="center"
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Expiry Date"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:gravity="center"
@@ -72,7 +72,7 @@
         <ListView
             android:id="@+id/lv_plan"
             android:layout_width="match_parent"
-            android:layout_height="450dp"/>
+            android:layout_height="500dp"/>
 
 
         <TextView

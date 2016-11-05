@@ -20,7 +20,7 @@ public class SplashActivity extends Activity {
                 }finally{
 
                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                    //LoginActivity   ViewAppointmentActivity
+                    //LoginActivity   BuyPlanActivity
                     startActivity(intent);
                 }
             }

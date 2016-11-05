@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,7 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import dcube.com.trust.utils.PlanListAdapter;
-import dcube.com.trust.utils.ProductSelectedAdapter;
+import dcube.com.trust.utils.PlanSelectedAdapter;
 
 public class BuyPlanActivity extends Activity{
 
@@ -25,9 +26,9 @@ public class BuyPlanActivity extends Activity{
 
     TextView buy;
 
-    static ArrayList<String> name = new ArrayList<>();
-    static ArrayList<String> productCost = new ArrayList<>();
-    static ArrayList<String> serviceCost = new ArrayList<>();
+     ArrayList<String> name = new ArrayList<>();
+     ArrayList<String> productCost = new ArrayList<>();
+     ArrayList<String> serviceCost = new ArrayList<>();
 
     EditText search;
 
@@ -39,12 +40,14 @@ public class BuyPlanActivity extends Activity{
         addData();
 
         servicelist = (ListView) findViewById(R.id.servicelist);
-        adapter = new PlanListAdapter(this,name,productCost,serviceCost);
 
         buy = (TextView) findViewById(R.id.buy);
-
-        servicelist.setAdapter(adapter);
         search = (EditText) findViewById(R.id.search);
+
+
+        adapter = new PlanListAdapter(this,name,productCost,serviceCost);
+        servicelist.setAdapter(adapter);
+
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +57,20 @@ public class BuyPlanActivity extends Activity{
                 cdd.show();
             }
         });
+
+
+
+        servicelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                adapter.setSelectedIndex(i);
+                adapter.notifyDataSetChanged();
+
+            }
+        });
+
+
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -71,15 +88,16 @@ public class BuyPlanActivity extends Activity{
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
-                if(s.toString().equalsIgnoreCase("condom"))
+                if(s.toString().equalsIgnoreCase("IUCD"))
                 {
-                    name.add("Bull Condom");
-                    productCost.add("Condom");
-                    serviceCost.add("5");
+                    name.add("IUCD Sleek/Copper T/Safeload");
+                    productCost.add("5,000");
+                    serviceCost.add("20,000");
 
-                    name.add("Fiesta");
-                    productCost.add("Condom");
-                    serviceCost.add("12");
+                    name.add("CPAC + IUCD");
+                    productCost.add("");
+                    serviceCost.add("150,000");
+
                 }
                 else
                 if(s.toString().equalsIgnoreCase("implant"))
@@ -112,7 +130,7 @@ public class BuyPlanActivity extends Activity{
 
         public ListView selected;
 
-        ProductSelectedAdapter selectedAdapter;
+        PlanSelectedAdapter selectedAdapter;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -124,18 +142,20 @@ public class BuyPlanActivity extends Activity{
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-            setContentView(R.layout.buy_product_dialog);
+            setContentView(R.layout.buyplan_dialog);
 
             confirm = (TextView) findViewById(R.id.confirm);
             cancel = (TextView) findViewById(R.id.cancel);
             selected = (ListView) findViewById(R.id.selected_product_list);
 
-            selectedAdapter = new ProductSelectedAdapter(BuyPlanActivity.this);
+            selectedAdapter = new PlanSelectedAdapter(BuyPlanActivity.this,name,productCost,serviceCost);
             selected.setAdapter(selectedAdapter);
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    dismiss();
 
                     startActivity(new Intent(BuyPlanActivity.this,GenerateInvoiceActivity.class));
                 }
@@ -152,24 +172,24 @@ public class BuyPlanActivity extends Activity{
     }
 
     public  void addData(){
-        name.add("IUCD Sleek/Copper T/Safeload");
+        name.add("Silverline + Implants");
         productCost.add("5,000");
         serviceCost.add("20,000");
 
-        name.add("Silverline");
+        name.add("Injection Depo + Injection-Sayana");
         productCost.add("15,000");
         serviceCost.add("20,000");
 
-        name.add("CPAC + IUCD");
-        productCost.add("");
+        name.add("HIV + Family Planning");
+        productCost.add("12,000");
         serviceCost.add("150,000");
 
-        name.add("Gynaecologist");
-        productCost.add("");
+        name.add("Blood Sugar + Urine Analysis");
+        productCost.add("10,000");
         serviceCost.add("50,000");
 
-        name.add("Family Planning Counseling");
-        productCost.add("Free");
+        name.add("OCP's(3 Cycles) + EC(2 Packs)");
+        productCost.add("15,000");
         serviceCost.add("Free");
 
     }

@@ -91,11 +91,11 @@ public class PendingPaymentAdapter extends BaseAdapter {
         al_date.add("16");
         al_date.add("18");
 
-        al_product_name.add("Product");
-        al_product_name.add("Service");
-        al_product_name.add("Product");
-        al_product_name.add("Service");
-        al_product_name.add("Product");
+        al_product_name.add("Bull Condom");
+        al_product_name.add("Fiesta");
+        al_product_name.add("Implanon Implants");
+        al_product_name.add("Safe Load");
+        al_product_name.add("Jadelle");
 
         al_product_cost.add("4000");
         al_product_cost.add("2000");
