@@ -69,7 +69,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="Email :"
                 android:textSize="25sp"
                 android:typeface="monospace"
                 android:textStyle="bold"
@@ -77,16 +77,16 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"/>
 
-            <EditText
-                android:layout_width="280dp"
-                android:layout_height="match_parent"
-                android:typeface="monospace"
-                android:textColor="@color/textColor"
-                android:layout_weight="1"
-                android:layout_gravity="center"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Omondi@gmail.com"
                 android:textSize="25sp"
-                android:inputType="textEmailAddress"
-                />
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:textColor="@color/purple"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
@@ -100,7 +100,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Service"
+                android:text="Service :"
                 android:textSize="25sp"
                 android:typeface="monospace"
                 android:textStyle="bold"
@@ -108,14 +108,16 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"/>
 
-            <com.weiwangcn.betterspinner.library.BetterSpinner
-                android:layout_width="280dp"
-                android:layout_height="match_parent"
-                android:typeface="monospace"
-                android:layout_weight="1"
-                android:layout_gravity="center"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pregnancy"
                 android:textSize="25sp"
-                android:id="@+id/service"/>
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:textColor="@color/purple"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
