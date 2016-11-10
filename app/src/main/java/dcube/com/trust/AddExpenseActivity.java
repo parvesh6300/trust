@@ -11,14 +11,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import dcube.com.trust.utils.DepositAdapter;
+import dcube.com.trust.utils.ExpenseAdapter;
 
 public class AddExpenseActivity extends Activity {
 
-
     ListView list_expense;
 
-    DepositAdapter depositAdapter;
+    ExpenseAdapter expenseAdapter;
 
     ArrayList<String> al_expense_amount= new ArrayList<>();
     ArrayList<String> al_expense_reason= new ArrayList<>();
@@ -41,9 +40,9 @@ public class AddExpenseActivity extends Activity {
         tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
         tv_submit=(TextView)findViewById(R.id.tv_submit);
 
-        depositAdapter= new DepositAdapter(this,al_date,al_expense_amount,al_expense_reason);
+        expenseAdapter= new ExpenseAdapter(this,al_date,al_expense_amount,al_expense_reason);
 
-        list_expense.setAdapter(depositAdapter);
+        list_expense.setAdapter(expenseAdapter);
 
 
         tv_submit.setOnClickListener(new View.OnClickListener() {
@@ -54,11 +53,7 @@ public class AddExpenseActivity extends Activity {
                 cdd.show();
             }
         });
-
-
-
     }
-
 
     public class CustomDialogClass extends Dialog {
 

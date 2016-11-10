@@ -106,21 +106,18 @@
 
         </LinearLayout>
 
-
-
         <ListView
             android:id="@+id/lv_payment_details"
             android:layout_width="match_parent"
             android:layout_height="340dp"
             android:layout_marginTop="2dp"/>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:background="@color/textColor">
 
             <!--<TextView-->
@@ -153,13 +150,7 @@
                 android:textSize="25sp"
                 android:typeface="monospace" />
 
-
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="20dp"/>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -188,12 +179,7 @@
                 android:textSize="25sp"
                 android:typeface="monospace" />
 
-
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="20dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -201,8 +187,6 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:background="@color/textColor">
-
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -232,6 +216,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_marginTop="20dp"
             android:layout_below="@+id/lin_payment_detail">
 
 
