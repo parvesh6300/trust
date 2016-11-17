@@ -17,10 +17,11 @@ public class FinanceAdapter extends BaseAdapter {
     public Integer[] mThumbIds = {
             R.drawable.stockmanagement,
             R.drawable.salesanalytics,
-            R.drawable.depositmoney,
+            R.drawable.operatingexpenses,
             R.drawable.revenue,
             R.drawable.expenses,
-            R.drawable.addexpensesone
+            R.drawable.addexpensesone,
+            R.drawable.moneybanked,
     };
 
     private static LayoutInflater inflater = null;

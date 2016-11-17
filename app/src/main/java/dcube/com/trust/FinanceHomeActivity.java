@@ -40,7 +40,7 @@ public class FinanceHomeActivity extends Activity {
                         break;
 
                     case 2:
-                        startActivity(new Intent(FinanceHomeActivity.this,MoneyBankedActivity.class));
+                        startActivity(new Intent(FinanceHomeActivity.this,DepositMoneyActivity.class));
                         break;
 
                     case 3:
@@ -53,6 +53,10 @@ public class FinanceHomeActivity extends Activity {
 
                     case 5:
                         startActivity(new Intent(FinanceHomeActivity.this,AddExpenseActivity.class));
+                        break;
+
+                    case 6:
+                        startActivity(new Intent(FinanceHomeActivity.this,MoneyBankedActivity.class));
                         break;
 
 

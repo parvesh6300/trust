@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/background_1"
-    tools:context="dcube.com.trust.MoneyBankedActivity">
+    android:orientation="vertical"
+    tools:context=".DepositMoneyActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
-        android:text="Money Banked"
+        android:text="Deposit Money"
         android:id="@+id/addclienttext"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -29,11 +29,49 @@
         android:background="@drawable/form_back">
 
 
+        <RelativeLayout
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_marginLeft="80dp">
+
+
+            <TextView
+                android:id="@+id/tv_balance_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="Account Balance :"
+                android:textColor="@color/purple"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+
+            <TextView
+                android:id="@+id/tv_total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="10,00,000 Tsh"
+                android:textColor="@color/purple"
+                android:textSize="25sp"
+                android:typeface="monospace"
+                android:layout_toRightOf="@+id/tv_balance_label"
+                android:layout_marginRight="20dp"/>
+
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="500dp"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
 
             <TextView
@@ -57,8 +95,7 @@
                 android:hint="Enter amount"
                 android:inputType="number"
                 android:textSize="25sp"
-                android:typeface="monospace"
-                />
+                android:typeface="monospace" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,8 +113,43 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+
+            <TextView
+                android:id="@+id/tv_remark_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Remark "
+                android:textColor="@color/purple"
+                android:textSize="25sp"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/ed_remark"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/tv_remark_label"
+                android:hint="Enter Remark"
+                android:inputType="number"
+                android:textSize="25sp"
+                android:typeface="monospace"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp">
+
 
             <TextView
                 android:id="@+id/tv_deposit"
@@ -94,12 +166,11 @@
 
         </RelativeLayout>
 
-
         <TextView
             android:id="@+id/tv_history"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Sales History"
+            android:text="Deposit History"
             android:textSize="25sp"
             android:textAlignment="center"
             android:typeface="monospace"
@@ -110,47 +181,11 @@
             android:textColor="@color/white"/>
 
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="10dp">
-
-
-            <TextView
-                android:id="@+id/tv_balance_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:text="Account Balance(Tsh) :"
-                android:textColor="@color/purple"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:typeface="monospace" />
-
-
-            <TextView
-                android:id="@+id/tv_total_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_toRightOf="@+id/tv_balance_label"
-                android:text="10,00,000"
-                android:textColor="@color/purple"
-                android:textSize="25sp"
-                android:typeface="monospace" />
-
-        </RelativeLayout>
-
-
         <ListView
-            android:id="@+id/lv_money_banked"
+            android:id="@+id/list_deposit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"/>
+            android:padding="20dp"/>
 
     </LinearLayout>
 
