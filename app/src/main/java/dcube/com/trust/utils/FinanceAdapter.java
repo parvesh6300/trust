@@ -17,9 +17,9 @@ public class FinanceAdapter extends BaseAdapter {
     public Integer[] mThumbIds = {
             R.drawable.stockmanagement,
             R.drawable.salesanalytics,
-            R.drawable.operatingexpenses,
+            R.drawable.depositmoney,
             R.drawable.revenue,
-            R.drawable.expenses,
+            R.drawable.operatingexpenses,
             R.drawable.addexpensesone,
             R.drawable.moneybanked,
     };
