@@ -100,12 +100,15 @@
             android:name=".ViewPendingPaymentActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".ViewPlanActivity"
+        <activity
+            android:name=".ViewPlanActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".MoneyBankedActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".MoneyBankedActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".CartActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/iv_product_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/buyplan"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Item Name"
+            android:textSize="30sp"
+            android:textColor="@color/purple"
+            android:layout_gravity="center"
+            android:typeface="monospace"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_product_image"/>
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Item Description"
+            android:textSize="20sp"
+            android:textColor="@color/purple"
+            android:layout_gravity="center"
+            android:typeface="monospace"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_product_image"
+            android:layout_below="@+id/tv_name"/>
+
+
+        <EditText
+            android:id="@+id/ed_quantity"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/circle"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:typeface="monospace"
+            android:text="1"
+            android:textColorHint="@color/white"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:inputType="number"
+            android:maxLength="2"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/tv_desc"/>
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_minus"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="-"-->
+            <!--android:textColor="@color/textColor"-->
+            <!--android:textSize="30sp"-->
+            <!--android:typeface="monospace"-->
+            <!--android:textAlignment="center"-->
+            <!--android:layout_toRightOf="@+id/tv_quantity"-->
+            <!--/>-->
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_plus"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="+"-->
+            <!--android:textColor="@color/textColor"-->
+            <!--android:textSize="30sp"-->
+            <!--android:typeface="monospace"-->
+            <!--android:textAlignment="center"-->
+            <!--android:layout_below="@+id/tv_minus"-->
+            <!--android:layout_toRightOf="@+id/tv_quantity"/>-->
+
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:textSize="30sp"
+            android:layout_marginLeft="40dp"
+            android:textColor="@color/purple"
+            android:layout_gravity="center_vertical"
+            android:typeface="monospace"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:textAlignment="center"
+            android:layout_toRightOf="@+id/ed_quantity"/>
+
+
+        <ImageView
+            android:id="@+id/iv_cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/cancel_purple"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

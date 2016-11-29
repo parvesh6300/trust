@@ -36,9 +36,9 @@
             android:layout_gravity="center_horizontal">
 
             <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:text="Name: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name : "
                 android:textSize="25sp"
                 android:typeface="monospace"
                 android:textStyle="bold"
@@ -55,7 +55,6 @@
                 android:typeface="monospace"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
-                android:layout_weight="1"
                 android:layout_gravity="center"/>
 
         </LinearLayout>
@@ -64,18 +63,16 @@
             android:layout_width="400dp"
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
-            android:layout_gravity="center_horizontal"
-            android:weightSum="2">
+            android:layout_gravity="center_horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email :"
+                android:text="Email : "
                 android:textSize="25sp"
                 android:typeface="monospace"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
-                android:layout_weight="1"
                 android:layout_gravity="center"/>
 
             <TextView
@@ -86,8 +83,7 @@
                 android:typeface="monospace"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
-                android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center_vertical"/>
 
         </LinearLayout>
 
@@ -95,18 +91,16 @@
             android:layout_width="400dp"
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
-            android:layout_gravity="center_horizontal"
-            android:weightSum="2">
+            android:layout_gravity="center_horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Service :"
+                android:text="Service : "
                 android:textSize="25sp"
                 android:typeface="monospace"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
-                android:layout_weight="1"
                 android:layout_gravity="center"/>
 
             <TextView
@@ -117,7 +111,6 @@
                 android:typeface="monospace"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
-                android:layout_weight="1"
                 android:layout_gravity="center"/>
 
         </LinearLayout>
@@ -135,33 +128,39 @@
             android:gravity="center"
             android:layout_marginTop="15dp"/>
 
-        <ListView
-            android:layout_width="500dp"
-            android:layout_height="250dp"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/followuplist"
-            android:fadeScrollbars="false"
-            android:scrollbarSize="10dp"
-            android:layout_gravity="center"
-            android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:background="@drawable/button_background"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:text="Add Follow Up"
-            android:id="@+id/tv_add_follow_up"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:typeface="monospace" />
+            <ListView
+                android:id="@+id/followuplist"
+                android:layout_width="500dp"
+                android:layout_height="280dp"
+                android:fadeScrollbars="false"
+                android:scrollbarSize="10dp"
+                android:layout_gravity="center"
+                android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
+
+            <TextView
+                android:id="@+id/tv_add_follow_up"
+                android:background="@drawable/button_background"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:textColor="@color/white"
+                android:text="Add Follow Up"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:typeface="monospace"
+                android:layout_marginBottom="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/followuplist"
+                android:layout_marginTop="20dp"
+                />
+
+        </RelativeLayout>
 
 
     </LinearLayout>
-
-
 
 
 </RelativeLayout>

@@ -74,8 +74,8 @@ public class FinanceAdapter extends BaseAdapter {
         {
             holder.notify.setVisibility(View.VISIBLE);
             holder.notify.setText("2");
-
         }
+
 
         /*rowView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import dcube.com.trust.utils.NurseAdapter;
 
@@ -13,6 +14,7 @@ public class NurseHomeActivity extends Activity {
 
     GridView gridView;
     NurseAdapter adapter;
+    ImageView iv_cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +23,18 @@ public class NurseHomeActivity extends Activity {
 
         adapter = new NurseAdapter(this);
 
+        iv_cart = (ImageView) findViewById(R.id.iv_cart);
+
         gridView = (GridView) findViewById(R.id.grid_view);
         gridView.setAdapter(adapter);
+
+
+        iv_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NurseHomeActivity.this,CartActivity.class));
+            }
+        });
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

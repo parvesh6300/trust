@@ -28,8 +28,6 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/form_back">
 
-
-
         <RelativeLayout
             android:layout_width="500dp"
             android:layout_height="wrap_content"
