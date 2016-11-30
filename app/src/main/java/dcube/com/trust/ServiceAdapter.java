@@ -1,4 +1,4 @@
-package dcube.com.trust.utils;
+package dcube.com.trust;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,34 +9,28 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import dcube.com.trust.R;
-
 /**
- * Created by Sagar on 20/10/16.
+ * Created by Sagar on 30/11/16.
  */
-public class PlanAdapter extends BaseAdapter {
-
+public class ServiceAdapter extends BaseAdapter {
 
     Context context;
 
     public static LayoutInflater inflater;
 
-    ArrayList<String> al_plan_name = new ArrayList<>();
+    ArrayList<String> al_service_name = new ArrayList<>();
     ArrayList<String> al_date= new ArrayList<>();
 
-
-    public PlanAdapter(Context mcontext, ArrayList<String> date,ArrayList<String> product_name)
+    public ServiceAdapter(Context mcontext, ArrayList<String> date,ArrayList<String> product_name)
     {
         this.context= mcontext;
         this.al_date=date;
-        this.al_plan_name = product_name;
+        this.al_service_name = product_name;
 
-         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         addValues();
     }
-
-
 
     public class ViewHolder{
 
@@ -44,10 +38,27 @@ public class PlanAdapter extends BaseAdapter {
     }
 
 
+    @Override
+    public View getView(int pos, View convertview, ViewGroup viewGroup) {
+
+        ViewHolder holder= new ViewHolder();
+
+        convertview= inflater.inflate(R.layout.service_list,null);
+
+        holder.tv_date= (TextView)convertview.findViewById(R.id.tv_date);
+        holder.tv_month= (TextView)convertview.findViewById(R.id.tv_month);
+        holder.tv_year= (TextView)convertview.findViewById(R.id.tv_year);
+        holder.tv_plan_name = (TextView)convertview.findViewById(R.id.tv_plan_name);
+
+        holder.tv_date.setText(al_date.get(pos));
+        holder.tv_plan_name.setText(al_service_name.get(pos));
+
+        return convertview;
+    }
 
     @Override
     public int getCount() {
-        return al_plan_name.size();
+        return al_service_name.size();
     }
 
     @Override
@@ -60,25 +71,6 @@ public class PlanAdapter extends BaseAdapter {
         return i;
     }
 
-    @Override
-    public View getView(int pos, View convertview, ViewGroup viewGroup) {
-
-        ViewHolder holder= new ViewHolder();
-
-        convertview= inflater.inflate(R.layout.planlist,null);
-
-        holder.tv_date= (TextView)convertview.findViewById(R.id.tv_date);
-        holder.tv_month= (TextView)convertview.findViewById(R.id.tv_month);
-        holder.tv_year= (TextView)convertview.findViewById(R.id.tv_year);
-        holder.tv_plan_name = (TextView)convertview.findViewById(R.id.tv_plan_name);
-
-        holder.tv_date.setText(al_date.get(pos));
-        holder.tv_plan_name.setText(al_plan_name.get(pos));
-
-        return convertview;
-    }
-
-
 
     public void addValues()
     {
@@ -88,13 +80,10 @@ public class PlanAdapter extends BaseAdapter {
         al_date.add("16");
         al_date.add("18");
 
-        al_plan_name.add("Silverline + Implants");
-        al_plan_name.add("Injection Depo + Injection-Sayana");
-        al_plan_name.add("OCP's(3 Cycles) + EC(2 Packs)");
-        al_plan_name.add("HIV + Family Planning");
-        al_plan_name.add("Blood Sugar + Urine Analysis");
-
+        al_service_name.add("Provider Counsultation");
+        al_service_name.add("CPAC + IUCD");
+        al_service_name.add("Gynaecologist");
+        al_service_name.add("Pap Smear");
+        al_service_name.add("Ultrasound");
     }
-
-
 }

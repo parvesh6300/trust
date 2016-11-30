@@ -16,26 +16,26 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import dcube.com.trust.utils.PlanListAdapter;
-import dcube.com.trust.utils.PlanSelectedAdapter;
+import dcube.com.trust.utils.ServiceListAdapter;
 
-public class BuyPlanActivity extends Activity{
+public class BuyServicesActivity extends Activity {
 
     ListView servicelist;
-    PlanListAdapter adapter;
+    ServiceListAdapter adapter;
 
     TextView buy;
 
-     ArrayList<String> name = new ArrayList<>();
-     ArrayList<String> productCost = new ArrayList<>();
-     ArrayList<String> serviceCost = new ArrayList<>();
+    ArrayList<String> name = new ArrayList<>();
+    ArrayList<String> serviceCost = new ArrayList<>();
 
     EditText search;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buy_plan);
+        setContentView(R.layout.activity_buy_services);
+
 
         addData();
 
@@ -44,17 +44,20 @@ public class BuyPlanActivity extends Activity{
         buy = (TextView) findViewById(R.id.buy);
         search = (EditText) findViewById(R.id.search);
 
-        adapter = new PlanListAdapter(this,name,productCost,serviceCost);
+
+        adapter = new ServiceListAdapter(this,name,serviceCost);
         servicelist.setAdapter(adapter);
+
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                CustomDialogClass cdd = new CustomDialogClass(BuyPlanActivity.this);
+                CustomDialogClass cdd = new CustomDialogClass(BuyServicesActivity.this);
                 cdd.show();
             }
         });
+
 
 
         servicelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,12 +71,12 @@ public class BuyPlanActivity extends Activity{
         });
 
 
+
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 name = new ArrayList<>();
-                productCost = new ArrayList<>();
                 serviceCost = new ArrayList<>();
 
             }
@@ -86,35 +89,45 @@ public class BuyPlanActivity extends Activity{
 
                 if(s.toString().equalsIgnoreCase("IUCD"))
                 {
-                    name.add("IUCD Sleek/Copper T/Safeload");
-                    productCost.add("5,000");
-                    serviceCost.add("20,000");
-
                     name.add("CPAC + IUCD");
-                    productCost.add("");
                     serviceCost.add("150,000");
-
                 }
-                else
-                if(s.toString().equalsIgnoreCase("implant"))
-                {
-                    name.add("Implanon Implants");
-                    productCost.add("implant");
-                    serviceCost.add("23");
 
-                    name.add("Jadelle");
-                    productCost.add("implant");
-                    serviceCost.add("7");
+                else if(s.toString().equalsIgnoreCase("Ult"))
+                {
+                    name.add("Ultrasound");
+                    serviceCost.add("20,000");
                 }
                 else
                 {
                     addData();
                 }
 
-                adapter = new PlanListAdapter(BuyPlanActivity.this,name,productCost,serviceCost);
+                adapter = new ServiceListAdapter(BuyServicesActivity.this,name,serviceCost);
                 servicelist.setAdapter(adapter);
             }
         });
+
+
+    }
+
+    public  void addData(){
+
+        name.add("Provider Counsultation");
+        serviceCost.add("30,000");
+
+        name.add("CPAC + IUCD");
+        serviceCost.add("150,000");
+
+        name.add("Gynaecologist");
+        serviceCost.add("50,000");
+
+        name.add("Pap Smear");
+        serviceCost.add("70,000");
+
+        name.add("Ultrasound");
+        serviceCost.add("20,000");
+
     }
 
     public class CustomDialogClass extends Dialog {
@@ -126,7 +139,7 @@ public class BuyPlanActivity extends Activity{
 
         public ListView selected;
 
-        PlanSelectedAdapter selectedAdapter;
+        ServiceSelectedAdapter selectedAdapter;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -138,13 +151,14 @@ public class BuyPlanActivity extends Activity{
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-            setContentView(R.layout.buyplan_dialog);
+
+            setContentView(R.layout.buy_service_dialog);
 
             confirm = (TextView) findViewById(R.id.confirm);
             cancel = (TextView) findViewById(R.id.cancel);
             selected = (ListView) findViewById(R.id.selected_product_list);
 
-            selectedAdapter = new PlanSelectedAdapter(BuyPlanActivity.this,name,productCost,serviceCost);
+            selectedAdapter = new ServiceSelectedAdapter(BuyServicesActivity.this,name,serviceCost);
             selected.setAdapter(selectedAdapter);
 
             confirm.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +167,7 @@ public class BuyPlanActivity extends Activity{
 
                     dismiss();
 
-                    startActivity(new Intent(BuyPlanActivity.this,GenerateInvoiceActivity.class));
+                    startActivity(new Intent(BuyServicesActivity.this,GenerateInvoiceActivity.class));
                 }
             });
 
@@ -165,29 +179,6 @@ public class BuyPlanActivity extends Activity{
                 }
             });
         }
-    }
-
-    public  void addData(){
-        name.add("Silverline + Implants");
-        productCost.add("5,000");
-        serviceCost.add("20,000");
-
-        name.add("Injection Depo + Injection-Sayana");
-        productCost.add("15,000");
-        serviceCost.add("20,000");
-
-        name.add("HIV + Family Planning");
-        productCost.add("12,000");
-        serviceCost.add("150,000");
-
-        name.add("Blood Sugar + Urine Analysis");
-        productCost.add("10,000");
-        serviceCost.add("50,000");
-
-        name.add("OCP's(3 Cycles) + EC(2 Packs)");
-        productCost.add("15,000");
-        serviceCost.add("Free");
-
     }
 
 
