@@ -31,6 +31,20 @@ public class Global extends Application {
     public ArrayList<HashMap<String, String>> StylistListing;
     public ArrayList<HashMap<String, String>> BookedListing;
 
+    // ******************************* Login Getter and Setter  *************************************************
+
+
+    public ArrayList<HashMap<String, String>> getAl_login_list() {
+        return al_login_list;
+    }
+
+    public void setAl_login_list(ArrayList<HashMap<String, String>> al_login_list) {
+        this.al_login_list = al_login_list;
+    }
+
+    public ArrayList<HashMap<String,String>> al_login_list;
+
+
     @Override
     public void onCreate() {
 
