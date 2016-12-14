@@ -45,6 +45,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     GifTextView gif_loader;
 
+    int role_id = 2;
+
     WebServices ws;
 
     Context context = LoginActivity.this;
@@ -52,7 +54,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     Global global;
 
-    ArrayList<HashMap<String,String>> al_login_user;
+    ArrayList<HashMap<String, String>> al_login_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +88,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
 
         switch (view.getId()) {
+
             case R.id.nurse: {
+
                 nurse_radio.setImageResource(R.drawable.radioselected);
                 nurse_text.setTextColor(getResources().getColor(R.color.textColor));
                 finance_radio.setImageResource(R.drawable.radiounselected);
                 finance_text.setTextColor(getResources().getColor(R.color.greyed_out));
 
                 role = "nurse";
+                role_id = 2;
 
                 break;
             }
@@ -104,33 +109,24 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 nurse_radio.setImageResource(R.drawable.radiounselected);
                 nurse_text.setTextColor(getResources().getColor(R.color.greyed_out));
 
+                role_id = 3;
+
                 role = "finance";
                 break;
             }
 
             case R.id.signin: {
-                Intent i;
 
-                if (role.equals("nurse")) {
+                str_user_name = ed_user_name.getText().toString().trim();
+                str_password = ed_pwd.getText().toString().trim();
 
-                    str_user_name = ed_user_name.getText().toString().trim();
-                    str_password = ed_pwd.getText().toString().trim();
+                str_device_token = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                        Settings.Secure.ANDROID_ID);
 
-                    str_device_token = Settings.Secure.getString(getApplicationContext().getContentResolver(),
-                            Settings.Secure.ANDROID_ID);
-
-                    if (isOnline())
-                    {
-                        new OkHttpHandlerAsyncTask().execute();
-                    }
-                    else
-                    {
-                        Toast.makeText(LoginActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                    }
-
+                if (isOnline()) {
+                    new OkHttpHandlerAsyncTask().execute();
                 } else {
-                    i = new Intent(LoginActivity.this, FinanceHomeActivity.class);
-                    startActivity(i);
+                    Toast.makeText(LoginActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -152,7 +148,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
-        String message ="";
+        String message = "";
 
         @Override
         protected void onPreExecute() {
@@ -173,6 +169,15 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 al_str_key.add(GlobalConstants.LOGIN_PASSWORD);
                 al_str_value.add(str_password);
 
+                al_str_key.add(GlobalConstants.LOGIN_USER_ROle);
+
+                if (role_id == 2) {
+                    al_str_value.add(String.valueOf(2));
+                }
+                else {
+                    al_str_value.add(String.valueOf(3));
+                }
+
                 al_str_key.add(GlobalConstants.LOGIN_DEVICE_TYPE);
                 al_str_value.add("android");
 
@@ -184,8 +189,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 message = ws.LoginService(context, al_str_key, al_str_value);
 
-    //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
-   //             Log.i("Login", "Login : " + resPonse);
+                //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
+                //             Log.i("Login", "Login : " + resPonse);
 
 //                return resPonse;
 
@@ -201,15 +206,24 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
             gif_loader.setVisibility(View.GONE);
 
-            if (!message.equalsIgnoreCase("true"))
-            {
-                Toast.makeText(LoginActivity.this, ""+message, Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Intent i = new Intent(LoginActivity.this, NurseHomeActivity.class);
-                startActivity(i);
+            if (!message.equalsIgnoreCase("true")) {
+                Toast.makeText(LoginActivity.this, "" + message, Toast.LENGTH_SHORT).show();
+            } else {
+
+                if ( role_id == 2)
+                {
+                    Intent i = new Intent(LoginActivity.this, NurseHomeActivity.class);
+                    startActivity(i);
+                }
+
+                if (role_id == 3)
+                {
+                    Intent i = new Intent(LoginActivity.this, FinanceHomeActivity.class);
+                    startActivity(i);
+                }
+
                 finish();
+
             }
 
         }

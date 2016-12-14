@@ -6,7 +6,9 @@ package WebServicesHandler;
 public class GlobalConstants {
 
 
-    public static final String TRUST_URL = "http://dcubetechnologies.com/Trust_Backend/src/api/webservice.php";
+    public static final String TRUST_URL = "http://dcubetechnologies.com/Trust_Backend/api/webservice.php";
+
+    //http://dcubetechnologies.com/Trust_Backend/src/api/webservice.php
 
     public static final String STATUS = "status";
     public static final String MESSAGE = "msg";
@@ -17,6 +19,7 @@ public class GlobalConstants {
 
     public static final String LOGIN_USER_NAME = "email";
     public static final String LOGIN_PASSWORD = "password";
+    public static final String LOGIN_USER_ROle = "role_id";
     public static final String LOGIN_DEVICE_TYPE = "devic_type";
     public static final String LOGIN_DEVICE_TOKEN = "device_token";
     public static final String LOGIN_ACTION = "action";

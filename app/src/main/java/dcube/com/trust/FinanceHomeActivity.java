@@ -6,13 +6,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.utils.FinanceAdapter;
+import dcube.com.trust.utils.Global;
 
 public class FinanceHomeActivity extends Activity {
 
     GridView gridView;
     FinanceAdapter adapter;
+    TextView tv_user_name,tv_logout;
+    Global global;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +28,25 @@ public class FinanceHomeActivity extends Activity {
 
         adapter = new FinanceAdapter(this);
 
+        global = (Global) getApplicationContext();
+
         gridView = (GridView) findViewById(R.id.grid_view);
         gridView.setAdapter(adapter);
+
+        tv_user_name = (TextView) findViewById(R.id.tv_user_name);
+        tv_logout = (TextView) findViewById(R.id.tv_logout);
+
+        tv_user_name.setText("Hi, "+global.getAl_login_list().get(0).get(GlobalConstants.USER_NAME));
+
+        tv_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(FinanceHomeActivity.this,LoginActivity.class));
+                finish();
+                global.getAl_login_list().clear();
+            }
+        });
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
