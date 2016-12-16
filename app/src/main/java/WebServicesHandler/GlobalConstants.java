@@ -79,25 +79,22 @@ public class GlobalConstants {
     public static final String APMT_DATE = "price";
     public static final String APMT_TIME= "price";
 
+    // ************************************* Search Client VARIABLES  ****************************************************
 
 
+    public static final String SRC_CLIENT_BRANCH = "price";
+    public static final String SRC_CLIENT_KEYWORD = "keyword";
 
-
-    /*
-
-    $name=$_POST['name'];
-    $age=$_POST['age'];
-    $contact=$_POST['contact'];
-    $emergency_contact=$_POST['emergency_contact'];
-    $area=$_POST['area'];
-    $medical_history=$_POST['medical_history'];
-    $contraceptive_history=$_POST['contraceptive_history'];
-    $sex=$_POST['sex'];
-    $children=$_POST['children'];
-    $hiv_tested=$_POST['hiv_tested'];
-    $how_you_reached_us=$_POST['how_you_reached_us'];
-
-*/
+    public static final String SRC_CLIENT_NAME = "name";
+    public static final String SRC_CLIENT_ID = "client_id";
+    public static final String SRC_CLIENT_AGE = "age";
+    public static final String SRC_CLIENT_CONTACT = "contact";
+    public static final String SRC_CLIENT_EMER_CONTACT = "emergency_contact";
+    public static final String SRC_CLIENT_AREA = "area";
+    public static final String SRC_CLIENT_MED_HIS = "medical_history";
+    public static final String SRC_CLIENT_CONTRA_HIS = "contraceptive_history";
+    public static final String SRC_CLIENT_HIV_TESTED = "hiv_tested";
+    public static final String SRC_CLIENT_HOW_U_REACH = "how_you_reached_us";
 
 
 }

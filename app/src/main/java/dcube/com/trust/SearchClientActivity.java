@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.CustomAdapter;
+import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
@@ -35,7 +36,11 @@ public class SearchClientActivity extends Activity {
     CustomAdapter listadapter;
     EditText search;
 
+    String src_keyword;
+
     GifTextView gif_loader;
+
+    Global global;
 
     WebServices ws;
 
@@ -46,6 +51,8 @@ public class SearchClientActivity extends Activity {
 
         context = this;
 
+        global = (Global) getApplicationContext();
+
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         searchlist = (ListView) findViewById(R.id.searchlist);
@@ -54,13 +61,10 @@ public class SearchClientActivity extends Activity {
         adapter = new MySpinnerAdapter(context, android.R.layout.simple_spinner_item, ITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        listadapter = new CustomAdapter(this);
-        searchlist.setAdapter(listadapter);
 
         branch = (Spinner) findViewById(R.id.spinner);
         branch.setAdapter(adapter);
 
-        searchlist.setVisibility(View.INVISIBLE);
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -73,12 +77,13 @@ public class SearchClientActivity extends Activity {
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
                 if(s.length() >1)
                 {
-                    searchlist.setVisibility(View.VISIBLE);
+                    src_keyword = s.toString();
+//                    searchlist.setVisibility(View.VISIBLE);
                     new SearchClientAsyncTask().execute();
                 }
                 else
                 {
-                    searchlist.setVisibility(View.INVISIBLE);
+                 //   searchlist.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -91,7 +96,7 @@ public class SearchClientActivity extends Activity {
             }
         });
 
-
+        listadapter = new CustomAdapter(SearchClientActivity.this);
 
     }
 
@@ -115,10 +120,16 @@ public class SearchClientActivity extends Activity {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
-                al_str_key.add(GlobalConstants.ACTION);
+                al_str_key.add(GlobalConstants.SRC_CLIENT_KEYWORD);
+                al_str_value.add(src_keyword);
+
+                al_str_key.add(GlobalConstants.SRC_CLIENT_BRANCH);
                 al_str_value.add("login");
 
-                message = ws.LoginService(context, al_str_key, al_str_value);
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("search_client");
+
+                message = ws.SearchClientService(context, al_str_key, al_str_value);
 
                 //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
                 //             Log.i("Login", "Login : " + resPonse);
@@ -139,7 +150,15 @@ public class SearchClientActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-
+                if (global.getAl_src_client_details().size() == 0)
+                {
+                    listadapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    searchlist.setAdapter(listadapter);
+                    listadapter.notifyDataSetChanged();
+                }
 
             }
             else {

@@ -343,6 +343,72 @@ public class WebServices {
     }
 
 
+    public static String SearchClientService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        ArrayList<HashMap<String,String>> al_client_detail;
+
+        Global global = (Global) context.getApplicationContext();
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("SearchClient", "Client : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                al_client_detail = new ArrayList<>();
+
+                JSONArray jsonArray = jsonObject.getJSONArray("clients");
+
+                for (int i = 0 ; i< jsonArray.length() ; i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.SRC_CLIENT_ID , jsonObject1.optString(GlobalConstants.SRC_CLIENT_ID));
+                    map.put(GlobalConstants.SRC_CLIENT_NAME , jsonObject1.optString(GlobalConstants.SRC_CLIENT_NAME));
+                    map.put(GlobalConstants.SRC_CLIENT_AGE , jsonObject1.optString(GlobalConstants.SRC_CLIENT_AGE));
+                    map.put(GlobalConstants.SRC_CLIENT_CONTACT , jsonObject1.optString(GlobalConstants.SRC_CLIENT_CONTACT));
+                    map.put(GlobalConstants.SRC_CLIENT_EMER_CONTACT , jsonObject1.optString(GlobalConstants.SRC_CLIENT_EMER_CONTACT));
+                    map.put(GlobalConstants.SRC_CLIENT_AREA , jsonObject1.optString(GlobalConstants.SRC_CLIENT_AREA));
+                    map.put(GlobalConstants.SRC_CLIENT_MED_HIS , jsonObject1.optString(GlobalConstants.SRC_CLIENT_MED_HIS));
+                    map.put(GlobalConstants.SRC_CLIENT_CONTRA_HIS , jsonObject1.optString(GlobalConstants.SRC_CLIENT_CONTRA_HIS));
+                    map.put(GlobalConstants.SRC_CLIENT_HIV_TESTED , jsonObject1.optString(GlobalConstants.SRC_CLIENT_HIV_TESTED));
+                    map.put(GlobalConstants.SRC_CLIENT_HOW_U_REACH , jsonObject1.optString(GlobalConstants.SRC_CLIENT_HOW_U_REACH));
+
+                    al_client_detail.add(map);
+                }
+
+                global.setAl_src_client_details(al_client_detail);
+
+                return "true";
+            }
+
+            else{
+                global.getAl_src_client_details().clear();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+
+
     public static String callApiWithPerameter(String url, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues) throws Exception {
 
         StringBuilder result;

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 public class CustomAdapter extends BaseAdapter {
@@ -22,29 +23,20 @@ public class CustomAdapter extends BaseAdapter {
     ArrayList<String> contact = new ArrayList<>();
 
     private static LayoutInflater inflater = null;
+
     public CustomAdapter(Activity activity) {
 
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        name.add("Khalfan");
-        name.add("Gheilani");
-        name.add("Hafiz");
-
-        branch.add("Dodoma");
-        branch.add("Dar Es Salaam");
-        branch.add("Morogoro");
-
-        contact.add("8879861183");
-        contact.add("8879861182");
-        contact.add("8879861184");
+        global = (Global) activity.getApplicationContext();
 
     }
 
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-         return name.size();
+         return global.getAl_src_client_details().size();
     }
 
     @Override
@@ -78,9 +70,9 @@ public class CustomAdapter extends BaseAdapter {
         holder.branch = (TextView) rowView.findViewById(R.id.branch);
         holder.contact = (TextView) rowView.findViewById(R.id.contact);
 
-        holder.name.setText(name.get(position));
-        holder.branch.setText(branch.get(position));
-        holder.contact.setText(contact.get(position));
+        holder.name.setText(global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_NAME));   //name.get(position)
+        holder.branch.setText(global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_BRANCH));
+        holder.contact.setText(global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_CONTACT));
 
         return rowView;
     }

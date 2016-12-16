@@ -63,6 +63,22 @@ public class Global extends Application {
         this.al_plan_details = al_plan_details;
     }
 
+
+    // ******************************* Search Client Getter and Setter  *************************************************
+
+    public ArrayList<HashMap<String, String>> getAl_src_client_details() {
+        return al_src_client_details;
+    }
+
+    public void setAl_src_client_details(ArrayList<HashMap<String, String>> al_src_client_details) {
+        this.al_src_client_details = al_src_client_details;
+    }
+
+    public ArrayList<HashMap<String,String>> al_src_client_details;
+
+
+
+
     @Override
     public void onCreate() {
 
