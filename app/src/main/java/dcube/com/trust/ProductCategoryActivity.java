@@ -68,7 +68,7 @@ public class ProductCategoryActivity extends Activity {
                     }
                 }
 
-                startActivity(new Intent(ProductCategoryActivity.this, ProductActivity.class));
+                startActivity(new Intent(ProductCategoryActivity.this, BuyProductActivity.class));
             }
         });
 

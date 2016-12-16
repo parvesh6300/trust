@@ -2,7 +2,9 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,11 +15,16 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.PlanListAdapter;
 import dcube.com.trust.utils.PlanSelectedAdapter;
+import okhttp3.OkHttpClient;
+import pl.droidsonroids.gif.GifTextView;
 
 public class BuyPlanActivity extends Activity{
 
@@ -25,6 +32,10 @@ public class BuyPlanActivity extends Activity{
     PlanListAdapter adapter;
 
     TextView buy;
+    GifTextView gif_loader;
+    WebServices ws;
+
+    Context context = this;
 
      ArrayList<String> name = new ArrayList<>();
      ArrayList<String> productCost = new ArrayList<>();
@@ -39,13 +50,14 @@ public class BuyPlanActivity extends Activity{
 
         addData();
 
+        gif_loader = (GifTextView) findViewById(R.id.gif_loader);
+
         servicelist = (ListView) findViewById(R.id.servicelist);
 
         buy = (TextView) findViewById(R.id.buy);
         search = (EditText) findViewById(R.id.search);
 
-        adapter = new PlanListAdapter(this,name,productCost,serviceCost);
-        servicelist.setAdapter(adapter);
+
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +176,10 @@ public class BuyPlanActivity extends Activity{
                     dismiss();
                 }
             });
+
+            new GetPlanAsyncTask().execute();
         }
+
     }
 
     public  void addData(){
@@ -190,5 +205,61 @@ public class BuyPlanActivity extends Activity{
 
     }
 
+
+
+    public class GetPlanAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_product_list");
+
+                message = ws.GetPlanService(context, al_str_key, al_str_value);
+
+                //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
+                //             Log.i("Login", "Login : " + resPonse);
+
+//                return resPonse;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (!message.equalsIgnoreCase("true"))
+            {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+            else {
+
+                adapter = new PlanListAdapter(BuyPlanActivity.this,name,productCost,serviceCost);
+                servicelist.setAdapter(adapter);
+            }
+
+        }
+
+    }
 
 }

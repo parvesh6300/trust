@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 public class ProductListAdapter extends BaseAdapter {
@@ -24,20 +25,19 @@ public class ProductListAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
 
-    public ProductListAdapter(Activity activity,ArrayList<String> name,ArrayList<String> category,ArrayList<String> quntity) {
+    public ProductListAdapter(Activity activity) {
 
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        this.name = name;
-        this.category = category;
-        //this.quantity = quantity;
+        global = (Global) activity.getApplicationContext();
+
     }
 
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-         return name.size();
+         return global.getAl_product_details().size();
     }
 
     @Override
@@ -76,8 +76,8 @@ public class ProductListAdapter extends BaseAdapter {
         holder.add = (TextView) rowView.findViewById(R.id.add);
         holder.minus = (TextView) rowView.findViewById(R.id.minus);
 
-        holder.name.setText(name.get(position));
-        holder.category.setText(category.get(position));
+        holder.name.setText(global.getAl_product_details().get(position).get(GlobalConstants.PRODUCT_NAME));   // name.get(position)
+        holder.category.setText(global.getAl_product_details().get(position).get(GlobalConstants.PRODUCT_CATEGORY));
 
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,4 +105,7 @@ public class ProductListAdapter extends BaseAdapter {
 
         return rowView;
     }
+
+
+
 }

@@ -11,28 +11,8 @@ import java.util.HashMap;
 
 public class Global extends Application {
 
-    boolean readonly;
-    boolean run;
-    boolean fblogin;
-
-    public ArrayList<HashMap<String, String>> ProductListing;
-
-    public ArrayList<HashMap<String, String>> getProductListing() {
-        return ProductListing;
-    }
-
-    public void setProductListing(ArrayList<HashMap<String, String>> productListing) {
-        ProductListing = productListing;
-    }
-
-    public ArrayList<HashMap<String, String>> LoginListing;
-    public ArrayList<HashMap<String, String>> SignupListing;
-    public ArrayList<HashMap<String, String>> SalonDetailListing;
-    public ArrayList<HashMap<String, String>> StylistListing;
-    public ArrayList<HashMap<String, String>> BookedListing;
 
     // ******************************* Login Getter and Setter  *************************************************
-
 
     public ArrayList<HashMap<String, String>> getAl_login_list() {
         return al_login_list;
@@ -44,6 +24,44 @@ public class Global extends Application {
 
     public ArrayList<HashMap<String,String>> al_login_list;
 
+    // ******************************* PRoduct Details Getter and Setter  *************************************************
+
+    public ArrayList<HashMap<String, String>> getAl_product_details() {
+        return al_product_details;
+    }
+
+    public void setAl_product_details(ArrayList<HashMap<String, String>> al_product_details) {
+        this.al_product_details = al_product_details;
+    }
+
+    public ArrayList<HashMap<String,String>> al_product_details;
+
+
+    // ******************************* SERVICE Details Getter and Setter  *************************************************
+
+    public ArrayList<HashMap<String, String>> getAl_service_details() {
+        return al_service_details;
+    }
+
+    public void setAl_service_details(ArrayList<HashMap<String, String>> al_service_details) {
+        this.al_service_details = al_service_details;
+    }
+
+    public ArrayList<HashMap<String,String>> al_service_details;
+
+
+
+    // ******************************* Plan Details Getter and Setter  *************************************************
+
+    public ArrayList<HashMap<String,String>> al_plan_details;
+
+    public ArrayList<HashMap<String, String>> getAl_plan_details() {
+        return al_plan_details;
+    }
+
+    public void setAl_plan_details(ArrayList<HashMap<String, String>> al_plan_details) {
+        this.al_plan_details = al_plan_details;
+    }
 
     @Override
     public void onCreate() {

@@ -58,6 +58,7 @@
                 android:layout_centerVertical="true"/>
 
             <EditText
+                android:id="@+id/ed_name"
                 android:layout_width="280dp"
                 android:layout_height="match_parent"
                 android:typeface="monospace"
@@ -91,6 +92,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:prompt="@string/spinner_title"
+                android:gravity="center"
                 android:layout_centerVertical="true"/>
 
 
@@ -123,13 +125,15 @@
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/textColor"
                 android:id="@+id/areacode"
+                android:editable="false"
                 android:layout_toRightOf="@id/contact_text"/>
 
             <EditText
+                android:id="@+id/ed_contact"
                 android:layout_width="180dp"
                 android:layout_height="match_parent"
                 android:typeface="monospace"
-                android:inputType="phone"
+                android:inputType="number"
                 android:textColor="@color/textColor"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/areacode"/>
@@ -163,13 +167,15 @@
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/textColor"
                 android:id="@+id/emer_areacode"
+                android:editable="false"
                 android:layout_toRightOf="@id/emer_contact_text"/>
 
             <EditText
+                android:id="@+id/ed_emer_contact"
                 android:layout_width="180dp"
                 android:layout_height="match_parent"
                 android:typeface="monospace"
-                android:inputType="phone"
+                android:inputType="number"
                 android:textColor="@color/textColor"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/emer_areacode"/>
@@ -199,6 +205,7 @@
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:prompt="@string/spinner_title"
+                    android:gravity="center"
                     android:layout_centerVertical="true"/>
 
 
@@ -224,6 +231,7 @@
                 android:layout_centerVertical="true"/>
 
             <EditText
+                android:id="@+id/ed_med_history"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:typeface="monospace"
@@ -257,6 +265,7 @@
                 android:layout_centerVertical="true"/>
 
             <RadioGroup
+                android:id="@+id/radio_group_contra"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
@@ -265,6 +274,7 @@
                 android:weightSum="3">
 
                 <RadioButton
+                    android:id="@+id/radio_contra_yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="YES"
@@ -276,6 +286,7 @@
                     />
 
                 <RadioButton
+                    android:id="@+id/radio_contra_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NO"
@@ -287,6 +298,7 @@
                     />
 
                 <RadioButton
+                    android:id="@+id/radio_contra_one_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="At one time, not now"
@@ -321,6 +333,7 @@
 
 
             <RadioGroup
+                android:id="@+id/radio_group_sex"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:orientation="horizontal"
@@ -329,6 +342,7 @@
                 android:weightSum="2">
 
                 <RadioButton
+                    android:id="@+id/radio_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Male"
@@ -340,6 +354,7 @@
                     />
 
                 <RadioButton
+                    android:id="@+id/radio_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Female"
@@ -374,6 +389,7 @@
                 android:layout_centerVertical="true"/>
 
             <RadioGroup
+                android:id="@+id/radio_group_child"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
@@ -382,6 +398,7 @@
                 android:weightSum="3">
 
                 <RadioButton
+                    android:id="@+id/radio_child_yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="YES"
@@ -392,6 +409,7 @@
                     android:typeface="monospace"/>
 
                 <RadioButton
+                    android:id="@+id/radio_child_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NO"
@@ -425,6 +443,7 @@
                 android:layout_centerVertical="true"/>
 
             <RadioGroup
+                android:id="@+id/radio_group_hiv_test"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:layout_marginTop="10dp"
@@ -433,6 +452,7 @@
                 android:weightSum="4">
 
                 <RadioButton
+                    android:id="@+id/radio_test_yes_months"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes, Within 6 months"
@@ -443,6 +463,7 @@
                     android:typeface="monospace" />
 
                 <RadioButton
+                    android:id="@+id/radio_test_last_2_yr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes, Within last 2 years"
@@ -453,6 +474,7 @@
                     android:typeface="monospace"/>
 
                 <RadioButton
+                    android:id="@+id/radio_test_more_2_yr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes, More than 2 years"
@@ -463,6 +485,7 @@
                     android:typeface="monospace"/>
 
                 <RadioButton
+                    android:id="@+id/radio_test_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No"
@@ -496,6 +519,7 @@
                 android:layout_centerVertical="true"/>
 
             <RadioGroup
+                android:id="@+id/radio_group_about_clinic"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_marginTop="10dp"
@@ -504,6 +528,7 @@
                 android:weightSum="5">
 
                 <RadioButton
+                    android:id="@+id/radio_social"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Social Media"
@@ -514,6 +539,7 @@
                     android:typeface="monospace" />
 
                 <RadioButton
+                    android:id="@+id/radio_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Radio"
@@ -525,6 +551,7 @@
                     />
 
                 <RadioButton
+                    android:id="@+id/radio_family"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Friends / Family "
@@ -535,6 +562,7 @@
                     android:typeface="monospace"
                     />
                 <RadioButton
+                    android:id="@+id/radio_flier"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Flier"
@@ -545,6 +573,7 @@
                     android:typeface="monospace"
                     />
                 <RadioButton
+                    android:id="@+id/radio_event"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="At an Event"
@@ -580,5 +609,16 @@
         </ScrollView>
 
     </LinearLayout>
+
+    <pl.droidsonroids.gif.GifTextView
+        android:id="@+id/gif_loader"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/loading"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

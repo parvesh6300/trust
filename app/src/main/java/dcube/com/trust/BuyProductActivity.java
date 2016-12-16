@@ -2,7 +2,9 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,44 +14,50 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.ProductListAdapter;
 import dcube.com.trust.utils.ProductSelectedAdapter;
+import okhttp3.OkHttpClient;
+import pl.droidsonroids.gif.GifTextView;
 
-public class ProductActivity extends Activity{
+public class BuyProductActivity extends Activity{
 
     ListView productlist;
     ProductListAdapter adapter;
     TextView buy;
 
-    ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> category = new ArrayList<>();
-    ArrayList<String> quantity = new ArrayList<>();
+    GifTextView gif_loader;
+    Context context = BuyProductActivity.this;
 
+    WebServices ws;
     EditText search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product);
 
-        addData();
+        setContentView(R.layout.activity_buy_product);
+
+        //addData();
 
         productlist = (ListView) findViewById(R.id.productlist);
-        adapter = new ProductListAdapter(this,name,category,quantity);
+
+        gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         buy = (TextView) findViewById(R.id.buy);
 
-        productlist.setAdapter(adapter);
         search = (EditText) findViewById(R.id.search);
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                CustomDialogClass cdd = new CustomDialogClass(ProductActivity.this);
+                CustomDialogClass cdd = new CustomDialogClass(BuyProductActivity.this);
                 cdd.show();
 
             }
@@ -57,12 +65,9 @@ public class ProductActivity extends Activity{
 
 
         search.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                name = new ArrayList<>();
-                category = new ArrayList<>();
-                quantity = new ArrayList<>();
 
             }
             @Override
@@ -72,36 +77,71 @@ public class ProductActivity extends Activity{
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
-                if(s.toString().equalsIgnoreCase("condom"))
-                {
-                    name.add("Bull Condom");
-                    category.add("Condom");
-                    quantity.add("5");
-
-                    name.add("Fiesta");
-                    category.add("Condom");
-                    quantity.add("12");
-                }
-                else
-                if(s.toString().equalsIgnoreCase("implant"))
-                {
-                    name.add("Implanon Implants");
-                    category.add("implant");
-                    quantity.add("23");
-
-                    name.add("Jadelle");
-                    category.add("implant");
-                    quantity.add("7");
-                }
-                else
-                {
-                    addData();
-                }
-
-                adapter = new ProductListAdapter(ProductActivity.this,name,category,quantity);
-                productlist.setAdapter(adapter);
+//                adapter = new ProductListAdapter(BuyProductActivity.this,name,category,quantity);
+//                productlist.setAdapter(adapter);
             }
         });
+
+
+        new GetPruductAsyncTask().execute();
+
+    }
+
+
+
+    public class GetPruductAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_product_list");
+
+                message = ws.GetProductService(context, al_str_key, al_str_value);
+
+                //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
+                //             Log.i("Login", "Login : " + resPonse);
+
+//                return resPonse;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (!message.equalsIgnoreCase("true"))
+            {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+            else {
+
+                adapter = new ProductListAdapter(BuyProductActivity.this);
+                productlist.setAdapter(adapter);
+            }
+
+        }
+
     }
 
     public class CustomDialogClass extends Dialog {
@@ -131,14 +171,14 @@ public class ProductActivity extends Activity{
             cancel = (TextView) findViewById(R.id.cancel);
             selected = (ListView) findViewById(R.id.selected_product_list);
 
-            selectedAdapter = new ProductSelectedAdapter(ProductActivity.this);
+            selectedAdapter = new ProductSelectedAdapter(BuyProductActivity.this);
             selected.setAdapter(selectedAdapter);
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    startActivity(new Intent(ProductActivity.this,GenerateInvoiceActivity.class));
+                    startActivity(new Intent(BuyProductActivity.this,GenerateInvoiceActivity.class));
                 }
             });
 
@@ -152,37 +192,7 @@ public class ProductActivity extends Activity{
         }
     }
 
-    public  void addData(){
-        name.add("Bull Condom");
-        category.add("Condom");
-        quantity.add("5");
 
-        name.add("Fiesta");
-        category.add("Condom");
-        quantity.add("12");
 
-        name.add("Implanon Implants");
-        category.add("implant");
-        quantity.add("23");
 
-        name.add("Jadelle");
-        category.add("implant");
-        quantity.add("7");
-
-        name.add("Safe Load");
-        category.add("IUD");
-        quantity.add("4");
-
-        name.add("Silverline IUD");
-        category.add("IUD");
-        quantity.add("18");
-
-        name.add("Trust Daisy");
-        category.add("Emergency Pill");
-        quantity.add("42");
-
-        name.add("Depo Provera Contraceptive");
-        category.add("Injectable");
-        quantity.add("6");
-    }
 }

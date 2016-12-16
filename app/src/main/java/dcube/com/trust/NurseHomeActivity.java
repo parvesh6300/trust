@@ -2,12 +2,14 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.utils.Global;
@@ -21,6 +23,17 @@ public class NurseHomeActivity extends Activity {
     TextView tv_user_name,tv_logout;
 
     Global global;
+
+    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
+    private long mBackPressed;
+
+
+    String login_pref = "Login_pref";
+    String is_logged_in_pref = "Logged_in_pref";
+
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +65,9 @@ public class NurseHomeActivity extends Activity {
             @Override
             public void onClick(View view) {
 
+                setSharedPreferences();
                 startActivity(new Intent(NurseHomeActivity.this,LoginActivity.class));
                 finish();
-
                 global.getAl_login_list().clear();
             }
         });
@@ -82,10 +95,41 @@ public class NurseHomeActivity extends Activity {
 
                     case 3:
 
-                        startActivity(new Intent(NurseHomeActivity.this,ProductActivity.class));
+                        startActivity(new Intent(NurseHomeActivity.this,BuyProductActivity.class));
                         break;
                 }
             }
         });
     }
+
+
+    @Override
+    public void onBackPressed() {
+
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
+        {
+            super.onBackPressed();
+            return;
+        }
+        else
+        {
+            Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
+        }
+
+        mBackPressed = System.currentTimeMillis();
+
+    }
+
+
+    public void setSharedPreferences()
+    {
+        pref = getSharedPreferences(login_pref,MODE_PRIVATE);
+
+        editor = pref.edit();
+
+        editor.putBoolean(is_logged_in_pref,false);
+
+        editor.apply();
+    }
+
 }

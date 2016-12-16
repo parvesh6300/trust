@@ -2,7 +2,9 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,22 +15,26 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.ServiceListAdapter;
+import okhttp3.OkHttpClient;
+import pl.droidsonroids.gif.GifTextView;
 
 public class BuyServicesActivity extends Activity {
 
     ListView servicelist;
     ServiceListAdapter adapter;
-
+    GifTextView gif_loader;
     TextView buy;
 
-    ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> serviceCost = new ArrayList<>();
-
     EditText search;
+    WebServices ws;
+    Context context = BuyServicesActivity.this;
 
 
     @Override
@@ -37,16 +43,14 @@ public class BuyServicesActivity extends Activity {
         setContentView(R.layout.activity_buy_services);
 
 
-        addData();
+        //addData();
 
         servicelist = (ListView) findViewById(R.id.servicelist);
 
         buy = (TextView) findViewById(R.id.buy);
         search = (EditText) findViewById(R.id.search);
 
-
-        adapter = new ServiceListAdapter(this,name,serviceCost);
-        servicelist.setAdapter(adapter);
+        gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
 
         buy.setOnClickListener(new View.OnClickListener() {
@@ -76,8 +80,6 @@ public class BuyServicesActivity extends Activity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                name = new ArrayList<>();
-                serviceCost = new ArrayList<>();
 
             }
             @Override
@@ -87,48 +89,15 @@ public class BuyServicesActivity extends Activity {
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
-                if(s.toString().equalsIgnoreCase("IUCD"))
-                {
-                    name.add("CPAC + IUCD");
-                    serviceCost.add("150,000");
-                }
-
-                else if(s.toString().equalsIgnoreCase("Ult"))
-                {
-                    name.add("Ultrasound");
-                    serviceCost.add("20,000");
-                }
-                else
-                {
-                    addData();
-                }
-
-                adapter = new ServiceListAdapter(BuyServicesActivity.this,name,serviceCost);
-                servicelist.setAdapter(adapter);
             }
         });
 
 
-    }
-
-    public  void addData(){
-
-        name.add("Provider Counsultation");
-        serviceCost.add("30,000");
-
-        name.add("CPAC + IUCD");
-        serviceCost.add("150,000");
-
-        name.add("Gynaecologist");
-        serviceCost.add("50,000");
-
-        name.add("Pap Smear");
-        serviceCost.add("70,000");
-
-        name.add("Ultrasound");
-        serviceCost.add("20,000");
+        new GetServiceAsyncTask().execute();
 
     }
+
+
 
     public class CustomDialogClass extends Dialog {
 
@@ -158,8 +127,8 @@ public class BuyServicesActivity extends Activity {
             cancel = (TextView) findViewById(R.id.cancel);
             selected = (ListView) findViewById(R.id.selected_product_list);
 
-            selectedAdapter = new ServiceSelectedAdapter(BuyServicesActivity.this,name,serviceCost);
-            selected.setAdapter(selectedAdapter);
+//            selectedAdapter = new ServiceSelectedAdapter(BuyServicesActivity.this,name,serviceCost);
+//            selected.setAdapter(selectedAdapter);
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -181,5 +150,60 @@ public class BuyServicesActivity extends Activity {
         }
     }
 
+
+    public class GetServiceAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_service_list");
+
+                message = ws.GetServiceService(context, al_str_key, al_str_value);
+
+                //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
+                //             Log.i("Login", "Login : " + resPonse);
+
+//                return resPonse;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (!message.equalsIgnoreCase("true"))
+            {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+            else {
+
+                adapter = new ServiceListAdapter(BuyServicesActivity.this);
+                servicelist.setAdapter(adapter);
+            }
+
+        }
+
+    }
 
 }

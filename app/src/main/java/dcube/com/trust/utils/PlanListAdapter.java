@@ -84,7 +84,6 @@ public class PlanListAdapter extends BaseAdapter {
         holder.service_cost.setText(serviceCost.get(position));
 
 
-
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

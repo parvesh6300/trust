@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
@@ -33,11 +34,12 @@ public class ServiceListAdapter extends BaseAdapter{
 
     private static LayoutInflater inflater = null;
 
-    public ServiceListAdapter(Activity activity, ArrayList<String> name, ArrayList<String> serviceCost)
+    public ServiceListAdapter(Activity activity)
     {
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        global = (Global) activity.getApplicationContext();
         this.name = name;
         this.serviceCost = serviceCost;
     }
@@ -60,8 +62,8 @@ public class ServiceListAdapter extends BaseAdapter{
         holder.service_cost = (TextView) rowView.findViewById(R.id.service_cost);
         holder.iv = (ImageView) rowView.findViewById(R.id.iv);
 
-        holder.name.setText(name.get(position));
-        holder.service_cost.setText(serviceCost.get(position));
+        holder.name.setText(global.getAl_service_details().get(position).get(GlobalConstants.SERVICE_NAME));  //name.get(position)
+        holder.service_cost.setText(global.getAl_service_details().get(position).get(GlobalConstants.SERVICE_PRICE));  //serviceCost.get(position)
 
 
 
@@ -95,7 +97,7 @@ public class ServiceListAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return name.size();
+        return global.getAl_service_details().size();
     }
 
     @Override

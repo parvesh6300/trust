@@ -17,7 +17,7 @@
         android:layout_gravity="center"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:textStyle="bold"/>
 
     <TextView

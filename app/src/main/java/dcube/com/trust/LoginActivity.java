@@ -3,6 +3,7 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -51,10 +52,22 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     Context context = LoginActivity.this;
 
-
     Global global;
 
     ArrayList<HashMap<String, String>> al_login_user;
+
+    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
+    private long mBackPressed;
+
+    String login_pref = "Login_pref";
+    String is_logged_in_pref = "Logged_in_pref";
+    String user_name_pref = "user_name";
+    String password_pref = "password";
+    String role_key = "role";
+
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,11 +147,14 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
     protected boolean isOnline() {
+
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected()) {
+        if (netInfo != null && netInfo.isConnected())
+        {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -184,7 +200,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 al_str_key.add(GlobalConstants.LOGIN_DEVICE_TOKEN);
                 al_str_value.add(str_device_token);
 
-                al_str_key.add(GlobalConstants.LOGIN_ACTION);
+                al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("login");
 
                 message = ws.LoginService(context, al_str_key, al_str_value);
@@ -206,23 +222,33 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
             gif_loader.setVisibility(View.GONE);
 
-            if (!message.equalsIgnoreCase("true")) {
-                Toast.makeText(LoginActivity.this, "" + message, Toast.LENGTH_SHORT).show();
-            } else {
+            if (message.equalsIgnoreCase("true"))
+            {
+                setSharedPreferences();
 
                 if ( role_id == 2)
                 {
                     Intent i = new Intent(LoginActivity.this, NurseHomeActivity.class);
                     startActivity(i);
+                    finish();
                 }
 
-                if (role_id == 3)
+                else if (role_id == 3)
                 {
                     Intent i = new Intent(LoginActivity.this, FinanceHomeActivity.class);
                     startActivity(i);
+                    finish();
                 }
 
-                finish();
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "Wrong Username or Password", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            else {
+
+                Toast.makeText(LoginActivity.this, "" + message, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -230,4 +256,40 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
+        {
+            super.onBackPressed();
+            return;
+        }
+        else
+        {
+            Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
+        }
+
+        mBackPressed = System.currentTimeMillis();
+
+    }
+
+
+    public void setSharedPreferences()
+    {
+        pref = getSharedPreferences(login_pref,MODE_PRIVATE);
+
+        editor = pref.edit();
+
+        editor.putBoolean(is_logged_in_pref,true);
+
+        editor.putString(user_name_pref,ed_user_name.getText().toString().trim());
+        editor.putString(password_pref, ed_pwd.getText().toString().trim());
+        editor.putString(role_key , String.valueOf(role_id));
+
+        editor.apply();
+    }
+
+
 }
+
+
