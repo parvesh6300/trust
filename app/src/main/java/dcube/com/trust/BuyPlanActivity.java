@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.PlanListAdapter;
 import dcube.com.trust.utils.PlanSelectedAdapter;
 import okhttp3.OkHttpClient;
@@ -37,18 +40,17 @@ public class BuyPlanActivity extends Activity{
 
     Context context = this;
 
-     ArrayList<String> name = new ArrayList<>();
-     ArrayList<String> productCost = new ArrayList<>();
-     ArrayList<String> serviceCost = new ArrayList<>();
+    Global global;
 
     EditText search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_buy_plan);
 
-        addData();
+         global = (Global) getApplicationContext();
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -57,7 +59,11 @@ public class BuyPlanActivity extends Activity{
         buy = (TextView) findViewById(R.id.buy);
         search = (EditText) findViewById(R.id.search);
 
-
+        if (isOnline()) {
+            new GetPlanAsyncTask().execute();
+        } else {
+            Toast.makeText(BuyPlanActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,10 +90,6 @@ public class BuyPlanActivity extends Activity{
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                name = new ArrayList<>();
-                productCost = new ArrayList<>();
-                serviceCost = new ArrayList<>();
-
             }
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -96,35 +98,6 @@ public class BuyPlanActivity extends Activity{
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
-                if(s.toString().equalsIgnoreCase("IUCD"))
-                {
-                    name.add("IUCD Sleek/Copper T/Safeload");
-                    productCost.add("5,000");
-                    serviceCost.add("20,000");
-
-                    name.add("CPAC + IUCD");
-                    productCost.add("");
-                    serviceCost.add("150,000");
-
-                }
-                else
-                if(s.toString().equalsIgnoreCase("implant"))
-                {
-                    name.add("Implanon Implants");
-                    productCost.add("implant");
-                    serviceCost.add("23");
-
-                    name.add("Jadelle");
-                    productCost.add("implant");
-                    serviceCost.add("7");
-                }
-                else
-                {
-                    addData();
-                }
-
-                adapter = new PlanListAdapter(BuyPlanActivity.this,name,productCost,serviceCost);
-                servicelist.setAdapter(adapter);
             }
         });
     }
@@ -132,9 +105,11 @@ public class BuyPlanActivity extends Activity{
     public class CustomDialogClass extends Dialog {
 
         public Activity c;
+        int int_product_price = 0;
+        int int_service_price = 0;
 
-        public TextView cancel;
-        public TextView confirm;
+        public TextView cancel,tv_product_cost;
+        public TextView confirm,tv_service_cost;
 
         public ListView selected;
 
@@ -149,14 +124,19 @@ public class BuyPlanActivity extends Activity{
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
             requestWindowFeature(Window.FEATURE_NO_TITLE);
+
             setContentView(R.layout.buyplan_dialog);
 
             confirm = (TextView) findViewById(R.id.confirm);
             cancel = (TextView) findViewById(R.id.cancel);
+            tv_product_cost = (TextView) findViewById(R.id.tv_product_cost);
+            tv_service_cost = (TextView) findViewById(R.id.tv_service_cost);
+
             selected = (ListView) findViewById(R.id.selected_product_list);
 
-            selectedAdapter = new PlanSelectedAdapter(BuyPlanActivity.this,name,productCost,serviceCost);
+            selectedAdapter = new PlanSelectedAdapter(context);
             selected.setAdapter(selectedAdapter);
 
             confirm.setOnClickListener(new View.OnClickListener() {
@@ -177,34 +157,22 @@ public class BuyPlanActivity extends Activity{
                 }
             });
 
-            new GetPlanAsyncTask().execute();
+
+            for (int count = 0 ; count < global.getAl_selected_plan().size() ; count++)
+            {
+                int_product_price = int_product_price +
+                        Integer.parseInt(global.getAl_selected_plan().get(count).get(GlobalConstants.PLAN_PRODUCT_PRICE));
+
+                int_service_price = int_service_price +
+                        Integer.parseInt(global.getAl_selected_plan().get(count).get(GlobalConstants.PLAN_SERVICE_PRICE));
+            }
+
+            tv_product_cost.setText(String.valueOf(int_product_price));
+            tv_service_cost.setText(String.valueOf(int_service_price));
+
         }
 
     }
-
-    public  void addData(){
-        name.add("Silverline + Implants");
-        productCost.add("5,000");
-        serviceCost.add("20,000");
-
-        name.add("Injection Depo + Injection-Sayana");
-        productCost.add("15,000");
-        serviceCost.add("20,000");
-
-        name.add("HIV + Family Planning");
-        productCost.add("12,000");
-        serviceCost.add("150,000");
-
-        name.add("Blood Sugar + Urine Analysis");
-        productCost.add("10,000");
-        serviceCost.add("50,000");
-
-        name.add("OCP's(3 Cycles) + EC(2 Packs)");
-        productCost.add("15,000");
-        serviceCost.add("Free");
-
-    }
-
 
 
     public class GetPlanAsyncTask extends AsyncTask<String, String, String> {
@@ -227,7 +195,7 @@ public class BuyPlanActivity extends Activity{
                 ArrayList<String> al_str_value = new ArrayList<>();
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_product_list");
+                al_str_value.add("get_plan_list");
 
                 message = ws.GetPlanService(context, al_str_key, al_str_value);
 
@@ -248,18 +216,32 @@ public class BuyPlanActivity extends Activity{
 
             gif_loader.setVisibility(View.GONE);
 
-            if (!message.equalsIgnoreCase("true"))
+            if (message.equalsIgnoreCase("true"))
             {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+                adapter = new PlanListAdapter(BuyPlanActivity.this);
+                servicelist.setAdapter(adapter);
+
             }
             else {
 
-                adapter = new PlanListAdapter(BuyPlanActivity.this,name,productCost,serviceCost);
-                servicelist.setAdapter(adapter);
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
         }
 
+    }
+
+    protected boolean isOnline() {
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected())
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

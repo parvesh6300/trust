@@ -32,6 +32,8 @@ public class ServiceListAdapter extends BaseAdapter{
     ArrayList<String> name = new ArrayList<>();
     ArrayList<String> serviceCost = new ArrayList<>();
 
+    ArrayList<String> al_selected_service;
+
     private static LayoutInflater inflater = null;
 
     public ServiceListAdapter(Activity activity)
@@ -40,6 +42,7 @@ public class ServiceListAdapter extends BaseAdapter{
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         global = (Global) activity.getApplicationContext();
+        al_selected_service = new ArrayList<>();
         this.name = name;
         this.serviceCost = serviceCost;
     }
@@ -51,7 +54,7 @@ public class ServiceListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public View getView(final int position, View view, ViewGroup viewGroup) {
         // TODO Auto-generated method stub
         final Holder holder = new Holder();
 
@@ -77,6 +80,9 @@ public class ServiceListAdapter extends BaseAdapter{
                     rowView.setBackgroundColor(Color.parseColor("#603370"));    // Purple
                     holder.name.setTextColor(Color.parseColor("#FFFFFF"));      // white
                     holder.service_cost.setTextColor(Color.parseColor("#FFFFFF"));      // white
+
+                    al_selected_service.add(global.getAl_service_details().get(position).get(GlobalConstants.SERVICE_ID));
+
                 }
                 else
                 {
@@ -84,8 +90,12 @@ public class ServiceListAdapter extends BaseAdapter{
                     rowView.setBackgroundColor(Color.parseColor("#FFFFFF"));    // white
                     holder.name.setTextColor(Color.parseColor("#45265f"));      // text color
                     holder.service_cost.setTextColor(Color.parseColor("#45265f"));      // text color
+
+                    al_selected_service.remove(global.getAl_service_details().get(position).get(GlobalConstants.SERVICE_ID));
+
                 }
 
+                global.setAl_selected_service_id(al_selected_service);
 
             }
         });

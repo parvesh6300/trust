@@ -3,6 +3,7 @@ package dcube.com.trust.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 public class PlanListAdapter extends BaseAdapter {
@@ -24,26 +26,25 @@ public class PlanListAdapter extends BaseAdapter {
 
     boolean isSelected = false;
 
-    ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> productCost = new ArrayList<>();
-    ArrayList<String> serviceCost = new ArrayList<>();
+    ArrayList<String> al_selected_plan;
 
     private static LayoutInflater inflater = null;
 
-    public PlanListAdapter(Activity activity,ArrayList<String> name,ArrayList<String> productCost,ArrayList<String> serviceCost) {
+    public PlanListAdapter(Activity activity) {
 
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        this.name = name;
-        this.productCost = productCost;
-        this.serviceCost = serviceCost;
+        global = (Global) activity.getApplicationContext();
+
+        al_selected_plan = new ArrayList<>();
+
     }
 
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-         return name.size();
+         return global.getAl_plan_details().size();
     }
 
     @Override
@@ -79,9 +80,12 @@ public class PlanListAdapter extends BaseAdapter {
         holder.service_cost = (TextView) rowView.findViewById(R.id.service_cost);
         holder.iv = (ImageView) rowView.findViewById(R.id.iv);
 
-        holder.name.setText(name.get(position));
-        holder.product_cost.setText(productCost.get(position));
-        holder.service_cost.setText(serviceCost.get(position));
+        String plan_name = global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_PRODUCT_NAME)+" + "+
+                global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_SERVICE_NAME);
+
+        holder.name.setText(plan_name);    //name.get(position)
+        holder.product_cost.setText(global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_PRODUCT_PRICE));
+        holder.service_cost.setText( global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_SERVICE_PRICE));
 
 
         rowView.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +99,9 @@ public class PlanListAdapter extends BaseAdapter {
                     holder.name.setTextColor(Color.parseColor("#FFFFFF"));      // white
                     holder.product_cost.setTextColor(Color.parseColor("#FFFFFF"));      // white
                     holder.service_cost.setTextColor(Color.parseColor("#FFFFFF"));      // white
+
+                    al_selected_plan.add(global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_ID));
+
                 }
                 else
                 {
@@ -103,8 +110,13 @@ public class PlanListAdapter extends BaseAdapter {
                     holder.name.setTextColor(Color.parseColor("#45265f"));      // text color
                     holder.product_cost.setTextColor(Color.parseColor("#45265f"));      // text color
                     holder.service_cost.setTextColor(Color.parseColor("#45265f"));      // text color
+
+                    al_selected_plan.remove(global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_ID));
+
                 }
 
+                global.setAl_selected_plan_id(al_selected_plan);
+                Log.e("SelectedPlan","Size "+al_selected_plan.size());
 
             }
         });

@@ -40,8 +40,6 @@ public class GlobalConstants {
 
     // ************************************* GET PRODUCT VARIABLES  ****************************************************
 
-    public static final String GET_PRODUCT_ACTION = "get_product_list";
-
     public static final String PRODUCT_ID = "product_id";
     public static final String PRODUCT_SKU = "SKU";
     public static final String PRODUCT_NAME = "name";
@@ -54,6 +52,26 @@ public class GlobalConstants {
     public static final String SERVICE_ID = "service_id";
     public static final String SERVICE_NAME = "name";
     public static final String SERVICE_PRICE = "price";
+
+
+// ************************************* GET PLAN VARIABLES  ****************************************************
+
+    public static final String PLAN_ID = "plan_id";
+    public static final String PLAN_PRICE = "plan_price";
+    public static final String PLAN_DURATION = "plan_duration";
+    public static final String PLAN_NAME = "plan_name";
+
+
+    public static final String PLAN_PRODUCT_ID = "product_id";
+    public static final String PLAN_PRODUCT_SKU = "SKU";
+    public static final String PLAN_PRODUCT_NAME = "product_name";
+    public static final String PLAN_PRODUCT_CATEGORY = "product_category";
+    public static final String PLAN_PRODUCT_PRICE = "product_price";
+    public static final String PLAN_PRODUCT_IN_STOCK = "in_stock";
+
+    public static final String PLAN_SERVICE_ID = "service_id";
+    public static final String PLAN_SERVICE_NAME = "service_name";
+    public static final String PLAN_SERVICE_PRICE = "service_price";
 
 
 // *************************************  ADD CLIENT VARIABLES  ****************************************************
@@ -73,11 +91,11 @@ public class GlobalConstants {
 
     // ************************************* Add Apppointment VARIABLES  ****************************************************
 
-    public static final String APMT_CLIENT_NAME = "service_id";
-    public static final String APMT_CLIENT_EMAIL = "name";
-    public static final String APMT_CLIENT_SERVICE = "price";
-    public static final String APMT_DATE = "price";
-    public static final String APMT_TIME= "price";
+    public static final String APMT_CLIENT_ID = "client_id";
+    public static final String APMT_PLAN_ID = "plan_id";
+    public static final String APMT_SERVICE_ID = "service_id";
+    public static final String APMT_DATE = "date";
+    public static final String APMT_TIME= "time";
 
     // ************************************* Search Client VARIABLES  ****************************************************
 

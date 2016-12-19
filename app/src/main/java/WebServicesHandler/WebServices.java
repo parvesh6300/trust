@@ -234,10 +234,6 @@ public class WebServices {
     {
         String response;
 
-        ArrayList<HashMap<String,String>> al_service_detail;
-
-        Global global = (Global) context.getApplicationContext();
-
         String message = "Some Error occured";
 
         try {
@@ -253,25 +249,6 @@ public class WebServices {
 
             if (status.equalsIgnoreCase("1"))
             {
-                al_service_detail = new ArrayList<>();
-
-                JSONArray jsonArray = jsonObject.getJSONArray("services");
-
-                for (int i = 0 ; i< jsonArray.length() ; i++)
-                {
-                    HashMap<String, String> map = new HashMap<String, String>();
-
-                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-
-                    map.put(GlobalConstants.SERVICE_ID , jsonObject1.optString(GlobalConstants.SERVICE_ID));
-                    map.put(GlobalConstants.SERVICE_PRICE , jsonObject1.optString(GlobalConstants.SERVICE_PRICE));
-                    map.put(GlobalConstants.SERVICE_NAME , jsonObject1.optString(GlobalConstants.SERVICE_NAME));
-
-                    al_service_detail.add(map);
-                }
-
-                global.setAl_service_details(al_service_detail);
-
                 return "true";
             }
 
@@ -308,7 +285,7 @@ public class WebServices {
             {
                 al_plan_detail = new ArrayList<>();
 
-                JSONArray jsonArray = jsonObject.getJSONArray("products");
+                JSONArray jsonArray = jsonObject.getJSONArray("plans");
 
                 for (int i = 0 ; i< jsonArray.length() ; i++)
                 {
@@ -316,16 +293,20 @@ public class WebServices {
 
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                    map.put(GlobalConstants.PRODUCT_ID , jsonObject1.optString(GlobalConstants.PRODUCT_ID));
-                    map.put(GlobalConstants.PRODUCT_SKU , jsonObject1.optString(GlobalConstants.PRODUCT_SKU));
-                    map.put(GlobalConstants.PRODUCT_NAME , jsonObject1.optString(GlobalConstants.PRODUCT_NAME));
-                    map.put(GlobalConstants.PRODUCT_CATEGORY , jsonObject1.optString(GlobalConstants.PRODUCT_CATEGORY));
-                    map.put(GlobalConstants.PRODUCT_PRICE , jsonObject1.optString(GlobalConstants.PRODUCT_PRICE));
-                    map.put(GlobalConstants.PRODUCT_IN_STOCK , jsonObject1.optString(GlobalConstants.PRODUCT_IN_STOCK));
+                    map.put(GlobalConstants.PLAN_ID , jsonObject1.optString(GlobalConstants.PLAN_ID));
+                    map.put(GlobalConstants.PLAN_DURATION , jsonObject1.optString(GlobalConstants.PLAN_DURATION));
+                    map.put(GlobalConstants.PLAN_PRICE , jsonObject1.optString(GlobalConstants.PLAN_PRICE));
 
-                    map.put(GlobalConstants.SERVICE_ID , jsonObject1.optString(GlobalConstants.SERVICE_ID));
-                    map.put(GlobalConstants.SERVICE_PRICE , jsonObject1.optString(GlobalConstants.SERVICE_PRICE));
-                    map.put(GlobalConstants.SERVICE_NAME , jsonObject1.optString(GlobalConstants.SERVICE_NAME));
+                    map.put(GlobalConstants.PLAN_PRODUCT_ID , jsonObject1.optString(GlobalConstants.PLAN_PRODUCT_ID));
+                    map.put(GlobalConstants.PLAN_PRODUCT_SKU , jsonObject1.optString(GlobalConstants.PLAN_PRODUCT_SKU));
+                    map.put(GlobalConstants.PLAN_PRODUCT_NAME , jsonObject1.optString(GlobalConstants.PLAN_PRODUCT_NAME));
+                    map.put(GlobalConstants.PLAN_PRODUCT_CATEGORY , jsonObject1.optString(GlobalConstants.PLAN_PRODUCT_CATEGORY));
+                    map.put(GlobalConstants.PLAN_PRODUCT_PRICE , jsonObject1.optString(GlobalConstants.PLAN_PRODUCT_PRICE));
+                    map.put(GlobalConstants.PLAN_PRODUCT_IN_STOCK , jsonObject1.optString(GlobalConstants.PLAN_PRODUCT_IN_STOCK));
+
+                    map.put(GlobalConstants.PLAN_SERVICE_ID , jsonObject1.optString(GlobalConstants.PLAN_SERVICE_ID));
+                    map.put(GlobalConstants.PLAN_SERVICE_PRICE , jsonObject1.optString(GlobalConstants.PLAN_SERVICE_PRICE));
+                    map.put(GlobalConstants.PLAN_SERVICE_NAME , jsonObject1.optString(GlobalConstants.PLAN_SERVICE_NAME));
 
                     al_plan_detail.add(map);
                 }
@@ -350,6 +331,7 @@ public class WebServices {
         ArrayList<HashMap<String,String>> al_client_detail;
 
         Global global = (Global) context.getApplicationContext();
+
 
         String message = "Some Error occured";
 
@@ -396,7 +378,9 @@ public class WebServices {
             }
 
             else{
+
                 global.getAl_src_client_details().clear();
+
             }
 
         } catch (Exception e) {

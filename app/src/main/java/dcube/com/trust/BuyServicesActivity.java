@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.ServiceListAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
@@ -32,6 +35,8 @@ public class BuyServicesActivity extends Activity {
     GifTextView gif_loader;
     TextView buy;
 
+    Global global;
+
     EditText search;
     WebServices ws;
     Context context = BuyServicesActivity.this;
@@ -42,8 +47,7 @@ public class BuyServicesActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_services);
 
-
-        //addData();
+        global = (Global) getApplicationContext();
 
         servicelist = (ListView) findViewById(R.id.servicelist);
 
@@ -92,8 +96,12 @@ public class BuyServicesActivity extends Activity {
             }
         });
 
+        if (isOnline()) {
+            new GetServiceAsyncTask().execute();
+        } else {
+            Toast.makeText(BuyServicesActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
-        new GetServiceAsyncTask().execute();
 
     }
 
@@ -104,11 +112,13 @@ public class BuyServicesActivity extends Activity {
         public Activity c;
 
         public TextView cancel;
-        public TextView confirm;
+        public TextView confirm,tv_service_cost;
 
         public ListView selected;
 
         ServiceSelectedAdapter selectedAdapter;
+
+        int int_service_price = 0;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -125,10 +135,11 @@ public class BuyServicesActivity extends Activity {
 
             confirm = (TextView) findViewById(R.id.confirm);
             cancel = (TextView) findViewById(R.id.cancel);
+            tv_service_cost = (TextView) findViewById(R.id.tv_service_cost);
             selected = (ListView) findViewById(R.id.selected_product_list);
 
-//            selectedAdapter = new ServiceSelectedAdapter(BuyServicesActivity.this,name,serviceCost);
-//            selected.setAdapter(selectedAdapter);
+            selectedAdapter = new ServiceSelectedAdapter(BuyServicesActivity.this);
+            selected.setAdapter(selectedAdapter);
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -147,6 +158,15 @@ public class BuyServicesActivity extends Activity {
                     dismiss();
                 }
             });
+
+            for (int count = 0 ; count < global.getAl_selected_service().size() ; count++)
+            {
+                 int_service_price = int_service_price +
+                        Integer.parseInt(global.getAl_selected_service().get(count).get(GlobalConstants.SERVICE_PRICE));
+            }
+
+            tv_service_cost.setText(String.valueOf(int_service_price));
+
         }
     }
 
@@ -204,6 +224,20 @@ public class BuyServicesActivity extends Activity {
 
         }
 
+    }
+
+
+    protected boolean isOnline() {
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected())
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

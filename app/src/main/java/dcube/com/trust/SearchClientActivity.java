@@ -3,6 +3,8 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -77,9 +79,16 @@ public class SearchClientActivity extends Activity {
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
                 if(s.length() >1)
                 {
-                    src_keyword = s.toString();
+                    if (isOnline())
+                    {
+                        src_keyword = s.toString();
 //                    searchlist.setVisibility(View.VISIBLE);
-                    new SearchClientAsyncTask().execute();
+                        new SearchClientAsyncTask().execute();
+                    }
+                    else {
+                        Toast.makeText(SearchClientActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
                 else
                 {
@@ -171,6 +180,18 @@ public class SearchClientActivity extends Activity {
 
     }
 
+    protected boolean isOnline() {
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected())
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 
 }

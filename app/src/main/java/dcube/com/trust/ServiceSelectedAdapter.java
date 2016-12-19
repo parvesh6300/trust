@@ -8,6 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import WebServicesHandler.GlobalConstants;
+import dcube.com.trust.utils.Global;
 
 /**
  * Created by Sagar on 30/11/16.
@@ -15,17 +19,23 @@ import java.util.ArrayList;
 public class ServiceSelectedAdapter extends BaseAdapter {
 
     Context context;
+    Global global;
+
+
+    ArrayList<HashMap<String,String>> selected_service_details;
 
     ArrayList<String> service_name = new ArrayList<>();
     ArrayList<String> service_Cost = new ArrayList<>();
 
     private static LayoutInflater inflater;
 
-    public ServiceSelectedAdapter(Context ctx,ArrayList<String> name,ArrayList<String> serviceCost)
-    {
+    public ServiceSelectedAdapter(Context ctx) {
         this.context = ctx;
 //        this.name = name;
 //        this.serviceCost = serviceCost;
+        global = (Global) ctx.getApplicationContext();
+
+        selected_service_details = new ArrayList<>();
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -34,6 +44,29 @@ public class ServiceSelectedAdapter extends BaseAdapter {
 
         service_name.add("Gynaecologist");
         service_Cost.add("50,000");
+
+
+        for (int i = 0; i < global.getAl_selected_service_id().size(); i++)
+        {
+
+            for (int j = 0; j < global.getAl_service_details().size(); j++)
+            {
+                String service_id = global.getAl_service_details().get(j).get(GlobalConstants.SERVICE_ID);
+
+                if (global.getAl_selected_service_id().get(i).equalsIgnoreCase(service_id))
+                {
+                    HashMap<String,String> map = new HashMap<>();
+
+                    map.put(GlobalConstants.SERVICE_ID , global.getAl_service_details().get(j).get(GlobalConstants.SERVICE_ID));
+                    map.put(GlobalConstants.SERVICE_PRICE , global.getAl_service_details().get(j).get(GlobalConstants.SERVICE_PRICE));
+                    map.put(GlobalConstants.SERVICE_NAME , global.getAl_service_details().get(j).get(GlobalConstants.SERVICE_NAME));
+
+                    selected_service_details.add(map);
+                }
+
+            }
+        }
+        global.setAl_selected_service(selected_service_details);
     }
 
 
@@ -54,15 +87,15 @@ public class ServiceSelectedAdapter extends BaseAdapter {
         holder.tv_service_cost = (TextView) rowView.findViewById(R.id.tv_service_cost);
 
 
-        holder.tv_name.setText(service_name.get(position));
-        holder.tv_service_cost.setText(service_Cost.get(position));
+        holder.tv_name.setText(global.getAl_selected_service().get(position).get(GlobalConstants.SERVICE_NAME));   //service_name.get(position)
+        holder.tv_service_cost.setText(global.getAl_selected_service().get(position).get(GlobalConstants.SERVICE_PRICE));
 
         return rowView;
     }
 
     @Override
     public int getCount() {
-        return service_name.size();
+        return global.getAl_selected_service().size();
     }
 
     @Override

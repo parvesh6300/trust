@@ -40,4 +40,16 @@
         android:scrollbarSize="10dp"
         android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
 
+
+    <pl.droidsonroids.gif.GifTextView
+        android:id="@+id/gif_loader"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/loading"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:visibility="gone"
+        />
+
 </RelativeLayout>

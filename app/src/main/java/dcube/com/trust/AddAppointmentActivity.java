@@ -31,6 +31,7 @@ import java.util.Calendar;
 
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
@@ -39,6 +40,8 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
     BetterSpinner service;
     Context context = AddAppointmentActivity.this;
 
+    Global global;
+
     TextView date;
     TextView time;
     TextView add;
@@ -46,12 +49,14 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
     RelativeLayout datepicker;
     RelativeLayout timepicker;
 
-    EditText ed_name,ed_email;
+    EditText ed_name,ed_contact;
     GifTextView gif_loader;
 
-    String str_client_name,str_client_email,str_service,str_date,str_time;
+    String str_client_name,str_client_contact,str_service,str_date,str_time,str_service_id;
 
-     WebServices ws;
+    WebServices ws;
+
+    ArrayList<String> al_service_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +64,10 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
         setContentView(R.layout.activity_add_appointment);
 
+        global = (Global) getApplicationContext();
+
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
+        service = (BetterSpinner) findViewById(R.id.service);
 
         datepicker = (RelativeLayout) findViewById(R.id.datepicker);
         timepicker = (RelativeLayout) findViewById(R.id.timepicker);
@@ -69,21 +77,25 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
         add = (TextView) findViewById(R.id.add);
 
         ed_name = (EditText) findViewById(R.id.ed_name);
-        ed_email = (EditText) findViewById(R.id.ed_email);
+        ed_contact = (EditText) findViewById(R.id.ed_contact);
 
-        String[] SERVICES = getResources().getStringArray(R.array.servicelist);
+      //  String[] SERVICES = getResources().getStringArray(R.array.servicelist);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, SERVICES);
-        service = (BetterSpinner) findViewById(R.id.service);
-        service.setAdapter(adapter);
 
         str_service = "";
+
+        ed_name.setText(global.getAl_src_client_details().get(0).get(GlobalConstants.SRC_CLIENT_NAME));
+        ed_contact.setText(global.getAl_src_client_details().get(0).get(GlobalConstants.SRC_CLIENT_CONTACT));
+
 
         service.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
 
                 str_service = adapterView.getItemAtPosition(pos).toString();
+
+                str_service_id = global.getAl_service_details().get(pos).get(GlobalConstants.SERVICE_ID);
+
             }
         });
 
@@ -138,6 +150,16 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
             }
         });
+
+        if (isOnline())
+        {
+            new GetServiceAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
@@ -163,32 +185,113 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
         date.setText(d);
     }
 
-    public class CustomDialogClass extends Dialog {
 
-        public Activity c;
-        public Button ok;
+    public boolean validate()
+    {
+        if (ed_name.getText().toString().matches(""))
+        {
+            Toast.makeText(AddAppointmentActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
+        }
+        else if (ed_contact.getText().toString().matches(""))
+        {
+            Toast.makeText(AddAppointmentActivity.this, "Enter Contact No.", Toast.LENGTH_SHORT).show();
+        }
+        else if (str_service.matches(""))
+        {
+            Toast.makeText(AddAppointmentActivity.this, "Choose Service", Toast.LENGTH_SHORT).show();
+        }
+        else if (date.getText().toString().matches("Date"))
+        {
+            Toast.makeText(AddAppointmentActivity.this, "Specify Date", Toast.LENGTH_SHORT).show();
+        }
+        else if (time.getText().toString().matches("Time"))
+        {
+            Toast.makeText(AddAppointmentActivity.this, "Specify Time", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            str_client_name = ed_name.getText().toString();
+            str_client_contact = ed_contact.getText().toString();
+            str_date = date.getText().toString();
+            str_time = time.getText().toString();
+            return true;
+        }
 
-        public CustomDialogClass(Activity a) {
-            super(a);
-            // TODO Auto-generated constructor stub
-            this.c = a;
+        return false;
+    }
+
+    protected boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    public class GetServiceAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            al_service_name = new ArrayList<>();
+            gif_loader.setVisibility(View.VISIBLE);
         }
 
         @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-            setContentView(R.layout.custom_dialog);
-            ok = (Button) findViewById(R.id.btn_yes);
+        protected String doInBackground(String... params) {
+            try {
 
-            ok.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
 
-                    finish();
-                }
-            });
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_service_list");
+
+                message = ws.GetServiceService(context, al_str_key, al_str_value);
+
+                //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
+                //             Log.i("Login", "Login : " + resPonse);
+
+//                return resPonse;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
         }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (!message.equalsIgnoreCase("true"))
+            {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+            else {
+
+                for (int i = 0 ; i < global.getAl_service_details().size() ; i++)
+                {
+                    al_service_name.add(global.getAl_service_details().get(i).get(GlobalConstants.SERVICE_NAME));
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, al_service_name);
+                service.setAdapter(adapter);
+
+            }
+
+        }
+
     }
 
 
@@ -212,14 +315,11 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
-                al_str_key.add(GlobalConstants.APMT_CLIENT_NAME);
-                al_str_value.add(str_client_name);
+                al_str_key.add(GlobalConstants.APMT_CLIENT_ID);
+                al_str_value.add(global.getAl_src_client_details().get(0).get(GlobalConstants.SRC_CLIENT_ID));
 
-                al_str_key.add(GlobalConstants.APMT_CLIENT_EMAIL);
-                al_str_value.add(str_client_email);
-
-                al_str_key.add(GlobalConstants.APMT_CLIENT_SERVICE);
-                al_str_value.add(str_service);
+                al_str_key.add(GlobalConstants.APMT_SERVICE_ID);
+                al_str_value.add(str_service_id);
 
                 al_str_key.add(GlobalConstants.APMT_DATE);
                 al_str_value.add(str_date);
@@ -228,7 +328,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                 al_str_value.add(str_time);
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("login");
+                al_str_value.add("add_appointment");
 
                 for (int i =0 ; i < al_str_value.size() ; i++)
                 {
@@ -260,8 +360,8 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                 CustomDialogClass cdd = new CustomDialogClass(AddAppointmentActivity.this);
                 cdd.show();
             }
-            else {
-
+            else
+            {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
@@ -270,47 +370,34 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
     }
 
 
-    public boolean validate()
-    {
-        if (ed_name.getText().toString().matches(""))
-        {
-            Toast.makeText(AddAppointmentActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
-        }
-        else if (ed_email.getText().toString().matches(""))
-        {
-            Toast.makeText(AddAppointmentActivity.this, "Enter E-mail", Toast.LENGTH_SHORT).show();
-        }
-        else if (str_service.matches(""))
-        {
-            Toast.makeText(AddAppointmentActivity.this, "Choose Service", Toast.LENGTH_SHORT).show();
-        }
-        else if (date.getText().toString().matches(""))
-        {
-            Toast.makeText(AddAppointmentActivity.this, "Specify Date", Toast.LENGTH_SHORT).show();
-        }
-        else if (time.getText().toString().matches(""))
-        {
-            Toast.makeText(AddAppointmentActivity.this, "Specify Time", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            str_client_name = ed_name.getText().toString();
-            str_client_email = ed_email.getText().toString();
-            str_date = date.getText().toString();
-            str_time = time.getText().toString();
-            return true;
+
+    public class CustomDialogClass extends Dialog {
+
+        public Activity c;
+        public Button ok;
+
+        public CustomDialogClass(Activity a) {
+            super(a);
+            // TODO Auto-generated constructor stub
+            this.c = a;
         }
 
-        return false;
-    }
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
 
-    protected boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected()) {
-            return true;
-        } else {
-            return false;
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            setContentView(R.layout.custom_dialog);
+            ok = (Button) findViewById(R.id.btn_yes);
+
+            ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    dismiss();
+                    finish();
+                }
+            });
         }
     }
 

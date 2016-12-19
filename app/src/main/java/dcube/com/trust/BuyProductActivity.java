@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -82,8 +84,11 @@ public class BuyProductActivity extends Activity{
             }
         });
 
-
-        new GetPruductAsyncTask().execute();
+        if (isOnline()) {
+            new GetPruductAsyncTask().execute();
+        } else {
+            Toast.makeText(BuyProductActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -193,6 +198,17 @@ public class BuyProductActivity extends Activity{
     }
 
 
+    protected boolean isOnline() {
 
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected())
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 }

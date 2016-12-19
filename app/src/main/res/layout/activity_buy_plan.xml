@@ -110,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/servicelist"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_below="@id/header1"
             android:choiceMode="multipleChoice"/>
 
@@ -137,7 +137,7 @@
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="30dp"
         android:visibility="gone"
         />
 

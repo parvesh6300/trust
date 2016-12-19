@@ -137,7 +137,7 @@
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="30dp"
         android:visibility="gone"
         />
 

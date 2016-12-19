@@ -50,6 +50,26 @@ public class Global extends Application {
     public ArrayList<HashMap<String,String>> al_service_details;
 
 
+    public ArrayList<HashMap<String,String>> al_selected_service;
+
+
+    public ArrayList<String> al_selected_service_id;
+
+    public ArrayList<HashMap<String, String>> getAl_selected_service() {
+        return al_selected_service;
+    }
+
+    public void setAl_selected_service(ArrayList<HashMap<String, String>> al_selected_service) {
+        this.al_selected_service = al_selected_service;
+    }
+
+    public ArrayList<String> getAl_selected_service_id() {
+        return al_selected_service_id;
+    }
+
+    public void setAl_selected_service_id(ArrayList<String> al_selected_service_id) {
+        this.al_selected_service_id = al_selected_service_id;
+    }
 
     // ******************************* Plan Details Getter and Setter  *************************************************
 
@@ -62,6 +82,30 @@ public class Global extends Application {
     public void setAl_plan_details(ArrayList<HashMap<String, String>> al_plan_details) {
         this.al_plan_details = al_plan_details;
     }
+
+
+    public ArrayList<HashMap<String,String>> al_selected_plan;
+
+    public ArrayList<HashMap<String, String>> getAl_selected_plan() {
+        return al_selected_plan;
+    }
+
+    public void setAl_selected_plan(ArrayList<HashMap<String, String>> al_selected_plan) {
+        this.al_selected_plan = al_selected_plan;
+    }
+
+
+    public ArrayList<String> al_selected_plan_id;
+
+    public ArrayList<String> getAl_selected_plan_id() {
+        return al_selected_plan_id;
+    }
+
+    public void setAl_selected_plan_id(ArrayList<String> al_selected_plan_id) {
+        this.al_selected_plan_id = al_selected_plan_id;
+    }
+
+
 
 
     // ******************************* Search Client Getter and Setter  *************************************************
