@@ -37,6 +37,40 @@ public class Global extends Application {
     public ArrayList<HashMap<String,String>> al_product_details;
 
 
+    public ArrayList<HashMap<String, String>> getAl_selected_product() {
+        return al_selected_product;
+    }
+
+    public void setAl_selected_product(ArrayList<HashMap<String, String>> al_selected_product) {
+        this.al_selected_product = al_selected_product;
+    }
+
+    public ArrayList<HashMap<String,String>> al_selected_product;
+
+
+    public ArrayList<String> getAl_selected_product_id() {
+        return al_selected_product_id;
+    }
+
+    public void setAl_selected_product_id(ArrayList<String> al_selected_product_id) {
+        this.al_selected_product_id = al_selected_product_id;
+    }
+
+    public ArrayList<String> al_selected_product_id;
+
+    public ArrayList<String> getAl_selected_product_quantity() {
+        return al_selected_product_quantity;
+    }
+
+    public void setAl_selected_product_quantity(ArrayList<String> al_selected_product_quantity) {
+        this.al_selected_product_quantity = al_selected_product_quantity;
+    }
+
+    public ArrayList<String> al_selected_product_quantity;
+
+
+
+
     // ******************************* SERVICE Details Getter and Setter  *************************************************
 
     public ArrayList<HashMap<String, String>> getAl_service_details() {
@@ -106,6 +140,17 @@ public class Global extends Application {
     }
 
 
+    // ******************************* Appointmemnt Getter and Setter  *************************************************
+
+    public ArrayList<HashMap<String, String>> getAl_apmt_details() {
+        return al_apmt_details;
+    }
+
+    public void setAl_apmt_details(ArrayList<HashMap<String, String>> al_apmt_details) {
+        this.al_apmt_details = al_apmt_details;
+    }
+
+    public ArrayList<HashMap<String,String>> al_apmt_details;
 
 
     // ******************************* Search Client Getter and Setter  *************************************************
@@ -121,7 +166,15 @@ public class Global extends Application {
     public ArrayList<HashMap<String,String>> al_src_client_details;
 
 
+    public int selected_client;
 
+    public int getSelected_client() {
+        return selected_client;
+    }
+
+    public void setSelected_client(int selected_client) {
+        this.selected_client = selected_client;
+    }
 
     @Override
     public void onCreate() {

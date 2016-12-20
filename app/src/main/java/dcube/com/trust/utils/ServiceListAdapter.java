@@ -69,7 +69,6 @@ public class ServiceListAdapter extends BaseAdapter{
         holder.service_cost.setText(global.getAl_service_details().get(position).get(GlobalConstants.SERVICE_PRICE));  //serviceCost.get(position)
 
 
-
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

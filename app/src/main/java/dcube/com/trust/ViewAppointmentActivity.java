@@ -2,6 +2,8 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -9,33 +11,52 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
+import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.FollowupListAdapter;
+import dcube.com.trust.utils.Global;
+import okhttp3.OkHttpClient;
+import pl.droidsonroids.gif.GifTextView;
 
 public class ViewAppointmentActivity extends Activity {
 
     ListView followUpList;
     FollowupListAdapter adapter;
-    TextView tv_add_follow_up;
+    TextView tv_add_follow_up,tv_client_name,tv_contact,tv_service;
+    Global global;
+
+    GifTextView gif_loader;
+
+    WebServices ws;
+    Context context = ViewAppointmentActivity.this;
+
+    int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_view_appointment);
 
+        global = (Global) getApplicationContext();
+
+        gif_loader = (GifTextView) findViewById(R.id.gif_loader);
+
         tv_add_follow_up = (TextView) findViewById(R.id.tv_add_follow_up);
+        tv_client_name = (TextView) findViewById(R.id.tv_client_name);
+        tv_contact = (TextView) findViewById(R.id.tv_contact);
+        tv_service = (TextView) findViewById(R.id.tv_service);
 
         followUpList = (ListView) findViewById(R.id.followuplist);
-        adapter = new FollowupListAdapter(this);
-
-        followUpList.setAdapter(adapter);
-
 
         /*String[] SERVICES = getResources().getStringArray(R.array.servicelist);
 
@@ -43,6 +64,12 @@ public class ViewAppointmentActivity extends Activity {
         service = (BetterSpinner) findViewById(R.id.service);
         service.setAdapter(adapter);
         */
+
+        pos = global.getSelected_client();
+
+        tv_client_name.setText(global.getAl_src_client_details().get(pos).get(GlobalConstants.SRC_CLIENT_NAME));
+        tv_contact.setText(global.getAl_src_client_details().get(pos).get(GlobalConstants.SRC_CLIENT_CONTACT));
+       // tv_service.setText(global.getAl_login_list().get(0).get(GlobalConstants.SRC_CLIENT_SER));
 
         tv_add_follow_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,6 +192,66 @@ public class ViewAppointmentActivity extends Activity {
         }
 
     }
+
+
+
+    public class GetAppointmentAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+        String str_client_id;
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+            str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
+                    get(GlobalConstants.SRC_CLIENT_ID);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.APMT_CLIENT_ID);
+                al_str_value.add(str_client_id);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_appointments");
+
+                message = ws.GetPlanService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                adapter = new FollowupListAdapter(context);
+                followUpList.setAdapter(adapter);
+            }
+            else {
+
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
 
 
 }

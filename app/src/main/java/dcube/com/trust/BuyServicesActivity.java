@@ -40,7 +40,7 @@ public class BuyServicesActivity extends Activity {
     EditText search;
     WebServices ws;
     Context context = BuyServicesActivity.this;
-
+    CustomDialogClass cdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +56,13 @@ public class BuyServicesActivity extends Activity {
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
+        cdd = new CustomDialogClass(BuyServicesActivity.this);
+
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                CustomDialogClass cdd = new CustomDialogClass(BuyServicesActivity.this);
                 cdd.show();
             }
         });
@@ -145,9 +146,14 @@ public class BuyServicesActivity extends Activity {
                 @Override
                 public void onClick(View view) {
 
-                    dismiss();
+                    if (isOnline())
+                    {
+                        new AddServiceCartAsyncTask().execute();
+                    }
+                    else {
+                        Toast.makeText(BuyServicesActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
 
-                    startActivity(new Intent(BuyServicesActivity.this,GenerateInvoiceActivity.class));
                 }
             });
 
@@ -239,5 +245,85 @@ public class BuyServicesActivity extends Activity {
             return false;
         }
     }
+
+
+
+    public class AddServiceCartAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+        String str_client_id;
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+            str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                for (int j = 0 ; j < global.getAl_selected_service_id().size() ; j++)
+                {
+                    ArrayList<String> al_str_key = new ArrayList<>();
+                    ArrayList<String> al_str_value = new ArrayList<>();
+
+                    al_str_key.add(GlobalConstants.CART_CLIENT_ID);
+                    al_str_value.add(str_client_id);
+
+                    al_str_key.add(GlobalConstants.CART_ITEM_TYPE);
+                    al_str_value.add("service");
+
+                    al_str_key.add(GlobalConstants.CART_ITEM_ID);
+                    al_str_value.add(global.getAl_selected_service_id().get(j));
+
+                    al_str_key.add(GlobalConstants.CART_AMOUNT);
+                    al_str_value.add("1");
+
+                    al_str_key.add(GlobalConstants.ACTION);
+                    al_str_value.add("add_to_cart");
+
+                    for (int i = 0 ; i < al_str_key.size(); i++)
+                    {
+                        Log.e("Key",""+al_str_key.get(i));
+                        Log.e("Value",""+al_str_value.get(i));
+                    }
+
+                    message = ws.CartService(context, al_str_key, al_str_value);
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                cdd.dismiss();
+                startActivity(new Intent(BuyServicesActivity.this,GenerateInvoiceActivity.class));
+            }
+            else
+            {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+
 
 }

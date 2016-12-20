@@ -71,7 +71,7 @@ public class CustomAdapter extends BaseAdapter {
         holder.contact = (TextView) rowView.findViewById(R.id.contact);
 
         holder.name.setText(global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_NAME));   //name.get(position)
-        holder.branch.setText(global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_BRANCH));
+        holder.branch.setText(global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_AREA));
         holder.contact.setText(global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_CONTACT));
 
         return rowView;

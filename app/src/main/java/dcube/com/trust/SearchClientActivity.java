@@ -28,23 +28,26 @@ import pl.droidsonroids.gif.GifTextView;
 
 public class SearchClientActivity extends Activity {
 
-    String[] ITEMS = {"Select Branch", "Arusha", "Dodoma", "Mwanza", "Dar Es Salaam", "Morogoro", "Mbeya", "Zanzibar"};
+    String[] ITEMS = {"Select Branch","All","Arusha","Dar Es Salaam","Dodoma","Mbeya","Morogoro","Mwanza","Zanzibar"};
     Spinner branch;
 
-    Context context;
+    Context context = SearchClientActivity.this;
     ListView searchlist;
 
     MySpinnerAdapter adapter;
     CustomAdapter listadapter;
     EditText search;
 
-    String src_keyword;
+    String src_keyword,str_branch = "Select Branch";
 
     GifTextView gif_loader;
 
     Global global;
 
+    String compareValue;
+
     WebServices ws;
+    int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +66,36 @@ public class SearchClientActivity extends Activity {
         adapter = new MySpinnerAdapter(context, android.R.layout.simple_spinner_item, ITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
         branch = (Spinner) findViewById(R.id.spinner);
         branch.setAdapter(adapter);
+
+        compareValue = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
+
+        if (!compareValue.equals(null)) {
+            int spinnerPosition = adapter.getPosition(compareValue);
+            branch.setSelection(spinnerPosition);
+        }
+
+        branch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+
+                if (pos == 1)
+                {
+                    str_branch = "";
+                }
+                else
+                {
+                    str_branch = adapterView.getItemAtPosition(pos).toString().toLowerCase();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         search.addTextChangedListener(new TextWatcher() {
@@ -77,6 +107,7 @@ public class SearchClientActivity extends Activity {
             public void afterTextChanged(Editable s) {
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
+
                 if(s.length() >1)
                 {
                     if (isOnline())
@@ -97,16 +128,18 @@ public class SearchClientActivity extends Activity {
             }
         });
 
+
         searchlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
 
+                global.setSelected_client(pos);
                 startActivity(new Intent(SearchClientActivity.this,ClientHomeActivity.class));
             }
         });
 
-        listadapter = new CustomAdapter(SearchClientActivity.this);
 
+        listadapter = new CustomAdapter(SearchClientActivity.this);
     }
 
 
@@ -133,10 +166,16 @@ public class SearchClientActivity extends Activity {
                 al_str_value.add(src_keyword);
 
                 al_str_key.add(GlobalConstants.SRC_CLIENT_BRANCH);
-                al_str_value.add("login");
+                al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("search_client");
+
+                for (int i = 0 ; i < al_str_key.size(); i++)
+                {
+                    Log.e("KEy",""+al_str_key.get(i));
+                    Log.e("Value",""+al_str_value.get(i));
+                }
 
                 message = ws.SearchClientService(context, al_str_key, al_str_value);
 
@@ -166,7 +205,6 @@ public class SearchClientActivity extends Activity {
                 else
                 {
                     searchlist.setAdapter(listadapter);
-                    listadapter.notifyDataSetChanged();
                 }
 
             }

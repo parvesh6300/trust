@@ -26,7 +26,7 @@ public class GlobalConstants {
 
     public static final String USER_ID = "user_id";
     public static final String USER_NAME = "username";
-    public static final String USER_BRANCH_ID = "branch_id";
+    public static final String USER_BRANCH = "branch";
     public static final String USER_ROLE_ID = "role_id";
     public static final String USER_CONTACT = "contact";
     public static final String USER_IS_ACTIVE = "is_active";
@@ -46,6 +46,8 @@ public class GlobalConstants {
     public static final String PRODUCT_CATEGORY = "category";
     public static final String PRODUCT_PRICE = "price";
     public static final String PRODUCT_IN_STOCK = "in_stock";
+    public static final String PRODUCT_QUANTITY = "quantity";
+
 
 // ************************************* GET Service VARIABLES  ****************************************************
 
@@ -89,18 +91,19 @@ public class GlobalConstants {
     public static final String CLIENT_REACH_WAY = "how_you_reached_us";
 
 
-    // ************************************* Add Apppointment VARIABLES  ****************************************************
+    // ************************************* Add/GET Apppointment VARIABLES  ****************************************************
 
     public static final String APMT_CLIENT_ID = "client_id";
+    public static final String APMT_ID = "appointment_id";
     public static final String APMT_PLAN_ID = "plan_id";
     public static final String APMT_SERVICE_ID = "service_id";
     public static final String APMT_DATE = "date";
     public static final String APMT_TIME= "time";
 
+
     // ************************************* Search Client VARIABLES  ****************************************************
 
-
-    public static final String SRC_CLIENT_BRANCH = "price";
+    public static final String SRC_CLIENT_BRANCH = "branch";
     public static final String SRC_CLIENT_KEYWORD = "keyword";
 
     public static final String SRC_CLIENT_NAME = "name";
@@ -114,5 +117,12 @@ public class GlobalConstants {
     public static final String SRC_CLIENT_HIV_TESTED = "hiv_tested";
     public static final String SRC_CLIENT_HOW_U_REACH = "how_you_reached_us";
 
+
+    // ************************************* Add to cart VARIABLES  ****************************************************
+
+    public static final String CART_CLIENT_ID = "id";
+    public static final String CART_ITEM_TYPE = "item_type";
+    public static final String CART_ITEM_ID = "item_id";
+    public static final String CART_AMOUNT = "amount";
 
 }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.ProductListAdapter;
 import dcube.com.trust.utils.ProductSelectedAdapter;
 import okhttp3.OkHttpClient;
@@ -39,19 +40,23 @@ public class BuyProductActivity extends Activity{
     WebServices ws;
     EditText search;
 
+    Global global;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_buy_product);
 
-        //addData();
+        global = (Global) getApplicationContext();
 
         productlist = (ListView) findViewById(R.id.productlist);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         buy = (TextView) findViewById(R.id.buy);
+
+
 
         search = (EditText) findViewById(R.id.search);
 
@@ -73,14 +78,35 @@ public class BuyProductActivity extends Activity{
 
             }
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+//                BuyProductActivity.this.adapter.get;
+
+
+            }
             @Override
             public void afterTextChanged(Editable s) {
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
-//                adapter = new ProductListAdapter(BuyProductActivity.this,name,category,quantity);
-//                productlist.setAdapter(adapter);
+//                if (s.length() > 0)
+//                {
+//                    for (int i =0 ; i < global.al_product_details.size() ; i++)
+//                    {
+//                        Log.e("Search",search.getText().toString());
+//                        Log.e("Array", global.al_product_details.get(i).get(GlobalConstants.PRODUCT_NAME));
+//
+//                        if (search.getText().toString().equals(global.getAl_product_details().get(i).get(GlobalConstants.PRODUCT_NAME)))
+//                        {
+//                            adapter = new ProductListAdapter(BuyProductActivity.this);
+//                            productlist.setAdapter(adapter);
+//                        }
+//                    }
+//
+//                }
+
+          //      BuyProductActivity.this.adapter.filter(s.toString());
+
             }
         });
 
@@ -149,6 +175,7 @@ public class BuyProductActivity extends Activity{
 
     }
 
+
     public class CustomDialogClass extends Dialog {
 
         public Activity c;
@@ -209,6 +236,78 @@ public class BuyProductActivity extends Activity{
         else {
             return false;
         }
+    }
+
+
+
+    public class AddToCartAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+        String str_client_id;
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+            str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
+                    get(GlobalConstants.SRC_CLIENT_ID);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                for ( int j=0 ; j < global.al_selected_product_id.size() ; j++)
+                {
+                    ArrayList<String> al_str_key = new ArrayList<>();
+                    ArrayList<String> al_str_value = new ArrayList<>();
+
+                    al_str_key.add(GlobalConstants.CART_CLIENT_ID);
+                    al_str_value.add(str_client_id);
+
+                    al_str_key.add(GlobalConstants.CART_ITEM_ID);
+                    al_str_value.add(global.al_selected_product_id.get(j));
+
+                    al_str_key.add(GlobalConstants.CART_ITEM_TYPE);
+                    al_str_value.add("product");
+
+                    al_str_key.add(GlobalConstants.CART_AMOUNT);
+                    al_str_value.add(global.al_selected_product_quantity.get(j));
+
+                    al_str_key.add(GlobalConstants.ACTION);
+                    al_str_value.add("add_to_cart");
+
+                    message = ws.CartService(context, al_str_key, al_str_value);
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+
+                productlist.setAdapter(adapter);
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
     }
 
 }

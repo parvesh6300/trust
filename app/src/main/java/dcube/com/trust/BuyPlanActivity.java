@@ -42,6 +42,8 @@ public class BuyPlanActivity extends Activity{
 
     Global global;
 
+    CustomDialogClass cdd;
+
     EditText search;
 
     @Override
@@ -69,7 +71,7 @@ public class BuyPlanActivity extends Activity{
             @Override
             public void onClick(View view) {
 
-                CustomDialogClass cdd = new CustomDialogClass(BuyPlanActivity.this);
+                cdd = new CustomDialogClass(BuyPlanActivity.this);
                 cdd.show();
             }
         });
@@ -143,9 +145,15 @@ public class BuyPlanActivity extends Activity{
                 @Override
                 public void onClick(View view) {
 
-                    dismiss();
+                    if (isOnline())
+                    {
+                        new AddPlanCartAsyncTask().execute();
+                    }
+                    else {
+                        Toast.makeText(BuyPlanActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
 
-                    startActivity(new Intent(BuyPlanActivity.this,GenerateInvoiceActivity.class));
+
                 }
             });
 
@@ -243,5 +251,81 @@ public class BuyPlanActivity extends Activity{
             return false;
         }
     }
+
+
+    public class AddPlanCartAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+        String str_client_id;
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+            str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
+                    get(GlobalConstants.SRC_CLIENT_ID);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                for (int i = 0 ; i < global.al_selected_plan_id.size() ; i++) {
+                    ArrayList<String> al_str_key = new ArrayList<>();
+                    ArrayList<String> al_str_value = new ArrayList<>();
+
+                    al_str_key.add(GlobalConstants.CART_CLIENT_ID);
+                    al_str_value.add(str_client_id);
+
+                    al_str_key.add(GlobalConstants.CART_ITEM_TYPE);
+                    al_str_value.add("plan");
+
+                    al_str_key.add(GlobalConstants.CART_ITEM_ID);
+                    al_str_value.add(global.al_selected_plan_id.get(i));
+
+                    al_str_key.add(GlobalConstants.CART_AMOUNT);
+                    al_str_value.add("1");
+
+                    al_str_key.add(GlobalConstants.ACTION);
+                    al_str_value.add("add_to_cart");
+
+                    for (int j = 0; j < al_str_key.size(); j++) {
+                        Log.e("KEy", "" + al_str_key.get(j));
+                        Log.e("Value", "" + al_str_value.get(j));
+                    }
+
+                    message = ws.CartService(context, al_str_key, al_str_value);
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                cdd.dismiss();
+                startActivity(new Intent(BuyPlanActivity.this,GenerateInvoiceActivity.class));
+            }
+            else
+            {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
 
 }

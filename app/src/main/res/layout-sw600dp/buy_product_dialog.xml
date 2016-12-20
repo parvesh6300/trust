@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="172dp"
             android:layout_height="wrap_content"
-            android:text="PRODUCT COST"
+            android:text="QUANTITY"
             android:textColor="@color/white"
             android:typeface="monospace"
             android:textSize="25sp"
@@ -42,7 +42,7 @@
         <TextView
             android:layout_width="166dp"
             android:layout_height="wrap_content"
-            android:text="SERVICE COST"
+            android:text="TOTAL COST"
             android:textColor="@color/white"
             android:typeface="monospace"
             android:textSize="25sp"
@@ -54,9 +54,9 @@
     </LinearLayout>
 
     <ListView
+        android:id="@+id/selected_product_list"
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:id="@+id/selected_product_list"
         android:layout_below="@+id/header1"/>
 
     <LinearLayout
