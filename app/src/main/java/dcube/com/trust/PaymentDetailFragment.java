@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
-import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
 /**
@@ -34,13 +34,18 @@ public class PaymentDetailFragment extends Fragment {
 
     GifTextView gif_loader;
 
-    Context context = getActivity();
+    Context context;
 
     String str_client_id;
     WebServices ws;
     TextView tv_cancel,generate;
 
     Global global;
+
+    String str_payment_mode = "",str_payment_type = "",str_amount="",str_discount,str_amount_to_pay;
+
+    EditText ed_amount,ed_discount;
+    int total_cost,int_discount_per,int_discount,int_discounted_amount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,11 +58,15 @@ public class PaymentDetailFragment extends Fragment {
 
         gif_loader = (GifTextView) v.findViewById(R.id.gif_loader);
 
+        context = getActivity();
+
         nextFragment = viewPager.getCurrentItem() + 1;
 
         tv_cancel =(TextView)v.findViewById(R.id.tv_cancel);
-
         generate = (TextView) v.findViewById(R.id.generate);
+
+        ed_amount = (EditText) v.findViewById(R.id.ed_amount);
+        ed_discount = (EditText) v.findViewById(R.id.ed_discount);
 
         radio_group_payment = (RadioGroup) v.findViewById(R.id.radio_group_payment);
         radio_group_payment_mode = (RadioGroup) v.findViewById(R.id.radio_group_payment_mode);
@@ -74,13 +83,33 @@ public class PaymentDetailFragment extends Fragment {
         generate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                new PaymentAsyncTask().execute();
+                if (validate())
+                {
+                    str_discount = ed_discount.getText().toString();
 
-                viewPager.setCurrentItem(nextFragment);
+                    if (!str_discount.equalsIgnoreCase("0"))
+                    {
+                        int_discount_per = Integer.parseInt(str_discount);
+                        int_discounted_amount = (int_discount_per * total_cost)/100;
+                        str_amount_to_pay = String.valueOf(int_discounted_amount);
+
+                        int_discount = total_cost - int_discounted_amount;
+
+                    }
+                    else {
+                        str_amount_to_pay = ed_amount.getText().toString();
+                    }
+
+                    global.setPayment_amount(str_amount);
+                    global.setAmount_to_pay(str_amount_to_pay);
+                    global.setDiscount(String.valueOf(int_discount));
+
+                    new PaymentAsyncTask().execute();
+                }
+
             }
 
         });
-
 
 
         tv_cancel.setOnClickListener(new View.OnClickListener() {
@@ -91,8 +120,60 @@ public class PaymentDetailFragment extends Fragment {
             }
         });
 
+
+        radio_group_payment_mode.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                if (radio_cash.isChecked())
+                {
+                    str_payment_mode = "cash";
+                }
+                else if (radio_mpesa.isChecked())
+                {
+                    str_payment_mode = "mpesa";
+                }
+                else if(radio_insurance.isChecked())
+                {
+                    str_payment_mode = "insurance";
+                }
+            }
+        });
+
+        radio_group_payment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                if (radio_full.isChecked())
+                {
+                    str_payment_type = "full";
+                }
+                else if (radio_partial.isChecked())
+                {
+                    str_payment_type = "partial";
+                }
+                else if (radio_partial_grant.isChecked())
+                {
+                    str_payment_type = "grant";
+                }
+
+            }
+        });
+
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
                 get(GlobalConstants.SRC_CLIENT_ID);
+
+        for ( int i =0 ; i< global.getAl_cart_details().size() ; i++)
+        {
+            total_cost = total_cost + Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+        }
+
+
+        ed_amount.setText(String.valueOf(total_cost));
+        ed_amount.setFocusable(false);
+        ed_amount.setClickable(false);
+
+        str_amount = ed_amount.getText().toString();
 
 
         return v;
@@ -111,20 +192,16 @@ public class PaymentDetailFragment extends Fragment {
 
 
 
-
-
     public class PaymentAsyncTask extends AsyncTask<String, String, String> {
 
-        OkHttpClient httpClient = new OkHttpClient();
+
         String resPonse = "";
         String message = "";
-
 
         @Override
         protected void onPreExecute() {
 
             gif_loader.setVisibility(View.VISIBLE);
-
         }
 
         @Override
@@ -138,18 +215,87 @@ public class PaymentDetailFragment extends Fragment {
                 al_str_value.add(str_client_id);
 
                 al_str_key.add(GlobalConstants.PAYMENT_MODE);
-                al_str_value.add(str_client_id);
+                al_str_value.add(str_payment_mode);
 
                 al_str_key.add(GlobalConstants.PAYMENT_TYPE);
-                al_str_value.add(str_client_id);
+                al_str_value.add(str_payment_type);
 
                 al_str_key.add(GlobalConstants.PAYMENT_AMOUNT);
-                al_str_value.add(str_client_id);
+                al_str_value.add(str_amount_to_pay);
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_cart_by_client_id");
+                al_str_value.add("payment");
 
-                message = ws.GetCartService(context, al_str_key, al_str_value);
+                message = ws.PaymentService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                new CheckOutAsyncTask().execute();
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+    public boolean validate()
+    {
+        if (str_payment_mode.matches(""))
+        {
+            Toast.makeText(getActivity(), "Choose Payment Mode", Toast.LENGTH_SHORT).show();
+        }
+        else if (str_payment_type.matches(""))
+        {
+            Toast.makeText(getActivity(), "Choose Payment Type", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            return true;
+        }
+        return false;
+    }
+
+
+    public class CheckOutAsyncTask extends AsyncTask<String, String, String> {
+
+        String message = "";
+        String payment_id;
+
+        @Override
+        protected void onPreExecute() {
+
+            payment_id = String.valueOf(global.getPayment_id());
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.PAYMENT_CLIENT_ID);
+                al_str_value.add(str_client_id);
+
+                al_str_key.add(GlobalConstants.PAYMENT_ID);
+                al_str_value.add(payment_id);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("checkout_in_cart");
+
+                message = ws.CheckOutService(context, al_str_key, al_str_value);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -163,19 +309,17 @@ public class PaymentDetailFragment extends Fragment {
 
             gif_loader.setVisibility(View.GONE);
 
-            if (!message.equalsIgnoreCase("true"))
+            if (message.equalsIgnoreCase("true"))
             {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+                viewPager.setCurrentItem(nextFragment);
             }
             else {
-
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
         }
 
     }
-
-
 
 
 }

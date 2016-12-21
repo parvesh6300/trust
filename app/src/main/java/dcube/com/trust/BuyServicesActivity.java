@@ -3,7 +3,6 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -148,6 +147,7 @@ public class BuyServicesActivity extends Activity {
 
                     if (isOnline())
                     {
+                        dismiss();
                         new AddServiceCartAsyncTask().execute();
                     }
                     else {
@@ -312,8 +312,7 @@ public class BuyServicesActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                cdd.dismiss();
-                startActivity(new Intent(BuyServicesActivity.this,GenerateInvoiceActivity.class));
+                finish();
             }
             else
             {

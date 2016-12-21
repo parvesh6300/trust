@@ -32,13 +32,13 @@
             android:id="@+id/contact_text"/>
 
         <TextView
+            android:id="@+id/amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:typeface="monospace"
             android:textColor="@color/textColor"
             android:layout_marginLeft="10dp"
             android:textSize="25sp"
-            android:id="@+id/amount"
             android:text="2300"
             android:textStyle="bold"
             android:layout_centerVertical="true"
@@ -64,13 +64,14 @@
             android:id="@+id/discount_text"/>
 
         <TextView
+            android:id="@+id/discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:typeface="monospace"
             android:textColor="@color/textColor"
             android:layout_marginLeft="10dp"
             android:textSize="25sp"
-            android:id="@+id/discount"
+
             android:textStyle="bold"
             android:text="230"
             android:layout_centerVertical="true"

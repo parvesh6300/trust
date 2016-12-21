@@ -149,6 +149,8 @@ public class GlobalConstants {
     public static final String PAYMENT_MODE = "payment_mode";
     public static final String PAYMENT_TYPE = "payment_type";
     public static final String PAYMENT_AMOUNT = "amount";
+    public static final String PAYMENT_ID = "payment_id";
+
 
 
 

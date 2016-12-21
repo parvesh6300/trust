@@ -212,17 +212,54 @@ public class Global extends Application {
 
     public int total_cart_items;
 
-    public int getTotalCartItems()
-    {
+    public int getTotal_cart_items() {
         return total_cart_items;
     }
 
-    public void setTotal_cart_items(int items)
-    {
-        this.total_cart_items = items;
+    public void setTotal_cart_items(int total_cart_items) {
+        this.total_cart_items = total_cart_items;
+    }
+
+    // ******************************* Payment Getter and Setter  *************************************************
+
+    public int payment_id;
+
+    public int getPayment_id() {
+        return payment_id;
+    }
+
+    public void setPayment_id(int payment_id) {
+        this.payment_id = payment_id;
     }
 
 
+    public String payment_amount;
+    public String amount_to_pay;
+    public String discount;
+
+    public String getPayment_amount() {
+        return payment_amount;
+    }
+
+    public void setPayment_amount(String payment_amount) {
+        this.payment_amount = payment_amount;
+    }
+
+    public String getAmount_to_pay() {
+        return amount_to_pay;
+    }
+
+    public void setAmount_to_pay(String amount_to_pay) {
+        this.amount_to_pay = amount_to_pay;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
 
     @Override
     public void onCreate() {
