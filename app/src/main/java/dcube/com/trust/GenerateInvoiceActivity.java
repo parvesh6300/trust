@@ -36,6 +36,7 @@ public class GenerateInvoiceActivity extends FragmentActivity {
                 return true;
             }
         });
+
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

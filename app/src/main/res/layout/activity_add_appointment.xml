@@ -58,6 +58,7 @@
                         android:layout_gravity="center"
                         android:textSize="25sp"
                         android:inputType="textNoSuggestions"
+                        android:editable="false"
                         />
 
                 </LinearLayout>
@@ -90,6 +91,7 @@
                 android:layout_gravity="center"
                 android:textSize="25sp"
                 android:inputType="textEmailAddress"
+                android:editable="false"
                 />
 
         </LinearLayout>

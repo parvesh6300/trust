@@ -24,6 +24,8 @@ public class Global extends Application {
 
     public ArrayList<HashMap<String,String>> al_login_list;
 
+
+
     // ******************************* PRoduct Details Getter and Setter  *************************************************
 
     public ArrayList<HashMap<String, String>> getAl_product_details() {
@@ -68,6 +70,18 @@ public class Global extends Application {
 
     public ArrayList<String> al_selected_product_quantity;
 
+    public ArrayList<String> al_select_product;
+
+    public ArrayList<String> getAl_select_product() {
+        return al_select_product;
+    }
+
+    public void setAl_select_product(ArrayList<String> al_select_product) {
+        this.al_select_product = al_select_product;
+    }
+
+
+
 
 
 
@@ -105,6 +119,8 @@ public class Global extends Application {
         this.al_selected_service_id = al_selected_service_id;
     }
 
+
+
     // ******************************* Plan Details Getter and Setter  *************************************************
 
     public ArrayList<HashMap<String,String>> al_plan_details;
@@ -140,6 +156,7 @@ public class Global extends Application {
     }
 
 
+
     // ******************************* Appointmemnt Getter and Setter  *************************************************
 
     public ArrayList<HashMap<String, String>> getAl_apmt_details() {
@@ -151,6 +168,8 @@ public class Global extends Application {
     }
 
     public ArrayList<HashMap<String,String>> al_apmt_details;
+
+
 
 
     // ******************************* Search Client Getter and Setter  *************************************************
@@ -175,6 +194,35 @@ public class Global extends Application {
     public void setSelected_client(int selected_client) {
         this.selected_client = selected_client;
     }
+
+
+
+
+    // ******************************* CART Getter and Setter  *************************************************
+
+    public ArrayList<HashMap<String, String>> getAl_cart_details() {
+        return al_cart_details;
+    }
+
+    public void setAl_cart_details(ArrayList<HashMap<String, String>> al_cart_details) {
+        this.al_cart_details = al_cart_details;
+    }
+
+    public ArrayList<HashMap<String,String>> al_cart_details;
+
+    public int total_cart_items;
+
+    public int getTotalCartItems()
+    {
+        return total_cart_items;
+    }
+
+    public void setTotal_cart_items(int items)
+    {
+        this.total_cart_items = items;
+    }
+
+
 
     @Override
     public void onCreate() {

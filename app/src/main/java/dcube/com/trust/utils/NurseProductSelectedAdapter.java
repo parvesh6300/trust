@@ -14,7 +14,10 @@ import java.util.HashMap;
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
-public class ProductSelectedAdapter extends BaseAdapter {
+/**
+ * Created by Sagar on 21/12/16.
+ */
+public class NurseProductSelectedAdapter extends BaseAdapter {
 
     Context context;
     Global global;
@@ -28,8 +31,8 @@ public class ProductSelectedAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
 
-    public ProductSelectedAdapter(Activity activity) {
-
+    public NurseProductSelectedAdapter(Activity activity)
+    {
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -37,74 +40,25 @@ public class ProductSelectedAdapter extends BaseAdapter {
 
         global = (Global) activity.getApplicationContext();
 
-        name.add("Fiesta");
-        category.add("Condom");
-        quantity.add("x 3");
-        price.add("1,500");
-
-        name.add("Sleek /safe load");
-        category.add("IUD");
-        quantity.add("x 1");
-        price.add("5,000");
-
-
-//        for (int i = 0; i < global.getAl_selected_product_id().size(); i++)
-//        {
-//
-//            for (int j = 0; j < global.getAl_product_details().size(); j++)
-//            {
-//                String product_id = global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_ID);
-//
-//                if (global.getAl_selected_product_id().get(i).equalsIgnoreCase(product_id))
-//                {
-//                    HashMap<String,String> map = new HashMap<>();
-//
-//                    map.put(GlobalConstants.PRODUCT_ID , global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_ID));
-//                    map.put(GlobalConstants.PRODUCT_SKU ,global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_SKU));
-//                    map.put(GlobalConstants.PRODUCT_NAME , global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_NAME));
-//                    map.put(GlobalConstants.PRODUCT_CATEGORY , global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_CATEGORY));
-//                    map.put(GlobalConstants.PRODUCT_PRICE , global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_PRICE));
-//                    map.put(GlobalConstants.PRODUCT_IN_STOCK , global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_IN_STOCK));
-//                    map.put(GlobalConstants.PRODUCT_QUANTITY , global.getAl_selected_product_quantity().get(i));
-//
-//                    selected_product_details.add(map);
-//                }
-//
-//            }
-//        }
-//        global.setAl_selected_product(selected_product_details);
-
     }
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-         return global.getAl_select_product().size();
+        return 0;
     }
 
     @Override
-    public Object getItem(int position) {
-        // TODO Auto-generated method stub
-        return position;
+    public Object getItem(int i) {
+        return i;
     }
 
     @Override
-    public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return position;
-    }
-
-    public class Holder
-    {
-        TextView name;
-        TextView quantity;
-        TextView category;
-        TextView price,product_cost;
+    public long getItemId(int i) {
+        return i;
     }
 
     @Override
-    public View getView(final int position, final View convertView, ViewGroup parent) {
-
+    public View getView(int position, View view, ViewGroup parent) {
         // TODO Auto-generated method stub
         final Holder holder = new Holder();
 
@@ -132,5 +86,17 @@ public class ProductSelectedAdapter extends BaseAdapter {
         holder.price.setText(String.valueOf(total_cost));
 
         return rowView;
+
     }
+
+
+    public class Holder
+    {
+        TextView name;
+        TextView quantity;
+        TextView category;
+        TextView price,product_cost;
+    }
+
+
 }

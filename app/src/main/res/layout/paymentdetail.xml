@@ -31,6 +31,7 @@
             android:layout_centerVertical="true"/>
 
         <RadioGroup
+            android:id="@+id/radio_group_payment_mode"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_marginTop="10dp"
@@ -39,6 +40,7 @@
             android:weightSum="4">
 
             <RadioButton
+                android:id="@+id/radio_mpesa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="mPesa"
@@ -50,6 +52,7 @@
                 android:checked="false" />
 
             <RadioButton
+                android:id="@+id/radio_cash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cash"
@@ -61,6 +64,7 @@
                 android:checked="false" />
 
             <RadioButton
+                android:id="@+id/radio_insurance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Insurance"
@@ -160,6 +164,7 @@
             android:layout_centerVertical="true"/>
 
         <RadioGroup
+            android:id="@+id/radio_group_payment"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginTop="10dp"
@@ -168,6 +173,7 @@
             android:weightSum="3">
 
             <RadioButton
+                android:id="@+id/radio_partial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Partial payment received"
@@ -179,6 +185,7 @@
                 android:checked="false"/>
 
             <RadioButton
+                android:id="@+id/radio_partial_grant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Partial payment received with grant"
@@ -190,6 +197,7 @@
                 android:checked="false"/>
 
             <RadioButton
+                android:id="@+id/radio_full"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Full payment received "
@@ -243,5 +251,25 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="20dp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        >
+
+        <pl.droidsonroids.gif.GifTextView
+            android:id="@+id/gif_loader"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/loading"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"
+            />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

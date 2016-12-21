@@ -125,4 +125,31 @@ public class GlobalConstants {
     public static final String CART_ITEM_ID = "item_id";
     public static final String CART_AMOUNT = "amount";
 
+
+
+    // ************************************* GET CART VARIABLES  ****************************************************
+
+    public static final String GET_CART_ID = "cart_id";
+    public static final String GET_CART_CLIENT_ID = "client_id";
+    public static final String GET_CART_ITEM_TYPE = "item_type";
+    public static final String GET_CART_ITEM_ID = "item_id";
+    public static final String GET_CART_AMOUNT = "amount";
+    public static final String GET_CART_ITEM_NAME = "item_name";
+    public static final String GET_CART_ITEM_PRICE = "item_price";
+    public static final String GET_CART_ITEM_DESC = "item_desc";
+    public static final String GET_CART_ITEM_CREATED = "created";
+    public static final String GET_CART_MAX_STOCK = "maximum_in_stock";
+
+    public static final String GET_CART_TOTAL_ITEMS = "total_items_in_cart";
+
+
+    // ************************************* PAYMENT VARIABLES  ****************************************************
+
+    public static final String PAYMENT_CLIENT_ID = "client_id";
+    public static final String PAYMENT_MODE = "payment_mode";
+    public static final String PAYMENT_TYPE = "payment_type";
+    public static final String PAYMENT_AMOUNT = "amount";
+
+
+
 }

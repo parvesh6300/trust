@@ -28,14 +28,14 @@ import dcube.com.trust.utils.ProductSelectedAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class BuyProductActivity extends Activity{
+public class NurseProductActivity extends Activity {
 
     ListView productlist;
     ProductListAdapter adapter;
     TextView buy;
 
     GifTextView gif_loader;
-    Context context = BuyProductActivity.this;
+    Context context = NurseProductActivity.this;
 
     WebServices ws;
     EditText search;
@@ -45,8 +45,7 @@ public class BuyProductActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_buy_product);
+        setContentView(R.layout.activity_product);
 
         global = (Global) getApplicationContext();
 
@@ -62,7 +61,7 @@ public class BuyProductActivity extends Activity{
             @Override
             public void onClick(View view) {
 
-                CustomDialogClass cdd = new CustomDialogClass(BuyProductActivity.this);
+                CustomDialogClass cdd = new CustomDialogClass(NurseProductActivity.this);
                 cdd.show();
 
             }
@@ -78,24 +77,44 @@ public class BuyProductActivity extends Activity{
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+//                BuyProductActivity.this.adapter.get;
+
+
             }
             @Override
             public void afterTextChanged(Editable s) {
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
-                adapter = new ProductListAdapter(BuyProductActivity.this,"");
-                productlist.setAdapter(adapter);
+//                if (s.length() > 0)
+//                {
+//                    for (int i =0 ; i < global.al_product_details.size() ; i++)
+//                    {
+//                        Log.e("Search",search.getText().toString());
+//                        Log.e("Array", global.al_product_details.get(i).get(GlobalConstants.PRODUCT_NAME));
+//
+//                        if (search.getText().toString().equals(global.getAl_product_details().get(i).get(GlobalConstants.PRODUCT_NAME)))
+//                        {
+//                            adapter = new ProductListAdapter(BuyProductActivity.this);
+//                            productlist.setAdapter(adapter);
+//                        }
+//                    }
+//
+//                }
+
+                //      BuyProductActivity.this.adapter.filter(s.toString());
+
             }
         });
 
         if (isOnline()) {
             new GetPruductAsyncTask().execute();
         } else {
-            Toast.makeText(BuyProductActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NurseProductActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
     }
+
 
 
 
@@ -142,7 +161,7 @@ public class BuyProductActivity extends Activity{
             }
             else {
 
-                adapter = new ProductListAdapter(BuyProductActivity.this,"");
+                adapter = new ProductListAdapter(NurseProductActivity.this,"");
                 productlist.setAdapter(adapter);
             }
 
@@ -178,14 +197,14 @@ public class BuyProductActivity extends Activity{
             cancel = (TextView) findViewById(R.id.cancel);
             selected = (ListView) findViewById(R.id.selected_product_list);
 
-            selectedAdapter = new ProductSelectedAdapter(BuyProductActivity.this);
+            selectedAdapter = new ProductSelectedAdapter(NurseProductActivity.this);
             selected.setAdapter(selectedAdapter);
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    startActivity(new Intent(BuyProductActivity.this,GenerateInvoiceActivity.class));
+                    startActivity(new Intent(NurseProductActivity.this,GenerateInvoiceActivity.class));
                 }
             });
 
@@ -227,8 +246,8 @@ public class BuyProductActivity extends Activity{
 
             gif_loader.setVisibility(View.VISIBLE);
 
-            str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
-                    get(GlobalConstants.SRC_CLIENT_ID);
+//            str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
+//                    get(GlobalConstants.SRC_CLIENT_ID);
         }
 
         @Override
@@ -241,8 +260,8 @@ public class BuyProductActivity extends Activity{
                     ArrayList<String> al_str_key = new ArrayList<>();
                     ArrayList<String> al_str_value = new ArrayList<>();
 
-                    al_str_key.add(GlobalConstants.CART_CLIENT_ID);
-                    al_str_value.add(str_client_id);
+//                    al_str_key.add(GlobalConstants.CART_CLIENT_ID);
+//                    al_str_value.add(str_client_id);
 
                     al_str_key.add(GlobalConstants.CART_ITEM_ID);
                     al_str_value.add(global.al_selected_product_id.get(j));
@@ -283,5 +302,7 @@ public class BuyProductActivity extends Activity{
         }
 
     }
+
+
 
 }

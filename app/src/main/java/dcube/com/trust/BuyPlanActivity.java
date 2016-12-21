@@ -297,7 +297,7 @@ public class BuyPlanActivity extends Activity{
                         Log.e("Value", "" + al_str_value.get(j));
                     }
 
-                    message = ws.CartService(context, al_str_key, al_str_value);
+                    message = ws.AddToCartService(context, al_str_key, al_str_value);
 
                 }
 

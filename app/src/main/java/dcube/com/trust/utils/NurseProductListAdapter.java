@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,7 +14,10 @@ import java.util.HashMap;
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
-public class ProductListAdapter extends BaseAdapter {
+/**
+ * Created by Sagar on 21/12/16.
+ */
+public class NurseProductListAdapter extends BaseAdapter {
 
     Context context;
     Global global;
@@ -30,20 +32,20 @@ public class ProductListAdapter extends BaseAdapter {
     ArrayList<String> selected_product = new ArrayList<>();
     ArrayList<String> selected_product_quantity = new ArrayList<>();
 
-//    ArrayList<String> al_selected_product;
-//    ArrayList<String> al_selected_product_quantity;
+    ArrayList<String> al_selected_product;
+    ArrayList<String> al_selected_product_quantity;
 
     private static LayoutInflater inflater = null;
 
-    public ProductListAdapter(Activity activity, String search) {
-
+    public NurseProductListAdapter(Activity activity, String search)
+    {
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         global = (Global) activity.getApplicationContext();
 
-//        al_selected_product = new ArrayList<>();
-//        al_selected_product_quantity = new ArrayList<>();
+        al_selected_product = new ArrayList<>();
+        al_selected_product_quantity = new ArrayList<>();
 
         try {
 
@@ -51,18 +53,19 @@ public class ProductListAdapter extends BaseAdapter {
 
                 if(search.equalsIgnoreCase(""))
                 {
-                if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search)) {
-                    name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
-                    category.add(GlobalConstants.PRODUCT_CATEGORY);
-                    SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
-                    price.add(GlobalConstants.PRODUCT_PRICE);
-                    in_stock.add(GlobalConstants.PRODUCT_IN_STOCK);
-                    product_id.add(GlobalConstants.PRODUCT_ID);
-                    selected_product.add("0");
-                }
+                    if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search)) {
+                        name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
+                        category.add(GlobalConstants.PRODUCT_CATEGORY);
+                        SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
+                        price.add(GlobalConstants.PRODUCT_PRICE);
+                        in_stock.add(GlobalConstants.PRODUCT_IN_STOCK);
+                        product_id.add(GlobalConstants.PRODUCT_ID);
+                        selected_product.add("0");
+                    }
                 }
                 else
                 {
+
                     name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
                     category.add(GlobalConstants.PRODUCT_CATEGORY);
                     SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
@@ -82,42 +85,28 @@ public class ProductListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-         return name.size();
+        return name.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        // TODO Auto-generated method stub
-        return position;
+    public Object getItem(int i) {
+        return i;
     }
 
     @Override
-    public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return position;
-    }
-
-    public class Holder
-    {
-        TextView name;
-        EditText quantity;
-        TextView category;
-        TextView add;
-        TextView minus;
+    public long getItemId(int i) {
+        return i;
     }
 
     @Override
-    public View getView(final int position, final View convertView, ViewGroup parent) {
-
-        // TODO Auto-generated method stub
+    public View getView(final int position, View view, ViewGroup parent) {
         final Holder holder = new Holder();
 
         final View rowView;
         rowView = inflater.inflate(R.layout.product_category_item, parent , false);
 
         holder.name = (TextView) rowView.findViewById(R.id.name);
-        holder.quantity = (EditText) rowView.findViewById(R.id.quantity);
+        holder.quantity = (TextView) rowView.findViewById(R.id.quantity);
         holder.category = (TextView) rowView.findViewById(R.id.category);
         holder.add = (TextView) rowView.findViewById(R.id.add);
         holder.minus = (TextView) rowView.findViewById(R.id.minus);
@@ -166,6 +155,15 @@ public class ProductListAdapter extends BaseAdapter {
         });
 
         return rowView;
+    }
+
+    public class Holder
+    {
+        TextView name;
+        TextView quantity;
+        TextView category;
+        TextView add;
+        TextView minus;
     }
 
 

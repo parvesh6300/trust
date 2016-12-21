@@ -260,6 +260,62 @@ public class WebServices {
     }
 
 
+    public static String GetAppointmentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        ArrayList<HashMap<String,String>> al_apmt_detail;
+
+        Global global = (Global) context.getApplicationContext();
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("GetApmt", "Appointments : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                al_apmt_detail = new ArrayList<>();
+
+                JSONArray jsonArray = jsonObject.getJSONArray("Appointments");
+
+                for (int i = 0 ; i< jsonArray.length() ; i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.APMT_ID , jsonObject1.optString(GlobalConstants.APMT_ID));
+                    map.put(GlobalConstants.APMT_CLIENT_ID , jsonObject1.optString(GlobalConstants.APMT_CLIENT_ID));
+                    map.put(GlobalConstants.APMT_PLAN_ID , jsonObject1.optString(GlobalConstants.APMT_PLAN_ID));
+                    map.put(GlobalConstants.APMT_SERVICE_ID , jsonObject1.optString(GlobalConstants.APMT_SERVICE_ID));
+                    map.put(GlobalConstants.APMT_DATE , jsonObject1.optString(GlobalConstants.APMT_DATE));
+                    map.put(GlobalConstants.APMT_TIME , jsonObject1.optString(GlobalConstants.APMT_TIME));
+
+                    al_apmt_detail.add(map);
+                }
+
+                global.setAl_apmt_details(al_apmt_detail);
+
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
     public static String GetPlanService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -392,7 +448,7 @@ public class WebServices {
 
 
 
-    public static String CartService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    public static String AddToCartService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
 
@@ -423,11 +479,11 @@ public class WebServices {
     }
 
 
-    public static String GetAppointmentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    public static String GetCartService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
 
-        ArrayList<HashMap<String,String>> al_apmt_detail;
+        ArrayList<HashMap<String,String>> al_cart_detail;
 
         Global global = (Global) context.getApplicationContext();
 
@@ -437,18 +493,21 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("GetApmt", "Appointments : " + response);
+            Log.i("GetProduct", "Product : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
             String status = jsonObject.optString(GlobalConstants.STATUS);
             message = jsonObject.optString(GlobalConstants.MESSAGE);
 
+
             if (status.equalsIgnoreCase("1"))
             {
-                al_apmt_detail = new ArrayList<>();
+                al_cart_detail = new ArrayList<>();
 
-                JSONArray jsonArray = jsonObject.getJSONArray("Appointments");
+                int items = jsonObject.optInt(GlobalConstants.GET_CART_TOTAL_ITEMS);
+
+                JSONArray jsonArray = jsonObject.getJSONArray("items_in_cart");
 
                 for (int i = 0 ; i< jsonArray.length() ; i++)
                 {
@@ -456,18 +515,27 @@ public class WebServices {
 
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                    map.put(GlobalConstants.APMT_ID , jsonObject1.optString(GlobalConstants.APMT_ID));
-                    map.put(GlobalConstants.APMT_CLIENT_ID , jsonObject1.optString(GlobalConstants.APMT_CLIENT_ID));
-                    map.put(GlobalConstants.APMT_PLAN_ID , jsonObject1.optString(GlobalConstants.APMT_PLAN_ID));
-                    map.put(GlobalConstants.APMT_SERVICE_ID , jsonObject1.optString(GlobalConstants.APMT_SERVICE_ID));
-                    map.put(GlobalConstants.APMT_DATE , jsonObject1.optString(GlobalConstants.APMT_DATE));
-                    map.put(GlobalConstants.APMT_TIME , jsonObject1.optString(GlobalConstants.APMT_TIME));
+                    map.put(GlobalConstants.GET_CART_ID , jsonObject1.optString(GlobalConstants.GET_CART_ID));
+                    map.put(GlobalConstants.GET_CART_CLIENT_ID , jsonObject1.optString(GlobalConstants.GET_CART_CLIENT_ID));
 
-                    al_apmt_detail.add(map);
+                    String str_item_type = jsonObject1.optString(GlobalConstants.GET_CART_ITEM_TYPE);
+                    map.put(GlobalConstants.GET_CART_ITEM_TYPE , str_item_type);
+                    map.put(GlobalConstants.GET_CART_ITEM_ID , jsonObject1.optString(GlobalConstants.GET_CART_ITEM_ID));
+                    map.put(GlobalConstants.GET_CART_AMOUNT , jsonObject1.optString(GlobalConstants.GET_CART_AMOUNT));
+                    map.put(GlobalConstants.GET_CART_ITEM_NAME , jsonObject1.optString(GlobalConstants.GET_CART_ITEM_NAME));
+                    map.put(GlobalConstants.GET_CART_ITEM_PRICE , jsonObject1.optString(GlobalConstants.GET_CART_ITEM_PRICE));
+                    map.put(GlobalConstants.GET_CART_ITEM_DESC , jsonObject1.optString(GlobalConstants.GET_CART_ITEM_DESC));
+                    map.put(GlobalConstants.GET_CART_ITEM_CREATED , jsonObject1.optString(GlobalConstants.GET_CART_ITEM_CREATED));
+
+                    if (str_item_type.equalsIgnoreCase("product"))
+                    {
+                        map.put(GlobalConstants.GET_CART_MAX_STOCK , jsonObject1.optString(GlobalConstants.GET_CART_MAX_STOCK));
+                    }
+
+                    al_cart_detail.add(map);
                 }
 
-                global.setAl_apmt_details(al_apmt_detail);
-
+                global.setAl_cart_details(al_cart_detail);
                 return "true";
             }
 
@@ -479,6 +547,35 @@ public class WebServices {
     }
 
 
+    public static String DeleteItemCartService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("SearchClient", "Client : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                return "true";
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
 
 
     public static String callApiWithPerameter(String url, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues) throws Exception {
