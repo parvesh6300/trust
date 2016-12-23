@@ -62,7 +62,7 @@ public class PaymentDetailFragment extends Fragment {
 
         context = getActivity();
 
-        nextFragment = viewPager.getCurrentItem() + 1;
+        nextFragment = viewPager.getCurrentItem() + 2;
 
         tv_cancel =(TextView)v.findViewById(R.id.tv_cancel);
         generate = (TextView) v.findViewById(R.id.generate);

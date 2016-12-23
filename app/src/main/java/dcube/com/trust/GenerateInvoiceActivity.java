@@ -25,6 +25,7 @@ public class GenerateInvoiceActivity extends FragmentActivity {
         setContentView(R.layout.activity_generate_invoice);
 
         mInstance = this;
+
         generate = (TextView) findViewById(R.id.generate);
 
         pager = (ViewPager) findViewById(R.id.viewPager);
@@ -55,14 +56,15 @@ public class GenerateInvoiceActivity extends FragmentActivity {
             switch(pos) {
 
                 case 0: return PaymentDetailFragment.newInstance("FirstFragment, Instance 1");
-                case 1: return InvoiceFragment.newInstance("SecondFragment, Instance 1");
-                default: return PaymentDetailFragment.newInstance("ThirdFragment, Default");
+                case 1: return TestFragment.newInstance("SecondFragment, Instance 1");
+                case 2: return InvoiceFragment.newInstance("ThirdFragment, Instance 1");
+                default: return PaymentDetailFragment.newInstance("FourthFragment, Default");
             }
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     }
 
