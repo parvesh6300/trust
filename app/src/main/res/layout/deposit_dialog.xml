@@ -30,6 +30,7 @@
 
 
         <TextView
+            android:id="@+id/tv_total_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ACCOUNT TOTAL : 10,00,000 Tsh"
@@ -43,6 +44,7 @@
 
 
         <TextView
+            android:id="@+id/tv_deposit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Deposit : 2,50,000 Tsh"
@@ -56,6 +58,7 @@
 
 
         <TextView
+            android:id="@+id/tv_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BALANCE : 12,50,000 Tsh"

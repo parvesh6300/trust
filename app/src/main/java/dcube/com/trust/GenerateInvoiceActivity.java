@@ -15,6 +15,8 @@ public class GenerateInvoiceActivity extends FragmentActivity {
     TextView generate;
     ViewPager pager;
 
+    String TabFragmentB;
+
     public static GenerateInvoiceActivity mInstance = null;
 
     @Override
@@ -27,6 +29,8 @@ public class GenerateInvoiceActivity extends FragmentActivity {
 
         pager = (ViewPager) findViewById(R.id.viewPager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+
+        pager.setOffscreenPageLimit(0);
 
         pager.setOnTouchListener(new View.OnTouchListener()
         {
@@ -61,4 +65,19 @@ public class GenerateInvoiceActivity extends FragmentActivity {
             return 2;
         }
     }
+
+
+
+
+
+    public void setTabFragmentB(String t){
+        TabFragmentB = t;
+    }
+
+    public String getTabFragmentB(){
+        return TabFragmentB;
+    }
+
+
+
 }

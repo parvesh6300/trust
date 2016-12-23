@@ -138,7 +138,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/tv_remark_label"
                 android:hint="Enter Remark"
-                android:inputType="number"
                 android:textSize="25sp"
                 android:typeface="monospace"
                 />
@@ -188,5 +187,15 @@
             android:padding="20dp"/>
 
     </LinearLayout>
+
+    <pl.droidsonroids.gif.GifTextView
+        android:id="@+id/gif_loader"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/loading"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        />
 
 </LinearLayout>

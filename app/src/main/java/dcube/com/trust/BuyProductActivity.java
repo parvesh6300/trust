@@ -3,6 +3,7 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -41,6 +42,8 @@ public class BuyProductActivity extends Activity{
 
     Global global;
 
+    CustomDialogClass cdd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +64,25 @@ public class BuyProductActivity extends Activity{
             @Override
             public void onClick(View view) {
 
-                CustomDialogClass cdd = new CustomDialogClass(BuyProductActivity.this);
-                cdd.show();
+
+                try
+                {
+                    if (global.getAl_selected_plan_id().size() > 0)
+                    {
+
+                        cdd.show();
+                    }
+                    else
+                    {
+                        Toast.makeText(BuyProductActivity.this, "Chose any one Product", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(BuyProductActivity.this, "Chose any one Product", Toast.LENGTH_SHORT).show();
+                }
+
+
 
             }
         });
@@ -94,6 +114,9 @@ public class BuyProductActivity extends Activity{
             Toast.makeText(BuyProductActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
+
+
+        cdd = new CustomDialogClass(BuyProductActivity.this);
     }
 
 
@@ -274,7 +297,8 @@ public class BuyProductActivity extends Activity{
 
             if (message.equalsIgnoreCase("true"))
             {
-
+                startActivity(new Intent(BuyProductActivity.this,ClientHomeActivity.class));
+                finish();
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

@@ -3,6 +3,7 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -70,8 +71,24 @@ public class BuyPlanActivity extends Activity{
             @Override
             public void onClick(View view) {
 
-                cdd = new CustomDialogClass(BuyPlanActivity.this);
-                cdd.show();
+                try
+                {
+                    if (global.getAl_selected_plan_id().size() > 0)
+                    {
+                        cdd = new CustomDialogClass(BuyPlanActivity.this);
+                        cdd.show();
+                    }
+                    else
+                    {
+                        Toast.makeText(BuyPlanActivity.this, "Chose any one Plan", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(BuyPlanActivity.this, "Chose any one Plan", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
@@ -315,6 +332,7 @@ public class BuyPlanActivity extends Activity{
 
             if (message.equalsIgnoreCase("true"))
             {
+                startActivity(new Intent(BuyPlanActivity.this,ClientHomeActivity.class));
                 finish();
             }
             else

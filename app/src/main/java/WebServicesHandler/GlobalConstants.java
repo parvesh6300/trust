@@ -152,6 +152,12 @@ public class GlobalConstants {
     public static final String PAYMENT_ID = "payment_id";
 
 
+    // ************************************* DEPOSIT Money VARIABLES  ****************************************************
+
+    public static final String DEPOSIT_AMOUNT = "amount";
+    public static final String DEPOSIT_REMARKS = "remarks";
+
+
 
 
 }

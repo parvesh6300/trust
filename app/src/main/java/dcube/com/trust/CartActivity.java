@@ -66,7 +66,6 @@ public class CartActivity extends Activity {
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
                 get(GlobalConstants.SRC_CLIENT_ID);
 
-
         new GetCartItemsAsyncTask().execute();
 
     }

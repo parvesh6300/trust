@@ -3,6 +3,7 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -12,7 +13,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -62,21 +62,37 @@ public class BuyServicesActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                cdd.show();
+                try
+                {
+                    if (global.getAl_selected_service_id().size() >0)
+                    {
+                        cdd.show();
+                    }
+                    else
+                    {
+                        Toast.makeText(BuyServicesActivity.this, "Chose any one Service", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(BuyServicesActivity.this, "Chose any one Service", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
 
 
-        servicelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                adapter.setSelectedIndex(i);
-                adapter.notifyDataSetChanged();
-
-            }
-        });
+//        servicelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                adapter.setSelectedIndex(i);
+//                adapter.notifyDataSetChanged();
+//
+//            }
+//        });
 
 
 
@@ -312,6 +328,7 @@ public class BuyServicesActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
+                startActivity(new Intent(BuyServicesActivity.this,ClientHomeActivity.class));
                 finish();
             }
             else

@@ -1,6 +1,7 @@
 package dcube.com.trust;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.NurseAdapter;
 
@@ -23,15 +25,20 @@ public class NurseHomeActivity extends Activity {
 
     Global global;
 
+    String str_client_id;
+
     private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
     private long mBackPressed;
-
 
     String login_pref = "Login_pref";
     String is_logged_in_pref = "Logged_in_pref";
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+
+    WebServices ws;
+
+    Context context = this;
 
 
     @Override
@@ -42,7 +49,6 @@ public class NurseHomeActivity extends Activity {
         global = (Global) getApplicationContext();
 
         adapter = new NurseAdapter(this);
-
 
         tv_user_name = (TextView) findViewById(R.id.tv_user_name);
         tv_logout = (TextView) findViewById(R.id.tv_logout);
@@ -92,6 +98,11 @@ public class NurseHomeActivity extends Activity {
                 }
             }
         });
+
+
+
+
+
     }
 
 
@@ -123,5 +134,11 @@ public class NurseHomeActivity extends Activity {
 
         editor.apply();
     }
+
+
+
+
+
+
 
 }

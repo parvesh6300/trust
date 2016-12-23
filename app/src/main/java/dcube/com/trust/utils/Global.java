@@ -237,6 +237,16 @@ public class Global extends Application {
     public String amount_to_pay;
     public String discount;
 
+    public String getPayment_mode() {
+        return payment_mode;
+    }
+
+    public void setPayment_mode(String payment_mode) {
+        this.payment_mode = payment_mode;
+    }
+
+    public String payment_mode;
+
     public String getPayment_amount() {
         return payment_amount;
     }

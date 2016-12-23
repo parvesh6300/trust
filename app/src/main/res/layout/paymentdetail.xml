@@ -137,7 +137,6 @@
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:typeface="monospace"
-            android:text="0"
             android:background="@drawable/textarea"
             android:textColor="@color/textColor"
             android:layout_centerInParent="true"

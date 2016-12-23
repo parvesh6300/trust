@@ -28,6 +28,7 @@ public class PaymentDetailFragment extends Fragment {
 
     ViewPager viewPager;
     int nextFragment;
+
     RadioGroup radio_group_payment,radio_group_payment_mode;
     RadioButton radio_mpesa,radio_cash,radio_insurance;
     RadioButton radio_partial,radio_partial_grant,radio_full;
@@ -45,7 +46,8 @@ public class PaymentDetailFragment extends Fragment {
     String str_payment_mode = "",str_payment_type = "",str_amount="",str_discount,str_amount_to_pay;
 
     EditText ed_amount,ed_discount;
-    int total_cost,int_discount_per,int_discount,int_discounted_amount;
+    int total_cost,int_discount_per,int_discount,int_discounted_amount,int_amount_to_pay;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,26 +85,29 @@ public class PaymentDetailFragment extends Fragment {
         generate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
+
                 if (validate())
                 {
                     str_discount = ed_discount.getText().toString();
 
-                    if (!str_discount.equalsIgnoreCase("0"))
+                    if (!(str_discount.equalsIgnoreCase("0")  || str_discount.equals(null) || str_discount == null || str_discount.matches("")))
                     {
                         int_discount_per = Integer.parseInt(str_discount);
                         int_discounted_amount = (int_discount_per * total_cost)/100;
-                        str_amount_to_pay = String.valueOf(int_discounted_amount);
-
-                        int_discount = total_cost - int_discounted_amount;
-
+                        int_amount_to_pay = total_cost - int_discounted_amount;
+                        str_amount_to_pay = String.valueOf(int_amount_to_pay);
                     }
-                    else {
+                    else
+                    {
                         str_amount_to_pay = ed_amount.getText().toString();
+                        int_discount = 0;
                     }
+
 
                     global.setPayment_amount(str_amount);
                     global.setAmount_to_pay(str_amount_to_pay);
-                    global.setDiscount(String.valueOf(int_discount));
+                    global.setDiscount(String.valueOf(int_discounted_amount));
+                    global.setPayment_mode(str_payment_mode);
 
                     new PaymentAsyncTask().execute();
                 }
@@ -168,13 +173,11 @@ public class PaymentDetailFragment extends Fragment {
             total_cost = total_cost + Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
         }
 
-
         ed_amount.setText(String.valueOf(total_cost));
         ed_amount.setFocusable(false);
         ed_amount.setClickable(false);
 
         str_amount = ed_amount.getText().toString();
-
 
         return v;
     }
@@ -250,6 +253,7 @@ public class PaymentDetailFragment extends Fragment {
         }
 
     }
+
 
     public boolean validate()
     {

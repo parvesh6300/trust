@@ -105,7 +105,7 @@ public class PlanListAdapter extends BaseAdapter {
                 }
                 else
                 {
-                    holder.iv.setVisibility(View.VISIBLE);
+                    holder.iv.setVisibility(View.INVISIBLE);
                     rowView.setBackgroundColor(Color.parseColor("#FFFFFF"));    // white
                     holder.name.setTextColor(Color.parseColor("#45265f"));      // text color
                     holder.product_cost.setTextColor(Color.parseColor("#45265f"));      // text color

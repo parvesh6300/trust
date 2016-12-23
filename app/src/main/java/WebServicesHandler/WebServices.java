@@ -23,9 +23,6 @@ import dcube.com.trust.utils.Global;
 public class WebServices {
 
 
-//    ArrayList<String> al_ParemeterKeys ;
-//    ArrayList<String> al_ParemeterValues ;
-//    String response;
 
     public static String LoginService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
@@ -536,6 +533,8 @@ public class WebServices {
                 }
 
                 global.setAl_cart_details(al_cart_detail);
+                global.setTotal_cart_items(items);
+
                 return "true";
             }
 
@@ -647,6 +646,35 @@ public class WebServices {
         return message;
     }
 
+
+    public static String DepositMoneyService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Deposit", "Amount : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
 
 
     public static String callApiWithPerameter(String url, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues) throws Exception {

@@ -85,7 +85,7 @@ public class ServiceListAdapter extends BaseAdapter{
                 }
                 else
                 {
-                    holder.iv.setVisibility(View.VISIBLE);
+                    holder.iv.setVisibility(View.INVISIBLE);
                     rowView.setBackgroundColor(Color.parseColor("#FFFFFF"));    // white
                     holder.name.setTextColor(Color.parseColor("#45265f"));      // text color
                     holder.service_cost.setTextColor(Color.parseColor("#45265f"));      // text color
