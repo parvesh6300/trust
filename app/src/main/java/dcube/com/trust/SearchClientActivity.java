@@ -135,6 +135,12 @@ public class SearchClientActivity extends Activity {
 
                 global.setSelected_client(pos);
                 startActivity(new Intent(SearchClientActivity.this,ClientHomeActivity.class));
+
+                Log.e("Client","Pos "+pos);
+
+                Log.e("Clientid","id"+ global.getAl_src_client_details().get(global.getSelected_client()).
+                        get(GlobalConstants.SRC_CLIENT_ID));
+
             }
         });
 

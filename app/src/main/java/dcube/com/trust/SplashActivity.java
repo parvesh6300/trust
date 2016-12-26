@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 
 public class SplashActivity extends Activity {
@@ -37,6 +38,7 @@ public class SplashActivity extends Activity {
     Boolean is_logged_in = false;
 
     WebServices ws;
+    Global global;
 
     String str_username,str_password,str_role,str_device_token;
 
@@ -48,6 +50,8 @@ public class SplashActivity extends Activity {
         getSharePreferences();
 
         setSharedPreferences();
+
+        global = (Global) getApplicationContext();
 
         Thread timerThread = new Thread(){
             public void run(){
@@ -149,14 +153,14 @@ public class SplashActivity extends Activity {
                 al_str_key.add(GlobalConstants.LOGIN_PASSWORD);
                 al_str_value.add(str_password);
 
-                al_str_key.add(GlobalConstants.LOGIN_USER_ROle);
-
-                if (str_role.equalsIgnoreCase("2")) {
-                    al_str_value.add(String.valueOf(2));
-                }
-                else {
-                    al_str_value.add(String.valueOf(3));
-                }
+//                al_str_key.add(GlobalConstants.LOGIN_USER_ROle);
+//
+//                if (str_role.equalsIgnoreCase("2")) {
+//                    al_str_value.add(String.valueOf(2));
+//                }
+//                else {
+//                    al_str_value.add(String.valueOf(3));
+//                }
 
                 al_str_key.add(GlobalConstants.LOGIN_DEVICE_TYPE);
                 al_str_value.add("android");
@@ -169,10 +173,6 @@ public class SplashActivity extends Activity {
 
                 message = ws.LoginService(context, al_str_key, al_str_value);
 
-                //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
-                //             Log.i("Login", "Login : " + resPonse);
-
-//                return resPonse;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -184,41 +184,39 @@ public class SplashActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-            if (message.equalsIgnoreCase("true"))
-            {
+            if (message.equalsIgnoreCase("true")) {
+
                 setSharedPreferences();
 
-                if ( str_role.equalsIgnoreCase("2"))
+                if ("nurse".equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role_id == 2
                 {
                     Intent i = new Intent(SplashActivity.this, NurseHomeActivity.class);
                     startActivity(i);
                     finish();
-                }
-
-                else if (str_role.equalsIgnoreCase("3"))
+                } else if ("finance".equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role_id == 3
                 {
                     Intent i = new Intent(SplashActivity.this, FinanceHomeActivity.class);
                     startActivity(i);
                     finish();
+                } else if (global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE).equalsIgnoreCase("nurse_finance")) {
+                    Intent i = new Intent(SplashActivity.this, NurseHomeActivity.class);
+                    startActivity(i);
+                    finish();
+
+                } else {
+                    Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(intent);
                 }
-                else
-                {
-                    Toast.makeText(context, "Wrong Username or Password", Toast.LENGTH_SHORT).show();
-                }
 
-            }
-            else {
-
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
             }
 
         }
 
-    }
 
+
+        }
 
     protected boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -228,7 +226,6 @@ public class SplashActivity extends Activity {
         } else {
             return false;
         }
+
     }
-
-
 }

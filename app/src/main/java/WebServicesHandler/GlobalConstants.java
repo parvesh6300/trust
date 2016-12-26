@@ -20,7 +20,8 @@ public class GlobalConstants {
 
     public static final String LOGIN_USER_NAME = "email";
     public static final String LOGIN_PASSWORD = "password";
-    public static final String LOGIN_USER_ROle = "role_id";
+    public static final String LOGIN_USER_ROLE_ID = "role_id";
+    public static final String LOGIN_USER_ROLE = "role";
     public static final String LOGIN_DEVICE_TYPE = "devic_type";
     public static final String LOGIN_DEVICE_TOKEN = "device_token";
 
@@ -28,6 +29,7 @@ public class GlobalConstants {
     public static final String USER_NAME = "username";
     public static final String USER_BRANCH = "branch";
     public static final String USER_ROLE_ID = "role_id";
+    public static final String USER_ROLE = "role";
     public static final String USER_CONTACT = "contact";
     public static final String USER_IS_ACTIVE = "is_active";
     public static final String USER_STATUS = "status";
@@ -98,7 +100,9 @@ public class GlobalConstants {
     public static final String APMT_PLAN_ID = "plan_id";
     public static final String APMT_SERVICE_ID = "service_id";
     public static final String APMT_DATE = "date";
-    public static final String APMT_TIME= "time";
+    public static final String APMT_TIME= "time_of_appointment";
+
+
 
 
     // ************************************* Search Client VARIABLES  ****************************************************
@@ -150,6 +154,23 @@ public class GlobalConstants {
     public static final String PAYMENT_TYPE = "payment_type";
     public static final String PAYMENT_AMOUNT = "amount";
     public static final String PAYMENT_ID = "payment_id";
+
+
+
+    // ************************************* View Order VARIABLES  ****************************************************
+
+    public static final String ORDER_ID = "order_id";
+    public static final String ORDER_ONLY_ID = "id";
+    public static final String ORDER_PMT_ID = "payment_id";
+    public static final String ORDER_CLIENT_ID = "client_id";
+    public static final String ORDER_ITEM_ID = "item_id";
+    public static final String ORDER_ITEM_NAME = "item_name";
+    public static final String ORDER_ITEM_TYPE = "item_type";
+    public static final String ORDER_ITEM_PRICE = "item_price";
+    public static final String ORDER_AMOUNT = "amount";
+    public static final String ORDER_CREATED = "created";
+    public static final String ORDER_TO_PAID = "to_paid";
+    public static final String ORDER_ON_RATE = "on_rate";
 
 
     // ************************************* DEPOSIT Money VARIABLES  ****************************************************

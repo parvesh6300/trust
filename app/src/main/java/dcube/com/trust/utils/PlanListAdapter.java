@@ -83,7 +83,7 @@ public class PlanListAdapter extends BaseAdapter {
         String plan_name = global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_PRODUCT_NAME)+" + "+
                 global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_SERVICE_NAME);
 
-        holder.name.setText(plan_name);    //name.get(position)
+        holder.name.setText(global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_ID));    //name.get(position)
         holder.product_cost.setText(global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_PRODUCT_PRICE));
         holder.service_cost.setText( global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_SERVICE_PRICE));
 

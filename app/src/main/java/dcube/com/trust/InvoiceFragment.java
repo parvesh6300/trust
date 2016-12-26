@@ -38,15 +38,12 @@ public class InvoiceFragment extends Fragment  {
         tv_continue = (TextView) v.findViewById(R.id.tv_continue);
 
 
-        String myTag = getTag();
-
-        ((GenerateInvoiceActivity)getActivity()).setTabFragmentB(myTag);
-
         tv_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 startActivity(new Intent(getActivity(),ClientHomeActivity.class));
+                getActivity().finish();
             }
         });
 

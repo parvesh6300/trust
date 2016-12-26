@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
@@ -21,22 +23,32 @@ public class PlanAdapter extends BaseAdapter {
 
     public static LayoutInflater inflater;
 
-    ArrayList<String> al_plan_name = new ArrayList<>();
-    ArrayList<String> al_date= new ArrayList<>();
+    ArrayList<String> al_plan_name;
+    ArrayList<String> al_date;
+    ArrayList<String> al_plan_price;
 
+    Global global;
 
-    public PlanAdapter(Context mcontext, ArrayList<String> date,ArrayList<String> product_name)
+    public PlanAdapter(Context mcontext)
     {
         this.context= mcontext;
-        this.al_date=date;
-        this.al_plan_name = product_name;
 
-         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        al_plan_name = new ArrayList<>();
+        al_date= new ArrayList<>();
+        al_plan_price= new ArrayList<>();
 
-        addValues();
+        inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        global = (Global) context.getApplicationContext();
+
+        for (HashMap<String,String> hashmap : global.getAl_view_plan_details() )
+        {
+            al_plan_name.add(hashmap.get(GlobalConstants.ORDER_ITEM_NAME));
+            al_date.add(hashmap.get(GlobalConstants.ORDER_CREATED));
+            al_plan_price.add(hashmap.get(GlobalConstants.ORDER_ITEM_PRICE));
+        }
+
     }
-
-
 
     public class ViewHolder{
 
@@ -72,29 +84,20 @@ public class PlanAdapter extends BaseAdapter {
         holder.tv_year= (TextView)convertview.findViewById(R.id.tv_year);
         holder.tv_plan_name = (TextView)convertview.findViewById(R.id.tv_plan_name);
 
-        holder.tv_date.setText(al_date.get(pos));
+
         holder.tv_plan_name.setText(al_plan_name.get(pos));
+
+        String[] date_time = al_date.get(pos).split("\\s+");
+
+        String[] date = date_time[0].split("-");
+
+        holder.tv_date.setText(date[2]);
+        holder.tv_month.setText(date[1]+" ");
+        holder.tv_year.setText("'"+date[0]);
 
         return convertview;
     }
 
-
-
-    public void addValues()
-    {
-        al_date.add("05");
-        al_date.add("10");
-        al_date.add("14");
-        al_date.add("16");
-        al_date.add("18");
-
-        al_plan_name.add("Silverline + Implants");
-        al_plan_name.add("Injection Depo + Injection-Sayana");
-        al_plan_name.add("OCP's(3 Cycles) + EC(2 Packs)");
-        al_plan_name.add("HIV + Family Planning");
-        al_plan_name.add("Blood Sugar + Urine Analysis");
-
-    }
 
 
 }

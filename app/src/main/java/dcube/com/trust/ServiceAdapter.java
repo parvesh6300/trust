@@ -8,6 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import WebServicesHandler.GlobalConstants;
+import dcube.com.trust.utils.Global;
 
 /**
  * Created by Sagar on 30/11/16.
@@ -18,23 +22,35 @@ public class ServiceAdapter extends BaseAdapter {
 
     public static LayoutInflater inflater;
 
-    ArrayList<String> al_service_name = new ArrayList<>();
-    ArrayList<String> al_date= new ArrayList<>();
+    ArrayList<String> al_service_name;
+    ArrayList<String> al_date;
+    ArrayList<String> al_service_price;
 
-    public ServiceAdapter(Context mcontext, ArrayList<String> date,ArrayList<String> product_name)
+    Global global;
+
+    public ServiceAdapter(Context mcontext)
     {
         this.context= mcontext;
-        this.al_date=date;
-        this.al_service_name = product_name;
+
+        al_service_name = new ArrayList<>();
+        al_date= new ArrayList<>();
+        al_service_price = new ArrayList<>();
 
         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        addValues();
+        global = (Global) context.getApplicationContext();
+
+        for (HashMap<String,String> hashmap : global.getAl_view_service_details() )
+        {
+            al_service_name.add(hashmap.get(GlobalConstants.ORDER_ITEM_NAME));
+            al_date.add(hashmap.get(GlobalConstants.ORDER_CREATED));
+            al_service_price.add(hashmap.get(GlobalConstants.ORDER_ITEM_PRICE));
+        }
     }
 
     public class ViewHolder{
 
-        TextView tv_date,tv_month,tv_year, tv_plan_name;
+        TextView tv_date,tv_month,tv_year, tv_service_name;
     }
 
 
@@ -48,10 +64,17 @@ public class ServiceAdapter extends BaseAdapter {
         holder.tv_date= (TextView)convertview.findViewById(R.id.tv_date);
         holder.tv_month= (TextView)convertview.findViewById(R.id.tv_month);
         holder.tv_year= (TextView)convertview.findViewById(R.id.tv_year);
-        holder.tv_plan_name = (TextView)convertview.findViewById(R.id.tv_plan_name);
+        holder.tv_service_name = (TextView)convertview.findViewById(R.id.tv_service_name);
 
-        holder.tv_date.setText(al_date.get(pos));
-        holder.tv_plan_name.setText(al_service_name.get(pos));
+        holder.tv_service_name.setText(al_service_name.get(pos));
+
+        String[] date_time = al_date.get(pos).split("\\s+");
+
+        String[] date = date_time[0].split("-");
+
+        holder.tv_date.setText(date[2]);
+        holder.tv_month.setText(date[1]+" ");
+        holder.tv_year.setText("'"+date[0]);
 
         return convertview;
     }
@@ -72,18 +95,4 @@ public class ServiceAdapter extends BaseAdapter {
     }
 
 
-    public void addValues()
-    {
-        al_date.add("05");
-        al_date.add("10");
-        al_date.add("14");
-        al_date.add("16");
-        al_date.add("18");
-
-        al_service_name.add("Provider Counsultation");
-        al_service_name.add("CPAC + IUCD");
-        al_service_name.add("Gynaecologist");
-        al_service_name.add("Pap Smear");
-        al_service_name.add("Ultrasound");
-    }
 }

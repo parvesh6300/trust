@@ -42,16 +42,14 @@ public class WebServices {
 
             JSONObject jsonObject = new JSONObject(response);
 
-            JSONObject jsonObject1 = jsonObject.getJSONObject("user_info");
-
-            String user_id = jsonObject1.optString(GlobalConstants.USER_ID);
-
             String status = jsonObject.optString(GlobalConstants.STATUS);
             message = jsonObject.optString(GlobalConstants.MESSAGE);
 
             if (status.equalsIgnoreCase("1"))
             {
                 al_login_user = new ArrayList<>();
+
+                JSONObject jsonObject1 = jsonObject.getJSONObject("user_info");
 
                 HashMap<String, String> map = new HashMap<String, String>();
 
@@ -60,6 +58,7 @@ public class WebServices {
                 map.put(GlobalConstants.USER_PASSWORD,jsonObject1.optString(GlobalConstants.USER_PASSWORD));
                 map.put(GlobalConstants.USER_BRANCH,jsonObject1.optString(GlobalConstants.USER_BRANCH));
                 map.put(GlobalConstants.USER_ROLE_ID,jsonObject1.optString(GlobalConstants.USER_ROLE_ID));
+                map.put(GlobalConstants.USER_ROLE,jsonObject1.optString(GlobalConstants.USER_ROLE));
                 map.put(GlobalConstants.USER_CONTACT,jsonObject1.optString(GlobalConstants.USER_CONTACT));
                 map.put(GlobalConstants.USER_EMAIL,jsonObject1.optString(GlobalConstants.USER_EMAIL));
                 map.put(GlobalConstants.USER_IS_ACTIVE,jsonObject1.optString(GlobalConstants.USER_IS_ACTIVE));
@@ -294,8 +293,8 @@ public class WebServices {
                     map.put(GlobalConstants.APMT_CLIENT_ID , jsonObject1.optString(GlobalConstants.APMT_CLIENT_ID));
                     map.put(GlobalConstants.APMT_PLAN_ID , jsonObject1.optString(GlobalConstants.APMT_PLAN_ID));
                     map.put(GlobalConstants.APMT_SERVICE_ID , jsonObject1.optString(GlobalConstants.APMT_SERVICE_ID));
-                    map.put(GlobalConstants.APMT_DATE , jsonObject1.optString(GlobalConstants.APMT_DATE));
                     map.put(GlobalConstants.APMT_TIME , jsonObject1.optString(GlobalConstants.APMT_TIME));
+               //     map.put(GlobalConstants.APMT_TIME , jsonObject1.optString(GlobalConstants.APMT_TIME));
 
                     al_apmt_detail.add(map);
                 }
@@ -647,6 +646,132 @@ public class WebServices {
     }
 
 
+    public static String ViewServiceService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        ArrayList<HashMap<String,String>> al_view_service_details;
+
+        Global global = (Global) context.getApplicationContext();
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("GetService", "Service : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                al_view_service_details = new ArrayList<>();
+
+                JSONArray jsonArray = jsonObject.getJSONArray("in_order");
+
+                for (int i = 0 ; i< jsonArray.length() ; i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.ORDER_ID , jsonObject1.optString(GlobalConstants.ORDER_ID));
+                    map.put(GlobalConstants.ORDER_PMT_ID , jsonObject1.optString(GlobalConstants.ORDER_PMT_ID));
+                    map.put(GlobalConstants.ORDER_CLIENT_ID , jsonObject1.optString(GlobalConstants.ORDER_CLIENT_ID));
+                    map.put(GlobalConstants.ORDER_ITEM_ID , jsonObject1.optString(GlobalConstants.ORDER_ITEM_ID));
+                    map.put(GlobalConstants.ORDER_ITEM_NAME , jsonObject1.optString(GlobalConstants.ORDER_ITEM_NAME));
+                    map.put(GlobalConstants.ORDER_ITEM_TYPE , jsonObject1.optString(GlobalConstants.ORDER_ITEM_TYPE));
+                    map.put(GlobalConstants.ORDER_ITEM_PRICE , jsonObject1.optString(GlobalConstants.ORDER_ITEM_PRICE));
+                    map.put(GlobalConstants.ORDER_AMOUNT , jsonObject1.optString(GlobalConstants.ORDER_AMOUNT));
+                    map.put(GlobalConstants.ORDER_CREATED , jsonObject1.optString(GlobalConstants.ORDER_CREATED));
+                    map.put(GlobalConstants.ORDER_TO_PAID , jsonObject1.optString(GlobalConstants.ORDER_TO_PAID));
+                    map.put(GlobalConstants.ORDER_ON_RATE , jsonObject1.optString(GlobalConstants.ORDER_ON_RATE));
+                    map.put(GlobalConstants.ORDER_ONLY_ID , jsonObject1.optString(GlobalConstants.ORDER_ONLY_ID));
+
+                    al_view_service_details.add(map);
+                }
+
+                global.setAl_view_service_details(al_view_service_details);
+                return "true";
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+    public static String ViewPlanService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        ArrayList<HashMap<String,String>> al_view_plan_details;
+
+        Global global = (Global) context.getApplicationContext();
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("GetService", "Service : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                al_view_plan_details = new ArrayList<>();
+
+                JSONArray jsonArray = jsonObject.getJSONArray("in_order");
+
+                for (int i = 0 ; i< jsonArray.length() ; i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.ORDER_ID , jsonObject1.optString(GlobalConstants.ORDER_ID));
+                    map.put(GlobalConstants.ORDER_PMT_ID , jsonObject1.optString(GlobalConstants.ORDER_PMT_ID));
+                    map.put(GlobalConstants.ORDER_CLIENT_ID , jsonObject1.optString(GlobalConstants.ORDER_CLIENT_ID));
+                    map.put(GlobalConstants.ORDER_ITEM_ID , jsonObject1.optString(GlobalConstants.ORDER_ITEM_ID));
+                    map.put(GlobalConstants.ORDER_ITEM_NAME , jsonObject1.optString(GlobalConstants.ORDER_ITEM_NAME));
+                    map.put(GlobalConstants.ORDER_ITEM_TYPE , jsonObject1.optString(GlobalConstants.ORDER_ITEM_TYPE));
+                    map.put(GlobalConstants.ORDER_ITEM_PRICE , jsonObject1.optString(GlobalConstants.ORDER_ITEM_PRICE));
+                    map.put(GlobalConstants.ORDER_AMOUNT , jsonObject1.optString(GlobalConstants.ORDER_AMOUNT));
+                    map.put(GlobalConstants.ORDER_CREATED , jsonObject1.optString(GlobalConstants.ORDER_CREATED));
+                    map.put(GlobalConstants.ORDER_TO_PAID , jsonObject1.optString(GlobalConstants.ORDER_TO_PAID));
+                    map.put(GlobalConstants.ORDER_ON_RATE , jsonObject1.optString(GlobalConstants.ORDER_ON_RATE));
+                    map.put(GlobalConstants.ORDER_ONLY_ID , jsonObject1.optString(GlobalConstants.ORDER_ONLY_ID));
+
+                    al_view_plan_details.add(map);
+                }
+
+                global.setAl_view_plan_details(al_view_plan_details);
+                return "true";
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
     public static String DepositMoneyService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -675,6 +800,39 @@ public class WebServices {
 
         return message;
     }
+
+
+    public static String StockService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Deposit", "Amount : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+
 
 
     public static String callApiWithPerameter(String url, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues) throws Exception {

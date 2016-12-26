@@ -2,6 +2,8 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -9,44 +11,70 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.Global;
+import okhttp3.OkHttpClient;
+import pl.droidsonroids.gif.GifTextView;
+
 public class ViewServicesActivity extends Activity {
 
-    ListView lv_plan;
+    ListView lv_services;
     ServiceAdapter adapter;
 
-    ArrayList<String> al_plan_name = new ArrayList<>();
-    ArrayList<String> al_date= new ArrayList<>();
+    GifTextView gif_loader;
 
+    Context context;
+
+    WebServices ws;
+
+    String str_client_id;
+    CustomDialogClass cdd;
+
+    Global global;
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_services);
 
-        lv_plan=(ListView)findViewById(R.id.lv_plan);
+        global = (Global) getApplicationContext();
 
-        adapter= new ServiceAdapter(this,al_date,al_plan_name);
-        lv_plan.setAdapter(adapter);
+        lv_services =(ListView)findViewById(R.id.lv_services);
 
-        lv_plan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gif_loader = (GifTextView) findViewById(R.id.gif_loader);
+
+        context = this;
+
+
+        lv_services.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
 
-                CustomDialogClass cdd= new CustomDialogClass(ViewServicesActivity.this);
+                position = pos;
+                cdd= new CustomDialogClass(ViewServicesActivity.this);
                 cdd.show();
             }
         });
+
+        str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
+
+
+        new ViewServiceAsyncTask().execute();
+
     }
 
     public class CustomDialogClass extends Dialog {
 
         public Activity c;
 
-        public TextView cancel;
-        public TextView confirm;
+        public TextView cancel,tv_service_cost;
+        public TextView confirm,tv_service_name;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -64,6 +92,12 @@ public class ViewServicesActivity extends Activity {
 
             confirm = (TextView) findViewById(R.id.confirm);
             cancel = (TextView) findViewById(R.id.cancel);
+            tv_service_cost = (TextView) findViewById(R.id.tv_service_cost);
+            tv_service_name = (TextView) findViewById(R.id.tv_service_name);
+
+            tv_service_name.setText(global.getAl_view_service_details().get(position).get(GlobalConstants.ORDER_ITEM_NAME));
+            tv_service_cost.setText(global.getAl_view_service_details().get(position).get(GlobalConstants.ORDER_ITEM_PRICE));
+
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,7 +105,6 @@ public class ViewServicesActivity extends Activity {
 
                     dismiss();
                     //   finish();
-
 
                     final Dialog dialog = new Dialog(c);
                     dialog.setContentView(R.layout.custom_dialog);
@@ -90,6 +123,7 @@ public class ViewServicesActivity extends Activity {
                             finish();
                         }
                     });
+
                 }
             });
 
@@ -102,6 +136,66 @@ public class ViewServicesActivity extends Activity {
             });
         }
     }
+
+
+    public class ViewServiceAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.CART_CLIENT_ID);
+                al_str_value.add(str_client_id);
+
+                al_str_key.add(GlobalConstants.ORDER_ITEM_TYPE);
+                al_str_value.add("service");
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("my_order");
+
+                message = ws.ViewServiceService(context, al_str_key, al_str_value);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                adapter= new ServiceAdapter(context);
+                lv_services.setAdapter(adapter);}
+            else {
+
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+
+    }
+
+
 
 
 }

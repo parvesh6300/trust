@@ -64,7 +64,6 @@ public class BuyProductActivity extends Activity{
             @Override
             public void onClick(View view) {
 
-
                 try
                 {
                     if (global.getAl_selected_plan_id().size() > 0)

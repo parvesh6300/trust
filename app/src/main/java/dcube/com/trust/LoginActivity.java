@@ -123,7 +123,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 nurse_text.setTextColor(getResources().getColor(R.color.greyed_out));
 
                 role_id = 3;
-
                 role = "finance";
                 break;
             }
@@ -185,14 +184,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 al_str_key.add(GlobalConstants.LOGIN_PASSWORD);
                 al_str_value.add(str_password);
 
-                al_str_key.add(GlobalConstants.LOGIN_USER_ROle);
 
-                if (role_id == 2) {
-                    al_str_value.add(String.valueOf(2));
-                }
-                else {
-                    al_str_value.add(String.valueOf(3));
-                }
+//                if (role_id == 2) {
+//                    al_str_value.add(String.valueOf(2));
+//                }
+//                else {
+//                    al_str_value.add(String.valueOf(3));
+//                }
 
                 al_str_key.add(GlobalConstants.LOGIN_DEVICE_TYPE);
                 al_str_value.add("android");
@@ -205,10 +203,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 message = ws.LoginService(context, al_str_key, al_str_value);
 
-                //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
-                //             Log.i("Login", "Login : " + resPonse);
-
-//                return resPonse;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -226,23 +220,37 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             {
                 setSharedPreferences();
 
-                if ( role_id == 2)
+                if (role.equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)) )  //role_id == 2
                 {
                     Intent i = new Intent(LoginActivity.this, NurseHomeActivity.class);
                     startActivity(i);
                     finish();
                 }
 
-                else if (role_id == 3)
+                else if (role.equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role_id == 3
                 {
                     Intent i = new Intent(LoginActivity.this, FinanceHomeActivity.class);
                     startActivity(i);
                     finish();
                 }
-
+                else if (global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE).equalsIgnoreCase("nurse_finance"))
+                {
+                    if (role.equalsIgnoreCase("nurse"))
+                    {
+                        Intent i = new Intent(LoginActivity.this, NurseHomeActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                    else
+                    {
+                        Intent i = new Intent(LoginActivity.this, FinanceHomeActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }
                 else
                 {
-                    Toast.makeText(LoginActivity.this, "Wrong Username or Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Verify your Role again", Toast.LENGTH_SHORT).show();
                 }
 
             }

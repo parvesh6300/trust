@@ -57,15 +57,24 @@ public class CartAdapter extends BaseAdapter {
 
         for (HashMap<String,String> hashmap: global.getAl_cart_details())
         {
-            al_item_name.add(hashmap.get(GlobalConstants.GET_CART_ITEM_NAME));
+
             al_item_price.add(hashmap.get(GlobalConstants.GET_CART_ITEM_PRICE));
             al_item_quantity.add(hashmap.get(GlobalConstants.GET_CART_AMOUNT));
             al_cart_id.add(hashmap.get(GlobalConstants.GET_CART_ID));
             al_item_type.add(hashmap.get(GlobalConstants.GET_CART_ITEM_TYPE));
+
+            if (hashmap.get(GlobalConstants.GET_CART_ITEM_TYPE).equalsIgnoreCase("plan"))
+            {
+                al_item_name.add(hashmap.get(GlobalConstants.GET_CART_ITEM_ID));
+            }
+            else
+            {
+                al_item_name.add(hashmap.get(GlobalConstants.GET_CART_ITEM_NAME));
+            }
+
             al_item_desc.add(hashmap.get(GlobalConstants.GET_CART_ITEM_DESC));
         }
 
-     //   addValues();
 
     }
 
@@ -93,7 +102,7 @@ public class CartAdapter extends BaseAdapter {
         holder.iv_cancel = (ImageView) convertView.findViewById(R.id.iv_cancel);
 
         holder.tv_name.setText(al_item_name.get(pos));   //al_product_name.get(pos)
-        holder.tv_desc.setText(al_item_desc.get(pos));
+        holder.tv_desc.setText(al_item_type.get(pos));
 
         str_price = al_item_price.get(pos);
 

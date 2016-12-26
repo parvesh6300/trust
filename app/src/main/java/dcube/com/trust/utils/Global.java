@@ -271,6 +271,37 @@ public class Global extends Application {
         this.discount = discount;
     }
 
+
+
+    // ******************************* View Services Getter and Setter  *************************************************
+
+
+    public ArrayList<HashMap<String, String>> getAl_view_service_details() {
+        return al_view_service_details;
+    }
+
+    public void setAl_view_service_details(ArrayList<HashMap<String, String>> al_view_service_details) {
+        this.al_view_service_details = al_view_service_details;
+    }
+
+    public ArrayList<HashMap<String,String>> al_view_service_details;
+
+
+    // ******************************* View Plan Getter and Setter  *************************************************
+
+
+    public ArrayList<HashMap<String, String>> getAl_view_plan_details() {
+        return al_view_plan_details;
+    }
+
+    public void setAl_view_plan_details(ArrayList<HashMap<String, String>> al_view_plan_details) {
+        this.al_view_plan_details = al_view_plan_details;
+    }
+
+    public ArrayList<HashMap<String,String>> al_view_plan_details;
+
+
+
     @Override
     public void onCreate() {
 

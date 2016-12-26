@@ -39,6 +39,7 @@ public class ViewAppointmentActivity extends Activity {
     WebServices ws;
     Context context = ViewAppointmentActivity.this;
 
+    String str_client_id;
     int pos;
 
     @Override
@@ -80,7 +81,10 @@ public class ViewAppointmentActivity extends Activity {
             }
         });
 
+        str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
+                get(GlobalConstants.SRC_CLIENT_ID);
 
+        new GetAppointmentAsyncTask().execute();
     }
 
 
@@ -167,6 +171,7 @@ public class ViewAppointmentActivity extends Activity {
             });
 
 
+
         }
 
         @Override
@@ -200,15 +205,12 @@ public class ViewAppointmentActivity extends Activity {
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
         String message = "";
-        String str_client_id;
+
 
         @Override
         protected void onPreExecute() {
 
             gif_loader.setVisibility(View.VISIBLE);
-
-            str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
-                    get(GlobalConstants.SRC_CLIENT_ID);
         }
 
         @Override
@@ -224,7 +226,7 @@ public class ViewAppointmentActivity extends Activity {
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("get_appointments");
 
-                message = ws.GetPlanService(context, al_str_key, al_str_value);
+                message = ws.GetAppointmentService(context, al_str_key, al_str_value);
 
             } catch (Exception e) {
                 e.printStackTrace();

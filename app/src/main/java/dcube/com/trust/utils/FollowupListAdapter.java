@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
@@ -22,9 +24,11 @@ public class FollowupListAdapter extends BaseAdapter {
 
     public static LayoutInflater inflater;
 
-    ArrayList<String> notes= new ArrayList<>();
-    ArrayList<String> timing = new ArrayList<>();
-    ArrayList<String> al_date= new ArrayList<>();
+    ArrayList<String> notes;
+    ArrayList<String> timing;
+   // ArrayList<String> al_date;
+
+    Global global;
 
     Calendar cl= Calendar.getInstance();
 
@@ -34,7 +38,19 @@ public class FollowupListAdapter extends BaseAdapter {
 
         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        addValues();
+        global = (Global) context.getApplicationContext();
+
+        notes = new ArrayList<>();
+        timing = new ArrayList<>();
+
+        for (HashMap<String,String> hashmap : global.getAl_apmt_details())
+        {
+            notes.add(hashmap.get(GlobalConstants.APMT_SERVICE_ID));
+            timing.add(hashmap.get(GlobalConstants.APMT_TIME));
+
+        }
+
+
     }
 
     public class ViewHolder{
@@ -55,9 +71,16 @@ public class FollowupListAdapter extends BaseAdapter {
         holder.tv_notes= (TextView)convertview.findViewById(R.id.notes);
         holder.tv_timing= (TextView)convertview.findViewById(R.id.timings);
 
-        holder.tv_date.setText(al_date.get(pos));
+        String[] date_time = timing.get(pos).split("\\s+");
+
+        String[] date = date_time[0].split("-");
+
+        holder.tv_date.setText(date[2]);
+        holder.tv_month.setText(date[1]+" ");
+        holder.tv_year.setText("'"+date[0]);
+
         holder.tv_notes.setText(notes.get(pos));
-        holder.tv_timing.setText(timing.get(pos));
+        holder.tv_timing.setText(date_time[1]);
 
         return convertview;
     }
@@ -75,22 +98,6 @@ public class FollowupListAdapter extends BaseAdapter {
     @Override
     public long getItemId(int i) {
         return i;
-    }
-
-
-    public void addValues()
-    {
-        al_date.add("21");
-        al_date.add("25");
-        al_date.add("30");
-
-        notes.add("Early ultrasound screening");
-        notes.add("Triple screen test");
-        notes.add("Review of fetal growth");
-
-        timing.add("10:00 am");
-        timing.add("01:00 pm");
-        timing.add("4:00 pm");
     }
 
 

@@ -29,8 +29,6 @@ public class StockAdapter extends BaseAdapter {
     Dialog dialog;
     Dialog alertDialog;
 
-
-
     public  int quantity;
 
     public StockAdapter(Context context, ArrayList<String> product,ArrayList<String> category,ArrayList<String> quantity)

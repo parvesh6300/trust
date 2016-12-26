@@ -41,6 +41,8 @@ public class BuyServicesActivity extends Activity {
     Context context = BuyServicesActivity.this;
     CustomDialogClass cdd;
 
+    String str_client_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +120,8 @@ public class BuyServicesActivity extends Activity {
             Toast.makeText(BuyServicesActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
+
+        str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
 
     }
 
@@ -269,15 +273,12 @@ public class BuyServicesActivity extends Activity {
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
         String message = "";
-        String str_client_id;
+
 
         @Override
         protected void onPreExecute() {
 
             gif_loader.setVisibility(View.VISIBLE);
-
-            str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
-
         }
 
         @Override

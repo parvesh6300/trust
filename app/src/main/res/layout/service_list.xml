@@ -11,7 +11,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/tv_plan_name"
+            android:id="@+id/tv_service_name"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:text="Service"
