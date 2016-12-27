@@ -9,7 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
@@ -20,24 +22,34 @@ public class SoldProductAdapter extends BaseAdapter {
 
     Context mcontext;
 
+    Global global;
+
     ArrayList<String> al_quantity= new ArrayList<>();
     ArrayList<String> al_product_name= new ArrayList<>();
     ArrayList<String> al_category= new ArrayList<>();
+    ArrayList<String> al_product_id= new ArrayList<>();
 
     ViewHolder holder;
 
     public LayoutInflater inflater;
 
 
-    public SoldProductAdapter(Context context, ArrayList<String> productname,ArrayList<String> quantity,ArrayList<String> category)
+    public SoldProductAdapter(Context context)
     {
-        this.al_product_name= productname;
-        this.al_quantity= quantity;
-        this.al_category= category;
 
         this.mcontext=context;
+        global = (Global) context.getApplicationContext();
 
         inflater= (LayoutInflater) mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        for (HashMap<String,String> hashmap : global.getAl_product_sold())
+        {
+            al_quantity.add(hashmap.get(GlobalConstants.PRODUCT_SOLD_OUT));
+            al_product_name.add(hashmap.get(GlobalConstants.PRODUCT_NAME));
+            al_product_id.add(hashmap.get(GlobalConstants.PRODUCT_ID));
+
+        }
+
 
     }
 
@@ -49,8 +61,8 @@ public class SoldProductAdapter extends BaseAdapter {
     public View getView(int position, View convertview, ViewGroup viewGroup) {
 
 
-            convertview= inflater.inflate(R.layout.salesanalyticslist, viewGroup, false );
-            holder= new ViewHolder();
+        convertview= inflater.inflate(R.layout.salesanalyticslist, viewGroup, false );
+        holder= new ViewHolder();
 
 
         holder.tv_product_name= (TextView)convertview.findViewById(R.id.tv_product_name);
@@ -58,14 +70,10 @@ public class SoldProductAdapter extends BaseAdapter {
         holder.tv_product_category= (TextView)convertview.findViewById(R.id.tv_product_category);
 
 
-
         holder.tv_product_name.setText(al_product_name.get(position));
-
-        Log.e("Product","Product "+al_product_name.get(position));
-
         holder.tv_quantity.setText(al_quantity.get(position));
 
-        holder.tv_product_category.setText(al_category.get(position));
+   //     holder.tv_product_category.setText(al_category.get(position));
 
         return convertview;
     }

@@ -29,11 +29,16 @@ public class NurseProductListAdapter extends BaseAdapter {
     ArrayList<String> in_stock = new ArrayList<>();
     ArrayList<String> category = new ArrayList<>();
     ArrayList<String> price = new ArrayList<>();
-    ArrayList<String> selected_product = new ArrayList<>();
-    ArrayList<String> selected_product_quantity = new ArrayList<>();
 
-    ArrayList<String> al_selected_product;
-    ArrayList<String> al_selected_product_quantity;
+    ArrayList<String> selected_product_id = new ArrayList<>();
+    ArrayList<String> selected_product_quantity = new ArrayList<>();
+    ArrayList<String> selected_product_name = new ArrayList<>();
+    ArrayList<String> selected_product_sku = new ArrayList<>();
+    ArrayList<String> selected_product_category = new ArrayList<>();
+    ArrayList<String> selected_product_price = new ArrayList<>();
+
+
+
 
     private static LayoutInflater inflater = null;
 
@@ -44,13 +49,19 @@ public class NurseProductListAdapter extends BaseAdapter {
 
         global = (Global) activity.getApplicationContext();
 
-        al_selected_product = new ArrayList<>();
-        al_selected_product_quantity = new ArrayList<>();
-
         try {
 
             for (HashMap<String, String> hashMap : global.getAl_product_details()) {
 
+
+                name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
+                category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
+                SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
+                price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
+                in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
+                product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
+
+                /*
                 if(search.equalsIgnoreCase(""))
                 {
                     if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search)) {
@@ -60,7 +71,7 @@ public class NurseProductListAdapter extends BaseAdapter {
                         price.add(GlobalConstants.PRODUCT_PRICE);
                         in_stock.add(GlobalConstants.PRODUCT_IN_STOCK);
                         product_id.add(GlobalConstants.PRODUCT_ID);
-                        selected_product.add("0");
+                        selected_product_id.add("0");
                     }
                 }
                 else
@@ -72,8 +83,10 @@ public class NurseProductListAdapter extends BaseAdapter {
                     price.add(GlobalConstants.PRODUCT_PRICE);
                     in_stock.add(GlobalConstants.PRODUCT_IN_STOCK);
                     product_id.add(GlobalConstants.PRODUCT_ID);
-                    selected_product.add("0");
+                    selected_product_id.add("0");
                 }
+
+                */
             }
 
         }catch(Exception e)
@@ -112,7 +125,7 @@ public class NurseProductListAdapter extends BaseAdapter {
         holder.minus = (TextView) rowView.findViewById(R.id.minus);
 
         holder.name.setText(name.get(position));
-        holder.category.setText(name.get(position));
+        holder.category.setText(category.get(position));
 
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,11 +140,55 @@ public class NurseProductListAdapter extends BaseAdapter {
 
                 holder.quantity.setText(String.valueOf(quantity));
 
-                selected_product.add(position, product_id.get(position));
-                selected_product_quantity.add(position ,String.valueOf(quantity));
 
-                global.setAl_select_product(selected_product);
+                if (quantity > 0)
+                {
+                    if (selected_product_id.contains(product_id.get(position)))
+                    {
+                        int pos = selected_product_id.indexOf(product_id.get(position));
+                        selected_product_quantity.add(pos, String.valueOf(quantity));
+                    }
+                    else
+                    {
+//                    selected_product_id.add(position, product_id.get(position));
+//                    selected_product_quantity.add(position ,String.valueOf(quantity));
+
+                        selected_product_id.add(product_id.get(position));
+                        selected_product_quantity.add(String.valueOf(quantity));
+                        selected_product_category.add(category.get(position));
+                        selected_product_sku.add(SKU.get(position));
+                        selected_product_name.add(name.get(position));
+                        selected_product_price.add(price.get(position));
+
+                    }
+                }
+                else
+                {
+                    try {
+                        selected_product_price.remove(position);
+                        selected_product_name.remove(position);
+                        selected_product_sku.remove(position);
+                        selected_product_category.remove(position);
+                        selected_product_id.remove(position);
+                        selected_product_quantity.remove(position);
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+
+                }
+
+
+
+
+                global.setAl_select_product(selected_product_id);
                 global.setAl_selected_product_quantity(selected_product_quantity);
+                global.setAl_selected_product_category(selected_product_category);
+                global.setAl_selected_product_price(selected_product_price);
+                global.setAl_selected_product_sku(selected_product_sku);
+                global.setAl_selected_product_name(selected_product_name);
+
             }
         });
 
@@ -145,11 +202,29 @@ public class NurseProductListAdapter extends BaseAdapter {
 
                 holder.quantity.setText(String.valueOf(quantity));
 
-                selected_product.add(position, product_id.get(position));
-                selected_product_quantity.add(position ,String.valueOf(quantity));
+                if (selected_product_id.contains(product_id.get(position)))
+                {
+                    int pos = selected_product_id.indexOf(product_id.get(position));
 
-                global.setAl_select_product(selected_product);
+                    selected_product_quantity.add(pos , String.valueOf(quantity));
+               }
+                else
+                {
+                    selected_product_id.add(product_id.get(position));
+                    selected_product_quantity.add(String.valueOf(quantity));
+                    selected_product_category.add(category.get(position));
+                    selected_product_sku.add(SKU.get(position));
+                    selected_product_name.add(name.get(position));
+                    selected_product_price.add(price.get(position));
+
+                }
+
+                global.setAl_select_product(selected_product_id);
                 global.setAl_selected_product_quantity(selected_product_quantity);
+                global.setAl_selected_product_category(selected_product_category);
+                global.setAl_selected_product_price(selected_product_price);
+                global.setAl_selected_product_sku(selected_product_sku);
+                global.setAl_selected_product_name(selected_product_name);
 
             }
         });

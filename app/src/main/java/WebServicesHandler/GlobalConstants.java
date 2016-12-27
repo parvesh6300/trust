@@ -49,7 +49,7 @@ public class GlobalConstants {
     public static final String PRODUCT_PRICE = "price";
     public static final String PRODUCT_IN_STOCK = "in_stock";
     public static final String PRODUCT_QUANTITY = "quantity";
-
+    public static final String PRODUCT_SOLD_OUT = "sold_out";
 
 // ************************************* GET Service VARIABLES  ****************************************************
 
@@ -177,6 +177,36 @@ public class GlobalConstants {
 
     public static final String DEPOSIT_AMOUNT = "amount";
     public static final String DEPOSIT_REMARKS = "remarks";
+    public static final String DEPOSIT_ID = "deposit_id";
+    public static final String DEPOSIT_DATE = "date";
+
+    public static final String AC_BALANCE = "total";
+
+    // ************************************* STOCK VARIABLES  ****************************************************
+
+    public static final String STOCK_ITEM_ID = "product_id";
+    public static final String STOCK_ITEM_QTY = "amount";
+    public static final String STOCK_ITEM_DATE = "remarks";
+
+
+    // ************************************* PRODUCTS SOLD OUT VARIABLES  ****************************************************
+
+    public static final String SOLD_START_DATE = "start_date";
+    public static final String SOLD_END_DATE = "end_date";
+
+
+    // *************************************  EXPENSE VARIABLES  ****************************************************
+
+
+    public static final String EXP_AMOUNT = "amount";
+    public static final String EXP_REASON = "expense_reason";
+    public static final String EXP_ID = "expense_id";
+    public static final String EXP_DATE = "created";
+
+
+
+
+
 
 
 

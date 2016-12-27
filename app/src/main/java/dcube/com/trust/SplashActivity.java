@@ -193,17 +193,22 @@ public class SplashActivity extends Activity {
                     Intent i = new Intent(SplashActivity.this, NurseHomeActivity.class);
                     startActivity(i);
                     finish();
-                } else if ("finance".equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role_id == 3
+
+                }
+                else if ("finance".equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role_id == 3
                 {
                     Intent i = new Intent(SplashActivity.this, FinanceHomeActivity.class);
                     startActivity(i);
                     finish();
-                } else if (global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE).equalsIgnoreCase("nurse_finance")) {
-                    Intent i = new Intent(SplashActivity.this, NurseHomeActivity.class);
+
+                }
+                else if (global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE).equalsIgnoreCase("nurse_finance")) {
+                    Intent i = new Intent(SplashActivity.this, NurseHomeActivity.class);  //FinanceHomeActivity
                     startActivity(i);
                     finish();
 
-                } else {
+                }
+                else {
                     Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
@@ -213,7 +218,6 @@ public class SplashActivity extends Activity {
             }
 
         }
-
 
 
         }

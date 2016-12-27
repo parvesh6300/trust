@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
@@ -21,24 +23,36 @@ public class ExpenseAdapter extends BaseAdapter {
 
     public static LayoutInflater inflater;
 
-    ArrayList<String> al_deposit_detail= new ArrayList<>();
-    ArrayList<String> al_deposit_amount= new ArrayList<>();
+    ArrayList<String> al_expense_detail= new ArrayList<>();
+    ArrayList<String> al_expense_amount= new ArrayList<>();
     ArrayList<String> al_date= new ArrayList<>();
+    ArrayList<String> al_expense_id= new ArrayList<>();
+
 
 
     Calendar cl= Calendar.getInstance();
+    Global global;
 
 
-    public ExpenseAdapter(Context mcontext, ArrayList<String> date, ArrayList<String> depositlist, ArrayList<String> depositamount)
+    public ExpenseAdapter(Context mcontext)
     {
         this.context= mcontext;
-        this.al_date=date;
-        this.al_deposit_detail= depositlist;
-        this.al_deposit_amount= depositamount;
+        this.al_date= new ArrayList<>();
+        this.al_expense_detail= new ArrayList<>();
+        this.al_expense_amount= new ArrayList<>();
+
+        global = (Global) context.getApplicationContext();
 
         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        addValues();
+
+        for (HashMap<String,String> hashmap : global.getAl_expense_details() )
+        {
+            al_expense_amount.add(hashmap.get(GlobalConstants.EXP_AMOUNT));
+            al_expense_detail.add(hashmap.get(GlobalConstants.EXP_REASON));
+            al_date.add(hashmap.get(GlobalConstants.EXP_DATE));
+            al_expense_id.add(hashmap.get(GlobalConstants.EXP_ID));
+        }
 
     }
 
@@ -60,16 +74,24 @@ public class ExpenseAdapter extends BaseAdapter {
         holder.tv_detail= (TextView)convertview.findViewById(R.id.tv_detail);
         holder.tv_amount= (TextView)convertview.findViewById(R.id.tv_amount);
 
-        holder.tv_date.setText(al_date.get(pos));
-        holder.tv_detail.setText(al_deposit_detail.get(pos));
-        holder.tv_amount.setText(al_deposit_amount.get(pos)+" Tsh");
+        String[] date_time = al_date.get(pos).split("\\s+");
+
+        String[] date = date_time[0].split("-");
+
+
+        holder.tv_month.setText(date[1]+" ");
+        holder.tv_year.setText("'"+date[0]);
+        holder.tv_date.setText(date[2]);
+
+        holder.tv_detail.setText(al_expense_detail.get(pos));
+        holder.tv_amount.setText(al_expense_amount.get(pos)+" Tsh");
 
         return convertview;
     }
 
     @Override
     public int getCount() {
-        return al_deposit_amount.size();
+        return global.getAl_expense_details().size();
     }
 
     @Override
@@ -83,24 +105,4 @@ public class ExpenseAdapter extends BaseAdapter {
     }
 
 
-    public void addValues()
-    {
-        al_date.add("05");
-        al_date.add("10");
-        al_date.add("14");
-        al_date.add("16");
-        al_date.add("18");
-
-        al_deposit_detail.add("Salaries");
-        al_deposit_detail.add("Rent");
-        al_deposit_detail.add("Equipment");
-        al_deposit_detail.add("Commodities");
-        al_deposit_detail.add("Other");
-
-        al_deposit_amount.add("40000");
-        al_deposit_amount.add("20000");
-        al_deposit_amount.add("10000");
-        al_deposit_amount.add("50000");
-        al_deposit_amount.add("80000");
-    }
 }

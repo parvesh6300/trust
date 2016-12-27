@@ -43,7 +43,7 @@
                 android:layout_width="280dp"
                 android:layout_height="match_parent"
                 android:hint="Username"
-                android:text="sushantsharma739@gmail.com"
+                android:text="rohit"
                 android:typeface="monospace"
                 android:textColor="@color/textColor"
                 android:layout_centerInParent="true"/>

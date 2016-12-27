@@ -39,7 +39,7 @@
 
 
 
-        <TextView
+        <EditText
             android:id="@+id/tv_quantity"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -52,6 +52,7 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:inputType="number"
             android:layout_centerInParent="true"/>
 
         <TextView

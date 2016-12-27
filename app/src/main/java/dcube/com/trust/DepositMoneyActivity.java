@@ -3,7 +3,8 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,11 +31,7 @@ public class DepositMoneyActivity extends Activity {
 
     DepositAdapter depositAdapter;
 
-    ArrayList<String> al_deposit_detail= new ArrayList<>();
-    ArrayList<String> al_deposit_amount= new ArrayList<>();
-    ArrayList<String> al_date= new ArrayList<>();
-
-    TextView tv_total_amount,tv_deposit;
+   TextView tv_total_amount,tv_deposit;
 
     EditText ed_deposit_amount,ed_remark;
 
@@ -45,6 +42,7 @@ public class DepositMoneyActivity extends Activity {
     String str_deposit_amount,str_remark;
     WebServices ws;
 
+    CustomDialogClass cdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +63,6 @@ public class DepositMoneyActivity extends Activity {
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
-        depositAdapter= new DepositAdapter(this,al_date,al_deposit_detail,al_deposit_amount);
-        list_deposit.setAdapter(depositAdapter);
 
 
         tv_deposit.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +76,7 @@ public class DepositMoneyActivity extends Activity {
                 else
                 {
                     str_deposit_amount = ed_deposit_amount.getText().toString();
+
                     if (ed_remark.getText().toString().matches(""))
                     {
                         str_remark = "";
@@ -89,13 +86,23 @@ public class DepositMoneyActivity extends Activity {
                         str_remark = ed_remark.getText().toString();
                     }
 
-                    CustomDialogClass cdd = new CustomDialogClass(DepositMoneyActivity.this);
+                    cdd = new CustomDialogClass(DepositMoneyActivity.this);
                     cdd.show();
                 }
 
 
             }
         });
+
+
+        if (isOnline())
+        {
+            new DepositHistoryAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -130,9 +137,10 @@ public class DepositMoneyActivity extends Activity {
             tv_balance = (TextView) findViewById(R.id.tv_balance);
             tv_total_amount = (TextView) findViewById(R.id.tv_total_amount);
 
+            tv_total_amount.setText("ACCOUNT TOTAL : "+String.valueOf(global.getInt_ac_balance()));
             tv_deposit.setText("Deposit : "+str_deposit_amount);
 
-            int_total_amount = Integer.parseInt("1000000");
+            int_total_amount = global.getInt_ac_balance();
             int_deposit = Integer.parseInt(str_deposit_amount);
             int_balance = int_total_amount + int_deposit;
 
@@ -144,7 +152,15 @@ public class DepositMoneyActivity extends Activity {
                 public void onClick(View view) {
 
                     dismiss();
-                    new DepositMoneyAsyncTask().execute();
+
+                    if (isOnline())
+                    {
+                        new DepositMoneyAsyncTask().execute();
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
             });
@@ -215,8 +231,8 @@ public class DepositMoneyActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                startActivity(new Intent(DepositMoneyActivity.this,FinanceHomeActivity.class));
-                finish();
+                showDoneDialog();
+
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
@@ -225,5 +241,106 @@ public class DepositMoneyActivity extends Activity {
         }
 
     }
+
+
+    public void showDoneDialog() {
+
+        final Dialog doneDialog = new Dialog(context);
+
+        doneDialog.setContentView(R.layout.stockalertdialog);
+
+        //doneDialog.create();
+        doneDialog.show();
+
+        TextView tv_yes = (TextView) doneDialog.findViewById(R.id.tv_yes);
+        TextView tv_no = (TextView) doneDialog.findViewById(R.id.tv_no);
+        TextView tv_message = (TextView) doneDialog.findViewById(R.id.tv_message);
+        TextView tv_title = (TextView) doneDialog.findViewById(R.id.tv_title);
+
+        tv_title.setText("Confirmation Dialog");
+        tv_message.setText("Money Deposited");
+        tv_yes.setText("OK");
+        tv_no.setVisibility(View.GONE);
+
+        tv_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                cdd.dismiss();
+                doneDialog.cancel();
+                finish();
+
+            }
+        });
+    }
+
+
+    public class DepositHistoryAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("deposits_history");
+
+                message = ws.DepositHistoryService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                tv_total_amount.setText(" "+String.valueOf(global.getInt_ac_balance() +" Tsh"));
+
+                depositAdapter= new DepositAdapter(context);
+                list_deposit.setAdapter(depositAdapter);
+
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+
+
+    protected boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

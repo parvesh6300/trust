@@ -23,15 +23,15 @@ import java.util.ArrayList;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
-import dcube.com.trust.utils.ProductListAdapter;
-import dcube.com.trust.utils.ProductSelectedAdapter;
+import dcube.com.trust.utils.NurseProductListAdapter;
+import dcube.com.trust.utils.NurseProductSelectedAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
 public class NurseProductActivity extends Activity {
 
     ListView productlist;
-    ProductListAdapter adapter;
+    NurseProductListAdapter adapter;
     TextView buy;
 
     GifTextView gif_loader;
@@ -117,7 +117,6 @@ public class NurseProductActivity extends Activity {
 
 
 
-
     public class GetPruductAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -161,7 +160,7 @@ public class NurseProductActivity extends Activity {
             }
             else {
 
-                adapter = new ProductListAdapter(NurseProductActivity.this,"");
+                adapter = new NurseProductListAdapter(NurseProductActivity.this,"");
                 productlist.setAdapter(adapter);
             }
 
@@ -179,7 +178,7 @@ public class NurseProductActivity extends Activity {
 
         public ListView selected;
 
-        ProductSelectedAdapter selectedAdapter;
+        NurseProductSelectedAdapter selectedAdapter;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -197,7 +196,7 @@ public class NurseProductActivity extends Activity {
             cancel = (TextView) findViewById(R.id.cancel);
             selected = (ListView) findViewById(R.id.selected_product_list);
 
-            selectedAdapter = new ProductSelectedAdapter(NurseProductActivity.this);
+            selectedAdapter = new NurseProductSelectedAdapter(NurseProductActivity.this);
             selected.setAdapter(selectedAdapter);
 
             confirm.setOnClickListener(new View.OnClickListener() {
@@ -255,7 +254,7 @@ public class NurseProductActivity extends Activity {
 
             try {
 
-                for ( int j=0 ; j < global.al_selected_product_id.size() ; j++)
+                for ( int j=0 ; j < global.getAl_select_product().size() ; j++)
                 {
                     ArrayList<String> al_str_key = new ArrayList<>();
                     ArrayList<String> al_str_value = new ArrayList<>();
@@ -264,7 +263,7 @@ public class NurseProductActivity extends Activity {
 //                    al_str_value.add(str_client_id);
 
                     al_str_key.add(GlobalConstants.CART_ITEM_ID);
-                    al_str_value.add(global.al_selected_product_id.get(j));
+                 //   al_str_value.add(global.getAl_expense_details().get(j));
 
                     al_str_key.add(GlobalConstants.CART_ITEM_TYPE);
                     al_str_value.add("product");

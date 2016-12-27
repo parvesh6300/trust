@@ -385,7 +385,6 @@ public class AddClientActivity extends Activity {
             str_age = str_age.toLowerCase();
             str_contact = str_contact.toLowerCase();
             str_emer_contact = str_emer_contact.toLowerCase();
-            str_area= str_area.toLowerCase();
             str_med_his = str_med_his.toLowerCase();
             str_his_contra = str_his_contra.toLowerCase();
             str_sex = str_sex.toLowerCase();

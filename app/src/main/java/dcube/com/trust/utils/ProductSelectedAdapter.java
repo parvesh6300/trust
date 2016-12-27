@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 public class ProductSelectedAdapter extends BaseAdapter {
@@ -46,6 +45,11 @@ public class ProductSelectedAdapter extends BaseAdapter {
         category.add("IUD");
         quantity.add("x 1");
         price.add("5,000");
+
+        for (int i = 0 ; i < global.getAl_select_product().size() ; i++)
+        {
+            name.add(global.getAl_select_product().get(i));
+        }
 
 
 //        for (int i = 0; i < global.getAl_selected_product_id().size(); i++)
@@ -125,11 +129,11 @@ public class ProductSelectedAdapter extends BaseAdapter {
         holder.name.setText(global.getAl_select_product().get(position));
 //        holder.category.setText();
 
-        int int_quantity = Integer.parseInt(global.getAl_selected_product().get(position).get(GlobalConstants.PRODUCT_QUANTITY));
-        int int_product_cost = Integer.parseInt(global.getAl_selected_product().get(position).get(GlobalConstants.PRODUCT_PRICE));
-        int total_cost = int_quantity * int_product_cost;
+        int int_quantity = Integer.parseInt(global.getAl_selected_product_quantity().get(position));
+//        int int_product_cost = Integer.parseInt(global.getAl_selected_product().get(position).get(GlobalConstants.PRODUCT_PRICE));
+//        int total_cost = int_quantity * int_product_cost;
 
-        holder.price.setText(String.valueOf(total_cost));
+//        holder.price.setText(String.valueOf(total_cost));
 
         return rowView;
     }

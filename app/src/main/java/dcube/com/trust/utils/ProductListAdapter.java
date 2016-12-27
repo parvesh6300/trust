@@ -47,11 +47,11 @@ public class ProductListAdapter extends BaseAdapter {
 
         try {
 
-            for (HashMap<String, String> hashMap : global.getAl_product_details()) {
+            for (HashMap<String, String> hashMap : global.getAl_product_details())
+            {
 
                 if(search.equalsIgnoreCase(""))
                 {
-                if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search)) {
                     name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
                     category.add(GlobalConstants.PRODUCT_CATEGORY);
                     SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
@@ -59,17 +59,20 @@ public class ProductListAdapter extends BaseAdapter {
                     in_stock.add(GlobalConstants.PRODUCT_IN_STOCK);
                     product_id.add(GlobalConstants.PRODUCT_ID);
                     selected_product.add("0");
-                }
                 }
                 else
                 {
-                    name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
-                    category.add(GlobalConstants.PRODUCT_CATEGORY);
-                    SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
-                    price.add(GlobalConstants.PRODUCT_PRICE);
-                    in_stock.add(GlobalConstants.PRODUCT_IN_STOCK);
-                    product_id.add(GlobalConstants.PRODUCT_ID);
-                    selected_product.add("0");
+                    if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search))
+                    {
+                        name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
+                        category.add(GlobalConstants.PRODUCT_CATEGORY);
+                        SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
+                        price.add(GlobalConstants.PRODUCT_PRICE);
+                        in_stock.add(GlobalConstants.PRODUCT_IN_STOCK);
+                        product_id.add(GlobalConstants.PRODUCT_ID);
+                        selected_product.add("0");
+                    }
+
                 }
             }
 
@@ -125,6 +128,7 @@ public class ProductListAdapter extends BaseAdapter {
         holder.name.setText(name.get(position));
         holder.category.setText(name.get(position));
 
+
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,6 +149,7 @@ public class ProductListAdapter extends BaseAdapter {
                 global.setAl_selected_product_quantity(selected_product_quantity);
             }
         });
+
 
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override

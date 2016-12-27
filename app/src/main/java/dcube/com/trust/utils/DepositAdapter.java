@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
@@ -25,20 +27,27 @@ public class DepositAdapter extends BaseAdapter {
     ArrayList<String> al_deposit_amount= new ArrayList<>();
     ArrayList<String> al_date= new ArrayList<>();
 
+    Global global;
 
     Calendar cl= Calendar.getInstance();
 
-
-    public DepositAdapter(Context mcontext, ArrayList<String> date,ArrayList<String> depositlist,ArrayList<String> depositamount)
+    public DepositAdapter(Context mcontext)
     {
         this.context= mcontext;
-        this.al_date=date;
-        this.al_deposit_detail= depositlist;
-        this.al_deposit_amount= depositamount;
+        al_date = new ArrayList<>();
+        al_deposit_detail = new ArrayList<>();
+        al_deposit_amount = new ArrayList<>();
+
+        global = (Global) context.getApplicationContext();
 
         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        addValues();
+        for (HashMap<String,String> hashmap  : global.getAl_deposit_details() )
+        {
+            al_date.add(hashmap.get(GlobalConstants.DEPOSIT_DATE));
+            al_deposit_amount.add(hashmap.get(GlobalConstants.DEPOSIT_AMOUNT));
+            al_deposit_detail.add(hashmap.get(GlobalConstants.DEPOSIT_REMARKS));
+        }
 
     }
 
@@ -60,7 +69,14 @@ public class DepositAdapter extends BaseAdapter {
         holder.tv_detail= (TextView)convertview.findViewById(R.id.tv_detail);
         holder.tv_amount= (TextView)convertview.findViewById(R.id.tv_amount);
 
-        holder.tv_date.setText(al_date.get(pos));
+        String[] date_time = al_date.get(pos).split("\\s+");
+
+        String[] date = date_time[0].split("-");
+
+        holder.tv_date.setText(date[2]);
+        holder.tv_month.setText(date[1]+" ");
+        holder.tv_year.setText("'"+date[0]);
+
         holder.tv_detail.setText(al_deposit_detail.get(pos));
         holder.tv_amount.setText(al_deposit_amount.get(pos)+" Tsh");
 
@@ -83,26 +99,5 @@ public class DepositAdapter extends BaseAdapter {
     }
 
 
-    public void addValues()
-    {
-        al_date.add("05");
-        al_date.add("10");
-        al_date.add("14");
-        al_date.add("16");
-        al_date.add("18");
-
-        al_deposit_detail.add("Sales Deposit");
-        al_deposit_detail.add("Deposit");
-        al_deposit_detail.add("Sales Deposit");
-        al_deposit_detail.add("Deposit");
-        al_deposit_detail.add("Sales Deposit");
-
-        al_deposit_amount.add("4000");
-        al_deposit_amount.add("2000");
-        al_deposit_amount.add("1000");
-        al_deposit_amount.add("5000");
-        al_deposit_amount.add("8000");
-
-    }
 
 }

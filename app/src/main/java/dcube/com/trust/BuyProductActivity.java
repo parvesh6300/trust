@@ -3,7 +3,6 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -66,9 +65,9 @@ public class BuyProductActivity extends Activity{
 
                 try
                 {
-                    if (global.getAl_selected_plan_id().size() > 0)
+                    if (global.getAl_select_product().size() > 0)
                     {
-
+                        cdd = new CustomDialogClass(BuyProductActivity.this);
                         cdd.show();
                     }
                     else
@@ -114,8 +113,6 @@ public class BuyProductActivity extends Activity{
         }
 
 
-
-        cdd = new CustomDialogClass(BuyProductActivity.this);
     }
 
 
@@ -144,7 +141,6 @@ public class BuyProductActivity extends Activity{
 
                 message = ws.GetProductService(context, al_str_key, al_str_value);
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -157,14 +153,14 @@ public class BuyProductActivity extends Activity{
 
             gif_loader.setVisibility(View.GONE);
 
-            if (!message.equalsIgnoreCase("true"))
+            if (message.equalsIgnoreCase("true"))
             {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
-            else {
-
                 adapter = new ProductListAdapter(BuyProductActivity.this,"");
                 productlist.setAdapter(adapter);
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+
             }
 
         }
@@ -207,7 +203,7 @@ public class BuyProductActivity extends Activity{
                 public void onClick(View view) {
 
                     dismiss();
-                    new AddToCartAsyncTask().execute();
+                //    new AddToCartAsyncTask().execute();
                 }
             });
 
@@ -235,6 +231,8 @@ public class BuyProductActivity extends Activity{
         }
     }
 
+
+    /*
 
 
     public class AddToCartAsyncTask extends AsyncTask<String, String, String> {
@@ -306,5 +304,7 @@ public class BuyProductActivity extends Activity{
         }
 
     }
+
+    */
 
 }

@@ -66,7 +66,7 @@ public class FinanceHomeActivity extends Activity {
                 switch (i)
                 {
                     case 0:
-                        startActivity(new Intent(FinanceHomeActivity.this,StockControl.class));
+                        startActivity(new Intent(FinanceHomeActivity.this,StockControlActivity.class));
                         break;
 
                     case 1:

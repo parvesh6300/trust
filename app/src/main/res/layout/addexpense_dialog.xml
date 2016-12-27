@@ -28,6 +28,7 @@
         android:layout_centerInParent="true">
 
         <TextView
+            android:id="@+id/tv_expense_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Expense Amount : 10,00,000 Tsh"
@@ -40,6 +41,7 @@
             android:gravity="center" />
 
         <TextView
+            android:id="@+id/tv_expense_reason"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Expense : Salary "

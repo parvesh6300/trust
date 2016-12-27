@@ -86,7 +86,7 @@ public class SearchClientActivity extends Activity {
                 }
                 else
                 {
-                    str_branch = adapterView.getItemAtPosition(pos).toString().toLowerCase();
+                    str_branch = adapterView.getItemAtPosition(pos).toString();
                 }
 
             }

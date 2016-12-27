@@ -28,6 +28,7 @@ public class Global extends Application {
 
     // ******************************* PRoduct Details Getter and Setter  *************************************************
 
+
     public ArrayList<HashMap<String, String>> getAl_product_details() {
         return al_product_details;
     }
@@ -39,36 +40,12 @@ public class Global extends Application {
     public ArrayList<HashMap<String,String>> al_product_details;
 
 
-    public ArrayList<HashMap<String, String>> getAl_selected_product() {
-        return al_selected_product;
-    }
-
-    public void setAl_selected_product(ArrayList<HashMap<String, String>> al_selected_product) {
-        this.al_selected_product = al_selected_product;
-    }
-
-    public ArrayList<HashMap<String,String>> al_selected_product;
 
 
-    public ArrayList<String> getAl_selected_product_id() {
-        return al_selected_product_id;
-    }
 
-    public void setAl_selected_product_id(ArrayList<String> al_selected_product_id) {
-        this.al_selected_product_id = al_selected_product_id;
-    }
 
-    public ArrayList<String> al_selected_product_id;
+    // ******************************* Selected PRoduct Details Getter and Setter  *************************************************
 
-    public ArrayList<String> getAl_selected_product_quantity() {
-        return al_selected_product_quantity;
-    }
-
-    public void setAl_selected_product_quantity(ArrayList<String> al_selected_product_quantity) {
-        this.al_selected_product_quantity = al_selected_product_quantity;
-    }
-
-    public ArrayList<String> al_selected_product_quantity;
 
     public ArrayList<String> al_select_product;
 
@@ -81,8 +58,54 @@ public class Global extends Application {
     }
 
 
+    public ArrayList<String> getAl_selected_product_quantity() {
+        return al_selected_product_quantity;
+    }
+
+    public ArrayList<String> getAl_selected_product_category() {
+        return al_selected_product_category;
+    }
+
+    public void setAl_selected_product_category(ArrayList<String> al_selected_product_category) {
+        this.al_selected_product_category = al_selected_product_category;
+    }
+
+    public ArrayList<String> getAl_selected_product_sku() {
+        return al_selected_product_sku;
+    }
+
+    public void setAl_selected_product_sku(ArrayList<String> al_selected_product_sku) {
+        this.al_selected_product_sku = al_selected_product_sku;
+    }
+
+    public ArrayList<String> getAl_selected_product_price() {
+        return al_selected_product_price;
+    }
+
+    public void setAl_selected_product_price(ArrayList<String> al_selected_product_price) {
+        this.al_selected_product_price = al_selected_product_price;
+    }
+
+    public void setAl_selected_product_quantity(ArrayList<String> al_selected_product_quantity) {
+        this.al_selected_product_quantity = al_selected_product_quantity;
+    }
+
+    public ArrayList<String> al_selected_product_quantity;
 
 
+    public ArrayList<String> al_selected_product_category;
+    public ArrayList<String> al_selected_product_sku;
+    public ArrayList<String> al_selected_product_price;
+
+    public ArrayList<String> getAl_selected_product_name() {
+        return al_selected_product_name;
+    }
+
+    public void setAl_selected_product_name(ArrayList<String> al_selected_product_name) {
+        this.al_selected_product_name = al_selected_product_name;
+    }
+
+    public ArrayList<String> al_selected_product_name;
 
 
     // ******************************* SERVICE Details Getter and Setter  *************************************************
@@ -299,6 +322,74 @@ public class Global extends Application {
     }
 
     public ArrayList<HashMap<String,String>> al_view_plan_details;
+
+
+    // ******************************* Stock Product Getter and Setter  *************************************************
+
+    public ArrayList<HashMap<String, String>> getAl_stock_product() {
+        return al_stock_product;
+    }
+
+    public void setAl_stock_product(ArrayList<HashMap<String, String>> al_stock_product) {
+        this.al_stock_product = al_stock_product;
+    }
+
+    public ArrayList<HashMap<String,String>> al_stock_product;
+
+
+    public ArrayList<HashMap<String, String>> getAl_product_sold() {
+        return al_product_sold;
+    }
+
+    public void setAl_product_sold(ArrayList<HashMap<String, String>> al_product_sold) {
+        this.al_product_sold = al_product_sold;
+    }
+
+    public ArrayList<HashMap<String,String>> al_product_sold;
+
+
+
+    // ******************************* Deposit Getter and Setter  *************************************************
+
+
+    public ArrayList<HashMap<String, String>> getAl_deposit_details() {
+        return al_deposit_details;
+    }
+
+    public void setAl_deposit_details(ArrayList<HashMap<String, String>> al_deposit_details) {
+        this.al_deposit_details = al_deposit_details;
+    }
+
+    public ArrayList<HashMap<String,String>> al_deposit_details;
+
+    public int int_ac_balance;
+
+    public int getInt_ac_balance() {
+        return int_ac_balance;
+    }
+
+    public void setInt_ac_balance(int int_ac_balance) {
+        this.int_ac_balance = int_ac_balance;
+    }
+
+
+    // ******************************* Expense Getter and Setter  *************************************************
+
+
+    public ArrayList<HashMap<String, String>> getAl_expense_details() {
+        return al_expense_details;
+    }
+
+    public void setAl_expense_details(ArrayList<HashMap<String, String>> al_expense_details) {
+        this.al_expense_details = al_expense_details;
+    }
+
+    public ArrayList<HashMap<String,String>> al_expense_details;
+
+
+
+
+
 
 
 
