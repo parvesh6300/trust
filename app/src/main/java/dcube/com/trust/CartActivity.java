@@ -52,10 +52,6 @@ public class CartActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                for ( int i =0 ; i< global.getAl_cart_details().size() ; i++)
-                {
-                    total_cost = total_cost + Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
-                }
 
                 CustomDialogClass dialog = new CustomDialogClass(CartActivity.this);
                 dialog.show();
@@ -95,6 +91,13 @@ public class CartActivity extends Activity {
             confirm = (TextView) findViewById(R.id.tv_yes);
             cancel = (TextView) findViewById(R.id.tv_no);
             tv_message = (TextView) findViewById(R.id.tv_message);
+
+            total_cost =0;
+
+            for ( int i =0 ; i< global.getAl_cart_details().size() ; i++)
+            {
+                total_cost = total_cost + Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+            }
 
             tv_message.setText("Your order total is: "+total_cost+" Tsh");
 

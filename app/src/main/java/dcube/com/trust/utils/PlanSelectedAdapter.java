@@ -116,7 +116,7 @@ public class PlanSelectedAdapter extends BaseAdapter {
         String str_plan_name = global.getAl_selected_plan().get(position).get(GlobalConstants.PLAN_PRODUCT_NAME)+" + "+
                 global.getAl_selected_plan().get(position).get(GlobalConstants.PLAN_SERVICE_NAME);
 
-        holder.tv_name.setText(str_plan_name);   // (plan_name.get(position)
+        holder.tv_name.setText(global.getAl_selected_plan().get(position).get(GlobalConstants.PLAN_ID));   // (plan_name.get(position)
         holder.tv_product_cost.setText(global.getAl_selected_plan().get(position).get(GlobalConstants.PLAN_PRODUCT_PRICE));
         holder.tv_service_cost.setText(global.getAl_selected_plan().get(position).get(GlobalConstants.PLAN_SERVICE_PRICE));
 

@@ -155,7 +155,7 @@ public class GlobalConstants {
     public static final String PAYMENT_TYPE = "payment_type";
     public static final String PAYMENT_AMOUNT = "amount";
     public static final String PAYMENT_ID = "payment_id";
-
+    public static final String PAYMENT_DIS_PER = "discount_percentage";
 
 
     // ************************************* View Order VARIABLES  ****************************************************

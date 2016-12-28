@@ -116,6 +116,19 @@ public class BuyPlanActivity extends Activity{
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
+                if (s.length() > 1)
+                {
+                    adapter = new PlanListAdapter(BuyPlanActivity.this, s.toString());
+                    servicelist.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    adapter = new PlanListAdapter(BuyPlanActivity.this, "");
+                    servicelist.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+
             }
         });
     }
@@ -243,7 +256,7 @@ public class BuyPlanActivity extends Activity{
 
             if (message.equalsIgnoreCase("true"))
             {
-                adapter = new PlanListAdapter(BuyPlanActivity.this);
+                adapter = new PlanListAdapter(BuyPlanActivity.this,"");
                 servicelist.setAdapter(adapter);
 
             }

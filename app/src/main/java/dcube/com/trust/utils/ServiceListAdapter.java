@@ -30,10 +30,9 @@ public class ServiceListAdapter extends BaseAdapter{
 
     boolean isSelected = false;
 
-    ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> serviceCost = new ArrayList<>();
+    ArrayList<String> name ;
+    ArrayList<String> serviceCost;
     ArrayList<String> service_id ;
-
     ArrayList<String> al_selected_service;
 
     private static LayoutInflater inflater = null;
@@ -45,37 +44,39 @@ public class ServiceListAdapter extends BaseAdapter{
 
         global = (Global) activity.getApplicationContext();
         al_selected_service = new ArrayList<>();
-
+        name = new ArrayList<>();
+        serviceCost = new ArrayList<>();
         service_id = new ArrayList<>();
 
 
         try {
 
+            for (HashMap<String,String> hashmap : global.getAl_service_details())
+            {
+                if (search.equalsIgnoreCase(""))
+                {
+                    name.add(hashmap.get(GlobalConstants.SERVICE_NAME));
+                    serviceCost.add(hashmap.get(GlobalConstants.SERVICE_PRICE));
+                    service_id.add(hashmap.get(GlobalConstants.SERVICE_ID));
+                }
+                else
+                {
+                    if (hashmap.get(GlobalConstants.SERVICE_NAME).contains(search))
+                    {
+                        name.add(hashmap.get(GlobalConstants.SERVICE_NAME));
+                        serviceCost.add(hashmap.get(GlobalConstants.SERVICE_PRICE));
+                        service_id.add(hashmap.get(GlobalConstants.SERVICE_ID));
+                    }
+                }
+
+            }
         }
         catch (Exception e)
         {
 
         }
 
-        for (HashMap<String,String> hashmap : global.getAl_service_details())
-        {
-            if (search.equalsIgnoreCase(""))
-            {
-                name.add(hashmap.get(GlobalConstants.SERVICE_NAME));
-                serviceCost.add(hashmap.get(GlobalConstants.SERVICE_PRICE));
-                service_id.add(hashmap.get(GlobalConstants.SERVICE_ID));
-            }
-            else
-            {
-                if (hashmap.get(GlobalConstants.SERVICE_NAME).contains(search))
-                {
-                    name.add(hashmap.get(GlobalConstants.SERVICE_NAME));
-                    serviceCost.add(hashmap.get(GlobalConstants.SERVICE_PRICE));
-                    service_id.add(hashmap.get(GlobalConstants.SERVICE_ID));
-                }
-            }
 
-        }
 
     }
 

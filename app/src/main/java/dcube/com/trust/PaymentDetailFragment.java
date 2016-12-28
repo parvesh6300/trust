@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,7 +104,6 @@ public class PaymentDetailFragment extends Fragment {
                         str_amount_to_pay = ed_amount.getText().toString();
                         int_discount = 0;
                     }
-
 
                     global.setPayment_amount(str_amount);
                     global.setAmount_to_pay(str_amount_to_pay);
@@ -264,22 +264,6 @@ public class PaymentDetailFragment extends Fragment {
     }
 
 
-    public boolean validate()
-    {
-        if (str_payment_mode.matches(""))
-        {
-            Toast.makeText(getActivity(), "Choose Payment Mode", Toast.LENGTH_SHORT).show();
-        }
-        else if (str_payment_type.matches(""))
-        {
-            Toast.makeText(getActivity(), "Choose Payment Type", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            return true;
-        }
-        return false;
-    }
-
 
     public class CheckOutAsyncTask extends AsyncTask<String, String, String> {
 
@@ -308,8 +292,17 @@ public class PaymentDetailFragment extends Fragment {
                 al_str_key.add(GlobalConstants.PAYMENT_ID);
                 al_str_value.add(payment_id);
 
+                al_str_key.add(GlobalConstants.PAYMENT_DIS_PER);
+                al_str_value.add(str_discount);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("checkout_in_cart");
+
+                for (int i =0; i<al_str_key.size() ; i++)
+                {
+                    Log.i("Key",al_str_key.get(i) );
+                    Log.i("Value",al_str_value.get(i) );
+                }
 
                 message = ws.CheckOutService(context, al_str_key, al_str_value);
 
@@ -337,5 +330,21 @@ public class PaymentDetailFragment extends Fragment {
 
     }
 
+
+    public boolean validate()
+    {
+        if (str_payment_mode.matches(""))
+        {
+            Toast.makeText(getActivity(), "Choose Payment Mode", Toast.LENGTH_SHORT).show();
+        }
+        else if (str_payment_type.matches(""))
+        {
+            Toast.makeText(getActivity(), "Choose Payment Type", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            return true;
+        }
+        return false;
+    }
 
 }
