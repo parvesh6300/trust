@@ -123,7 +123,11 @@
             android:name=".ViewServicesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".NurseProductActivity" />
+        <activity
+            android:name=".NurseProductActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity android:name=".TestFragment"></activity>
     </application>
 

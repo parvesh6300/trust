@@ -63,23 +63,16 @@ public class BuyProductActivity extends Activity{
             @Override
             public void onClick(View view) {
 
-                try
-                {
-                    if (global.getAl_select_product().size() > 0)
-                    {
+                try {
+                    if (global.getAl_select_product().size() > 0) {
                         cdd = new CustomDialogClass(BuyProductActivity.this);
                         cdd.show();
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(BuyProductActivity.this, "Chose any one Product", Toast.LENGTH_SHORT).show();
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     Toast.makeText(BuyProductActivity.this, "Chose any one Product", Toast.LENGTH_SHORT).show();
                 }
-
 
 
             }
@@ -92,17 +85,26 @@ public class BuyProductActivity extends Activity{
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
-                Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
+                Log.e("TextWatcherTest", "afterTextChanged:\t" + s.toString());
 
-                adapter = new ProductListAdapter(BuyProductActivity.this,"");
-                productlist.setAdapter(adapter);
+                if (s.length() > 1) {
+                    adapter = new ProductListAdapter(BuyProductActivity.this, s.toString());
+                    productlist.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    adapter = new ProductListAdapter(BuyProductActivity.this, "");
+                    productlist.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
 
@@ -111,6 +113,22 @@ public class BuyProductActivity extends Activity{
         } else {
             Toast.makeText(BuyProductActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
+
+
+        try {
+
+            global.getAl_select_product().clear();
+            global.getAl_selected_product_quantity().clear();
+            global.getAl_selected_product_category().clear();
+            global.getAl_selected_product_price().clear();
+            global.getAl_selected_product_sku().clear();
+            global.getAl_selected_product_name().clear();
+
+        } catch (Exception e)
+        {
+
+        }
+
 
 
     }

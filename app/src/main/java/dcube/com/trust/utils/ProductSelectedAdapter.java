@@ -8,22 +8,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import dcube.com.trust.R;
 
 public class ProductSelectedAdapter extends BaseAdapter {
 
     Context context;
     Global global;
-
-    ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> category = new ArrayList<>();
-    ArrayList<String> quantity = new ArrayList<>();
-    ArrayList<String> price = new ArrayList<>();
-
-    ArrayList<HashMap<String,String>> selected_product_details;
 
     private static LayoutInflater inflater = null;
 
@@ -32,51 +22,7 @@ public class ProductSelectedAdapter extends BaseAdapter {
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        selected_product_details = new ArrayList<>();
-
         global = (Global) activity.getApplicationContext();
-
-        name.add("Fiesta");
-        category.add("Condom");
-        quantity.add("x 3");
-        price.add("1,500");
-
-        name.add("Sleek /safe load");
-        category.add("IUD");
-        quantity.add("x 1");
-        price.add("5,000");
-
-        for (int i = 0 ; i < global.getAl_select_product().size() ; i++)
-        {
-            name.add(global.getAl_select_product().get(i));
-        }
-
-
-//        for (int i = 0; i < global.getAl_selected_product_id().size(); i++)
-//        {
-//
-//            for (int j = 0; j < global.getAl_product_details().size(); j++)
-//            {
-//                String product_id = global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_ID);
-//
-//                if (global.getAl_selected_product_id().get(i).equalsIgnoreCase(product_id))
-//                {
-//                    HashMap<String,String> map = new HashMap<>();
-//
-//                    map.put(GlobalConstants.PRODUCT_ID , global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_ID));
-//                    map.put(GlobalConstants.PRODUCT_SKU ,global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_SKU));
-//                    map.put(GlobalConstants.PRODUCT_NAME , global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_NAME));
-//                    map.put(GlobalConstants.PRODUCT_CATEGORY , global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_CATEGORY));
-//                    map.put(GlobalConstants.PRODUCT_PRICE , global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_PRICE));
-//                    map.put(GlobalConstants.PRODUCT_IN_STOCK , global.getAl_product_details().get(j).get(GlobalConstants.PRODUCT_IN_STOCK));
-//                    map.put(GlobalConstants.PRODUCT_QUANTITY , global.getAl_selected_product_quantity().get(i));
-//
-//                    selected_product_details.add(map);
-//                }
-//
-//            }
-//        }
-//        global.setAl_selected_product(selected_product_details);
 
     }
 
@@ -121,19 +67,19 @@ public class ProductSelectedAdapter extends BaseAdapter {
         holder.price = (TextView) rowView.findViewById(R.id.price);
         holder.product_cost = (TextView) rowView.findViewById(R.id.product_cost);
 
-//        holder.name.setText(global.getAl_selected_product().get(position).get(GlobalConstants.PRODUCT_NAME));  //name.get(position)
-//        holder.category.setText(global.getAl_selected_product().get(position).get(GlobalConstants.PRODUCT_CATEGORY));
-//        holder.quantity.setText(" x "+global.getAl_selected_product().get(position).get(GlobalConstants.PRODUCT_QUANTITY));
-//        holder.product_cost.setText(global.getAl_selected_product().get(position).get(GlobalConstants.PRODUCT_PRICE));
+        holder.name.setText(global.getAl_selected_product_name().get(position));
 
-        holder.name.setText(global.getAl_select_product().get(position));
-//        holder.category.setText();
+        holder.product_cost.setText(global.getAl_selected_product_price().get(position));
 
         int int_quantity = Integer.parseInt(global.getAl_selected_product_quantity().get(position));
-//        int int_product_cost = Integer.parseInt(global.getAl_selected_product().get(position).get(GlobalConstants.PRODUCT_PRICE));
-//        int total_cost = int_quantity * int_product_cost;
+        int int_product_cost = Integer.parseInt(global.getAl_selected_product_price().get(position));
+        int total_cost = int_quantity * int_product_cost;
 
-//        holder.price.setText(String.valueOf(total_cost));
+        holder.price.setText(String.valueOf(total_cost));
+
+        holder.quantity.setText(" x "+global.getAl_selected_product_quantity().get(position));
+        holder.category.setText(global.getAl_selected_product_category().get(position));
+
 
         return rowView;
     }

@@ -77,7 +77,7 @@ public class NurseProductActivity extends Activity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-//                BuyProductActivity.this.adapter.get;
+
 
 
             }
@@ -86,23 +86,18 @@ public class NurseProductActivity extends Activity {
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
-//                if (s.length() > 0)
-//                {
-//                    for (int i =0 ; i < global.al_product_details.size() ; i++)
-//                    {
-//                        Log.e("Search",search.getText().toString());
-//                        Log.e("Array", global.al_product_details.get(i).get(GlobalConstants.PRODUCT_NAME));
-//
-//                        if (search.getText().toString().equals(global.getAl_product_details().get(i).get(GlobalConstants.PRODUCT_NAME)))
-//                        {
-//                            adapter = new ProductListAdapter(BuyProductActivity.this);
-//                            productlist.setAdapter(adapter);
-//                        }
-//                    }
-//
-//                }
-
-                //      BuyProductActivity.this.adapter.filter(s.toString());
+                if(s.length() > 1)
+                {
+                    adapter = new NurseProductListAdapter(NurseProductActivity.this,s.toString());
+                    productlist.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    adapter = new NurseProductListAdapter(NurseProductActivity.this,"");
+                    productlist.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
 
             }
         });
@@ -111,6 +106,21 @@ public class NurseProductActivity extends Activity {
             new GetPruductAsyncTask().execute();
         } else {
             Toast.makeText(NurseProductActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
+
+        try {
+
+            global.getAl_select_product().clear();
+            global.getAl_selected_product_quantity().clear();
+            global.getAl_selected_product_category().clear();
+            global.getAl_selected_product_price().clear();
+            global.getAl_selected_product_sku().clear();
+            global.getAl_selected_product_name().clear();
+
+        } catch (Exception e)
+        {
+
         }
 
     }
@@ -165,6 +175,12 @@ public class NurseProductActivity extends Activity {
             }
 
         }
+
+
+
+
+
+
 
     }
 

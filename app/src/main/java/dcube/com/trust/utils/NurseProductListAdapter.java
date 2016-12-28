@@ -2,6 +2,9 @@ package dcube.com.trust.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,42 +54,35 @@ public class NurseProductListAdapter extends BaseAdapter {
 
         try {
 
-            for (HashMap<String, String> hashMap : global.getAl_product_details()) {
+            for (HashMap<String, String> hashMap : global.getAl_product_details())
+            {
 
-
-                name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
-                category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
-                SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
-                price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
-                in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
-                product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
-
-                /*
                 if(search.equalsIgnoreCase(""))
                 {
-                    if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search)) {
-                        name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
-                        category.add(GlobalConstants.PRODUCT_CATEGORY);
-                        SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
-                        price.add(GlobalConstants.PRODUCT_PRICE);
-                        in_stock.add(GlobalConstants.PRODUCT_IN_STOCK);
-                        product_id.add(GlobalConstants.PRODUCT_ID);
-                        selected_product_id.add("0");
-                    }
+                    name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
+                    category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
+                    SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
+                    price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
+                    in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
+                    product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
+
+                    Log.i("Called","Blank ");
                 }
                 else
                 {
+                    if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search))
+                    {
+                        name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
+                        category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
+                        SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
+                        price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
+                        in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
+                        product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
 
-                    name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
-                    category.add(GlobalConstants.PRODUCT_CATEGORY);
-                    SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
-                    price.add(GlobalConstants.PRODUCT_PRICE);
-                    in_stock.add(GlobalConstants.PRODUCT_IN_STOCK);
-                    product_id.add(GlobalConstants.PRODUCT_ID);
-                    selected_product_id.add("0");
+                        Log.i("Called","Search "+search);
+
+                    }
                 }
-
-                */
             }
 
         }catch(Exception e)
@@ -150,8 +146,6 @@ public class NurseProductListAdapter extends BaseAdapter {
                     }
                     else
                     {
-//                    selected_product_id.add(position, product_id.get(position));
-//                    selected_product_quantity.add(position ,String.valueOf(quantity));
 
                         selected_product_id.add(product_id.get(position));
                         selected_product_quantity.add(String.valueOf(quantity));
@@ -178,9 +172,6 @@ public class NurseProductListAdapter extends BaseAdapter {
                     }
 
                 }
-
-
-
 
                 global.setAl_select_product(selected_product_id);
                 global.setAl_selected_product_quantity(selected_product_quantity);
@@ -228,6 +219,47 @@ public class NurseProductListAdapter extends BaseAdapter {
 
             }
         });
+
+
+        holder.quantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (selected_product_id.contains(product_id.get(position)))
+                {
+                    int pos = selected_product_id.indexOf(product_id.get(position));
+
+                    selected_product_quantity.add(pos , editable.toString());
+                }
+                else
+                {
+                    selected_product_id.add(product_id.get(position));
+                    selected_product_quantity.add(String.valueOf(quantity));
+                    selected_product_category.add(category.get(position));
+                    selected_product_sku.add(SKU.get(position));
+                    selected_product_name.add(name.get(position));
+                    selected_product_price.add(price.get(position));
+
+                }
+
+                global.setAl_select_product(selected_product_id);
+                global.setAl_selected_product_quantity(selected_product_quantity);
+                global.setAl_selected_product_category(selected_product_category);
+                global.setAl_selected_product_price(selected_product_price);
+                global.setAl_selected_product_sku(selected_product_sku);
+                global.setAl_selected_product_name(selected_product_name);}
+        });
+
 
         return rowView;
     }
