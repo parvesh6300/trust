@@ -150,6 +150,7 @@ public class GlobalConstants {
     // ************************************* PAYMENT VARIABLES  ****************************************************
 
     public static final String PAYMENT_CLIENT_ID = "client_id";
+    public static final String PAYMENT_USER_ID = "user_id";
     public static final String PAYMENT_MODE = "payment_mode";
     public static final String PAYMENT_TYPE = "payment_type";
     public static final String PAYMENT_AMOUNT = "amount";
@@ -204,11 +205,39 @@ public class GlobalConstants {
     public static final String EXP_DATE = "created";
 
 
+    // *************************************  PENDING PAYMENT VARIABLES  ****************************************************
+
+    public static final String PEND_ID = "id";
+    public static final String PEND_PMT_ID = "payment_id";
+    public static final String PEND_CLIENT_ID = "client_id";
+    public static final String PEND_ITEM_TYPE = "item_type";
+    public static final String PEND_ITEM_ID = "item_id";
+    public static final String PEND_AMOUNT= "amount";
+    public static final String PEND_ORDER_ID = "order_id";
+    public static final String PEND_ITEM_NAME = "item_name";
+    public static final String PEND_ITEM_PRICE = "item_price";
+    public static final String PEND_DATE = "created";
+
+    public static final String PEND_COST = "item_price";
+    public static final String PEND_TOTAL_AMOUNT = "total_payable_price";
+    public static final String PEND_AMOUNT_PAID = "paid_amount";
 
 
 
+    // *************************************  WithDraw VARIABLES  ****************************************************
 
+
+    public static final String WD_AMOUNT = "amount";
+    public static final String WD_REASON = "reason";
+    public static final String WD_USER_ID = "user_id";
+    public static final String WD_DATE = "created";
+
+
+    // *************************************  WithDraw VARIABLES  ****************************************************
+
+    public static final String REVENUE_AS_PER = "as_per";
 
 
 
 }
+

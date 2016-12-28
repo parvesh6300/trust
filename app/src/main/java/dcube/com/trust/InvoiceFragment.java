@@ -44,6 +44,7 @@ public class InvoiceFragment extends Fragment  {
 
                 startActivity(new Intent(getActivity(),ClientHomeActivity.class));
                 getActivity().finish();
+
             }
         });
 

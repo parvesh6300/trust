@@ -37,7 +37,7 @@ public class PaymentDetailFragment extends Fragment {
 
     Context context;
 
-    String str_client_id;
+    String str_client_id,str_user_id;
     WebServices ws;
     TextView tv_cancel,generate;
 
@@ -47,6 +47,7 @@ public class PaymentDetailFragment extends Fragment {
 
     EditText ed_amount,ed_discount;
     int total_cost,int_discount_per,int_discount,int_discounted_amount,int_amount_to_pay;
+
 
 
     @Override
@@ -165,8 +166,6 @@ public class PaymentDetailFragment extends Fragment {
             }
         });
 
-        str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
-                get(GlobalConstants.SRC_CLIENT_ID);
 
         for ( int i =0 ; i< global.getAl_cart_details().size() ; i++)
         {
@@ -179,8 +178,15 @@ public class PaymentDetailFragment extends Fragment {
 
         str_amount = ed_amount.getText().toString();
 
+        str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
+                get(GlobalConstants.SRC_CLIENT_ID);
+
+        str_user_id = global.getAl_login_list().get(0).get(GlobalConstants.USER_ID);
+
         return v;
     }
+
+
 
     public static PaymentDetailFragment newInstance(String text) {
 
@@ -216,6 +222,9 @@ public class PaymentDetailFragment extends Fragment {
 
                 al_str_key.add(GlobalConstants.PAYMENT_CLIENT_ID);
                 al_str_value.add(str_client_id);
+
+                al_str_key.add(GlobalConstants.PAYMENT_USER_ID);
+                al_str_value.add(str_user_id);
 
                 al_str_key.add(GlobalConstants.PAYMENT_MODE);
                 al_str_value.add(str_payment_mode);
@@ -292,6 +301,9 @@ public class PaymentDetailFragment extends Fragment {
 
                 al_str_key.add(GlobalConstants.PAYMENT_CLIENT_ID);
                 al_str_value.add(str_client_id);
+
+                al_str_key.add(GlobalConstants.PAYMENT_USER_ID);
+                al_str_value.add(str_user_id);
 
                 al_str_key.add(GlobalConstants.PAYMENT_ID);
                 al_str_value.add(payment_id);

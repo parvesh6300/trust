@@ -28,6 +28,7 @@
         android:layout_centerInParent="true">
 
         <TextView
+            android:id="@+id/tv_account_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ACCOUNT TOTAL : 10,00,000 Tsh"
@@ -40,6 +41,7 @@
             android:gravity="center" />
 
         <TextView
+            android:id="@+id/tv_wd_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="WITHDRAW : 2,50,000 Tsh"
@@ -52,6 +54,7 @@
             android:gravity="center" />
 
         <TextView
+            android:id="@+id/tv_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BALANCE : 7,50,000 Tsh"

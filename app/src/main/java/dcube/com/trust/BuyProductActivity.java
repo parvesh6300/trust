@@ -3,6 +3,7 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -221,7 +222,7 @@ public class BuyProductActivity extends Activity{
                 public void onClick(View view) {
 
                     dismiss();
-                //    new AddToCartAsyncTask().execute();
+                    new AddToCartAsyncTask().execute();
                 }
             });
 
@@ -250,7 +251,7 @@ public class BuyProductActivity extends Activity{
     }
 
 
-    /*
+
 
 
     public class AddToCartAsyncTask extends AsyncTask<String, String, String> {
@@ -274,7 +275,7 @@ public class BuyProductActivity extends Activity{
 
             try {
 
-                for ( int j=0 ; j < global.al_selected_product_id.size() ; j++)
+                for ( int j=0 ; j < global.getAl_select_product().size() ; j++)
                 {
                     ArrayList<String> al_str_key = new ArrayList<>();
                     ArrayList<String> al_str_value = new ArrayList<>();
@@ -283,13 +284,13 @@ public class BuyProductActivity extends Activity{
                     al_str_value.add(str_client_id);
 
                     al_str_key.add(GlobalConstants.CART_ITEM_ID);
-                    al_str_value.add(global.al_selected_product_id.get(j));
+                    al_str_value.add(global.getAl_select_product().get(j));
 
                     al_str_key.add(GlobalConstants.CART_ITEM_TYPE);
                     al_str_value.add("product");
 
                     al_str_key.add(GlobalConstants.CART_AMOUNT);
-                    al_str_value.add(global.al_selected_product_quantity.get(j));
+                    al_str_value.add(global.getAl_selected_product_quantity().get(j));
 
                     al_str_key.add(GlobalConstants.ACTION);
                     al_str_value.add("add_to_cart");
@@ -323,6 +324,6 @@ public class BuyProductActivity extends Activity{
 
     }
 
-    */
+
 
 }

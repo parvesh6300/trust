@@ -40,6 +40,7 @@ public class NurseProductActivity extends Activity {
     WebServices ws;
     EditText search;
 
+    CustomDialogClass cdd;
     Global global;
 
     @Override
@@ -61,8 +62,17 @@ public class NurseProductActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                CustomDialogClass cdd = new CustomDialogClass(NurseProductActivity.this);
-                cdd.show();
+                try {
+                    if (global.getAl_select_product().size() > 0) {
+                        cdd = new CustomDialogClass(NurseProductActivity.this);
+                        cdd.show();
+                    } else {
+                        Toast.makeText(NurseProductActivity.this, "Chose any one Product", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(NurseProductActivity.this, "Chose any one Product", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
@@ -76,8 +86,6 @@ public class NurseProductActivity extends Activity {
             }
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
 
 
             }
@@ -164,23 +172,17 @@ public class NurseProductActivity extends Activity {
 
             gif_loader.setVisibility(View.GONE);
 
-            if (!message.equalsIgnoreCase("true"))
+            if (message.equalsIgnoreCase("true"))
             {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
-            else {
-
                 adapter = new NurseProductListAdapter(NurseProductActivity.this,"");
                 productlist.setAdapter(adapter);
             }
+            else {
+
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
 
         }
-
-
-
-
-
-
 
     }
 

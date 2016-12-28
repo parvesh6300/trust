@@ -576,6 +576,36 @@ public class WebServices {
     }
 
 
+    public static String UpdateCartItemService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("SearchClient", "Client : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                return "true";
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
     public static String PaymentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -1142,6 +1172,106 @@ public class WebServices {
 
         return message;
     }
+
+
+
+    public static String PendingPaymentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+        Global global = (Global) context.getApplicationContext();
+        ArrayList<HashMap<String ,String>> al_pending_pmt_details;
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("SearchClient", "Client : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                JSONArray jsonArray = jsonObject.getJSONArray("in_order");
+
+                al_pending_pmt_details = new ArrayList<>();
+
+                global.setPendAmountPaid(jsonObject.getString(GlobalConstants.PEND_AMOUNT_PAID));
+                global.setPendTotalCost(jsonObject.getString(GlobalConstants.PEND_TOTAL_AMOUNT));
+
+                for (int i=0 ; i < jsonArray.length() ; i++)
+                {
+
+                    JSONObject obj = jsonArray.getJSONObject(i);
+
+                    HashMap<String,String> map = new HashMap<>();
+
+                    map.put(GlobalConstants.PEND_ID ,obj.optString(GlobalConstants.PEND_ID) );
+                    map.put(GlobalConstants.PEND_PMT_ID ,obj.optString(GlobalConstants.PEND_PMT_ID) );
+                    map.put(GlobalConstants.PEND_CLIENT_ID ,obj.optString(GlobalConstants.PEND_CLIENT_ID) );
+                    map.put(GlobalConstants.PEND_ITEM_TYPE ,obj.optString(GlobalConstants.PEND_ITEM_TYPE) );
+                    map.put(GlobalConstants.PEND_ITEM_ID ,obj.optString(GlobalConstants.PEND_ITEM_ID) );
+                    map.put(GlobalConstants.PEND_AMOUNT ,obj.optString(GlobalConstants.PEND_AMOUNT) );
+                    map.put(GlobalConstants.PEND_ORDER_ID ,obj.optString(GlobalConstants.PEND_ORDER_ID) );
+                    map.put(GlobalConstants.PEND_ITEM_NAME ,obj.optString(GlobalConstants.PEND_ITEM_NAME) );
+                    map.put(GlobalConstants.PEND_ITEM_PRICE ,obj.optString(GlobalConstants.PEND_ITEM_PRICE) );
+                    map.put(GlobalConstants.PEND_DATE ,obj.optString(GlobalConstants.PEND_DATE) );
+
+                    al_pending_pmt_details.add(map);
+
+                }
+
+                global.setAl_pend_pmt_details(al_pending_pmt_details);
+
+
+                return "true";
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+
+
+    public static String WithdrawMoneyService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Expense", "Amount : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
 
 
 

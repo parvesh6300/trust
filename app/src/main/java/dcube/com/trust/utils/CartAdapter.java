@@ -3,6 +3,7 @@ package dcube.com.trust.utils;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,7 @@ public class CartAdapter extends BaseAdapter {
     String str_price ="1";
     String str_client_id;
     WebServices ws;
-    int position;
+    int position,quantity;
 
     public CartAdapter(Context mcontext)
     {
@@ -121,6 +122,7 @@ public class CartAdapter extends BaseAdapter {
             holder.ed_quantity.setText(al_item_quantity.get(pos));
         }
 
+        holder.ed_quantity.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         holder.ed_quantity.addTextChangedListener(new TextWatcher() {
             @Override
@@ -138,7 +140,7 @@ public class CartAdapter extends BaseAdapter {
 
                 try {
 
-                    int qty = Integer.parseInt(holder.ed_quantity.getText().toString());
+                    int qty = Integer.parseInt(editable.toString());
                     int max_stock = Integer.parseInt(global.getAl_cart_details().get(pos).get(GlobalConstants.GET_CART_MAX_STOCK));
 
                     if (qty > max_stock)
@@ -150,6 +152,13 @@ public class CartAdapter extends BaseAdapter {
                         String price = String.valueOf(qty* Integer.parseInt(str_price));   //al_product_price.get(pos)
 
                         holder.tv_price.setText(price);
+                        holder.ed_quantity.setText(String.valueOf(qty));
+
+                        quantity = qty;
+
+                        position = pos;
+
+                        new UpdateCartItemAsyncTask().execute();
                     }
 
                 }
@@ -298,6 +307,60 @@ public class CartAdapter extends BaseAdapter {
         }
 
     }
+
+
+    public class UpdateCartItemAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.GET_CART_ID);
+                al_str_value.add(global.al_cart_details.get(position).get(GlobalConstants.GET_CART_ID));
+
+                al_str_key.add(GlobalConstants.CART_AMOUNT);
+                al_str_value.add(String.valueOf(quantity));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("update_in_cart");
+
+                message = ws.UpdateCartItemService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                new GetCartItemsAsyncTask().execute();
+            }
+            else
+            {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
 
 
     @Override

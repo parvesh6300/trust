@@ -24,6 +24,7 @@ import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.ServiceListAdapter;
+import dcube.com.trust.utils.ServiceSelectedAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
@@ -86,17 +87,6 @@ public class BuyServicesActivity extends Activity {
 
 
 
-//        servicelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//                adapter.setSelectedIndex(i);
-//                adapter.notifyDataSetChanged();
-//
-//            }
-//        });
-
-
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -110,6 +100,20 @@ public class BuyServicesActivity extends Activity {
             public void afterTextChanged(Editable s) {
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
+
+                if (s.length() > 1)
+                {
+                    adapter = new ServiceListAdapter(BuyServicesActivity.this, s.toString());
+                    servicelist.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    adapter = new ServiceListAdapter(BuyServicesActivity.this, "");
+                    servicelist.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+
 
             }
         });
@@ -244,7 +248,7 @@ public class BuyServicesActivity extends Activity {
             }
             else {
 
-                adapter = new ServiceListAdapter(BuyServicesActivity.this);
+                adapter = new ServiceListAdapter(BuyServicesActivity.this,"");
                 servicelist.setAdapter(adapter);
             }
 

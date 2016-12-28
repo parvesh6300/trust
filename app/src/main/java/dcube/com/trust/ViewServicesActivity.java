@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
+import dcube.com.trust.utils.ServiceAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 

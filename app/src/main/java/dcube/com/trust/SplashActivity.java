@@ -202,11 +202,11 @@ public class SplashActivity extends Activity {
                     finish();
 
                 }
-                else if (global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE).equalsIgnoreCase("nurse_finance")) {
+                else if (global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE).equalsIgnoreCase("nurse_finance"))
+                {
                     Intent i = new Intent(SplashActivity.this, NurseHomeActivity.class);  //FinanceHomeActivity
                     startActivity(i);
                     finish();
-
                 }
                 else {
                     Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

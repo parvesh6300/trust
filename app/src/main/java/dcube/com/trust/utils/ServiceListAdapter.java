@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
@@ -31,20 +32,51 @@ public class ServiceListAdapter extends BaseAdapter{
 
     ArrayList<String> name = new ArrayList<>();
     ArrayList<String> serviceCost = new ArrayList<>();
+    ArrayList<String> service_id ;
 
     ArrayList<String> al_selected_service;
 
     private static LayoutInflater inflater = null;
 
-    public ServiceListAdapter(Activity activity)
+    public ServiceListAdapter(Activity activity,String search)
     {
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         global = (Global) activity.getApplicationContext();
         al_selected_service = new ArrayList<>();
-        this.name = name;
-        this.serviceCost = serviceCost;
+
+        service_id = new ArrayList<>();
+
+
+        try {
+
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        for (HashMap<String,String> hashmap : global.getAl_service_details())
+        {
+            if (search.equalsIgnoreCase(""))
+            {
+                name.add(hashmap.get(GlobalConstants.SERVICE_NAME));
+                serviceCost.add(hashmap.get(GlobalConstants.SERVICE_PRICE));
+                service_id.add(hashmap.get(GlobalConstants.SERVICE_ID));
+            }
+            else
+            {
+                if (hashmap.get(GlobalConstants.SERVICE_NAME).contains(search))
+                {
+                    name.add(hashmap.get(GlobalConstants.SERVICE_NAME));
+                    serviceCost.add(hashmap.get(GlobalConstants.SERVICE_PRICE));
+                    service_id.add(hashmap.get(GlobalConstants.SERVICE_ID));
+                }
+            }
+
+        }
+
     }
 
     public class Holder {
@@ -65,8 +97,8 @@ public class ServiceListAdapter extends BaseAdapter{
         holder.service_cost = (TextView) rowView.findViewById(R.id.service_cost);
         holder.iv = (ImageView) rowView.findViewById(R.id.iv);
 
-        holder.name.setText(global.getAl_service_details().get(position).get(GlobalConstants.SERVICE_NAME));  //name.get(position)
-        holder.service_cost.setText(global.getAl_service_details().get(position).get(GlobalConstants.SERVICE_PRICE));  //serviceCost.get(position)
+        holder.name.setText(name.get(position));
+        holder.service_cost.setText(serviceCost.get(position));
 
 
         rowView.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +112,7 @@ public class ServiceListAdapter extends BaseAdapter{
                     holder.name.setTextColor(Color.parseColor("#FFFFFF"));      // white
                     holder.service_cost.setTextColor(Color.parseColor("#FFFFFF"));      // white
 
-                    al_selected_service.add(global.getAl_service_details().get(position).get(GlobalConstants.SERVICE_ID));
+                    al_selected_service.add(service_id.get(position));
 
                 }
                 else
@@ -90,7 +122,7 @@ public class ServiceListAdapter extends BaseAdapter{
                     holder.name.setTextColor(Color.parseColor("#45265f"));      // text color
                     holder.service_cost.setTextColor(Color.parseColor("#45265f"));      // text color
 
-                    al_selected_service.remove(global.getAl_service_details().get(position).get(GlobalConstants.SERVICE_ID));
+                    al_selected_service.remove(service_id.get(position));
 
                 }
 
@@ -106,7 +138,7 @@ public class ServiceListAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return global.getAl_service_details().size();
+        return name.size();
     }
 
     @Override

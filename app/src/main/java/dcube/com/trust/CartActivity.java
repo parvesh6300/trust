@@ -125,7 +125,6 @@ public class CartActivity extends Activity {
         String resPonse = "";
         String message = "";
 
-
         @Override
         protected void onPreExecute() {
 

@@ -1,4 +1,4 @@
-package dcube.com.trust;
+package dcube.com.trust.utils;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import WebServicesHandler.GlobalConstants;
+import dcube.com.trust.R;
 import dcube.com.trust.utils.Global;
 
 /**

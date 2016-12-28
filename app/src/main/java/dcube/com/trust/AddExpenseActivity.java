@@ -255,7 +255,6 @@ public class AddExpenseActivity extends Activity {
 
 
 
-
     public class ExpenseHistoryAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();

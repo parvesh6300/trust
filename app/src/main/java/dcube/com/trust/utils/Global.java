@@ -388,6 +388,51 @@ public class Global extends Application {
 
 
 
+    // ******************************* Pending PAyment Getter and Setter  *************************************************
+
+
+    public ArrayList<HashMap<String,String>> al_pend_pmt_details;
+
+    public ArrayList<HashMap<String, String>> getAl_pend_pmt_details() {
+        return al_pend_pmt_details;
+    }
+
+    public void setAl_pend_pmt_details(ArrayList<HashMap<String, String>> al_pend_pmt_details) {
+        this.al_pend_pmt_details = al_pend_pmt_details;
+    }
+
+
+    public String getPendAmountToPay() {
+        return pendAmountToPay;
+    }
+
+    public void setPendAmountToPay(String pendAmountToPay) {
+        this.pendAmountToPay = pendAmountToPay;
+    }
+
+    public String getPendAmountPaid() {
+        return pendAmountPaid;
+    }
+
+    public void setPendAmountPaid(String pendAmountPaid) {
+        this.pendAmountPaid = pendAmountPaid;
+    }
+
+    public String getPendTotalCost() {
+
+        return pendTotalCost;
+    }
+
+    public void setPendTotalCost(String pendTotalCost) {
+        this.pendTotalCost = pendTotalCost;
+    }
+
+    public String pendTotalCost;
+    public String pendAmountToPay;
+    public String pendAmountPaid;
+
+
+
 
 
 

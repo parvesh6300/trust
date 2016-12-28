@@ -42,6 +42,7 @@
             android:typeface="monospace" />
 
         <EditText
+            android:id="@+id/ed_wd_amount"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -224,6 +225,16 @@
 
 
     </RelativeLayout>
+
+    <pl.droidsonroids.gif.GifTextView
+        android:id="@+id/gif_loader"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/loading"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        />
 
 
 </LinearLayout>

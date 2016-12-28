@@ -55,7 +55,6 @@ public class ViewPlanActivity extends Activity {
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
 
-
         lv_plan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {

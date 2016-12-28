@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
@@ -25,6 +27,8 @@ public class PendingPaymentAdapter extends BaseAdapter {
     ArrayList<String> al_product_cost= new ArrayList<>();
     ArrayList<String> al_date= new ArrayList<>();
 
+    Global global;
+
 
     public PendingPaymentAdapter(Context mcontext, ArrayList<String> date,ArrayList<String> product_name,ArrayList<String> product_cost)
     {
@@ -33,9 +37,21 @@ public class PendingPaymentAdapter extends BaseAdapter {
         this.al_product_name= product_name;
         this.al_product_cost= product_cost;
 
+        global = (Global) context.getApplicationContext();
+
         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        addValues();
+
+        for (HashMap<String,String> hashmap : global.getAl_pend_pmt_details())
+        {
+
+            al_product_name.add(hashmap.get(GlobalConstants.PEND_ITEM_NAME));
+            al_product_cost.add(hashmap.get(GlobalConstants.PEND_ITEM_PRICE));
+            al_date.add(hashmap.get(GlobalConstants.PEND_DATE));
+
+        }
+
+
     }
 
     public class ViewHolder{
@@ -59,7 +75,14 @@ public class PendingPaymentAdapter extends BaseAdapter {
         holder.tv_product_name= (TextView)convertview.findViewById(R.id.tv_product_name);
         holder.tv_cost= (TextView)convertview.findViewById(R.id.tv_cost);
 
-        holder.tv_date.setText(al_date.get(pos));
+        String[] date_time = al_date.get(pos).split("\\s+");
+
+        String[] date = date_time[0].split("-");
+
+        holder.tv_date.setText(date[2]);
+        holder.tv_month.setText(date[1]+" ");
+        holder.tv_year.setText("'"+date[0]);
+
         holder.tv_product_name.setText(al_product_name.get(pos));
         holder.tv_cost.setText(al_product_cost.get(pos)+" Tsh");
 
@@ -81,32 +104,6 @@ public class PendingPaymentAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
-
-
-    public void addValues()
-    {
-        al_date.add("05");
-        al_date.add("10");
-        al_date.add("14");
-        al_date.add("16");
-        al_date.add("18");
-
-        al_product_name.add("Bull Condom");
-        al_product_name.add("Fiesta");
-        al_product_name.add("Implanon Implants");
-        al_product_name.add("Safe Load");
-        al_product_name.add("Jadelle");
-
-        al_product_cost.add("4000");
-        al_product_cost.add("2000");
-        al_product_cost.add("1000");
-        al_product_cost.add("5000");
-        al_product_cost.add("8000");
-
-    }
-
-
-
 
 
 
