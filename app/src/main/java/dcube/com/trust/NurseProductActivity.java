@@ -3,7 +3,6 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -221,7 +220,7 @@ public class NurseProductActivity extends Activity {
                 @Override
                 public void onClick(View view) {
 
-                    startActivity(new Intent(NurseProductActivity.this,GenerateInvoiceActivity.class));
+                   // startActivity(new Intent(NurseProductActivity.this,GenerateInvoiceActivity.class));
                 }
             });
 

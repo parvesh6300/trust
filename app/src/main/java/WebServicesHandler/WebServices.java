@@ -281,7 +281,7 @@ public class WebServices {
             {
                 al_apmt_detail = new ArrayList<>();
 
-                JSONArray jsonArray = jsonObject.getJSONArray("Appointments");
+                JSONArray jsonArray = jsonObject.getJSONArray("appointments");
 
                 for (int i = 0 ; i< jsonArray.length() ; i++)
                 {
@@ -1272,6 +1272,60 @@ public class WebServices {
         return message;
     }
 
+
+    public static String RevenueService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        Global global = (Global) context.getApplicationContext();
+        ArrayList<String> al_on_date;
+        ArrayList<String> al_was_sum;
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Expense", "Amount : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+//
+//            String status = jsonObject.optString(GlobalConstants.STATUS);
+//            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+//            if (status.equalsIgnoreCase("1"))
+//            {
+                JSONObject obj1 = jsonObject.getJSONObject("revenue");
+
+                al_on_date = new ArrayList<>();
+                al_was_sum = new ArrayList<>();
+
+                JSONArray onDateArray = obj1.getJSONArray("ondate");
+                JSONArray wasSumArray = obj1.getJSONArray("was_sum");
+
+                for (int i =0 ; i < onDateArray.length() ; i++)
+                {
+                    al_on_date.add(onDateArray.get(i).toString());
+                }
+
+                for (int i = 0 ; i < wasSumArray.length() ; i++)
+                {
+                    al_was_sum.add(wasSumArray.get(i).toString());
+                }
+
+                global.setAl_on_date(al_on_date);
+                global.setAl_was_sum(al_was_sum);
+
+                return "true";
+ //           }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
 
 
 

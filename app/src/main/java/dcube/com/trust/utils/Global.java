@@ -433,6 +433,30 @@ public class Global extends Application {
 
 
 
+    // ******************************* Revenue Getter and Setter  *************************************************
+
+
+
+    public ArrayList<String> al_on_date;
+
+    public ArrayList<String> getAl_on_date() {
+        return al_on_date;
+    }
+
+    public void setAl_on_date(ArrayList<String> al_on_date) {
+        this.al_on_date = al_on_date;
+    }
+
+    public ArrayList<String> getAl_was_sum() {
+
+        return al_was_sum;
+    }
+
+    public void setAl_was_sum(ArrayList<String> al_was_sum) {
+        this.al_was_sum = al_was_sum;
+    }
+
+    public ArrayList<String> al_was_sum;
 
 
 

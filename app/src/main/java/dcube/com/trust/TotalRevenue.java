@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -11,9 +12,14 @@ import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
@@ -30,12 +36,13 @@ public class TotalRevenue extends Activity {
     ArrayList<Double> time= new ArrayList<>();
     ArrayList<Double> revenue= new ArrayList<>();
 
-
     ArrayList<Double> al_time_weekly;
     ArrayList<Double> al_revenue_weekly;
 
     Double[] ar_time= new Double[]{};
     Double[] ar_revenue= new Double[]{};
+
+    ArrayList<String> al_time;
 
     GraphView graph;
 
@@ -47,14 +54,14 @@ public class TotalRevenue extends Activity {
 
     String str_as_per="";
 
+    LineGraphSeries<DataPoint> series2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total_revenue);
 
         graph = (GraphView) findViewById(R.id.graph);
-
-        addValuesInList();
 
         global = (Global) getApplicationContext();
 
@@ -67,6 +74,7 @@ public class TotalRevenue extends Activity {
         radio_monthly=(RadioButton)findViewById(R.id.radio_monthly);
         radio_yearly=(RadioButton)findViewById(R.id.radio_yearly);
 
+        context = this;
 
         graph.removeAllSeries();
 
@@ -81,39 +89,17 @@ public class TotalRevenue extends Activity {
 
                     new TotalRevenueAsyncTask().execute();
 
-                    LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-
-                            new DataPoint(0, 0),
-                            new DataPoint(4, 2),
-                            new DataPoint(5, 5)
-                    });
-                    graph.addSeries(series);
                 }
 
 
                 else if (radio_weekly.isChecked())
                 {
                     str_as_per = "weekly";
+
                     graph.removeAllSeries();
 
-                    al_revenue_weekly = new ArrayList<Double>();
-                    al_time_weekly = new ArrayList<Double>();
-
-                    addWeekValue();
-
                     new TotalRevenueAsyncTask().execute();
-                    LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
 
-                            new DataPoint(al_time_weekly.get(0), al_revenue_weekly.get(0)),
-                            new DataPoint(al_time_weekly.get(1), al_revenue_weekly.get(1)),
-                            new DataPoint(al_time_weekly.get(2), al_revenue_weekly.get(2)),
-                            new DataPoint(al_time_weekly.get(3), al_revenue_weekly.get(3)),
-                            new DataPoint(al_time_weekly.get(4), al_revenue_weekly.get(4)),
-                            new DataPoint(al_time_weekly.get(5), al_revenue_weekly.get(5)),
-                            new DataPoint(al_time_weekly.get(6), al_revenue_weekly.get(6)),
-
-                    });
-                    graph.addSeries(series);
                 }
 
 
@@ -122,12 +108,6 @@ public class TotalRevenue extends Activity {
                 {
                     str_as_per = "monthly";
                     graph.removeAllSeries();
-
-                    al_revenue_weekly = new ArrayList<Double>();
-                    al_time_weekly = new ArrayList<Double>();
-
-                    addMonthlyValue();
-                    drawMonthlyGraph();
 
                     new TotalRevenueAsyncTask().execute();
 
@@ -141,13 +121,7 @@ public class TotalRevenue extends Activity {
                     graph.removeAllSeries();
 
                     new TotalRevenueAsyncTask().execute();
-                    LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
 
-                            new DataPoint(0, 0),
-                            new DataPoint(1, 5),
-                            new DataPoint(2, 3)
-                    });
-                    graph.addSeries(series);
                 }
 
             }
@@ -157,91 +131,193 @@ public class TotalRevenue extends Activity {
     }
 
 
-    public void addValuesInList()
+
+    public void drawWeeklyGraph()
     {
-        time.add(1.0);
-        time.add(2.0);
-        time.add(3.0);
-        time.add(4.0);
-        time.add(5.0);
+        series2 = new LineGraphSeries<>(generateData());
+
+        int count =  global.getAl_on_date().size();
+
+        String[] dateArr;
+        al_time = new ArrayList<>();
+
+        if ( count == 12 )
+        {
+            dateArr = new String[global.getAl_on_date().size()];
+            dateArr = global.getAl_on_date().toArray(dateArr);
+            Arrays.sort(dateArr , Collections.<String>reverseOrder());
+        }
+        else
+        {
+            for (int i=0; i < count; i++)
+            {
+                String[] date_time = global.getAl_on_date().get(i).split("\\s+");
+
+                String[] date = date_time[0].split("-");
+
+                al_time.add(date[2]);
+
+            }
+
+            dateArr = new String[al_time.size()];
+            dateArr = al_time.toArray(dateArr);
+            Arrays.sort(dateArr , Collections.<String>reverseOrder());
+
+        }
 
 
-        revenue.add(1000.0);
-        revenue.add(1550.0);
-        revenue.add(1330.0);
-        revenue.add(2530.0);
-        revenue.add(3000.0);
+        String[] stockArr = new String[global.getAl_was_sum().size()];
+        stockArr = global.getAl_was_sum().toArray(stockArr);
+        Arrays.sort(stockArr , Collections.<String>reverseOrder());
 
-        ar_time=time.toArray(ar_time);
-        ar_revenue= revenue.toArray(ar_revenue);
+        // set manual bounds
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(Double.parseDouble(stockArr[0]));
+
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(Double.parseDouble(dateArr[0]));
+
+
+ //       graph.getViewport().setScrollable(true); // enables horizontal scrolling
+        //     graph.getViewport().setScrollableY(true); // enables vertical scrolling
+        //      graph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
+        //     graph.getViewport().setScalableY(true); // enables vertical zooming and scrolling
+
+        graph.addSeries(series2);
+
+        series2.setAnimated(true);
+  //      series.setDrawAsPath(true);
+ //       series.setThickness(10);
+//        series2.setDrawDataPoints(true);
+//        series2.setDataPointsRadius(10);
+
+
+        series2.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPoint) {
+
+                Toast.makeText(TotalRevenue.this, "Revenue "+dataPoint, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+        graph.getViewport().setScrollable(true);
+
+//        StaticLabelsFormatter label = new StaticLabelsFormatter(graph);
+//        label.setHorizontalLabels(new String[] {"Mon","Tue","Wed","Thu","Fri","Sat","Sun"});
+//        graph.getGridLabelRenderer().setLabelFormatter(label);
+
+
+        series2.setDrawBackground(true);
+        series2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
 
     }
 
 
-    public void addWeekValue()
-    {
-        for (double i=0 ; i < 7 ; i++)
-        {
-            al_time_weekly.add(i);
+
+
+
+    public class TotalRevenueAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
         }
 
-        al_revenue_weekly.add(200d);
-        al_revenue_weekly.add(300d);
-        al_revenue_weekly.add(100d);
-        al_revenue_weekly.add(500d);
-        al_revenue_weekly.add(700d);
-        al_revenue_weekly.add(400d);
-        al_revenue_weekly.add(1000d);
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.REVENUE_AS_PER);
+                al_str_value.add(str_as_per);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_revenue");
+
+                message = ws.RevenueService(context, al_str_key, al_str_value);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                drawWeeklyGraph();
+            }
+            else {
+
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+
     }
 
 
-    public void addMonthlyValue()
-    {
-        for (double i=0 ; i < 31 ; i++)
+
+
+    private DataPoint[] generateData() {
+
+        int count =  global.getAl_on_date().size();
+        DataPoint[] values = new DataPoint[count];
+
+        if ( count == 12 )
         {
-            al_time_weekly.add(i);
+            for (int i=0 ; i < count ; i++)
+            {
+                double x = Double.parseDouble(global.getAl_on_date().get(i));
+                double y = Double.parseDouble(global.getAl_was_sum().get(i));
+
+                DataPoint v = new DataPoint( x, y);
+                values[i] = v;
+            }
+        }
+        else
+        {
+            for (int i=0; i < count; i++)
+            {
+                String[] date_time = global.getAl_on_date().get(i).split("\\s+");
+
+                String[] date = date_time[0].split("-");
+
+                double x = Double.parseDouble(date[2]);
+                double y = Double.parseDouble(global.getAl_was_sum().get(i));
+
+                DataPoint v = new DataPoint( x, y);
+                values[i] = v;
+            }
         }
 
-        al_revenue_weekly.add(200d);
-        al_revenue_weekly.add(300d);
-        al_revenue_weekly.add(100d);
-        al_revenue_weekly.add(500d);
-        al_revenue_weekly.add(700d);
-        al_revenue_weekly.add(400d);
-        al_revenue_weekly.add(1000d);
-        al_revenue_weekly.add(100d);
-        al_revenue_weekly.add(2000d);
-        al_revenue_weekly.add(200d);
-        al_revenue_weekly.add(100d);
-        al_revenue_weekly.add(1700d);
-        al_revenue_weekly.add(1050d);
-        al_revenue_weekly.add(200d);
-        al_revenue_weekly.add(250d);
-        al_revenue_weekly.add(120d);
-        al_revenue_weekly.add(130d);
-        al_revenue_weekly.add(400d);
-        al_revenue_weekly.add(1050d);
-        al_revenue_weekly.add(500d);
-        al_revenue_weekly.add(700d);
-        al_revenue_weekly.add(750d);
-        al_revenue_weekly.add(700d);
-        al_revenue_weekly.add(850d);
-        al_revenue_weekly.add(720d);
-        al_revenue_weekly.add(160d);
-        al_revenue_weekly.add(130d);
-        al_revenue_weekly.add(350d);
-        al_revenue_weekly.add(130d);
-        al_revenue_weekly.add(350d);
-        al_revenue_weekly.add(130d);
-        al_revenue_weekly.add(350d);
-        al_revenue_weekly.add(130d);
 
+        return values;
     }
 
 
     public void drawMonthlyGraph()
     {
+        /*
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
 
                 new DataPoint(al_time_weekly.get(0), al_revenue_weekly.get(0)),
@@ -279,62 +355,146 @@ public class TotalRevenue extends Activity {
         });
         graph.addSeries(series);
 
+        */
+
+        series2 = new LineGraphSeries<>(generateData());
+        graph.addSeries(series2);
+
+        series2.setAnimated(true);
+        series2.setDrawAsPath(true);
+        // series.setThickness(10);
+        series2.setDrawBackground(true);
+        series2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        series2.setDrawDataPoints(true);
+        series2.setDataPointsRadius(10);
+
+        series2.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPoint) {
+
+                Toast.makeText(TotalRevenue.this, "Revenue "+dataPoint, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+        graph.getViewport().setScrollable(true);
+        series2.setDrawBackground(true);
+        series2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+//        StaticLabelsFormatter label = new StaticLabelsFormatter(graph);
+//        label.setHorizontalLabels(new String[] {"05","10","15","20","25","30"});
+//        graph.getGridLabelRenderer().setLabelFormatter(label);
+
     }
 
 
+    public void drawYearlyGraph()
+    {
+/*
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
 
-    public class TotalRevenueAsyncTask extends AsyncTask<String, String, String> {
+                new DataPoint(al_time_weekly.get(0), al_revenue_weekly.get(0)),
+                new DataPoint(al_time_weekly.get(1), al_revenue_weekly.get(1)),
+                new DataPoint(al_time_weekly.get(2), al_revenue_weekly.get(2)),
+                new DataPoint(al_time_weekly.get(3), al_revenue_weekly.get(3)),
+                new DataPoint(al_time_weekly.get(4), al_revenue_weekly.get(4)),
+                new DataPoint(al_time_weekly.get(5), al_revenue_weekly.get(5)),
+                new DataPoint(al_time_weekly.get(6), al_revenue_weekly.get(6)),
+                new DataPoint(al_time_weekly.get(7), al_revenue_weekly.get(7)),
+                new DataPoint(al_time_weekly.get(8), al_revenue_weekly.get(8)),
+                new DataPoint(al_time_weekly.get(9), al_revenue_weekly.get(9)),
+                new DataPoint(al_time_weekly.get(10), al_revenue_weekly.get(10)),
+                new DataPoint(al_time_weekly.get(11), al_revenue_weekly.get(11)),
 
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
+        });
+        graph.addSeries(series);
+*/
 
-        @Override
-        protected void onPreExecute() {
+        series2 = new LineGraphSeries<>(generateData());
+        graph.addSeries(series2);
 
-            gif_loader.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.REVENUE_AS_PER);
-                al_str_value.add(str_as_per);
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_revenue");
-
-                message = ws.WithdrawMoneyService(context, al_str_key, al_str_value);
+        series2.setAnimated(true);
+        //      series.setDrawAsPath(true);
+        //       series.setThickness(10);
+        series2.setDrawBackground(true);
+        series2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        series2.setDrawDataPoints(true);
+        series2.setDataPointsRadius(10);
 
 
-            } catch (Exception e) {
-                e.printStackTrace();
+        series2.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPoint) {
+
+                Toast.makeText(TotalRevenue.this, "Revenue "+dataPoint, Toast.LENGTH_SHORT).show();
+
             }
+        });
 
-            return null;
+
+        graph.getViewport().setScrollable(true);
+
+//        StaticLabelsFormatter label = new StaticLabelsFormatter(graph);
+//        label.setHorizontalLabels(new String[] {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"});
+//        graph.getGridLabelRenderer().setLabelFormatter(label);
+
+
+        series2.setDrawBackground(true);
+        series2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+    }
+
+
+    public void addValuesInList()
+    {
+        Log.e("Size","Date "+global.getAl_on_date().size());
+/*
+        if (global.getAl_on_date().size() == 12)
+        {
+            for (int i=0 ; i < global.getAl_on_date().size()  ; i++)
+            {
+                al_time_weekly.add(Double.parseDouble(global.getAl_on_date().get(i)));
+            }
         }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            gif_loader.setVisibility(View.GONE);
-
-            if (message.equalsIgnoreCase("true"))
+        else
+        {
+            for (int i=0 ; i < global.getAl_on_date().size()  ; i++)
             {
 
-            }
-            else {
+                String[] date_time = global.getAl_on_date().get(i).split("\\s+");
 
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
+                String[] date = date_time[0].split("-");
 
+                al_time_weekly.add(Double.parseDouble(date[2]));
+
+            }
         }
 
 
+        for (int i = 0 ; i< global.getAl_was_sum().size() ; i++ )
+        {
+            al_revenue_weekly.add(Double.parseDouble(global.getAl_was_sum().get(i)));
+        }
+
+
+*/
+
+        drawWeeklyGraph();
+        /*
+       if (global.getAl_on_date().size() == 7)
+       {
+           drawWeeklyGraph();
+       }
+       else if (global.getAl_on_date().size() >= 28)
+       {
+           drawMonthlyGraph();
+       }
+        else if (global.getAl_on_date().size() == 12 )
+       {
+           drawYearlyGraph();
+       }
+*/
     }
 
 

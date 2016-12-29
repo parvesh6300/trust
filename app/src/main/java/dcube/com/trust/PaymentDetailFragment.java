@@ -116,7 +116,7 @@ public class PaymentDetailFragment extends Fragment {
             }
 
         });
-
+        
 
         tv_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
