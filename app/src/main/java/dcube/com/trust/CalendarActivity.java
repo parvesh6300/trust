@@ -6,7 +6,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -94,24 +93,10 @@ public class CalendarActivity extends Activity
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
-                al_str_key.add(GlobalConstants.APMT_CLIENT_ID);
-                al_str_value.add(global.getAl_src_client_details().get(0).get(GlobalConstants.SRC_CLIENT_ID));
-
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("add_appointment");
+                al_str_value.add("get_appointments");
 
-                for (int i =0 ; i < al_str_value.size() ; i++)
-                {
-                    Log.i("Key",al_str_key.get(i));
-                    Log.i("Value",al_str_value.get(i));
-                }
-
-                message = ws.AddAppointmentService(context, al_str_key, al_str_value);
-
-                //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
-                //             Log.i("Login", "Login : " + resPonse);
-
-//                return resPonse;
+                message = ws.GetAppointmentService(context, al_str_key, al_str_value);
 
             } catch (Exception e) {
                 e.printStackTrace();

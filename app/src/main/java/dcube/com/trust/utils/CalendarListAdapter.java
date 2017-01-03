@@ -9,7 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
@@ -20,7 +22,9 @@ public class CalendarListAdapter extends BaseAdapter {
     public Context context;
     ArrayList<String> al_name = new ArrayList<>();
     ArrayList<String> al_time = new ArrayList<>();
+
     public static LayoutInflater inflater;
+    Global global;
 
 
     public CalendarListAdapter(Context context)
@@ -29,10 +33,18 @@ public class CalendarListAdapter extends BaseAdapter {
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        global = (Global) context.getApplicationContext() ;
+
         Log.e("Adapter","Adapter Starts");
 
-        fillNameInList();
-        fillTImeInList();
+
+        for (HashMap<String,String> hashmap : global.getAl_apmt_details())
+        {
+            al_name.add(hashmap.get(GlobalConstants.APMT_CLIENT_ID));
+            al_time.add(hashmap.get(GlobalConstants.APMT_TIME));
+        }
+
+
     }
 
     @Override
@@ -71,30 +83,5 @@ public class CalendarListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void fillNameInList()
-    {
 
-        al_name.add("Evangle Omondi");
-        al_name.add("Sausanfatimah");
-        al_name.add("Anyelwiswe");
-        al_name.add("William");
-        al_name.add("Robert");
-        al_name.add("Mcculum");
-        al_name.add("De Villiers");
-        al_name.add("Peitersen");
-
-    }
-
-    public void fillTImeInList()
-    {
-        al_time.add("10:00 am");
-        al_time.add("11:00 am");
-        al_time.add("12:30 pm");
-        al_time.add("1:30 pm");
-        al_time.add("2:00 pm");
-        al_time.add("3:30 pm");
-        al_time.add("4:15 pm");
-        al_time.add("5:30 pm");
-
-    }
 }

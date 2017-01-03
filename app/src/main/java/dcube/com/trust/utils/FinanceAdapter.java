@@ -70,11 +70,11 @@ public class FinanceAdapter extends BaseAdapter {
 
         holder.image.setImageResource(mThumbIds[position]);
 
-        if(position==0)
-        {
-            holder.notify.setVisibility(View.VISIBLE);
-            holder.notify.setText("2");
-        }
+//        if(position==0)
+//        {
+//            holder.notify.setVisibility(View.VISIBLE);
+//            holder.notify.setText("2");
+//        }
 
 
         /*rowView.setOnClickListener(new View.OnClickListener() {
