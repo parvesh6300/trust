@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -44,6 +45,8 @@ public class BuyProductActivity extends Activity{
 
     CustomDialogClass cdd;
 
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,8 @@ public class BuyProductActivity extends Activity{
         setContentView(R.layout.activity_buy_product);
 
         global = (Global) getApplicationContext();
+
+        cn = new CheckNetConnection(this);
 
         productlist = (ListView) findViewById(R.id.productlist);
 
@@ -97,11 +102,13 @@ public class BuyProductActivity extends Activity{
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" + s.toString());
 
-                if (s.length() > 1) {
+                if (s.length() > 1)
+                {
                     adapter = new ProductListAdapter(BuyProductActivity.this, s.toString());
                     productlist.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-                } else {
+                }
+                else {
                     adapter = new ProductListAdapter(BuyProductActivity.this, "");
                     productlist.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
@@ -109,10 +116,13 @@ public class BuyProductActivity extends Activity{
             }
         });
 
-        if (isOnline()) {
+
+        if (cn.isNetConnected())
+        {
             new GetPruductAsyncTask().execute();
-        } else {
-            Toast.makeText(BuyProductActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -205,8 +215,10 @@ public class BuyProductActivity extends Activity{
         }
 
         @Override
-        protected void onCreate(Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState)
+        {
             super.onCreate(savedInstanceState);
+
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.buy_product_dialog);
 
@@ -221,8 +233,16 @@ public class BuyProductActivity extends Activity{
                 @Override
                 public void onClick(View view) {
 
-                    dismiss();
-                    new AddToCartAsyncTask().execute();
+                    if (cn.isNetConnected())
+                    {
+                        dismiss();
+                        new AddToCartAsyncTask().execute();
+                    }
+                    else {
+                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 }
             });
 
@@ -249,8 +269,6 @@ public class BuyProductActivity extends Activity{
             return false;
         }
     }
-
-
 
 
 

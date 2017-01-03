@@ -43,9 +43,10 @@ public class PlanAdapter extends BaseAdapter {
 
         for (HashMap<String,String> hashmap : global.getAl_view_plan_details() )
         {
-            al_plan_name.add(hashmap.get(GlobalConstants.ORDER_ITEM_NAME));
+            al_plan_name.add(hashmap.get(GlobalConstants.ORDER_ITEM_ID));
             al_date.add(hashmap.get(GlobalConstants.ORDER_CREATED));
             al_plan_price.add(hashmap.get(GlobalConstants.ORDER_ITEM_PRICE));
+
         }
 
     }
@@ -97,7 +98,5 @@ public class PlanAdapter extends BaseAdapter {
 
         return convertview;
     }
-
-
 
 }

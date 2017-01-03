@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.CustomAdapter;
@@ -49,6 +50,8 @@ public class SearchClientActivity extends Activity {
     WebServices ws;
     int pos;
 
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,8 @@ public class SearchClientActivity extends Activity {
         context = this;
 
         global = (Global) getApplicationContext();
+
+        cn = new CheckNetConnection(this);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -110,20 +115,30 @@ public class SearchClientActivity extends Activity {
 
                 if(s.length() >1)
                 {
-                    if (isOnline())
+//                    if (isOnline())
+//                    {
+//                        src_keyword = s.toString();
+////                    searchlist.setVisibility(View.VISIBLE);
+//                        new SearchClientAsyncTask().execute();
+//                    }
+//                    else {
+//                        Toast.makeText(SearchClientActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+//                    }
+
+                    if (cn.isNetConnected())
                     {
                         src_keyword = s.toString();
-//                    searchlist.setVisibility(View.VISIBLE);
+                        searchlist.setVisibility(View.VISIBLE);
                         new SearchClientAsyncTask().execute();
                     }
                     else {
-                        Toast.makeText(SearchClientActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
 
                 }
                 else
                 {
-                 //   searchlist.setVisibility(View.INVISIBLE);
+                    searchlist.setVisibility(View.GONE);
                 }
             }
         });
@@ -211,6 +226,7 @@ public class SearchClientActivity extends Activity {
                 else
                 {
                     searchlist.setAdapter(listadapter);
+                    listadapter.notifyDataSetChanged();
                 }
 
             }

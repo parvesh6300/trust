@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.ExpenseAdapter;
@@ -44,7 +45,7 @@ public class AddExpenseActivity extends Activity {
     Context context = AddExpenseActivity.this;
     CustomDialogClass cdd;
 
-
+    CheckNetConnection cn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,8 @@ public class AddExpenseActivity extends Activity {
         setContentView(R.layout.activity_add_expense);
 
         global = (Global) getApplicationContext();
+
+        cn = new CheckNetConnection(this);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -61,7 +64,6 @@ public class AddExpenseActivity extends Activity {
         ed_reason=(EditText)findViewById(R.id.ed_reason);
         tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
         tv_submit=(TextView)findViewById(R.id.tv_submit);
-
 
 
         tv_submit.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +92,7 @@ public class AddExpenseActivity extends Activity {
         });
 
 
-        if (isOnline())
+        if (cn.isNetConnected())
         {
             new ExpenseHistoryAsyncTask().execute();
         }
@@ -98,7 +100,6 @@ public class AddExpenseActivity extends Activity {
         {
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
-
 
     }
 
@@ -135,7 +136,7 @@ public class AddExpenseActivity extends Activity {
                 public void onClick(View view) {
 
 
-                    if (isOnline())
+                    if (cn.isNetConnected())
                     {
                         new AddExpenseAsyncTask().execute();
                     }

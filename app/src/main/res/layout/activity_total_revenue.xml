@@ -38,7 +38,7 @@
             android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/form_back"
             android:orientation="vertical"
             android:padding="10dp">
@@ -102,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp">
 
 
                 <TextView
@@ -157,17 +157,15 @@
             android:typeface="monospace"/>
 
 
-
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph"
             android:layout_width="match_parent"
-            android:layout_height="340dp"
+            android:layout_height="360dp"
             android:background="@color/white"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"/>
 
     </LinearLayout>
-
 
 
     <TextView

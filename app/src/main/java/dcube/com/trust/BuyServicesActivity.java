@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -43,6 +44,7 @@ public class BuyServicesActivity extends Activity {
     CustomDialogClass cdd;
 
     String str_client_id;
+    CheckNetConnection cn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,8 @@ public class BuyServicesActivity extends Activity {
         setContentView(R.layout.activity_buy_services);
 
         global = (Global) getApplicationContext();
+
+        cn = new CheckNetConnection(this);
 
         servicelist = (ListView) findViewById(R.id.servicelist);
 
@@ -118,10 +122,13 @@ public class BuyServicesActivity extends Activity {
             }
         });
 
-        if (isOnline()) {
+
+        if (cn.isNetConnected())
+        {
             new GetServiceAsyncTask().execute();
-        } else {
-            Toast.makeText(BuyServicesActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -169,7 +176,7 @@ public class BuyServicesActivity extends Activity {
                 @Override
                 public void onClick(View view) {
 
-                    if (isOnline())
+                    if (cn.isNetConnected())
                     {
                         dismiss();
                         new AddServiceCartAsyncTask().execute();

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +40,6 @@ public class NurseProductListAdapter extends BaseAdapter {
     ArrayList<String> selected_product_price = new ArrayList<>();
 
 
-
-
     private static LayoutInflater inflater = null;
 
     public NurseProductListAdapter(Activity activity, String search)
@@ -66,11 +63,10 @@ public class NurseProductListAdapter extends BaseAdapter {
                     in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
                     product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
 
-                    Log.i("Called","Blank ");
                 }
                 else
                 {
-                    if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search))
+                    if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search) || hashMap.get(GlobalConstants.PRODUCT_CATEGORY).contains(search))
                     {
                         name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
                         category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
@@ -78,9 +74,6 @@ public class NurseProductListAdapter extends BaseAdapter {
                         price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
                         in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
                         product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
-
-                        Log.i("Called","Search "+search);
-
                     }
                 }
             }

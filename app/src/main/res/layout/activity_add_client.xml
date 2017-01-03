@@ -135,6 +135,7 @@
                 android:typeface="monospace"
                 android:inputType="number"
                 android:textColor="@color/textColor"
+                android:maxLength="9"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/areacode"/>
 
@@ -176,6 +177,7 @@
                 android:layout_height="match_parent"
                 android:typeface="monospace"
                 android:inputType="number"
+                android:maxLength="9"
                 android:textColor="@color/textColor"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/emer_areacode"/>

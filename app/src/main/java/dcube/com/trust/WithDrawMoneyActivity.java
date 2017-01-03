@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -45,6 +46,8 @@ public class WithDrawMoneyActivity extends Activity {
 
     CustomDialogClass cdd;
 
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,8 @@ public class WithDrawMoneyActivity extends Activity {
         context = this;
 
         global = (Global) getApplicationContext();
+
+        cn = new CheckNetConnection(this);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -213,7 +218,13 @@ public class WithDrawMoneyActivity extends Activity {
                 @Override
                 public void onClick(View view) {
 
-               new WithDrawMoneyAsyncTask().execute();
+                    if (cn.isNetConnected())
+                    {
+                        new WithDrawMoneyAsyncTask().execute();
+                    }
+                    else {
+                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
             });

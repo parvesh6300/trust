@@ -193,8 +193,29 @@ public class Global extends Application {
     public ArrayList<HashMap<String,String>> al_apmt_details;
 
 
+    // *******************************  Client Getter and Setter  *************************************************
 
 
+    public String str_client_id;
+
+    public String getStr_client_id() {
+        return str_client_id;
+    }
+
+    public void setStr_client_id(String str_client_id) {
+        this.str_client_id = str_client_id;
+    }
+
+
+    public boolean isCLientAdded;
+
+    public boolean isCLientAdded() {
+        return isCLientAdded;
+    }
+
+    public void setCLientAdded(boolean CLientAdded) {
+        isCLientAdded = CLientAdded;
+    }
     // ******************************* Search Client Getter and Setter  *************************************************
 
     public ArrayList<HashMap<String, String>> getAl_src_client_details() {
@@ -431,6 +452,17 @@ public class Global extends Application {
     public String pendAmountToPay;
     public String pendAmountPaid;
 
+    public boolean isPendingPayment;
+
+    public boolean isPendingPayment() {
+        return isPendingPayment;
+    }
+
+    public void setPendingPayment(boolean pendingPayment) {
+        isPendingPayment = pendingPayment;
+    }
+
+
 
 
     // ******************************* Revenue Getter and Setter  *************************************************
@@ -457,6 +489,8 @@ public class Global extends Application {
     }
 
     public ArrayList<String> al_was_sum;
+
+
 
 
 

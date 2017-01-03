@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -35,7 +36,11 @@ public class ViewPendingPaymentActivity extends Activity {
 
     Context context;
     WebServices ws;
-    String str_client_id;
+    String str_client_id,str_user_id;
+    String str_amount_to_pay;
+    String str_payment_mode = "cash";
+
+    CheckNetConnection cn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,8 @@ public class ViewPendingPaymentActivity extends Activity {
         setContentView(R.layout.activity_view_payment);
 
         context = this;
+
+        cn = new CheckNetConnection(this);
 
         global = (Global) getApplicationContext();
 
@@ -62,14 +69,38 @@ public class ViewPendingPaymentActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(ViewPendingPaymentActivity.this,GenerateInvoiceActivity.class));
+                global.setPendingPayment(true);
+
+                global.setPayment_amount(str_amount_to_pay);
+                global.setAmount_to_pay(str_amount_to_pay);
+                global.setDiscount(String.valueOf(0));
+                global.setPayment_mode(str_payment_mode);
+
+                if (cn.isNetConnected())
+                {
+                    new PaymentAsyncTask().execute();
+                }
+                else {
+                    Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
 
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
 
-        new PendingPaymentAsyncTask().execute();
+        str_user_id = global.getAl_login_list().get(0).get(GlobalConstants.USER_ID);
+
+
+
+        if (cn.isNetConnected())
+        {
+            new PendingPaymentAsyncTask().execute();
+        }
+        else {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -122,12 +153,13 @@ public class ViewPendingPaymentActivity extends Activity {
                 paymentAdapter = new PendingPaymentAdapter(context, al_date, al_product_name, al_product_cost);
                 lv_payment_details.setAdapter(paymentAdapter);
 
-
                 int paid_amount = Integer.parseInt(global.getPendAmountPaid());
                 int total_cost = Integer.parseInt(global.getPendTotalCost());
                 int pending_amount = total_cost - paid_amount;
 
-                tv_pending_amount.setText(String.valueOf(pending_amount));
+                str_amount_to_pay = String.valueOf(pending_amount);
+
+                tv_pending_amount.setText(str_amount_to_pay);
 
             }
             else {
@@ -140,6 +172,69 @@ public class ViewPendingPaymentActivity extends Activity {
 
     }
 
+
+
+    public class PaymentAsyncTask extends AsyncTask<String, String, String> {
+
+
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.PAYMENT_CLIENT_ID);
+                al_str_value.add(str_client_id);
+
+                al_str_key.add(GlobalConstants.PAYMENT_USER_ID);
+                al_str_value.add(str_user_id);
+
+                al_str_key.add(GlobalConstants.PAYMENT_MODE);
+                al_str_value.add(str_payment_mode);
+
+                al_str_key.add(GlobalConstants.PAYMENT_TYPE);
+                al_str_value.add("full");
+
+                al_str_key.add(GlobalConstants.PAYMENT_AMOUNT);
+                al_str_value.add(str_amount_to_pay);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("payment");
+
+                message = ws.PaymentService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                startActivity(new Intent(ViewPendingPaymentActivity.this,GenerateInvoiceActivity.class));
+                finish();
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
 
 
 

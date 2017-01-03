@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -47,9 +48,9 @@ public class PaymentDetailFragment extends Fragment {
     String str_payment_mode = "",str_payment_type = "",str_amount="",str_discount,str_amount_to_pay;
 
     EditText ed_amount,ed_discount;
-    int total_cost,int_discount_per,int_discount,int_discounted_amount,int_amount_to_pay;
+    int total_cost=0,int_discount_per,int_discounted_amount,int_amount_to_pay;
 
-
+    CheckNetConnection cn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +60,8 @@ public class PaymentDetailFragment extends Fragment {
         viewPager = (ViewPager) GenerateInvoiceActivity.mInstance.findViewById(R.id.viewPager);
 
         global = (Global) getActivity().getApplicationContext();
+
+        cn = new CheckNetConnection(getActivity());
 
         gif_loader = (GifTextView) v.findViewById(R.id.gif_loader);
 
@@ -85,12 +88,14 @@ public class PaymentDetailFragment extends Fragment {
 
 
         generate.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v)
             {
 
                 if (validate())
                 {
                     str_discount = ed_discount.getText().toString();
+                    total_cost = Integer.parseInt(ed_amount.getText().toString());
 
                     if (!(str_discount.equalsIgnoreCase("0")  || str_discount.equals(null) || str_discount == null || str_discount.matches("")))
                     {
@@ -102,15 +107,26 @@ public class PaymentDetailFragment extends Fragment {
                     else
                     {
                         str_amount_to_pay = ed_amount.getText().toString();
-                        int_discount = 0;
+                        int_discounted_amount = 0;
                     }
+
 
                     global.setPayment_amount(str_amount);
                     global.setAmount_to_pay(str_amount_to_pay);
                     global.setDiscount(String.valueOf(int_discounted_amount));
                     global.setPayment_mode(str_payment_mode);
 
-                    new PaymentAsyncTask().execute();
+
+
+                    if (cn.isNetConnected())
+                    {
+                        new PaymentAsyncTask().execute();
+                    }
+                    else {
+                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 }
 
             }
@@ -329,6 +345,7 @@ public class PaymentDetailFragment extends Fragment {
         }
 
     }
+
 
 
     public boolean validate()

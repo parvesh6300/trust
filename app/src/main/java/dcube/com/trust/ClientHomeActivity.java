@@ -137,8 +137,15 @@ public class ClientHomeActivity extends Activity {
 
 
 
-        str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
-                get(GlobalConstants.SRC_CLIENT_ID);
+        if (global.isCLientAdded())
+        {
+            str_client_id = global.getStr_client_id();
+        }
+        else
+        {
+            str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
+                    get(GlobalConstants.SRC_CLIENT_ID);
+        }
 
 
         new GetCartItemsAsyncTask().execute();

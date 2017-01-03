@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -35,6 +36,8 @@ public class StockControlActivity extends Activity {
     WebServices ws;
     Context context = StockControlActivity.this;
 
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,18 +46,19 @@ public class StockControlActivity extends Activity {
 
         global = (Global) getApplicationContext();
 
+        cn = new CheckNetConnection(this);
+
         tv_quantity = (TextView) findViewById(R.id.tv_quantity);
 
         stock_list = (ListView) findViewById(R.id.stock_list);
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
 
-        if (isOnline())
+        if (cn.isNetConnected())
         {
             new GetStockProductAsyncTask().execute();
         }
-        else
-        {
+        else {
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 

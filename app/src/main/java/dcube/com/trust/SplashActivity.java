@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -41,6 +42,7 @@ public class SplashActivity extends Activity {
     Global global;
 
     String str_username,str_password,str_role,str_device_token;
+    CheckNetConnection cn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class SplashActivity extends Activity {
         setSharedPreferences();
 
         global = (Global) getApplicationContext();
+
+        cn = new CheckNetConnection(this);
 
         Thread timerThread = new Thread(){
             public void run(){
@@ -67,13 +71,30 @@ public class SplashActivity extends Activity {
                         str_device_token = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                                 Settings.Secure.ANDROID_ID);
 
-                        if (isOnline())
+//                        if (isOnline())
+//                        {
+//                            new OkHttpHandlerAsyncTask().execute();
+//                        }
+//                        else {
+//                            Toast.makeText(SplashActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+//                        }
+
+
+                        if (cn.isNetConnected())
                         {
                             new OkHttpHandlerAsyncTask().execute();
                         }
                         else {
-                            Toast.makeText(SplashActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                        }
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(SplashActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                          }
+
 
                     }
                     else

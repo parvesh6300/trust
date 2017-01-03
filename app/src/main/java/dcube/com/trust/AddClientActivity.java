@@ -25,8 +25,10 @@ import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
@@ -58,6 +60,10 @@ public class AddClientActivity extends Activity {
 
     String[] ITEMS = {"Select Branch","Arusha","Dar Es Salaam","Dodoma","Mbeya","Morogoro","Mwanza","Zanzibar"};
 
+    CheckNetConnection cn;
+
+    Global global;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +73,10 @@ public class AddClientActivity extends Activity {
         context = this;
 
         getViewById();
+
+        cn = new CheckNetConnection(this);
+
+        global = (Global) getApplicationContext();
 
         str_area = "Select Branch";
 
@@ -87,7 +97,7 @@ public class AddClientActivity extends Activity {
                else
                {
                    str_age = parent.getItemAtPosition(pos).toString();
-                   Toast.makeText(AddClientActivity.this, ""+str_age, Toast.LENGTH_SHORT).show();
+
                }
 
            }
@@ -104,7 +114,6 @@ public class AddClientActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int pos, long l) {
 
                 str_area = parent.getItemAtPosition(pos).toString();
-                Toast.makeText(AddClientActivity.this, ""+parent.getItemAtPosition(pos).toString(), Toast.LENGTH_SHORT).show();
                 Log.e("Area",parent.getItemAtPosition(pos)+"");
 
             }
@@ -118,11 +127,19 @@ public class AddClientActivity extends Activity {
 
                 if (validate())
                 {
-                    if (isOnline())
+//                    if (isOnline())
+//                    {
+//                        new AddClientAsyncTask().execute();
+//                    } else
+//                    {
+//                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+//                    }
+
+                    if (cn.isNetConnected())
                     {
                         new AddClientAsyncTask().execute();
-                    } else
-                    {
+                    }
+                    else {
                         Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
 
@@ -267,7 +284,9 @@ public class AddClientActivity extends Activity {
 
                     dismiss();
 
-                    startActivity(new Intent(AddClientActivity.this,ClientHomeActivity.class));
+                    global.setCLientAdded(true);
+
+                    startActivity(new Intent(AddClientActivity.this,NurseHomeActivity.class));  //ClientHomeActivity
                     finish();
                 }
             });
@@ -286,14 +305,23 @@ public class AddClientActivity extends Activity {
         {
             Toast.makeText(AddClientActivity.this, "Enter Contact No.", Toast.LENGTH_SHORT).show();
         }
+        else if (ed_contact.getText().toString().length() != 9)
+        {
+            Toast.makeText(AddClientActivity.this, "Contact No. is not of 9 digits", Toast.LENGTH_SHORT).show();
+        }
         else if (ed_emer_contact.getText().toString().matches(""))
         {
             Toast.makeText(AddClientActivity.this, "Enter Emergency Contact No.", Toast.LENGTH_SHORT).show();
+        }
+        else if (ed_emer_contact.getText().toString().length() != 9)
+        {
+            Toast.makeText(AddClientActivity.this, "Emer. Contact No. is not of 9 digits", Toast.LENGTH_SHORT).show();
         }
         else if (str_area.equalsIgnoreCase("Select Branch"))
         {
             Toast.makeText(AddClientActivity.this, "Select Area", Toast.LENGTH_SHORT).show();
         }
+
         else
         {
             str_name = ed_name.getText().toString().toLowerCase();

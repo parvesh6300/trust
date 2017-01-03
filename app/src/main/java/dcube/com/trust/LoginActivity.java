@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -28,7 +29,7 @@ import pl.droidsonroids.gif.GifTextView;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
-    static String role = "nurse";
+    static String role;
     RelativeLayout nurse;
     RelativeLayout finance;
     ImageView nurse_radio;
@@ -68,6 +69,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
+    CheckNetConnection cn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
 
         global = (Global) getApplicationContext();
+
+        cn = new CheckNetConnection(this);
+
+        role = "nurse";
 
         nurse = (RelativeLayout) findViewById(R.id.nurse);
         finance = (RelativeLayout) findViewById(R.id.finance);
@@ -135,9 +142,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 str_device_token = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                         Settings.Secure.ANDROID_ID);
 
-                if (isOnline()) {
+                if (cn.isNetConnected())
+                {
                     new OkHttpHandlerAsyncTask().execute();
-                } else {
+                }
+                else {
                     Toast.makeText(LoginActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                 }
 

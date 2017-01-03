@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -65,6 +66,8 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
     String format_time = "",format_date = "";
 
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +75,8 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
         setContentView(R.layout.activity_add_appointment);
 
         global = (Global) getApplicationContext();
+
+        cn = new CheckNetConnection(this);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
         service = (BetterSpinner) findViewById(R.id.service);
@@ -200,7 +205,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
                 if (validate())
                 {
-                    if (isOnline())
+                    if (cn.isNetConnected())
                     {
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -220,7 +225,9 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                             e.printStackTrace();
                         }
 
+
                         new AddAppointmentAsyncTask().execute();
+
                     }
                     else
                     {
@@ -360,7 +367,14 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, al_service_name);
                 service.setAdapter(adapter);
 
-                new GetAppointmentAsyncTask().execute();
+
+                if (cn.isNetConnected())
+                {
+                    new GetAppointmentAsyncTask().execute();
+                }
+                else {
+                    Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                }
 
             }
             else {

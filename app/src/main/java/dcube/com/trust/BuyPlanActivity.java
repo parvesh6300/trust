@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -46,6 +47,8 @@ public class BuyPlanActivity extends Activity{
 
     EditText search;
 
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +64,9 @@ public class BuyPlanActivity extends Activity{
         buy = (TextView) findViewById(R.id.buy);
         search = (EditText) findViewById(R.id.search);
 
-        if (isOnline()) {
-            new GetPlanAsyncTask().execute();
-        } else {
-            Toast.makeText(BuyPlanActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-        }
+        cn = new CheckNetConnection(this);
+
+
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +132,18 @@ public class BuyPlanActivity extends Activity{
 
             }
         });
+
+
+        if (cn.isNetConnected())
+        {
+            new GetPlanAsyncTask().execute();
+        }
+        else {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 
     public class CustomDialogClass extends Dialog {
@@ -174,7 +187,7 @@ public class BuyPlanActivity extends Activity{
                 @Override
                 public void onClick(View view) {
 
-                    if (isOnline())
+                    if (cn.isNetConnected())
                     {
                         dismiss();
                         new AddPlanCartAsyncTask().execute();

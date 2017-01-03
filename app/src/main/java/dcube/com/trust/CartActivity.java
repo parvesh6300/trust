@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.CartAdapter;
@@ -34,6 +35,8 @@ public class CartActivity extends Activity {
 
     int total_cost=0;
 
+    CheckNetConnection cn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class CartActivity extends Activity {
         setContentView(R.layout.activity_cart);
 
         global = (Global) getApplicationContext();
+
+        cn = new CheckNetConnection(this);
 
         lv_cart_items = (ListView) findViewById(R.id.lv_cart_items);
 
@@ -52,7 +57,6 @@ public class CartActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-
                 CustomDialogClass dialog = new CustomDialogClass(CartActivity.this);
                 dialog.show();
             }
@@ -62,7 +66,14 @@ public class CartActivity extends Activity {
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
                 get(GlobalConstants.SRC_CLIENT_ID);
 
-        new GetCartItemsAsyncTask().execute();
+
+        if (cn.isNetConnected())
+        {
+            new GetCartItemsAsyncTask().execute();
+        }
+        else {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -162,14 +173,14 @@ public class CartActivity extends Activity {
 
             gif_loader.setVisibility(View.GONE);
 
-            if (!message.equalsIgnoreCase("true"))
+            if (message.equalsIgnoreCase("true"))
             {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+                CartAdapter adapter = new CartAdapter(CartActivity.this);
+                lv_cart_items.setAdapter(adapter);
             }
             else {
 
-                CartAdapter adapter = new CartAdapter(CartActivity.this);
-                lv_cart_items.setAdapter(adapter);
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
         }

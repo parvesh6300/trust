@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -37,6 +38,8 @@ public class ViewServicesActivity extends Activity {
     CustomDialogClass cdd;
 
     Global global;
+
+    CheckNetConnection cn;
     int position;
 
     @Override
@@ -52,6 +55,8 @@ public class ViewServicesActivity extends Activity {
 
         context = this;
 
+        cn = new CheckNetConnection(this);
+
 
         lv_services.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -66,7 +71,14 @@ public class ViewServicesActivity extends Activity {
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
 
 
-        new ViewServiceAsyncTask().execute();
+        if (cn.isNetConnected())
+        {
+            new ViewServiceAsyncTask().execute();
+        }
+        else {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 

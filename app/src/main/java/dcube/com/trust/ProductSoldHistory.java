@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.SoldProductAdapter;
@@ -42,6 +43,8 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
     WebServices ws;
     Context context = ProductSoldHistory.this;
 
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,7 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
         lin_date_from.setOnClickListener(this);
         lin_date_to.setOnClickListener(this);
 
+        cn = new CheckNetConnection(this);
 
     }
 
@@ -90,9 +94,6 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
                     now.get(Calendar.DAY_OF_MONTH)
             );
             dpd_to.show(getFragmentManager(), "Datepickerdialog");
-
-
-
         }
 
     }
@@ -113,7 +114,7 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
             String d = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
             tv_date_to.setText(d);
 
-            if (isOnline())
+            if (cn.isNetConnected())
             {
                 new ProductSoldAsyncTask().execute();
             }

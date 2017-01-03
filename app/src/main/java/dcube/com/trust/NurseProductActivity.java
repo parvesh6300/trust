@@ -17,8 +17,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -42,6 +45,8 @@ public class NurseProductActivity extends Activity {
     CustomDialogClass cdd;
     Global global;
 
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +61,8 @@ public class NurseProductActivity extends Activity {
         buy = (TextView) findViewById(R.id.buy);
 
         search = (EditText) findViewById(R.id.search);
+
+        cn = new CheckNetConnection(this);
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,12 +116,15 @@ public class NurseProductActivity extends Activity {
             }
         });
 
-        if (isOnline()) {
-            new GetPruductAsyncTask().execute();
-        } else {
-            Toast.makeText(NurseProductActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-        }
 
+
+        if (cn.isNetConnected())
+        {
+            new GetPruductAsyncTask().execute();
+        }
+        else {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
         try {
 
@@ -220,6 +230,8 @@ public class NurseProductActivity extends Activity {
                 @Override
                 public void onClick(View view) {
 
+                 //   new CheckOutAsyncTask().execute();
+
                    // startActivity(new Intent(NurseProductActivity.this,GenerateInvoiceActivity.class));
                 }
             });
@@ -250,7 +262,7 @@ public class NurseProductActivity extends Activity {
 
 
 
-    public class AddToCartAsyncTask extends AsyncTask<String, String, String> {
+    public class CheckOutAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
@@ -276,17 +288,17 @@ public class NurseProductActivity extends Activity {
                     ArrayList<String> al_str_key = new ArrayList<>();
                     ArrayList<String> al_str_value = new ArrayList<>();
 
-//                    al_str_key.add(GlobalConstants.CART_CLIENT_ID);
-//                    al_str_value.add(str_client_id);
+                    al_str_key.add(GlobalConstants.CART_CLIENT_ID);
+                    al_str_value.add("guest");
 
                     al_str_key.add(GlobalConstants.CART_ITEM_ID);
-                 //   al_str_value.add(global.getAl_expense_details().get(j));
+                    al_str_value.add(global.getAl_select_product().get(j));
 
                     al_str_key.add(GlobalConstants.CART_ITEM_TYPE);
                     al_str_value.add("product");
 
                     al_str_key.add(GlobalConstants.CART_AMOUNT);
-                    al_str_value.add(global.al_selected_product_quantity.get(j));
+                    al_str_value.add(global.getAl_selected_product_quantity().get(j));
 
                     al_str_key.add(GlobalConstants.ACTION);
                     al_str_value.add("add_to_cart");
@@ -319,6 +331,42 @@ public class NurseProductActivity extends Activity {
 
     }
 
+
+
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }
+
+
+    public boolean isOnlineNet() {
+
+        Runtime runtime = Runtime.getRuntime();
+        try {
+
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int     exitValue = ipProcess.waitFor();
+            return (exitValue == 0);
+
+        } catch (IOException e)          { e.printStackTrace(); }
+        catch (InterruptedException e) { e.printStackTrace(); }
+
+        return false;
+    }
 
 
 }

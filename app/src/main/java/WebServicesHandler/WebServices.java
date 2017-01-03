@@ -215,6 +215,10 @@ public class WebServices {
 
             if (status.equalsIgnoreCase("1"))
             {
+                String client_id = jsonObject.optString(GlobalConstants.CLIENT_ID);
+
+                global.setStr_client_id(client_id);
+
                 return "true";
             }
 

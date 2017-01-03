@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -41,6 +42,8 @@ public class ViewPlanActivity extends Activity {
     String str_client_id;
     CustomDialogClass cdd;
 
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,8 @@ public class ViewPlanActivity extends Activity {
         lv_plan=(ListView)findViewById(R.id.lv_plan);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
+
+        cn = new CheckNetConnection(this);
 
 
         lv_plan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,7 +73,15 @@ public class ViewPlanActivity extends Activity {
 
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
 
-        new ViewPlanAsyncTask().execute();
+
+        if (cn.isNetConnected())
+        {
+            new ViewPlanAsyncTask().execute();
+        }
+        else {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
@@ -97,7 +110,7 @@ public class ViewPlanActivity extends Activity {
             tv_plan_name = (TextView) findViewById(R.id.tv_plan_name);
             tv_plan_price = (TextView) findViewById(R.id.tv_plan_price);
 
-            tv_plan_name.setText(global.getAl_view_plan_details().get(position).get(GlobalConstants.ORDER_ITEM_NAME));
+            tv_plan_name.setText(global.getAl_view_plan_details().get(position).get(GlobalConstants.ORDER_ITEM_ID));
             tv_plan_price.setText(global.getAl_view_plan_details().get(position).get(GlobalConstants.ORDER_ITEM_PRICE));
 
 

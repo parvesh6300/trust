@@ -20,6 +20,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.FollowupListAdapter;
@@ -42,6 +43,8 @@ public class ViewAppointmentActivity extends Activity {
     String str_client_id;
     int pos;
 
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,8 @@ public class ViewAppointmentActivity extends Activity {
         setContentView(R.layout.activity_view_appointment);
 
         global = (Global) getApplicationContext();
+
+        cn = new CheckNetConnection(this);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -84,7 +89,16 @@ public class ViewAppointmentActivity extends Activity {
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
                 get(GlobalConstants.SRC_CLIENT_ID);
 
-        new GetAppointmentAsyncTask().execute();
+
+
+        if (cn.isNetConnected())
+        {
+            new GetAppointmentAsyncTask().execute();
+        }
+        else {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 

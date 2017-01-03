@@ -91,6 +91,8 @@ public class GlobalConstants {
     public static final String CLIENT_CHILD = "children";
     public static final String CLIENT_HIV_TEST = "hiv_tested";
     public static final String CLIENT_REACH_WAY = "how_you_reached_us";
+    public static final String CLIENT_ID = "client_id";
+
 
 
     // ************************************* Add/GET Apppointment VARIABLES  ****************************************************

@@ -60,7 +60,7 @@ public class PlanListAdapter extends BaseAdapter {
                 }
                 else
                 {
-                    if (hashmap.get(GlobalConstants.PLAN_ID).contains(search))
+                    if (hashmap.get(GlobalConstants.PLAN_ID).contains(search) )
                     {
                    //     al_plan_name.add(hashmap.get(GlobalConstants.PLAN_NAME));
                         al_product_cost.add(hashmap.get(GlobalConstants.PLAN_PRODUCT_PRICE));

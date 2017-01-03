@@ -10,10 +10,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import dcube.com.trust.utils.Global;
+
 public class GenerateInvoiceActivity extends FragmentActivity {
 
     TextView generate;
     ViewPager pager;
+    Global global;
 
     public static GenerateInvoiceActivity mInstance = null;
 
@@ -24,6 +27,7 @@ public class GenerateInvoiceActivity extends FragmentActivity {
 
         mInstance = this;
 
+        global = (Global) getApplicationContext();
         generate = (TextView) findViewById(R.id.generate);
 
         pager = (ViewPager) findViewById(R.id.viewPager);
@@ -49,13 +53,21 @@ public class GenerateInvoiceActivity extends FragmentActivity {
         @Override
         public Fragment getItem(int pos) {
 
-            switch(pos) {
-
-                case 0: return PaymentDetailFragment.newInstance("FirstFragment, Instance 1");
-                case 1: return TestFragment.newInstance("SecondFragment, Instance 1");
-                case 2: return InvoiceFragment.newInstance("ThirdFragment, Instance 1");
-                default: return PaymentDetailFragment.newInstance("FourthFragment, Default");
+            if(global.isPendingPayment)
+            {
+                return InvoiceFragment.newInstance("ThirdFragment, Instance 1");
             }
+            else
+            {
+                switch(pos) {
+
+                    case 0: return PaymentDetailFragment.newInstance("FirstFragment, Instance 1");
+                    case 1: return TestFragment.newInstance("SecondFragment, Instance 1");
+                    case 2: return InvoiceFragment.newInstance("ThirdFragment, Instance 1");
+                    default: return PaymentDetailFragment.newInstance("FourthFragment, Default");
+                }
+            }
+
         }
 
         @Override

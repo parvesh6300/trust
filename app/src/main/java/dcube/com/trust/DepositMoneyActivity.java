@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.DepositAdapter;
@@ -44,6 +45,8 @@ public class DepositMoneyActivity extends Activity {
 
     CustomDialogClass cdd;
 
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -52,6 +55,8 @@ public class DepositMoneyActivity extends Activity {
         setContentView(R.layout.activity_deposit_money);
 
         global = (Global) getApplicationContext();
+
+        cn = new CheckNetConnection(this);
 
         list_deposit=(ListView)findViewById(R.id.list_deposit);
 
@@ -95,7 +100,7 @@ public class DepositMoneyActivity extends Activity {
         });
 
 
-        if (isOnline())
+        if (cn.isNetConnected())
         {
             new DepositHistoryAsyncTask().execute();
         }
@@ -153,7 +158,7 @@ public class DepositMoneyActivity extends Activity {
 
                     dismiss();
 
-                    if (isOnline())
+                    if (cn.isNetConnected())
                     {
                         new DepositMoneyAsyncTask().execute();
                     }
