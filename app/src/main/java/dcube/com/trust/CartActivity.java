@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
@@ -36,6 +38,8 @@ public class CartActivity extends Activity {
     int total_cost=0;
 
     CheckNetConnection cn;
+
+    public static Handler h;
 
 
     @Override
@@ -74,6 +78,22 @@ public class CartActivity extends Activity {
         else {
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
+
+        h = new Handler() {
+
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+
+                switch(msg.what) {
+
+                    case 0:
+                        finish();
+                        break;
+
+                }
+            }
+
+        };
 
     }
 

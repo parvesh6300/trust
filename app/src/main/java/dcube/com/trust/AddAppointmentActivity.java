@@ -480,6 +480,8 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                 @Override
                 public void onClick(View view) {
 
+                    CalendarActivity.h.sendEmptyMessage(0);
+//                    ClientHomeActivity.h.sendEmptyMessage(0);
                     dismiss();
                     finish();
                 }

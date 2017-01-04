@@ -43,7 +43,6 @@ public class Global extends Application {
 
 
 
-
     // ******************************* Selected PRoduct Details Getter and Setter  *************************************************
 
 
@@ -106,6 +105,8 @@ public class Global extends Application {
     }
 
     public ArrayList<String> al_selected_product_name;
+
+
 
 
     // ******************************* SERVICE Details Getter and Setter  *************************************************
@@ -193,6 +194,19 @@ public class Global extends Application {
     public ArrayList<HashMap<String,String>> al_apmt_details;
 
 
+    public boolean isAppointmentSelected;
+
+    public boolean isAppointmentSelected() {
+        return isAppointmentSelected;
+    }
+
+    public void setAppointmentSelected(boolean appointmentSelected) {
+        isAppointmentSelected = appointmentSelected;
+    }
+
+
+
+
     // *******************************  Client Getter and Setter  *************************************************
 
 
@@ -216,6 +230,10 @@ public class Global extends Application {
     public void setCLientAdded(boolean CLientAdded) {
         isCLientAdded = CLientAdded;
     }
+
+
+
+
     // ******************************* Search Client Getter and Setter  *************************************************
 
     public ArrayList<HashMap<String, String>> getAl_src_client_details() {
@@ -263,6 +281,8 @@ public class Global extends Application {
     public void setTotal_cart_items(int total_cart_items) {
         this.total_cart_items = total_cart_items;
     }
+
+
 
     // ******************************* Payment Getter and Setter  *************************************************
 
@@ -331,6 +351,8 @@ public class Global extends Application {
     public ArrayList<HashMap<String,String>> al_view_service_details;
 
 
+
+
     // ******************************* View Plan Getter and Setter  *************************************************
 
 
@@ -343,6 +365,7 @@ public class Global extends Application {
     }
 
     public ArrayList<HashMap<String,String>> al_view_plan_details;
+
 
 
     // ******************************* Stock Product Getter and Setter  *************************************************

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -41,6 +43,8 @@ public class ClientHomeActivity extends Activity {
     WebServices ws;
 
     Context context = this;
+
+    public static Handler h;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +93,8 @@ public class ClientHomeActivity extends Activity {
                 {
                     case 0:
 
-                        startActivity(new Intent(ClientHomeActivity.this,AddAppointmentActivity.class));
+                        global.setAppointmentSelected(true);
+                        startActivity(new Intent(ClientHomeActivity.this,CalendarActivity.class));
                         break;
 
                     case 1:
@@ -149,6 +154,23 @@ public class ClientHomeActivity extends Activity {
 
 
         new GetCartItemsAsyncTask().execute();
+
+
+        h = new Handler() {
+
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+
+                switch(msg.what) {
+
+                    case 0:
+                        finish();
+                        break;
+
+                }
+            }
+
+        };
 
 
     }

@@ -42,6 +42,16 @@ public class InvoiceFragment extends Fragment  {
             @Override
             public void onClick(View view) {
 
+                if(global.isPendingPayment())
+                {
+                    ClientHomeActivity.h.sendEmptyMessage(0);
+                }
+                else
+                {
+                    CartActivity.h.sendEmptyMessage(0);
+                    ClientHomeActivity.h.sendEmptyMessage(0);
+                }
+
                 getActivity().startActivity(new Intent(getActivity(),ClientHomeActivity.class));
                 getActivity().finish();
 

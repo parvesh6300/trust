@@ -2,20 +2,23 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.CalendarListAdapter;
@@ -32,6 +35,14 @@ public class CalendarActivity extends Activity
     Global global;
     WebServices ws;
 
+    CheckNetConnection cn;
+
+    CalendarCustomView cv;
+    HashSet<Date> events;
+    TextView tv_continue;
+
+    public static Handler h;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -39,16 +50,30 @@ public class CalendarActivity extends Activity
 
         setContentView(R.layout.activity_calendar);
 
+        cn = new CheckNetConnection(context);
+
         global = (Global) getApplicationContext();
 
         list = (ListView) findViewById(R.id.list);
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
+        tv_continue = (TextView) findViewById(R.id.tv_continue);
 
-        HashSet<Date> events = new HashSet<>();
-        events.add(new Date());
+//        events = new HashSet<>();
+//        events.add(new Date());
 
-        CalendarCustomView cv = ((CalendarCustomView)findViewById(R.id.calendar_view));
-        cv.updateCalendar(events);
+        cv = ((CalendarCustomView)findViewById(R.id.calendar_view));
+ //       cv.updateCalendar(events);
+
+
+        if (global.isAppointmentSelected())
+        {
+            tv_continue.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_continue.setVisibility(View.GONE);
+        }
+
 
         // assign event handler
         cv.setEventHandler(new CalendarCustomView.EventHandler()
@@ -57,12 +82,29 @@ public class CalendarActivity extends Activity
             public void onDayLongPress(Date date)
             {
                 // show returned day
-                DateFormat df = SimpleDateFormat.getDateInstance();
-                Toast.makeText(CalendarActivity.this, df.format(date), Toast.LENGTH_SHORT).show();
+//                DateFormat df = SimpleDateFormat.getDateInstance();
+//                Toast.makeText(CalendarActivity.this, df.format(date), Toast.LENGTH_SHORT).show();
+
+//                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                events = new HashSet<>();
+                events.add(date);
+                cv.updateCalendar(events);
+
             }
         });
 
-        if (isOnline())
+
+        tv_continue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(CalendarActivity.this,AddAppointmentActivity.class));
+
+            }
+        });
+
+
+        if (cn.isNetConnected())
         {
             new GetAppointmentAsyncTask().execute();
         }
@@ -70,6 +112,23 @@ public class CalendarActivity extends Activity
         {
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
+
+        h = new Handler() {
+
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+
+                switch(msg.what) {
+
+                    case 0:
+                        finish();
+                        break;
+
+                }
+            }
+
+        };
+
 
     }
 

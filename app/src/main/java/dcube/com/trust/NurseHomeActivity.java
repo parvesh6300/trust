@@ -59,6 +59,8 @@ public class NurseHomeActivity extends Activity {
         tv_user_name.setText("Hi, "+global.getAl_login_list().get(0).get(GlobalConstants.USER_NAME));
         
 
+        global.setAppointmentSelected(false);
+
         tv_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

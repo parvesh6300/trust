@@ -358,6 +358,7 @@ public class BuyPlanActivity extends Activity{
 
             if (message.equalsIgnoreCase("true"))
             {
+                ClientHomeActivity.h.sendEmptyMessage(0);
                 startActivity(new Intent(BuyPlanActivity.this,ClientHomeActivity.class));
                 finish();
             }

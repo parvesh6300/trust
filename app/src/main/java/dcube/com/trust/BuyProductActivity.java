@@ -331,6 +331,7 @@ public class BuyProductActivity extends Activity{
 
             if (message.equalsIgnoreCase("true"))
             {
+                ClientHomeActivity.h.sendEmptyMessage(0);
                 startActivity(new Intent(BuyProductActivity.this,ClientHomeActivity.class));
                 finish();
             }

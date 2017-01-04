@@ -340,6 +340,7 @@ public class BuyServicesActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
+                ClientHomeActivity.h.sendEmptyMessage(0);
                 startActivity(new Intent(BuyServicesActivity.this,ClientHomeActivity.class));
                 finish();
             }

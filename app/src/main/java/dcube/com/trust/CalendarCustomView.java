@@ -129,7 +129,6 @@ public class CalendarCustomView extends LinearLayout
 			@Override
 			public void onClick(View v)
 			{
-
 				currentDate.add(Calendar.MONTH, 1);
 				updateCalendar();
 			}
@@ -292,20 +291,22 @@ public class CalendarCustomView extends LinearLayout
 			// if this day has an event, specify event image
 			view.setBackgroundResource(0);
 
+/*
 			if (eventDays != null)
 			{
 				for (Date eventDate : eventDays)
 				{
-					if (eventDate.getDate() == day &&
-							eventDate.getMonth() == month &&
-							eventDate.getYear() == year)
+//
+					if (eventDate.getDate() == day && eventDate.getMonth() == month && eventDate.getYear() == year)
 					{
 						// mark this day for event
 						view.setBackgroundResource(R.drawable.circle_calendar);
+
 						break;
 					}
 				}
 			}
+*/
 
 			// clear styling
 			((TextView)view).setTypeface(null, Typeface.NORMAL);
@@ -319,18 +320,47 @@ public class CalendarCustomView extends LinearLayout
 				view.setBackgroundResource(R.drawable.white_circle);
 
 			}
-			else if (day == today.getDate())
+
+			else if (day == today.getDate() || eventDays != null  )
 			{
 				// if it is today, set it to blue/bold
 				((TextView)view).setTextColor(getResources().getColor(R.color.white));
 				view.setBackgroundResource(R.drawable.circle_calendar);
+
+				if (eventDays != null)
+				{
+					for (Date eventDate : eventDays)
+					{
+
+//  eventDate.getDate() == day &&
+						if (eventDate.getDate() == day && eventDate.getMonth() == month && eventDate.getYear() == year)
+						{
+							// mark this day for event
+							//view.setBackgroundResource(R.drawable.circle_calendar);
+
+							((TextView)view).setTextColor(getResources().getColor(R.color.white));
+							view.setBackgroundResource(R.drawable.circle_calendar);
+
+							break;
+						}
+
+						// if it is not clicked, set it to blue/bold
+						else
+						{
+							((TextView)view).setTextColor(getResources().getColor(R.color.textColor));
+							view.setBackgroundResource(R.drawable.white_circle);
+						}
+
+					}
+				}
+
 			}
+
 			else
 			{
 				// if it is today, set it to blue/bold
 				((TextView)view).setTextColor(getResources().getColor(R.color.textColor));
 				view.setBackgroundResource(R.drawable.white_circle);
-
 			}
 
 			// set text

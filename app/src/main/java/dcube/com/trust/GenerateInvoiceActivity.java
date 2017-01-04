@@ -53,7 +53,7 @@ public class GenerateInvoiceActivity extends FragmentActivity {
         @Override
         public Fragment getItem(int pos) {
 
-            if(global.isPendingPayment)
+            if(global.isPendingPayment())
             {
                 return InvoiceFragment.newInstance("ThirdFragment, Instance 1");
             }
