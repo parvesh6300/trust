@@ -1,7 +1,6 @@
 package dcube.com.trust.utils;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,9 +33,6 @@ public class CalendarListAdapter extends BaseAdapter {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         global = (Global) context.getApplicationContext() ;
-
-        Log.e("Adapter","Adapter Starts");
-
 
         for (HashMap<String,String> hashmap : global.getAl_apmt_details())
         {

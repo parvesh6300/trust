@@ -20,8 +20,8 @@ import dcube.com.trust.utils.Global;
 /**
  * Created by Sagar on 06/12/16.
  */
-public class WebServices {
 
+public class WebServices {
 
 
     public static String LoginService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
@@ -271,6 +271,14 @@ public class WebServices {
         String message = "Some Error occured";
 
         try {
+            global.getAl_apmt_details().clear();
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        try {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
@@ -298,7 +306,6 @@ public class WebServices {
                     map.put(GlobalConstants.APMT_PLAN_ID , jsonObject1.optString(GlobalConstants.APMT_PLAN_ID));
                     map.put(GlobalConstants.APMT_SERVICE_ID , jsonObject1.optString(GlobalConstants.APMT_SERVICE_ID));
                     map.put(GlobalConstants.APMT_TIME , jsonObject1.optString(GlobalConstants.APMT_TIME));
-               //     map.put(GlobalConstants.APMT_TIME , jsonObject1.optString(GlobalConstants.APMT_TIME));
 
                     al_apmt_detail.add(map);
                 }
@@ -445,7 +452,6 @@ public class WebServices {
 
         return message;
     }
-
 
 
     public static String AddToCartService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
@@ -609,6 +615,7 @@ public class WebServices {
 
         return message;
     }
+
 
     public static String PaymentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
@@ -1246,7 +1253,6 @@ public class WebServices {
 
 
 
-
     public static String WithdrawMoneyService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -1275,6 +1281,7 @@ public class WebServices {
 
         return message;
     }
+
 
 
     public static String RevenueService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)

@@ -9,12 +9,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -41,7 +44,13 @@ public class CalendarActivity extends Activity
     HashSet<Date> events;
     TextView tv_continue;
 
+    String str_date;
+
+    Calendar cl = Calendar.getInstance();
+
     public static Handler h;
+
+    SimpleDateFormat format;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -65,6 +74,10 @@ public class CalendarActivity extends Activity
  //       cv.updateCalendar(events);
 
 
+        format = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+        str_date = format.format(cl.getTime());
+
+
         if (global.isAppointmentSelected())
         {
             tv_continue.setVisibility(View.VISIBLE);
@@ -81,14 +94,14 @@ public class CalendarActivity extends Activity
             @Override
             public void onDayLongPress(Date date)
             {
-                // show returned day
-//                DateFormat df = SimpleDateFormat.getDateInstance();
-//                Toast.makeText(CalendarActivity.this, df.format(date), Toast.LENGTH_SHORT).show();
 
-//                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                str_date = format.format(date);
+
                 events = new HashSet<>();
                 events.add(date);
                 cv.updateCalendar(events);
+
+                new GetAppointmentAsyncTask().execute();
 
             }
         });
@@ -99,7 +112,6 @@ public class CalendarActivity extends Activity
             public void onClick(View view) {
 
                 startActivity(new Intent(CalendarActivity.this,AddAppointmentActivity.class));
-
             }
         });
 
@@ -152,6 +164,11 @@ public class CalendarActivity extends Activity
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.APMT_DATE);
+                al_str_value.add(str_date);
+
+                Log.e("Date",str_date);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("get_appointments");
 
@@ -171,11 +188,16 @@ public class CalendarActivity extends Activity
 
             if (message.equalsIgnoreCase("true"))
             {
+
+                list.setVisibility(View.VISIBLE);
                 calendarListAdapter= new CalendarListAdapter(context);
                 list.setAdapter(calendarListAdapter);
+                calendarListAdapter.notifyDataSetChanged();
+
             }
             else
             {
+                list.setVisibility(View.GONE);
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 

@@ -154,7 +154,11 @@ public class ProductListAdapter extends BaseAdapter {
                     if (selected_product_id.contains(product_id.get(position)))
                     {
                         int pos = selected_product_id.indexOf(product_id.get(position));
-                        selected_product_quantity.add(pos, String.valueOf(quantity));
+
+                        selected_product_quantity.remove(pos);
+
+                        selected_product_quantity.add(pos , String.valueOf(quantity));
+
                     }
                     else
                     {
@@ -209,7 +213,10 @@ public class ProductListAdapter extends BaseAdapter {
                 {
                     int pos = selected_product_id.indexOf(product_id.get(position));
 
+                    selected_product_quantity.remove(pos);
+
                     selected_product_quantity.add(pos , String.valueOf(quantity));
+
                 }
                 else
                 {

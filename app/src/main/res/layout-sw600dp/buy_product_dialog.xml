@@ -57,9 +57,11 @@
         android:id="@+id/selected_product_list"
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:layout_below="@+id/header1"/>
+        android:layout_below="@+id/header1"
+        android:layout_above="@+id/dialog_footer"/>
 
     <LinearLayout
+        android:id="@+id/dialog_footer"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
