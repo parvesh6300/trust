@@ -229,13 +229,22 @@ public class SplashActivity extends Activity {
                     startActivity(i);
                     finish();
                 }
-                else {
+                else
+                {
                     Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
 
+            }
+
+            else
+            {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
 
         }
