@@ -464,7 +464,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("SearchClient", "Client : " + response);
+            Log.i("AddCart", "CArt : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -499,7 +499,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("GetProduct", "Product : " + response);
+            Log.i("GetCart", "Cart : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -565,7 +565,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("SearchClient", "Client : " + response);
+            Log.i("Delete", "CArtItem : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -596,7 +596,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("SearchClient", "Client : " + response);
+            Log.i("Update", "CartItem : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -628,7 +628,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("SearchClient", "Client : " + response);
+            Log.i("Payment", "Service : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -665,7 +665,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("SearchClient", "Client : " + response);
+            Log.i("Check", "Out : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -701,7 +701,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("GetService", "Service : " + response);
+            Log.i("ViewService", "Service : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -764,7 +764,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("GetService", "Service : " + response);
+            Log.i("ViewPlan", "Plan : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -811,6 +811,71 @@ public class WebServices {
 
         return message;
     }
+
+
+    public static String RenewPlanService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        ArrayList<HashMap<String,String>> al_view_plan_details;
+
+        Global global = (Global) context.getApplicationContext();
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Renew", "Plan : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                al_view_plan_details = new ArrayList<>();
+
+                JSONArray jsonArray = jsonObject.getJSONArray("in_order");
+
+                for (int i = 0 ; i< jsonArray.length() ; i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.ORDER_ID , jsonObject1.optString(GlobalConstants.ORDER_ID));
+                    map.put(GlobalConstants.ORDER_PMT_ID , jsonObject1.optString(GlobalConstants.ORDER_PMT_ID));
+                    map.put(GlobalConstants.ORDER_CLIENT_ID , jsonObject1.optString(GlobalConstants.ORDER_CLIENT_ID));
+                    map.put(GlobalConstants.ORDER_ITEM_ID , jsonObject1.optString(GlobalConstants.ORDER_ITEM_ID));
+                    map.put(GlobalConstants.ORDER_ITEM_NAME , jsonObject1.optString(GlobalConstants.ORDER_ITEM_NAME));
+                    map.put(GlobalConstants.ORDER_ITEM_TYPE , jsonObject1.optString(GlobalConstants.ORDER_ITEM_TYPE));
+                    map.put(GlobalConstants.ORDER_ITEM_PRICE , jsonObject1.optString(GlobalConstants.ORDER_ITEM_PRICE));
+                    map.put(GlobalConstants.ORDER_AMOUNT , jsonObject1.optString(GlobalConstants.ORDER_AMOUNT));
+                    map.put(GlobalConstants.ORDER_CREATED , jsonObject1.optString(GlobalConstants.ORDER_CREATED));
+                    map.put(GlobalConstants.ORDER_TO_PAID , jsonObject1.optString(GlobalConstants.ORDER_TO_PAID));
+                    map.put(GlobalConstants.ORDER_ON_RATE , jsonObject1.optString(GlobalConstants.ORDER_ON_RATE));
+                    map.put(GlobalConstants.ORDER_ONLY_ID , jsonObject1.optString(GlobalConstants.ORDER_ONLY_ID));
+
+                    al_view_plan_details.add(map);
+                }
+
+                global.setAl_view_plan_details(al_view_plan_details);
+                return "true";
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
 
 
     public static String DepositHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
@@ -880,7 +945,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("Deposit", "Amount : " + response);
+            Log.i("Deposit", "Money : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -915,7 +980,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("Product", "Stock : " + response);
+            Log.i("GetProduct", "Stock : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -977,7 +1042,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("Deposit", "Amount : " + response);
+            Log.i("Product", "Sold : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -1060,7 +1125,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("Expense", "Amount : " + response);
+            Log.i("Add", "Expense : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -1137,54 +1202,6 @@ public class WebServices {
 
 
 
-    public static String NurseProductService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
-    {
-        String response;
-
-        ArrayList<HashMap<String,String>> al_product_detail;
-
-
-        Global global = (Global) context.getApplicationContext();
-
-        String message = "Some Error occured";
-
-        try {
-
-            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
-
-            Log.i("GetProduct", "Product : " + response);
-
-            JSONObject jsonObject = new JSONObject(response);
-
-            String status = jsonObject.optString(GlobalConstants.STATUS);
-            message = jsonObject.optString(GlobalConstants.MESSAGE);
-
-            if (status.equalsIgnoreCase("1"))
-            {
-                al_product_detail = new ArrayList<>();
-
-                JSONArray jsonArray = jsonObject.getJSONArray("products");
-
-                for (int i = 0 ; i< jsonArray.length() ; i++)
-                {
-                    HashMap<String, String> map = new HashMap<String, String>();
-
-                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-
-                }
-
-                global.setAl_product_details(al_product_detail);
-                return "true";
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return message;
-    }
-
-
 
     public static String PendingPaymentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
@@ -1198,7 +1215,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("SearchClient", "Client : " + response);
+            Log.i("Pending", "Payment : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -1252,6 +1269,41 @@ public class WebServices {
     }
 
 
+    public static String ClearPendingPaymentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+        Global global = (Global) context.getApplicationContext();
+        ArrayList<HashMap<String ,String>> al_pending_pmt_details;
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Clear", "PendingPayment : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+
+            if (status.equalsIgnoreCase("1"))
+            {
+
+
+                return "true";
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
 
     public static String WithdrawMoneyService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
@@ -1263,7 +1315,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("Expense", "Amount : " + response);
+            Log.i("Withdraw", "Money : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -1298,7 +1350,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("Expense", "Amount : " + response);
+            Log.i("Revenue", "Service : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 //

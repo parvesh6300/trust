@@ -27,10 +27,6 @@ public class ViewPendingPaymentActivity extends Activity {
     ListView lv_payment_details;
     PendingPaymentAdapter paymentAdapter;
 
-    ArrayList<String> al_product_name= new ArrayList<>();
-    ArrayList<String> al_product_cost= new ArrayList<>();
-    ArrayList<String> al_date= new ArrayList<>();
-
     Global global;
     GifTextView gif_loader;
 
@@ -78,7 +74,8 @@ public class ViewPendingPaymentActivity extends Activity {
 
                 if (cn.isNetConnected())
                 {
-                    new PaymentAsyncTask().execute();
+                    Toast.makeText(context, "Not Completed yet", Toast.LENGTH_SHORT).show();
+                   // new ClearPendingPaymentAsyncTask().execute();
                 }
                 else {
                     Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
@@ -150,7 +147,7 @@ public class ViewPendingPaymentActivity extends Activity {
                 tv_paid_amount.setText(global.getPendAmountPaid());
                 tv_total_cost.setText(global.getPendTotalCost());
 
-                paymentAdapter = new PendingPaymentAdapter(context, al_date, al_product_name, al_product_cost);
+                paymentAdapter = new PendingPaymentAdapter(context);
                 lv_payment_details.setAdapter(paymentAdapter);
 
                 int paid_amount = Integer.parseInt(global.getPendAmountPaid());
@@ -174,8 +171,7 @@ public class ViewPendingPaymentActivity extends Activity {
 
 
 
-    public class PaymentAsyncTask extends AsyncTask<String, String, String> {
-
+    public class ClearPendingPaymentAsyncTask extends AsyncTask<String, String, String> {
 
         String resPonse = "";
         String message = "";
@@ -193,23 +189,11 @@ public class ViewPendingPaymentActivity extends Activity {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
-                al_str_key.add(GlobalConstants.PAYMENT_CLIENT_ID);
+                al_str_key.add(GlobalConstants.PAYMENT_ID);
                 al_str_value.add(str_client_id);
 
-                al_str_key.add(GlobalConstants.PAYMENT_USER_ID);
-                al_str_value.add(str_user_id);
-
-                al_str_key.add(GlobalConstants.PAYMENT_MODE);
-                al_str_value.add(str_payment_mode);
-
-                al_str_key.add(GlobalConstants.PAYMENT_TYPE);
-                al_str_value.add("full");
-
-                al_str_key.add(GlobalConstants.PAYMENT_AMOUNT);
-                al_str_value.add(str_amount_to_pay);
-
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("payment");
+                al_str_value.add("clear_pending_payment");
 
                 message = ws.PaymentService(context, al_str_key, al_str_value);
 

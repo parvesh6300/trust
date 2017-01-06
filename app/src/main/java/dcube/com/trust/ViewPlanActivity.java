@@ -119,7 +119,6 @@ public class ViewPlanActivity extends Activity {
                 public void onClick(View view) {
 
                     dismiss();
-                 //   finish();
 
 
                     final Dialog dialog = new Dialog(c);
@@ -129,7 +128,7 @@ public class ViewPlanActivity extends Activity {
                     TextView text= (TextView)dialog.findViewById(R.id.text);
                     Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
 
-                    text.setText("Renewed Successfully");
+                    text.setText("Not Completed Yet");
 
                     btn_yes.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -210,5 +209,66 @@ public class ViewPlanActivity extends Activity {
         }
 
     }
+
+
+
+
+    public class RenewPlanAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.CLIENT_ID);
+                al_str_value.add(str_client_id);
+
+                al_str_key.add(GlobalConstants.PLAN_ID);
+                al_str_value.add(global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("renew_the_plan");
+
+                message = ws.ViewPlanService(context, al_str_key, al_str_value);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                planAdapter= new PlanAdapter(context);
+                lv_plan.setAdapter(planAdapter);
+            }
+            else {
+
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
 
 }

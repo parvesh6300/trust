@@ -129,7 +129,7 @@ public class ClientHomeActivity extends Activity {
 
                     case 7:
 
-                        startActivity(new Intent(ClientHomeActivity.this,GenerateInvoiceActivity.class));
+                     //   startActivity(new Intent(ClientHomeActivity.this,GenerateInvoiceActivity.class));
                         break;
 
                     case 8:

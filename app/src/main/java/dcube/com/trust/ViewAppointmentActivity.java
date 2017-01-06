@@ -64,12 +64,6 @@ public class ViewAppointmentActivity extends Activity {
 
         followUpList = (ListView) findViewById(R.id.followuplist);
 
-        /*String[] SERVICES = getResources().getStringArray(R.array.servicelist);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, SERVICES);
-        service = (BetterSpinner) findViewById(R.id.service);
-        service.setAdapter(adapter);
-        */
 
         pos = global.getSelected_client();
 
@@ -171,7 +165,9 @@ public class ViewAppointmentActivity extends Activity {
                 public void onClick(View view) {
 
                     dismiss();
-                    finish();
+                    //finish();
+
+                    Toast.makeText(context, "Not Completed Yet", Toast.LENGTH_SHORT).show();
 
                 }
             });

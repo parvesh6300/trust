@@ -153,11 +153,10 @@ public class ProductListAdapter extends BaseAdapter {
                 {
                     if (selected_product_id.contains(product_id.get(position)))
                     {
+
                         int pos = selected_product_id.indexOf(product_id.get(position));
 
-                        selected_product_quantity.remove(pos);
-
-                        selected_product_quantity.add(pos , String.valueOf(quantity));
+                        selected_product_quantity.set(pos , holder.quantity.getText().toString());
 
                     }
                     else
@@ -213,9 +212,7 @@ public class ProductListAdapter extends BaseAdapter {
                 {
                     int pos = selected_product_id.indexOf(product_id.get(position));
 
-                    selected_product_quantity.remove(pos);
-
-                    selected_product_quantity.add(pos , String.valueOf(quantity));
+                    selected_product_quantity.set(pos , holder.quantity.getText().toString());
 
                 }
                 else
@@ -235,6 +232,7 @@ public class ProductListAdapter extends BaseAdapter {
                 global.setAl_selected_product_price(selected_product_price);
                 global.setAl_selected_product_sku(selected_product_sku);
                 global.setAl_selected_product_name(selected_product_name);
+
 
             }
         });

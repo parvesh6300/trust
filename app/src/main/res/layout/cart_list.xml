@@ -49,7 +49,7 @@
             android:layout_below="@+id/tv_name"/>
 
 
-        <EditText
+        <TextView
             android:id="@+id/ed_quantity"
             android:layout_width="60dp"
             android:layout_height="60dp"

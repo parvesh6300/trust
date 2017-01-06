@@ -31,11 +31,7 @@ public class AddExpenseActivity extends Activity {
 
     ExpenseAdapter expenseAdapter;
 
-    ArrayList<String> al_expense_amount= new ArrayList<>();
-    ArrayList<String> al_expense_reason= new ArrayList<>();
-    ArrayList<String> al_date= new ArrayList<>();
-
-    TextView tv_total_amount,tv_submit;
+     TextView tv_total_amount,tv_submit;
 
     EditText ed_expense_amount,ed_reason;
     GifTextView gif_loader;

@@ -58,8 +58,6 @@ public class MoneyBankedActivity extends Activity {
         });
 
 
-
-
     }
 
 
@@ -104,9 +102,6 @@ public class MoneyBankedActivity extends Activity {
                     dismiss();
                 }
             });
-
-
-
 
         }
     }

@@ -90,7 +90,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/header1"
-            android:layout_above="@+id/tv_check_out"/>
+            android:layout_above="@+id/tv_check_out"
+            android:descendantFocusability="beforeDescendants"/>
 
 
         <TextView

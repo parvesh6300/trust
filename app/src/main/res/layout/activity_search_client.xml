@@ -49,6 +49,7 @@
             android:background="@android:color/transparent"
             android:hint="Search Clients, UID, Name, Contact"
             android:textColorHint="@color/graytext"
+            android:singleLine="true"
             android:textSize="25sp"
             android:textStyle="bold"
             android:typeface="monospace" />

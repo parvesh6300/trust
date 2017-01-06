@@ -1,10 +1,9 @@
 package dcube.com.trust.utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import java.util.HashMap;
 
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.CartActivity;
 import dcube.com.trust.R;
 import okhttp3.OkHttpClient;
 
@@ -32,18 +32,20 @@ public class CartAdapter extends BaseAdapter {
 
     Global global;
 
-    ArrayList<String> al_item_name= new ArrayList<>();
-    ArrayList<String> al_item_desc= new ArrayList<>();
-    ArrayList<String> al_item_price= new ArrayList<>();
-    ArrayList<String> al_item_quantity= new ArrayList<>();
-    ArrayList<String> al_cart_id= new ArrayList<>();
-    ArrayList<String> al_item_type= new ArrayList<>();
-
+    ArrayList<String> al_item_name;
+    ArrayList<String> al_item_desc;
+    ArrayList<String> al_item_price;
+    ArrayList<String> al_item_quantity;
+    ArrayList<String> al_cart_id;
+    ArrayList<String> al_item_type;
 
     String str_price ="1";
     String str_client_id;
     WebServices ws;
     int position,quantity;
+
+    Dialog dialog;
+
 
     public CartAdapter(Context mcontext)
     {
@@ -52,13 +54,20 @@ public class CartAdapter extends BaseAdapter {
 
         global = (Global) context.getApplicationContext();
 
+        al_item_name= new ArrayList<>();
+        al_item_desc= new ArrayList<>();
+        al_item_price= new ArrayList<>();
+        al_item_quantity= new ArrayList<>();
+        al_cart_id= new ArrayList<>();
+        al_item_type= new ArrayList<>();
+
+
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
                 get(GlobalConstants.SRC_CLIENT_ID);
 
 
         for (HashMap<String,String> hashmap: global.getAl_cart_details())
         {
-
             al_item_price.add(hashmap.get(GlobalConstants.GET_CART_ITEM_PRICE));
             al_item_quantity.add(hashmap.get(GlobalConstants.GET_CART_AMOUNT));
             al_cart_id.add(hashmap.get(GlobalConstants.GET_CART_ID));
@@ -82,7 +91,7 @@ public class CartAdapter extends BaseAdapter {
     public class ViewHolder
     {
         TextView tv_name,tv_desc,tv_price;
-        EditText ed_quantity;
+        TextView ed_quantity;
         ImageView iv_product_image,iv_cancel;
     }
 
@@ -97,78 +106,55 @@ public class CartAdapter extends BaseAdapter {
         holder.tv_desc= (TextView)convertView.findViewById(R.id.tv_desc);
         holder.tv_price=(TextView)convertView.findViewById(R.id.tv_price);
 
-        holder.ed_quantity = (EditText)convertView.findViewById(R.id.ed_quantity);
+        holder.ed_quantity = (TextView)convertView.findViewById(R.id.ed_quantity);
 
         holder.iv_product_image = (ImageView) convertView.findViewById(R.id.iv_product_image);
         holder.iv_cancel = (ImageView) convertView.findViewById(R.id.iv_cancel);
 
-        holder.tv_name.setText(al_item_name.get(pos));   //al_product_name.get(pos)
+        holder.tv_name.setText(al_item_name.get(pos));
         holder.tv_desc.setText(al_item_type.get(pos));
 
         str_price = al_item_price.get(pos);
 
-        holder.tv_price.setText(str_price);
-
         String str_item_type = al_item_type.get(pos);
 
-        if (str_item_type.equalsIgnoreCase("service") || str_item_type.equalsIgnoreCase("plan"))
+        if (str_item_type.equalsIgnoreCase("product"))
+        {
+            holder.ed_quantity.setText(al_item_quantity.get(pos));
+            holder.ed_quantity.setFocusable(true);
+            holder.ed_quantity.setClickable(true);
+            holder.ed_quantity.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+            int each_price = Integer.parseInt(str_price);
+            int qt = Integer.parseInt(holder.ed_quantity.getText().toString());
+
+            holder.tv_price.setText(String.valueOf(each_price * qt));
+
+        }
+        else
         {
             holder.ed_quantity.setText("NA");
             holder.ed_quantity.setFocusable(false);
             holder.ed_quantity.setClickable(false);
+
+            holder.tv_price.setText(str_price);
+
         }
-        else
-        {
-            holder.ed_quantity.setText(al_item_quantity.get(pos));
-        }
 
-        holder.ed_quantity.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-        holder.ed_quantity.addTextChangedListener(new TextWatcher() {
+        holder.ed_quantity.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onClick(View view) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-                try {
-
-                    int qty = Integer.parseInt(editable.toString());
-                    int max_stock = Integer.parseInt(global.getAl_cart_details().get(pos).get(GlobalConstants.GET_CART_MAX_STOCK));
-
-                    if (qty > max_stock)
-                    {
-                        Toast.makeText(context, "Only "+max_stock+" is left", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-                        String price = String.valueOf(qty* Integer.parseInt(str_price));   //al_product_price.get(pos)
-
-                        holder.tv_price.setText(price);
-                        holder.ed_quantity.setText(String.valueOf(qty));
-
-                        quantity = qty;
-
-                        position = pos;
-
-                        new UpdateCartItemAsyncTask().execute();
-                    }
-
-                }
-                catch (Exception e)
+                if (al_item_type.get(pos).equalsIgnoreCase("product"))
                 {
-
+                    position = pos;
+                    showDialog();
                 }
 
             }
         });
+
 
 
         holder.iv_cancel.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +162,7 @@ public class CartAdapter extends BaseAdapter {
             public void onClick(View view) {
 
                 position = pos;
+
                 al_item_name.remove(pos);
                 al_item_desc.remove(pos);
                 al_item_type.remove(pos);
@@ -193,6 +180,8 @@ public class CartAdapter extends BaseAdapter {
         return convertView;
     }
 
+
+
     @Override
     public int getCount() {
         return al_item_name.size();
@@ -206,6 +195,86 @@ public class CartAdapter extends BaseAdapter {
     @Override
     public long getItemId(int i) {
         return i;
+    }
+
+
+    public void showDialog()
+    {
+        dialog = new Dialog(context);
+
+        dialog.setContentView(R.layout.cart_update_dialog);
+
+        final EditText tv_quantity1 = (EditText) dialog.findViewById(R.id.tv_quantity);
+        TextView tv_plus = (TextView) dialog.findViewById(R.id.tv_plus);
+        TextView tv_minus = (TextView) dialog.findViewById(R.id.tv_minus);
+        TextView tv_product_name = (TextView) dialog.findViewById(R.id.tv_product_name);
+        TextView tv_product_cat = (TextView) dialog.findViewById(R.id.tv_product_cat);
+        TextView tv_request = (TextView) dialog.findViewById(R.id.tv_request);
+        TextView tv_cancel = (TextView) dialog.findViewById(R.id.tv_cancel);
+
+        dialog.setCancelable(false);
+        dialog.show();
+
+        tv_product_name.setText(al_item_name.get(position));
+        tv_product_cat.setText(al_item_type.get(position));
+        tv_quantity1.setText(al_item_quantity.get(position));
+
+
+        tv_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                quantity = Integer.parseInt(tv_quantity1.getText().toString());
+                int max_stock = Integer.parseInt(global.getAl_cart_details().get(position).get(GlobalConstants.GET_CART_MAX_STOCK));
+
+                if (quantity > max_stock)
+                {
+                    Toast.makeText(context, "Only "+max_stock+" is left", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    quantity++;
+                    tv_quantity1.setText(String.valueOf(quantity));
+                }
+
+            }
+        });
+
+
+        tv_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (quantity > 0) {
+                    quantity--;
+                }
+
+                tv_quantity1.setText(String.valueOf(quantity));
+            }
+        });
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog.cancel();
+            }
+        });
+
+
+        tv_request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                quantity = Integer.parseInt(tv_quantity1.getText().toString());
+
+                new UpdateCartItemAsyncTask().execute();
+
+            }
+        });
+
+
     }
 
 
@@ -296,12 +365,15 @@ public class CartAdapter extends BaseAdapter {
         @Override
         protected void onPostExecute(String s) {
 
-            if (!message.equalsIgnoreCase("true"))
+            if (message.equalsIgnoreCase("true"))
             {
-//                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+//                new CartAdapter(context);
+//                notifyDataSetChanged();
+
+                ((CartActivity)context).updateList(context);
             }
             else {
-                notifyDataSetChanged();
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -350,6 +422,18 @@ public class CartAdapter extends BaseAdapter {
 
             if (message.equalsIgnoreCase("true"))
             {
+                dialog.dismiss();
+
+//                global.getAl_cart_details().clear();
+//
+//                al_item_name.clear();
+//                al_item_desc.clear();
+//                al_item_type.clear();
+//                al_item_price.clear();
+//                al_item_quantity.clear();
+//                al_cart_id.clear();
+
+
                 new GetCartItemsAsyncTask().execute();
             }
             else
@@ -360,8 +444,6 @@ public class CartAdapter extends BaseAdapter {
         }
 
     }
-
-
 
     @Override
     public void notifyDataSetChanged() {

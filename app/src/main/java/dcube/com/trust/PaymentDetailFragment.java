@@ -26,6 +26,7 @@ import pl.droidsonroids.gif.GifTextView;
 /**
  * Created by yadi on 14/10/16.
  */
+
 public class PaymentDetailFragment extends Fragment {
 
     ViewPager viewPager;
@@ -45,10 +46,11 @@ public class PaymentDetailFragment extends Fragment {
 
     Global global;
 
-    String str_payment_mode = "",str_payment_type = "",str_amount="",str_discount,str_amount_to_pay;
+    String str_payment_mode = "",str_payment_type = "",str_amount="",str_discount,str_amount_to_pay,str_isFull_paid;
 
     EditText ed_amount,ed_discount;
     int total_cost=0,int_discount_per,int_discounted_amount,int_amount_to_pay;
+
 
     CheckNetConnection cn;
 
@@ -102,11 +104,28 @@ public class PaymentDetailFragment extends Fragment {
                         int_discount_per = Integer.parseInt(str_discount);
                         int_discounted_amount = (int_discount_per * total_cost)/100;
                         int_amount_to_pay = total_cost - int_discounted_amount;
+
+                        if (str_payment_type.equalsIgnoreCase("partial"))
+                        {
+                            int_amount_to_pay = int_amount_to_pay/2 ;
+                        }
+
                         str_amount_to_pay = String.valueOf(int_amount_to_pay);
+
                     }
                     else
                     {
                         str_amount_to_pay = ed_amount.getText().toString();
+
+                        int_amount_to_pay = Integer.parseInt(str_amount_to_pay);
+
+                        if (str_payment_type.equalsIgnoreCase("partial"))
+                        {
+                            int_amount_to_pay = int_amount_to_pay/2 ;
+                        }
+
+                        str_amount_to_pay = String.valueOf(int_amount_to_pay);
+
                         int_discounted_amount = 0;
                     }
 
@@ -115,7 +134,6 @@ public class PaymentDetailFragment extends Fragment {
                     global.setAmount_to_pay(str_amount_to_pay);
                     global.setDiscount(String.valueOf(int_discounted_amount));
                     global.setPayment_mode(str_payment_mode);
-
 
 
                     if (cn.isNetConnected())
@@ -169,14 +187,17 @@ public class PaymentDetailFragment extends Fragment {
                 if (radio_full.isChecked())
                 {
                     str_payment_type = "full";
+                    str_isFull_paid = "true";
                 }
                 else if (radio_partial.isChecked())
                 {
                     str_payment_type = "partial";
+                    str_isFull_paid = "false";
                 }
                 else if (radio_partial_grant.isChecked())
                 {
                     str_payment_type = "grant";
+                    str_isFull_paid = "false";
                 }
 
             }
@@ -254,6 +275,12 @@ public class PaymentDetailFragment extends Fragment {
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("payment");
 
+                for (int i=0 ; i< al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+al_str_key.get(i));
+                    Log.i("Value",""+al_str_value.get(i));
+                }
+
                 message = ws.PaymentService(context, al_str_key, al_str_value);
 
             } catch (Exception e) {
@@ -308,8 +335,11 @@ public class PaymentDetailFragment extends Fragment {
                 al_str_key.add(GlobalConstants.PAYMENT_ID);
                 al_str_value.add(payment_id);
 
-                al_str_key.add(GlobalConstants.PAYMENT_DIS_PER);
+                al_str_key.add(GlobalConstants.PAYMENT_DISCOUNT);
                 al_str_value.add(str_discount);
+
+                al_str_key.add(GlobalConstants.PAYMENT_IS_FULL_PAID);
+                al_str_value.add(str_isFull_paid);
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("checkout_in_cart");

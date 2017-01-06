@@ -40,6 +40,7 @@ public class CartActivity extends Activity {
     CheckNetConnection cn;
 
     public static Handler h;
+    CartAdapter adapter;
 
 
     @Override
@@ -127,8 +128,22 @@ public class CartActivity extends Activity {
 
             for ( int i =0 ; i< global.getAl_cart_details().size() ; i++)
             {
-                total_cost = total_cost + Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
-            }
+                String str_item_type = global.getAl_cart_details().get(i).get(GlobalConstants.CART_ITEM_TYPE);
+
+                if (str_item_type.equalsIgnoreCase("product"))
+                {
+                    int qt =Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.CART_AMOUNT));
+                    int each_price = Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+
+                    total_cost = total_cost + (qt*each_price);
+                }
+                else
+                {
+                    total_cost = total_cost + Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+
+                }
+
+             }
 
             tv_message.setText("Your order total is: "+total_cost+" Tsh");
 
@@ -195,8 +210,9 @@ public class CartActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                CartAdapter adapter = new CartAdapter(CartActivity.this);
+                adapter = new CartAdapter(CartActivity.this);
                 lv_cart_items.setAdapter(adapter);
+
             }
             else {
 
@@ -207,6 +223,15 @@ public class CartActivity extends Activity {
 
     }
 
+
+
+    public void updateList(Context context)
+    {
+        CartAdapter adapter;
+        adapter = new CartAdapter(context);
+        lv_cart_items.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
 
 
 }

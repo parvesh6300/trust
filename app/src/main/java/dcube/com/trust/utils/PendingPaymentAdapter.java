@@ -23,19 +23,21 @@ public class PendingPaymentAdapter extends BaseAdapter {
 
     public static LayoutInflater inflater;
 
-    ArrayList<String> al_product_name= new ArrayList<>();
-    ArrayList<String> al_product_cost= new ArrayList<>();
+    ArrayList<String> al_product_name = new ArrayList<>();
+    ArrayList<String> al_product_cost = new ArrayList<>();
     ArrayList<String> al_date= new ArrayList<>();
+    ArrayList<String> al_item_id;
+    ArrayList<String> al_item_type;
 
     Global global;
 
 
-    public PendingPaymentAdapter(Context mcontext, ArrayList<String> date,ArrayList<String> product_name,ArrayList<String> product_cost)
+    public PendingPaymentAdapter(Context mcontext)
     {
         this.context= mcontext;
-        this.al_date=date;
-        this.al_product_name= product_name;
-        this.al_product_cost= product_cost;
+
+        al_item_id = new ArrayList<>();
+        al_item_type = new ArrayList<>();
 
         global = (Global) context.getApplicationContext();
 
@@ -48,7 +50,8 @@ public class PendingPaymentAdapter extends BaseAdapter {
             al_product_name.add(hashmap.get(GlobalConstants.PEND_ITEM_NAME));
             al_product_cost.add(hashmap.get(GlobalConstants.PEND_ITEM_PRICE));
             al_date.add(hashmap.get(GlobalConstants.PEND_DATE));
-
+            al_item_id.add(hashmap.get(GlobalConstants.PEND_ITEM_ID));
+            al_item_type.add(hashmap.get(GlobalConstants.PEND_ITEM_TYPE));
         }
 
 
@@ -83,7 +86,15 @@ public class PendingPaymentAdapter extends BaseAdapter {
         holder.tv_month.setText(date[1]+" ");
         holder.tv_year.setText("'"+date[0]);
 
-        holder.tv_product_name.setText(al_product_name.get(pos));
+        if (al_item_type.get(pos).equalsIgnoreCase("plan"))
+        {
+            holder.tv_product_name.setText(al_item_id.get(pos));
+        }
+        else
+        {
+            holder.tv_product_name.setText(al_product_name.get(pos));
+        }
+
         holder.tv_cost.setText(al_product_cost.get(pos)+" Tsh");
 
         return convertview;

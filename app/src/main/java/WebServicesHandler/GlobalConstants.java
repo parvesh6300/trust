@@ -157,7 +157,8 @@ public class GlobalConstants {
     public static final String PAYMENT_TYPE = "payment_type";
     public static final String PAYMENT_AMOUNT = "amount";
     public static final String PAYMENT_ID = "payment_id";
-    public static final String PAYMENT_DIS_PER = "discount_percentage";
+    public static final String PAYMENT_DISCOUNT = "discounted";
+    public static final String PAYMENT_IS_FULL_PAID = "is_full_paid";
 
 
     // ************************************* View Order VARIABLES  ****************************************************
@@ -235,9 +236,14 @@ public class GlobalConstants {
     public static final String WD_DATE = "created";
 
 
-    // *************************************  WithDraw VARIABLES  ****************************************************
+    // *************************************  REVENUE VARIABLES  ****************************************************
 
     public static final String REVENUE_AS_PER = "as_per";
+
+
+
+
+
 
 
 

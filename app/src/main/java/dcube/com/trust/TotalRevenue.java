@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -33,14 +34,6 @@ public class TotalRevenue extends Activity {
     RadioGroup radio_group;
     RadioButton radio_daily,radio_weekly,radio_monthly,radio_yearly;
 
-    ArrayList<Double> time= new ArrayList<>();
-    ArrayList<Double> revenue= new ArrayList<>();
-
-    ArrayList<Double> al_time_weekly;
-    ArrayList<Double> al_revenue_weekly;
-
-    Double[] ar_time= new Double[]{};
-    Double[] ar_revenue= new Double[]{};
 
     ArrayList<String> al_time;
 
@@ -90,6 +83,7 @@ public class TotalRevenue extends Activity {
                 if (radio_daily.isChecked())
                 {
                     str_as_per = "daily";
+
                     graph.removeAllSeries();
 
                     if (cn.isNetConnected())
@@ -148,7 +142,8 @@ public class TotalRevenue extends Activity {
                     {
                         new TotalRevenueAsyncTask().execute();
                     }
-                    else {
+                    else
+                    {
                         Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
 
@@ -181,6 +176,23 @@ public class TotalRevenue extends Activity {
             dateArr = global.getAl_on_date().toArray(dateArr);
             Arrays.sort(dateArr , Collections.<String>reverseOrder());
 
+        }
+        else if (count == 24)
+        {
+            for (int i=0; i < count; i++)
+            {
+                String[] date_time = global.getAl_on_date().get(i).split("\\s+");
+
+                String[] date = date_time[1].split(":");
+
+                al_time.add(date[0]);
+                Log.i("Hour",""+date[0]);
+
+            }
+
+            dateArr = new String[al_time.size()];
+            dateArr = al_time.toArray(dateArr);
+            Arrays.sort(dateArr , Collections.<String>reverseOrder());
         }
         else
         {
