@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +25,7 @@ public class NurseProductListAdapter extends BaseAdapter {
 
     Context context;
     Global global;
-    static int quantity;
+    int quantity;
 
     ArrayList<String> name = new ArrayList<>();
     ArrayList<String> product_id = new ArrayList<>();
@@ -38,7 +40,6 @@ public class NurseProductListAdapter extends BaseAdapter {
     ArrayList<String> selected_product_sku = new ArrayList<>();
     ArrayList<String> selected_product_category = new ArrayList<>();
     ArrayList<String> selected_product_price = new ArrayList<>();
-
 
     private static LayoutInflater inflater = null;
 
@@ -85,6 +86,17 @@ public class NurseProductListAdapter extends BaseAdapter {
 
     }
 
+
+    public class Holder
+    {
+        TextView name;
+        EditText quantity;
+        TextView category;
+        TextView add;
+        TextView minus;
+    }
+
+
     @Override
     public int getCount() {
         return name.size();
@@ -102,13 +114,15 @@ public class NurseProductListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View view, ViewGroup parent) {
+
         final Holder holder = new Holder();
 
         final View rowView;
         rowView = inflater.inflate(R.layout.product_category_item, parent , false);
 
+        holder.quantity = (EditText) rowView.findViewById(R.id.quantity);
+
         holder.name = (TextView) rowView.findViewById(R.id.name);
-        holder.quantity = (TextView) rowView.findViewById(R.id.quantity);
         holder.category = (TextView) rowView.findViewById(R.id.category);
         holder.add = (TextView) rowView.findViewById(R.id.add);
         holder.minus = (TextView) rowView.findViewById(R.id.minus);
@@ -135,7 +149,7 @@ public class NurseProductListAdapter extends BaseAdapter {
                     if (selected_product_id.contains(product_id.get(position)))
                     {
                         int pos = selected_product_id.indexOf(product_id.get(position));
-                        selected_product_quantity.add(pos, String.valueOf(quantity));
+                        selected_product_quantity.set(pos, String.valueOf(quantity));
                     }
                     else
                     {
@@ -176,39 +190,52 @@ public class NurseProductListAdapter extends BaseAdapter {
             }
         });
 
+
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 quantity =  Integer.parseInt(holder.quantity.getText().toString());
 
-                quantity = quantity + 1;
+                int max_stock = Integer.parseInt(in_stock.get(position));
 
-                holder.quantity.setText(String.valueOf(quantity));
-
-                if (selected_product_id.contains(product_id.get(position)))
+                if (max_stock > quantity )
                 {
-                    int pos = selected_product_id.indexOf(product_id.get(position));
+                    quantity = quantity + 1;
 
-                    selected_product_quantity.add(pos , String.valueOf(quantity));
-               }
-                else
-                {
-                    selected_product_id.add(product_id.get(position));
-                    selected_product_quantity.add(String.valueOf(quantity));
-                    selected_product_category.add(category.get(position));
-                    selected_product_sku.add(SKU.get(position));
-                    selected_product_name.add(name.get(position));
-                    selected_product_price.add(price.get(position));
+                    holder.quantity.setText(String.valueOf(quantity));
+
+                    if (selected_product_id.contains(product_id.get(position)))
+                    {
+                        int pos = selected_product_id.indexOf(product_id.get(position));
+
+                        selected_product_quantity.set(pos , holder.quantity.getText().toString());
+
+                    }
+                    else
+                    {
+                        selected_product_id.add(product_id.get(position));
+                        selected_product_quantity.add(String.valueOf(quantity));
+                        selected_product_category.add(category.get(position));
+                        selected_product_sku.add(SKU.get(position));
+                        selected_product_name.add(name.get(position));
+                        selected_product_price.add(price.get(position));
+
+                    }
+
+                    global.setAl_select_product(selected_product_id);
+                    global.setAl_selected_product_quantity(selected_product_quantity);
+                    global.setAl_selected_product_category(selected_product_category);
+                    global.setAl_selected_product_price(selected_product_price);
+                    global.setAl_selected_product_sku(selected_product_sku);
+                    global.setAl_selected_product_name(selected_product_name);
+
 
                 }
-
-                global.setAl_select_product(selected_product_id);
-                global.setAl_selected_product_quantity(selected_product_quantity);
-                global.setAl_selected_product_category(selected_product_category);
-                global.setAl_selected_product_price(selected_product_price);
-                global.setAl_selected_product_sku(selected_product_sku);
-                global.setAl_selected_product_name(selected_product_name);
+                else
+                {
+                    Toast.makeText(context, "Only "+max_stock+" are left", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -223,48 +250,83 @@ public class NurseProductListAdapter extends BaseAdapter {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                try {
+                    quantity =  Integer.parseInt(charSequence.toString());
+
+                    int max_stock = Integer.parseInt(in_stock.get(position));
+
+                    if (quantity > max_stock)
+                    {
+                        String qt = charSequence.toString();
+
+                        String[] q = new String[qt.length()];
+
+                        q[0] =  qt.substring(0,qt.length()-1);
+
+                        holder.quantity.setText(q[0]);
+
+                    }
+                }
+                catch (Exception e)
+                {
+
+                }
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if (selected_product_id.contains(product_id.get(position)))
-                {
-                    int pos = selected_product_id.indexOf(product_id.get(position));
+                try {
 
-                    selected_product_quantity.add(pos , editable.toString());
+                    quantity =  Integer.parseInt(editable.toString());
+
+                    int max_stock = Integer.parseInt(in_stock.get(position));
+
+                    if (max_stock > quantity)
+                    {
+                        if (selected_product_id.contains(product_id.get(position)))
+                        {
+                            int pos = selected_product_id.indexOf(product_id.get(position));
+
+                            selected_product_quantity.set(pos , editable.toString());
+                        }
+                        else
+                        {
+                            selected_product_id.add(product_id.get(position));
+                            selected_product_quantity.add(String.valueOf(quantity));
+                            selected_product_category.add(category.get(position));
+                            selected_product_sku.add(SKU.get(position));
+                            selected_product_name.add(name.get(position));
+                            selected_product_price.add(price.get(position));
+
+                        }
+
+                        global.setAl_select_product(selected_product_id);
+                        global.setAl_selected_product_quantity(selected_product_quantity);
+                        global.setAl_selected_product_category(selected_product_category);
+                        global.setAl_selected_product_price(selected_product_price);
+                        global.setAl_selected_product_sku(selected_product_sku);
+                        global.setAl_selected_product_name(selected_product_name);
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Only "+max_stock+" are left", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-                else
+                catch (Exception e)
                 {
-                    selected_product_id.add(product_id.get(position));
-                    selected_product_quantity.add(String.valueOf(quantity));
-                    selected_product_category.add(category.get(position));
-                    selected_product_sku.add(SKU.get(position));
-                    selected_product_name.add(name.get(position));
-                    selected_product_price.add(price.get(position));
 
                 }
 
-                global.setAl_select_product(selected_product_id);
-                global.setAl_selected_product_quantity(selected_product_quantity);
-                global.setAl_selected_product_category(selected_product_category);
-                global.setAl_selected_product_price(selected_product_price);
-                global.setAl_selected_product_sku(selected_product_sku);
-                global.setAl_selected_product_name(selected_product_name);}
+            }
         });
 
 
         return rowView;
     }
 
-    public class Holder
-    {
-        TextView name;
-        TextView quantity;
-        TextView category;
-        TextView add;
-        TextView minus;
-    }
 
 
 }

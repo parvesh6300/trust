@@ -31,12 +31,12 @@ public class AddExpenseActivity extends Activity {
 
     ExpenseAdapter expenseAdapter;
 
-     TextView tv_total_amount,tv_submit;
+    TextView tv_total_amount,tv_submit;
 
     EditText ed_expense_amount,ed_reason;
     GifTextView gif_loader;
     Global global;
-    String str_amount,str_reason;
+    String str_amount,str_reason,str_branch;
     WebServices ws;
     Context context = AddExpenseActivity.this;
     CustomDialogClass cdd;
@@ -61,6 +61,7 @@ public class AddExpenseActivity extends Activity {
         tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
         tv_submit=(TextView)findViewById(R.id.tv_submit);
 
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,6 +182,9 @@ public class AddExpenseActivity extends Activity {
                 al_str_key.add(GlobalConstants.EXP_REASON);
                 al_str_value.add(str_reason);
 
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("add_in_expense");
 
@@ -206,7 +210,6 @@ public class AddExpenseActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-//
                 showDoneDialog();
             }
             else
@@ -273,6 +276,8 @@ public class AddExpenseActivity extends Activity {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("get_in_expense");

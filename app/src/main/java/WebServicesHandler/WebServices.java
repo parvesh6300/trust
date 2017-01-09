@@ -1145,7 +1145,6 @@ public class WebServices {
     }
 
 
-
     public static String ExpenseHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -1199,8 +1198,6 @@ public class WebServices {
 
         return message;
     }
-
-
 
 
     public static String PendingPaymentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)

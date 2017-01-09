@@ -40,7 +40,7 @@ public class DepositMoneyActivity extends Activity {
 
     Global global;
 
-    String str_deposit_amount,str_remark;
+    String str_deposit_amount,str_remark,str_branch;
     WebServices ws;
 
     CustomDialogClass cdd;
@@ -68,6 +68,7 @@ public class DepositMoneyActivity extends Activity {
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
 
         tv_deposit.setOnClickListener(new View.OnClickListener() {
@@ -202,17 +203,20 @@ public class DepositMoneyActivity extends Activity {
 
             try {
 
-                    ArrayList<String> al_str_key = new ArrayList<>();
-                    ArrayList<String> al_str_value = new ArrayList<>();
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
 
-                    al_str_key.add(GlobalConstants.DEPOSIT_AMOUNT);
-                    al_str_value.add(str_deposit_amount);
+                al_str_key.add(GlobalConstants.DEPOSIT_AMOUNT);
+                al_str_value.add(str_deposit_amount);
 
-                    al_str_key.add(GlobalConstants.DEPOSIT_REMARKS);
-                    al_str_value.add(str_remark);
+                al_str_key.add(GlobalConstants.DEPOSIT_REMARKS);
+                al_str_value.add(str_remark);
 
-                    al_str_key.add(GlobalConstants.ACTION);
-                    al_str_value.add("deposits");
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("deposits");
 
                 for (int i =0 ; i < al_str_key.size() ; i++)
                 {

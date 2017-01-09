@@ -17,8 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.net.InetAddress;
 import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
@@ -45,6 +43,8 @@ public class NurseProductActivity extends Activity {
     CustomDialogClass cdd;
     Global global;
 
+    String str_branch;
+
     CheckNetConnection cn;
 
     @Override
@@ -63,6 +63,8 @@ public class NurseProductActivity extends Activity {
         search = (EditText) findViewById(R.id.search);
 
         cn = new CheckNetConnection(this);
+
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,7 +263,6 @@ public class NurseProductActivity extends Activity {
     }
 
 
-
     public class CheckOutAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -300,6 +301,9 @@ public class NurseProductActivity extends Activity {
                     al_str_key.add(GlobalConstants.CART_AMOUNT);
                     al_str_value.add(global.getAl_selected_product_quantity().get(j));
 
+                    al_str_key.add(GlobalConstants.BRANCH);
+                    al_str_value.add(str_branch);
+
                     al_str_key.add(GlobalConstants.ACTION);
                     al_str_value.add("add_to_cart");
 
@@ -329,43 +333,6 @@ public class NurseProductActivity extends Activity {
 
         }
 
-    }
-
-
-
-
-    public boolean isInternetAvailable() {
-        try {
-            InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
-            return !ipAddr.equals("");
-
-        } catch (Exception e) {
-            return false;
-        }
-
-    }
-
-
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        return cm.getActiveNetworkInfo() != null;
-    }
-
-
-    public boolean isOnlineNet() {
-
-        Runtime runtime = Runtime.getRuntime();
-        try {
-
-            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
-            int     exitValue = ipProcess.waitFor();
-            return (exitValue == 0);
-
-        } catch (IOException e)          { e.printStackTrace(); }
-        catch (InterruptedException e) { e.printStackTrace(); }
-
-        return false;
     }
 
 

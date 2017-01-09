@@ -35,8 +35,11 @@ public class ViewPendingPaymentActivity extends Activity {
     String str_client_id,str_user_id;
     String str_amount_to_pay;
     String str_payment_mode = "cash";
+    String str_branch;
 
     CheckNetConnection cn;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class ViewPendingPaymentActivity extends Activity {
         tv_paid_amount=(TextView)findViewById(R.id.tv_paid_amount);
         tv_total_cost=(TextView)findViewById(R.id.tv_total_cost);
 
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
         tv_pay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,6 +195,9 @@ public class ViewPendingPaymentActivity extends Activity {
 
                 al_str_key.add(GlobalConstants.PAYMENT_ID);
                 al_str_value.add(str_client_id);
+
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("clear_pending_payment");

@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class ProductListAdapter extends BaseAdapter {
 
     Context context;
     Global global;
-    static int quantity;
+    int quantity;
 
     ArrayList<String> name = new ArrayList<>();
     ArrayList<String> product_id = new ArrayList<>();
@@ -63,7 +63,6 @@ public class ProductListAdapter extends BaseAdapter {
                     in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
                     product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
 
-                    Log.i("Called","Blank ");
                 }
                 else
                 {
@@ -75,8 +74,6 @@ public class ProductListAdapter extends BaseAdapter {
                         price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
                         in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
                         product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
-
-                        Log.i("Called","Search "+search);
 
                     }
                 }
@@ -157,8 +154,7 @@ public class ProductListAdapter extends BaseAdapter {
                         int pos = selected_product_id.indexOf(product_id.get(position));
 
                         selected_product_quantity.set(pos , holder.quantity.getText().toString());
-
-                    }
+                   }
                     else
                     {
 
@@ -188,12 +184,14 @@ public class ProductListAdapter extends BaseAdapter {
 
                 }
 
+
                 global.setAl_select_product(selected_product_id);
                 global.setAl_selected_product_quantity(selected_product_quantity);
                 global.setAl_selected_product_category(selected_product_category);
                 global.setAl_selected_product_price(selected_product_price);
                 global.setAl_selected_product_sku(selected_product_sku);
                 global.setAl_selected_product_name(selected_product_name);
+
             }
         });
 
@@ -204,34 +202,45 @@ public class ProductListAdapter extends BaseAdapter {
 
                 quantity =  Integer.parseInt(holder.quantity.getText().toString());
 
-                quantity = quantity + 1;
+                int max_stock = Integer.parseInt(in_stock.get(position));
 
-                holder.quantity.setText(String.valueOf(quantity));
-
-                if (selected_product_id.contains(product_id.get(position)))
+                if (max_stock > quantity )
                 {
-                    int pos = selected_product_id.indexOf(product_id.get(position));
+                    quantity = quantity + 1;
 
-                    selected_product_quantity.set(pos , holder.quantity.getText().toString());
+                    holder.quantity.setText(String.valueOf(quantity));
+
+                    if (selected_product_id.contains(product_id.get(position)))
+                    {
+                        int pos = selected_product_id.indexOf(product_id.get(position));
+
+                        selected_product_quantity.set(pos , holder.quantity.getText().toString());
+
+                    }
+                    else
+                    {
+                        selected_product_id.add(product_id.get(position));
+                        selected_product_quantity.add(String.valueOf(quantity));
+                        selected_product_category.add(category.get(position));
+                        selected_product_sku.add(SKU.get(position));
+                        selected_product_name.add(name.get(position));
+                        selected_product_price.add(price.get(position));
+
+                    }
+
+                    global.setAl_select_product(selected_product_id);
+                    global.setAl_selected_product_quantity(selected_product_quantity);
+                    global.setAl_selected_product_category(selected_product_category);
+                    global.setAl_selected_product_price(selected_product_price);
+                    global.setAl_selected_product_sku(selected_product_sku);
+                    global.setAl_selected_product_name(selected_product_name);
+
 
                 }
                 else
                 {
-                    selected_product_id.add(product_id.get(position));
-                    selected_product_quantity.add(String.valueOf(quantity));
-                    selected_product_category.add(category.get(position));
-                    selected_product_sku.add(SKU.get(position));
-                    selected_product_name.add(name.get(position));
-                    selected_product_price.add(price.get(position));
-
+                    Toast.makeText(context, "Only "+max_stock+" are left", Toast.LENGTH_SHORT).show();
                 }
-
-                global.setAl_select_product(selected_product_id);
-                global.setAl_selected_product_quantity(selected_product_quantity);
-                global.setAl_selected_product_category(selected_product_category);
-                global.setAl_selected_product_price(selected_product_price);
-                global.setAl_selected_product_sku(selected_product_sku);
-                global.setAl_selected_product_name(selected_product_name);
 
 
             }
@@ -248,34 +257,80 @@ public class ProductListAdapter extends BaseAdapter {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                try {
+                    quantity =  Integer.parseInt(charSequence.toString());
+
+                    int max_stock = Integer.parseInt(in_stock.get(position));
+
+                    if (quantity > max_stock)
+                    {
+                        String qt = charSequence.toString();
+
+                        String[] q = new String[qt.length()];
+
+                        q[0] =  qt.substring(0,qt.length()-1);
+
+                        holder.quantity.setText(q[0]);
+
+                    }
+                }
+                catch (Exception e)
+                {
+
+                }
+
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if (selected_product_id.contains(product_id.get(position)))
-                {
-                    int pos = selected_product_id.indexOf(product_id.get(position));
+                try {
+                    quantity =  Integer.parseInt(editable.toString());
 
-                    selected_product_quantity.add(pos , editable.toString());
+                    int max_stock = Integer.parseInt(in_stock.get(position));
+
+                    if (max_stock > quantity)
+                    {
+                        if (selected_product_id.contains(product_id.get(position)))
+                        {
+                            int pos = selected_product_id.indexOf(product_id.get(position));
+
+                            selected_product_quantity.set(pos , editable.toString());
+
+                        }
+                        else
+                        {
+                            selected_product_id.add(product_id.get(position));
+                            selected_product_quantity.add(String.valueOf(quantity));
+                            selected_product_category.add(category.get(position));
+                            selected_product_sku.add(SKU.get(position));
+                            selected_product_name.add(name.get(position));
+                            selected_product_price.add(price.get(position));
+
+                        }
+
+                        global.setAl_select_product(selected_product_id);
+                        global.setAl_selected_product_quantity(selected_product_quantity);
+                        global.setAl_selected_product_category(selected_product_category);
+                        global.setAl_selected_product_price(selected_product_price);
+                        global.setAl_selected_product_sku(selected_product_sku);
+                        global.setAl_selected_product_name(selected_product_name);
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Only "+max_stock+" are left", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-                else
+                catch (Exception e)
                 {
-                    selected_product_id.add(product_id.get(position));
-                    selected_product_quantity.add(String.valueOf(quantity));
-                    selected_product_category.add(category.get(position));
-                    selected_product_sku.add(SKU.get(position));
-                    selected_product_name.add(name.get(position));
-                    selected_product_price.add(price.get(position));
 
                 }
 
-                global.setAl_select_product(selected_product_id);
-                global.setAl_selected_product_quantity(selected_product_quantity);
-                global.setAl_selected_product_category(selected_product_category);
-                global.setAl_selected_product_price(selected_product_price);
-                global.setAl_selected_product_sku(selected_product_sku);
-                global.setAl_selected_product_name(selected_product_name);}
+
+
+            }
         });
 
         return rowView;

@@ -66,6 +66,8 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:inputType="number"
+            android:maxLength="3"
             android:layout_centerInParent="true"/>
 
         <TextView

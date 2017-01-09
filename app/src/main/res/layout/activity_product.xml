@@ -98,7 +98,8 @@
             android:id="@+id/productlist"
             android:layout_marginTop="10dp"
             android:layout_below="@id/header1"
-            android:choiceMode="multipleChoice"/>
+            android:choiceMode="multipleChoice"
+            android:descendantFocusability="beforeDescendants"/>
 
     </RelativeLayout>
 

@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -42,7 +43,7 @@ public class WithDrawMoneyActivity extends Activity {
     WebServices ws;
     Global global;
     String str_user_id;
-    String str_exp_rsn="",str_wd_amount;
+    String str_exp_rsn="",str_wd_amount,str_branch;
 
     CustomDialogClass cdd;
 
@@ -77,6 +78,7 @@ public class WithDrawMoneyActivity extends Activity {
 
         tv_withdraw=(TextView)findViewById(R.id.tv_withdraw);
 
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
         radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -270,8 +272,17 @@ public class WithDrawMoneyActivity extends Activity {
                 al_str_key.add(GlobalConstants.WD_REASON);
                 al_str_value.add(str_exp_rsn);
 
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("widrawal");
+
+                for (int i = 0 ; i<al_str_key.size() ; i++)
+                {
+                    Log.i("Key",al_str_key.get(i));
+                    Log.i("Value",al_str_value.get(i));
+                }
 
                 message = ws.WithdrawMoneyService(context, al_str_key, al_str_value);
 

@@ -25,6 +25,7 @@ import java.util.Date;
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.SoldProductAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
@@ -45,10 +46,15 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
     CheckNetConnection cn;
 
+    String str_branch;
+    Global global;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_sold_history);
+
+        global = (Global) getApplicationContext();
 
         //getSupportActionBar().hide();
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
@@ -65,6 +71,8 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
         lin_date_to.setOnClickListener(this);
 
         cn = new CheckNetConnection(this);
+
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
     }
 
@@ -183,6 +191,9 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
                 al_str_key.add(GlobalConstants.SOLD_END_DATE);
                 al_str_value.add(format_date_to);
+
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("products_soldout");

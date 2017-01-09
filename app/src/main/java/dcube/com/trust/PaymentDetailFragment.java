@@ -46,7 +46,8 @@ public class PaymentDetailFragment extends Fragment {
 
     Global global;
 
-    String str_payment_mode = "",str_payment_type = "",str_amount="",str_discount,str_amount_to_pay,str_isFull_paid;
+    String str_payment_mode = "",str_payment_type = "",str_amount="",str_discount,str_amount_to_pay,str_isFull_paid="0";
+    String str_branch;
 
     EditText ed_amount,ed_discount;
     int total_cost=0,int_discount_per,int_discounted_amount,int_amount_to_pay;
@@ -88,6 +89,8 @@ public class PaymentDetailFragment extends Fragment {
         radio_partial_grant = (RadioButton) v.findViewById(R.id.radio_partial_grant);
         radio_full = (RadioButton) v.findViewById(R.id.radio_full);
 
+
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
         generate.setOnClickListener(new View.OnClickListener() {
 
@@ -187,17 +190,17 @@ public class PaymentDetailFragment extends Fragment {
                 if (radio_full.isChecked())
                 {
                     str_payment_type = "full";
-                    str_isFull_paid = "true";
+                    str_isFull_paid = "1";
                 }
                 else if (radio_partial.isChecked())
                 {
                     str_payment_type = "partial";
-                    str_isFull_paid = "false";
+                    str_isFull_paid = "0";
                 }
                 else if (radio_partial_grant.isChecked())
                 {
                     str_payment_type = "grant";
-                    str_isFull_paid = "false";
+                    str_isFull_paid = "0";
                 }
 
             }
@@ -272,6 +275,9 @@ public class PaymentDetailFragment extends Fragment {
                 al_str_key.add(GlobalConstants.PAYMENT_AMOUNT);
                 al_str_value.add(str_amount_to_pay);
 
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("payment");
 
@@ -340,6 +346,9 @@ public class PaymentDetailFragment extends Fragment {
 
                 al_str_key.add(GlobalConstants.PAYMENT_IS_FULL_PAID);
                 al_str_value.add(str_isFull_paid);
+
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("checkout_in_cart");

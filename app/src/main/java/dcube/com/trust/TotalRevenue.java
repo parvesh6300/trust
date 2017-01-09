@@ -45,7 +45,7 @@ public class TotalRevenue extends Activity {
     Global global;
     WebServices ws;
 
-    String str_as_per="";
+    String str_as_per="",str_branch;
 
     LineGraphSeries<DataPoint> series2;
 
@@ -75,6 +75,8 @@ public class TotalRevenue extends Activity {
         context = this;
 
         graph.removeAllSeries();
+
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
         radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -262,8 +264,6 @@ public class TotalRevenue extends Activity {
 
 
 
-
-
     public class TotalRevenueAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -285,6 +285,9 @@ public class TotalRevenue extends Activity {
 
                 al_str_key.add(GlobalConstants.REVENUE_AS_PER);
                 al_str_value.add(str_as_per);
+
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("get_revenue");

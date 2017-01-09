@@ -47,6 +47,8 @@ public class StockAdapter extends BaseAdapter {
     Dialog alertDialog;
     int pos ;
 
+    String str_branch;
+
     public StockAdapter(Context context) {
         this.mcontext = context;
 
@@ -60,6 +62,8 @@ public class StockAdapter extends BaseAdapter {
         in_stock = new ArrayList<>();
         category = new ArrayList<>();
         price = new ArrayList<>();
+
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
         for (HashMap<String, String> hashMap : global.getAl_stock_product()) {   //getAl_stock_product
 
@@ -283,19 +287,22 @@ public class StockAdapter extends BaseAdapter {
 
             try {
 
-                    ArrayList<String> al_str_key = new ArrayList<>();
-                    ArrayList<String> al_str_value = new ArrayList<>();
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
 
-                    al_str_key.add(GlobalConstants.STOCK_ITEM_ID);
-                    al_str_value.add(global.getAl_stock_product().get(pos).get(GlobalConstants.PRODUCT_ID));
+                al_str_key.add(GlobalConstants.STOCK_ITEM_ID);
+                al_str_value.add(global.getAl_stock_product().get(pos).get(GlobalConstants.PRODUCT_ID));
 
-                    al_str_key.add(GlobalConstants.STOCK_ITEM_QTY);
-                    al_str_value.add(String.valueOf(quantity));
+                al_str_key.add(GlobalConstants.STOCK_ITEM_QTY);
+                al_str_value.add(String.valueOf(quantity));
 
-                    al_str_key.add(GlobalConstants.ACTION);
-                    al_str_value.add("update_products_in_stock");
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
 
-                    message = ws.UpdateStockService(mcontext, al_str_key, al_str_value);
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("update_products_in_stock");
+
+                message = ws.UpdateStockService(mcontext, al_str_key, al_str_value);
 
             } catch (Exception e) {
                 e.printStackTrace();

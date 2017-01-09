@@ -37,6 +37,7 @@ public class StockControlActivity extends Activity {
     Context context = StockControlActivity.this;
 
     CheckNetConnection cn;
+    String str_branch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class StockControlActivity extends Activity {
         stock_list = (ListView) findViewById(R.id.stock_list);
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
         if (cn.isNetConnected())
         {
@@ -86,6 +88,9 @@ public class StockControlActivity extends Activity {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("get_products_in_stock");
 
@@ -116,6 +121,8 @@ public class StockControlActivity extends Activity {
         }
 
     }
+
+
 
     protected boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
