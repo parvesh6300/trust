@@ -62,7 +62,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
     ArrayList<String> al_service_name;
 
-    String str_client_id;
+    String str_client_id,str_branch;
 
     String format_time = "",format_date = "";
 
@@ -97,6 +97,9 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
         ed_name.setFocusable(false);
         ed_contact.setClickable(false);
         ed_contact.setFocusable(false);
+
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
+
 
         ed_name.setText(global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_NAME));
         ed_contact.setText(global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_CONTACT));
@@ -412,8 +415,8 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                 al_str_key.add(GlobalConstants.APMT_SERVICE_ID);
                 al_str_value.add(str_service_id);
 
-//                al_str_key.add(GlobalConstants.APMT_DATE);
-//                al_str_value.add(format_date);
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.APMT_TIME);
                 al_str_value.add(format_time);
