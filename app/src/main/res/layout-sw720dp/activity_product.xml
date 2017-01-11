@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Select Product"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:textAlignment="gravity"
         android:gravity="center_horizontal"
@@ -21,8 +21,8 @@
         android:typeface="monospace"/>
 
     <RelativeLayout
-        android:layout_width="550dp"
-        android:layout_height="70dp"
+        android:layout_width="700dp"
+        android:layout_height="80dp"
         android:background="@drawable/searchback"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -30,14 +30,14 @@
         android:layout_below="@id/header">
 
         <EditText
-            android:layout_width="450dp"
+            android:layout_width="650dp"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:hint="Search By Brand or Name"
             android:typeface="monospace"
             android:layout_marginLeft="20dp"
             android:textColorHint="@color/graytext"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:id="@+id/search"/>
 
         <ImageView
@@ -51,8 +51,8 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="500dp"
-        android:layout_height="600dp"
+        android:layout_width="650dp"
+        android:layout_height="1030dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/form_back"
         android:layout_below="@+id/search_layout"
@@ -61,7 +61,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:weightSum="3"
             android:background="@color/textColor"
@@ -73,7 +73,7 @@
                 android:text="    PRODUCT"
                 android:textColor="@color/white"
                 android:typeface="monospace"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_weight="2"
                 android:layout_gravity="center"/>
@@ -84,7 +84,7 @@
                 android:text="QUANTITY"
                 android:textColor="@color/white"
                 android:typeface="monospace"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:layout_gravity="center"
@@ -107,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Check Out"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textAlignment="gravity"
         android:textColor="@color/white"
         android:layout_marginTop="20sp"

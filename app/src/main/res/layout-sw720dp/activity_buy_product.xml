@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Select Product"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:textAlignment="gravity"
         android:gravity="center_horizontal"
@@ -30,7 +30,7 @@
         android:layout_below="@id/header">
 
         <EditText
-            android:layout_width="450dp"
+            android:layout_width="550dp"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:hint="Search By Brand or Name"
@@ -51,7 +51,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="500dp"
+        android:layout_width="600dp"
         android:layout_height="600dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/form_back"

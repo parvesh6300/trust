@@ -116,7 +116,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
 
 
-        service.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        service.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
 
