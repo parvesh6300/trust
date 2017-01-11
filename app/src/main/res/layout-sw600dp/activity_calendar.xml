@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CalendarActivity"
+    android:background="@drawable/background_1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/header">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calendar"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:textSize="30sp"
+            android:typeface="monospace"/>
+        
+    </RelativeLayout>
+
+    <dcube.com.trust.CalendarCustomView
+        android:id="@+id/calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_below="@id/header"/>
+    
+    <ListView
+        android:layout_width="500dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/calendar_view"
+        android:id="@+id/list"
+        android:layout_centerHorizontal="true"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="10dp"
+        android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
+
+
+    <pl.droidsonroids.gif.GifTextView
+        android:id="@+id/gif_loader"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/loading"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:visibility="gone"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tv_continue"
+            android:background="@drawable/button_background"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:textColor="@color/white"
+            android:text="Continue"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:typeface="monospace"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -71,7 +71,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     CheckNetConnection cn;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

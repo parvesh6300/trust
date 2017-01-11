@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="3">
+
+    <TextView
+        android:layout_width="166dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:layout_weight="1"
+        android:textColor="@color/textColor"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:textStyle="bold"
+        android:text="Gheilani"
+        />
+    <TextView
+        android:layout_width="166dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/branch"
+        android:layout_weight="1"
+        android:textColor="@color/textColor"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:text="Morogoro"
+        />
+    <TextView
+        android:layout_width="166dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/contact"
+        android:layout_weight="1"
+        android:textColor="@color/textColor"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:text="9877887978"
+        />
+
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dcube.com.trust.ProductCategoryActivity"
+    android:background="@drawable/background_1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Product Category"
+        android:textSize="30sp"
+        android:textAlignment="gravity"
+        android:gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:layout_marginTop="20sp"
+        android:id="@id/header"
+        android:typeface="monospace" />
+
+    <ListView
+        android:id="@+id/product_category_list"
+        android:layout_width="500dp"
+        android:layout_height="700dp"
+        android:layout_below="@id/header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/form_back"/>
+
+</RelativeLayout>

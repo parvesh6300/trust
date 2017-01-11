@@ -2,9 +2,9 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,7 +39,7 @@ public class ViewPendingPaymentActivity extends Activity {
 
     CheckNetConnection cn;
 
-
+    int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,7 @@ public class ViewPendingPaymentActivity extends Activity {
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
+
         tv_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,10 +79,16 @@ public class ViewPendingPaymentActivity extends Activity {
 
                 if (cn.isNetConnected())
                 {
-                    Toast.makeText(context, "Not Completed yet", Toast.LENGTH_SHORT).show();
-                   // new ClearPendingPaymentAsyncTask().execute();
+                    for (int i =0 ; i < global.getAl_order_id().size() ; i++ )
+                    {
+                        count = i;
+                        new PaymentAsyncTask().execute();
+                    }
+
+
                 }
-                else {
+                else
+                {
                     Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                 }
 
@@ -92,7 +99,6 @@ public class ViewPendingPaymentActivity extends Activity {
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
 
         str_user_id = global.getAl_login_list().get(0).get(GlobalConstants.USER_ID);
-
 
 
         if (cn.isNetConnected())
@@ -174,8 +180,7 @@ public class ViewPendingPaymentActivity extends Activity {
     }
 
 
-
-    public class ClearPendingPaymentAsyncTask extends AsyncTask<String, String, String> {
+    public class PaymentAsyncTask extends AsyncTask<String, String, String> {
 
         String resPonse = "";
         String message = "";
@@ -193,8 +198,87 @@ public class ViewPendingPaymentActivity extends Activity {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.PAYMENT_CLIENT_ID);
+                al_str_value.add(str_client_id);
+
+                al_str_key.add(GlobalConstants.PAYMENT_USER_ID);
+                al_str_value.add(str_user_id);
+
+                al_str_key.add(GlobalConstants.PAYMENT_MODE);
+                al_str_value.add("");
+
+                al_str_key.add(GlobalConstants.PAYMENT_TYPE);
+                al_str_value.add("");
+
+                al_str_key.add(GlobalConstants.PAYMENT_AMOUNT);
+                al_str_value.add(str_amount_to_pay);
+
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("payment");
+
+                for (int i=0 ; i< al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+al_str_key.get(i));
+                    Log.i("Value",""+al_str_value.get(i));
+                }
+
+                message = ws.PaymentService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                Log.i("Message",message);
+                new ClearPendingPaymentAsyncTask().execute();
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+
+    public class ClearPendingPaymentAsyncTask extends AsyncTask<String, String, String> {
+
+        String resPonse = "";
+        String message = "";
+        String order_id;
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+            order_id = global.getAl_order_id().get(count);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
                 al_str_key.add(GlobalConstants.PAYMENT_ID);
                 al_str_value.add(str_client_id);
+
+                al_str_key.add(GlobalConstants.PEND_ORDER_ID);
+                al_str_value.add(order_id);
 
                 al_str_key.add(GlobalConstants.BRANCH);
                 al_str_value.add(str_branch);
@@ -216,8 +300,8 @@ public class ViewPendingPaymentActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                startActivity(new Intent(ViewPendingPaymentActivity.this,GenerateInvoiceActivity.class));
-                finish();
+//                startActivity(new Intent(ViewPendingPaymentActivity.this,GenerateInvoiceActivity.class));
+//                finish();
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

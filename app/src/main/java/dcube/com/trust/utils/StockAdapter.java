@@ -200,7 +200,6 @@ public class StockAdapter extends BaseAdapter {
     }
 
 
-
     public void showAlertDialog()
     {
 

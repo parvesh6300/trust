@@ -1207,6 +1207,7 @@ public class WebServices {
         String message = "Some Error occured";
         Global global = (Global) context.getApplicationContext();
         ArrayList<HashMap<String ,String>> al_pending_pmt_details;
+        ArrayList<String> al_order_id;
 
         try {
 
@@ -1225,6 +1226,7 @@ public class WebServices {
                 JSONArray jsonArray = jsonObject.getJSONArray("in_order");
 
                 al_pending_pmt_details = new ArrayList<>();
+                al_order_id = new ArrayList<>();
 
                 global.setPendAmountPaid(jsonObject.getString(GlobalConstants.PEND_AMOUNT_PAID));
                 global.setPendTotalCost(jsonObject.getString(GlobalConstants.PEND_TOTAL_AMOUNT));
@@ -1247,12 +1249,18 @@ public class WebServices {
                     map.put(GlobalConstants.PEND_ITEM_PRICE ,obj.optString(GlobalConstants.PEND_ITEM_PRICE) );
                     map.put(GlobalConstants.PEND_DATE ,obj.optString(GlobalConstants.PEND_DATE) );
 
+
+                    if (!al_order_id.contains(obj.optString(GlobalConstants.PEND_ORDER_ID)))
+                    {
+                        al_order_id.add(obj.optString(GlobalConstants.PEND_ORDER_ID));
+                    }
+
                     al_pending_pmt_details.add(map);
 
                 }
 
                 global.setAl_pend_pmt_details(al_pending_pmt_details);
-
+                global.setAl_order_id(al_order_id);
 
                 return "true";
             }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="500dp"
+    android:layout_height="90dp"
+    android:orientation="horizontal"
+    android:weightSum="3"
+    android:id="@+id/lin_row">
+
+    <TextView
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:textColor="@color/textColor"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:text="Consultation"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="162dp"
+        android:layout_height="60dp"
+        android:id="@+id/product_cost"
+        android:textColor="@color/textColor"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="166dp"
+        android:layout_height="60dp"
+        android:id="@+id/service_cost"
+        android:textColor="@color/textColor"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:visibility="invisible"/>
+
+</LinearLayout>

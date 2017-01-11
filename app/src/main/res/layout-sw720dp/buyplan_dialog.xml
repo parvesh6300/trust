@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="360dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:elevation="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:background="@color/textColor"
+        android:id="@+id/header1">
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="PLAN"
+            android:textColor="@color/white"
+            android:typeface="monospace"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="172dp"
+            android:layout_height="wrap_content"
+            android:text="PRODUCT COST"
+            android:textColor="@color/white"
+            android:typeface="monospace"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
+            android:text="SERVICE COST"
+            android:textColor="@color/white"
+            android:typeface="monospace"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:id="@+id/selected_product_list"
+        android:layout_below="@+id/header1"/>
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:id="@+id/lin_row"
+        android:layout_below="@+id/selected_product_list">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="133dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:typeface="monospace"
+            android:text="Total"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_product_cost"
+            android:layout_width="133dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:typeface="monospace"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:text="20,000"/>
+
+        <TextView
+            android:id="@+id/tv_service_cost"
+            android:layout_width="133dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:typeface="monospace"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:text="20,000"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:background="@color/textColor"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            android:textColor="@color/white"
+            android:typeface="monospace"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/cancel"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONFIRM"
+            android:textColor="@color/white"
+            android:typeface="monospace"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/confirm"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

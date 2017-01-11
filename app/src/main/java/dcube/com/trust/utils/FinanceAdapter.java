@@ -21,7 +21,7 @@ public class FinanceAdapter extends BaseAdapter {
             R.drawable.revenue,
             R.drawable.operatingexpenses,
             R.drawable.addexpensesone,
-            R.drawable.moneybanked,
+            R.drawable.moneybanked,  //moneybagforten
     };
 
     private static LayoutInflater inflater = null;

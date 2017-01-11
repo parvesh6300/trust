@@ -138,7 +138,6 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/signin"
             android:background="@drawable/button_background"
             android:layout_width="360dp"
             android:layout_height="70dp"
@@ -146,6 +145,7 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@color/white"
             android:text="SignIn"
+            android:id="@+id/signin"
             android:gravity="center"
             android:textSize="30sp"
             android:typeface="monospace"/>
@@ -163,16 +163,6 @@
 
     </LinearLayout>
 
-    <!--<ProgressBar-->
-        <!--android:id="@+id/progress_bar"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginBottom="60dp"-->
-        <!--android:visibility="gone"-->
-        <!--android:indeterminateDrawable="@drawable/progressbar_custom" />-->
-
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
         android:layout_width="80dp"
@@ -183,6 +173,5 @@
         android:layout_marginBottom="60dp"
         android:visibility="gone"
         />
-
 
 </RelativeLayout>

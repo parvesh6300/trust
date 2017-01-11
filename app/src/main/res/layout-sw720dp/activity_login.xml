@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/trustbackground"
+    tools:context="dcube.com.trust.LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:text="SignIn"
+        android:typeface="monospace"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:id="@+id/signin_text"/>
+
+    <LinearLayout
+        android:layout_width="600dp"
+        android:layout_height="500dp"
+        android:background="@drawable/containerbox"
+        android:orientation="vertical"
+        android:layout_marginTop="380dp"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:layout_width="450dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="90dp"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/user"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+            
+            <EditText
+                android:id="@+id/ed_user_name"
+                android:layout_width="350dp"
+                android:layout_height="match_parent"
+                android:hint="Username"
+                android:text="rohit@gmail.com"
+                android:typeface="monospace"
+                android:textSize="30sp"
+                android:textColor="@color/textColor"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="450dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/lock"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/ed_pwd"
+                android:layout_width="350dp"
+                android:layout_height="match_parent"
+                android:hint="Password"
+                android:text="123"
+                android:textSize="30sp"
+                android:textColor="@color/textColor"
+                android:typeface="monospace"
+                android:inputType="textPassword"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="450dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/nurse">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/radioselected"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/nurse_radio"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nurse/Mid wife"
+                    android:textSize="25sp"
+                    android:id="@+id/nurse_text"
+                    android:typeface="monospace"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/textColor"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/finance">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/radiounselected"
+                    android:id="@+id/finance_radio"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Finance"
+                    android:id="@+id/finance_text"
+                    android:textSize="25sp"
+                    android:layout_centerInParent="true"
+                    android:typeface="monospace"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:background="@drawable/button_background"
+            android:layout_width="360dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:text="SignIn"
+            android:id="@+id/signin"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:typeface="monospace"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/greyed_out"
+            android:text="Forgot Password"
+            android:id="@+id/forgot"
+            android:typeface="monospace"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+    <pl.droidsonroids.gif.GifTextView
+        android:id="@+id/gif_loader"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/loading"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:visibility="gone"
+        />
+
+
+</RelativeLayout>

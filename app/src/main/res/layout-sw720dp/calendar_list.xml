@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Evangle Omodi"
+        android:textSize="30sp"
+        android:typeface="monospace"
+        android:textColor="@color/white"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10:00 AM"
+        android:textSize="30sp"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/white"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:typeface="monospace"/>
+
+</RelativeLayout>

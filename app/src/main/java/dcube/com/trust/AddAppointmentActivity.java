@@ -68,6 +68,9 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
     CheckNetConnection cn;
 
+    int int_selected_day;
+    int int_today;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,13 +103,17 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
-
         ed_name.setText(global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_NAME));
         ed_contact.setText(global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_CONTACT));
 
         al_service_name = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, al_service_name);
         service.setAdapter(adapter);
+
+
+        Calendar now = Calendar.getInstance();
+        int_today = now.get(Calendar.DATE);
+
 
 
         service.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -133,44 +140,6 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                 );
                 dpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
 
-
-//                Calendar cal_date;
-//                Calendar[] days = new Calendar[30];
-//                SimpleDateFormat format = new SimpleDateFormat("DD-mm-yyyy");
-//
-//                for (int i=0 ; i < global.getAl_apmt_details().size() ; i++)
-//                {
-//                    String[] dtStart = global.getAl_apmt_details().get(i).get(GlobalConstants.APMT_TIME).split("\\s+");
-//
-//                    String[] apmt_date = dtStart[0].split("-");
-//
-//                    Log.e("apmt_date2",apmt_date[2]);
-//
-//                    try {
-//                        Date date = new Date();
-//                        date = format.parse(apmt_date[2]+"-"+apmt_date[1]+"-"+apmt_date[0]);  //dtStart
-//                        Log.e("date",""+date);
-//
-//                        cal_date = toCalendar(date);
-//
-//                        days[i] = cal_date;
-//
-//                    } catch (ParseException e) {
-//                        // TODO Auto-generated catch block
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                dpd.setDisabledDays(days);
-
-//                    Calendar[] days = new Calendar[13];
-//                    for (int i = -6; i < 7; i++) {
-//                        Calendar day = Calendar.getInstance();
-//                        day.add(Calendar.DAY_OF_MONTH, i * 2);
-//                        days[i + 6] = day;
-//                    }
-
-
                 now.add(Calendar.DATE,0);
                 dpd.setMinDate(now);
 
@@ -178,6 +147,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
             }
         });
+
 
         timepicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,9 +162,10 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
                 tpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
 
-//                int hour = Calendar.HOUR_OF_DAY +1 ;
-//                now.add(Calendar.HOUR_OF_DAY,0);
-                tpd.setMinTime(now.get(Calendar.HOUR_OF_DAY),Calendar.MINUTE,Calendar.SECOND);
+                if (int_today == int_selected_day)
+                {
+                    tpd.setMinTime(now.get(Calendar.HOUR_OF_DAY),Calendar.MINUTE,Calendar.SECOND);
+                }
 
                 tpd.show(getFragmentManager(), "Timepickerdialog"); //Datepickerdialog
             }
@@ -270,6 +241,8 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth)
     {
         String d = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+
+        int_selected_day = dayOfMonth;
 
         date.setText(d);
     }

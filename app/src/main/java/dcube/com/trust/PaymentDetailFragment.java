@@ -47,7 +47,7 @@ public class PaymentDetailFragment extends Fragment {
     Global global;
 
     String str_payment_mode = "",str_payment_type = "",str_amount="",str_discount,str_amount_to_pay,str_isFull_paid="0";
-    String str_branch;
+    String str_branch,str_discounted_amount;
 
     EditText ed_amount,ed_discount;
     int total_cost=0,int_discount_per,int_discounted_amount,int_amount_to_pay;
@@ -130,6 +130,7 @@ public class PaymentDetailFragment extends Fragment {
                         str_amount_to_pay = String.valueOf(int_amount_to_pay);
 
                         int_discounted_amount = 0;
+                        str_discounted_amount = "0";
                     }
 
 
@@ -146,10 +147,7 @@ public class PaymentDetailFragment extends Fragment {
                     else {
                         Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
-
-
                 }
-
             }
 
         });
@@ -182,6 +180,7 @@ public class PaymentDetailFragment extends Fragment {
                 }
             }
         });
+
 
         radio_group_payment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -342,7 +341,7 @@ public class PaymentDetailFragment extends Fragment {
                 al_str_value.add(payment_id);
 
                 al_str_key.add(GlobalConstants.PAYMENT_DISCOUNT);
-                al_str_value.add(str_discount);
+                al_str_value.add(global.getDiscount());
 
                 al_str_key.add(GlobalConstants.PAYMENT_IS_FULL_PAID);
                 al_str_value.add(str_isFull_paid);

@@ -486,8 +486,15 @@ public class Global extends Application {
     }
 
 
+    public ArrayList<String> al_order_id;
 
+    public ArrayList<String> getAl_order_id() {
+        return al_order_id;
+    }
 
+    public void setAl_order_id(ArrayList<String> al_order_id) {
+        this.al_order_id = al_order_id;
+    }
     // ******************************* Revenue Getter and Setter  *************************************************
 
 
