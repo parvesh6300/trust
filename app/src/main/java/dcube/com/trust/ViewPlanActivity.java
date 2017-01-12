@@ -3,8 +3,11 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -28,9 +31,6 @@ public class ViewPlanActivity extends Activity {
     ListView lv_plan;
     PlanAdapter planAdapter;
 
-    ArrayList<String> al_plan_name = new ArrayList<>();
-    ArrayList<String> al_date= new ArrayList<>();
-
     GifTextView gif_loader;
 
     Context context;
@@ -41,6 +41,10 @@ public class ViewPlanActivity extends Activity {
     int position;
     String str_client_id;
     CustomDialogClass cdd;
+
+    String str_amount_to_pay,str_payment_mode;
+
+    public static Handler h;
 
     CheckNetConnection cn;
 
@@ -58,7 +62,6 @@ public class ViewPlanActivity extends Activity {
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         cn = new CheckNetConnection(this);
-
 
         lv_plan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,6 +85,21 @@ public class ViewPlanActivity extends Activity {
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
+        h = new Handler() {
+
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+
+                switch(msg.what) {
+
+                    case 0:
+                        finish();
+                        break;
+
+                }
+            }
+
+        };
 
     }
 
@@ -90,7 +108,7 @@ public class ViewPlanActivity extends Activity {
 
         public Activity c;
 
-        public TextView cancel,tv_plan_price;
+        public TextView tv_configure,tv_plan_price;
         public TextView confirm,tv_plan_name;
 
         public CustomDialogClass(Activity a) {
@@ -103,16 +121,19 @@ public class ViewPlanActivity extends Activity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
+
             setContentView(R.layout.renewplan_dialog);
 
             confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
+            tv_configure = (TextView) findViewById(R.id.tv_configure);
             tv_plan_name = (TextView) findViewById(R.id.tv_plan_name);
             tv_plan_price = (TextView) findViewById(R.id.tv_plan_price);
 
             tv_plan_name.setText(global.getAl_view_plan_details().get(position).get(GlobalConstants.ORDER_ITEM_ID));
             tv_plan_price.setText(global.getAl_view_plan_details().get(position).get(GlobalConstants.ORDER_ITEM_PRICE));
 
+            str_amount_to_pay = global.getAl_view_plan_details().get(position).get(GlobalConstants.ORDER_ITEM_PRICE);
+            str_payment_mode = "cash";
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -120,37 +141,59 @@ public class ViewPlanActivity extends Activity {
 
                     dismiss();
 
+                    global.setPlanRenew(true);
 
-                    final Dialog dialog = new Dialog(c);
-                    dialog.setContentView(R.layout.custom_dialog);
-                    dialog.show();
+                    global.setPayment_amount(str_amount_to_pay);
+                    global.setAmount_to_pay(str_amount_to_pay);
+                    global.setDiscount(String.valueOf(0));
+                    global.setPayment_mode(str_payment_mode);
 
-                    TextView text= (TextView)dialog.findViewById(R.id.text);
-                    Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
+                    startActivity(new Intent(ViewPlanActivity.this,GenerateInvoiceActivity.class));
+                //    finish();
 
-                    text.setText("Not Completed Yet");
+                 //   showDoneDialog();
 
-                    btn_yes.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-                            dialog.cancel();
-                            finish();
-                        }
-                    });
                 }
             });
 
-            cancel.setOnClickListener(new View.OnClickListener() {
+            tv_configure.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     dismiss();
+                    Intent intent = new Intent(ViewPlanActivity.this,AddPlanAppointmentActivity.class);
+                    intent.putExtra("pos", position);
+                    startActivity(intent);
+                    finish();
+
                 }
             });
         }
     }
 
+
+    public void showDoneDialog()
+    {
+
+        final Dialog dialog = new Dialog(ViewPlanActivity.this);
+        dialog.setContentView(R.layout.custom_dialog);
+        dialog.show();
+
+        TextView text= (TextView)dialog.findViewById(R.id.text);
+        Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
+
+        text.setText("Not Completed Yet");
+
+        btn_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog.cancel();
+                finish();
+            }
+        });
+
+    }
 
 
     public class ViewPlanAsyncTask extends AsyncTask<String, String, String> {
@@ -209,8 +252,6 @@ public class ViewPlanActivity extends Activity {
         }
 
     }
-
-
 
 
     public class RenewPlanAsyncTask extends AsyncTask<String, String, String> {

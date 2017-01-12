@@ -46,6 +46,11 @@ public class InvoiceFragment extends Fragment  {
                 {
                     ClientHomeActivity.h.sendEmptyMessage(0);
                 }
+                else if (global.isPlanRenew())
+                {
+                    ViewPlanActivity.h.sendEmptyMessage(0);
+                    ClientHomeActivity.h.sendEmptyMessage(0);
+                }
                 else
                 {
                     CartActivity.h.sendEmptyMessage(0);

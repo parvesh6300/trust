@@ -2,8 +2,6 @@ package dcube.com.trust.utils;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.R;
@@ -47,12 +46,16 @@ public class StockAdapter extends BaseAdapter {
     Dialog alertDialog;
     int pos ;
 
+    CheckNetConnection cn;
+
     String str_branch;
 
     public StockAdapter(Context context) {
         this.mcontext = context;
 
         global = (Global) context.getApplicationContext();
+
+        cn = new CheckNetConnection(context);
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -219,9 +222,10 @@ public class StockAdapter extends BaseAdapter {
                 dialog.cancel();
 
 
-                if (isOnline())
+                if (cn.isNetConnected())
                 {
-                    new StockRequestAsyncTask().execute();
+                    //new StockRequestAsyncTask().execute();
+                    new AdminStockRequestAsyncTask().execute();
                 }
                 else
                 {
@@ -240,7 +244,10 @@ public class StockAdapter extends BaseAdapter {
         });
     }
 
-    public void showDoneDialog() {
+
+    public void showDoneDialog()
+    {
+
         final Dialog doneDialog = new Dialog(mcontext);
 
         doneDialog.setContentView(R.layout.stockalertdialog);
@@ -268,6 +275,60 @@ public class StockAdapter extends BaseAdapter {
         });
     }
 
+
+    public class AdminStockRequestAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+        String str_client_id;
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.STOCK_ITEM_ID);
+                al_str_value.add(global.getAl_stock_product().get(pos).get(GlobalConstants.PRODUCT_ID));
+
+                al_str_key.add(GlobalConstants.STOCK_ITEM_QTY);
+                al_str_value.add(String.valueOf(quantity));
+
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("request_admin_for_products");
+
+                message = ws.UpdateStockService(mcontext, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if (message.equalsIgnoreCase("true")) {
+                showDoneDialog();
+            } else {
+                Toast.makeText(mcontext, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
 
     public class StockRequestAsyncTask extends AsyncTask<String, String, String> {
 
@@ -323,16 +384,5 @@ public class StockAdapter extends BaseAdapter {
 
     }
 
-
-
-    protected boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager) mcontext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 }

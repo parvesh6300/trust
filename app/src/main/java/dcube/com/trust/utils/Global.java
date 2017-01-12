@@ -367,7 +367,15 @@ public class Global extends Application {
     public ArrayList<HashMap<String,String>> al_view_plan_details;
 
 
+    public boolean isPlanRenew;
 
+    public boolean isPlanRenew() {
+        return isPlanRenew;
+    }
+
+    public void setPlanRenew(boolean planRenew) {
+        isPlanRenew = planRenew;
+    }
     // ******************************* Stock Product Getter and Setter  *************************************************
 
     public ArrayList<HashMap<String, String>> getAl_stock_product() {

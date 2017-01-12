@@ -84,8 +84,6 @@ public class ViewPendingPaymentActivity extends Activity {
                         count = i;
                         new PaymentAsyncTask().execute();
                     }
-
-
                 }
                 else
                 {

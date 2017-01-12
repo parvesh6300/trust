@@ -21,8 +21,8 @@
         android:typeface="monospace"/>
 
     <RelativeLayout
-        android:layout_width="550dp"
-        android:layout_height="70dp"
+        android:layout_width="700dp"
+        android:layout_height="80dp"
         android:background="@drawable/searchback"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -30,7 +30,7 @@
         android:layout_below="@id/header">
 
         <EditText
-            android:layout_width="550dp"
+            android:layout_width="650dp"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:hint="Search By Brand or Name"
@@ -51,8 +51,8 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="600dp"
-        android:layout_height="600dp"
+        android:layout_width="650dp"
+        android:layout_height="1030dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/form_back"
         android:layout_below="@+id/search_layout"
@@ -106,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add to Cart"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textAlignment="gravity"
         android:textColor="@color/white"
         android:layout_marginTop="20sp"
