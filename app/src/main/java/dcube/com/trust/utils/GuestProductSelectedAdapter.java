@@ -13,14 +13,14 @@ import dcube.com.trust.R;
 /**
  * Created by Sagar on 21/12/16.
  */
-public class NurseProductSelectedAdapter extends BaseAdapter {
+public class GuestProductSelectedAdapter extends BaseAdapter {
 
     Context context;
     Global global;
 
     private static LayoutInflater inflater = null;
 
-    public NurseProductSelectedAdapter(Activity activity)
+    public GuestProductSelectedAdapter(Activity activity)
     {
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,32 +22,46 @@ import dcube.com.trust.R;
 /**
  * Created by Sagar on 21/12/16.
  */
-public class NurseProductListAdapter extends BaseAdapter {
+public class GuestProductListAdapter extends BaseAdapter {
 
     Context context;
     Global global;
     int quantity;
 
-    ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> product_id = new ArrayList<>();
-    ArrayList<String> SKU = new ArrayList<>();
-    ArrayList<String> in_stock = new ArrayList<>();
-    ArrayList<String> category = new ArrayList<>();
-    ArrayList<String> price = new ArrayList<>();
+    ArrayList<String> name ;
+    ArrayList<String> product_id;
+    ArrayList<String> SKU;
+    ArrayList<String> in_stock ;
+    ArrayList<String> category;
+    ArrayList<String> price ;
 
-    ArrayList<String> selected_product_id = new ArrayList<>();
-    ArrayList<String> selected_product_quantity = new ArrayList<>();
-    ArrayList<String> selected_product_name = new ArrayList<>();
-    ArrayList<String> selected_product_sku = new ArrayList<>();
-    ArrayList<String> selected_product_category = new ArrayList<>();
-    ArrayList<String> selected_product_price = new ArrayList<>();
+    ArrayList<String> selected_product_id;
+    ArrayList<String> selected_product_quantity;
+    ArrayList<String> selected_product_name;
+    ArrayList<String> selected_product_sku ;
+    ArrayList<String> selected_product_category ;
+    ArrayList<String> selected_product_price;
 
     private static LayoutInflater inflater = null;
 
-    public NurseProductListAdapter(Activity activity, String search)
+    public GuestProductListAdapter(Activity activity, String search)
     {
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        name = new ArrayList<>();
+        product_id = new ArrayList<>();
+        SKU = new ArrayList<>();
+        in_stock = new ArrayList<>();
+        category = new ArrayList<>();
+        price = new ArrayList<>();
+
+        selected_product_id = new ArrayList<>();
+        selected_product_quantity = new ArrayList<>();
+        selected_product_name = new ArrayList<>();
+        selected_product_sku = new ArrayList<>();
+        selected_product_category = new ArrayList<>();
+        selected_product_price = new ArrayList<>();
 
         global = (Global) activity.getApplicationContext();
 
@@ -236,6 +251,8 @@ public class NurseProductListAdapter extends BaseAdapter {
                 {
                     Toast.makeText(context, "Only "+max_stock+" are left", Toast.LENGTH_SHORT).show();
                 }
+
+                Log.i("Product","id "+selected_product_id);
 
             }
         });

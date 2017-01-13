@@ -262,7 +262,6 @@ public class ViewPendingPaymentActivity extends Activity {
             gif_loader.setVisibility(View.VISIBLE);
 
             order_id = global.getAl_order_id().get(count);
-
         }
 
         @Override

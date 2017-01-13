@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -227,6 +228,8 @@ public class ProductListAdapter extends BaseAdapter {
                         selected_product_price.add(price.get(position));
 
                     }
+
+                    Log.i("Product","id "+selected_product_id);
 
                     global.setAl_select_product(selected_product_id);
                     global.setAl_selected_product_quantity(selected_product_quantity);

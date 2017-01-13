@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -253,20 +251,6 @@ public class BuyProductActivity extends Activity{
                     dismiss();
                 }
             });
-        }
-    }
-
-
-    protected boolean isOnline() {
-
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected())
-        {
-            return true;
-        }
-        else {
-            return false;
         }
     }
 
