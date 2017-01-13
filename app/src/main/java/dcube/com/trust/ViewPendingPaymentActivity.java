@@ -2,6 +2,7 @@ package dcube.com.trust;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -272,7 +273,7 @@ public class ViewPendingPaymentActivity extends Activity {
                 ArrayList<String> al_str_value = new ArrayList<>();
 
                 al_str_key.add(GlobalConstants.PAYMENT_ID);
-                al_str_value.add(str_client_id);
+                al_str_value.add(String.valueOf(global.getPayment_id()));
 
                 al_str_key.add(GlobalConstants.PEND_ORDER_ID);
                 al_str_value.add(order_id);
@@ -282,6 +283,9 @@ public class ViewPendingPaymentActivity extends Activity {
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("clear_pending_payment");
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
 
                 message = ws.PaymentService(context, al_str_key, al_str_value);
 
@@ -297,8 +301,8 @@ public class ViewPendingPaymentActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-//                startActivity(new Intent(ViewPendingPaymentActivity.this,GenerateInvoiceActivity.class));
-//                finish();
+                startActivity(new Intent(ViewPendingPaymentActivity.this,GenerateInvoiceActivity.class));
+                finish();
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

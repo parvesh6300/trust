@@ -28,6 +28,7 @@ public class PendingPaymentAdapter extends BaseAdapter {
     ArrayList<String> al_date= new ArrayList<>();
     ArrayList<String> al_item_id;
     ArrayList<String> al_item_type;
+    ArrayList<String> al_item_qty;
 
     Global global;
 
@@ -38,6 +39,7 @@ public class PendingPaymentAdapter extends BaseAdapter {
 
         al_item_id = new ArrayList<>();
         al_item_type = new ArrayList<>();
+        al_item_qty = new ArrayList<>();
 
         global = (Global) context.getApplicationContext();
 
@@ -52,6 +54,8 @@ public class PendingPaymentAdapter extends BaseAdapter {
             al_date.add(hashmap.get(GlobalConstants.PEND_DATE));
             al_item_id.add(hashmap.get(GlobalConstants.PEND_ITEM_ID));
             al_item_type.add(hashmap.get(GlobalConstants.PEND_ITEM_TYPE));
+            al_item_qty.add(hashmap.get(GlobalConstants.PEND_AMOUNT));
+
         }
 
 
@@ -90,12 +94,18 @@ public class PendingPaymentAdapter extends BaseAdapter {
         {
             holder.tv_product_name.setText(al_item_id.get(pos));
         }
+        else if (al_item_type.get(pos).equalsIgnoreCase("product"))
+        {
+            holder.tv_product_name.setText(al_product_name.get(pos)+"("+al_item_qty.get(pos)+")");
+        }
         else
         {
             holder.tv_product_name.setText(al_product_name.get(pos));
         }
 
+
         holder.tv_cost.setText(al_product_cost.get(pos)+" Tsh");
+
 
         return convertview;
     }

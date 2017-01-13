@@ -47,7 +47,7 @@ public class PaymentDetailFragment extends Fragment {
     Global global;
 
     String str_payment_mode = "",str_payment_type = "",str_amount="",str_discount,str_amount_to_pay,str_isFull_paid="0";
-    String str_branch,str_discounted_amount;
+    String str_branch,str_discounted_amount,str_response_amount;
 
     EditText ed_amount,ed_discount;
     int total_cost=0,int_discount_per,int_discounted_amount,int_amount_to_pay;
@@ -108,12 +108,12 @@ public class PaymentDetailFragment extends Fragment {
                         int_discounted_amount = (int_discount_per * total_cost)/100;
                         int_amount_to_pay = total_cost - int_discounted_amount;
 
-                        if (str_payment_type.equalsIgnoreCase("partial"))
-                        {
-                            int_amount_to_pay = int_amount_to_pay/2 ;
-                        }
+//                        if (str_payment_type.equalsIgnoreCase("partial"))
+//                        {
+//                            int_amount_to_pay = int_amount_to_pay/2 ;
+//                        }
 
-                        str_amount_to_pay = String.valueOf(int_amount_to_pay);
+                        str_response_amount = String.valueOf(int_amount_to_pay);
 
                     }
                     else
@@ -122,17 +122,26 @@ public class PaymentDetailFragment extends Fragment {
 
                         int_amount_to_pay = Integer.parseInt(str_amount_to_pay);
 
-                        if (str_payment_type.equalsIgnoreCase("partial"))
-                        {
-                            int_amount_to_pay = int_amount_to_pay/2 ;
-                        }
+//                        if (str_payment_type.equalsIgnoreCase("partial"))
+//                        {
+//                            int_amount_to_pay = int_amount_to_pay/2 ;
+//                        }
 
-                        str_amount_to_pay = String.valueOf(int_amount_to_pay);
+                        str_response_amount = String.valueOf(int_amount_to_pay);
 
                         int_discounted_amount = 0;
                         str_discounted_amount = "0";
                     }
 
+
+                    if (str_payment_type.equalsIgnoreCase("partial"))
+                    {
+                        int_amount_to_pay = int_amount_to_pay/2 ;
+                    }
+
+                    str_amount_to_pay = String.valueOf(int_amount_to_pay);
+
+                    Log.e("Amount",""+str_amount_to_pay);
 
                     global.setPayment_amount(str_amount);
                     global.setAmount_to_pay(str_amount_to_pay);
@@ -206,10 +215,32 @@ public class PaymentDetailFragment extends Fragment {
         });
 
 
+//        for ( int i =0 ; i< global.getAl_cart_details().size() ; i++)
+//        {
+//            total_cost = total_cost + Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+//        }
+
+
+
         for ( int i =0 ; i< global.getAl_cart_details().size() ; i++)
         {
-            total_cost = total_cost + Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+            String str_item_type = global.getAl_cart_details().get(i).get(GlobalConstants.CART_ITEM_TYPE);
+
+            if (str_item_type.equalsIgnoreCase("product"))
+            {
+                int qt =Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.CART_AMOUNT));
+                int each_price = Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+
+                total_cost = total_cost + (qt*each_price);
+            }
+            else
+            {
+                total_cost = total_cost + Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+
+            }
+
         }
+
 
         ed_amount.setText(String.valueOf(total_cost));
         ed_amount.setFocusable(false);
@@ -250,6 +281,7 @@ public class PaymentDetailFragment extends Fragment {
         protected void onPreExecute() {
 
             gif_loader.setVisibility(View.VISIBLE);
+
         }
 
         @Override
@@ -272,7 +304,7 @@ public class PaymentDetailFragment extends Fragment {
                 al_str_value.add(str_payment_type);
 
                 al_str_key.add(GlobalConstants.PAYMENT_AMOUNT);
-                al_str_value.add(str_amount_to_pay);
+                al_str_value.add(str_response_amount);
 
                 al_str_key.add(GlobalConstants.BRANCH);
                 al_str_value.add(str_branch);

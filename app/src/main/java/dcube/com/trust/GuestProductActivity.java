@@ -73,50 +73,16 @@ public class GuestProductActivity extends Activity {
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
+        String two_letters = str_branch.substring(0,2).toUpperCase();
 
-        switch (str_branch)
-        {
-            case "Arusha":
-                str_client_id = "arguest";
-                break;
-
-            case "Dar Es Salaam":
-                str_client_id = "daguest";
-                break;
-
-            case "Dodoma":
-                str_client_id = "doguest";
-                break;
-
-            case "Mbeya":
-                str_client_id = "mbguest";
-                break;
-
-            case "Morogoro":
-                str_client_id = "moguest";
-                break;
-
-            case "Mwanza":
-                str_client_id = "mwguest";
-                break;
-
-            case "Zanzibar":
-                str_client_id = "zaguest";
-                break;
-
-            default:
-                str_client_id = "guest";
-                break;
-        }
+        str_client_id = two_letters+"_GUEST";
 
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-//                try {
-
-                    Log.i("Size","Selected "+global.getAl_select_product().size());
+                try {
 
                     if (global.getAl_select_product().size() > 0)
                     {
@@ -128,9 +94,9 @@ public class GuestProductActivity extends Activity {
                         Toast.makeText(GuestProductActivity.this, "Chose any one Product", Toast.LENGTH_SHORT).show();
                     }
 
-//                } catch (Exception e) {
-//                    Toast.makeText(GuestProductActivity.this, "Chose any one Product Exception occurs", Toast.LENGTH_SHORT).show();
-//                }
+                } catch (Exception e) {
+                    Toast.makeText(GuestProductActivity.this, "Some Error occured", Toast.LENGTH_SHORT).show();
+                }
 
 
             }

@@ -75,6 +75,7 @@ public class InvoiceFragment extends Fragment  {
         tv_netamount.setText(global.getAmount_to_pay());
         tv_mode.setText("By "+global.getPayment_mode());
 
+
         return v;
     }
 
