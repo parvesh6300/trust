@@ -152,6 +152,10 @@ public class CartActivity extends Activity {
                 @Override
                 public void onClick(View view) {
 
+                    global.setCart(true);
+                    global.setPlanRenew(false);
+                    global.setPendingPayment(false);
+
                     dismiss();
                     context.startActivity(new Intent(CartActivity.this,GenerateInvoiceActivity.class));
                 }

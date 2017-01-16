@@ -37,7 +37,7 @@
             android:typeface="monospace"
             android:layout_marginLeft="20dp"
             android:textColorHint="@color/graytext"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:id="@+id/search"/>
 
         <ImageView
@@ -61,7 +61,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:weightSum="3"
             android:background="@color/textColor"
@@ -70,12 +70,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="    PRODUCT"
+                android:text="PRODUCT"
                 android:textColor="@color/white"
                 android:typeface="monospace"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_weight="2"
+                android:layout_marginStart="30dp"
                 android:layout_gravity="center"/>
 
             <TextView
@@ -84,7 +85,7 @@
                 android:text="QUANTITY"
                 android:textColor="@color/white"
                 android:typeface="monospace"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:layout_gravity="center"

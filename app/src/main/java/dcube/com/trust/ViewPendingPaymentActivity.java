@@ -80,11 +80,15 @@ public class ViewPendingPaymentActivity extends Activity {
 
                 if (cn.isNetConnected())
                 {
-                    for (int i =0 ; i < global.getAl_order_id().size() ; i++ )
-                    {
-                        count = i;
-                        new PaymentAsyncTask().execute();
-                    }
+//                    for (int i =0 ; i < global.getAl_order_id().size() ; i++ )
+//                    {
+//                        count = i;
+//                        new PaymentAsyncTask().execute();
+//                    }
+
+                    new ClearPendingPaymentAsyncTask().execute();
+
+
                 }
                 else
                 {
@@ -272,14 +276,17 @@ public class ViewPendingPaymentActivity extends Activity {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
-                al_str_key.add(GlobalConstants.PAYMENT_ID);
-                al_str_value.add(String.valueOf(global.getPayment_id()));
+                al_str_key.add(GlobalConstants.PAYMENT_CLIENT_ID);
+                al_str_value.add(str_client_id);
 
-                al_str_key.add(GlobalConstants.PEND_ORDER_ID);
-                al_str_value.add(order_id);
-
-                al_str_key.add(GlobalConstants.BRANCH);
-                al_str_value.add(str_branch);
+//                al_str_key.add(GlobalConstants.PAYMENT_ID);
+//                al_str_value.add(String.valueOf(global.getPayment_id()));
+//
+//                al_str_key.add(GlobalConstants.PEND_ORDER_ID);
+//                al_str_value.add(order_id);
+//
+//                al_str_key.add(GlobalConstants.BRANCH);
+//                al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("clear_pending_payment");

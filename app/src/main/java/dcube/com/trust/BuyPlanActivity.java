@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -250,10 +248,6 @@ public class BuyPlanActivity extends Activity{
 
                 message = ws.GetPlanService(context, al_str_key, al_str_value);
 
-                //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
-                //             Log.i("Login", "Login : " + resPonse);
-
-//                return resPonse;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -280,19 +274,6 @@ public class BuyPlanActivity extends Activity{
 
         }
 
-    }
-
-    protected boolean isOnline() {
-
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected())
-        {
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 
 

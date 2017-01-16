@@ -282,8 +282,15 @@ public class Global extends Application {
         this.total_cart_items = total_cart_items;
     }
 
+    public boolean isCart;
 
+    public boolean isCart() {
+        return isCart;
+    }
 
+    public void setCart(boolean cart) {
+        isCart = cart;
+    }
     // ******************************* Payment Getter and Setter  *************************************************
 
     public int payment_id;

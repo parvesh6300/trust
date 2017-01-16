@@ -112,13 +112,13 @@
         android:weightSum="2">
 
         <TextView
-            android:id="@+id/cancel"
+            android:id="@+id/tv_configure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="CANCEL"
+            android:text="CONFIGURE"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"

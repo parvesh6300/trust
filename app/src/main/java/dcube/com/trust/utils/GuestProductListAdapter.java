@@ -181,19 +181,29 @@ public class GuestProductListAdapter extends BaseAdapter {
                 else
                 {
                     try {
-                        selected_product_price.remove(position);
-                        selected_product_name.remove(position);
-                        selected_product_sku.remove(position);
-                        selected_product_category.remove(position);
-                        selected_product_id.remove(position);
-                        selected_product_quantity.remove(position);
+
+                        if (selected_product_id.contains(product_id.get(position)))
+                        {
+                            int pos = selected_product_id.indexOf(product_id.get(position));
+
+                            selected_product_price.remove(pos);
+                            selected_product_name.remove(pos);
+                            selected_product_sku.remove(pos);
+                            selected_product_category.remove(pos);
+                            selected_product_id.remove(pos);
+                            selected_product_quantity.remove(pos);
+
+                        }
+
                     }
                     catch (Exception e)
                     {
 
                     }
 
+
                 }
+
 
                 global.setAl_select_product(selected_product_id);
                 global.setAl_selected_product_quantity(selected_product_quantity);
@@ -330,6 +340,7 @@ public class GuestProductListAdapter extends BaseAdapter {
                     {
                         Toast.makeText(context, "Only "+max_stock+" are left", Toast.LENGTH_SHORT).show();
                     }
+
 
                 }
                 catch (Exception e)
