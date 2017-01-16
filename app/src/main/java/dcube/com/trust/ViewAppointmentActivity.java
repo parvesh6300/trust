@@ -84,7 +84,6 @@ public class ViewAppointmentActivity extends Activity {
                 get(GlobalConstants.SRC_CLIENT_ID);
 
 
-
         if (cn.isNetConnected())
         {
             new GetAppointmentAsyncTask().execute();

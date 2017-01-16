@@ -219,15 +219,6 @@ public class AddPlanAppointmentActivity extends FragmentActivity implements Time
                 get(GlobalConstants.SRC_CLIENT_ID);
 
 
-        if (cn.isNetConnected())
-        {
-
-        }
-        else
-        {
-            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-        }
-
 
     }
 

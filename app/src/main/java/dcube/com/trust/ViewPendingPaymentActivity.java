@@ -78,22 +78,34 @@ public class ViewPendingPaymentActivity extends Activity {
                 global.setDiscount(String.valueOf(0));
                 global.setPayment_mode(str_payment_mode);
 
-                if (cn.isNetConnected())
-                {
+                try{
+
+                    if (global.al_pend_pmt_details.size() > 0)
+                    {
+                        if (cn.isNetConnected())
+                        {
+
 //                    for (int i =0 ; i < global.getAl_order_id().size() ; i++ )
 //                    {
 //                        count = i;
 //                        new PaymentAsyncTask().execute();
 //                    }
+                            new ClearPendingPaymentAsyncTask().execute();
 
-                    new ClearPendingPaymentAsyncTask().execute();
+                        }
+                        else
+                        {
+                            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                        }
 
+                    }
 
                 }
-                else
+                catch (Exception e)
                 {
-                    Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    Log.i("Exception","Occurs");
                 }
+
 
             }
         });
@@ -163,11 +175,19 @@ public class ViewPendingPaymentActivity extends Activity {
                 paymentAdapter = new PendingPaymentAdapter(context);
                 lv_payment_details.setAdapter(paymentAdapter);
 
-                int paid_amount = Integer.parseInt(global.getPendAmountPaid());
-                int total_cost = Integer.parseInt(global.getPendTotalCost());
-                int pending_amount = total_cost - paid_amount;
+//                int paid_amount = Integer.parseInt(global.getPendAmountPaid());
+//                int total_cost = Integer.parseInt(global.getPendTotalCost());
+//                int pending_amount = total_cost - paid_amount;
+//
+//                str_amount_to_pay = String.valueOf(pending_amount);
+//
+//                tv_pending_amount.setText(str_amount_to_pay);
 
-                str_amount_to_pay = String.valueOf(pending_amount);
+                float f_paid_amount = Float.parseFloat(global.getPendAmountPaid());
+                float f_total_cost = Float.parseFloat(global.getPendTotalCost());
+                float f_pending_amount = f_total_cost - f_paid_amount;
+
+                str_amount_to_pay  = String.valueOf(f_pending_amount);
 
                 tv_pending_amount.setText(str_amount_to_pay);
 
