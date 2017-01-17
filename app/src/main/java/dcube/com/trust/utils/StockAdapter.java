@@ -221,7 +221,6 @@ public class StockAdapter extends BaseAdapter {
 
                 dialog.cancel();
 
-
                 if (cn.isNetConnected())
                 {
                     //new StockRequestAsyncTask().execute();

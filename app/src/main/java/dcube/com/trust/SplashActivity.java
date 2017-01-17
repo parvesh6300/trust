@@ -225,7 +225,7 @@ public class SplashActivity extends Activity {
                 }
                 else if (global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE).equalsIgnoreCase("nurse_finance"))
                 {
-                    Intent i = new Intent(SplashActivity.this, NurseHomeActivity.class);  //FinanceHomeActivity
+                    Intent i = new Intent(SplashActivity.this, FinanceHomeActivity.class);  //NurseHomeActivity
                     startActivity(i);
                     finish();
                 }

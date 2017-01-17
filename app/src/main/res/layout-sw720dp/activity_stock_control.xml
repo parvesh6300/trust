@@ -16,15 +16,15 @@
         android:text="View Stock"
         android:textAlignment="gravity"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:typeface="monospace"
         android:textStyle="bold"/>
 
 
     <RelativeLayout
         android:id="@+id/list_layout"
-        android:layout_width="500dp"
-        android:layout_height="700dp"
+        android:layout_width="650dp"
+        android:layout_height="1100dp"
         android:layout_below="@+id/search_layout"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
@@ -33,8 +33,8 @@
 
         <LinearLayout
             android:id="@+id/header1"
-            android:layout_width="500dp"
-            android:layout_height="40dp"
+            android:layout_width="650dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:background="@color/textColor"
             android:orientation="horizontal"
@@ -47,10 +47,10 @@
                 android:layout_weight="2"
                 android:text="PRODUCT"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="40dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
                 android:gravity="center"
                 android:text="QUANTITY"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:layout_marginLeft="140dp"/>
@@ -70,7 +70,7 @@
 
         <ListView
             android:id="@+id/stock_list"
-            android:layout_width="500dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/form_back"
@@ -83,10 +83,10 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:background="@drawable/loading"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="30dp"
         android:layout_gravity="center_horizontal"
         />
 

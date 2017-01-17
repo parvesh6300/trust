@@ -14,24 +14,26 @@
         android:textColor="@color/white"
         android:text="Money Banked"
         android:id="@+id/addclienttext"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:typeface="monospace"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true" />
 
     <LinearLayout
-        android:layout_width="500dp"
-        android:layout_height="720dp"
+        android:layout_width="700dp"
+        android:layout_height="1100dp"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@drawable/form_back">
 
         <RelativeLayout
-            android:layout_width="500dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:layout_gravity="center"
+            >
 
 
             <TextView
@@ -41,20 +43,20 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Enter Deposit Amount"
                 android:textColor="@color/purple"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:typeface="monospace"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
             <EditText
                 android:id="@+id/ed_deposit_amount"
-                android:layout_width="160dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/tv_amount_label"
                 android:hint="Enter amount"
                 android:inputType="number"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:typeface="monospace"
                 />
 
@@ -64,10 +66,10 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Tsh"
                 android:textColor="@color/purple"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:typeface="monospace"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
+                android:layout_toEndOf="@+id/ed_deposit_amount"
                 android:layout_marginTop="10dp"/>
 
 
@@ -79,7 +81,7 @@
 
             <TextView
                 android:id="@+id/tv_deposit"
-                android:layout_width="250dp"
+                android:layout_width="280dp"
                 android:layout_height="50dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/button_background"
@@ -88,7 +90,7 @@
                 android:typeface="monospace"
                 android:textAlignment="gravity"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="30sp" />
 
         </RelativeLayout>
 
@@ -96,9 +98,9 @@
         <TextView
             android:id="@+id/tv_history"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:text="Money Banked History"
-            android:textSize="25sp"
+            android:textSize="30sp"
             android:textAlignment="center"
             android:typeface="monospace"
             android:layout_marginTop="10dp"
@@ -123,7 +125,7 @@
                 android:layout_marginTop="20dp"
                 android:text="Account Balance(Tsh) :"
                 android:textColor="@color/purple"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -138,7 +140,7 @@
                 android:layout_toRightOf="@+id/tv_balance_label"
                 android:text="10,00,000"
                 android:textColor="@color/purple"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:typeface="monospace" />
 
         </RelativeLayout>

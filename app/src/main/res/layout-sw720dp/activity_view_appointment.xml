@@ -143,6 +143,8 @@
                 android:fadeScrollbars="false"
                 android:scrollbarSize="10dp"
                 android:layout_gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
 
             <TextView
