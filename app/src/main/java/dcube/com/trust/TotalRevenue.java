@@ -165,18 +165,38 @@ public class TotalRevenue extends Activity {
 
         int count =  global.getAl_on_date().size();
 
+        Integer[] int_stock_arr = new Integer[global.getAl_was_sum().size()];
         String[] dateArr;
         al_time = new ArrayList<>();
 
         String[] stockArr = new String[global.getAl_was_sum().size()];
         stockArr = global.getAl_was_sum().toArray(stockArr);
-        Arrays.sort(stockArr , Collections.<String>reverseOrder());
+     //   Arrays.sort(stockArr , Collections.<String>reverseOrder());
+
+        for (int i =0 ; i < stockArr.length ; i++)
+        {
+            Log.i("Stock","array "+stockArr[i]);
+            int_stock_arr[i] = Integer.parseInt(stockArr[i]);
+        }
+
+        Arrays.sort(int_stock_arr , Collections.<Integer>reverseOrder());
+
+        for (int i =0 ; i < stockArr.length ; i++)
+        {
+            Log.i("Stock","array in integer"+int_stock_arr[i]);
+        }
+
 
         if ( count == 12 )
         {
             dateArr = new String[global.getAl_on_date().size()];
             dateArr = global.getAl_on_date().toArray(dateArr);
             Arrays.sort(dateArr , Collections.<String>reverseOrder());
+
+            for (int i =0 ; i < dateArr.length ; i++)
+            {
+                Log.i("Yearly","array "+dateArr[i]);
+            }
 
         }
         else if (count == 24)
@@ -188,13 +208,19 @@ public class TotalRevenue extends Activity {
                 String[] date = date_time[1].split(":");
 
                 al_time.add(date[0]);
-                Log.i("Hour",""+date[0]);
+//                Log.i("Hour",""+date[0]);
 
             }
 
             dateArr = new String[al_time.size()];
             dateArr = al_time.toArray(dateArr);
             Arrays.sort(dateArr , Collections.<String>reverseOrder());
+
+            for (int i =0 ; i < dateArr.length ; i++)
+            {
+                Log.i("Daily","array "+dateArr[i]);
+            }
+
         }
         else
         {
@@ -212,13 +238,23 @@ public class TotalRevenue extends Activity {
             dateArr = al_time.toArray(dateArr);
             Arrays.sort(dateArr , Collections.<String>reverseOrder());
 
+
+            for (int i =0 ; i < dateArr.length ; i++)
+            {
+                Log.i("MOnthly","Weekly "+dateArr[i]);
+            }
+
         }
 
 
         // set manual bounds
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
-        graph.getViewport().setMaxY(Double.parseDouble(stockArr[0]));
+     //   graph.getViewport().setMaxY(Double.parseDouble(stockArr[0]));
+
+        double val = (double) int_stock_arr[0];
+        graph.getViewport().setMaxY(val);
+
 
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(0);
