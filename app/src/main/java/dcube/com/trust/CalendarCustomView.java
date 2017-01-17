@@ -234,14 +234,24 @@ public class CalendarCustomView extends LinearLayout
 					break;
 				}
 
+//				case 1: {
+//
+//					txtMonth.setText("February");
+//					btnPrev.setText("January");
+//					btnNext.setText("March");
+//
+//					break;
+//				}
+
 				case 1: {
 
-					txtMonth.setText("February");
-					btnPrev.setText("January");
-					btnNext.setText("March");
+					txtMonth.setText("January");
+					btnPrev.setText("December");
+					btnNext.setText("February");
 
 					break;
 				}
+
 
 			}
 		}
