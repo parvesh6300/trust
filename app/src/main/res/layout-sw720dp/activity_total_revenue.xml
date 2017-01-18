@@ -124,6 +124,8 @@
                     android:text="5,00,000 Tsh"
                     android:textSize="35sp"
                     android:textColor="@color/purple"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
                     android:typeface="monospace"/>
 
             </LinearLayout>
