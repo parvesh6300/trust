@@ -183,6 +183,9 @@ public class SearchClientActivity extends Activity {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
                 al_str_key.add(GlobalConstants.SRC_CLIENT_KEYWORD);
                 al_str_value.add(src_keyword);
 

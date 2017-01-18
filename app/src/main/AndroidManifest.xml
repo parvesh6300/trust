@@ -129,7 +129,9 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".TestFragment" />
         <activity android:name=".AddPlanAppointmentActivity" />
-        <activity android:name=".GuestReceiptActivity"></activity>
+        <activity android:name=".GuestReceiptActivity" />
+        <activity android:name=".GraphActivity" />
+        <activity android:name=".HelloChartActivity"></activity>
     </application>
 
 </manifest>

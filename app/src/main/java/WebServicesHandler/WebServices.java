@@ -57,6 +57,7 @@ public class WebServices {
                 map.put(GlobalConstants.USER_NAME,jsonObject1.optString(GlobalConstants.USER_NAME));
                 map.put(GlobalConstants.USER_PASSWORD,jsonObject1.optString(GlobalConstants.USER_PASSWORD));
                 map.put(GlobalConstants.USER_BRANCH,jsonObject1.optString(GlobalConstants.USER_BRANCH));
+                map.put(GlobalConstants.USER_BRANCH_ID,jsonObject1.optString(GlobalConstants.USER_BRANCH_ID));
                 map.put(GlobalConstants.USER_ROLE_ID,jsonObject1.optString(GlobalConstants.USER_ROLE_ID));
                 map.put(GlobalConstants.USER_ROLE,jsonObject1.optString(GlobalConstants.USER_ROLE));
                 map.put(GlobalConstants.USER_CONTACT,jsonObject1.optString(GlobalConstants.USER_CONTACT));
@@ -1006,13 +1007,10 @@ public class WebServices {
                     map.put(GlobalConstants.PRODUCT_PRICE , jsonObject1.optString(GlobalConstants.PRODUCT_PRICE));
                     map.put(GlobalConstants.PRODUCT_IN_STOCK , jsonObject1.getString(GlobalConstants.PRODUCT_IN_STOCK ));
 
-                    Log.e("Web","Instock "+ jsonObject1.getString(GlobalConstants.PRODUCT_IN_STOCK));
-
                     al_stock_product.add(map);
                 }
 
                 global.setAl_stock_product(al_stock_product);
-                Log.e("Size",""+ global.getAl_stock_product().size());
 
                 return "true";
             }

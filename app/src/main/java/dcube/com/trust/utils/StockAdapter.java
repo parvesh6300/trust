@@ -76,10 +76,6 @@ public class StockAdapter extends BaseAdapter {
             price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
             in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
             product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
-
-
-            Log.e("Constructor",GlobalConstants.PRODUCT_IN_STOCK);
-
         }
     }
 
@@ -295,6 +291,9 @@ public class StockAdapter extends BaseAdapter {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
                 al_str_key.add(GlobalConstants.STOCK_ITEM_ID);
                 al_str_value.add(global.getAl_stock_product().get(pos).get(GlobalConstants.PRODUCT_ID));
 
@@ -306,6 +305,9 @@ public class StockAdapter extends BaseAdapter {
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("request_admin_for_products");
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
 
                 message = ws.UpdateStockService(mcontext, al_str_key, al_str_value);
 
@@ -349,6 +351,9 @@ public class StockAdapter extends BaseAdapter {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
                 al_str_key.add(GlobalConstants.STOCK_ITEM_ID);
                 al_str_value.add(global.getAl_stock_product().get(pos).get(GlobalConstants.PRODUCT_ID));
 
@@ -360,6 +365,9 @@ public class StockAdapter extends BaseAdapter {
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("update_products_in_stock");
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
 
                 message = ws.UpdateStockService(mcontext, al_str_key, al_str_value);
 

@@ -38,6 +38,8 @@ public class AddClientActivity extends Activity {
 
     String[] spinnerArray = {"10-19","20-29","30-39","40+"};
 
+    EditText ed_areacode,emer_areacode;
+
     Spinner age_group;
     BetterSpinner area;
 
@@ -85,6 +87,10 @@ public class AddClientActivity extends Activity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ITEMS);
         area.setAdapter(adapter);
+
+        ed_areacode.setFocusable(false);
+        ed_areacode.setKeyListener(null);
+        emer_areacode.setKeyListener(null);
 
         age_group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
@@ -346,6 +352,9 @@ public class AddClientActivity extends Activity {
 
         addclient = (TextView) findViewById(R.id.addclient);
 
+        ed_areacode = (EditText) findViewById(R.id.areacode);
+        emer_areacode = (EditText) findViewById(R.id.emer_areacode);
+
         ed_name = (EditText) findViewById(R.id.ed_name);
         ed_contact = (EditText) findViewById(R.id.ed_contact);
         ed_emer_contact = (EditText) findViewById(R.id.ed_emer_contact);
@@ -428,6 +437,9 @@ public class AddClientActivity extends Activity {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
                 al_str_key.add(GlobalConstants.CLIENT_NAME);
                 al_str_value.add(str_name);
 
@@ -469,7 +481,6 @@ public class AddClientActivity extends Activity {
                     Log.i("Key",al_str_key.get(i));
                     Log.i("Value",al_str_value.get(i));
                 }
-
 
                 message = ws.AddClientService(context, al_str_key, al_str_value);
 

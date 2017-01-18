@@ -22,7 +22,7 @@
             android:textColor="@color/white"
             android:textSize="35sp"
             android:textStyle="bold"
-            android:typeface="monospace"/>
+            android:typeface="monospace" />
 
 
     </RelativeLayout>
@@ -47,8 +47,7 @@
             <RadioGroup
                 android:id="@+id/radio_group"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
 
                 <RadioButton
@@ -59,7 +58,7 @@
                     android:textColor="@color/purple"
                     android:textSize="35sp"
                     android:textStyle="bold"
-                    android:typeface="monospace"/>
+                    android:typeface="monospace" />
 
                 <RadioButton
                     android:id="@+id/radio_weekly"
@@ -70,7 +69,7 @@
                     android:textColor="@color/purple"
                     android:textSize="35sp"
                     android:textStyle="bold"
-                    android:typeface="monospace"/>
+                    android:typeface="monospace" />
 
                 <RadioButton
                     android:id="@+id/radio_monthly"
@@ -81,7 +80,7 @@
                     android:textColor="@color/purple"
                     android:textSize="35sp"
                     android:textStyle="bold"
-                    android:typeface="monospace"/>
+                    android:typeface="monospace" />
 
                 <RadioButton
                     android:id="@+id/radio_yearly"
@@ -92,7 +91,7 @@
                     android:textColor="@color/purple"
                     android:textSize="35sp"
                     android:textStyle="bold"
-                    android:typeface="monospace"/>
+                    android:typeface="monospace" />
 
 
             </RadioGroup>
@@ -101,32 +100,32 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:text="Total Revenue Collected: "
                     android:layout_marginLeft="40dp"
+                    android:text="Total Revenue Collected: "
                     android:textAlignment="center"
                     android:textColor="@color/purple"
                     android:textSize="30sp"
                     android:textStyle="bold"
-                    android:typeface="monospace"/>
+                    android:typeface="monospace" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:text="5,00,000 Tsh"
-                    android:textSize="35sp"
-                    android:textColor="@color/purple"
                     android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
-                    android:typeface="monospace"/>
+                    android:text="5,00,000 Tsh"
+                    android:textColor="@color/purple"
+                    android:textSize="35sp"
+                    android:typeface="monospace" />
 
             </LinearLayout>
 
@@ -139,8 +138,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
 
         <TextView
@@ -151,18 +150,36 @@
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:typeface="monospace"/>
+            android:typeface="monospace" />
 
-
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graph"
+        <lecho.lib.hellocharts.view.LineChartView
+            android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="700dp"
-            android:background="@color/white"
+            android:layout_height="500dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:foreground="?selectableItemBackground"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="30dp"/>
+
+
+
+        <!--<com.deepakbaliga.beautifulgraph.Plotter-->
+        <!--android:id="@+id/plotter_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="600dp"-->
+        <!--android:foreground="?selectableItemBackground"-->
+        <!--android:layout_margin="8dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginStart="50dp"-->
+        <!--android:layout_marginTop="30dp"/>-->
+
+        <!--<com.jjoe64.graphview.GraphView-->
+        <!--android:id="@+id/graph"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="700dp"-->
+        <!--android:background="@color/white"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginTop="30dp"/>-->
 
     </LinearLayout>
 
@@ -170,25 +187,23 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:text="Time"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_gravity="center"
-        android:typeface="monospace"
-        android:layout_marginTop="20dp"/>
+        android:typeface="monospace" />
 
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@drawable/loading"
-        android:layout_marginBottom="30dp"
         android:layout_gravity="center_horizontal"
-        android:visibility="gone"
-        />
-
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/loading"
+        android:visibility="gone" />
 
 
 </LinearLayout>

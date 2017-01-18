@@ -243,6 +243,9 @@ public class BuyPlanActivity extends Activity{
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("get_plan_list");
 
@@ -300,6 +303,9 @@ public class BuyPlanActivity extends Activity{
                 for (int i = 0 ; i < global.al_selected_plan_id.size() ; i++) {
                     ArrayList<String> al_str_key = new ArrayList<>();
                     ArrayList<String> al_str_value = new ArrayList<>();
+
+                    al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                    al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
                     al_str_key.add(GlobalConstants.CART_CLIENT_ID);
                     al_str_value.add(str_client_id);

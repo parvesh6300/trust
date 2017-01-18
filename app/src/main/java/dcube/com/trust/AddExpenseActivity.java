@@ -3,8 +3,6 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -176,6 +174,9 @@ public class AddExpenseActivity extends Activity {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
                 al_str_key.add(GlobalConstants.EXP_AMOUNT);
                 al_str_value.add(str_amount);
 
@@ -275,6 +276,9 @@ public class AddExpenseActivity extends Activity {
 
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
                 al_str_key.add(GlobalConstants.BRANCH);
                 al_str_value.add(str_branch);

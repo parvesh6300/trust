@@ -28,6 +28,7 @@ public class GlobalConstants {
     public static final String USER_ID = "user_id";
     public static final String USER_NAME = "username";
     public static final String USER_BRANCH = "branch";
+    public static final String USER_BRANCH_ID = "branch_id";
     public static final String USER_ROLE_ID = "role_id";
     public static final String USER_ROLE = "role";
     public static final String USER_CONTACT = "contact";

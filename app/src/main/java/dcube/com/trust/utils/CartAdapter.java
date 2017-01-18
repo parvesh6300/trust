@@ -296,6 +296,9 @@ public class CartAdapter extends BaseAdapter {
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
                 al_str_key.add(GlobalConstants.GET_CART_ID);
                 al_str_value.add(global.al_cart_details.get(position).get(GlobalConstants.GET_CART_ID));
 
@@ -346,6 +349,9 @@ public class CartAdapter extends BaseAdapter {
 
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
                 al_str_key.add(GlobalConstants.CART_CLIENT_ID);
                 al_str_value.add(str_client_id);
@@ -398,6 +404,9 @@ public class CartAdapter extends BaseAdapter {
 
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
                 al_str_key.add(GlobalConstants.GET_CART_ID);
                 al_str_value.add(global.al_cart_details.get(position).get(GlobalConstants.GET_CART_ID));

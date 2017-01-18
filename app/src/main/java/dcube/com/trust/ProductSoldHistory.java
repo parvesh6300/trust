@@ -184,6 +184,9 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
                 al_str_key.add(GlobalConstants.SOLD_START_DATE);
                 al_str_value.add(format_date_from);
 

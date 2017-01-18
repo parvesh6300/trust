@@ -78,7 +78,7 @@ public class FinanceHomeActivity extends Activity {
                         break;
 
                     case 3:
-                        startActivity(new Intent(FinanceHomeActivity.this,TotalRevenue.class));
+                        startActivity(new Intent(FinanceHomeActivity.this,HelloChartActivity.class)); // TotalRevenue   GraphActivity
                         break;
 
                     case 4:

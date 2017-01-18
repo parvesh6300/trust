@@ -154,15 +154,24 @@
             android:typeface="monospace"/>
 
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graph"
+        <com.deepakbaliga.beautifulgraph.Plotter
+            android:id="@+id/plotter_view"
             android:layout_width="match_parent"
-            android:layout_height="700dp"
-            android:background="@color/white"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_height="600dp"
             android:foreground="?selectableItemBackground"
+            android:layout_margin="8dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="30dp"/>
+
+        <!--<com.jjoe64.graphview.GraphView-->
+            <!--android:id="@+id/graph"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="700dp"-->
+            <!--android:background="@color/white"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginTop="30dp"/>-->
 
     </LinearLayout>
 
