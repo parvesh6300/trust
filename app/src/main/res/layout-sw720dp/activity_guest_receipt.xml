@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Generate Invoice"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:textAlignment="gravity"
+        android:gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
+        android:id="@+id/header"
+        android:typeface="monospace"/>
+
+
+    <LinearLayout
+        android:id="@+id/id_receipt"
+        android:layout_width="600dp"
+        android:layout_height="600dp"
+        android:layout_below="@id/addclienttext"
+        android:layout_centerInParent="true"
+        android:background="@drawable/receipt_back"
+        android:elevation="4dp"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/contact_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Amount(Tsh) :"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/contact_text"
+                android:text="2300"
+                android:textColor="@color/textColor"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/discount_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Discount      :"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/discount_text"
+                android:text="230"
+                android:textColor="@color/textColor"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Net Amount Paid:"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/netamount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/_text"
+                android:text="2070"
+                android:textColor="@color/textColor"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="35dp">
+
+            <TextView
+                android:id="@+id/mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="By Cash"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:typeface="monospace" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/stamp" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/id_receipt"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/tv_continue"
+            android:background="@drawable/button_background"
+            android:layout_width="230dp"
+            android:layout_height="60dp"
+            android:textColor="@color/white"
+            android:text="Continue"
+            android:gravity="center"
+            android:textSize="35sp"
+            android:typeface="monospace"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

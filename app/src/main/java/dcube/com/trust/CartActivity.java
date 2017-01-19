@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
@@ -35,7 +36,7 @@ public class CartActivity extends Activity {
     String str_client_id;
     Global global;
 
-    int total_cost=0;
+    float total_cost=0;
 
     CheckNetConnection cn;
 
@@ -134,13 +135,13 @@ public class CartActivity extends Activity {
                 if (str_item_type.equalsIgnoreCase("product"))
                 {
                     int qt =Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.CART_AMOUNT));
-                    int each_price = Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+                    float each_price = Float.parseFloat(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
 
                     total_cost = total_cost + (qt*each_price);
                 }
                 else
                 {
-                    total_cost = total_cost + Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+                    total_cost = total_cost + Float.parseFloat(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
 
                 }
 
@@ -201,6 +202,9 @@ public class CartActivity extends Activity {
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("get_cart_by_client_id");
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
 
                 message = ws.GetCartService(context, al_str_key, al_str_value);
 

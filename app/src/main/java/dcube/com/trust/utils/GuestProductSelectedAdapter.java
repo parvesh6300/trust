@@ -64,8 +64,8 @@ public class GuestProductSelectedAdapter extends BaseAdapter {
         holder.product_cost.setText(global.getAl_selected_product_price().get(position));
 
         int int_quantity = Integer.parseInt(global.getAl_selected_product_quantity().get(position));
-        int int_product_cost = Integer.parseInt(global.getAl_selected_product_price().get(position));
-        int total_cost = int_quantity * int_product_cost;
+        float int_product_cost = Float.parseFloat(global.getAl_selected_product_price().get(position));
+        float total_cost = int_quantity * int_product_cost;
 
         holder.price.setText(String.valueOf(total_cost));
 

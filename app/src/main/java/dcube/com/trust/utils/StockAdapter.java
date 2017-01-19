@@ -304,7 +304,7 @@ public class StockAdapter extends BaseAdapter {
                 al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("request_admin_for_products");
+                al_str_value.add("request_stock");   //request_admin_for_products
 
                 Log.i("Key",""+al_str_key);
                 Log.i("Value",""+al_str_value);

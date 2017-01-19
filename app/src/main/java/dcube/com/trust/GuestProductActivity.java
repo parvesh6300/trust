@@ -82,7 +82,7 @@ public class GuestProductActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                try {
+             //   try {
 
                     if (global.getAl_select_product().size() > 0)
                     {
@@ -94,9 +94,9 @@ public class GuestProductActivity extends Activity {
                         Toast.makeText(GuestProductActivity.this, "Chose any one Product", Toast.LENGTH_SHORT).show();
                     }
 
-                } catch (Exception e) {
-                    Toast.makeText(GuestProductActivity.this, "Some Error occured", Toast.LENGTH_SHORT).show();
-                }
+//                } catch (Exception e) {
+//                    Toast.makeText(GuestProductActivity.this, "Some Error occured", Toast.LENGTH_SHORT).show();
+//                }
 
 
             }
@@ -250,7 +250,7 @@ public class GuestProductActivity extends Activity {
 
         GuestProductSelectedAdapter selectedAdapter;
 
-        int amount_to_pay = 0;
+        float amount_to_pay = 0;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -275,7 +275,7 @@ public class GuestProductActivity extends Activity {
             for (int i=0 ; i < global.getAl_select_product().size() ; i++)
             {
                 int qt =Integer.parseInt(global.getAl_selected_product_quantity().get(i));
-                int each_price = Integer.parseInt(global.getAl_selected_product_price().get(i));
+                float each_price = Float.parseFloat(global.getAl_selected_product_price().get(i));
 
                 amount_to_pay = amount_to_pay + (qt*each_price);
             }
@@ -289,11 +289,20 @@ public class GuestProductActivity extends Activity {
                 @Override
                 public void onClick(View view) {
 
-                    new AddToCartAsyncTask().execute();
+                    if (cn.isNetConnected())
+                    {
+                        new AddToCartAsyncTask().execute();
 
-                    cdd.dismiss();
+                        cdd.dismiss();
 
-                    buy.setClickable(false);
+                        buy.setClickable(false);
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+
+
                    // startActivity(new Intent(GuestProductActivity.this,GenerateInvoiceActivity.class));
 
                 }

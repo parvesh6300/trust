@@ -147,8 +147,8 @@ public class BuyPlanActivity extends Activity{
     public class CustomDialogClass extends Dialog {
 
         public Activity c;
-        int int_product_price = 0;
-        int int_service_price = 0;
+        float int_product_price = 0;
+        float int_service_price = 0;
 
         public TextView cancel,tv_product_cost;
         public TextView confirm,tv_service_cost;
@@ -210,10 +210,10 @@ public class BuyPlanActivity extends Activity{
             for (int count = 0 ; count < global.getAl_selected_plan().size() ; count++)
             {
                 int_product_price = int_product_price +
-                        Integer.parseInt(global.getAl_selected_plan().get(count).get(GlobalConstants.PLAN_PRODUCT_PRICE));
+                        Float.parseFloat(global.getAl_selected_plan().get(count).get(GlobalConstants.PLAN_PRODUCT_PRICE));
 
                 int_service_price = int_service_price +
-                        Integer.parseInt(global.getAl_selected_plan().get(count).get(GlobalConstants.PLAN_SERVICE_PRICE));
+                        Float.parseFloat(global.getAl_selected_plan().get(count).get(GlobalConstants.PLAN_SERVICE_PRICE));
             }
 
             tv_product_cost.setText(String.valueOf(int_product_price));

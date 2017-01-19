@@ -147,7 +147,7 @@ public class BuyServicesActivity extends Activity {
 
         ServiceSelectedAdapter selectedAdapter;
 
-        int int_service_price = 0;
+        float int_service_price = 0;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -197,7 +197,7 @@ public class BuyServicesActivity extends Activity {
             for (int count = 0 ; count < global.getAl_selected_service().size() ; count++)
             {
                  int_service_price = int_service_price +
-                        Integer.parseInt(global.getAl_selected_service().get(count).get(GlobalConstants.SERVICE_PRICE));
+                        Float.parseFloat(global.getAl_selected_service().get(count).get(GlobalConstants.SERVICE_PRICE));
             }
 
             tv_service_cost.setText(String.valueOf(int_service_price));

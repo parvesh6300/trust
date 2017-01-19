@@ -242,7 +242,9 @@ public class GlobalConstants {
     public static final String REVENUE_AS_PER = "as_per";
 
 
+    // ************************************* MONEY BANKED VARIABLES  ****************************************************
 
+    public static final String MONEY_BANKED_AMOUNT = "amount";
 
 
 

@@ -50,7 +50,8 @@ public class PaymentDetailFragment extends Fragment {
     String str_branch,str_discounted_amount,str_response_amount;
 
     EditText ed_amount,ed_discount;
-    int total_cost=0,int_discount_per,int_discounted_amount,int_amount_to_pay;
+    float int_discount_per,int_discounted_amount,int_amount_to_pay;
+    float total_cost=0;
 
 
     CheckNetConnection cn;
@@ -100,18 +101,13 @@ public class PaymentDetailFragment extends Fragment {
                 if (validate())
                 {
                     str_discount = ed_discount.getText().toString();
-                    total_cost = Integer.parseInt(ed_amount.getText().toString());
+                    total_cost = Float.parseFloat(ed_amount.getText().toString());
 
-                    if (!(str_discount.equalsIgnoreCase("0")  || str_discount.equals(null) || str_discount == null || str_discount.matches("")))
+                    if (!(str_discount.equalsIgnoreCase("0.0")  || str_discount.equals(null) || str_discount == null || str_discount.matches("")))
                     {
-                        int_discount_per = Integer.parseInt(str_discount);
+                        int_discount_per = Float.parseFloat(str_discount);
                         int_discounted_amount = (int_discount_per * total_cost)/100;
                         int_amount_to_pay = total_cost - int_discounted_amount;
-
-//                        if (str_payment_type.equalsIgnoreCase("partial"))
-//                        {
-//                            int_amount_to_pay = int_amount_to_pay/2 ;
-//                        }
 
                         str_response_amount = String.valueOf(int_amount_to_pay);
 
@@ -120,12 +116,7 @@ public class PaymentDetailFragment extends Fragment {
                     {
                         str_amount_to_pay = ed_amount.getText().toString();
 
-                        int_amount_to_pay = Integer.parseInt(str_amount_to_pay);
-
-//                        if (str_payment_type.equalsIgnoreCase("partial"))
-//                        {
-//                            int_amount_to_pay = int_amount_to_pay/2 ;
-//                        }
+                        int_amount_to_pay = Float.parseFloat(str_amount_to_pay);
 
                         str_response_amount = String.valueOf(int_amount_to_pay);
 
@@ -229,13 +220,13 @@ public class PaymentDetailFragment extends Fragment {
             if (str_item_type.equalsIgnoreCase("product"))
             {
                 int qt =Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.CART_AMOUNT));
-                int each_price = Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+                float each_price = Float.parseFloat(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
 
                 total_cost = total_cost + (qt*each_price);
             }
             else
             {
-                total_cost = total_cost + Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
+                total_cost = total_cost + Float.parseFloat(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
 
             }
 
