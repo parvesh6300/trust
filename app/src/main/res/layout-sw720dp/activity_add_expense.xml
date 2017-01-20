@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
-        android:text="Add Expense"
+        android:text="Expense History"
         android:id="@+id/addclienttext"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -29,108 +29,150 @@
         android:gravity="center"
         android:background="@drawable/form_back">
 
+        <!--<RelativeLayout-->
+            <!--android:layout_width="700dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:padding="10dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:paddingStart="80dp"-->
+            <!--android:paddingEnd="80dp"-->
+            <!--&gt;-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_amount_label"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:text="Enter Amount"-->
+                <!--android:textColor="@color/purple"-->
+                <!--android:textSize="30sp"-->
+                <!--android:typeface="monospace"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_marginTop="10dp"/>-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/ed_expense_amount"-->
+                <!--android:layout_width="260dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_toRightOf="@+id/tv_amount_label"-->
+                <!--android:hint="Enter amount"-->
+                <!--android:inputType="number"-->
+                <!--android:textSize="30sp"-->
+                <!--android:typeface="monospace"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:text="Tsh"-->
+                <!--android:textColor="@color/purple"-->
+                <!--android:textSize="30sp"-->
+                <!--android:typeface="monospace"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:layout_marginTop="10dp"/>-->
+
+
+        <!--</RelativeLayout>-->
+
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="10dp">-->
+
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_reason_label"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:text="Enter Expense"-->
+                <!--android:textColor="@color/purple"-->
+                <!--android:textSize="30sp"-->
+                <!--android:typeface="monospace"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_marginTop="10dp"/>-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/ed_reason"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="55dp"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_toRightOf="@+id/tv_reason_label"-->
+                <!--android:hint="Expense"-->
+                <!--android:inputType="textNoSuggestions"-->
+                <!--android:textSize="30sp"-->
+                <!--android:typeface="monospace"-->
+                <!--/>-->
+
+
+        <!--</RelativeLayout>-->
+
+
         <RelativeLayout
-            android:layout_width="700dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:layout_gravity="center"
-            android:paddingStart="80dp"
-            android:paddingEnd="80dp"
-            >
-
-            <TextView
-                android:id="@+id/tv_amount_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Enter Amount"
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:typeface="monospace"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"/>
-
-            <EditText
-                android:id="@+id/ed_expense_amount"
-                android:layout_width="260dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/tv_amount_label"
-                android:hint="Enter amount"
-                android:inputType="number"
-                android:textSize="30sp"
-                android:typeface="monospace"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Tsh"
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:typeface="monospace"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"/>
-
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-
-            <TextView
-                android:id="@+id/tv_reason_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Enter Expense"
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:typeface="monospace"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"/>
-
-            <EditText
-                android:id="@+id/ed_reason"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/tv_reason_label"
-                android:hint="Expense"
-                android:inputType="textNoSuggestions"
-                android:textSize="30sp"
-                android:typeface="monospace"
-                />
-
-
-        </RelativeLayout>
-
-
-        <TextView
-            android:id="@+id/tv_history"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Expense History"
-            android:textSize="30sp"
-            android:layout_marginTop="10dp"
-            android:textAlignment="center"
-            android:typeface="monospace"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:background="@color/textColor"/>
+            android:background="@color/textColor"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="140dp"
+                android:layout_height="60dp"
+                android:text="Date"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_expense"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Expense"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_toEndOf="@+id/tv_date"
+                android:layout_toStartOf="@+id/tv_amount"
+              />
+
+
+            <TextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="Amount"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="100dp"
+                />
+
+
+        </RelativeLayout>
+
+
 
         <ListView
             android:id="@+id/list_expense"
             android:layout_width="match_parent"
-            android:layout_height="800dp"
+            android:layout_height="1000dp"
             android:padding="20dp"/>
 
 
@@ -148,11 +190,11 @@
                 android:layout_centerInParent="true"
                 android:background="@drawable/button_background"
                 android:gravity="center"
-                android:text="Submit"
+                android:text="Back"
                 android:typeface="monospace"
                 android:textAlignment="gravity"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="35sp"
                 />
 
         </RelativeLayout>

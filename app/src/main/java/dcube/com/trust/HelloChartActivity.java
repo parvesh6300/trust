@@ -193,29 +193,15 @@ public class HelloChartActivity extends Activity {
 
         for (int i =0 ; i < stockArr.length ; i++)
         {
-            Log.i("Stock","array "+stockArr[i]);
             int_stock_arr_sorted[i] = Integer.parseInt(stockArr[i]);
         }
 
         Arrays.sort(int_stock_arr_sorted , Collections.<Integer>reverseOrder());
 
-        for (int i =0 ; i < stockArr.length ; i++)
-        {
-            Log.i("Stock","array in integer Sorted"+int_stock_arr_sorted[i]);
-        }
-
-
         if ( count == 12 )
         {
             dateArr = new String[global.getAl_on_date().size()];
             dateArr = global.getAl_on_date().toArray(dateArr);
-            Arrays.sort(dateArr , Collections.<String>reverseOrder());
-
-            for (int i =0 ; i < dateArr.length ; i++)
-            {
-                Log.i("Yearly","array Sorted"+dateArr[i]);
-            }
-
         }
         else if (count == 24)
         {
@@ -231,12 +217,7 @@ public class HelloChartActivity extends Activity {
 
             dateArr = new String[al_time.size()];
             dateArr = al_time.toArray(dateArr);
-            Arrays.sort(dateArr , Collections.<String>reverseOrder());
-
-            for (int i =0 ; i < dateArr.length ; i++)
-            {
-                Log.i("Daily","array Sorted"+dateArr[i]);
-            }
+     //       Arrays.sort(dateArr , Collections.<String>reverseOrder());
 
         }
         else
@@ -252,20 +233,16 @@ public class HelloChartActivity extends Activity {
             }
             dateArr = new String[al_time.size()];
             dateArr = al_time.toArray(dateArr);
-            Arrays.sort(dateArr , Collections.<String>reverseOrder());
 
-            for (int i =0 ; i < dateArr.length ; i++)
-            {
-                Log.i("MOnthly","Weekly Sorted"+dateArr[i]);
-            }
+       //     Arrays.sort(dateArr , Collections.<String>reverseOrder());
 
         }
-
         for (int i =0 ; i < count ; i++)
         {
-            Log.i("Date","array "+dateArr[i]);
             int_date_arr_sorted[i] = Integer.parseInt(dateArr[i]);
         }
+
+        Arrays.sort(int_date_arr_sorted , Collections.<Integer>reverseOrder());
 
 
     }
@@ -275,22 +252,35 @@ public class HelloChartActivity extends Activity {
     {
         // Reset viewport height range to (0,100)
         final Viewport v = new Viewport(chart.getMaximumViewport());
+
         v.bottom = 0;
         v.top = int_stock_arr_sorted[0];
 //        v.left = 0;
 //        v.right = int_date_arr_sorted[0];
 
-        v.left =Integer.parseInt(dateArr[0]) ;
-        v.right = Integer.parseInt(dateArr[dateArr.length-1]) ;
+        if (global.getAl_on_date().size() == 12)
+        {
+            v.left =Integer.parseInt(global.getAl_on_date().get(0));
+            v.right = int_date_arr_sorted[0] ;
 
-        if (global.getAl_was_sum().size() == 7)
+            Log.i("Left",""+Integer.parseInt(global.getAl_on_date().get(0)));
+        }
+        else
         {
             v.left =Integer.parseInt(dateArr[0]) ;
-            v.right = Integer.parseInt(dateArr[dateArr.length-1]) ;
+            v.right = int_date_arr_sorted[0] ;
+
+            Log.i("Left",""+Integer.parseInt(dateArr[0]));
         }
+
+        Log.i("Bottom",""+0);
+        Log.i("TOp",""+int_stock_arr_sorted[0]);
+        Log.i("Right",""+int_date_arr_sorted[0]);
+
 
         chart.setMaximumViewport(v);
         chart.setCurrentViewport(v);
+
     }
 
 

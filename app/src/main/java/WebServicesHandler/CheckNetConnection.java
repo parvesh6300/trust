@@ -19,6 +19,7 @@ public class CheckNetConnection
     public boolean isNetConnected() {
 
         Runtime runtime = Runtime.getRuntime();
+
         try {
 
             Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");

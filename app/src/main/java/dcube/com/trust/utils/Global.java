@@ -510,9 +510,9 @@ public class Global extends Application {
     public void setAl_order_id(ArrayList<String> al_order_id) {
         this.al_order_id = al_order_id;
     }
+
+
     // ******************************* Revenue Getter and Setter  *************************************************
-
-
 
     public ArrayList<String> al_on_date;
 
@@ -536,8 +536,32 @@ public class Global extends Application {
     public ArrayList<String> al_was_sum;
 
 
+    // ******************************* Money Bank Getter and Setter  *************************************************
+
+    public ArrayList<HashMap<String, String>> getAl_money_bank_history() {
+        return al_money_bank_history;
+    }
+
+    public void setAl_money_bank_history(ArrayList<HashMap<String, String>> al_money_bank_history) {
+        this.al_money_bank_history = al_money_bank_history;
+    }
+
+    public ArrayList<HashMap<String,String>> al_money_bank_history;
 
 
+
+    // ******************************* Branch Balance Getter and Setter  *************************************************
+
+
+    public String str_branch_balance;
+
+    public String getStr_branch_balance() {
+        return str_branch_balance;
+    }
+
+    public void setStr_branch_balance(String str_branch_balance) {
+        this.str_branch_balance = str_branch_balance;
+    }
 
 
 

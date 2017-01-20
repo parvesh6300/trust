@@ -29,6 +29,7 @@ import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
 public class ProductSoldHistory extends FragmentActivity implements OnDateSetListener,View.OnClickListener {
+
     ListView lv_sold_products;
 
     LinearLayout lin_date_from,lin_date_to;
@@ -198,6 +199,9 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("products_soldout");
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
 
                 message = ws.ProductSoldService(context, al_str_key, al_str_value);
 

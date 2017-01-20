@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
@@ -22,25 +24,39 @@ public class MoneyBankedAdapter extends BaseAdapter {
 
     public static LayoutInflater inflater;
 
-    ArrayList<String> al_money_detail= new ArrayList<>();
-    ArrayList<String> al_money_amount= new ArrayList<>();
-    ArrayList<String> al_date= new ArrayList<>();
+    ArrayList<String> al_money_detail;
+    ArrayList<String> al_money_amount;
+    ArrayList<String> al_date;
 
+    Global global;
 
     Calendar cl= Calendar.getInstance();
 
-    public MoneyBankedAdapter(Context mcontext, ArrayList<String> date,
-                              ArrayList<String> depositlist,ArrayList<String> depositamount)
+    public MoneyBankedAdapter(Context mcontext)
     {
 
         this.context = mcontext;
-        this.al_date = date;
-        this.al_money_detail = depositlist;
-        this.al_money_amount = depositamount;
+
+        global = (Global) context.getApplicationContext();
+
+        al_money_detail= new ArrayList<>();
+        al_money_amount= new ArrayList<>();
+        al_date= new ArrayList<>();
 
         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        addValues();
+       // addValues();
+
+        for (HashMap<String, String> hashmap : global.getAl_money_bank_history())
+        {
+            al_money_detail.add(hashmap.get(GlobalConstants.MONEY_BANKED_REASON));
+            al_date.add(hashmap.get(GlobalConstants.MONEY_BANKED_DATE));
+            al_money_amount.add(hashmap.get(GlobalConstants.MONEY_BANKED_HIS_AMOUNT));
+
+        }
+
+
+
     }
 
     public class ViewHolder{
@@ -61,12 +77,19 @@ public class MoneyBankedAdapter extends BaseAdapter {
         holder.tv_detail= (TextView)convertview.findViewById(R.id.tv_detail);
         holder.tv_amount= (TextView)convertview.findViewById(R.id.tv_amount);
 
-        holder.tv_date.setText(al_date.get(pos));
+        // "date": "2017-01-19",
+
+        String[] date = al_date.get(pos).split("-");
+
+        holder.tv_date.setText(date[2]);
+        holder.tv_month.setText(date[1]+" '");
+        holder.tv_year.setText(date[0]);
+
         holder.tv_detail.setText(al_money_detail.get(pos));
         holder.tv_amount.setText(al_money_amount.get(pos));
 
 
-        if (pos == 2 || pos == 4)
+        if (al_money_detail.get(pos).equalsIgnoreCase("moneybanked"))
         {
             holder.tv_amount.setTextColor(Color.parseColor("#E74C3C")); // RED
         }

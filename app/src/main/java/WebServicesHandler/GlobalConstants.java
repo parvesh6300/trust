@@ -28,6 +28,7 @@ public class GlobalConstants {
     public static final String USER_ID = "user_id";
     public static final String USER_NAME = "username";
     public static final String USER_BRANCH = "branch";
+    public static final String USER_BRANCH_NAME = "branch_name";
     public static final String USER_BRANCH_ID = "branch_id";
     public static final String USER_ROLE_ID = "role_id";
     public static final String USER_ROLE = "role";
@@ -190,7 +191,7 @@ public class GlobalConstants {
     // ************************************* STOCK VARIABLES  ****************************************************
 
     public static final String STOCK_ITEM_ID = "product_id";
-    public static final String STOCK_ITEM_QTY = "amount";
+    public static final String STOCK_ITEM_QTY = "quantity";
     public static final String STOCK_ITEM_DATE = "remarks";
 
 
@@ -246,7 +247,14 @@ public class GlobalConstants {
 
     public static final String MONEY_BANKED_AMOUNT = "amount";
 
+    public static final String MONEY_BANKED_HIS_AMOUNT = "amount";
+    public static final String MONEY_BANKED_DATE = "date";
+    public static final String MONEY_BANKED_REASON = "reason";
 
+
+    // ************************************* Branch Balance VARIABLES  ****************************************************
+
+    public static final String BRANCH_BALANCE = "net_balance";
 
 
 

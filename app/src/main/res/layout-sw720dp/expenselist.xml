@@ -6,13 +6,14 @@
     android:orientation="vertical">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp">
 
         <RelativeLayout
+            android:id="@+id/rel_date"
             android:layout_width="100dp"
             android:layout_height="110dp"
             android:padding="2dp"
@@ -44,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="OCT "
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:layout_marginTop="2dp"
                 android:textColor="@color/white"
                 android:typeface="monospace"
@@ -57,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="'20"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:layout_marginTop="2dp"
                 android:layout_below="@+id/divider"
                 android:textStyle="bold"
@@ -70,14 +71,17 @@
 
         <TextView
             android:id="@+id/tv_detail"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sales Deposit"
             android:textSize="35sp"
             android:textColor="@color/purple"
             android:layout_gravity="center"
+            android:gravity="center"
             android:typeface="monospace"
-            android:layout_marginLeft="20dp"/>
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/rel_date"
+            android:layout_toStartOf="@+id/tv_amount" />
 
 
         <TextView
@@ -89,11 +93,12 @@
             android:textColor="@color/purple"
             android:layout_gravity="center"
             android:typeface="monospace"
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="60dp"/>
 
-            android:layout_marginLeft="100dp"/>
 
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <View

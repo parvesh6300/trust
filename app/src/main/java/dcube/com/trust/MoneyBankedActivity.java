@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
@@ -29,10 +30,6 @@ public class MoneyBankedActivity extends Activity {
 
     MoneyBankedAdapter moneyBankedAdapter;
 
-    ArrayList<String> al_money_detail= new ArrayList<>();
-    ArrayList<String> al_money_amount= new ArrayList<>();
-    ArrayList<String> al_date= new ArrayList<>();
-
     TextView tv_total_amount,tv_deposit;
 
     EditText ed_deposit_amount;
@@ -44,6 +41,8 @@ public class MoneyBankedActivity extends Activity {
     CustomDialogClass cdd;
     String str_deposit_amount;
 
+    CheckNetConnection cn;
+
     Context context;
 
     @Override
@@ -54,6 +53,8 @@ public class MoneyBankedActivity extends Activity {
 
         context = this;
 
+        cn = new CheckNetConnection(context);
+
         global = (Global) context.getApplicationContext();
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
@@ -63,9 +64,6 @@ public class MoneyBankedActivity extends Activity {
         tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
         tv_deposit=(TextView)findViewById(R.id.tv_deposit);
 
-
-        moneyBankedAdapter= new MoneyBankedAdapter(this,al_date,al_money_detail,al_money_amount);
-        lv_money_banked.setAdapter(moneyBankedAdapter);
 //
 //        View header = getLayoutInflater().inflate(R.layout.moneybankedlistheader, lv_money_banked, false);
 //        lv_money_banked.addHeaderView(header, null, false);
@@ -88,6 +86,17 @@ public class MoneyBankedActivity extends Activity {
 
             }
         });
+
+
+        if (cn.isNetConnected())
+        {
+            new GetBranchBalanceAsyncTask().execute();
+            new MoneyBankHistoryAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(MoneyBankedActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -120,15 +129,17 @@ public class MoneyBankedActivity extends Activity {
             tv_account_total = (TextView) findViewById(R.id.tv_account_total);
             tv_deposit_money = (TextView) findViewById(R.id.tv_deposit_money);
 
-            tv_account_total.setText("Account Total : 10,00,000 Tsh");
+            float account_total = Float.parseFloat(global.getStr_branch_balance());
+
+            tv_account_total.setText("Account Total : "+global.getStr_branch_balance()+" Tsh");
 
             tv_deposit_money.setText("Deposit : "+str_deposit_amount+" Tsh");
 
-            int deposit_amount = Integer.parseInt(str_deposit_amount);
+            float deposit_amount = Float.parseFloat(str_deposit_amount);
 
-            int balance = 1000000 + deposit_amount;
+            float balance = account_total + deposit_amount;
 
-            tv_balance.setText("Balance : "+balance+" Tsh");
+            tv_balance.setText("Balance : "+String.valueOf(balance)+" Tsh");
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -148,6 +159,8 @@ public class MoneyBankedActivity extends Activity {
                     dismiss();
                 }
             });
+
+
 
         }
     }
@@ -188,11 +201,11 @@ public class MoneyBankedActivity extends Activity {
 
                 for (int i =0 ; i < al_str_key.size() ; i++)
                 {
-                    Log.e("Key",""+ al_str_key.get(i));
-                    Log.e("Value",""+ al_str_value.get(i));
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
                 }
 
-                message = ws.DepositMoneyService(context, al_str_key, al_str_value);
+                message = ws.MoneyBankedService(context, al_str_key, al_str_value);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -219,6 +232,125 @@ public class MoneyBankedActivity extends Activity {
 
     }
 
+
+    public class MoneyBankHistoryAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("money_banked");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.e("Key",""+ al_str_key.get(i));
+                    Log.e("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.MoneyBankHistoryService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                moneyBankedAdapter= new MoneyBankedAdapter(MoneyBankedActivity.this);
+                lv_money_banked.setAdapter(moneyBankedAdapter);
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+
+    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_branch_balance");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.INVISIBLE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                tv_total_amount.setText(global.getStr_branch_balance());
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
 
     public void showDoneDialog() {
 

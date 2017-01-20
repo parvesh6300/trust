@@ -146,9 +146,9 @@ public class WithDrawMoneyActivity extends Activity {
                 }
                 else
                 {
+                    new GetBranchBalanceAsyncTask().execute();
                     str_wd_amount = ed_wd_amount.getText().toString();
-                    cdd = new CustomDialogClass(WithDrawMoneyActivity.this);
-                    cdd.show();
+
                 }
 
 
@@ -207,14 +207,13 @@ public class WithDrawMoneyActivity extends Activity {
             tv_wd_amount = (TextView) findViewById(R.id.tv_wd_amount);
             tv_balance = (TextView) findViewById(R.id.tv_balance);
 
+            float account_total = Float.parseFloat(global.getStr_branch_balance());
+            float wd_amount = Float.parseFloat(str_wd_amount);
+            float balance = account_total - wd_amount ;
 
-            int account_total = 1000000;
-            int wd_amount = Integer.parseInt(str_wd_amount);
-            int balance = account_total - wd_amount ;
-
-            tv_account_total.setText("ACCOUNT TOTAL : "+account_total+" Tsh");
-            tv_wd_amount.setText("WITHDRAW : "+wd_amount+" Tsh");
-            tv_balance.setText("BALANCE : "+balance+" Tsh");
+            tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" Tsh");
+            tv_wd_amount.setText("WITHDRAW : "+str_wd_amount+" Tsh");
+            tv_balance.setText("BALANCE : "+String.valueOf(balance)+" Tsh");
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -222,6 +221,7 @@ public class WithDrawMoneyActivity extends Activity {
 
                     if (cn.isNetConnected())
                     {
+                        dismiss();
                         new WithDrawMoneyAsyncTask().execute();
                     }
                     else {
@@ -347,6 +347,68 @@ public class WithDrawMoneyActivity extends Activity {
 
             }
         });
+    }
+
+
+
+    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_branch_balance");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.INVISIBLE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                //tv_total_amount.setText(global.getStr_branch_balance()+" Tsh");
+                cdd = new CustomDialogClass(WithDrawMoneyActivity.this);
+                cdd.show();
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
     }
 
 

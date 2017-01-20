@@ -29,7 +29,9 @@ public class AddExpenseActivity extends Activity {
 
     ExpenseAdapter expenseAdapter;
 
-    TextView tv_total_amount,tv_submit;
+ //   TextView tv_total_amount,tv_submit;
+
+    TextView tv_submit;
 
     EditText ed_expense_amount,ed_reason;
     GifTextView gif_loader;
@@ -56,11 +58,21 @@ public class AddExpenseActivity extends Activity {
 
         ed_expense_amount=(EditText)findViewById(R.id.ed_expense_amount);
         ed_reason=(EditText)findViewById(R.id.ed_reason);
-        tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
+//        tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
         tv_submit=(TextView)findViewById(R.id.tv_submit);
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
+        tv_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                finish();
+
+            }
+        });
+
+        /*
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +98,7 @@ public class AddExpenseActivity extends Activity {
             }
         });
 
-
+*/
         if (cn.isNetConnected())
         {
             new ExpenseHistoryAsyncTask().execute();
@@ -285,6 +297,9 @@ public class AddExpenseActivity extends Activity {
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("get_in_expense");
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
 
                 message = ws.ExpenseHistoryService(context, al_str_key, al_str_value);
 

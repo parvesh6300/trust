@@ -3,8 +3,6 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +45,10 @@ public class DepositMoneyActivity extends Activity {
 
     CheckNetConnection cn;
 
+    String branch_balance;
+
+    GetBranchBalance get_balance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -57,6 +59,8 @@ public class DepositMoneyActivity extends Activity {
         global = (Global) getApplicationContext();
 
         cn = new CheckNetConnection(this);
+
+        get_balance = new GetBranchBalance(this);
 
         list_deposit=(ListView)findViewById(R.id.list_deposit);
 
@@ -96,14 +100,21 @@ public class DepositMoneyActivity extends Activity {
                     cdd.show();
                 }
 
-
             }
         });
 
 
         if (cn.isNetConnected())
         {
+            new GetBranchBalanceAsyncTask().execute();
             new DepositHistoryAsyncTask().execute();
+
+//            branch_balance = get_balance.branchBalance();
+//
+//            Log.e("Branch","Balance "+branch_balance);
+//
+//            tv_total_amount.setText(branch_balance+" Tsh");
+
         }
         else
         {
@@ -122,7 +133,7 @@ public class DepositMoneyActivity extends Activity {
         public TextView cancel;
         public TextView confirm,tv_deposit,tv_total_amount,tv_balance;
 
-        int int_total_amount,int_deposit,int_balance;
+        float int_total_amount,int_deposit,int_balance;
 
 
         public CustomDialogClass(Activity a) {
@@ -143,11 +154,13 @@ public class DepositMoneyActivity extends Activity {
             tv_balance = (TextView) findViewById(R.id.tv_balance);
             tv_total_amount = (TextView) findViewById(R.id.tv_total_amount);
 
-            tv_total_amount.setText("ACCOUNT TOTAL : "+String.valueOf(global.getInt_ac_balance()));
+            branch_balance = global.getStr_branch_balance();
+
+            tv_total_amount.setText("ACCOUNT TOTAL : "+branch_balance);
             tv_deposit.setText("Deposit : "+str_deposit_amount);
 
-            int_total_amount = global.getInt_ac_balance();
-            int_deposit = Integer.parseInt(str_deposit_amount);
+            int_total_amount = Float.parseFloat(branch_balance);
+            int_deposit = Float.parseFloat(str_deposit_amount);
             int_balance = int_total_amount + int_deposit;
 
             tv_balance.setText("BALANCE : "+String.valueOf(int_balance));
@@ -161,6 +174,7 @@ public class DepositMoneyActivity extends Activity {
 
                     if (cn.isNetConnected())
                     {
+                        tv_deposit.setClickable(false);
                         new DepositMoneyAsyncTask().execute();
                     }
                     else
@@ -181,6 +195,63 @@ public class DepositMoneyActivity extends Activity {
 
 
         }
+    }
+
+
+    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_branch_balance");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                tv_total_amount.setText(global.getStr_branch_balance()+" Tsh");
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
     }
 
 
@@ -223,8 +294,8 @@ public class DepositMoneyActivity extends Activity {
 
                 for (int i =0 ; i < al_str_key.size() ; i++)
                 {
-                    Log.e("Key",""+ al_str_key.get(i));
-                    Log.e("Value",""+ al_str_value.get(i));
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
                 }
 
                 message = ws.DepositMoneyService(context, al_str_key, al_str_value);
@@ -240,6 +311,8 @@ public class DepositMoneyActivity extends Activity {
         protected void onPostExecute(String s) {
 
             gif_loader.setVisibility(View.GONE);
+
+            tv_deposit.setClickable(true);
 
             if (message.equalsIgnoreCase("true"))
             {
@@ -330,8 +403,6 @@ public class DepositMoneyActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(" "+String.valueOf(global.getInt_ac_balance() +" Tsh"));
-
                 depositAdapter= new DepositAdapter(context);
                 list_deposit.setAdapter(depositAdapter);
 
@@ -344,17 +415,6 @@ public class DepositMoneyActivity extends Activity {
 
     }
 
-
-
-    protected boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
 }

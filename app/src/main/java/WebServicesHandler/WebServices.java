@@ -68,6 +68,11 @@ public class WebServices {
                 map.put(GlobalConstants.USER_DEVICE_TYPE,jsonObject1.optString(GlobalConstants.USER_DEVICE_TYPE));
                 map.put(GlobalConstants.USER_DEVICE_TOKEN,jsonObject1.optString(GlobalConstants.USER_DEVICE_TOKEN));
 
+
+                JSONObject jsonObject2 = jsonObject1.getJSONObject(GlobalConstants.USER_BRANCH_NAME);
+                map.put(GlobalConstants.USER_BRANCH_NAME,jsonObject2.optString(GlobalConstants.USER_BRANCH_NAME));
+
+                Log.e("Branch","Name "+jsonObject2.optString(GlobalConstants.USER_BRANCH_NAME));
                 al_login_user.add(map);
 
                 global.setAl_login_list(al_login_user);
@@ -1413,6 +1418,96 @@ public class WebServices {
 
             if (status.equalsIgnoreCase("1"))
             {
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+
+    public static String MoneyBankHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        ArrayList<HashMap<String,String>> al_money_bank_history;
+
+        Global global = (Global) context.getApplicationContext();
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("MoneyBank", "History : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                al_money_bank_history = new ArrayList<>();
+
+                JSONArray jsonArray = jsonObject.getJSONArray("info");
+
+                for (int i = 0 ; i< jsonArray.length() ; i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.MONEY_BANKED_DATE , jsonObject1.optString(GlobalConstants.MONEY_BANKED_DATE));
+                    map.put(GlobalConstants.MONEY_BANKED_HIS_AMOUNT , jsonObject1.optString(GlobalConstants.MONEY_BANKED_HIS_AMOUNT));
+                    map.put(GlobalConstants.MONEY_BANKED_REASON , jsonObject1.optString(GlobalConstants.MONEY_BANKED_REASON
+                    ));
+
+                    al_money_bank_history.add(map);
+                }
+
+                global.setAl_money_bank_history(al_money_bank_history);
+
+                Log.e("Size",""+global.getAl_money_bank_history().size());
+
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+    public static String GetBranchBalanceService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        Global global = (Global) context.getApplicationContext();
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Branch", "Balance : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                global.setStr_branch_balance(jsonObject.optString(GlobalConstants.BRANCH_BALANCE));
                 return "true";
             }
 

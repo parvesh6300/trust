@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
@@ -34,6 +35,7 @@ public class TotalRevenue extends Activity {
     RadioGroup radio_group;
     RadioButton radio_daily,radio_weekly,radio_monthly,radio_yearly;
 
+    TextView tv_total_amount;
 
     ArrayList<String> al_time;
 
@@ -57,6 +59,8 @@ public class TotalRevenue extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total_revenue);
 
+        context = this;
+
         graph = (GraphView) findViewById(R.id.graph);
 
         global = (Global) getApplicationContext();
@@ -72,7 +76,7 @@ public class TotalRevenue extends Activity {
         radio_monthly=(RadioButton)findViewById(R.id.radio_monthly);
         radio_yearly=(RadioButton)findViewById(R.id.radio_yearly);
 
-        context = this;
+        tv_total_amount = (TextView) findViewById(R.id.tv_total_amount);
 
         graph.removeAllSeries();
 
@@ -154,6 +158,15 @@ public class TotalRevenue extends Activity {
             }
         });
 
+
+        if (cn.isNetConnected())
+        {
+            new GetBranchBalanceAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -361,8 +374,6 @@ public class TotalRevenue extends Activity {
     }
 
 
-
-
     private DataPoint[] generateData() {
 
         int count =  global.getAl_on_date().size();
@@ -399,5 +410,63 @@ public class TotalRevenue extends Activity {
         return values;
     }
 
+
+    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_branch_balance");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.INVISIBLE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                tv_total_amount.setText(global.getStr_branch_balance()+" Tsh");
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
 
 }

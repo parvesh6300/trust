@@ -74,9 +74,10 @@ public class SearchClientActivity extends Activity {
         branch = (Spinner) findViewById(R.id.spinner);
         branch.setAdapter(adapter);
 
-        compareValue = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
+        compareValue = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_NAME);
 
-        if (!compareValue.equals(null)) {
+        if (!compareValue.equals(null))
+        {
             int spinnerPosition = adapter.getPosition(compareValue);
             branch.setSelection(spinnerPosition);
         }

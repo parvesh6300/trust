@@ -119,9 +119,10 @@
 
 
                 <TextView
+                    android:id="@+id/tv_total_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:text="5,00,000 Tsh"
+                    android:text=" Tsh"
                     android:textSize="35sp"
                     android:textColor="@color/purple"
                     android:layout_gravity="center"

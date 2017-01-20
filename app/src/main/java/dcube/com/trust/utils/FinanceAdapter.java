@@ -20,7 +20,7 @@ public class FinanceAdapter extends BaseAdapter {
             R.drawable.depositmoney,
             R.drawable.revenue,
             R.drawable.operatingexpenses,
-            R.drawable.addexpensesone,
+            R.drawable.expense_history,  //expenses_history
             R.drawable.moneybanked,  //moneybagforten
     };
 

@@ -71,7 +71,7 @@ public class GuestProductActivity extends Activity {
 
         str_user_id = global.getAl_login_list().get(0).get(GlobalConstants.USER_ID);
 
-        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_NAME);
 
         String two_letters = str_branch.substring(0,2).toUpperCase();
 
