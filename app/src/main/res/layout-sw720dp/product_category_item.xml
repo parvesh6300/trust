@@ -17,7 +17,7 @@
         android:layout_gravity="center"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -39,6 +39,7 @@
         android:layout_width="150dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
+        android:gravity="center"
         android:layout_marginRight="50dp">
 
         <TextView
@@ -65,7 +66,6 @@
             android:text="0"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:inputType="number"
             android:maxLength="3"
             android:layout_centerInParent="true"/>
@@ -76,7 +76,6 @@
             android:text="+"
             android:textSize="40sp"
             android:textColor="@color/textColor"
-            android:layout_weight="1"
             android:id="@+id/add"
             android:typeface="monospace"
             android:layout_gravity="center"

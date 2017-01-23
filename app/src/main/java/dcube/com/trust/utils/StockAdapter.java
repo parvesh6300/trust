@@ -41,6 +41,7 @@ public class StockAdapter extends BaseAdapter {
     ArrayList<String> in_stock;
     ArrayList<String> category ;
     ArrayList<String> price ;
+    ArrayList<String> category_id ;
 
     Dialog dialog;
     Dialog alertDialog;
@@ -51,6 +52,7 @@ public class StockAdapter extends BaseAdapter {
     String str_branch;
 
     public StockAdapter(Context context) {
+
         this.mcontext = context;
 
         global = (Global) context.getApplicationContext();
@@ -65,6 +67,7 @@ public class StockAdapter extends BaseAdapter {
         in_stock = new ArrayList<>();
         category = new ArrayList<>();
         price = new ArrayList<>();
+        category_id = new ArrayList<>();
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
@@ -76,6 +79,7 @@ public class StockAdapter extends BaseAdapter {
             price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
             in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
             product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
+            category_id.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY_ID));
         }
     }
 
@@ -101,7 +105,7 @@ public class StockAdapter extends BaseAdapter {
         holder.tv_quantity_label = (TextView) convertView.findViewById(R.id.tv_quantity_label);
 
         holder.tv_product.setText(name.get(i));
-        holder.tv_category.setText(category.get(i));
+        holder.tv_category.setText(category_id.get(i));
         holder.tv_quantity.setText(in_stock.get(i));   //in_stock.get(i)
 
         holder.rel_row.setOnClickListener(new View.OnClickListener() {
@@ -331,65 +335,7 @@ public class StockAdapter extends BaseAdapter {
 
     }
 
-    public class StockRequestAsyncTask extends AsyncTask<String, String, String> {
 
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-        String str_client_id;
-
-        @Override
-        protected void onPreExecute() {
-
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
-
-                al_str_key.add(GlobalConstants.STOCK_ITEM_ID);
-                al_str_value.add(global.getAl_stock_product().get(pos).get(GlobalConstants.PRODUCT_ID));
-
-                al_str_key.add(GlobalConstants.STOCK_ITEM_QTY);
-                al_str_value.add(String.valueOf(quantity));
-
-                al_str_key.add(GlobalConstants.BRANCH);
-                al_str_value.add(str_branch);
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("update_products_in_stock");
-
-                Log.i("Key",""+al_str_key);
-                Log.i("Value",""+al_str_value);
-
-                message = ws.UpdateStockService(mcontext, al_str_key, al_str_value);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            if (message.equalsIgnoreCase("true")) {
-                showDoneDialog();
-            } else {
-                Toast.makeText(mcontext, "" + message, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-    }
 
 
 }

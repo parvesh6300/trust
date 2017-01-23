@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
-        android:text="SignIn"
+        android:text="Sign In"
         android:typeface="monospace"
         android:textColor="@color/white"
         android:textSize="40sp"
@@ -152,10 +152,10 @@
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/white"
-            android:text="SignIn"
+            android:text="Sign In"
             android:id="@+id/signin"
             android:gravity="center"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:typeface="monospace"/>
 
         <TextView

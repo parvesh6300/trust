@@ -608,7 +608,7 @@
             android:text="Add Client"
             android:id="@+id/addclient"
             android:gravity="center"
-            android:textSize="30sp"
+            android:textSize="34sp"
             android:typeface="monospace"/>
 
             <View

@@ -154,10 +154,11 @@
 
         <lecho.lib.hellocharts.view.LineChartView
             android:id="@+id/chart"
-            android:layout_width="730dp"
+            android:layout_width="wrap_content"
             android:layout_height="730dp"
             android:layout_gravity="center"
-            android:layout_marginStart="70dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginTop="10dp" />
 
 

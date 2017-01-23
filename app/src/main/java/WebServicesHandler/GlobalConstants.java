@@ -48,6 +48,7 @@ public class GlobalConstants {
     public static final String PRODUCT_SKU = "SKU";
     public static final String PRODUCT_NAME = "name";
     public static final String PRODUCT_CATEGORY = "category";
+    public static final String PRODUCT_CATEGORY_ID = "category_id";
     public static final String PRODUCT_PRICE = "price";
     public static final String PRODUCT_IN_STOCK = "in_stock";
     public static final String PRODUCT_QUANTITY = "quantity";

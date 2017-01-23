@@ -21,6 +21,7 @@ import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
@@ -55,6 +56,8 @@ public class HelloChartActivity extends Activity {
     private boolean hasLabelForSelected = false;
     private boolean pointsHaveDifferentColor;
 
+    List<AxisValue> axisValues;
+
 
     RadioGroup radio_group;
     RadioButton radio_daily,radio_weekly,radio_monthly,radio_yearly;
@@ -75,6 +78,12 @@ public class HelloChartActivity extends Activity {
 
     String[] dateArr;
 
+    public String[] months = new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+            "Sep", "Oct", "Nov", "Dec", };
+
+    public String[] days = new String[] { "M", "T", "W", "T", "F", "S", "S", };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +97,8 @@ public class HelloChartActivity extends Activity {
         global = (Global) getApplicationContext();
 
         cn = new CheckNetConnection(this);
+
+        axisValues = new ArrayList<>();
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -103,6 +114,7 @@ public class HelloChartActivity extends Activity {
         chart.setOnValueTouchListener(new ValueTouchListener());
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
+
 
         radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -255,24 +267,26 @@ public class HelloChartActivity extends Activity {
 
         v.bottom = 0;
         v.top = int_stock_arr_sorted[0];
-//        v.left = 0;
-//        v.right = int_date_arr_sorted[0];
 
-        if (global.getAl_on_date().size() == 12)
-        {
-            v.left =Integer.parseInt(global.getAl_on_date().get(0));
-            v.right = int_date_arr_sorted[0] ;
+        v.left =Integer.parseInt(dateArr[0]) ;
+        v.right = int_date_arr_sorted[0] ;
 
-            Log.i("Left",""+Integer.parseInt(global.getAl_on_date().get(0)));
-        }
-        else
-        {
-            v.left =Integer.parseInt(dateArr[0]) ;
-            v.right = int_date_arr_sorted[0] ;
+//        if (global.getAl_on_date().size() == 12)
+//        {
+//            v.left =Integer.parseInt(global.getAl_on_date().get(0));
+//            v.right = int_date_arr_sorted[0] ;
+//
+//            Log.i("Left",""+Integer.parseInt(global.getAl_on_date().get(0)));
+//        }
+//        else
+//        {
+//            v.left =Integer.parseInt(dateArr[0]) ;
+//            v.right = int_date_arr_sorted[0] ;
+//
+//            Log.i("Left",""+Integer.parseInt(dateArr[0]));
+//        }
 
-            Log.i("Left",""+Integer.parseInt(dateArr[0]));
-        }
-
+        Log.i("Left",""+Integer.parseInt(dateArr[0]));
         Log.i("Bottom",""+0);
         Log.i("TOp",""+int_stock_arr_sorted[0]);
         Log.i("Right",""+int_date_arr_sorted[0]);
@@ -288,20 +302,68 @@ public class HelloChartActivity extends Activity {
 
         List<Line> lines = new ArrayList<Line>();
 
+//        Axis axisX= new Axis();
+//        Axis axisY = new Axis().setHasLines(true);
+
+        if (hasAxes)
+        {
+//            axisX = new Axis();
+//            axisY = new Axis().setHasLines(true);
+
+//            axisX.setTextSize(20);
+//            axisY.setTextSize(20);
+//
+//            axisY.setMaxLabelChars(10);
+
+
+//
+//            axisValues.add(new AxisValue(i, "some textt".toCharArray()));
+//            Axis axisX = new Axis(axisValues);
+//            data.setAxisXBottom(axisX);
+
+//            if (global.getAl_was_sum().size() == 7 )
+//            {
+//
+//                axisValues.add(new AxisValue(0,"M".toCharArray()));  //.setLabel("Mon"))
+//                axisValues.add(new AxisValue(1,"T".toCharArray()));
+//                axisValues.add(new AxisValue(2,"W".toCharArray()));
+//                axisValues.add(new AxisValue(3,"T".toCharArray()));
+//                axisValues.add(new AxisValue(4,"F".toCharArray()));
+//                axisValues.add(new AxisValue(5,"S".toCharArray()));
+//                axisValues.add(new AxisValue(6,"S".toCharArray()));
+//
+//             //   axisX.setValues(axisValues);
+//
+//                axisX.setMaxLabelChars(7);
+//                axisX.setValues(axisValues);
+//            }
+
+
+//            data.setAxisXBottom(axisX);
+//            data.setAxisYLeft(axisY);
+
+        }
+        else
+        {
+            data.setAxisXBottom(null);
+            data.setAxisYLeft(null);
+        }
+
+
         for (int i = 0; i < numberOfLines; ++i)
         {
             List<PointValue> values = new ArrayList<PointValue>();
 
             for (int j = 0; j < global.getAl_was_sum().size() ; ++j )
             {
-                //values.add(new PointValue(j, randomNumbersTab[i][j]));
 
-                values.add(new PointValue(int_date_arr_sorted[j], Integer.parseInt(global.getAl_was_sum().get(j))));
+                values.add(new PointValue(Integer.parseInt(dateArr[j]), Integer.parseInt(global.getAl_was_sum().get(j))));
 
+                axisValues.add(new AxisValue(i, days[i].toCharArray()));
             }
 
             Line line = new Line(values);
-            line.setColor(ChartUtils.COLORS[i]);
+            line.setColor(ChartUtils.COLORS[i]);  // Color.parseColor("#FFFFFF")
             line.setShape(shape);
             line.setCubic(isCubic);
             line.setFilled(isFilled);
@@ -320,23 +382,28 @@ public class HelloChartActivity extends Activity {
 
         data = new LineChartData(lines);
 
-        if (hasAxes)
+        Axis axisX;
+        Axis axisY = new Axis().setHasLines(true);
+
+
+        if (global.getAl_was_sum().size() == 7)
         {
-            Axis axisX = new Axis();
-            Axis axisY = new Axis().setHasLines(true);
-
-            axisX.setTextSize(20);
-            axisY.setTextSize(20);
-
-            data.setAxisXBottom(axisX);
-            data.setAxisYLeft(axisY);
-
+            axisX = new Axis(axisValues);
+            axisX.setTextSize(10);
+           // axisX.setMaxLabelChars(7);
         }
         else
         {
-            data.setAxisXBottom(null);
-            data.setAxisYLeft(null);
+            axisX = new Axis();
+            axisX.setTextSize(20);
+          //  axisX.setMaxLabelChars(10);
         }
+
+
+        axisY.setTextSize(20);
+
+        data.setAxisXBottom(axisX);
+        data.setAxisYLeft(axisY);
 
         data.setBaseValue(Float.NEGATIVE_INFINITY);
         chart.setLineChartData(data);

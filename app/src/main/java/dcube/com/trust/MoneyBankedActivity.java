@@ -80,8 +80,20 @@ public class MoneyBankedActivity extends Activity {
                 {
                     str_deposit_amount = ed_deposit_amount.getText().toString();
 
-                    cdd = new CustomDialogClass(MoneyBankedActivity.this);
-                    cdd.show();
+                    float account_total = Float.parseFloat(global.getStr_branch_balance());
+                    float deposit_amount = Float.parseFloat(str_deposit_amount);
+
+                    if (account_total > deposit_amount)
+                    {
+                        cdd = new CustomDialogClass(MoneyBankedActivity.this);
+                        cdd.show();
+                    }
+                    else
+                    {
+                        Toast.makeText(MoneyBankedActivity.this, "Money to be Banked, is less than Account Balance", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 }
 
             }
@@ -137,9 +149,9 @@ public class MoneyBankedActivity extends Activity {
 
             float deposit_amount = Float.parseFloat(str_deposit_amount);
 
-            float balance = account_total + deposit_amount;
+            float balance = account_total - deposit_amount;
 
-            tv_balance.setText("Balance : "+String.valueOf(balance)+" Tsh");
+            tv_balance.setText("Projected Balance : "+String.valueOf(balance)+" Tsh");
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
