@@ -22,6 +22,7 @@ public class FinanceAdapter extends BaseAdapter {
             R.drawable.operatingexpenses,
             R.drawable.expense_history,  //expenses_history
             R.drawable.moneybanked,  //moneybagforten
+            R.drawable.account_history,
     };
 
     private static LayoutInflater inflater = null;

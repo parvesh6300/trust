@@ -48,6 +48,9 @@ public class FinanceHomeActivity extends Activity {
 
         tv_user_name.setText("Hi, "+global.getAl_login_list().get(0).get(GlobalConstants.USER_NAME));
 
+        global.setStr_branch_balance("0");
+        global.setStr_total_sale("0");
+
         tv_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,9 +96,9 @@ public class FinanceHomeActivity extends Activity {
                         startActivity(new Intent(FinanceHomeActivity.this,MoneyBankedActivity.class));
                         break;
 
-//                    case 7:
-//                        startActivity(new Intent(FinanceHomeActivity.this,CartActivity.class));
-//                        break;
+                    case 7:
+                        startActivity(new Intent(FinanceHomeActivity.this,AccountHistoryActivity.class));
+                        break;
 
                 }
             }

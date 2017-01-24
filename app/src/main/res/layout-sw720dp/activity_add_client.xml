@@ -140,6 +140,7 @@
                 android:inputType="number"
                 android:textColor="@color/textColor"
                 android:maxLength="9"
+                android:textSize="25sp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/areacode"/>
 
@@ -173,7 +174,7 @@
                 android:textColor="@color/textColor"
                 android:id="@+id/emer_areacode"
                 android:editable="false"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:layout_toRightOf="@id/emer_contact_text"/>
 
             <EditText
@@ -183,6 +184,7 @@
                 android:typeface="monospace"
                 android:inputType="number"
                 android:maxLength="9"
+                android:textSize="25sp"
                 android:textColor="@color/textColor"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/emer_areacode"/>
@@ -207,7 +209,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"/>
 
-                <com.weiwangcn.betterspinner.library.BetterSpinner
+                <Spinner
                     android:id="@+id/area"
                     android:layout_width="260dp"
                     android:layout_height="match_parent"
@@ -252,6 +254,7 @@
                 android:layout_centerInParent="true"
                 android:gravity="top|left"
                 android:padding="5dp"
+                android:textSize="25sp"
                 android:background="@drawable/textarea"/>
 
         </RelativeLayout>
@@ -470,7 +473,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:typeface="monospace" />
 
                 <RadioButton
@@ -481,7 +484,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:typeface="monospace"/>
 
                 <RadioButton
@@ -492,7 +495,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:typeface="monospace"/>
 
                 <RadioButton
@@ -503,7 +506,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:typeface="monospace"/>
 
             </RadioGroup>
@@ -546,7 +549,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:typeface="monospace" />
 
                 <RadioButton
@@ -557,7 +560,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:typeface="monospace"
                     />
 
@@ -569,7 +572,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:typeface="monospace"
                     />
                 <RadioButton
@@ -580,7 +583,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:typeface="monospace"
                     />
                 <RadioButton
@@ -591,7 +594,7 @@
                     android:buttonTint="@color/textColor"
                     android:layout_weight="1"
                     android:textColor="@color/textColor"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:typeface="monospace"
                     />
             </RadioGroup>

@@ -53,6 +53,8 @@ public class GlobalConstants {
     public static final String PRODUCT_IN_STOCK = "in_stock";
     public static final String PRODUCT_QUANTITY = "quantity";
     public static final String PRODUCT_SOLD_OUT = "sold_out";
+    public static final String PRODUCT_SOLD_TOTAL = "get_soldout_a_product_in_sold";
+    public static final String PRODUCT_REQUEST_STATUS = "status";
 
 // ************************************* GET Service VARIABLES  ****************************************************
 
@@ -106,8 +108,8 @@ public class GlobalConstants {
     public static final String APMT_SERVICE_ID = "service_id";
     public static final String APMT_DATE = "by_date";
     public static final String APMT_TIME= "time_of_appointment";
-
-
+    public static final String APMT_REMARK= "remarks";
+    public static final String APMT_is_FOLLOW_UP= "isfollowup";
 
 
     // ************************************* Search Client VARIABLES  ****************************************************

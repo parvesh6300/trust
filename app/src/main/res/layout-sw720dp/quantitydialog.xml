@@ -118,6 +118,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
+        android:gravity="center"
         android:paddingEnd="10dp">
 
 
@@ -129,6 +130,7 @@
             android:text="Product"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:layout_gravity="center"
             android:textColor="@color/textColor"
             android:typeface="monospace"/>
 
@@ -142,12 +144,12 @@
             android:textColor="@color/textColor"
             android:layout_below="@+id/tv_product_name"/>
 
-        <ImageView
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/forwardarrow" />
+        <!--<ImageView-->
+            <!--android:layout_width="40sp"-->
+            <!--android:layout_height="40sp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/forwardarrow" />-->
 
     </RelativeLayout>
 

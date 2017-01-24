@@ -128,11 +128,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
-        <!--<activity android:name=".TestFragment" />-->
+        <!-- <activity android:name=".TestFragment" /> -->
         <activity android:name=".AddPlanAppointmentActivity" />
         <activity android:name=".GuestReceiptActivity" />
         <activity android:name=".GraphActivity" />
-        <activity android:name=".HelloChartActivity"/>
+        <activity android:name=".HelloChartActivity" />
+        <activity android:name=".AccountHistoryActivity"></activity>
     </application>
 
 </manifest>

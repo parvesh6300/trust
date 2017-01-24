@@ -364,6 +364,7 @@ public class MoneyBankedActivity extends Activity {
 
     }
 
+
     public void showDoneDialog() {
 
         final Dialog doneDialog = new Dialog(context);

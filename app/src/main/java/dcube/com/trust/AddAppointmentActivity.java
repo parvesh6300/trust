@@ -53,10 +53,10 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
     RelativeLayout datepicker;
     RelativeLayout timepicker;
 
-    EditText ed_name,ed_contact;
+    EditText ed_name,ed_contact,ed_remarks;
     GifTextView gif_loader;
 
-    String str_client_name,str_client_contact,str_service,str_date,str_time,str_service_id;
+    String str_client_name,str_client_contact,str_service,str_date,str_time,str_service_id,str_remark;
 
     WebServices ws;
 
@@ -93,6 +93,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
         ed_name = (EditText) findViewById(R.id.ed_name);
         ed_contact = (EditText) findViewById(R.id.ed_contact);
+        ed_remarks = (EditText) findViewById(R.id.ed_remarks) ;
 
         str_service = "";
 
@@ -267,12 +268,18 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
         {
             Toast.makeText(AddAppointmentActivity.this, "Specify Time", Toast.LENGTH_SHORT).show();
         }
+        else if (ed_remarks.getText().toString().matches(""))
+        {
+            Toast.makeText(AddAppointmentActivity.this, "Enter Remark", Toast.LENGTH_SHORT).show();
+        }
         else
         {
             str_client_name = ed_name.getText().toString();
             str_client_contact = ed_contact.getText().toString();
             str_date = date.getText().toString();
             str_time = time.getText().toString();
+            str_remark = ed_remarks.getText().toString();
+
             return true;
         }
 
@@ -396,6 +403,12 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
                 al_str_key.add(GlobalConstants.APMT_TIME);
                 al_str_value.add(format_time);
+
+                al_str_key.add(GlobalConstants.APMT_REMARK);
+                al_str_value.add(str_remark);
+
+                al_str_key.add(GlobalConstants.APMT_is_FOLLOW_UP);
+                al_str_value.add("0");
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("add_appointment");

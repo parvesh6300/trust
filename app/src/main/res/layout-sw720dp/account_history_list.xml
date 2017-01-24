@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="2dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/dategradient">
+
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20"
+                android:textSize="40sp"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                android:typeface="monospace"
+                />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/white"
+                android:layout_below="@+id/tv_date"/>
+
+            <TextView
+                android:id="@+id/tv_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OCT "
+                android:textSize="24sp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/white"
+                android:typeface="monospace"
+                android:layout_below="@+id/divider"
+                android:textStyle="bold"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/tv_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="'16"
+                android:textSize="24sp"
+                android:layout_marginTop="2dp"
+                android:layout_below="@+id/divider"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:typeface="monospace"
+                android:layout_toRightOf="@+id/tv_month"/>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginRight="100dp">
+
+            <TextView
+                android:id="@+id/tv_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rohit Ref No.328432164621"
+                android:textSize="30sp"
+                android:textColor="@color/purple"
+                android:typeface="monospace"
+
+                />
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/tv_payment_detail"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="CHQ/REf no 021873497912"-->
+            <!--android:textSize="25sp"-->
+            <!--android:textColor="@color/purple"-->
+            <!--android:typeface="monospace" />-->
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4000"
+        android:textSize="30sp"
+        android:textColor="@color/purple"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="70dp"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>

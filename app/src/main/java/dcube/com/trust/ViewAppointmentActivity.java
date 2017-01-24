@@ -5,8 +5,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -17,8 +19,11 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
@@ -44,6 +49,13 @@ public class ViewAppointmentActivity extends Activity {
     int pos;
 
     CheckNetConnection cn;
+
+    int int_selected_day;
+    int int_today;
+
+    String str_date,str_time,str_remark;
+
+    String format_time = "",format_date = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +123,8 @@ public class ViewAppointmentActivity extends Activity {
         }
 
         @Override
-        protected void onCreate(Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState)
+        {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -137,6 +150,10 @@ public class ViewAppointmentActivity extends Activity {
                             now.get(Calendar.MONTH),
                             now.get(Calendar.DAY_OF_MONTH)
                     );
+
+                    now.add(Calendar.DATE,0);
+                    dpd.setMinDate(now);
+
                     dpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
                     dpd.show(getFragmentManager(), "Datepickerdialog");
                 }
@@ -153,6 +170,12 @@ public class ViewAppointmentActivity extends Activity {
                             now.get(Calendar.MINUTE),
                             false);
 
+                    if (int_today == int_selected_day)
+                    {
+                        tpd.setMinTime(now.get(Calendar.HOUR_OF_DAY),Calendar.MINUTE,Calendar.SECOND);
+                    }
+
+
                     tpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
                     tpd.show(getFragmentManager(), "Datepickerdialog");
                 }
@@ -163,10 +186,36 @@ public class ViewAppointmentActivity extends Activity {
                 @Override
                 public void onClick(View view) {
 
-                    dismiss();
-                    //finish();
+                    if (validate())
+                    {
+                        if (cn.isNetConnected())
+                        {
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                    Toast.makeText(context, "Not Completed Yet", Toast.LENGTH_SHORT).show();
+                            try {
+
+                                Date date = format.parse(str_date+" "+str_time);
+                                Log.e("Date","Format "+date);
+
+                                format_time = format.format(date);
+                                Log.e("Time","Format "+format_time);
+
+                                format_date = new SimpleDateFormat("yyyy-MM-dd").format(date);
+                                Log.e("Date","Format "+format_date);
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            dismiss();
+                            new AddAppointmentAsyncTask().execute();
+
+                        }
+                        else
+                        {
+                            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
                 }
             });
@@ -180,29 +229,53 @@ public class ViewAppointmentActivity extends Activity {
             });
 
 
-
         }
+
 
         @Override
         public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+
             String t = "";
 
-            if(hourOfDay < 12)
-                t = "" + hourOfDay + ":"+minute+" AM";
-            else
-            if(hourOfDay == 12)
-                t = "" + hourOfDay + ":"+minute+" PM";
-            else
-            if(hourOfDay > 12)
-                t = "" + (hourOfDay-12) + ":"+minute+" PM";
+            t = hourOfDay+":"+minute+":"+second;
 
             tv_timepick.setText(t);
         }
 
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-            String d = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
+
+            String d = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+
+            int_selected_day = dayOfMonth;
+
             tv_datepick.setText(d);
+        }
+
+        public boolean validate()
+        {
+            if (tv_datepick.getText().toString().matches("Date"))
+            {
+                Toast.makeText(context, "Specify Date", Toast.LENGTH_SHORT).show();
+            }
+            else if (tv_timepick.getText().toString().matches("Time"))
+            {
+                Toast.makeText(context, "Specify Time", Toast.LENGTH_SHORT).show();
+            }
+            else if (ed_note.getText().toString().matches(""))
+            {
+                Toast.makeText(context, "Enter Remark", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                str_date = tv_datepick.getText().toString();
+                str_time = tv_timepick.getText().toString();
+                str_remark = ed_note.getText().toString();
+
+                return true;
+            }
+
+            return false;
         }
 
     }
@@ -267,5 +340,113 @@ public class ViewAppointmentActivity extends Activity {
     }
 
 
+
+    public class AddAppointmentAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.APMT_CLIENT_ID);
+                al_str_value.add(str_client_id);
+
+                al_str_key.add(GlobalConstants.APMT_SERVICE_ID);
+                al_str_value.add(global.getAl_apmt_details().get(0).get(GlobalConstants.APMT_SERVICE_ID));
+
+                al_str_key.add(GlobalConstants.APMT_TIME);
+                al_str_value.add(format_time);
+
+                al_str_key.add(GlobalConstants.APMT_REMARK);
+                al_str_value.add(str_remark);
+
+                al_str_key.add(GlobalConstants.APMT_is_FOLLOW_UP);
+                al_str_value.add("1");
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("add_appointment");
+
+                for (int i =0 ; i < al_str_value.size() ; i++)
+                {
+                    Log.i("Key",al_str_key.get(i));
+                    Log.i("Value",al_str_value.get(i));
+                }
+
+                message = ws.AddAppointmentService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                DialogClass dd = new DialogClass(ViewAppointmentActivity.this);
+                dd.show();
+//                CustomDialogClass cdd = new CustomDialogClass(ViewAppointmentActivity.this);
+//                cdd.show();
+            }
+            else
+            {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+    public class DialogClass extends Dialog {
+
+        public Activity c;
+        public Button ok;
+
+        public DialogClass(Activity a) {
+            super(a);
+            // TODO Auto-generated constructor stub
+            this.c = a;
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            setContentView(R.layout.custom_dialog);
+            ok = (Button) findViewById(R.id.btn_yes);
+
+            ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                  //  CalendarActivity.h.sendEmptyMessage(0);
+//                    ClientHomeActivity.h.sendEmptyMessage(0);
+                    dismiss();
+                    finish();
+                }
+            });
+        }
+    }
 
 }

@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,8 @@ public class StockControlActivity extends Activity {
     TextView tv_quantity;
 
     ListView stock_list;
+
+    EditText search;
 
     int i;
 
@@ -53,7 +58,53 @@ public class StockControlActivity extends Activity {
         stock_list = (ListView) findViewById(R.id.stock_list);
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
+        search = (EditText) findViewById(R.id.search);
+
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
+
+
+        search.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
+
+                if(s.length() > 1)
+                {
+//                    adapter = new GuestProductListAdapter(GuestProductActivity.this,s.toString());
+//                    productlist.setAdapter(adapter);
+//                    adapter.notifyDataSetChanged();
+
+                    stockAdapter = new StockAdapter(context,s.toString());
+                    stock_list.setAdapter(stockAdapter);
+                    stockAdapter.notifyDataSetChanged();
+
+                }
+                else
+                {
+//                    adapter = new GuestProductListAdapter(GuestProductActivity.this,"");
+//                    productlist.setAdapter(adapter);
+//                    adapter.notifyDataSetChanged();
+
+                    stockAdapter = new StockAdapter(context,"");
+                    stock_list.setAdapter(stockAdapter);
+                    stockAdapter.notifyDataSetChanged();
+
+                }
+
+            }
+        });
+
 
         if (cn.isNetConnected())
         {
@@ -94,7 +145,7 @@ public class StockControlActivity extends Activity {
                 al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_products_in_stock");
+                al_str_value.add("get_stock_request"); //get_products_in_stock
 
                 Log.i("Key",""+al_str_key);
                 Log.i("Value",""+al_str_value);
@@ -115,16 +166,29 @@ public class StockControlActivity extends Activity {
 
                 gif_loader.setVisibility(View.GONE);
 
-                stockAdapter = new StockAdapter(context);
+                stockAdapter = new StockAdapter(context,"");
                 stock_list.setAdapter(stockAdapter);
                 stockAdapter.notifyDataSetChanged();
 
-            } else {
+            }
+            else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
         }
 
+    }
+
+
+    public void startLoader(Context context)
+    {
+        gif_loader.setVisibility(View.VISIBLE);
+
+    }
+
+    public void stopLoader(Context context)
+    {
+        gif_loader.setVisibility(View.INVISIBLE);
     }
 
 

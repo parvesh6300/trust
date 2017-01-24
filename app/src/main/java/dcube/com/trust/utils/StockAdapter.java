@@ -22,6 +22,7 @@ import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.R;
+import dcube.com.trust.StockControlActivity;
 import okhttp3.OkHttpClient;
 
 /**
@@ -43,6 +44,10 @@ public class StockAdapter extends BaseAdapter {
     ArrayList<String> price ;
     ArrayList<String> category_id ;
 
+    ArrayList<String> al_search_name;
+    ArrayList<String> al_status;
+    ArrayList<String> al_quantity;
+
     Dialog dialog;
     Dialog alertDialog;
     int pos ;
@@ -51,7 +56,7 @@ public class StockAdapter extends BaseAdapter {
 
     String str_branch;
 
-    public StockAdapter(Context context) {
+    public StockAdapter(Context context, String search) {
 
         this.mcontext = context;
 
@@ -69,32 +74,59 @@ public class StockAdapter extends BaseAdapter {
         price = new ArrayList<>();
         category_id = new ArrayList<>();
 
+        al_status = new ArrayList<>();
+        al_search_name = new ArrayList<>();
+        al_quantity = new ArrayList<>();
+
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
-        for (HashMap<String, String> hashMap : global.getAl_stock_product()) {   //getAl_stock_product
+        for (HashMap<String, String> hashMap : global.getAl_stock_product())
+        {
+            if(search.equalsIgnoreCase(""))
+            {
+                name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
+                category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
+                SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
+                price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
+                in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
+                product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
+                category_id.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY_ID));
+                al_status.add(hashMap.get(GlobalConstants.PRODUCT_REQUEST_STATUS));
+                al_quantity.add(hashMap.get(GlobalConstants.PRODUCT_QUANTITY));
+            }
+            else
+            {
+                if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search) || hashMap.get(GlobalConstants.PRODUCT_CATEGORY).contains(search))
+                {
+                    name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
+                    category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
+                    SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
+                    price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
+                    in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
+                    product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
+                    category_id.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY_ID));
+                    al_status.add(hashMap.get(GlobalConstants.PRODUCT_REQUEST_STATUS));
+                    al_quantity.add(hashMap.get(GlobalConstants.PRODUCT_QUANTITY));
+                }
+            }
 
-            name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
-            category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
-            SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
-            price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
-            in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
-            product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
-            category_id.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY_ID));
+
         }
     }
 
     public class ViewHolder {
-        TextView tv_product, tv_category, tv_quantity, tv_quantity_label;
+        TextView tv_product, tv_category, tv_quantity, tv_quantity_label,tv_status;
         RelativeLayout rel_row;
     }
 
 
 
     @Override
-    public View getView(final int i, View convertView, ViewGroup viewGroup) {
+    public View getView(final int i,View rowView, ViewGroup viewGroup) {
 
 
         final ViewHolder holder = new ViewHolder();
+        final View convertView;
 
         convertView = inflater.inflate(R.layout.viewstock, viewGroup, false);
 
@@ -102,11 +134,27 @@ public class StockAdapter extends BaseAdapter {
         holder.tv_product = (TextView) convertView.findViewById(R.id.tv_product);
         holder.tv_category = (TextView) convertView.findViewById(R.id.tv_category);
         holder.tv_quantity = (TextView) convertView.findViewById(R.id.tv_quantity);
+        holder.tv_status = (TextView) convertView.findViewById(R.id.tv_status);
         holder.tv_quantity_label = (TextView) convertView.findViewById(R.id.tv_quantity_label);
 
         holder.tv_product.setText(name.get(i));
-        holder.tv_category.setText(category_id.get(i));
+        holder.tv_category.setText(category.get(i));
         holder.tv_quantity.setText(in_stock.get(i));   //in_stock.get(i)
+
+
+        if (al_status.get(i).equalsIgnoreCase("0"))
+        {
+            holder.tv_status.setBackgroundResource(R.drawable.red_circle);
+        }
+        else if (al_status.get(i).equalsIgnoreCase("1"))
+        {
+            holder.tv_status.setBackgroundResource(R.drawable.green_circle);
+        }
+        else
+        {
+            holder.tv_status.setVisibility(View.INVISIBLE);
+        }
+
 
         holder.rel_row.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,7 +237,7 @@ public class StockAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return global.getAl_stock_product().size();
+        return name.size();
     }
 
     @Override
@@ -223,7 +271,11 @@ public class StockAdapter extends BaseAdapter {
 
                 if (cn.isNetConnected())
                 {
+                    alertDialog.dismiss();
+
                     //new StockRequestAsyncTask().execute();
+
+
                     new AdminStockRequestAsyncTask().execute();
                 }
                 else
@@ -268,7 +320,6 @@ public class StockAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
-                alertDialog.cancel();
                 doneDialog.cancel();
             }
         });
@@ -285,6 +336,7 @@ public class StockAdapter extends BaseAdapter {
         @Override
         protected void onPreExecute() {
 
+            ((StockControlActivity)mcontext).startLoader(mcontext);
         }
 
         @Override
@@ -324,6 +376,8 @@ public class StockAdapter extends BaseAdapter {
 
         @Override
         protected void onPostExecute(String s) {
+
+            ((StockControlActivity)mcontext).stopLoader(mcontext);
 
             if (message.equalsIgnoreCase("true")) {
                 showDoneDialog();

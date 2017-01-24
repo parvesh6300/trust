@@ -36,7 +36,7 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
     SoldProductAdapter soldProductAdapter;
 
-    TextView tv_date_from,tv_date_to;
+    TextView tv_date_from,tv_date_to,tv_total_sale;
 
     DatePickerDialog dpd_from,dpd_to;
     GifTextView gif_loader;
@@ -65,6 +65,7 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
         tv_date_from=(TextView)findViewById(R.id.tv_date_from);
         tv_date_to=(TextView)findViewById(R.id.tv_date_to);
+        tv_total_sale = (TextView) findViewById(R.id.tv_total_sale);
 
         lin_date_from.setOnClickListener(this);
         lin_date_to.setOnClickListener(this);
@@ -219,6 +220,8 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
             if (message.equalsIgnoreCase("true"))
             {
                 gif_loader.setVisibility(View.GONE);
+
+                tv_total_sale.setText("Total Sale : "+global.getStr_total_sale());
 
                 soldProductAdapter= new SoldProductAdapter(context);
                 lv_sold_products.setAdapter(soldProductAdapter);

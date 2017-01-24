@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,8 +18,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 import java.util.ArrayList;
 
@@ -41,7 +37,7 @@ public class AddClientActivity extends Activity {
     EditText ed_areacode,emer_areacode;
 
     Spinner age_group;
-    BetterSpinner area;
+    Spinner area;
 
     TextView addclient;
     GifTextView gif_loader;
@@ -65,6 +61,8 @@ public class AddClientActivity extends Activity {
     CheckNetConnection cn;
 
     Global global;
+
+    String compareValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +90,7 @@ public class AddClientActivity extends Activity {
         ed_areacode.setKeyListener(null);
         emer_areacode.setKeyListener(null);
 
+
         age_group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
            public void onItemSelected(AdapterView<?> parent, View view, int pos, long l) {
@@ -115,12 +114,25 @@ public class AddClientActivity extends Activity {
        });
 
 
-        area.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int pos, long l) {
+//        area.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int pos, long l) {
+//
+//                str_area = parent.getItemAtPosition(pos).toString();
+//                Log.e("Area",parent.getItemAtPosition(pos)+"");
+//
+//            }
+//        });
 
-                str_area = parent.getItemAtPosition(pos).toString();
-                Log.e("Area",parent.getItemAtPosition(pos)+"");
+        area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+
+                str_area = adapterView.getItemAtPosition(pos).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
@@ -133,14 +145,6 @@ public class AddClientActivity extends Activity {
 
                 if (validate())
                 {
-//                    if (isOnline())
-//                    {
-//                        new AddClientAsyncTask().execute();
-//                    } else
-//                    {
-//                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-//                    }
-
                     if (cn.isNetConnected())
                     {
                         new AddClientAsyncTask().execute();
@@ -261,6 +265,18 @@ public class AddClientActivity extends Activity {
         });
 
 
+        compareValue = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_NAME);
+        Log.e("Branch",""+compareValue);
+
+        if (!compareValue.equals(null))
+        {
+            int spinnerPosition = adapter.getPosition(compareValue.trim());
+
+            Log.e("Position",""+spinnerPosition);
+            area.setSelection(spinnerPosition);
+        }
+
+
     }
 
     public class CustomDialogClass extends Dialog{
@@ -348,7 +364,7 @@ public class AddClientActivity extends Activity {
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         age_group = (Spinner) findViewById(R.id.age_group);
-        area = (BetterSpinner) findViewById(R.id.area);
+        area = (Spinner) findViewById(R.id.area);
 
         addclient = (TextView) findViewById(R.id.addclient);
 
@@ -484,10 +500,6 @@ public class AddClientActivity extends Activity {
 
                 message = ws.AddClientService(context, al_str_key, al_str_value);
 
-                //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
-                //             Log.i("Login", "Login : " + resPonse);
-
-//                return resPonse;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -516,16 +528,6 @@ public class AddClientActivity extends Activity {
 
     }
 
-
-    protected boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 }
 

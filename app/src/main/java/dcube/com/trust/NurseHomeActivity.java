@@ -61,6 +61,7 @@ public class NurseHomeActivity extends Activity {
 
         global.setAppointmentSelected(false);
 
+
         tv_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

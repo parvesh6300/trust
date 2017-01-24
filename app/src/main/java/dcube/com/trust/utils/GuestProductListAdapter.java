@@ -133,6 +133,7 @@ public class GuestProductListAdapter extends BaseAdapter {
         final Holder holder = new Holder();
 
         final View rowView;
+
         rowView = inflater.inflate(R.layout.product_category_item, parent , false);
 
         holder.quantity = (EditText) rowView.findViewById(R.id.quantity);

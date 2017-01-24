@@ -383,6 +383,8 @@ public class Global extends Application {
     public void setPlanRenew(boolean planRenew) {
         isPlanRenew = planRenew;
     }
+
+
     // ******************************* Stock Product Getter and Setter  *************************************************
 
     public ArrayList<HashMap<String, String>> getAl_stock_product() {
@@ -406,8 +408,15 @@ public class Global extends Application {
 
     public ArrayList<HashMap<String,String>> al_product_sold;
 
+    public String str_total_sale;
 
+    public String getStr_total_sale() {
+        return str_total_sale;
+    }
 
+    public void setStr_total_sale(String str_total_sale) {
+        this.str_total_sale = str_total_sale;
+    }
     // ******************************* Deposit Getter and Setter  *************************************************
 
 

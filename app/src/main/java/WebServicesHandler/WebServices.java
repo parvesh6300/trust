@@ -1011,6 +1011,8 @@ public class WebServices {
                     map.put(GlobalConstants.PRODUCT_CATEGORY , jsonObject1.optString(GlobalConstants.PRODUCT_CATEGORY));
                     map.put(GlobalConstants.PRODUCT_PRICE , jsonObject1.optString(GlobalConstants.PRODUCT_PRICE));
                     map.put(GlobalConstants.PRODUCT_IN_STOCK , jsonObject1.getString(GlobalConstants.PRODUCT_IN_STOCK ));
+                    map.put(GlobalConstants.PRODUCT_QUANTITY , jsonObject1.getString(GlobalConstants.PRODUCT_QUANTITY ));
+                    map.put(GlobalConstants.PRODUCT_REQUEST_STATUS , jsonObject1.getString(GlobalConstants.PRODUCT_REQUEST_STATUS ));
 
                     al_stock_product.add(map);
                 }
@@ -1055,6 +1057,8 @@ public class WebServices {
             if (status.equalsIgnoreCase("1"))
             {
                 al_product_sold = new ArrayList<>();
+
+                global.setStr_total_sale(jsonObject.optString(GlobalConstants.PRODUCT_SOLD_TOTAL));
 
                 JSONArray jsonArray = jsonObject.getJSONArray("sold_products_list");
 

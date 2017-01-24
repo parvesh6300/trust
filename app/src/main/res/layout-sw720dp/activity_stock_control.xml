@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,9 +23,40 @@
 
 
     <RelativeLayout
+        android:layout_width="700dp"
+        android:layout_height="80dp"
+        android:background="@drawable/searchback"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:id="@+id/search_layout"
+        android:layout_below="@id/header">
+
+        <EditText
+            android:layout_width="650dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="Search By Brand or Name"
+            android:typeface="monospace"
+            android:layout_marginLeft="20dp"
+            android:textColorHint="@color/graytext"
+            android:textSize="25sp"
+            android:id="@+id/search"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/searchbutton"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
         android:id="@+id/list_layout"
         android:layout_width="650dp"
-        android:layout_height="1100dp"
+        android:layout_height="1030dp"
         android:layout_below="@+id/search_layout"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
@@ -44,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:text="PRODUCT"
                 android:textColor="@color/white"
                 android:textSize="30sp"
@@ -62,8 +94,19 @@
                 android:textColor="@color/white"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:typeface="monospace"
-                android:layout_marginLeft="140dp"/>
+                android:typeface="monospace" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="STATUS"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
 
         </LinearLayout>
 

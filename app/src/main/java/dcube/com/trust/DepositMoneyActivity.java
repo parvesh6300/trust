@@ -159,11 +159,19 @@ public class DepositMoneyActivity extends Activity {
             tv_total_amount.setText("ACCOUNT TOTAL : "+branch_balance);
             tv_deposit.setText("Deposit : "+str_deposit_amount);
 
-            int_total_amount = Float.parseFloat(branch_balance);
-            int_deposit = Float.parseFloat(str_deposit_amount);
-            int_balance = int_total_amount + int_deposit;
+            if (! branch_balance.equalsIgnoreCase(null))
+            {
+                int_total_amount = Float.parseFloat(branch_balance);
+                int_deposit = Float.parseFloat(str_deposit_amount);
+                int_balance = int_total_amount + int_deposit;
 
-            tv_balance.setText("BALANCE : "+String.valueOf(int_balance));
+                tv_balance.setText("BALANCE : "+String.valueOf(int_balance));
+
+            }
+            else
+            {
+                Toast.makeText(DepositMoneyActivity.this, "Account is very low", Toast.LENGTH_SHORT).show();
+            }
 
 
             confirm.setOnClickListener(new View.OnClickListener() {

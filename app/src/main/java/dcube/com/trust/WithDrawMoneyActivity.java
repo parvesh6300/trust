@@ -279,7 +279,7 @@ public class WithDrawMoneyActivity extends Activity {
                 al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("widrawal");
+                al_str_value.add("add_in_expense");
 
                 for (int i = 0 ; i<al_str_key.size() ; i++)
                 {

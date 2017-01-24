@@ -1,6 +1,7 @@
-package dcube.com.trust.utils;
+package dcube.com.trust;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import WebServicesHandler.GlobalConstants;
-import dcube.com.trust.R;
+import dcube.com.trust.utils.Global;
 
 /**
- * Created by Sagar on 17/11/16.
+ * Created by Sagar on 24/01/17.
  */
-public class MoneyBankedAdapter extends BaseAdapter {
+public class AccountHistoryAdapter extends BaseAdapter {
+
 
     Context context;
 
@@ -28,8 +30,7 @@ public class MoneyBankedAdapter extends BaseAdapter {
 
     Global global;
 
-
-    public MoneyBankedAdapter(Context mcontext)
+    public AccountHistoryAdapter(Context mcontext)
     {
 
         this.context = mcontext;
@@ -42,6 +43,7 @@ public class MoneyBankedAdapter extends BaseAdapter {
 
         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        // addValues();
 
         for (HashMap<String, String> hashmap : global.getAl_money_bank_history())
         {
@@ -55,6 +57,7 @@ public class MoneyBankedAdapter extends BaseAdapter {
 
     }
 
+
     public class ViewHolder{
 
         TextView tv_date,tv_month,tv_year,tv_detail,tv_amount;
@@ -66,7 +69,7 @@ public class MoneyBankedAdapter extends BaseAdapter {
 
         ViewHolder holder= new ViewHolder();
 
-        convertview= inflater.inflate(R.layout.moneybankedlist,null);
+        convertview= inflater.inflate(R.layout.account_history_list,null);
 
         holder.tv_date= (TextView)convertview.findViewById(R.id.tv_date);
         holder.tv_month= (TextView)convertview.findViewById(R.id.tv_month);
@@ -86,18 +89,20 @@ public class MoneyBankedAdapter extends BaseAdapter {
         holder.tv_amount.setText(al_money_amount.get(pos));
 
 
-//        if (al_money_detail.get(pos).equalsIgnoreCase("moneybanked"))
-//        {
-//            holder.tv_amount.setTextColor(Color.parseColor("#E74C3C")); // RED
-//        }
-//        else
-//        {
-//            holder.tv_amount.setTextColor(Color.parseColor("#FF368C28"));  // Green
-//        }
+        if (al_money_detail.get(pos).equalsIgnoreCase("moneybanked") || al_money_detail.get(pos).equalsIgnoreCase("expense")  )
+        {
+            holder.tv_amount.setTextColor(Color.parseColor("#E74C3C")); // RED
+        }
+        else
+        {
+            holder.tv_amount.setTextColor(Color.parseColor("#FF368C28"));  // Green
+        }
 
 
         return convertview;
+
     }
+
 
     @Override
     public int getCount() {
@@ -113,6 +118,8 @@ public class MoneyBankedAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
+
+
 
 
 }
