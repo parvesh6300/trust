@@ -64,8 +64,25 @@ public class CartActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                CustomDialogClass dialog = new CustomDialogClass(CartActivity.this);
-                dialog.show();
+                try
+                {
+                    if (!global.getAl_cart_details().isEmpty())
+                    {
+                        CustomDialogClass dialog = new CustomDialogClass(CartActivity.this);
+                        dialog.show();
+                    }
+                    else
+                    {
+                        Toast.makeText(CartActivity.this, "Cart is Empty", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(CartActivity.this, "Some error occured", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

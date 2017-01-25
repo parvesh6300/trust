@@ -84,14 +84,7 @@ public class ViewPendingPaymentActivity extends Activity {
                     {
                         if (cn.isNetConnected())
                         {
-
-//                    for (int i =0 ; i < global.getAl_order_id().size() ; i++ )
-//                    {
-//                        count = i;
-//                        new PaymentAsyncTask().execute();
-//                    }
                             new ClearPendingPaymentAsyncTask().execute();
-
                         }
                         else
                         {

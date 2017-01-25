@@ -312,6 +312,9 @@ public class WebServices {
                     map.put(GlobalConstants.APMT_PLAN_ID , jsonObject1.optString(GlobalConstants.APMT_PLAN_ID));
                     map.put(GlobalConstants.APMT_SERVICE_ID , jsonObject1.optString(GlobalConstants.APMT_SERVICE_ID));
                     map.put(GlobalConstants.APMT_TIME , jsonObject1.optString(GlobalConstants.APMT_TIME));
+                    map.put(GlobalConstants.APMT_BRANCH , jsonObject1.optString(GlobalConstants.APMT_BRANCH));
+                    map.put(GlobalConstants.APMT_REMARK , jsonObject1.optString(GlobalConstants.APMT_REMARK));
+                    map.put(GlobalConstants.APMT_is_FOLLOW_UP , jsonObject1.optString(GlobalConstants.APMT_is_FOLLOW_UP));
 
                     al_apmt_detail.add(map);
                 }
@@ -551,6 +554,10 @@ public class WebServices {
                 global.setTotal_cart_items(items);
 
                 return "true";
+            }
+            else
+            {
+                global.getAl_cart_details().clear();
             }
 
         } catch (Exception e) {

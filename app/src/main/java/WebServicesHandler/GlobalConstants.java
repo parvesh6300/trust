@@ -110,6 +110,7 @@ public class GlobalConstants {
     public static final String APMT_TIME= "time_of_appointment";
     public static final String APMT_REMARK= "remarks";
     public static final String APMT_is_FOLLOW_UP= "isfollowup";
+    public static final String APMT_BRANCH= "branch";
 
 
     // ************************************* Search Client VARIABLES  ****************************************************

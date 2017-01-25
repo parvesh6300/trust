@@ -76,7 +76,9 @@ public class MoneyBankedAdapter extends BaseAdapter {
 
         // "date": "2017-01-19",
 
-        String[] date = al_date.get(pos).split("-");
+        String[] date_time = al_date.get(pos).split("\\s+");
+
+        String[] date = date_time[0].split("-");
 
         holder.tv_date.setText(date[2]);
         holder.tv_month.setText(date[1]+" '");

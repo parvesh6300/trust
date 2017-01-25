@@ -24,9 +24,9 @@ public class FollowupListAdapter extends BaseAdapter {
 
     public static LayoutInflater inflater;
 
-    ArrayList<String> notes;
+    ArrayList<String> remark;
     ArrayList<String> timing;
-   // ArrayList<String> al_date;
+    ArrayList<String> al_service_id;
 
     Global global;
 
@@ -40,14 +40,15 @@ public class FollowupListAdapter extends BaseAdapter {
 
         global = (Global) context.getApplicationContext();
 
-        notes = new ArrayList<>();
+        remark = new ArrayList<>();
         timing = new ArrayList<>();
+        al_service_id = new ArrayList<>();
 
         for (HashMap<String,String> hashmap : global.getAl_apmt_details())
         {
-            notes.add(hashmap.get(GlobalConstants.APMT_SERVICE_ID));
+            remark.add(hashmap.get(GlobalConstants.APMT_REMARK));
             timing.add(hashmap.get(GlobalConstants.APMT_TIME));
-
+            al_service_id.add(hashmap.get(GlobalConstants.APMT_SERVICE_ID));
         }
 
 
@@ -79,7 +80,7 @@ public class FollowupListAdapter extends BaseAdapter {
         holder.tv_month.setText(date[1]+" ");
         holder.tv_year.setText("'"+date[0]);
 
-        holder.tv_notes.setText(notes.get(pos));
+        holder.tv_notes.setText(al_service_id.get(pos)+" - "+remark.get(pos));
         holder.tv_timing.setText(date_time[1]);
 
         return convertview;
