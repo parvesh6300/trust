@@ -44,6 +44,8 @@ public class ViewPlanActivity extends Activity {
 
     String str_amount_to_pay,str_payment_mode;
 
+    TextView tv_select_plan;
+
     public static Handler h;
 
     CheckNetConnection cn;
@@ -51,6 +53,7 @@ public class ViewPlanActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_view_plan);
 
         context = this;
@@ -58,10 +61,21 @@ public class ViewPlanActivity extends Activity {
         global = (Global) getApplicationContext();
 
         lv_plan=(ListView)findViewById(R.id.lv_plan);
+        tv_select_plan = (TextView) findViewById(R.id.tv_select_plan);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         cn = new CheckNetConnection(this);
+
+        tv_select_plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(ViewPlanActivity.this,UpdatePlanActivity.class));
+
+            }
+        });
+
 
         lv_plan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -134,6 +148,7 @@ public class ViewPlanActivity extends Activity {
 
             str_amount_to_pay = global.getAl_view_plan_details().get(position).get(GlobalConstants.ORDER_ITEM_PRICE);
             str_payment_mode = "cash";
+
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override

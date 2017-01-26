@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
@@ -34,6 +33,7 @@ public class PlanSelectedAdapter extends BaseAdapter {
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+/*
         for (int i = 0 ; i < global.getAl_selected_plan_id().size() ; i++ )
         {
 
@@ -72,6 +72,7 @@ public class PlanSelectedAdapter extends BaseAdapter {
         }
 
         global.setAl_selected_plan(selected_plan_details);
+*/
 
     }
 
@@ -86,7 +87,7 @@ public class PlanSelectedAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return global.getAl_selected_plan().size();
+        return selected_plan_details.size();
     }
 
     @Override
@@ -113,13 +114,15 @@ public class PlanSelectedAdapter extends BaseAdapter {
         holder.tv_product_cost = (TextView) rowView.findViewById(R.id.tv_product_cost);
         holder.tv_service_cost = (TextView) rowView.findViewById(R.id.tv_service_cost);
 
+        /*
+
         String str_plan_name = global.getAl_selected_plan().get(position).get(GlobalConstants.PLAN_PRODUCT_NAME)+" + "+
                 global.getAl_selected_plan().get(position).get(GlobalConstants.PLAN_SERVICE_NAME);
 
         holder.tv_name.setText(global.getAl_selected_plan().get(position).get(GlobalConstants.PLAN_ID));   // (plan_name.get(position)
         holder.tv_product_cost.setText(global.getAl_selected_plan().get(position).get(GlobalConstants.PLAN_PRODUCT_PRICE));
         holder.tv_service_cost.setText(global.getAl_selected_plan().get(position).get(GlobalConstants.PLAN_SERVICE_PRICE));
-
+*/
         return rowView;
 
     }

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.AccountHistoryAdapter;
 import dcube.com.trust.utils.ExpenseAdapter;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;

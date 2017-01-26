@@ -144,6 +144,7 @@ public class WebServices {
     }
 
 
+
     public static String GetServiceService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -236,6 +237,7 @@ public class WebServices {
     }
 
 
+
     public static String AddAppointmentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -264,6 +266,7 @@ public class WebServices {
 
         return message;
     }
+
 
 
     public static String GetAppointmentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
@@ -332,6 +335,7 @@ public class WebServices {
     }
 
 
+
     public static String GetPlanService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -394,6 +398,96 @@ public class WebServices {
 
         return message;
     }
+
+
+    public static String BuyPlanService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        ArrayList<HashMap<String,String>> al_plan_detail;
+        ArrayList<HashMap<String,String>> al_plan_element_detail;
+
+        Global global = (Global) context.getApplicationContext();
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("GetPlan", "Plan : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                al_plan_detail = new ArrayList<>();
+
+                JSONArray jsonArray = jsonObject.getJSONArray("plan");
+
+                for (int i = 0 ; i< jsonArray.length() ; i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.PLAN_ID , jsonObject1.optString(GlobalConstants.PLAN_ID));
+                    map.put(GlobalConstants.PLAN_NAME , jsonObject1.optString(GlobalConstants.PLAN_NAME));
+                    map.put(GlobalConstants.PLAN_DURATION , jsonObject1.optString(GlobalConstants.PLAN_DURATION));
+                    map.put(GlobalConstants.PLAN_PRICE , jsonObject1.optString(GlobalConstants.PLAN_PRICE));
+
+                    map.put(GlobalConstants.USER_BRANCH_ID , jsonObject1.optString(GlobalConstants.USER_BRANCH_ID));
+
+                    JSONObject jsonObject2 = jsonObject1.getJSONObject(GlobalConstants.PLAN_WITH_ELEMENTS);
+
+                    JSONArray jsonArray1 = jsonObject2.getJSONArray(GlobalConstants.PLAN_ELEMENTS);
+
+                    if (jsonArray1.length() > 0 )
+                    {
+                        al_plan_element_detail = new ArrayList<>();
+
+                        for (int j = 0 ; j < jsonArray1.length() ; j++)
+                        {
+
+                            HashMap<String, String> element_map = new HashMap<String, String>();
+
+                            JSONObject jsonObject3 = jsonArray1.getJSONObject(j);
+
+                            element_map.put(GlobalConstants.PLAN_ITEM_ID , jsonObject3.optString(GlobalConstants.PLAN_ITEM_ID));
+                            element_map.put(GlobalConstants.PLAN_ELEMENT_TYPE , jsonObject3.optString(GlobalConstants.PLAN_ELEMENT_TYPE));
+                            element_map.put(GlobalConstants.PLAN_ELEMENT_ID , jsonObject3.optString(GlobalConstants.PLAN_ELEMENT_ID));
+                            element_map.put(GlobalConstants.PLAN_ELEMENT_QUANTITY , jsonObject3.optString(GlobalConstants.PLAN_ELEMENT_QUANTITY));
+                            element_map.put(GlobalConstants.PLAN_ELEMENT_NAME , jsonObject3.optString(GlobalConstants.PLAN_ELEMENT_NAME));
+                            element_map.put(GlobalConstants.PLAN_CREATED , jsonObject3.optString(GlobalConstants.PLAN_CREATED));
+                            element_map.put(GlobalConstants.PLAN_ID , jsonObject3.optString(GlobalConstants.PLAN_ID));
+
+                            al_plan_element_detail.add(element_map);
+
+                        }
+
+                        global.setAl_element_plan(al_plan_element_detail);
+
+                    }
+
+
+                    al_plan_detail.add(map);
+                }
+
+                global.setAl_plan_details(al_plan_detail);
+
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
 
 
     public static String SearchClientService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
@@ -887,8 +981,6 @@ public class WebServices {
 
         return message;
     }
-
-
 
 
     public static String DepositHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)

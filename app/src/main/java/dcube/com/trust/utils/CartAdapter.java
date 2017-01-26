@@ -105,7 +105,6 @@ public class CartAdapter extends BaseAdapter {
         holder.tv_name= (TextView)convertView.findViewById(R.id.tv_name);
         holder.tv_desc= (TextView)convertView.findViewById(R.id.tv_desc);
         holder.tv_price=(TextView)convertView.findViewById(R.id.tv_price);
-
         holder.ed_quantity = (TextView)convertView.findViewById(R.id.ed_quantity);
 
         holder.iv_product_image = (ImageView) convertView.findViewById(R.id.iv_product_image);

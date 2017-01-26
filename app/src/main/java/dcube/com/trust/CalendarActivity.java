@@ -76,7 +76,7 @@ public class CalendarActivity extends Activity
         str_date = format.format(cl.getTime());
 
 
-        if (global.isAppointmentSelected())
+        if (global.isAppointmentSelected() || global.isServiceAppointment() )
         {
             tv_continue.setVisibility(View.VISIBLE);
         }

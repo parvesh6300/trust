@@ -139,16 +139,18 @@ public class StockAdapter extends BaseAdapter {
 
         holder.tv_product.setText(name.get(i));
         holder.tv_category.setText(category.get(i));
-        holder.tv_quantity.setText(in_stock.get(i));   //in_stock.get(i)
+        holder.tv_quantity.setText(in_stock.get(i));
 
 
         if (al_status.get(i).equalsIgnoreCase("0"))
         {
             holder.tv_status.setBackgroundResource(R.drawable.red_circle);
+            holder.tv_status.setText(al_quantity.get(pos));
         }
         else if (al_status.get(i).equalsIgnoreCase("1"))
         {
             holder.tv_status.setBackgroundResource(R.drawable.green_circle);
+            holder.tv_status.setText(al_quantity.get(pos));
         }
         else
         {

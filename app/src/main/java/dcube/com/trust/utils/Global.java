@@ -157,7 +157,7 @@ public class Global extends Application {
         this.al_plan_details = al_plan_details;
     }
 
-
+/*
     public ArrayList<HashMap<String,String>> al_selected_plan;
 
     public ArrayList<HashMap<String, String>> getAl_selected_plan() {
@@ -179,9 +179,33 @@ public class Global extends Application {
         this.al_selected_plan_id = al_selected_plan_id;
     }
 
+*/
 
 
-    // ******************************* Appointmemnt Getter and Setter  *************************************************
+    public ArrayList<HashMap<String, String>> getAl_element_plan() {
+        return al_element_plan;
+    }
+
+    public void setAl_element_plan(ArrayList<HashMap<String, String>> al_element_plan) {
+        this.al_element_plan = al_element_plan;
+    }
+
+    public ArrayList<HashMap<String,String>> al_element_plan;
+
+
+    public int plan_selected_pos;
+
+    public int getPlan_selected_pos() {
+        return plan_selected_pos;
+    }
+
+    public void setPlan_selected_pos(int plan_selected_pos) {
+        this.plan_selected_pos = plan_selected_pos;
+    }
+
+
+
+    // ******************************* Appointment Getter and Setter  *************************************************
 
     public ArrayList<HashMap<String, String>> getAl_apmt_details() {
         return al_apmt_details;
@@ -205,7 +229,26 @@ public class Global extends Application {
     }
 
 
+    public boolean isServiceAppointment;
 
+    public boolean isServiceAppointment() {
+        return isServiceAppointment;
+    }
+
+    public void setServiceAppointment(boolean serviceAppointment) {
+        isServiceAppointment = serviceAppointment;
+    }
+
+
+    public int serviceAppointmentPos;
+
+    public int getServiceAppointmentPos() {
+        return serviceAppointmentPos;
+    }
+
+    public void setServiceAppointmentPos(int serviceAppointmentPos) {
+        this.serviceAppointmentPos = serviceAppointmentPos;
+    }
 
     // *******************************  Client Getter and Setter  *************************************************
 

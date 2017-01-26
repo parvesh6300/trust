@@ -133,7 +133,8 @@
         <activity android:name=".GuestReceiptActivity" />
         <activity android:name=".GraphActivity" />
         <activity android:name=".HelloChartActivity" />
-        <activity android:name=".AccountHistoryActivity"></activity>
+        <activity android:name=".AccountHistoryActivity" />
+        <activity android:name=".UpdatePlanActivity"></activity>
     </application>
 
 </manifest>

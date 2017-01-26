@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,6 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListen
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog.OnTimeSetListener;
-import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,7 +39,7 @@ import pl.droidsonroids.gif.GifTextView;
 
 public class AddAppointmentActivity extends FragmentActivity implements OnTimeSetListener,OnDateSetListener{
 
-    BetterSpinner service;
+    Spinner service;
     Context context = AddAppointmentActivity.this;
 
     Global global;
@@ -69,6 +69,9 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
     int int_selected_day;
     int int_today;
 
+    ArrayAdapter<String> adapter;
+    String str_pre_selected_service;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +83,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
         cn = new CheckNetConnection(this);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
-        service = (BetterSpinner) findViewById(R.id.service);
+        service = (Spinner) findViewById(R.id.service);
 
         datepicker = (RelativeLayout) findViewById(R.id.datepicker);
         timepicker = (RelativeLayout) findViewById(R.id.timepicker);
@@ -106,21 +109,91 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
         ed_contact.setText(global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_CONTACT));
 
         al_service_name = new ArrayList<>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, al_service_name);
-        service.setAdapter(adapter);
+     //   al_service_name.clear();
+
+
+        if (global.isServiceAppointment())
+        {
+            int pos = global.getServiceAppointmentPos();
+
+            str_pre_selected_service = global.getAl_view_service_details().get(pos).get(GlobalConstants.ORDER_ITEM_NAME);
+
+            al_service_name.add(global.getAl_view_service_details().get(pos).get(GlobalConstants.ORDER_ITEM_NAME));
+
+            Log.e("ServiceName",""+al_service_name);
+
+            adapter = new ArrayAdapter<String>(context, R.layout.spinner_item, al_service_name);
+            service.setAdapter(adapter);
+
+            if (!str_pre_selected_service.equals(null) )
+            {
+                int spinnerPosition = adapter.getPosition(str_pre_selected_service.trim());
+
+                Log.e("Position",""+spinnerPosition);
+                service.setSelection(spinnerPosition);
+            }
+
+        }
+        else
+        {
+            if (cn.isNetConnected())
+            {
+                new GetServiceAsyncTask().execute();
+            }
+            else
+            {
+                Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
+
+
 
         Calendar now = Calendar.getInstance();
         int_today = now.get(Calendar.DATE);
 
-        service.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+
+        service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
 
                 str_service = adapterView.getItemAtPosition(pos).toString();
 
-                str_service_id = global.getAl_service_details().get(pos).get(GlobalConstants.SERVICE_ID);
+                if (global.isServiceAppointment())
+                {
+                    str_service_id = global.getAl_view_service_details().get(global.getServiceAppointmentPos()).get(GlobalConstants.ORDER_ITEM_ID);
+                }
+                else
+                {
+                    str_service_id = global.getAl_service_details().get(pos).get(GlobalConstants.SERVICE_ID);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
+
+//        service.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+//
+//                str_service = adapterView.getItemAtPosition(pos).toString();
+//
+//                if (global.isServiceAppointment())
+//                {
+//                    str_service_id = global.getAl_view_service_details().get(global.getServiceAppointmentPos()).get(GlobalConstants.ORDER_ITEM_ID);
+//                }
+//                else
+//                {
+//                    str_service_id = global.getAl_service_details().get(pos).get(GlobalConstants.SERVICE_ID);
+//                }
+//
+//            }
+//        });
 
 
         datepicker.setOnClickListener(new View.OnClickListener() {
@@ -209,17 +282,9 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
         });
 
 
-        str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
-                get(GlobalConstants.SRC_CLIENT_ID);
+        str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
 
-        if (cn.isNetConnected())
-        {
-            new GetServiceAsyncTask().execute();
-        }
-        else
-        {
-            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-        }
+
 
     }
 
@@ -334,17 +399,10 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                     al_service_name.add(global.getAl_service_details().get(i).get(GlobalConstants.SERVICE_NAME));
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, al_service_name);
+                adapter = new ArrayAdapter<String>(context, R.layout.spinner_item, al_service_name);
                 service.setAdapter(adapter);
+               // service.setEnabled(true);
 
-
-                if (cn.isNetConnected())
-                {
-                    new GetAppointmentAsyncTask().execute();
-                }
-                else {
-                    Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                }
 
             }
             else {
@@ -460,74 +518,20 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                 public void onClick(View view) {
 
                     CalendarActivity.h.sendEmptyMessage(0);
-//                    ClientHomeActivity.h.sendEmptyMessage(0);
+
+                    global.setAppointmentSelected(false);
+
+                    if (global.isServiceAppointment())
+                    {
+                        ViewServicesActivity.h.sendEmptyMessage(0);
+                    }
+
                     dismiss();
                     finish();
+
                 }
             });
         }
-    }
-
-
-
-    public class GetAppointmentAsyncTask extends AsyncTask<String, String, String> {
-
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-
-        @Override
-        protected void onPreExecute() {
-
-            gif_loader.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_appointments");
-
-                message = ws.GetAppointmentService(context, al_str_key, al_str_value);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            gif_loader.setVisibility(View.GONE);
-
-            if (message.equalsIgnoreCase("true"))
-            {
-
-            }
-            else {
-
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-    }
-
-
-
-    public static Calendar toCalendar(Date date){
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        return cal;
     }
 
 

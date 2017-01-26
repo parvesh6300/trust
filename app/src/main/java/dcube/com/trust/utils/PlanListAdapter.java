@@ -2,8 +2,6 @@ package dcube.com.trust.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +23,13 @@ public class PlanListAdapter extends BaseAdapter {
     Global global;
     int selectedIndex = -1;
     boolean isSelected = false;
+
     ArrayList<String> al_selected_plan;
     ArrayList<String> al_plan_name;
-    ArrayList<String> al_product_cost;
-    ArrayList<String> al_service_cost;
+    ArrayList<String> al_product_name;
+    ArrayList<String> al_service_name;
     ArrayList<String> al_plan_id;
+    ArrayList<String> al_plan_cost;
 
     public PlanListAdapter(Activity activity, String search) {
 
@@ -40,31 +40,31 @@ public class PlanListAdapter extends BaseAdapter {
 
         al_selected_plan = new ArrayList<>();
         al_plan_name = new ArrayList<>();
-        al_product_cost = new ArrayList<>();
-        al_service_cost = new ArrayList<>();
+        al_product_name = new ArrayList<>();
+        al_service_name = new ArrayList<>();
         al_plan_id = new ArrayList<>();
+        al_plan_cost = new ArrayList<>();
 
 
         try {
-
 
             for (HashMap<String, String> hashmap : global.getAl_plan_details())
             {
 
                 if (search.equalsIgnoreCase(""))
                 {
-               //     al_plan_name.add(hashmap.get(GlobalConstants.PLAN_NAME));
-                    al_product_cost.add(hashmap.get(GlobalConstants.PLAN_PRODUCT_PRICE));
-                    al_service_cost.add(hashmap.get(GlobalConstants.PLAN_SERVICE_PRICE));
+                    al_plan_name.add(hashmap.get(GlobalConstants.PLAN_NAME));
+                    al_plan_cost.add(hashmap.get(GlobalConstants.PLAN_PRICE));
                     al_plan_id.add(hashmap.get(GlobalConstants.PLAN_ID));
                 }
                 else
                 {
-                    if (hashmap.get(GlobalConstants.PLAN_ID).contains(search) )
+
+
+                    if (hashmap.get(GlobalConstants.PLAN_ID).contains(search) || hashmap.get(GlobalConstants.PLAN_NAME).contains(search))
                     {
-                   //     al_plan_name.add(hashmap.get(GlobalConstants.PLAN_NAME));
-                        al_product_cost.add(hashmap.get(GlobalConstants.PLAN_PRODUCT_PRICE));
-                        al_service_cost.add(hashmap.get(GlobalConstants.PLAN_SERVICE_PRICE));
+                        al_plan_name.add(hashmap.get(GlobalConstants.PLAN_NAME));
+                        al_plan_cost.add(hashmap.get(GlobalConstants.PLAN_PRICE));
                         al_plan_id.add(hashmap.get(GlobalConstants.PLAN_ID));
                     }
                 }
@@ -82,7 +82,7 @@ public class PlanListAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return al_plan_id.size();
+        return al_plan_name.size();
     }
 
     @Override
@@ -107,18 +107,15 @@ public class PlanListAdapter extends BaseAdapter {
         rowView = inflater.inflate(R.layout.buy_plan_item, parent, false);
 
         holder.name = (TextView) rowView.findViewById(R.id.name);
-        holder.product_cost = (TextView) rowView.findViewById(R.id.product_cost);
-        holder.service_cost = (TextView) rowView.findViewById(R.id.service_cost);
+    //    holder.product_cost = (TextView) rowView.findViewById(R.id.product_cost);
+        holder.plan_cost = (TextView) rowView.findViewById(R.id.plan_cost);
         holder.iv = (ImageView) rowView.findViewById(R.id.iv);
 
-//        String plan_name = global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_PRODUCT_NAME) + " + " +
-//                global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_SERVICE_NAME);
+        holder.name.setText(al_plan_name.get(position));
+     //   holder.product_cost.setText(global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_ITEM_NAME));
+        holder.plan_cost.setText(al_plan_cost.get(position));
 
-        holder.name.setText(al_plan_id.get(position));
-        holder.product_cost.setText(al_product_cost.get(position));
-        holder.service_cost.setText(al_service_cost.get(position));
-
-
+/*
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,8 +124,8 @@ public class PlanListAdapter extends BaseAdapter {
                     holder.iv.setVisibility(View.VISIBLE);
                     rowView.setBackgroundColor(Color.parseColor("#603370"));    // Purple
                     holder.name.setTextColor(Color.parseColor("#FFFFFF"));      // white
-                    holder.product_cost.setTextColor(Color.parseColor("#FFFFFF"));      // white
-                    holder.service_cost.setTextColor(Color.parseColor("#FFFFFF"));      // white
+//                    holder.product_cost.setTextColor(Color.parseColor("#FFFFFF"));      // white
+                    holder.plan_cost.setTextColor(Color.parseColor("#FFFFFF"));      // white
 
                     al_selected_plan.add(al_plan_id.get(position));
 
@@ -136,8 +133,8 @@ public class PlanListAdapter extends BaseAdapter {
                     holder.iv.setVisibility(View.INVISIBLE);
                     rowView.setBackgroundColor(Color.parseColor("#FFFFFF"));    // white
                     holder.name.setTextColor(Color.parseColor("#45265f"));      // text color
-                    holder.product_cost.setTextColor(Color.parseColor("#45265f"));      // text color
-                    holder.service_cost.setTextColor(Color.parseColor("#45265f"));      // text color
+              //      holder.product_cost.setTextColor(Color.parseColor("#45265f"));      // text color
+                    holder.plan_cost.setTextColor(Color.parseColor("#45265f"));      // text color
 
                     al_selected_plan.remove(al_plan_id.get(position));
 
@@ -148,7 +145,7 @@ public class PlanListAdapter extends BaseAdapter {
 
             }
         });
-
+*/
 
         return rowView;
     }
@@ -159,8 +156,8 @@ public class PlanListAdapter extends BaseAdapter {
 
     public class Holder {
         TextView name;
-        TextView product_cost;
-        TextView service_cost;
+      //  TextView product_cost;
+        TextView plan_cost;
         ImageView iv;
     }
 

@@ -111,8 +111,8 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
-
-            <com.weiwangcn.betterspinner.library.BetterSpinner
+<!--//com.weiwangcn.betterspinner.library.BetterSpinner-->
+            <Spinner
                 android:id="@+id/service"
                 android:layout_width="350dp"
                 android:layout_height="match_parent"

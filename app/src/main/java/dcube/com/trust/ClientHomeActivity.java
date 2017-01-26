@@ -93,6 +93,7 @@ public class ClientHomeActivity extends Activity {
                 {
                     case 0:
 
+                        global.setServiceAppointment(false);
                         global.setAppointmentSelected(true);
                         startActivity(new Intent(ClientHomeActivity.this,CalendarActivity.class));
                         break;

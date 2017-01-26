@@ -83,7 +83,7 @@ public class AddClientActivity extends Activity {
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray);
         age_group.setAdapter(spinnerArrayAdapter);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ITEMS);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, ITEMS);  //simple_dropdown_item_1line
         area.setAdapter(adapter);
 
         ed_areacode.setFocusable(false);

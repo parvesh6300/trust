@@ -24,7 +24,8 @@ import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.PlanListAdapter;
-import dcube.com.trust.utils.PlanSelectedAdapter;
+import dcube.com.trust.utils.PlanProductAdapter;
+import dcube.com.trust.utils.PlanServiceAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
@@ -41,11 +42,13 @@ public class BuyPlanActivity extends Activity{
 
     Global global;
 
-    CustomDialogClass cdd;
+   // CustomDialogClass cdd;
 
     EditText search;
 
     CheckNetConnection cn;
+
+    String str_client_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,7 @@ public class BuyPlanActivity extends Activity{
 
         setContentView(R.layout.activity_buy_plan);
 
-         global = (Global) getApplicationContext();
+        global = (Global) getApplicationContext();
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -64,7 +67,7 @@ public class BuyPlanActivity extends Activity{
 
         cn = new CheckNetConnection(this);
 
-
+        /*
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,14 +93,19 @@ public class BuyPlanActivity extends Activity{
 
             }
         });
-
+*/
 
         servicelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
 
-                adapter.setSelectedIndex(i);
-                adapter.notifyDataSetChanged();
+//                adapter.setSelectedIndex(i);
+//                adapter.notifyDataSetChanged();
+
+                global.setPlan_selected_pos(pos);
+
+                PlanDialogClass dialog = new PlanDialogClass(BuyPlanActivity.this);
+                dialog.show();
 
             }
         });
@@ -140,9 +148,88 @@ public class BuyPlanActivity extends Activity{
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
+        str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
+                get(GlobalConstants.SRC_CLIENT_ID);
+
+    }
+
+
+    public class PlanDialogClass extends Dialog {
+
+        public Context c;
+
+        public TextView tv_cancel;
+        public TextView tv_add_to_cart;
+
+        public ListView lv_products,lv_services;
+
+        PlanProductAdapter productAdapter;
+        PlanServiceAdapter serviceAdapter;
+
+
+        public PlanDialogClass(Context context1) {
+            super(context1);
+            // TODO Auto-generated constructor stub
+            this.c = context1;
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+            setContentView(R.layout.plan_detail_dialog);
+
+            tv_add_to_cart = (TextView) findViewById(R.id.tv_add_to_cart);
+            tv_cancel = (TextView) findViewById(R.id.tv_cancel);
+
+            lv_services = (ListView) findViewById(R.id.lv_services);
+            lv_products = (ListView) findViewById(R.id.lv_products);
+
+
+            productAdapter = new PlanProductAdapter(c);
+            lv_products.setAdapter(productAdapter);
+
+            serviceAdapter = new PlanServiceAdapter(c);
+            lv_services.setAdapter(serviceAdapter);
+
+
+            tv_add_to_cart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (cn.isNetConnected())
+                    {
+                        dismiss();
+                        new AddPlanCartAsyncTask().execute();
+                    }
+                    else {
+                        Toast.makeText(BuyPlanActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+            });
+
+            tv_cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    dismiss();
+                }
+            });
+
+
+
+        }
+
 
 
     }
+
+
+/*
 
     public class CustomDialogClass extends Dialog {
 
@@ -224,6 +311,8 @@ public class BuyPlanActivity extends Activity{
     }
 
 
+    */
+
     public class GetPlanAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -244,12 +333,15 @@ public class BuyPlanActivity extends Activity{
                 ArrayList<String> al_str_value = new ArrayList<>();
 
                 al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));  //global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID)
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_plan_list");
+                al_str_value.add("get_plans_of_branch");
 
-                message = ws.GetPlanService(context, al_str_key, al_str_value);
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
+
+                message = ws.BuyPlanService(context, al_str_key, al_str_value);
 
 
             } catch (Exception e) {
@@ -285,22 +377,22 @@ public class BuyPlanActivity extends Activity{
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
         String message = "";
-        String str_client_id;
+
 
         @Override
         protected void onPreExecute() {
 
             gif_loader.setVisibility(View.VISIBLE);
 
-            str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
-                    get(GlobalConstants.SRC_CLIENT_ID);
+
         }
 
         @Override
         protected String doInBackground(String... params) {
             try {
 
-                for (int i = 0 ; i < global.al_selected_plan_id.size() ; i++) {
+//                for (int i = 0 ; i < global.al_selected_plan_id.size() ; i++)
+//                {
                     ArrayList<String> al_str_key = new ArrayList<>();
                     ArrayList<String> al_str_value = new ArrayList<>();
 
@@ -314,7 +406,7 @@ public class BuyPlanActivity extends Activity{
                     al_str_value.add("plan");
 
                     al_str_key.add(GlobalConstants.CART_ITEM_ID);
-                    al_str_value.add(global.al_selected_plan_id.get(i));
+                    al_str_value.add(global.getAl_plan_details().get(0).get(GlobalConstants.PLAN_ID));
 
                     al_str_key.add(GlobalConstants.CART_AMOUNT);
                     al_str_value.add("1");
@@ -322,14 +414,15 @@ public class BuyPlanActivity extends Activity{
                     al_str_key.add(GlobalConstants.ACTION);
                     al_str_value.add("add_to_cart");
 
-                    for (int j = 0; j < al_str_key.size(); j++) {
+                    for (int j = 0; j < al_str_key.size(); j++)
+                    {
                         Log.e("KEy", "" + al_str_key.get(j));
                         Log.e("Value", "" + al_str_value.get(j));
                     }
 
                     message = ws.AddToCartService(context, al_str_key, al_str_value);
 
-                }
+//                }
 
             } catch (Exception e) {
                 e.printStackTrace();

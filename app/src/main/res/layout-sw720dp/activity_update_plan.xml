@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_1"
+    tools:context="dcube.com.trust.UpdatePlanActivity">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="Plans Availed"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:typeface="monospace" />
+
+    <RelativeLayout
+        android:layout_width="700dp"
+        android:layout_height="1150dp"
+        android:layout_below="@+id/header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/form_back"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_products"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:text="Products"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@color/textColor"
+            android:typeface="monospace" />
+
+
+        <ListView
+            android:id="@+id/lv_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_services"
+            android:layout_below="@+id/tv_products"/>
+
+        <TextView
+            android:id="@+id/tv_services"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:text="Services"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:background="@color/textColor"
+            android:typeface="monospace" />
+
+        <ListView
+            android:id="@+id/lv_services"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_update_plan"
+            android:layout_below="@+id/tv_services"/>
+
+        <TextView
+            android:id="@+id/tv_update_plan"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="UPDATE"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:background="@color/textColor"/>
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

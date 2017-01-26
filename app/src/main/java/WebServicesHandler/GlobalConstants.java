@@ -66,7 +66,7 @@ public class GlobalConstants {
 // ************************************* GET PLAN VARIABLES  ****************************************************
 
     public static final String PLAN_ID = "plan_id";
-    public static final String PLAN_PRICE = "plan_price";
+    public static final String PLAN_PRICE = "price";
     public static final String PLAN_DURATION = "plan_duration";
     public static final String PLAN_NAME = "plan_name";
 
@@ -81,6 +81,16 @@ public class GlobalConstants {
     public static final String PLAN_SERVICE_ID = "service_id";
     public static final String PLAN_SERVICE_NAME = "service_name";
     public static final String PLAN_SERVICE_PRICE = "service_price";
+
+    public static final String PLAN_WITH_ELEMENTS = "elements_in_this_plan";
+    public static final String PLAN_ELEMENTS = "elements";
+    public static final String PLAN_ITEM_ID = "id";
+    public static final String PLAN_ELEMENT_TYPE = "element_type";
+    public static final String PLAN_ELEMENT_ID = "element_id";
+    public static final String PLAN_ELEMENT_QUANTITY = "quantity";
+    public static final String PLAN_ELEMENT_NAME = "name";
+    public static final String PLAN_CREATED = "created";
+
 
 
 // *************************************  ADD CLIENT VARIABLES  ****************************************************
