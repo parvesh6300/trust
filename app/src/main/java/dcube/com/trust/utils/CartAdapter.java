@@ -73,14 +73,7 @@ public class CartAdapter extends BaseAdapter {
             al_cart_id.add(hashmap.get(GlobalConstants.GET_CART_ID));
             al_item_type.add(hashmap.get(GlobalConstants.GET_CART_ITEM_TYPE));
 
-            if (hashmap.get(GlobalConstants.GET_CART_ITEM_TYPE).equalsIgnoreCase("plan"))
-            {
-                al_item_name.add(hashmap.get(GlobalConstants.GET_CART_ITEM_ID));
-            }
-            else
-            {
-                al_item_name.add(hashmap.get(GlobalConstants.GET_CART_ITEM_NAME));
-            }
+            al_item_name.add(hashmap.get(GlobalConstants.GET_CART_ITEM_NAME));
 
             al_item_desc.add(hashmap.get(GlobalConstants.GET_CART_ITEM_DESC));
         }
@@ -286,6 +279,8 @@ public class CartAdapter extends BaseAdapter {
         @Override
         protected void onPreExecute() {
 
+            ((CartActivity)context).loader(context,true);
+
         }
 
         @Override
@@ -316,6 +311,8 @@ public class CartAdapter extends BaseAdapter {
         @Override
         protected void onPostExecute(String s) {
 
+            ((CartActivity)context).loader(context,false);
+
             if (message.equalsIgnoreCase("true"))
             {
                 new GetCartItemsAsyncTask().execute();}
@@ -339,6 +336,7 @@ public class CartAdapter extends BaseAdapter {
         @Override
         protected void onPreExecute() {
 
+            ((CartActivity)context).loader(context,true);
 
         }
 
@@ -370,6 +368,8 @@ public class CartAdapter extends BaseAdapter {
         @Override
         protected void onPostExecute(String s) {
 
+            ((CartActivity)context).loader(context,false);
+
             if (message.equalsIgnoreCase("true"))
             {
 //                new CartAdapter(context);
@@ -394,6 +394,10 @@ public class CartAdapter extends BaseAdapter {
 
         @Override
         protected void onPreExecute() {
+
+            dialog.dismiss();
+
+            ((CartActivity)context).loader(context,true);
 
         }
 
@@ -428,20 +432,10 @@ public class CartAdapter extends BaseAdapter {
         @Override
         protected void onPostExecute(String s) {
 
+            ((CartActivity)context).loader(context,false);
+
             if (message.equalsIgnoreCase("true"))
             {
-                dialog.dismiss();
-
-//                global.getAl_cart_details().clear();
-//
-//                al_item_name.clear();
-//                al_item_desc.clear();
-//                al_item_type.clear();
-//                al_item_price.clear();
-//                al_item_quantity.clear();
-//                al_cart_id.clear();
-
-
                 new GetCartItemsAsyncTask().execute();
             }
             else

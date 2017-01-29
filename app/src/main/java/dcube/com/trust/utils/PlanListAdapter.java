@@ -26,8 +26,8 @@ public class PlanListAdapter extends BaseAdapter {
 
     ArrayList<String> al_selected_plan;
     ArrayList<String> al_plan_name;
-    ArrayList<String> al_product_name;
-    ArrayList<String> al_service_name;
+//    ArrayList<String> al_product_name;
+//    ArrayList<String> al_service_name;
     ArrayList<String> al_plan_id;
     ArrayList<String> al_plan_cost;
 
@@ -40,8 +40,6 @@ public class PlanListAdapter extends BaseAdapter {
 
         al_selected_plan = new ArrayList<>();
         al_plan_name = new ArrayList<>();
-        al_product_name = new ArrayList<>();
-        al_service_name = new ArrayList<>();
         al_plan_id = new ArrayList<>();
         al_plan_cost = new ArrayList<>();
 
@@ -59,7 +57,6 @@ public class PlanListAdapter extends BaseAdapter {
                 }
                 else
                 {
-
 
                     if (hashmap.get(GlobalConstants.PLAN_ID).contains(search) || hashmap.get(GlobalConstants.PLAN_NAME).contains(search))
                     {

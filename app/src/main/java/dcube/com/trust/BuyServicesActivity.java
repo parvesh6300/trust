@@ -60,7 +60,7 @@ public class BuyServicesActivity extends Activity {
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
-        cdd = new CustomDialogClass(BuyServicesActivity.this);
+
 
 
         buy.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +71,7 @@ public class BuyServicesActivity extends Activity {
                 {
                     if (global.getAl_selected_service_id().size() >0)
                     {
+                        cdd = new CustomDialogClass(BuyServicesActivity.this);
                         cdd.show();
                     }
                     else
@@ -153,6 +154,8 @@ public class BuyServicesActivity extends Activity {
             super(a);
             // TODO Auto-generated constructor stub
             this.c = a;
+
+
         }
 
         @Override
@@ -169,6 +172,7 @@ public class BuyServicesActivity extends Activity {
 
             selectedAdapter = new ServiceSelectedAdapter(BuyServicesActivity.this);
             selected.setAdapter(selectedAdapter);
+            selectedAdapter.notifyDataSetChanged();
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -190,7 +194,7 @@ public class BuyServicesActivity extends Activity {
                 @Override
                 public void onClick(View view) {
 
-                    dismiss();
+                    cdd.dismiss();
                 }
             });
 
@@ -249,10 +253,11 @@ public class BuyServicesActivity extends Activity {
             {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
-            else {
-
+            else
+            {
                 adapter = new ServiceListAdapter(BuyServicesActivity.this,"");
                 servicelist.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
         }

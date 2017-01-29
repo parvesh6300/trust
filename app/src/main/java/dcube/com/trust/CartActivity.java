@@ -200,6 +200,8 @@ public class CartActivity extends Activity {
         @Override
         protected void onPreExecute() {
 
+            tv_check_out.setEnabled(false);
+
             gif_loader.setVisibility(View.VISIBLE);
 
         }
@@ -236,6 +238,7 @@ public class CartActivity extends Activity {
         protected void onPostExecute(String s) {
 
             gif_loader.setVisibility(View.GONE);
+            tv_check_out.setEnabled(true);
 
             if (message.equalsIgnoreCase("true"))
             {
@@ -249,6 +252,23 @@ public class CartActivity extends Activity {
             }
 
         }
+
+    }
+
+
+    public void loader(Context context, boolean show)
+    {
+        if (show)
+        {
+            gif_loader.setVisibility(View.VISIBLE);
+            tv_check_out.setEnabled(false);
+        }
+        else
+        {
+            gif_loader.setVisibility(View.INVISIBLE);
+            tv_check_out.setEnabled(true);
+        }
+
 
     }
 

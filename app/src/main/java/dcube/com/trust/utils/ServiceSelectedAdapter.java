@@ -12,7 +12,6 @@ import java.util.HashMap;
 
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
-import dcube.com.trust.utils.Global;
 
 /**
  * Created by Sagar on 30/11/16.
@@ -25,8 +24,8 @@ public class ServiceSelectedAdapter extends BaseAdapter {
 
     ArrayList<HashMap<String,String>> selected_service_details;
 
-    ArrayList<String> service_name = new ArrayList<>();
-    ArrayList<String> service_Cost = new ArrayList<>();
+    ArrayList<String> al_service_name;
+    ArrayList<String> al_service_price;
 
     private static LayoutInflater inflater;
 
@@ -37,20 +36,15 @@ public class ServiceSelectedAdapter extends BaseAdapter {
         global = (Global) ctx.getApplicationContext();
 
         selected_service_details = new ArrayList<>();
+        al_service_name = new ArrayList<>();
+        al_service_price = new ArrayList<>();
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        service_name.add("CPAC + IUCD");
-        service_Cost.add("150,000");
 
-        service_name.add("Gynaecologist");
-        service_Cost.add("50,000");
-
-
-        for (int i = 0; i < global.getAl_selected_service_id().size(); i++)
+        for (int i = 0 ; i < global.getAl_selected_service_id().size(); i++)
         {
-
-            for (int j = 0; j < global.getAl_service_details().size(); j++)
+            for (int j = 0 ; j < global.getAl_service_details().size(); j++)
             {
                 String service_id = global.getAl_service_details().get(j).get(GlobalConstants.SERVICE_ID);
 
@@ -67,6 +61,8 @@ public class ServiceSelectedAdapter extends BaseAdapter {
 
             }
         }
+
+
         global.setAl_selected_service(selected_service_details);
     }
 
@@ -96,8 +92,8 @@ public class ServiceSelectedAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return global.getAl_selected_service().size();
-    }
+        return selected_service_details.size();
+    }  // global.getAl_selected_service()
 
     @Override
     public Object getItem(int i) {

@@ -40,9 +40,11 @@ public class ServiceListAdapter extends BaseAdapter{
     public ServiceListAdapter(Activity activity,String search)
     {
         context = activity.getApplicationContext();
+
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         global = (Global) activity.getApplicationContext();
+
         al_selected_service = new ArrayList<>();
         name = new ArrayList<>();
         serviceCost = new ArrayList<>();
@@ -87,11 +89,13 @@ public class ServiceListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(final int position, View view, ViewGroup viewGroup) {
+    public View getView(final int position, View view, ViewGroup viewGroup)
+    {
         // TODO Auto-generated method stub
         final Holder holder = new Holder();
 
         final View rowView;
+
         rowView = inflater.inflate(R.layout.buy_service_item, null);
 
         holder.name = (TextView) rowView.findViewById(R.id.name);

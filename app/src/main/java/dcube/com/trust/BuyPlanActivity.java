@@ -50,6 +50,8 @@ public class BuyPlanActivity extends Activity{
 
     String str_client_id;
 
+    PlanDialogClass dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,8 +106,17 @@ public class BuyPlanActivity extends Activity{
 
                 global.setPlan_selected_pos(pos);
 
-                PlanDialogClass dialog = new PlanDialogClass(BuyPlanActivity.this);
-                dialog.show();
+                if (cn.isNetConnected())
+                {
+                    new GetPlanDataAsyncTask().execute();
+                }
+                else
+                {
+                    Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
+
+
 
             }
         });
@@ -144,7 +155,8 @@ public class BuyPlanActivity extends Activity{
         {
             new GetPlanAsyncTask().execute();
         }
-        else {
+        else
+        {
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
@@ -167,7 +179,7 @@ public class BuyPlanActivity extends Activity{
         PlanServiceAdapter serviceAdapter;
 
 
-        public PlanDialogClass(Context context1) {
+        public  PlanDialogClass(Context context1) {
             super(context1);
             // TODO Auto-generated constructor stub
             this.c = context1;
@@ -204,7 +216,8 @@ public class BuyPlanActivity extends Activity{
                         dismiss();
                         new AddPlanCartAsyncTask().execute();
                     }
-                    else {
+                    else
+                    {
                         Toast.makeText(BuyPlanActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
 
@@ -229,7 +242,216 @@ public class BuyPlanActivity extends Activity{
     }
 
 
-/*
+
+    public class GetPlanAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_plans_of_branch");
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
+
+                message = ws.BuyPlanService(context, al_str_key, al_str_value);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                adapter = new PlanListAdapter(BuyPlanActivity.this,"");
+                servicelist.setAdapter(adapter);
+
+            }
+            else {
+
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+
+    public class AddPlanCartAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+        int pos ;
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+            pos = global.getPlan_selected_pos();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+//                for (int i = 0 ; i < global.al_selected_plan_id.size() ; i++)
+//                {
+                    ArrayList<String> al_str_key = new ArrayList<>();
+                    ArrayList<String> al_str_value = new ArrayList<>();
+
+                    al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                    al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                    al_str_key.add(GlobalConstants.CART_CLIENT_ID);
+                    al_str_value.add(str_client_id);
+
+                    al_str_key.add(GlobalConstants.CART_ITEM_TYPE);
+                    al_str_value.add("plan");
+
+                    al_str_key.add(GlobalConstants.CART_ITEM_ID);
+                    al_str_value.add(global.getAl_plan_details().get(pos).get(GlobalConstants.PLAN_ID));
+
+                    al_str_key.add(GlobalConstants.CART_AMOUNT);
+                    al_str_value.add("1");
+
+                    al_str_key.add(GlobalConstants.ACTION);
+                    al_str_value.add("add_to_cart");
+
+                    for (int j = 0; j < al_str_key.size(); j++)
+                    {
+                        Log.i("KEy", "" + al_str_key.get(j));
+                        Log.i("Value", "" + al_str_value.get(j));
+                    }
+
+                    message = ws.AddToCartService(context, al_str_key, al_str_value);
+
+//                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                ClientHomeActivity.h.sendEmptyMessage(0);
+                startActivity(new Intent(BuyPlanActivity.this,ClientHomeActivity.class));
+                finish();
+            }
+            else
+            {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+
+    public class GetPlanDataAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        int pos ;
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+            pos = global.getPlan_selected_pos();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.PLAN_ID);
+                al_str_value.add(global.getAl_plan_details().get(pos).get(GlobalConstants.PLAN_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_plans_details");
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
+
+                message = ws.GetPlanDataService(context, al_str_key, al_str_value);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.GONE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                dialog = new PlanDialogClass(BuyPlanActivity.this);
+                dialog.show();
+
+//                adapter = new PlanListAdapter(BuyPlanActivity.this,"");
+//                servicelist.setAdapter(adapter);
+
+            }
+            else {
+
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+
+
+    /*
 
     public class CustomDialogClass extends Dialog {
 
@@ -313,143 +535,9 @@ public class BuyPlanActivity extends Activity{
 
     */
 
-    public class GetPlanAsyncTask extends AsyncTask<String, String, String> {
-
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-
-        @Override
-        protected void onPreExecute() {
-
-            gif_loader.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));  //global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID)
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_plans_of_branch");
-
-                Log.i("Key",""+al_str_key);
-                Log.i("Value",""+al_str_value);
-
-                message = ws.BuyPlanService(context, al_str_key, al_str_value);
 
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            gif_loader.setVisibility(View.GONE);
-
-            if (message.equalsIgnoreCase("true"))
-            {
-                adapter = new PlanListAdapter(BuyPlanActivity.this,"");
-                servicelist.setAdapter(adapter);
-
-            }
-            else {
-
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-    }
-
-
-    public class AddPlanCartAsyncTask extends AsyncTask<String, String, String> {
-
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-
-
-        @Override
-        protected void onPreExecute() {
-
-            gif_loader.setVisibility(View.VISIBLE);
-
-
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-
-//                for (int i = 0 ; i < global.al_selected_plan_id.size() ; i++)
-//                {
-                    ArrayList<String> al_str_key = new ArrayList<>();
-                    ArrayList<String> al_str_value = new ArrayList<>();
-
-                    al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                    al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
-
-                    al_str_key.add(GlobalConstants.CART_CLIENT_ID);
-                    al_str_value.add(str_client_id);
-
-                    al_str_key.add(GlobalConstants.CART_ITEM_TYPE);
-                    al_str_value.add("plan");
-
-                    al_str_key.add(GlobalConstants.CART_ITEM_ID);
-                    al_str_value.add(global.getAl_plan_details().get(0).get(GlobalConstants.PLAN_ID));
-
-                    al_str_key.add(GlobalConstants.CART_AMOUNT);
-                    al_str_value.add("1");
-
-                    al_str_key.add(GlobalConstants.ACTION);
-                    al_str_value.add("add_to_cart");
-
-                    for (int j = 0; j < al_str_key.size(); j++)
-                    {
-                        Log.e("KEy", "" + al_str_key.get(j));
-                        Log.e("Value", "" + al_str_value.get(j));
-                    }
-
-                    message = ws.AddToCartService(context, al_str_key, al_str_value);
-
-//                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            gif_loader.setVisibility(View.GONE);
-
-            if (message.equalsIgnoreCase("true"))
-            {
-                ClientHomeActivity.h.sendEmptyMessage(0);
-                startActivity(new Intent(BuyPlanActivity.this,ClientHomeActivity.class));
-                finish();
-            }
-            else
-            {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-    }
 
 
 }

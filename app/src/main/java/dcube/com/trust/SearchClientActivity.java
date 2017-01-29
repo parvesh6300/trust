@@ -3,8 +3,6 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -114,18 +112,8 @@ public class SearchClientActivity extends Activity {
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
-                if(s.length() >1)
+                if(s.length() > 1)
                 {
-//                    if (isOnline())
-//                    {
-//                        src_keyword = s.toString();
-////                    searchlist.setVisibility(View.VISIBLE);
-//                        new SearchClientAsyncTask().execute();
-//                    }
-//                    else {
-//                        Toast.makeText(SearchClientActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
-//                    }
-
                     if (cn.isNetConnected())
                     {
                         src_keyword = s.toString();
@@ -174,6 +162,7 @@ public class SearchClientActivity extends Activity {
         @Override
         protected void onPreExecute() {
 
+            searchlist.setEnabled(false);
             gif_loader.setVisibility(View.VISIBLE);
         }
 
@@ -204,10 +193,6 @@ public class SearchClientActivity extends Activity {
 
                 message = ws.SearchClientService(context, al_str_key, al_str_value);
 
-                //            resPonse = callApiWithPerameter(GlobalConstants.TRUST_URL, al_str_key, al_str_value);
-                //             Log.i("Login", "Login : " + resPonse);
-
-//                return resPonse;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -220,6 +205,7 @@ public class SearchClientActivity extends Activity {
         protected void onPostExecute(String s) {
 
             gif_loader.setVisibility(View.GONE);
+            searchlist.setEnabled(true);
 
             if (message.equalsIgnoreCase("true"))
             {
@@ -242,19 +228,6 @@ public class SearchClientActivity extends Activity {
 
         }
 
-    }
-
-    protected boolean isOnline() {
-
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected())
-        {
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 
 

@@ -334,6 +334,8 @@ public class Global extends Application {
     public void setCart(boolean cart) {
         isCart = cart;
     }
+
+
     // ******************************* Payment Getter and Setter  *************************************************
 
     public int payment_id;
@@ -427,8 +429,98 @@ public class Global extends Application {
         isPlanRenew = planRenew;
     }
 
+    public int viewPlanSelectPos;
+
+    public int getViewPlanSelectPos() {
+        return viewPlanSelectPos;
+    }
+
+    public void setViewPlanSelectPos(int viewPlanSelectPos) {
+        this.viewPlanSelectPos = viewPlanSelectPos;
+    }
+
+
+    public String str_selected_plan_id;
+
+    public String getStr_selected_plan_id() {
+        return str_selected_plan_id;
+    }
+
+    public void setStr_selected_plan_id(String str_selected_plan_id) {
+        this.str_selected_plan_id = str_selected_plan_id;
+    }
+
+
+
+    // ******************************* Update Plan Getter and Setter  *************************************************
+
+
+    public ArrayList<String> al_update_product_id;
+
+    public ArrayList<String> getAl_update_product_id() {
+        return al_update_product_id;
+    }
+
+    public void setAl_update_product_id(ArrayList<String> al_update_product_id) {
+        this.al_update_product_id = al_update_product_id;
+    }
+
+
+    public ArrayList<String> getAl_update_product_qty() {
+        return al_update_product_qty;
+    }
+
+    public void setAl_update_product_qty(ArrayList<String> al_update_product_qty) {
+        this.al_update_product_qty = al_update_product_qty;
+    }
+
+    public ArrayList<String> getAl_update_service_id() {
+        return al_update_service_id;
+    }
+
+    public void setAl_update_service_id(ArrayList<String> al_update_service_id) {
+        this.al_update_service_id = al_update_service_id;
+    }
+
+    public ArrayList<String> getAl_update_service_qty() {
+        return al_update_service_qty;
+    }
+
+    public void setAl_update_service_qty(ArrayList<String> al_update_service_qty) {
+        this.al_update_service_qty = al_update_service_qty;
+    }
+
+    public ArrayList<String> al_update_product_qty;
+
+    public ArrayList<String> al_update_service_id;
+
+    public ArrayList<String> al_update_service_qty;
+
+
+    public ArrayList<String> al_update_service_type;
+
+    public ArrayList<String> getAl_update_product_type() {
+        return al_update_product_type;
+    }
+
+    public void setAl_update_product_type(ArrayList<String> al_update_product_type) {
+        this.al_update_product_type = al_update_product_type;
+    }
+
+    public ArrayList<String> getAl_update_service_type() {
+        return al_update_service_type;
+    }
+
+    public void setAl_update_service_type(ArrayList<String> al_update_service_type) {
+        this.al_update_service_type = al_update_service_type;
+    }
+
+    public ArrayList<String> al_update_product_type;
+
+
 
     // ******************************* Stock Product Getter and Setter  *************************************************
+
 
     public ArrayList<HashMap<String, String>> getAl_stock_product() {
         return al_stock_product;
@@ -460,6 +552,8 @@ public class Global extends Application {
     public void setStr_total_sale(String str_total_sale) {
         this.str_total_sale = str_total_sale;
     }
+
+
     // ******************************* Deposit Getter and Setter  *************************************************
 
 

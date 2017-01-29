@@ -63,12 +63,12 @@ public class InvoiceFragment extends Fragment  {
             }
         });
 
-        Log.e("Invoice","Called");
+        Log.i("Invoice","Called");
 
-        Log.e("Payment","Amount "+ global.getPayment_amount());
-        Log.e("Amount","toPay "+global.getAmount_to_pay());
-        Log.e("Discount","Amount "+global.getDiscount());
-        Log.e("Payment","Mode "+global.getPayment_mode());
+        Log.i("Payment","Amount "+ global.getPayment_amount());
+        Log.i("Amount","toPay "+global.getAmount_to_pay());
+        Log.i("Discount","Amount "+global.getDiscount());
+        Log.i("Payment","Mode "+global.getPayment_mode());
 
         tv_amount.setText(global.getPayment_amount());
         tv_discount.setText(global.getDiscount());

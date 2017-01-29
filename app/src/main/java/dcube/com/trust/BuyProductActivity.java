@@ -68,16 +68,17 @@ public class BuyProductActivity extends Activity{
             public void onClick(View view) {
 
                 try {
-                    if (global.getAl_select_product().size() > 0) {
+                    if (global.getAl_select_product().size() > 0)
+                    {
                         cdd = new CustomDialogClass(BuyProductActivity.this);
                         cdd.show();
                     } else {
                         Toast.makeText(BuyProductActivity.this, "Chose any one Product", Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
+                } catch (Exception e)
+                {
                     Toast.makeText(BuyProductActivity.this, "Chose any one Product", Toast.LENGTH_SHORT).show();
                 }
-
 
             }
         });
@@ -97,8 +98,6 @@ public class BuyProductActivity extends Activity{
 
             @Override
             public void afterTextChanged(Editable s) {
-
-                Log.e("TextWatcherTest", "afterTextChanged:\t" + s.toString());
 
                 if (s.length() > 1)
                 {

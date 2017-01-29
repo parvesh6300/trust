@@ -1,6 +1,7 @@
 package dcube.com.trust.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
@@ -23,11 +25,9 @@ public class PlanProductAdapter extends BaseAdapter
     Context context;
 
     ArrayList<String> name;
-    ArrayList<String> product_id;
-    ArrayList<String> SKU;
     ArrayList<String> quantity;
-    ArrayList<String> category;
-    ArrayList<String> price;
+    ArrayList<String> product_id;
+
 
     public PlanProductAdapter(Context mcontext)
     {
@@ -37,28 +37,40 @@ public class PlanProductAdapter extends BaseAdapter
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-
         name = new ArrayList<>();
         product_id = new ArrayList<>();
-        SKU = new ArrayList<>();
         quantity = new ArrayList<>();
-        category = new ArrayList<>();
-        price = new ArrayList<>();
 
 
-        int pos = global.getServiceAppointmentPos();
+        int pos = global.getPlan_selected_pos();
 
-        String str_plan_id = global.getAl_plan_details().get(pos).get(GlobalConstants.PLAN_ID);
+        String str_plan_id = global.getAl_element_plan().get(pos).get(GlobalConstants.PLAN_ID);
 
-        for ( int i = 0 ; i < global.getAl_element_plan().size() ; i++)
+        Log.e("Plan","id "+str_plan_id);
+
+//        for ( int i = 0 ; i < global.getAl_element_plan().size() ; i++)
+//        {
+//            Log.e("List","Plan id "+global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ID));
+//
+//            if(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ID).equalsIgnoreCase(str_plan_id))
+//            {
+//                if (global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Product"))
+//                {
+//                    name.add(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_NAME));
+//                    quantity.add(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_QUANTITY));
+//
+//                }
+//
+//            }
+//        }
+
+        for (HashMap<String,String> hashmap : global.getAl_element_plan())
         {
-            if(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ID).equalsIgnoreCase(str_plan_id))
+            if (hashmap.get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Product"))
             {
-                if (global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Product"))
-                {
-                    name.add(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_NAME));
-                    quantity.add(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_QUANTITY));
-                }
+                name.add(hashmap.get(GlobalConstants.PLAN_ELEMENT_NAME));
+                quantity.add(hashmap.get(GlobalConstants.PLAN_ELEMENT_QUANTITY));
+                product_id.add(hashmap.get(GlobalConstants.PLAN_ELEMENT_ID));
 
             }
         }

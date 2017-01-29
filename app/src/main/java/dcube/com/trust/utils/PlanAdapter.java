@@ -1,6 +1,7 @@
 package dcube.com.trust.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
+import dcube.com.trust.UpdatePlanActivity;
 
 /**
  * Created by Sagar on 20/10/16.
@@ -26,6 +28,7 @@ public class PlanAdapter extends BaseAdapter {
     ArrayList<String> al_plan_name;
     ArrayList<String> al_date;
     ArrayList<String> al_plan_price;
+    ArrayList<String> al_plan_id;
 
     Global global;
 
@@ -36,6 +39,7 @@ public class PlanAdapter extends BaseAdapter {
         al_plan_name = new ArrayList<>();
         al_date= new ArrayList<>();
         al_plan_price= new ArrayList<>();
+        al_plan_id = new ArrayList<>();
 
         inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -43,9 +47,9 @@ public class PlanAdapter extends BaseAdapter {
 
         for (HashMap<String,String> hashmap : global.getAl_view_plan_details() )
         {
-            al_plan_name.add(hashmap.get(GlobalConstants.ORDER_ITEM_ID));
-            al_date.add(hashmap.get(GlobalConstants.ORDER_CREATED));
-            al_plan_price.add(hashmap.get(GlobalConstants.ORDER_ITEM_PRICE));
+            al_plan_name.add(hashmap.get(GlobalConstants.ORDER_ITEM_NAME));
+            al_date.add(hashmap.get(GlobalConstants.PLAN_CREATED));
+            al_plan_id.add(hashmap.get(GlobalConstants.PLAN_ID));
 
         }
 
@@ -74,7 +78,7 @@ public class PlanAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int pos, View convertview, ViewGroup viewGroup) {
+    public View getView(final int pos, View convertview, ViewGroup viewGroup) {
 
         ViewHolder holder= new ViewHolder();
 
@@ -95,6 +99,16 @@ public class PlanAdapter extends BaseAdapter {
         holder.tv_date.setText(date[2]);
         holder.tv_month.setText(date[1]+" ");
         holder.tv_year.setText("'"+date[0]);
+
+        convertview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                global.setStr_selected_plan_id(al_plan_id.get(pos));
+
+                context.startActivity(new Intent(context, UpdatePlanActivity.class));
+            }
+        });
 
         return convertview;
     }

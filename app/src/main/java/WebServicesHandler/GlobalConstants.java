@@ -70,6 +70,7 @@ public class GlobalConstants {
     public static final String PLAN_DURATION = "plan_duration";
     public static final String PLAN_NAME = "plan_name";
 
+    public static final String ID = "id";
 
     public static final String PLAN_PRODUCT_ID = "product_id";
     public static final String PLAN_PRODUCT_SKU = "SKU";

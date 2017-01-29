@@ -8,9 +8,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -44,8 +44,6 @@ public class ViewPlanActivity extends Activity {
 
     String str_amount_to_pay,str_payment_mode;
 
-    TextView tv_select_plan;
-
     public static Handler h;
 
     CheckNetConnection cn;
@@ -61,32 +59,10 @@ public class ViewPlanActivity extends Activity {
         global = (Global) getApplicationContext();
 
         lv_plan=(ListView)findViewById(R.id.lv_plan);
-        tv_select_plan = (TextView) findViewById(R.id.tv_select_plan);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         cn = new CheckNetConnection(this);
-
-        tv_select_plan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(ViewPlanActivity.this,UpdatePlanActivity.class));
-
-            }
-        });
-
-
-        lv_plan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-
-                position = pos;
-                cdd= new CustomDialogClass(ViewPlanActivity.this);
-                cdd.show();
-            }
-        });
-
 
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
 
@@ -114,6 +90,8 @@ public class ViewPlanActivity extends Activity {
             }
 
         };
+
+
 
     }
 
@@ -233,77 +211,16 @@ public class ViewPlanActivity extends Activity {
                 al_str_key.add(GlobalConstants.USER_BRANCH_ID);
                 al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
-                al_str_key.add(GlobalConstants.CART_CLIENT_ID);
-                al_str_value.add(str_client_id);
-
-                al_str_key.add(GlobalConstants.ORDER_ITEM_TYPE);
-                al_str_value.add("plan");
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("my_order");
-
-                message = ws.ViewPlanService(context, al_str_key, al_str_value);
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            gif_loader.setVisibility(View.GONE);
-
-            if (message.equalsIgnoreCase("true"))
-            {
-                planAdapter= new PlanAdapter(context);
-                lv_plan.setAdapter(planAdapter);
-            }
-            else {
-
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-    }
-
-
-    public class RenewPlanAsyncTask extends AsyncTask<String, String, String> {
-
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-
-        @Override
-        protected void onPreExecute() {
-
-            gif_loader.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
-
                 al_str_key.add(GlobalConstants.CLIENT_ID);
                 al_str_value.add(str_client_id);
 
-                al_str_key.add(GlobalConstants.PLAN_ID);
-                al_str_value.add(global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_ID));
-
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("renew_the_plan");
+                al_str_value.add("fetch_availed_plans");
 
-                message = ws.ViewPlanService(context, al_str_key, al_str_value);
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
+
+                message = ws.ViewAvailedPlanService(context, al_str_key, al_str_value);
 
 
             } catch (Exception e) {
@@ -322,15 +239,18 @@ public class ViewPlanActivity extends Activity {
             {
                 planAdapter= new PlanAdapter(context);
                 lv_plan.setAdapter(planAdapter);
+                planAdapter.notifyDataSetChanged();
             }
-            else {
-
+            else
+            {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
         }
 
     }
+
+
 
 
 }

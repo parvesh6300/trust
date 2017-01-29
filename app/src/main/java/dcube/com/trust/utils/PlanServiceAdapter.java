@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
@@ -21,7 +22,7 @@ public class PlanServiceAdapter extends BaseAdapter {
 
     Context context;
     Global global;
-    static int quantity;
+    int quantity;
 
     int selectedIndex = -1;
 
@@ -46,28 +47,31 @@ public class PlanServiceAdapter extends BaseAdapter {
 
         int pos = global.getServiceAppointmentPos();
 
-
-//            if (global.getAl_element_plan().get(pos).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
-//            {
-//                name.add(global.getAl_element_plan().get(pos).get(GlobalConstants.PLAN_ELEMENT_NAME));
-//                service_quantity.add(global.getAl_element_plan().get(pos).get(GlobalConstants.PLAN_ELEMENT_QUANTITY));
-//            }
-
-
-        String str_plan_id = global.getAl_plan_details().get(pos).get(GlobalConstants.PLAN_ID);
-
-        for ( int i = 0 ; i < global.getAl_element_plan().size() ; i++)
+        for (HashMap<String,String> hashmap : global.getAl_element_plan())
         {
-            if(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ID).equalsIgnoreCase(str_plan_id))
+            if (hashmap.get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
             {
-                if (global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
-                {
-                    name.add(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_NAME));
-                    service_quantity.add(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_QUANTITY));
-                }
+                name.add(hashmap.get(GlobalConstants.PLAN_ELEMENT_NAME));
+                service_quantity.add(hashmap.get(GlobalConstants.PLAN_ELEMENT_QUANTITY));
+                service_id.add(hashmap.get(GlobalConstants.PLAN_ELEMENT_ID));
 
             }
         }
+
+//        String str_plan_id = global.getAl_plan_details().get(pos).get(GlobalConstants.PLAN_ID);
+//
+//        for ( int i = 0 ; i < global.getAl_element_plan().size() ; i++)
+//        {
+//            if(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ID).equalsIgnoreCase(str_plan_id))
+//            {
+//                if (global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
+//                {
+//                    name.add(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_NAME));
+//                    service_quantity.add(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_QUANTITY));
+//                }
+//
+//            }
+//        }
 
 
 
