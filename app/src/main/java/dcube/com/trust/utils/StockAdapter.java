@@ -225,9 +225,23 @@ public class StockAdapter extends BaseAdapter {
                     public void onClick(View view) {
 
                         pos = i;
-                        quantity = Integer.parseInt(tv_quantity1.getText().toString()) ;
 
-                        showAlertDialog();
+                        if (tv_quantity1.getText().toString().matches("") )
+                        {
+                            Toast.makeText(mcontext, "Enter Quantity", Toast.LENGTH_SHORT).show();
+                        }
+                        else if (tv_quantity1.getText().toString().equalsIgnoreCase("0"))
+                        {
+                            Toast.makeText(mcontext, "Requested Quantity is 0", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            quantity = Integer.parseInt(tv_quantity1.getText().toString()) ;
+
+                            showAlertDialog();
+                        }
+
+
 
                     }
                 });

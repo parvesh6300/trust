@@ -215,6 +215,7 @@ public class WithDrawMoneyActivity extends Activity {
             tv_wd_amount.setText("WITHDRAW : "+str_wd_amount+" Tsh");
             tv_balance.setText("BALANCE : "+String.valueOf(balance)+" Tsh");
 
+
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -316,6 +317,30 @@ public class WithDrawMoneyActivity extends Activity {
 
     }
 
+    public void insufficientDialog() {
+
+        final Dialog doneDialog = new Dialog(context);
+
+        doneDialog.setContentView(R.layout.insufficient_amount_dialog);
+
+        //doneDialog.create();
+        doneDialog.show();
+
+        TextView tv_ok = (TextView) doneDialog.findViewById(R.id.tv_ok);
+        TextView tv_account_total = (TextView) doneDialog.findViewById(R.id.tv_account_total);
+        TextView tv_wd_amount = (TextView) doneDialog.findViewById(R.id.tv_wd_amount);
+
+        tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" Tsh");
+        tv_wd_amount.setText("WITHDRAW : "+str_wd_amount+" Tsh");
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                doneDialog.dismiss();
+            }
+        });
+    }
 
 
     public void showDoneDialog() {
@@ -399,9 +424,19 @@ public class WithDrawMoneyActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                //tv_total_amount.setText(global.getStr_branch_balance()+" Tsh");
-                cdd = new CustomDialogClass(WithDrawMoneyActivity.this);
-                cdd.show();
+                float account_total = Float.parseFloat(global.getStr_branch_balance());
+                float wd_amount = Float.parseFloat(str_wd_amount);
+
+                if (account_total > wd_amount)
+                {
+                    cdd = new CustomDialogClass(WithDrawMoneyActivity.this);
+                    cdd.show();
+                }
+                else
+                {
+                    insufficientDialog();
+                }
+
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

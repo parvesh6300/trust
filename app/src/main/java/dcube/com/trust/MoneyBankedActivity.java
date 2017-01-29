@@ -90,7 +90,8 @@ public class MoneyBankedActivity extends Activity {
                     }
                     else
                     {
-                        Toast.makeText(MoneyBankedActivity.this, "Money to be Banked, is less than Account Balance", Toast.LENGTH_SHORT).show();
+                        insufficientDialog();
+                      //  Toast.makeText(MoneyBankedActivity.this, "Money to be Banked, is less than Account Balance", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -145,7 +146,7 @@ public class MoneyBankedActivity extends Activity {
 
             tv_account_total.setText("Account Total : "+global.getStr_branch_balance()+" Tsh");
 
-            tv_deposit_money.setText("Deposit : "+str_deposit_amount+" Tsh");
+            tv_deposit_money.setText("Money to Bank : "+str_deposit_amount+" Tsh");
 
             float deposit_amount = Float.parseFloat(str_deposit_amount);
 
@@ -395,6 +396,34 @@ public class MoneyBankedActivity extends Activity {
             }
         });
     }
+
+
+
+    public void insufficientDialog() {
+
+        final Dialog doneDialog = new Dialog(context);
+
+        doneDialog.setContentView(R.layout.insufficient_amount_dialog);
+
+        //doneDialog.create();
+        doneDialog.show();
+
+        TextView tv_ok = (TextView) doneDialog.findViewById(R.id.tv_ok);
+        TextView tv_account_total = (TextView) doneDialog.findViewById(R.id.tv_account_total);
+        TextView tv_wd_amount = (TextView) doneDialog.findViewById(R.id.tv_wd_amount);
+
+        tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" Tsh");
+        tv_wd_amount.setText("MONEY TO BANK : "+str_deposit_amount+" Tsh");
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                doneDialog.dismiss();
+            }
+        });
+    }
+
 
 }
 

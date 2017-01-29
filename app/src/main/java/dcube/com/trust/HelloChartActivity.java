@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class HelloChartActivity extends Activity {
 
     RadioGroup radio_group;
     RadioButton radio_daily,radio_weekly,radio_monthly,radio_yearly;
-
+    TextView tv_total_amount;
 
     ArrayList<String> al_time;
 
@@ -70,7 +71,7 @@ public class HelloChartActivity extends Activity {
     Global global;
     WebServices ws;
 
-    String str_as_per="",str_branch;
+    String str_as_per="yearly",str_branch;
 
     CheckNetConnection cn;
 
@@ -78,10 +79,9 @@ public class HelloChartActivity extends Activity {
 
     String[] dateArr;
 
-    public String[] months = new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
-            "Sep", "Oct", "Nov", "Dec", };
+    public String[] months = new String[] { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
 
-    public String[] days = new String[] { "M", "T", "W", "T", "F", "S", "S", };
+    public String[] days = new String[] { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" };
 
 
 
@@ -98,9 +98,11 @@ public class HelloChartActivity extends Activity {
 
         cn = new CheckNetConnection(this);
 
-        axisValues = new ArrayList<>();
+
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
+
+        tv_total_amount = (TextView) findViewById(R.id.tv_total_amount);
 
         radio_group= (RadioGroup)findViewById(R.id.radio_group);
 
@@ -115,6 +117,8 @@ public class HelloChartActivity extends Activity {
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
+        radio_yearly.setChecked(true);
+
 
         radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -123,47 +127,16 @@ public class HelloChartActivity extends Activity {
                 if (radio_daily.isChecked())
                 {
                     str_as_per = "daily";
-
-                    if (cn.isNetConnected())
-                    {
-                        new TotalRevenueAsyncTask().execute();
-                    }
-                    else {
-                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                    }
-
-
                 }
-
 
                 else if (radio_weekly.isChecked())
                 {
                     str_as_per = "weekly";
-
-                    if (cn.isNetConnected())
-                    {
-                        new TotalRevenueAsyncTask().execute();
-                    }
-                    else {
-                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                    }
-
                 }
-
-
 
                 else if (radio_monthly.isChecked())
                 {
                     str_as_per = "monthly";
-
-                    if (cn.isNetConnected())
-                    {
-                        new TotalRevenueAsyncTask().execute();
-                    }
-                    else {
-                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                    }
-
                 }
 
 
@@ -171,20 +144,27 @@ public class HelloChartActivity extends Activity {
                 {
 
                     str_as_per = "yearly";
+                }
 
-                    if (cn.isNetConnected())
-                    {
-                        new TotalRevenueAsyncTask().execute();
-                    }
-                    else
-                    {
-                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                    }
-
+                if (cn.isNetConnected())
+                {
+                    new TotalRevenueAsyncTask().execute();
+                }
+                else {
+                    Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
+
+        if (cn.isNetConnected())
+        {
+            new GetBranchBalanceAsyncTask().execute();
+            new TotalRevenueAsyncTask().execute();
+        }
+        else {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -271,20 +251,6 @@ public class HelloChartActivity extends Activity {
         v.left =Integer.parseInt(dateArr[0]) ;
         v.right = int_date_arr_sorted[0] ;
 
-//        if (global.getAl_on_date().size() == 12)
-//        {
-//            v.left =Integer.parseInt(global.getAl_on_date().get(0));
-//            v.right = int_date_arr_sorted[0] ;
-//
-//            Log.i("Left",""+Integer.parseInt(global.getAl_on_date().get(0)));
-//        }
-//        else
-//        {
-//            v.left =Integer.parseInt(dateArr[0]) ;
-//            v.right = int_date_arr_sorted[0] ;
-//
-//            Log.i("Left",""+Integer.parseInt(dateArr[0]));
-//        }
 
         Log.i("Left",""+Integer.parseInt(dateArr[0]));
         Log.i("Bottom",""+0);
@@ -302,64 +268,17 @@ public class HelloChartActivity extends Activity {
 
         List<Line> lines = new ArrayList<Line>();
 
-//        Axis axisX= new Axis();
-//        Axis axisY = new Axis().setHasLines(true);
-
-        if (hasAxes)
-        {
-//            axisX = new Axis();
-//            axisY = new Axis().setHasLines(true);
-
-//            axisX.setTextSize(20);
-//            axisY.setTextSize(20);
-//
-//            axisY.setMaxLabelChars(10);
-
-
-//
-//            axisValues.add(new AxisValue(i, "some textt".toCharArray()));
-//            Axis axisX = new Axis(axisValues);
-//            data.setAxisXBottom(axisX);
-
-//            if (global.getAl_was_sum().size() == 7 )
-//            {
-//
-//                axisValues.add(new AxisValue(0,"M".toCharArray()));  //.setLabel("Mon"))
-//                axisValues.add(new AxisValue(1,"T".toCharArray()));
-//                axisValues.add(new AxisValue(2,"W".toCharArray()));
-//                axisValues.add(new AxisValue(3,"T".toCharArray()));
-//                axisValues.add(new AxisValue(4,"F".toCharArray()));
-//                axisValues.add(new AxisValue(5,"S".toCharArray()));
-//                axisValues.add(new AxisValue(6,"S".toCharArray()));
-//
-//             //   axisX.setValues(axisValues);
-//
-//                axisX.setMaxLabelChars(7);
-//                axisX.setValues(axisValues);
-//            }
-
-
-//            data.setAxisXBottom(axisX);
-//            data.setAxisYLeft(axisY);
-
-        }
-        else
-        {
-            data.setAxisXBottom(null);
-            data.setAxisYLeft(null);
-        }
-
 
         for (int i = 0; i < numberOfLines; ++i)
         {
             List<PointValue> values = new ArrayList<PointValue>();
 
-            for (int j = 0; j < global.getAl_was_sum().size() ; ++j )
-            {
+            axisValues = new ArrayList<>();
 
+            for (int j = 0; j < global.getAl_was_sum().size() ; j++ )
+            {
                 values.add(new PointValue(Integer.parseInt(dateArr[j]), Integer.parseInt(global.getAl_was_sum().get(j))));
 
-                axisValues.add(new AxisValue(i, days[i].toCharArray()));
             }
 
             Line line = new Line(values);
@@ -386,21 +305,41 @@ public class HelloChartActivity extends Activity {
         Axis axisY = new Axis().setHasLines(true);
 
 
+        /*
+        This if shows the week days in X axis
+         */
         if (global.getAl_was_sum().size() == 7)
         {
+            for (int i =0 ; i <7 ; i++)
+            {
+                axisValues.add(new AxisValue(Float.parseFloat(dateArr[i])).setLabel(days[i]));
+            }
+
             axisX = new Axis(axisValues);
-            axisX.setTextSize(10);
-           // axisX.setMaxLabelChars(7);
+
         }
+         /*
+        This if shows the months in X axis
+         */
+        else if (global.getAl_was_sum().size() == 12)
+        {
+            for (int i =0 ; i < 12 ; i++)
+            {
+                axisValues.add(new AxisValue(Float.parseFloat(dateArr[i])).setLabel(months[i]));
+            }
+
+            axisX = new Axis(axisValues);
+
+        }
+
         else
         {
             axisX = new Axis();
-            axisX.setTextSize(20);
-          //  axisX.setMaxLabelChars(10);
         }
 
-
+        axisX.setTextSize(20);
         axisY.setTextSize(20);
+        axisY.setMaxLabelChars(10);
 
         data.setAxisXBottom(axisX);
         data.setAxisYLeft(axisY);
@@ -492,5 +431,66 @@ public class HelloChartActivity extends Activity {
         }
 
     }
+
+
+
+    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_branch_balance");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.INVISIBLE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                tv_total_amount.setText(global.getStr_branch_balance()+" Tsh");
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
 
 }

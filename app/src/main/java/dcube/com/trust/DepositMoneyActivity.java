@@ -157,7 +157,7 @@ public class DepositMoneyActivity extends Activity {
             branch_balance = global.getStr_branch_balance();
 
             tv_total_amount.setText("ACCOUNT TOTAL : "+branch_balance);
-            tv_deposit.setText("Deposit : "+str_deposit_amount);
+            tv_deposit.setText("DEPOSIT : "+str_deposit_amount);
 
             if (! branch_balance.equalsIgnoreCase(null))
             {

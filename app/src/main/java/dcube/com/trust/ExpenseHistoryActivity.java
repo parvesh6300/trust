@@ -23,7 +23,7 @@ import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class AddExpenseActivity extends Activity {
+public class ExpenseHistoryActivity extends Activity {
 
     ListView list_expense;
 
@@ -38,7 +38,7 @@ public class AddExpenseActivity extends Activity {
     Global global;
     String str_amount,str_reason,str_branch;
     WebServices ws;
-    Context context = AddExpenseActivity.this;
+    Context context = ExpenseHistoryActivity.this;
     CustomDialogClass cdd;
 
     CheckNetConnection cn;
@@ -79,19 +79,19 @@ public class AddExpenseActivity extends Activity {
 
                 if (ed_expense_amount.getText().toString().matches(""))
                 {
-                    Toast.makeText(AddExpenseActivity.this, "Enter amount", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ExpenseHistoryActivity.this, "Enter amount", Toast.LENGTH_SHORT).show();
 
                 }
                 else if (ed_reason.getText().toString().matches(""))
                 {
-                    Toast.makeText(AddExpenseActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ExpenseHistoryActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
                     str_amount = ed_expense_amount.getText().toString();
                     str_reason = ed_reason.getText().toString();
 
-                    cdd = new CustomDialogClass(AddExpenseActivity.this);
+                    cdd = new CustomDialogClass(ExpenseHistoryActivity.this);
                     cdd.show();
                 }
 
@@ -141,7 +141,6 @@ public class AddExpenseActivity extends Activity {
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
 
                     if (cn.isNetConnected())
                     {
@@ -320,6 +319,7 @@ public class AddExpenseActivity extends Activity {
 
                 expenseAdapter= new ExpenseAdapter(context);
                 list_expense.setAdapter(expenseAdapter);
+                expenseAdapter.notifyDataSetChanged();
 
             }
             else {

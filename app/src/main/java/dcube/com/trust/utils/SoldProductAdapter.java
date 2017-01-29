@@ -1,7 +1,6 @@
 package dcube.com.trust.utils;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,7 @@ public class SoldProductAdapter extends BaseAdapter {
 
         for (HashMap<String,String> hashmap : global.getAl_product_sold())
         {
-            al_quantity.add(hashmap.get(GlobalConstants.PRODUCT_SOLD_OUT));
+            al_quantity.add(hashmap.get(GlobalConstants.PRODUCT_QUANTITY));
             al_product_name.add(hashmap.get(GlobalConstants.PRODUCT_NAME));
             al_product_id.add(hashmap.get(GlobalConstants.PRODUCT_ID));
 

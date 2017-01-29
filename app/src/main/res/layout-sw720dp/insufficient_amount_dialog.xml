@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="500dp"
+    android:layout_height="350dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:elevation="3dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Confirm Withdraw"
+        android:textColor="@color/white"
+        android:typeface="monospace"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/header"
+        android:background="@color/textColor"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/tv_account_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ACCOUNT TOTAL : 10,00,000 Tsh"
+            android:textColor="@color/textColor"
+            android:typeface="monospace"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_wd_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WITHDRAW : 2,50,000 Tsh"
+            android:textColor="@color/textColor"
+            android:typeface="monospace"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INSUFFICIENT BALANCE"
+            android:textColor="@color/textColor"
+            android:typeface="monospace"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+
+    </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:textColor="@color/white"
+            android:typeface="monospace"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@color/textColor"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/tv_ok"/>
+
+
+
+
+</RelativeLayout>

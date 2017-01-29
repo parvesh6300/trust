@@ -89,7 +89,7 @@ public class FinanceHomeActivity extends Activity {
                         break;
 
                     case 5:
-                        startActivity(new Intent(FinanceHomeActivity.this,AddExpenseActivity.class));
+                        startActivity(new Intent(FinanceHomeActivity.this,ExpenseHistoryActivity.class));
                         break;
 
                     case 6:

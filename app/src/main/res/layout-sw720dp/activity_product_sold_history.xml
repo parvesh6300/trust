@@ -192,22 +192,23 @@
             <ListView
                 android:id="@+id/lv_sold_products"
                 android:layout_width="match_parent"
-                android:layout_height="850dp"
+                android:layout_height="900dp"
+                android:scrollbars="none"
                 />
 
 
-            <TextView
-                android:id="@+id/tv_total_sale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="Total Sale : 0"
-                android:textColor="@color/purple"
-                android:textSize="35sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                android:typeface="monospace" />
+            <!--<TextView-->
+                <!--android:id="@+id/tv_total_sale"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:text="Total Sale : 0"-->
+                <!--android:textColor="@color/purple"-->
+                <!--android:textSize="35sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:typeface="monospace" />-->
 
         </LinearLayout>
 

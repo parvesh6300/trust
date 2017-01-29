@@ -1277,11 +1277,11 @@ public class WebServices {
 
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                    int sold_items = jsonObject1.optInt(GlobalConstants.PRODUCT_SOLD_OUT);
+                 //   int sold_items = jsonObject1.optInt(GlobalConstants.PRODUCT_QUANTITY);
 
                     map.put(GlobalConstants.PRODUCT_ID , jsonObject1.optString(GlobalConstants.PRODUCT_ID));
                     map.put(GlobalConstants.PRODUCT_NAME , jsonObject1.optString(GlobalConstants.PRODUCT_NAME));
-                    map.put(GlobalConstants.PRODUCT_SOLD_OUT , String.valueOf(sold_items));
+                    map.put(GlobalConstants.PRODUCT_QUANTITY , jsonObject1.optString(GlobalConstants.PRODUCT_QUANTITY));
 
                     al_product_sold.add(map);
                 }

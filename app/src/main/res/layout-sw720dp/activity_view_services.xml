@@ -33,7 +33,6 @@
             android:layout_width="650dp"
             android:layout_height="60dp"
             android:orientation="horizontal"
-            android:weightSum="2"
             android:background="@color/textColor"
             android:gravity="center">
 
@@ -45,7 +44,7 @@
                 android:textSize="30sp"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:layout_marginStart="100dp"
+                android:layout_marginStart="130dp"
                 android:typeface="monospace" />
 
             <TextView
@@ -71,7 +70,7 @@
             android:id="@+id/tv_select_plan"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Select Service to Upgrade"
+            android:text="Select Service to Book Appointment"
             android:textSize="30sp"
             android:textStyle="bold"
             android:typeface="monospace"

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_1"
     android:orientation="vertical"
-    tools:context="dcube.com.trust.AddExpenseActivity">
+    tools:context=".ExpenseHistoryActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,6 +91,7 @@
             android:id="@+id/list_expense"
             android:layout_width="match_parent"
             android:layout_height="1000dp"
+            android:scrollbars="none"
             android:padding="20dp"/>
 
 

@@ -96,7 +96,7 @@ public class ServiceListAdapter extends BaseAdapter{
 
         final View rowView;
 
-        rowView = inflater.inflate(R.layout.buy_service_item, null);
+        rowView = inflater.inflate(R.layout.buy_service_item,viewGroup, false);
 
         holder.name = (TextView) rowView.findViewById(R.id.name);
         holder.service_cost = (TextView) rowView.findViewById(R.id.service_cost);

@@ -152,7 +152,7 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                 quantity =  Integer.parseInt(holder.quantity.getText().toString());
 
-                if(Integer.parseInt(holder.quantity.getText().toString()) > 0)
+                if(quantity > 0)
                 {
                     quantity = quantity - 1;
                 }

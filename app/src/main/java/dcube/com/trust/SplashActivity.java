@@ -60,23 +60,18 @@ public class SplashActivity extends Activity {
 
                 try{
                     sleep(2000);
-                }catch(InterruptedException e){
+                }
+                catch(InterruptedException e)
+                {
                     e.printStackTrace();
-                }finally{
+                }
+                finally
+                {
 
                     if (is_logged_in)
                     {
                         str_device_token = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                                 Settings.Secure.ANDROID_ID);
-
-//                        if (isOnline())
-//                        {
-//                            new OkHttpHandlerAsyncTask().execute();
-//                        }
-//                        else {
-//                            Toast.makeText(SplashActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-//                        }
-
 
                         if (cn.isNetConnected())
                         {

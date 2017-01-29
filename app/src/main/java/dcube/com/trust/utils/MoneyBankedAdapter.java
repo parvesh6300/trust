@@ -84,18 +84,8 @@ public class MoneyBankedAdapter extends BaseAdapter {
         holder.tv_month.setText(date[1]+" '");
         holder.tv_year.setText(date[0]);
 
-        holder.tv_detail.setText(al_money_detail.get(pos));
+      //  holder.tv_detail.setText(al_money_detail.get(pos));
         holder.tv_amount.setText(al_money_amount.get(pos));
-
-
-//        if (al_money_detail.get(pos).equalsIgnoreCase("moneybanked"))
-//        {
-//            holder.tv_amount.setTextColor(Color.parseColor("#E74C3C")); // RED
-//        }
-//        else
-//        {
-//            holder.tv_amount.setTextColor(Color.parseColor("#FF368C28"));  // Green
-//        }
 
 
         return convertview;
