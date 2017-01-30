@@ -10,9 +10,11 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ import pl.droidsonroids.gif.GifTextView;
 
 public class SearchClientActivity extends Activity {
 
-    String[] ITEMS = {"Select Branch","All","Arusha","Dar Es Salaam","Dodoma","Mbeya","Morogoro","Mwanza","Zanzibar"};
+    String[] ITEMS = {"All","Arusha","Dar Es Salaam","Dodoma","Mbeya","Morogoro","Mwanza","Zanzibar"};
     Spinner branch;
 
     Context context = SearchClientActivity.this;
@@ -36,6 +38,8 @@ public class SearchClientActivity extends Activity {
     MySpinnerAdapter adapter;
     CustomAdapter listadapter;
     EditText search;
+
+    TextView tv_no_client;
 
     String src_keyword,str_branch = "Select Branch";
 
@@ -47,6 +51,8 @@ public class SearchClientActivity extends Activity {
 
     WebServices ws;
     int pos;
+
+    ArrayAdapter<String> spinnerArrayAdapter;
 
     CheckNetConnection cn;
 
@@ -63,20 +69,24 @@ public class SearchClientActivity extends Activity {
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
+        tv_no_client = (TextView) findViewById(R.id.tv_no_client);
+
         searchlist = (ListView) findViewById(R.id.searchlist);
         search = (EditText) findViewById(R.id.search);
-
-        adapter = new MySpinnerAdapter(context, android.R.layout.simple_spinner_item, ITEMS);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         branch = (Spinner) findViewById(R.id.spinner);
-        branch.setAdapter(adapter);
+
+
+//        adapter = new MySpinnerAdapter(context, android.R.layout.simple_spinner_item, ITEMS);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, ITEMS);
+        branch.setAdapter(spinnerArrayAdapter);
 
         compareValue = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_NAME);
 
         if (!compareValue.equals(null))
         {
-            int spinnerPosition = adapter.getPosition(compareValue);
+            int spinnerPosition = spinnerArrayAdapter.getPosition(compareValue);
             branch.setSelection(spinnerPosition);
         }
 
@@ -84,7 +94,7 @@ public class SearchClientActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
 
-                if (pos == 1)
+                if (pos == 0)
                 {
                     str_branch = "";
                 }
@@ -92,6 +102,27 @@ public class SearchClientActivity extends Activity {
                 {
                     str_branch = adapterView.getItemAtPosition(pos).toString();
                 }
+
+                if (cn.isNetConnected())
+                {
+                    if (src_keyword != null && !src_keyword.isEmpty() && !src_keyword.equals("null"))
+                    {
+                        new SearchClientAsyncTask().execute();
+                    }
+                    else
+                    {
+                        src_keyword = "";
+
+                    }
+
+
+
+                }
+                else {
+                    Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
+
 
             }
 
@@ -164,6 +195,8 @@ public class SearchClientActivity extends Activity {
 
             searchlist.setEnabled(false);
             gif_loader.setVisibility(View.VISIBLE);
+            searchlist.setVisibility(View.GONE);
+
         }
 
         @Override
@@ -212,9 +245,12 @@ public class SearchClientActivity extends Activity {
                 if (global.getAl_src_client_details().size() == 0)
                 {
                     listadapter.notifyDataSetChanged();
+                    tv_no_client.setVisibility(View.VISIBLE);
                 }
                 else
                 {
+                    tv_no_client.setVisibility(View.GONE);
+                    searchlist.setVisibility(View.VISIBLE);
                     searchlist.setAdapter(listadapter);
                     listadapter.notifyDataSetChanged();
                 }
@@ -222,7 +258,9 @@ public class SearchClientActivity extends Activity {
             }
             else {
 
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+                searchlist.setVisibility(View.GONE);
+                tv_no_client.setVisibility(View.VISIBLE);
+             //   Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
 
             }
 

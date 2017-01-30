@@ -55,7 +55,7 @@ public class ViewAppointmentActivity extends Activity {
 
     String str_date,str_time,str_remark;
 
-    String format_time = "",format_date = "";
+    String format_time = "",format_date = "",str_time_pick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,11 +235,32 @@ public class ViewAppointmentActivity extends Activity {
         @Override
         public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
 
-            String t = "";
+//            String t = "";
+//
+//            t = hourOfDay+":"+minute+":"+second;
+//
+//            tv_timepick.setText(t);
 
-            t = hourOfDay+":"+minute+":"+second;
+            String str_format_time="";
 
-            tv_timepick.setText(t);
+            str_time_pick = hourOfDay+":"+minute+":"+second;
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            try
+            {
+                Date date = format.parse("2017-01-30 "+str_time_pick);
+                str_format_time = new SimpleDateFormat("hh:mm a").format(date);
+            }
+            catch (ParseException e)
+            {
+                e.printStackTrace();
+            }
+
+            Log.i("Time","Picker "+str_format_time);
+
+            tv_timepick.setText(str_format_time);
+
         }
 
         @Override
@@ -269,7 +290,7 @@ public class ViewAppointmentActivity extends Activity {
             else
             {
                 str_date = tv_datepick.getText().toString();
-                str_time = tv_timepick.getText().toString();
+                str_time = str_time_pick ; //tv_timepick.getText().toString();
                 str_remark = ed_note.getText().toString();
 
                 return true;

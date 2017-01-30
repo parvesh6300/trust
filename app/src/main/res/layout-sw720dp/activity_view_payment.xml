@@ -38,27 +38,25 @@
             android:layout_width="700dp"
             android:layout_height="70dp"
             android:orientation="horizontal"
-            android:weightSum="3"
             android:id="@+id/header"
             android:background="@color/textColor"
             android:gravity="center">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
                 android:text="Date"
-                android:layout_weight="1"
                 android:textColor="@color/white"
                 android:textSize="30sp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:paddingEnd="20dp"
                 android:typeface="monospace" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:text="Item"
-                android:layout_weight="1"
                 android:textColor="@color/white"
                 android:textSize="30sp"
                 android:gravity="center"
@@ -66,10 +64,9 @@
                 android:typeface="monospace" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:text="Cost"
-                android:layout_weight="1"
                 android:textColor="@color/white"
                 android:textSize="30sp"
                 android:gravity="center"

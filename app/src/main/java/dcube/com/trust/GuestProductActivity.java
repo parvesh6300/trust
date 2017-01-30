@@ -82,7 +82,7 @@ public class GuestProductActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-             //   try {
+                try {
 
                     if (global.getAl_select_product().size() > 0)
                     {
@@ -94,9 +94,9 @@ public class GuestProductActivity extends Activity {
                         Toast.makeText(GuestProductActivity.this, "Chose any one Product", Toast.LENGTH_SHORT).show();
                     }
 
-//                } catch (Exception e) {
-//                    Toast.makeText(GuestProductActivity.this, "Some Error occured", Toast.LENGTH_SHORT).show();
-//                }
+                } catch (Exception e) {
+                    Toast.makeText(GuestProductActivity.this, "Some Error occured", Toast.LENGTH_SHORT).show();
+                }
 
 
             }

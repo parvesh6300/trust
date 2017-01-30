@@ -58,12 +58,11 @@
             android:textSize="30sp"
             android:gravity="center"
             android:typeface="monospace"
-            android:text="1"
+            android:text="0"
             android:textColorHint="@color/white"
             android:textStyle="bold"
             android:layout_marginStart="35dp"
             android:inputType="number"
-            android:maxLength="2"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/tv_desc"/>
 

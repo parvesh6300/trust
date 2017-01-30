@@ -92,7 +92,7 @@ public class PendingPaymentAdapter extends BaseAdapter {
 
         if (al_item_type.get(pos).equalsIgnoreCase("plan"))
         {
-            holder.tv_product_name.setText(al_item_id.get(pos));
+            holder.tv_product_name.setText(al_product_name.get(pos));
         }
         else if (al_item_type.get(pos).equalsIgnoreCase("product"))
         {

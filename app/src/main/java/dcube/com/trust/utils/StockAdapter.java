@@ -180,7 +180,7 @@ public class StockAdapter extends BaseAdapter {
 
                 Calendar calendar = Calendar.getInstance();
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd hh:mm a");
 
                 String date = sdf.format(calendar.getTime());
 

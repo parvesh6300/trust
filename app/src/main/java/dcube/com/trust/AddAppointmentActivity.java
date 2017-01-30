@@ -72,6 +72,8 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
     ArrayAdapter<String> adapter;
     String str_pre_selected_service;
 
+    String str_time_pick;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -227,7 +229,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                         AddAppointmentActivity.this,
                         now.get(Calendar.HOUR_OF_DAY),
                         now.get(Calendar.MINUTE),
-                        true);
+                        false);
 
                 tpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
 
@@ -257,7 +259,6 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
                             Date date = format.parse(str_date+" "+str_time);
                             Log.e("Date","Format "+date);
 
-//                            format_time = new SimpleDateFormat("HH:mm:ss").format(date);
                             format_time = format.format(date);
                             Log.e("Time","Format "+format_time);
 
@@ -291,11 +292,25 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
 
-        String t = "";
+        String str_format_time="";
 
-        t = hourOfDay+":"+minute+":"+second;
+        str_time_pick = hourOfDay+":"+minute+":"+second;
 
-        time.setText(t);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try
+        {
+            Date date = format.parse("2017-01-30 "+str_time_pick);
+            str_format_time = new SimpleDateFormat("hh:mm a").format(date);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        Log.i("Time","Picker "+str_format_time);
+
+        time.setText(str_format_time);
     }
 
     @Override
@@ -340,7 +355,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
             str_client_name = ed_name.getText().toString();
             str_client_contact = ed_contact.getText().toString();
             str_date = date.getText().toString();
-            str_time = time.getText().toString();
+            str_time = str_time_pick ; //time.getText().toString();
             str_remark = ed_remarks.getText().toString();
 
             return true;

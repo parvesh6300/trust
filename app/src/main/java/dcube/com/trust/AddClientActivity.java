@@ -80,8 +80,10 @@ public class AddClientActivity extends Activity {
 
         str_area = "Select Branch";
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
         age_group.setAdapter(spinnerArrayAdapter);
+
+        age_group.setSelection(1);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, ITEMS);  //simple_dropdown_item_1line
         area.setAdapter(adapter);
@@ -275,6 +277,8 @@ public class AddClientActivity extends Activity {
             Log.e("Position",""+spinnerPosition);
             area.setSelection(spinnerPosition);
         }
+
+
 
 
     }

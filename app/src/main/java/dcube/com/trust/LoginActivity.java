@@ -133,19 +133,26 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
             case R.id.signin: {
 
-                str_user_name = ed_user_name.getText().toString().trim();
-                str_password = ed_pwd.getText().toString().trim();
 
-                str_device_token = Settings.Secure.getString(getApplicationContext().getContentResolver(),
-                        Settings.Secure.ANDROID_ID);
-
-                if (cn.isNetConnected())
+                if (validate())
                 {
-                    new OkHttpHandlerAsyncTask().execute();
+                    str_user_name = ed_user_name.getText().toString().trim();
+                    str_password = ed_pwd.getText().toString().trim();
+
+                    str_device_token = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                            Settings.Secure.ANDROID_ID);
+
+                    if (cn.isNetConnected())
+                    {
+                        new OkHttpHandlerAsyncTask().execute();
+                    }
+                    else {
+                        Toast.makeText(LoginActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else {
-                    Toast.makeText(LoginActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                }
+
+
+
 
             }
         }
@@ -288,6 +295,25 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         editor.putString(role_key , String.valueOf(role_id));
 
         editor.apply();
+    }
+
+
+    public boolean validate()
+    {
+        if (ed_user_name.getText().toString().trim().matches(""))
+        {
+            Toast.makeText(LoginActivity.this, "Enter Username", Toast.LENGTH_SHORT).show();
+        }
+        else if (ed_pwd.getText().toString().trim().matches(""))
+        {
+            Toast.makeText(LoginActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            return true;
+        }
+
+        return false;
+
     }
 
 

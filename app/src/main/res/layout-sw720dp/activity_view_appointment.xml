@@ -22,7 +22,7 @@
 
     <LinearLayout
         android:layout_width="600dp"
-        android:layout_height="1000dp"
+        android:layout_height="1100dp"
         android:background="@drawable/form_back"
         android:orientation="vertical"
         android:elevation="4dp"
@@ -139,7 +139,7 @@
             <ListView
                 android:id="@+id/followuplist"
                 android:layout_width="600dp"
-                android:layout_height="650dp"
+                android:layout_height="730dp"
                 android:fadeScrollbars="false"
                 android:scrollbarSize="10dp"
                 android:layout_gravity="center"
@@ -158,8 +158,8 @@
                 android:gravity="center"
                 android:textSize="30sp"
                 android:typeface="monospace"
-                android:layout_marginBottom="30dp"
-                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_centerInParent="true"
                 android:layout_below="@+id/followuplist"
                 />
 

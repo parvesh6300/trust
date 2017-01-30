@@ -106,7 +106,7 @@
                 android:layout_height="45dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:text="Quantity"
+                android:text="Visits"
                 android:textColor="@color/white"
                 android:textSize="30sp"
                 android:textStyle="bold"

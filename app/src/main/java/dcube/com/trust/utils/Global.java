@@ -46,13 +46,15 @@ public class Global extends Application {
     // ******************************* Selected PRoduct Details Getter and Setter  *************************************************
 
 
+
     public ArrayList<String> al_select_product;
 
     public ArrayList<String> getAl_select_product() {
         return al_select_product;
     }
 
-    public void setAl_select_product(ArrayList<String> al_select_product) {
+    public void setAl_select_product(ArrayList<String> al_select_product)
+    {
         this.al_select_product = al_select_product;
     }
 

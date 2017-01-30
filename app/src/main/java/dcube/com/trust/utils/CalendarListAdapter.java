@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import WebServicesHandler.FormatTime;
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
@@ -25,10 +27,14 @@ public class CalendarListAdapter extends BaseAdapter {
     public static LayoutInflater inflater;
     Global global;
 
+    String formatted_time;
 
-    public CalendarListAdapter(Context context)
-    {
+    FormatTime ft;
+
+    public CalendarListAdapter(Context context) throws ParseException {
         this.context= context;
+
+        ft = new FormatTime(context);
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -37,7 +43,10 @@ public class CalendarListAdapter extends BaseAdapter {
         for (HashMap<String,String> hashmap : global.getAl_apmt_details())
         {
             al_name.add(hashmap.get(GlobalConstants.APMT_CLIENT_ID));
-            al_time.add(hashmap.get(GlobalConstants.APMT_TIME));
+
+            formatted_time = ft.FormatTime(hashmap.get(GlobalConstants.APMT_TIME));
+
+            al_time.add(formatted_time);
         }
 
 

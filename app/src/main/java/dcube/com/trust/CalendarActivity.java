@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,7 +41,7 @@ public class CalendarActivity extends Activity
 
     CalendarCustomView cv;
     HashSet<Date> events;
-    TextView tv_continue;
+    TextView tv_continue,tv_apmt_size;
 
     String str_date;
 
@@ -60,6 +61,8 @@ public class CalendarActivity extends Activity
         cn = new CheckNetConnection(context);
 
         global = (Global) getApplicationContext();
+
+        tv_apmt_size = (TextView) findViewById(R.id.tv_apmt_size);
 
         list = (ListView) findViewById(R.id.list);
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
@@ -191,14 +194,22 @@ public class CalendarActivity extends Activity
             if (message.equalsIgnoreCase("true"))
             {
 
+                tv_apmt_size.setText(String.valueOf(global.getAl_apmt_details().size()));
+
                 list.setVisibility(View.VISIBLE);
-                calendarListAdapter= new CalendarListAdapter(context);
+                try {
+                    calendarListAdapter= new CalendarListAdapter(context);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 list.setAdapter(calendarListAdapter);
                 calendarListAdapter.notifyDataSetChanged();
 
             }
             else
             {
+                tv_apmt_size.setText(String.valueOf(0));
+
                 list.setVisibility(View.GONE);
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }

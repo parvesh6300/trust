@@ -134,7 +134,7 @@ public class GuestProductListAdapter extends BaseAdapter {
 
         final View rowView;
 
-        rowView = inflater.inflate(R.layout.product_category_item, parent , false);
+        rowView = inflater.inflate(R.layout.guest_product_list, parent , false);
 
         holder.quantity = (EditText) rowView.findViewById(R.id.quantity);
 
@@ -278,7 +278,8 @@ public class GuestProductListAdapter extends BaseAdapter {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                try {
+                try
+                {
                     quantity =  Integer.parseInt(charSequence.toString());
 
                     int max_stock = Integer.parseInt(in_stock.get(position));
@@ -311,22 +312,53 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                     int max_stock = Integer.parseInt(in_stock.get(position));
 
-                    if (max_stock > quantity)
+                    if (quantity > 0)
                     {
+                        if (max_stock > quantity)
+                        {
+                            if (selected_product_id.contains(product_id.get(position)))
+                            {
+                                int pos = selected_product_id.indexOf(product_id.get(position));
+
+                                selected_product_quantity.set(pos , editable.toString());
+                            }
+                            else
+                            {
+                                selected_product_id.add(product_id.get(position));
+                                selected_product_quantity.add(String.valueOf(quantity));
+                                selected_product_category.add(category.get(position));
+                                selected_product_sku.add(SKU.get(position));
+                                selected_product_name.add(name.get(position));
+                                selected_product_price.add(price.get(position));
+
+                            }
+
+                            global.setAl_select_product(selected_product_id);
+                            global.setAl_selected_product_quantity(selected_product_quantity);
+                            global.setAl_selected_product_category(selected_product_category);
+                            global.setAl_selected_product_price(selected_product_price);
+                            global.setAl_selected_product_sku(selected_product_sku);
+                            global.setAl_selected_product_name(selected_product_name);
+                        }
+                        else
+                        {
+                            Toast.makeText(context, "Only "+max_stock+" are left", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                    else
+                    {
+
                         if (selected_product_id.contains(product_id.get(position)))
                         {
                             int pos = selected_product_id.indexOf(product_id.get(position));
 
-                            selected_product_quantity.set(pos , editable.toString());
-                        }
-                        else
-                        {
-                            selected_product_id.add(product_id.get(position));
-                            selected_product_quantity.add(String.valueOf(quantity));
-                            selected_product_category.add(category.get(position));
-                            selected_product_sku.add(SKU.get(position));
-                            selected_product_name.add(name.get(position));
-                            selected_product_price.add(price.get(position));
+                            selected_product_price.remove(pos);
+                            selected_product_name.remove(pos);
+                            selected_product_sku.remove(pos);
+                            selected_product_category.remove(pos);
+                            selected_product_id.remove(pos);
+                            selected_product_quantity.remove(pos);
 
                         }
 
@@ -336,11 +368,11 @@ public class GuestProductListAdapter extends BaseAdapter {
                         global.setAl_selected_product_price(selected_product_price);
                         global.setAl_selected_product_sku(selected_product_sku);
                         global.setAl_selected_product_name(selected_product_name);
+
+
+                        Toast.makeText(context, "Quantity should be greater than 0", Toast.LENGTH_SHORT).show();
                     }
-                    else
-                    {
-                        Toast.makeText(context, "Only "+max_stock+" are left", Toast.LENGTH_SHORT).show();
-                    }
+
 
 
                 }
