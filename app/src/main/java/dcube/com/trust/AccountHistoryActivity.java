@@ -28,7 +28,7 @@ public class AccountHistoryActivity extends Activity {
 
     ExpenseAdapter expenseAdapter;
 
-    //   TextView tv_total_amount,tv_submit;
+       TextView tv_total_amount;
 
     TextView tv_submit;
 
@@ -61,7 +61,7 @@ public class AccountHistoryActivity extends Activity {
 
         ed_expense_amount=(EditText)findViewById(R.id.ed_expense_amount);
         ed_reason=(EditText)findViewById(R.id.ed_reason);
-//        tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
+        tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
         tv_submit=(TextView)findViewById(R.id.tv_submit);
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
@@ -78,6 +78,7 @@ public class AccountHistoryActivity extends Activity {
 
         if (cn.isNetConnected())
         {
+            new GetBranchBalanceAsyncTask().execute();
             new AccountHistoryAsyncTask().execute();
         }
         else
@@ -152,6 +153,63 @@ public class AccountHistoryActivity extends Activity {
 
     }
 
+
+
+    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_branch_balance");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                tv_total_amount.setText(global.getStr_branch_balance()+" Tsh");
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
 
 
 }

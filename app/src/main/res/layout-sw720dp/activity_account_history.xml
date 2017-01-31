@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context=".ExpenseHistoryActivity">
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +30,43 @@
         android:orientation="vertical"
         android:gravity="center"
         android:background="@drawable/form_back">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/tv_balance_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Account Balance : "
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+
+            <TextView
+                android:id="@+id/tv_total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="0 Tsh"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:typeface="monospace"
+                android:layout_toRightOf="@+id/tv_balance_label"
+                android:layout_marginRight="20dp"/>
+
+
+        </RelativeLayout>
+
 
 
         <RelativeLayout
@@ -90,7 +129,7 @@
         <ListView
             android:id="@+id/list_expense"
             android:layout_width="match_parent"
-            android:layout_height="1000dp"
+            android:layout_height="900dp"
             android:scrollbars="none"
             android:padding="20dp"/>
 

@@ -83,6 +83,10 @@ public class DepositMoneyActivity extends Activity {
                 {
                     Toast.makeText(DepositMoneyActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
                 }
+                else if (ed_deposit_amount.getText().toString().equalsIgnoreCase("0"))
+                {
+                    Toast.makeText(DepositMoneyActivity.this, "Amount should be greater than 0", Toast.LENGTH_SHORT).show();
+                }
                 else
                 {
                     str_deposit_amount = ed_deposit_amount.getText().toString();
@@ -165,7 +169,7 @@ public class DepositMoneyActivity extends Activity {
                 int_deposit = Float.parseFloat(str_deposit_amount);
                 int_balance = int_total_amount + int_deposit;
 
-                tv_balance.setText("BALANCE : "+String.valueOf(int_balance));
+                tv_balance.setText("PROJECTED BALANCE : "+String.valueOf(int_balance));
 
             }
             else

@@ -63,7 +63,7 @@ public class ServiceListAdapter extends BaseAdapter{
                 }
                 else
                 {
-                    if (hashmap.get(GlobalConstants.SERVICE_NAME).contains(search) )
+                    if (hashmap.get(GlobalConstants.SERVICE_NAME).toLowerCase().contains(search.toLowerCase()) )
                     {
                         name.add(hashmap.get(GlobalConstants.SERVICE_NAME));
                         serviceCost.add(hashmap.get(GlobalConstants.SERVICE_PRICE));

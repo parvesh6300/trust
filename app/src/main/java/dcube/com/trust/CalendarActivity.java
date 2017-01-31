@@ -210,7 +210,7 @@ public class CalendarActivity extends Activity
             {
                 tv_apmt_size.setText(String.valueOf(0));
 
-                list.setVisibility(View.GONE);
+              //  list.setVisibility(View.GONE);
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 

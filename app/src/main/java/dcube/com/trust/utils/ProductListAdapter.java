@@ -67,7 +67,8 @@ public class ProductListAdapter extends BaseAdapter {
                 }
                 else
                 {
-                    if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search) || hashMap.get(GlobalConstants.PRODUCT_CATEGORY).contains(search)  )
+                    if(hashMap.get(GlobalConstants.PRODUCT_NAME).toLowerCase().contains(search.toLowerCase()) ||
+                            hashMap.get(GlobalConstants.PRODUCT_CATEGORY).toLowerCase().contains(search.toLowerCase())  )
                     {
                         name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
                         category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));

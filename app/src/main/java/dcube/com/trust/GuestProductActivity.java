@@ -46,6 +46,8 @@ public class GuestProductActivity extends Activity {
 
     String str_branch;
 
+    ArrayList<String> selected_quantity = new ArrayList<>();
+
     String str_client_id = "guest",str_user_id,str_amount_to_pay;
 
     CheckNetConnection cn;

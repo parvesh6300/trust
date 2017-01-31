@@ -140,10 +140,15 @@ public class WithDrawMoneyActivity extends Activity {
                 {
                     Toast.makeText(WithDrawMoneyActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
                 }
+                else if (ed_wd_amount.getText().toString().equalsIgnoreCase("0"))
+                {
+                    Toast.makeText(WithDrawMoneyActivity.this, "Amount should be greater than 0", Toast.LENGTH_SHORT).show();
+                }
                 else if (str_exp_rsn.matches(""))
                 {
                     Toast.makeText(WithDrawMoneyActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
                 }
+
                 else
                 {
                     new GetBranchBalanceAsyncTask().execute();
@@ -358,7 +363,7 @@ public class WithDrawMoneyActivity extends Activity {
         TextView tv_title = (TextView) doneDialog.findViewById(R.id.tv_title);
 
         tv_title.setText("Confirmation Dialog");
-        tv_message.setText("Money can be withdraw");
+        tv_message.setText("Money Withdrawn successfully");
         tv_yes.setText("OK");
         tv_no.setVisibility(View.GONE);
 

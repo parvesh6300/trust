@@ -96,7 +96,8 @@ public class StockAdapter extends BaseAdapter {
             }
             else
             {
-                if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search) || hashMap.get(GlobalConstants.PRODUCT_CATEGORY).contains(search))
+                if(hashMap.get(GlobalConstants.PRODUCT_NAME).toLowerCase().contains(search.toLowerCase()) ||
+                        hashMap.get(GlobalConstants.PRODUCT_CATEGORY).toLowerCase().contains(search.toLowerCase()))
                 {
                     name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
                     category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
@@ -145,12 +146,12 @@ public class StockAdapter extends BaseAdapter {
         if (al_status.get(i).equalsIgnoreCase("0"))
         {
             holder.tv_status.setBackgroundResource(R.drawable.red_circle);
-            holder.tv_status.setText(al_quantity.get(pos));
+            holder.tv_status.setText(al_quantity.get(i));
         }
         else if (al_status.get(i).equalsIgnoreCase("1"))
         {
             holder.tv_status.setBackgroundResource(R.drawable.green_circle);
-            holder.tv_status.setText(al_quantity.get(pos));
+            holder.tv_status.setText(al_quantity.get(i));
         }
         else
         {
@@ -396,7 +397,10 @@ public class StockAdapter extends BaseAdapter {
             ((StockControlActivity)mcontext).stopLoader(mcontext);
 
             if (message.equalsIgnoreCase("true")) {
-                showDoneDialog();
+
+                ((StockControlActivity)mcontext).updateList(mcontext);
+               // new GetStockProductAsyncTask().execute();
+               // showDoneDialog();
             } else {
                 Toast.makeText(mcontext, "" + message, Toast.LENGTH_SHORT).show();
             }
@@ -405,7 +409,68 @@ public class StockAdapter extends BaseAdapter {
 
     }
 
+    public class GetStockProductAsyncTask extends AsyncTask<String, String, String> {
 
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+        String str_client_id;
 
+        @Override
+        protected void onPreExecute() {
 
+            ((StockControlActivity)mcontext).startLoader(mcontext);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.BRANCH);
+                al_str_value.add(str_branch);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_stock_request"); //get_products_in_stock
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
+
+                message = ws.GetProductStockService(mcontext, al_str_key, al_str_value);  //GetProductStockService
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            ((StockControlActivity)mcontext).stopLoader(mcontext);
+
+            if (message.equalsIgnoreCase("true")) {
+
+                notifyDataSetChanged();
+                showDoneDialog();
+            }
+            else {
+                Toast.makeText(mcontext, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 }

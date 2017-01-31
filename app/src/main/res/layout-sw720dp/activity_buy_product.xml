@@ -38,6 +38,7 @@
             android:layout_marginLeft="20dp"
             android:textColorHint="@color/graytext"
             android:textSize="25sp"
+            android:paddingStart="10dp"
             android:id="@+id/search"/>
 
         <ImageView

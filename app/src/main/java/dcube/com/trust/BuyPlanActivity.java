@@ -436,8 +436,6 @@ public class BuyPlanActivity extends Activity{
                 dialog = new PlanDialogClass(BuyPlanActivity.this);
                 dialog.show();
 
-//                adapter = new PlanListAdapter(BuyPlanActivity.this,"");
-//                servicelist.setAdapter(adapter);
 
             }
             else {

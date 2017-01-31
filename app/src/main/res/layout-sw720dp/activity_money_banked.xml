@@ -112,7 +112,8 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:gravity="center"
             android:layout_gravity="center_horizontal"
             android:padding="10dp">
 
@@ -122,7 +123,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
                 android:text="Account Balance(Tsh) : "
                 android:textColor="@color/purple"
                 android:textSize="30sp"
@@ -136,7 +136,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
                 android:text="0"
                 android:layout_toRightOf="@+id/tv_balance_label"
                 android:textColor="@color/purple"
@@ -146,11 +145,68 @@
         </RelativeLayout>
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/textColor"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="140dp"
+                android:layout_height="60dp"
+                android:text="Date"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_expense"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Transaction"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_toEndOf="@+id/tv_date"
+                android:layout_toStartOf="@+id/tv_amount"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="Amount"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="60dp"
+                />
+
+
+        </RelativeLayout>
+
+
+
         <ListView
             android:id="@+id/lv_money_banked"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
+            android:layout_marginEnd="10dp"
             android:padding="10dp"/>
 
     </LinearLayout>

@@ -12,6 +12,15 @@ import java.util.HashMap;
 public class Global extends Application {
 
 
+    public int quantity_selected;
+
+    public int getQuantity_selected() {
+        return quantity_selected;
+    }
+
+    public void setQuantity_selected(int quantity_selected) {
+        this.quantity_selected = quantity_selected;
+    }
     // ******************************* Login Getter and Setter  *************************************************
 
     public ArrayList<HashMap<String, String>> getAl_login_list() {

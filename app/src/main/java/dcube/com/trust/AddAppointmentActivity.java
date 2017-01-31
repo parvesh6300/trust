@@ -538,6 +538,7 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
 
                     if (global.isServiceAppointment())
                     {
+                        global.setServiceAppointment(false);
                         ViewServicesActivity.h.sendEmptyMessage(0);
                     }
 

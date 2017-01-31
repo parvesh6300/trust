@@ -25,8 +25,13 @@ import dcube.com.trust.R;
 public class GuestProductListAdapter extends BaseAdapter {
 
     Context context;
-    Global global;
+    public Global global;
     int quantity;
+
+
+
+    ArrayList<String> selected_quantity = new ArrayList<>();
+
 
     ArrayList<String> name ;
     ArrayList<String> product_id;
@@ -35,12 +40,13 @@ public class GuestProductListAdapter extends BaseAdapter {
     ArrayList<String> category;
     ArrayList<String> price ;
 
-    ArrayList<String> selected_product_id;
-    ArrayList<String> selected_product_quantity;
-    ArrayList<String> selected_product_name;
-    ArrayList<String> selected_product_sku ;
-    ArrayList<String> selected_product_category ;
-    ArrayList<String> selected_product_price;
+
+    ArrayList<String> selected_product_id = new ArrayList<>();
+    ArrayList<String> selected_product_quantity = new ArrayList<>();
+    ArrayList<String> selected_product_name = new ArrayList<>();
+    ArrayList<String> selected_product_sku = new ArrayList<>();
+    ArrayList<String> selected_product_category = new ArrayList<>();
+    ArrayList<String> selected_product_price = new ArrayList<>();
 
     private static LayoutInflater inflater = null;
 
@@ -56,33 +62,22 @@ public class GuestProductListAdapter extends BaseAdapter {
         category = new ArrayList<>();
         price = new ArrayList<>();
 
-        selected_product_id = new ArrayList<>();
-        selected_product_quantity = new ArrayList<>();
-        selected_product_name = new ArrayList<>();
-        selected_product_sku = new ArrayList<>();
-        selected_product_category = new ArrayList<>();
-        selected_product_price = new ArrayList<>();
+//        selected_product_id = new ArrayList<>();
+//        selected_product_quantity = new ArrayList<>();
+//        selected_product_name = new ArrayList<>();
+//        selected_product_sku = new ArrayList<>();
+//        selected_product_category = new ArrayList<>();
+//        selected_product_price = new ArrayList<>();
 
         global = (Global) activity.getApplicationContext();
 
         try {
 
-            for (HashMap<String, String> hashMap : global.getAl_product_details())
+            if (global.getAl_product_details().size() > 0)
             {
-
-                if(search.equalsIgnoreCase(""))
+                for (HashMap<String, String> hashMap : global.getAl_product_details())
                 {
-                    name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
-                    category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
-                    SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
-                    price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
-                    in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
-                    product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
-
-                }
-                else
-                {
-                    if(hashMap.get(GlobalConstants.PRODUCT_NAME).contains(search) || hashMap.get(GlobalConstants.PRODUCT_CATEGORY).contains(search))
+                    if(search.equalsIgnoreCase(""))
                     {
                         name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
                         category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
@@ -91,8 +86,31 @@ public class GuestProductListAdapter extends BaseAdapter {
                         in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
                         product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
                     }
+                    else
+                    {
+                        if(hashMap.get(GlobalConstants.PRODUCT_NAME).toLowerCase().contains(search.toLowerCase()) ||
+                                hashMap.get(GlobalConstants.PRODUCT_CATEGORY).toLowerCase().contains(search.toLowerCase()))
+                        {
+                            name.add(hashMap.get(GlobalConstants.PRODUCT_NAME));
+                            category.add(hashMap.get(GlobalConstants.PRODUCT_CATEGORY));
+                            SKU.add(hashMap.get(GlobalConstants.PRODUCT_SKU));
+                            price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
+                            in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
+                            product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
+                        }
+                    }
                 }
             }
+//
+
+//            if(global.getAl_select_product().size()> 0 )
+//            {
+//                for (int i =0 ; i < global.getAl_select_product().size() ; i++)
+//                {
+//                    selected_product_quantity.set(i,global.getAl_selected_product_quantity().get(i));
+//                }
+//            }
+
 
         }catch(Exception e)
         {
@@ -145,6 +163,32 @@ public class GuestProductListAdapter extends BaseAdapter {
 
         holder.name.setText(name.get(position));
         holder.category.setText(category.get(position));
+//
+//        try {
+//
+//            if (global.getAl_select_product().size() > 0)
+//            {
+//                holder.quantity.setText(selected_product_quantity.get(position));
+//            }
+//
+//            Log.i("Qty", "Selected " + selected_product_quantity.size());
+//        }
+//        catch (Exception e)
+//        {
+//
+//        }
+
+//        try{
+//
+//            if(global.getAl_select_product().size()>0) {
+//                holder.quantity.setText(global.getAl_selected_product_quantity().get(global.getAl_select_product().indexOf(product_id.get(position))));
+//            }
+//
+//        }
+//        catch(Exception e){}
+//
+
+
 
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,6 +293,9 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                     }
 
+
+
+
                     global.setAl_select_product(selected_product_id);
                     global.setAl_selected_product_quantity(selected_product_quantity);
                     global.setAl_selected_product_category(selected_product_category);
@@ -263,7 +310,7 @@ public class GuestProductListAdapter extends BaseAdapter {
                     Toast.makeText(context, "Only "+max_stock+" are left", Toast.LENGTH_SHORT).show();
                 }
 
-                Log.i("Product","id "+selected_product_id);
+
 
             }
         });
@@ -373,6 +420,9 @@ public class GuestProductListAdapter extends BaseAdapter {
                         Toast.makeText(context, "Quantity should be greater than 0", Toast.LENGTH_SHORT).show();
                     }
 
+
+                    Log.i("Product","id "+selected_product_id);
+                    Log.i("Product","Qty "+selected_product_quantity);
 
 
                 }

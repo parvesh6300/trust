@@ -76,6 +76,10 @@ public class MoneyBankedActivity extends Activity {
                 {
                     Toast.makeText(MoneyBankedActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
                 }
+                else if ((ed_deposit_amount.getText().toString().equalsIgnoreCase("0")))
+                {
+                    Toast.makeText(MoneyBankedActivity.this, "Amount should be greater than 0", Toast.LENGTH_SHORT).show();
+                }
                 else
                 {
                     str_deposit_amount = ed_deposit_amount.getText().toString();
