@@ -28,8 +28,6 @@ public class GuestProductListAdapter extends BaseAdapter {
     public Global global;
     int quantity;
 
-
-
     ArrayList<String> selected_quantity = new ArrayList<>();
 
 
@@ -85,6 +83,7 @@ public class GuestProductListAdapter extends BaseAdapter {
                         price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
                         in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
                         product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
+
                     }
                     else
                     {
@@ -97,19 +96,12 @@ public class GuestProductListAdapter extends BaseAdapter {
                             price.add(hashMap.get(GlobalConstants.PRODUCT_PRICE));
                             in_stock.add(hashMap.get(GlobalConstants.PRODUCT_IN_STOCK));
                             product_id.add(hashMap.get(GlobalConstants.PRODUCT_ID));
+
                         }
                     }
                 }
-            }
-//
 
-//            if(global.getAl_select_product().size()> 0 )
-//            {
-//                for (int i =0 ; i < global.getAl_select_product().size() ; i++)
-//                {
-//                    selected_product_quantity.set(i,global.getAl_selected_product_quantity().get(i));
-//                }
-//            }
+            }
 
 
         }catch(Exception e)
@@ -163,31 +155,6 @@ public class GuestProductListAdapter extends BaseAdapter {
 
         holder.name.setText(name.get(position));
         holder.category.setText(category.get(position));
-//
-//        try {
-//
-//            if (global.getAl_select_product().size() > 0)
-//            {
-//                holder.quantity.setText(selected_product_quantity.get(position));
-//            }
-//
-//            Log.i("Qty", "Selected " + selected_product_quantity.size());
-//        }
-//        catch (Exception e)
-//        {
-//
-//        }
-
-//        try{
-//
-//            if(global.getAl_select_product().size()>0) {
-//                holder.quantity.setText(global.getAl_selected_product_quantity().get(global.getAl_select_product().indexOf(product_id.get(position))));
-//            }
-//
-//        }
-//        catch(Exception e){}
-//
-
 
 
         holder.minus.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +173,7 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                 if (quantity > 0)
                 {
+
                     if (selected_product_id.contains(product_id.get(position)))
                     {
                         int pos = selected_product_id.indexOf(product_id.get(position));
@@ -226,6 +194,7 @@ public class GuestProductListAdapter extends BaseAdapter {
                 else
                 {
                     try {
+
 
                         if (selected_product_id.contains(product_id.get(position)))
                         {
@@ -250,12 +219,12 @@ public class GuestProductListAdapter extends BaseAdapter {
                 }
 
 
-                global.setAl_select_product(selected_product_id);
-                global.setAl_selected_product_quantity(selected_product_quantity);
-                global.setAl_selected_product_category(selected_product_category);
-                global.setAl_selected_product_price(selected_product_price);
-                global.setAl_selected_product_sku(selected_product_sku);
-                global.setAl_selected_product_name(selected_product_name);
+//                global.setAl_select_product(selected_product_id);
+//                global.setAl_selected_product_quantity(selected_product_quantity);
+//                global.setAl_selected_product_category(selected_product_category);
+//                global.setAl_selected_product_price(selected_product_price);
+//                global.setAl_selected_product_sku(selected_product_sku);
+//                global.setAl_selected_product_name(selected_product_name);
 
             }
         });
@@ -296,12 +265,12 @@ public class GuestProductListAdapter extends BaseAdapter {
 
 
 
-                    global.setAl_select_product(selected_product_id);
-                    global.setAl_selected_product_quantity(selected_product_quantity);
-                    global.setAl_selected_product_category(selected_product_category);
-                    global.setAl_selected_product_price(selected_product_price);
-                    global.setAl_selected_product_sku(selected_product_sku);
-                    global.setAl_selected_product_name(selected_product_name);
+//                    global.setAl_select_product(selected_product_id);
+//                    global.setAl_selected_product_quantity(selected_product_quantity);
+//                    global.setAl_selected_product_category(selected_product_category);
+//                    global.setAl_selected_product_price(selected_product_price);
+//                    global.setAl_selected_product_sku(selected_product_sku);
+//                    global.setAl_selected_product_name(selected_product_name);
 
 
                 }
@@ -361,8 +330,10 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                     if (quantity > 0)
                     {
+
                         if (max_stock > quantity)
                         {
+
                             if (selected_product_id.contains(product_id.get(position)))
                             {
                                 int pos = selected_product_id.indexOf(product_id.get(position));

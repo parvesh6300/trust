@@ -41,6 +41,7 @@ public class ViewPlanServiceAdapter extends BaseAdapter {
     // Array which contains the modified quantity of service
     public int[] ary_service_mod;
 
+    ArrayList<String> al_with_zero;
 
 
     public ViewPlanServiceAdapter(Context mcontext) {
@@ -59,6 +60,8 @@ public class ViewPlanServiceAdapter extends BaseAdapter {
         updated_service_quantity = new ArrayList<>();
         updated_service_type = new ArrayList<>();
 
+        al_with_zero = new ArrayList<>();
+
 
         for (HashMap<String, String> hashMap : global.getAl_view_plan_details())
         {
@@ -67,11 +70,15 @@ public class ViewPlanServiceAdapter extends BaseAdapter {
                 name.add(hashMap.get(GlobalConstants.ORDER_ITEM_NAME));
                 service_id.add(hashMap.get(GlobalConstants.PLAN_ELEMENT_ID));
                 al_quantity.add(hashMap.get(GlobalConstants.PLAN_ELEMENT_QUANTITY));
+
+                al_with_zero.add("0");
             }
 
         }
 
         ary_service_mod = new int[name.size()];
+
+        global.setAl_update_service_qty(al_with_zero);
 
     }
 

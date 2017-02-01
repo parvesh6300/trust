@@ -501,14 +501,14 @@ public class Global extends Application {
         this.al_update_service_qty = al_update_service_qty;
     }
 
-    public ArrayList<String> al_update_product_qty;
+    public ArrayList<String> al_update_product_qty = new ArrayList<>();
 
-    public ArrayList<String> al_update_service_id;
+    public ArrayList<String> al_update_service_id= new ArrayList<>();
 
-    public ArrayList<String> al_update_service_qty;
+    public ArrayList<String> al_update_service_qty= new ArrayList<>();
 
 
-    public ArrayList<String> al_update_service_type;
+    public ArrayList<String> al_update_service_type= new ArrayList<>();
 
     public ArrayList<String> getAl_update_product_type() {
         return al_update_product_type;
@@ -526,7 +526,7 @@ public class Global extends Application {
         this.al_update_service_type = al_update_service_type;
     }
 
-    public ArrayList<String> al_update_product_type;
+    public ArrayList<String> al_update_product_type= new ArrayList<>();
 
 
 

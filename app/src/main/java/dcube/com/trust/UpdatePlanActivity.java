@@ -77,13 +77,15 @@ public class UpdatePlanActivity extends Activity {
 
                 for (int i =0 ; i < global.getAl_update_product_qty().size() ; i++)
                 {
-                     al_element_qty.add(global.getAl_update_product_qty().get(i));
+                    al_element_qty.add(global.getAl_update_product_qty().get(i));
                 }
 
                 for (int i =0 ; i < global.getAl_update_service_qty().size() ; i++)
                 {
                     al_element_qty.add(global.getAl_update_service_qty().get(i));
                 }
+
+
 
                 if (global.getAl_view_plan_details().size() > 0)
                 {
@@ -94,6 +96,22 @@ public class UpdatePlanActivity extends Activity {
                             al_element_type.add("Product");
                             al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
                         }
+
+//                        if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
+//                        {
+//                            al_element_type.add("Service");
+//                            al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
+//                        }
+
+                    }
+
+                    for (int i=0 ; i < global.getAl_view_plan_details().size() ; i++)
+                    {
+//                        if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Product"))
+//                        {
+//                            al_element_type.add("Product");
+//                            al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
+//                        }
 
                         if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
                         {
@@ -226,6 +244,13 @@ public class UpdatePlanActivity extends Activity {
             str_element_type = android.text.TextUtils.join(",", al_element_type);
 
             str_element_qty = android.text.TextUtils.join(",", al_element_qty);
+
+            Log.e("Elem","id "+str_element_id);
+            Log.e("Elem","type "+str_element_type);
+            Log.e("Elem","qty "+str_element_qty);
+
+
+            tv_update_plan.setEnabled(false);
         }
 
         @Override
@@ -275,6 +300,8 @@ public class UpdatePlanActivity extends Activity {
         protected void onPostExecute(String s) {
 
             gif_loader.setVisibility(View.GONE);
+
+            tv_update_plan.setEnabled(true);
 
             if (message.equalsIgnoreCase("true"))
             {

@@ -39,6 +39,8 @@ public class ViewPlanProductAdapter extends BaseAdapter {
     ArrayList<String> updated_product_type;
 
 
+    ArrayList<String> al_with_zero;
+
     // Array which contains the modified quantity of products
     public int[] ary_product_mod;
 
@@ -60,6 +62,8 @@ public class ViewPlanProductAdapter extends BaseAdapter {
         updated_product_quantity = new ArrayList<>();
         updated_product_type = new ArrayList<>();
 
+        al_with_zero = new ArrayList<>();
+
 
         for (HashMap<String, String> hashMap : global.getAl_view_plan_details())
         {
@@ -68,11 +72,14 @@ public class ViewPlanProductAdapter extends BaseAdapter {
                 name.add(hashMap.get(GlobalConstants.ORDER_ITEM_NAME));
                 product_id.add(hashMap.get(GlobalConstants.PLAN_ELEMENT_ID));
                 al_quantity.add(hashMap.get(GlobalConstants.PLAN_ELEMENT_QUANTITY));
+
+                al_with_zero.add("0");
             }
 
         }
 
         ary_product_mod = new int[name.size()] ;
+        global.setAl_update_product_qty(al_with_zero);
 
     }
 
