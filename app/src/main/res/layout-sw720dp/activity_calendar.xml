@@ -73,34 +73,36 @@
 
     <ListView
         android:layout_width="700dp"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/rel_apmt_size"
+        android:layout_above="@+id/rel_continue"
         android:id="@+id/list"
         android:layout_centerHorizontal="true"
         android:fadeScrollbars="false"
         android:scrollbarSize="10dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
 
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="70dp"
         android:elevation="2dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         />
 
 
     <RelativeLayout
+        android:id="@+id/rel_continue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/list"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="70dp"
         android:layout_alignParentBottom="true">
 
         <TextView
