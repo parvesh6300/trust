@@ -19,23 +19,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="160dp"
         android:text="Hi,User Name"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:typeface="monospace"
         android:layout_below="@+id/iv_trust_logo"/>
 
     <TextView
         android:id="@+id/tv_logout"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="150dp"
         android:text="Logout"
         android:textColor="@color/purple"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:typeface="monospace"
         android:gravity="center"
@@ -43,11 +43,9 @@
         android:layout_below="@+id/tv_user_name"/>
 
 
-
-
     <GridView
         android:id="@+id/grid_view"
-        android:layout_width="500dp"
+        android:layout_width="700dp"
         android:layout_centerHorizontal="true"
         android:layout_height="fill_parent"
         android:numColumns="3"
@@ -55,7 +53,7 @@
         android:horizontalSpacing="10dp"
         android:verticalSpacing="30dp"
         android:gravity="center"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="330dp"
         android:stretchMode="columnWidth" />
 
 </RelativeLayout>

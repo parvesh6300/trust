@@ -17,13 +17,13 @@
         android:layout_marginTop="20dp"
         android:text="Shopping Cart"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:typeface="monospace" />
 
     <RelativeLayout
-        android:layout_width="500dp"
-        android:layout_height="720dp"
+        android:layout_width="650dp"
+        android:layout_height="1100dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@drawable/form_back"
@@ -34,8 +34,8 @@
 
         <RelativeLayout
             android:id="@+id/header1"
-            android:layout_width="500dp"
-            android:layout_height="40dp"
+            android:layout_width="650dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:background="@color/textColor"
             android:orientation="horizontal"
@@ -51,8 +51,9 @@
                 android:text="ITEM"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
+                android:layout_centerVertical="true"
                 android:typeface="monospace" />
 
             <TextView
@@ -64,8 +65,10 @@
                 android:gravity="center"
                 android:text="QUANTITY"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
+                android:layout_marginStart="30dp"
+                android:layout_centerVertical="true"
                 android:typeface="monospace" />
 
             <TextView
@@ -77,8 +80,10 @@
                 android:gravity="center"
                 android:text="PRICE"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
+                android:layout_marginStart="80dp"
+                android:layout_centerVertical="true"
                 android:typeface="monospace" />
 
 
@@ -98,12 +103,12 @@
             android:id="@+id/tv_check_out"
             android:background="@drawable/button_background"
             android:layout_width="360dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/white"
             android:text="Check Out"
             android:gravity="center"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:typeface="monospace"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
@@ -118,6 +123,7 @@
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
         android:visibility="gone"
         />
 

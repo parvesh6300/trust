@@ -28,6 +28,7 @@ public class ExpenseAdapter extends BaseAdapter {
     ArrayList<String> al_date= new ArrayList<>();
     ArrayList<String> al_expense_id= new ArrayList<>();
 
+    ArrayList<String> al_expense_remark= new ArrayList<>();
 
 
     Calendar cl= Calendar.getInstance();
@@ -37,9 +38,12 @@ public class ExpenseAdapter extends BaseAdapter {
     public ExpenseAdapter(Context mcontext)
     {
         this.context= mcontext;
+
         this.al_date= new ArrayList<>();
         this.al_expense_detail= new ArrayList<>();
         this.al_expense_amount= new ArrayList<>();
+
+        this.al_expense_remark = new ArrayList<>();
 
         global = (Global) context.getApplicationContext();
 
@@ -52,6 +56,7 @@ public class ExpenseAdapter extends BaseAdapter {
             al_expense_detail.add(hashmap.get(GlobalConstants.EXP_REASON));
             al_date.add(hashmap.get(GlobalConstants.EXP_DATE));
             al_expense_id.add(hashmap.get(GlobalConstants.EXP_ID));
+            al_expense_remark.add(hashmap.get(GlobalConstants.EXP_REMARKS));
         }
 
     }
@@ -83,8 +88,20 @@ public class ExpenseAdapter extends BaseAdapter {
         holder.tv_year.setText("'"+date[0]);
         holder.tv_date.setText(date[2]);
 
-        holder.tv_detail.setText(al_expense_detail.get(pos));
+
         holder.tv_amount.setText(al_expense_amount.get(pos)+" Tsh");
+
+        if (al_expense_detail.get(pos).equalsIgnoreCase("other"))
+        {
+            holder.tv_detail.setText(al_expense_detail.get(pos)+" - "+al_expense_remark.get(pos));
+        }
+        else
+        {
+            holder.tv_detail.setText(al_expense_detail.get(pos));
+        }
+
+
+
 
         return convertview;
     }

@@ -312,6 +312,7 @@ public class WebServices {
 
                     map.put(GlobalConstants.APMT_ID , jsonObject1.optString(GlobalConstants.APMT_ID));
                     map.put(GlobalConstants.APMT_CLIENT_ID , jsonObject1.optString(GlobalConstants.APMT_CLIENT_ID));
+                    map.put(GlobalConstants.APMT_CLIENT_NAME , jsonObject1.optString(GlobalConstants.APMT_CLIENT_NAME));
                     map.put(GlobalConstants.APMT_PLAN_ID , jsonObject1.optString(GlobalConstants.APMT_PLAN_ID));
                     map.put(GlobalConstants.APMT_SERVICE_ID , jsonObject1.optString(GlobalConstants.APMT_SERVICE_ID));
                     map.put(GlobalConstants.APMT_SERVICE_NAME , jsonObject1.optString(GlobalConstants.APMT_SERVICE_NAME));
@@ -1399,6 +1400,7 @@ public class WebServices {
                     map.put(GlobalConstants.EXP_AMOUNT , jsonObject1.optString(GlobalConstants.EXP_AMOUNT));
                     map.put(GlobalConstants.EXP_REASON , jsonObject1.optString(GlobalConstants.EXP_REASON));
                     map.put(GlobalConstants.EXP_DATE , jsonObject1.optString(GlobalConstants.EXP_DATE));
+                    map.put(GlobalConstants.EXP_REMARKS , jsonObject1.optString(GlobalConstants.EXP_REMARKS));
 
                     al_expense_history.add(map);
                 }

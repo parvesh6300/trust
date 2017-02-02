@@ -23,11 +23,13 @@
 
     <RelativeLayout
         android:layout_width="650dp"
-        android:layout_height="1100dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@drawable/form_back"
         android:orientation="vertical"
+        android:layout_above="@+id/gif_loader"
+        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/addclienttext">
 
@@ -93,7 +95,7 @@
         <ListView
             android:id="@+id/lv_cart_items"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/header1"
             android:layout_above="@+id/tv_check_out"
             android:descendantFocusability="beforeDescendants"/>
@@ -118,13 +120,13 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         />
 
 </RelativeLayout>

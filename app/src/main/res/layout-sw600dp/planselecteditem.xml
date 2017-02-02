@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="400dp"
+    android:layout_width="500dp"
     android:layout_height="90dp"
     android:orientation="horizontal"
     android:weightSum="3"
@@ -12,11 +12,12 @@
         android:layout_width="133dp"
         android:layout_height="wrap_content"
         android:textColor="@color/textColor"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:gravity="center"
         android:typeface="monospace"
         android:text="Consultation"
         android:layout_gravity="center"
+        android:layout_marginStart="20dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -24,12 +25,14 @@
         android:layout_width="133dp"
         android:layout_height="60dp"
         android:textColor="@color/textColor"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:gravity="center"
         android:typeface="monospace"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:layout_weight="1"
+        android:layout_marginStart="10dp"
+        android:text="20,000"
         android:layout_centerInParent="true"/>
 
     <TextView
@@ -37,12 +40,13 @@
         android:layout_width="133dp"
         android:layout_height="60dp"
         android:textColor="@color/textColor"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:gravity="center"
         android:typeface="monospace"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:layout_weight="1"
+        android:text="20,000"
         android:layout_centerInParent="true"/>
 
 

@@ -5,8 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -43,7 +41,7 @@ public class WithDrawMoneyActivity extends Activity {
     WebServices ws;
     Global global;
     String str_user_id;
-    String str_exp_rsn="",str_wd_amount,str_branch;
+    String str_exp_rsn="",str_wd_amount,str_branch,str_remarks;
 
     CustomDialogClass cdd;
 
@@ -97,36 +95,43 @@ public class WithDrawMoneyActivity extends Activity {
                 if (radio_petty_cash.isChecked())
                 {
                     str_exp_rsn = "Petty Cash";
+                    str_remarks = "NA";
                 }
                 else if (radio_running_exp.isChecked())
                 {
                     str_exp_rsn = "Running Expenses";
+                    str_remarks = "NA";
                 }
                 else if (radio_commodity.isChecked())
                 {
                     str_exp_rsn = "Commodities";
+                    str_remarks = "NA";
                 }
                 else if (radio_salary.isChecked())
                 {
                     str_exp_rsn = "Salaries";
+                    str_remarks = "NA";
                 }
                 else if (radio_rent.isChecked())
                 {
                     str_exp_rsn = "Rent";
+                    str_remarks = "NA";
                 }
                 else if (radio_consultancy.isChecked())
                 {
                     str_exp_rsn = "Consultancies";
+                    str_remarks = "NA";
                 }
                 else if (radio_equipment.isChecked())
                 {
                     str_exp_rsn = "Equipment";
+                    str_remarks = "NA";
                 }
                 else if (radio_other.isChecked())
                 {
-                    str_exp_rsn = ed_other.getText().toString();
+                    str_exp_rsn = "other";
+                    str_remarks = ed_other.getText().toString();
                 }
-
 
             }
         });
@@ -148,34 +153,22 @@ public class WithDrawMoneyActivity extends Activity {
                 {
                     Toast.makeText(WithDrawMoneyActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
                 }
-
                 else
                 {
+                    if (str_exp_rsn.equalsIgnoreCase("other"))
+                    {
+                        str_remarks = ed_other.getText().toString();
+                    }
+                    else
+                    {
+                        str_remarks = "NA";
+                    }
+
                     new GetBranchBalanceAsyncTask().execute();
                     str_wd_amount = ed_wd_amount.getText().toString();
 
                 }
 
-
-            }
-        });
-
-
-        ed_other.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-                str_exp_rsn = editable.toString();
 
             }
         });
@@ -218,7 +211,7 @@ public class WithDrawMoneyActivity extends Activity {
 
             tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" Tsh");
             tv_wd_amount.setText("WITHDRAW : "+str_wd_amount+" Tsh");
-            tv_balance.setText("BALANCE : "+String.valueOf(balance)+" Tsh");
+            tv_balance.setText("PROJECTED BALANCE : "+String.valueOf(balance)+" Tsh");
 
 
             confirm.setOnClickListener(new View.OnClickListener() {
@@ -281,6 +274,9 @@ public class WithDrawMoneyActivity extends Activity {
                 al_str_key.add(GlobalConstants.WD_REASON);
                 al_str_value.add(str_exp_rsn);
 
+                al_str_key.add(GlobalConstants.WD_REMARK);
+                al_str_value.add(str_remarks);
+
                 al_str_key.add(GlobalConstants.BRANCH);
                 al_str_value.add(str_branch);
 
@@ -306,7 +302,7 @@ public class WithDrawMoneyActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
 
             if (message.equalsIgnoreCase("true"))
             {
@@ -321,6 +317,7 @@ public class WithDrawMoneyActivity extends Activity {
 
 
     }
+
 
     public void insufficientDialog() {
 

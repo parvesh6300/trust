@@ -237,7 +237,7 @@ public class CartActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
             tv_check_out.setEnabled(true);
 
             if (message.equalsIgnoreCase("true"))

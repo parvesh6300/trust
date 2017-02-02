@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Generate Invoice"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:textAlignment="gravity"
         android:gravity="center_horizontal"
@@ -22,8 +22,8 @@
 
     <LinearLayout
         android:id="@+id/id_receipt"
-        android:layout_width="500dp"
-        android:layout_height="550dp"
+        android:layout_width="600dp"
+        android:layout_height="600dp"
         android:layout_below="@id/addclienttext"
         android:layout_centerInParent="true"
         android:background="@drawable/receipt_back"
@@ -33,7 +33,7 @@
 
         <RelativeLayout
             android:layout_width="400dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginTop="40dp"
             android:gravity="center_horizontal">
 
@@ -45,7 +45,7 @@
                 android:layout_centerVertical="true"
                 android:text="Amount(Tsh) :"
                 android:textColor="@color/purple"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:typeface="monospace" />
 
             <TextView
@@ -57,7 +57,7 @@
                 android:layout_toRightOf="@id/contact_text"
                 android:text="2300"
                 android:textColor="@color/textColor"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -65,7 +65,7 @@
 
         <RelativeLayout
             android:layout_width="400dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal">
 
@@ -77,7 +77,7 @@
                 android:layout_centerVertical="true"
                 android:text="Discount      :"
                 android:textColor="@color/purple"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:typeface="monospace" />
 
             <TextView
@@ -88,9 +88,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/discount_text"
                 android:text="230"
-
                 android:textColor="@color/textColor"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -110,7 +109,7 @@
                 android:layout_centerVertical="true"
                 android:text="Net Amount Paid:"
                 android:textColor="@color/purple"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:typeface="monospace" />
 
             <TextView
@@ -122,7 +121,7 @@
                 android:layout_toRightOf="@id/_text"
                 android:text="2070"
                 android:textColor="@color/textColor"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -130,7 +129,7 @@
 
         <RelativeLayout
             android:layout_width="400dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="35dp">
 
@@ -142,7 +141,7 @@
                 android:layout_centerVertical="true"
                 android:text="By Cash"
                 android:textColor="@color/purple"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:typeface="monospace" />
 
         </RelativeLayout>
@@ -166,12 +165,12 @@
         <TextView
             android:id="@+id/tv_continue"
             android:background="@drawable/button_background"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_width="230dp"
+            android:layout_height="60dp"
             android:textColor="@color/white"
             android:text="Continue"
             android:gravity="center"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:typeface="monospace"
             android:layout_marginBottom="20dp"
             android:layout_centerHorizontal="true"/>

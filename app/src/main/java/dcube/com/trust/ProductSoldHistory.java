@@ -223,12 +223,10 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
 
             if (message.equalsIgnoreCase("true"))
             {
-
-
                // tv_total_sale.setText("Total Sale : "+global.getStr_total_sale());
 
                 soldProductAdapter= new SoldProductAdapter(context);

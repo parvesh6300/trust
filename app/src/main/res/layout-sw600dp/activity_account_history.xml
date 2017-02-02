@@ -1,12 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".AccountHistoryActivity">
+    android:background="@drawable/background_1"
+    android:orientation="vertical"
+    tools:context=".ExpenseHistoryActivity">
 
-</RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:text="Account History"
+        android:id="@+id/addclienttext"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="700dp"
+        android:layout_height="1150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/form_back">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/tv_balance_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Account Balance : "
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+
+            <TextView
+                android:id="@+id/tv_total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="0 Tsh"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:typeface="monospace"
+                android:layout_toRightOf="@+id/tv_balance_label"
+                android:layout_marginRight="20dp"/>
+
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/textColor"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="140dp"
+                android:layout_height="60dp"
+                android:text="Date"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_expense"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Transaction"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginStart="30dp"
+                android:textColor="@color/white"
+                android:layout_toEndOf="@+id/tv_date"
+                android:layout_toStartOf="@+id/tv_amount"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="Amount"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="60dp"
+                />
+
+
+        </RelativeLayout>
+
+
+
+        <ListView
+            android:id="@+id/list_expense"
+            android:layout_width="match_parent"
+            android:layout_height="900dp"
+            android:scrollbars="none"
+            android:padding="20dp"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
+
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_background"
+                android:gravity="center"
+                android:text="Back"
+                android:typeface="monospace"
+                android:textAlignment="gravity"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <pl.droidsonroids.gif.GifTextView
+        android:id="@+id/gif_loader"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/loading"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+        />
+
+</LinearLayout>

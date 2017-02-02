@@ -27,12 +27,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_below="@+id/addclienttext"
         android:layout_above="@+id/gif_loader">
 
         <RelativeLayout
             android:layout_width="650dp"
-            android:layout_height="1100dp"
+            android:layout_height="match_parent"
             android:background="@drawable/form_back"
             android:layout_gravity="center"
             android:gravity="center">
@@ -43,8 +45,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_centerHorizontal="true">
 
                 <TextView
@@ -100,7 +102,7 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:gravity="center"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:layout_below="@+id/amount_layout" />
 
 
@@ -119,7 +121,7 @@
                     android:id="@+id/radio_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="10dp">
 
                     <RadioButton
                         android:id="@+id/radio_petty_cash"
@@ -213,7 +215,7 @@
                 <EditText
                     android:id="@+id/ed_other"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="130dp"
                     android:layout_marginTop="10dp"
                     android:hint="Specify Reason"
                     android:gravity="top|left"
@@ -264,8 +266,8 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/loading"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentBottom="true"

@@ -114,6 +114,7 @@ public class GlobalConstants {
     // ************************************* Add/GET Apppointment VARIABLES  ****************************************************
 
     public static final String APMT_CLIENT_ID = "client_id";
+    public static final String APMT_CLIENT_NAME = "client_name";
     public static final String APMT_ID = "appointment_id";
     public static final String APMT_PLAN_ID = "plan_id";
     public static final String APMT_SERVICE_ID = "service_id";
@@ -224,6 +225,7 @@ public class GlobalConstants {
     public static final String EXP_REASON = "expense_reason";
     public static final String EXP_ID = "expense_id";
     public static final String EXP_DATE = "created";
+    public static final String EXP_REMARKS = "remarks";
 
 
     // *************************************  PENDING PAYMENT VARIABLES  ****************************************************
@@ -252,6 +254,7 @@ public class GlobalConstants {
     public static final String WD_REASON = "reason";
     public static final String WD_USER_ID = "user_id";
     public static final String WD_DATE = "created";
+    public static final String WD_REMARK = "remarks";
 
 
     // *************************************  REVENUE VARIABLES  ****************************************************

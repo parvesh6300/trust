@@ -1,6 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="500dp"
+    android:layout_height="700dp"
+    tools:context="dcube.com.trust.UpdatePlanActivity">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:text="Plan Details"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:background="@color/textColor"
+        android:textStyle="bold"
+        android:typeface="monospace" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1150dp"
+        android:layout_below="@+id/header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/form_back"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/lin_product_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_products"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:text="Products"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:background="@color/textColor"
+                android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/tv_product_qty"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:text="Quantity"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:background="@color/textColor"
+                android:typeface="monospace" />
+
+        </LinearLayout>
+
+
+
+
+        <ListView
+            android:id="@+id/lv_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lin_service_header"
+            android:layout_below="@+id/lin_product_header"/>
+
+        <LinearLayout
+            android:id="@+id/lin_service_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_service"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:text="Services"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:background="@color/textColor"
+                android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/tv_service_qty"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:text="Visits"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:background="@color/textColor"
+                android:typeface="monospace" />
+
+        </LinearLayout>
+
+
+
+        <ListView
+            android:id="@+id/lv_services"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lin_bottom"
+            android:layout_below="@+id/lin_service_header"/>
+
+        <LinearLayout
+            android:id="@+id/lin_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:gravity="center"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Cancel"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:background="@color/textColor"/>
+
+            <TextView
+                android:id="@+id/tv_add_to_cart"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Add to Cart"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:background="@color/textColor"/>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

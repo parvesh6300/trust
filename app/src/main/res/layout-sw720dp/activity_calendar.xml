@@ -27,7 +27,7 @@
     <dcube.com.trust.CalendarCustomView
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="520dp"
         android:layout_below="@id/header"/>
 
     <RelativeLayout
@@ -37,7 +37,7 @@
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:background="@color/white"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/calendar_view">
 
         <TextView
@@ -91,6 +91,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
+        android:elevation="2dp"
         android:visibility="gone"
         />
 

@@ -68,13 +68,13 @@ public class PendingPaymentAdapter extends BaseAdapter {
 
 
     @Override
-    public View getView(int pos, View convertview, ViewGroup viewGroup) {
+    public View getView(int pos, View convertview, ViewGroup parent) {
 
 
 
         ViewHolder holder= new ViewHolder();
 
-        convertview= inflater.inflate(R.layout.pending_payment_list,null);
+        convertview= inflater.inflate(R.layout.pending_payment_list,parent,false);
 
         holder.tv_date= (TextView)convertview.findViewById(R.id.tv_date);
         holder.tv_month= (TextView)convertview.findViewById(R.id.tv_month);

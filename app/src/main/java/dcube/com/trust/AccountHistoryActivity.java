@@ -28,7 +28,7 @@ public class AccountHistoryActivity extends Activity {
 
     ExpenseAdapter expenseAdapter;
 
-       TextView tv_total_amount;
+    TextView tv_total_amount;
 
     TextView tv_submit;
 
@@ -49,7 +49,6 @@ public class AccountHistoryActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_account_history);
-
 
         global = (Global) getApplicationContext();
 
@@ -138,7 +137,7 @@ public class AccountHistoryActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
 
             if (message.equalsIgnoreCase("true"))
             {

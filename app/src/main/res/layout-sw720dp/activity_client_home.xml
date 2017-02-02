@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="150dp"
+        android:layout_marginLeft="110dp"
         android:text="Hi, User Name"
         android:textColor="@color/white"
         android:textSize="35sp"
@@ -33,7 +33,7 @@
         android:layout_width="140dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="150dp"
+        android:layout_marginLeft="110dp"
         android:text="Logout"
         android:textColor="@color/purple"
         android:textSize="30sp"
@@ -49,7 +49,7 @@
         android:layout_below="@+id/iv_trust_logo"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="160dp">
+        android:layout_marginEnd="100dp">
 
         <ImageView
             android:id="@+id/iv_cart"

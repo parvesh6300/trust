@@ -163,9 +163,9 @@ public class StockControlActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-            if (message.equalsIgnoreCase("true")) {
+            gif_loader.setVisibility(View.INVISIBLE);
 
-                gif_loader.setVisibility(View.GONE);
+            if (message.equalsIgnoreCase("true")) {
 
                 stockAdapter = new StockAdapter(context,"");
                 stock_list.setAdapter(stockAdapter);

@@ -57,9 +57,6 @@ public class NurseHomeActivity extends Activity {
         gridView.setAdapter(adapter);
 
         tv_user_name.setText("Hi, "+global.getAl_login_list().get(0).get(GlobalConstants.USER_NAME));
-        
-
-        global.setAppointmentSelected(false);
 
 
         tv_logout.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +88,7 @@ public class NurseHomeActivity extends Activity {
 
                     case 2:
 
+                        global.setAppointmentSelected(false);
                         startActivity(new Intent(NurseHomeActivity.this,CalendarActivity.class));
                         break;
 

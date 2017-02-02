@@ -215,9 +215,7 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                     }
 
-
                 }
-
 
 //                global.setAl_select_product(selected_product_id);
 //                global.setAl_selected_product_quantity(selected_product_quantity);
@@ -261,9 +259,6 @@ public class GuestProductListAdapter extends BaseAdapter {
                         selected_product_price.add(price.get(position));
 
                     }
-
-
-
 
 //                    global.setAl_select_product(selected_product_id);
 //                    global.setAl_selected_product_quantity(selected_product_quantity);
@@ -351,12 +346,15 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                             }
 
-                            global.setAl_select_product(selected_product_id);
-                            global.setAl_selected_product_quantity(selected_product_quantity);
-                            global.setAl_selected_product_category(selected_product_category);
-                            global.setAl_selected_product_price(selected_product_price);
-                            global.setAl_selected_product_sku(selected_product_sku);
-                            global.setAl_selected_product_name(selected_product_name);
+                            setArrayListInGlobalList();
+
+//                            global.setAl_select_product(selected_product_id);
+//                            global.setAl_selected_product_quantity(selected_product_quantity);
+//                            global.setAl_selected_product_category(selected_product_category);
+//                            global.setAl_selected_product_price(selected_product_price);
+//                            global.setAl_selected_product_sku(selected_product_sku);
+//                            global.setAl_selected_product_name(selected_product_name);
+
                         }
                         else
                         {
@@ -380,12 +378,14 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                         }
 
-                        global.setAl_select_product(selected_product_id);
-                        global.setAl_selected_product_quantity(selected_product_quantity);
-                        global.setAl_selected_product_category(selected_product_category);
-                        global.setAl_selected_product_price(selected_product_price);
-                        global.setAl_selected_product_sku(selected_product_sku);
-                        global.setAl_selected_product_name(selected_product_name);
+                        setArrayListInGlobalList();
+//                        global.setAl_select_product(selected_product_id);
+//                        global.setAl_selected_product_quantity(selected_product_quantity);
+//                        global.setAl_selected_product_category(selected_product_category);
+//                        global.setAl_selected_product_price(selected_product_price);
+//                        global.setAl_selected_product_sku(selected_product_sku);
+//                        global.setAl_selected_product_name(selected_product_name);
+
 
 
                         Toast.makeText(context, "Quantity should be greater than 0", Toast.LENGTH_SHORT).show();
@@ -394,7 +394,6 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                     Log.i("Product","id "+selected_product_id);
                     Log.i("Product","Qty "+selected_product_quantity);
-
 
                 }
                 catch (Exception e)
@@ -407,6 +406,18 @@ public class GuestProductListAdapter extends BaseAdapter {
 
 
         return rowView;
+    }
+
+
+
+    public void setArrayListInGlobalList()
+    {
+        global.setAl_select_product(selected_product_id);
+        global.setAl_selected_product_quantity(selected_product_quantity);
+        global.setAl_selected_product_category(selected_product_category);
+        global.setAl_selected_product_price(selected_product_price);
+        global.setAl_selected_product_sku(selected_product_sku);
+        global.setAl_selected_product_name(selected_product_name);
     }
 
 

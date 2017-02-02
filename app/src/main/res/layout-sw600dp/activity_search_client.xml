@@ -17,28 +17,31 @@
 
     <RelativeLayout
         android:id="@+id/spin"
-        android:layout_width="550dp"
-        android:layout_height="70dp"
+        android:layout_width="640dp"
+        android:layout_height="80dp"
         android:layout_below="@+id/toplogo"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:background="@drawable/searchback">
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="match_parent"
+            android:layout_width="600dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp" />
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            />
 
     </RelativeLayout>
 
 
     <RelativeLayout
         android:id="@+id/search_layout"
-        android:layout_width="550dp"
-        android:layout_height="70dp"
+        android:layout_width="640dp"
+        android:layout_height="80dp"
         android:layout_below="@id/spin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/searchback">
 
         <EditText
@@ -47,11 +50,12 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:background="@android:color/transparent"
-            android:hint="Search Clients, UID, Name, Contact"
+            android:hint="Search Client : Name, Contact"
             android:textColorHint="@color/graytext"
             android:singleLine="true"
-            android:textSize="25sp"
+            android:textSize="30sp"
             android:textStyle="bold"
+            android:paddingStart="10dp"
             android:typeface="monospace" />
 
         <ImageView
@@ -68,18 +72,18 @@
 
 
     <RelativeLayout
-        android:layout_width="500dp"
-        android:layout_height="500dp"
+        android:layout_width="600dp"
+        android:layout_height="900dp"
         android:layout_below="@id/search_layout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/form_back">
 
 
         <LinearLayout
             android:id="@+id/header"
-            android:layout_width="500dp"
-            android:layout_height="40dp"
+            android:layout_width="600dp"
+            android:layout_height="60dp"
             android:layout_centerHorizontal="true"
             android:background="@color/textColor"
             android:orientation="horizontal"
@@ -89,10 +93,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_gravity="center"
                 android:gravity="center"
                 android:text="Name"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -102,8 +107,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Branch"
+                android:layout_gravity="center"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -113,8 +119,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Contact"
+                android:layout_gravity="center"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -126,6 +133,20 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/header"
             android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/tv_no_client"
+            android:layout_width="600dp"
+            android:layout_height="100dp"
+            android:text="No Client Found"
+            android:textSize="35sp"
+            android:textColor="@color/textColor"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/header"
+            android:visibility="gone"
+            android:layout_centerInParent="true"/>
 
     </RelativeLayout>
 

@@ -1,122 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dcube.com.trust.AddAppointmentActivity"
-    android:background="@drawable/background_1">
+    android:background="@drawable/background_1"
+    tools:context="dcube.com.trust.AddAppointmentActivity">
 
     <TextView
+        android:id="@+id/addclienttext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/white"
-        android:text="Book Appointment"
-        android:id="@+id/addclienttext"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:typeface="monospace"
         android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true" />
+        android:text="Book Appointment"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:typeface="monospace" />
 
     <LinearLayout
-        android:layout_width="500dp"
-        android:layout_height="480dp"
-        android:background="@drawable/form_back"
-        android:orientation="vertical"
-        android:elevation="4dp"
-        android:layout_centerVertical="true"
+        android:id="@+id/linearLayout"
+        android:layout_width="600dp"
+        android:layout_height="520dp"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout">
+        android:layout_centerVertical="true"
+        android:background="@drawable/form_back"
+        android:elevation="4dp"
+        android:orientation="vertical">
+
 
         <LinearLayout
-            android:layout_width="400dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="500dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             android:weightSum="2">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
-                android:textSize="25sp"
-                android:typeface="monospace"
-                android:textStyle="bold"
-                android:textColor="@color/purple"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:text="Name"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
 
             <EditText
                 android:id="@+id/ed_name"
-                android:layout_width="280dp"
+                android:layout_width="350dp"
                 android:layout_height="match_parent"
-                android:typeface="monospace"
-                android:textColor="@color/textColor"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:textSize="25sp"
-                android:inputType="textNoSuggestions"
+                android:layout_weight="1"
                 android:editable="false"
-                />
+                android:inputType="textNoSuggestions"
+                android:textColor="@color/textColor"
+                android:textSize="30sp"
+                android:typeface="monospace" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="400dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="500dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             android:weightSum="2">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact"
-                android:textSize="25sp"
-                android:typeface="monospace"
-                android:textStyle="bold"
-                android:textColor="@color/purple"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:text="Contact"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
 
             <EditText
                 android:id="@+id/ed_contact"
-                android:layout_width="280dp"
+                android:layout_width="350dp"
                 android:layout_height="match_parent"
-                android:typeface="monospace"
-                android:textColor="@color/textColor"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:textSize="25sp"
-                android:inputType="textEmailAddress"
+                android:layout_weight="1"
                 android:editable="false"
-                />
+                android:inputType="textEmailAddress"
+                android:textColor="@color/textColor"
+                android:textSize="30sp"
+                android:typeface="monospace" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="400dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="500dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             android:weightSum="2">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Plan"
-                android:textSize="25sp"
-                android:typeface="monospace"
-                android:textStyle="bold"
-                android:textColor="@color/purple"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:text="Plan"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
 
             <EditText
                 android:id="@+id/ed_plan"
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:typeface="monospace"
                 android:textColor="@color/textColor"
@@ -128,98 +126,98 @@
                 />
 
             <!--<com.weiwangcn.betterspinner.library.BetterSpinner-->
-                <!--android:layout_width="280dp"-->
+                <!--android:id="@+id/service"-->
+                <!--android:layout_width="350dp"-->
                 <!--android:layout_height="match_parent"-->
-                <!--android:typeface="monospace"-->
-                <!--android:layout_weight="1"-->
                 <!--android:layout_gravity="center"-->
-                <!--android:textSize="25sp"-->
-                <!--android:id="@+id/service"/>-->
+                <!--android:layout_weight="1"-->
+                <!--android:textSize="30sp"-->
+                <!--android:typeface="monospace" />-->
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="400dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="500dp"
+            android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             android:weightSum="2">
 
             <RelativeLayout
-                android:layout_width="180dp"
+                android:id="@+id/datepicker"
+                android:layout_width="220dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/textarea"
-                android:id="@+id/datepicker">
+                android:background="@drawable/textarea">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/cal_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:layout_centerVertical="true" />
+                    android:src="@drawable/cal_icon" />
 
                 <TextView
+                    android:id="@+id/datepick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date"
-                    android:textSize="20sp"
-                    android:typeface="monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/textColor"
-                    android:layout_gravity="center"
-                    android:id="@+id/datepick"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
                     android:layout_marginRight="20dp"
-                    android:layout_centerVertical="true"/>
+                    android:text="Date"
+                    android:textColor="@color/textColor"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
 
             </RelativeLayout>
 
             <View
                 android:layout_width="40dp"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <RelativeLayout
-                android:layout_width="180dp"
+                android:id="@+id/timepicker"
+                android:layout_width="220dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/textarea"
                 android:layout_weight="1"
-                android:id="@+id/timepicker">
+                android:background="@drawable/textarea">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/clock"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/clock" />
 
                 <TextView
+                    android:id="@+id/timepick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Time"
-                    android:textSize="20sp"
-                    android:typeface="monospace"
-                    android:textStyle="bold"
-                    android:textColor="@color/textColor"
-                    android:id="@+id/timepick"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginRight="40dp"
-                    android:layout_centerVertical="true"/>
+                    android:text="Time"
+                    android:textColor="@color/textColor"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
 
             </RelativeLayout>
 
         </LinearLayout>
 
         <TextView
-            android:background="@drawable/button_background"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:text="Add Appointment"
             android:id="@+id/add"
+            android:layout_width="330dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_background"
             android:gravity="center"
-            android:textSize="25sp"
+            android:text="Add Appointment"
+            android:textColor="@color/white"
+            android:textSize="30sp"
             android:typeface="monospace" />
 
     </LinearLayout>
@@ -228,12 +226,11 @@
         android:id="@+id/gif_loader"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@drawable/loading"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp"
-        android:visibility="gone"
-        />
+        android:background="@drawable/loading"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

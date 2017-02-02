@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="650dp"
+    android:layout_height="100dp"
+    android:orientation="horizontal">
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:textColor="@color/textColor"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:text="Fiesta"
+        android:layout_gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/category"
+        android:textColor="@color/textColor"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:typeface="monospace"
+        android:text="Condom"
+        android:layout_below="@+id/name"
+        android:layout_gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_centerVertical="true"/>
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:layout_marginRight="50dp">
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="-"
+            android:textSize="40sp"
+            android:textColor="@color/textColor"
+            android:layout_weight="1"
+            android:typeface="monospace"
+            android:id="@+id/minus"
+            android:layout_gravity="center"
+            android:layout_centerVertical="true"/>
+
+        <EditText
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/quantity"
+            android:background="@drawable/circle"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:typeface="monospace"
+            android:text="0"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:inputType="number"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="40sp"
+            android:textColor="@color/textColor"
+            android:id="@+id/add"
+            android:typeface="monospace"
+            android:layout_gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

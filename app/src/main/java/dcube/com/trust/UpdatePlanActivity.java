@@ -1,6 +1,7 @@
 package dcube.com.trust;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -68,78 +69,15 @@ public class UpdatePlanActivity extends Activity {
 
         tv_update_plan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                al_element_id = new ArrayList<String>();
-                al_element_qty = new ArrayList<String>();
-                al_element_type = new ArrayList<String>();
-
-
-                for (int i =0 ; i < global.getAl_update_product_qty().size() ; i++)
-                {
-                    al_element_qty.add(global.getAl_update_product_qty().get(i));
-                }
-
-                for (int i =0 ; i < global.getAl_update_service_qty().size() ; i++)
-                {
-                    al_element_qty.add(global.getAl_update_service_qty().get(i));
-                }
-
-
-
-                if (global.getAl_view_plan_details().size() > 0)
-                {
-                    for (int i=0 ; i < global.getAl_view_plan_details().size() ; i++)
-                    {
-                        if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Product"))
-                        {
-                            al_element_type.add("Product");
-                            al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
-                        }
-
-//                        if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
-//                        {
-//                            al_element_type.add("Service");
-//                            al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
-//                        }
-
-                    }
-
-                    for (int i=0 ; i < global.getAl_view_plan_details().size() ; i++)
-                    {
-//                        if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Product"))
-//                        {
-//                            al_element_type.add("Product");
-//                            al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
-//                        }
-
-                        if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
-                        {
-                            al_element_type.add("Service");
-                            al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
-                        }
-
-                    }
-
-
-                    if (cn.isNetConnected())
-                    {
-                        new UpdatePlanAsyncTask().execute();
-                    }
-                    else {
-                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-
+            public void onClick(View view)
+            {
+               showAlertDialog();
             }
         });
 
 
 
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
-
-     //   str_plan_id = global.getAl_view_plan_details().get(global.getViewPlanSelectPos()).get(GlobalConstants.PLAN_ID);
 
         str_plan_id = global.getStr_selected_plan_id();
 
@@ -204,7 +142,7 @@ public class UpdatePlanActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
 
             if (message.equalsIgnoreCase("true"))
             {
@@ -299,7 +237,7 @@ public class UpdatePlanActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
 
             tv_update_plan.setEnabled(true);
 
@@ -318,6 +256,107 @@ public class UpdatePlanActivity extends Activity {
 
     }
 
+
+    public void showAlertDialog()
+    {
+
+        final Dialog alertDialog = new Dialog(context);
+
+        alertDialog.setContentView(R.layout.stockalertdialog);
+        //alertDialog.create();
+        alertDialog.show();
+
+        TextView tv_yes = (TextView) alertDialog.findViewById(R.id.tv_yes);
+        TextView tv_no = (TextView) alertDialog.findViewById(R.id.tv_no);
+        TextView tv_message = (TextView) alertDialog.findViewById(R.id.tv_message);
+
+        tv_message.setText("Are you Sure ?");
+
+        tv_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                addElements();
+                alertDialog.cancel();
+
+            }
+        });
+
+        tv_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                alertDialog.cancel();
+            }
+        });
+    }
+
+
+    public void addElements()
+    {
+        al_element_id = new ArrayList<String>();
+        al_element_qty = new ArrayList<String>();
+        al_element_type = new ArrayList<String>();
+
+
+        for (int i =0 ; i < global.getAl_update_product_qty().size() ; i++)
+        {
+            al_element_qty.add(global.getAl_update_product_qty().get(i));
+        }
+
+        for (int i =0 ; i < global.getAl_update_service_qty().size() ; i++)
+        {
+            al_element_qty.add(global.getAl_update_service_qty().get(i));
+        }
+
+
+
+        if (global.getAl_view_plan_details().size() > 0)
+        {
+            for (int i=0 ; i < global.getAl_view_plan_details().size() ; i++)
+            {
+                if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Product"))
+                {
+                    al_element_type.add("Product");
+                    al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
+                }
+
+//                        if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
+//                        {
+//                            al_element_type.add("Service");
+//                            al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
+//                        }
+
+            }
+
+            for (int i=0 ; i < global.getAl_view_plan_details().size() ; i++)
+            {
+//                        if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Product"))
+//                        {
+//                            al_element_type.add("Product");
+//                            al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
+//                        }
+
+                if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
+                {
+                    al_element_type.add("Service");
+                    al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
+                }
+
+            }
+
+
+            if (cn.isNetConnected())
+            {
+                new UpdatePlanAsyncTask().execute();
+            }
+            else {
+                Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
 
 
 }

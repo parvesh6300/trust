@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp">
 
         <RelativeLayout
-            android:layout_width="80dp"
-            android:layout_height="90dp"
+            android:id="@+id/rel_date"
+            android:layout_width="100dp"
+            android:layout_height="110dp"
             android:padding="2dp"
             android:background="@drawable/dategradient">
 
@@ -23,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20"
-                android:textSize="40sp"
+                android:textSize="45sp"
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"
                 android:textStyle="bold"
@@ -43,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="OCT "
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:layout_marginTop="2dp"
                 android:textColor="@color/white"
                 android:typeface="monospace"
@@ -55,8 +57,8 @@
                 android:id="@+id/tv_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="'16"
-                android:textSize="16sp"
+                android:text="'20"
+                android:textSize="24sp"
                 android:layout_marginTop="2dp"
                 android:layout_below="@+id/divider"
                 android:textStyle="bold"
@@ -69,14 +71,17 @@
 
         <TextView
             android:id="@+id/tv_detail"
-            android:layout_width="210dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sales Deposit"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:textColor="@color/purple"
             android:layout_gravity="center"
+            android:gravity="center"
             android:typeface="monospace"
-            android:layout_marginLeft="20dp"/>
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/rel_date"
+            android:layout_toStartOf="@+id/tv_amount" />
 
 
         <TextView
@@ -84,14 +89,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4000 Tsh"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:textColor="@color/purple"
             android:layout_gravity="center"
             android:typeface="monospace"
-            android:layout_marginLeft="10dp"/>
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="60dp"/>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <View

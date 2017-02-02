@@ -20,16 +20,19 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="650dp"
-        android:layout_height="1100dp"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/header"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/gif_loader"
         android:orientation="vertical"
         android:background="@drawable/form_back">
 
         <LinearLayout
+            android:id="@+id/lin_header"
             android:layout_width="650dp"
             android:layout_height="60dp"
             android:orientation="horizontal"
@@ -63,7 +66,10 @@
         <ListView
             android:id="@+id/lv_services"
             android:layout_width="match_parent"
-            android:layout_height="900dp"/>
+            android:layout_height="850dp"
+            android:layout_above="@+id/tv_select_plan"
+            android:layout_below="@+id/lin_header"
+            android:layout_marginBottom="30dp"/>
 
 
         <TextView
@@ -74,23 +80,25 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:typeface="monospace"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentBottom="true"
             android:gravity="center"
-            android:layout_marginTop="20dp"
             android:textColor="@color/white"
             android:background="@color/textColor"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         />
 
 

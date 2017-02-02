@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,17 +22,17 @@
         android:typeface="monospace" />
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/lin_payment_detail"
         android:layout_width="650dp"
-        android:layout_height="1100dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/tv_header"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/gif_loader"
         android:background="@drawable/form_back"
         android:orientation="vertical">
-
-
 
 
         <LinearLayout
@@ -50,6 +51,7 @@
                 android:textSize="30sp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:layout_marginStart="30dp"
                 android:paddingEnd="20dp"
                 android:typeface="monospace" />
 
@@ -79,15 +81,19 @@
         <ListView
             android:id="@+id/lv_payment_details"
             android:layout_width="match_parent"
-            android:layout_height="680dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header"
+            android:layout_above="@+id/lin_total_cost"
             android:layout_marginTop="2dp"/>
 
         <LinearLayout
+            android:id="@+id/lin_total_cost"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
+            android:layout_above="@+id/lin_paid_amount"
             android:background="@color/textColor">
 
             <TextView
@@ -113,9 +119,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lin_paid_amount"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:gravity="center"
+            android:layout_above="@+id/lin_pending_amount"
             android:orientation="horizontal"
             android:background="@color/textColor">
 
@@ -143,9 +151,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lin_pending_amount"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:gravity="center"
+            android:layout_above="@+id/rel_pay"
             android:orientation="horizontal"
             android:background="@color/textColor">
 
@@ -176,10 +186,10 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/rel_pay"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/lin_payment_detail">
+            android:layout_alignParentBottom="true">
 
 
             <TextView
@@ -198,18 +208,18 @@
         </RelativeLayout>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         />
 
 

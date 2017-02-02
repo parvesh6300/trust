@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,17 +23,22 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="700dp"
-        android:layout_height="1150dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/addclienttext"
+        android:layout_above="@+id/gif_loader"
         android:orientation="vertical"
         android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/form_back">
 
 
         <RelativeLayout
+            android:id="@+id/rel_ac_balance"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_gravity="center"
@@ -70,9 +76,11 @@
 
 
         <RelativeLayout
+            android:id="@+id/rel_header"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/textColor"
+            android:layout_below="@+id/rel_ac_balance"
             android:gravity="center">
 
             <TextView
@@ -129,16 +137,20 @@
         <ListView
             android:id="@+id/list_expense"
             android:layout_width="match_parent"
-            android:layout_height="900dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rel_header"
+            android:layout_above="@+id/rel_back"
             android:scrollbars="none"
             android:padding="20dp"/>
 
 
         <RelativeLayout
+            android:id="@+id/rel_back"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
+            android:gravity="center"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_alignParentBottom="true">
 
 
             <TextView
@@ -157,17 +169,19 @@
 
         </RelativeLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/loading"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:visibility="gone"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
         />
 
-</LinearLayout>
+</RelativeLayout>

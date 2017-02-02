@@ -237,7 +237,7 @@ public class SearchClientActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
             searchlist.setEnabled(true);
 
             if (message.equalsIgnoreCase("true"))

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,9 @@
 
 
     <RelativeLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
         android:layout_height="80dp">
 
         <TextView
@@ -29,9 +32,11 @@
 
 
     <LinearLayout
+        android:id="@+id/lin_radio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@+id/header">
 
 
         <LinearLayout
@@ -39,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:gravity="center"
             android:background="@drawable/form_back"
             android:orientation="vertical"
             android:padding="10dp">
@@ -137,9 +143,11 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lin_chart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_below="@+id/lin_radio"
         android:orientation="horizontal">
 
 
@@ -156,7 +164,7 @@
         <lecho.lib.hellocharts.view.LineChartView
             android:id="@+id/chart"
             android:layout_width="wrap_content"
-            android:layout_height="750dp"
+            android:layout_height="600dp"
             android:layout_gravity="center"
             android:layout_marginEnd="15dp"
             android:layout_marginTop="10dp" />
@@ -174,17 +182,21 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/lin_chart"
         android:typeface="monospace" />
 
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/loading"
-        android:visibility="gone" />
+        android:visibility="invisible" />
 
 
-</LinearLayout>
+</RelativeLayout>
