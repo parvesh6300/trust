@@ -3,20 +3,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true">
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
+        android:id="@+id/layout_payment"
         android:layout_width="600dp"
-        android:layout_height="800dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/addclienttext"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:background="@drawable/form_back"
         android:elevation="4dp"
         android:orientation="vertical"
-        android:id="@+id/layout_payment"
         android:padding="20dp">
 
         <RelativeLayout
@@ -154,13 +152,54 @@
                 android:paddingRight="10dp"
                 android:textColor="@color/textColor"
                 android:textSize="30sp"
+                android:maxLength="2"
                 android:typeface="monospace" />
 
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_payable_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Payable Amount(Tsh) "
+                android:textColor="@color/purple"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+            <EditText
+                android:id="@+id/ed_payable_amount"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/tv_payable_amount"
+                android:background="@drawable/textarea"
+                android:clickable="false"
+                android:editable="false"
+                android:gravity="right|center_vertical"
+                android:inputType="number"
+                android:paddingRight="10dp"
+                android:textColor="@color/textColor"
+                android:textSize="30sp"
+                android:typeface="monospace" />
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp">
 
@@ -224,6 +263,48 @@
 
             </RadioGroup>
 
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rel_partial_layout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_partial_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Pay (Tsh) "
+                android:textColor="@color/purple"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+            <EditText
+                android:id="@+id/ed_partial_amount"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/tv_partial_label"
+                android:background="@drawable/textarea"
+                android:clickable="false"
+                android:editable="false"
+                android:gravity="right|center_vertical"
+                android:inputType="number"
+                android:paddingRight="10dp"
+                android:textColor="@color/textColor"
+                android:textSize="30sp"
+                android:typeface="monospace" />
+
         </RelativeLayout>
 
         <LinearLayout
@@ -270,13 +351,12 @@
     </LinearLayout>
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:gravity="center"
+        android:layout_below="@+id/layout_payment"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/layout_payment">
+        android:gravity="center">
 
         <pl.droidsonroids.gif.GifTextView
             android:id="@+id/gif_loader"
@@ -285,7 +365,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/loading"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </RelativeLayout>
 

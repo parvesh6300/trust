@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,29 +35,41 @@ public class PaymentDetailFragment extends Fragment {
     ViewPager viewPager;
     int nextFragment;
 
-    RadioGroup radio_group_payment,radio_group_payment_mode;
-    RadioButton radio_mpesa,radio_cash,radio_insurance;
-    RadioButton radio_partial,radio_partial_grant,radio_full;
+    RadioGroup radio_group_payment, radio_group_payment_mode;
+    RadioButton radio_mpesa, radio_cash, radio_insurance;
+    RadioButton radio_partial, radio_partial_grant, radio_full;
 
     GifTextView gif_loader;
 
     Context context;
 
-    String str_client_id,str_user_id;
+    String str_client_id, str_user_id;
     WebServices ws;
-    TextView tv_cancel,generate;
+    TextView tv_cancel, generate;
 
     Global global;
 
-    String str_payment_mode = "",str_payment_type = "",str_amount="",str_discount,str_amount_to_pay,str_isFull_paid="0";
-    String str_branch,str_discounted_amount,str_response_amount;
+    String str_payment_mode = "", str_payment_type = "", str_amount = "", str_discount, str_amount_to_pay, str_isFull_paid = "0";
+    String str_branch, str_discounted_amount, str_response_amount;
 
-    EditText ed_amount,ed_discount;
-    float int_discount_per,int_discounted_amount,int_amount_to_pay;
-    float total_cost=0;
+    EditText ed_amount, ed_discount, ed_partial_amount, ed_payable_amount;
+    float int_discount_per, int_discounted_amount, int_amount_to_pay;
+    float total_cost = 0;
 
+    RelativeLayout rel_partial_layout;
 
     CheckNetConnection cn;
+
+    public static PaymentDetailFragment newInstance(String text) {
+
+        PaymentDetailFragment f = new PaymentDetailFragment();
+        Bundle b = new Bundle();
+        b.putString("msg", text);
+
+        f.setArguments(b);
+
+        return f;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,11 +88,13 @@ public class PaymentDetailFragment extends Fragment {
 
         nextFragment = viewPager.getCurrentItem() + 2;
 
-        tv_cancel =(TextView)v.findViewById(R.id.tv_cancel);
+        tv_cancel = (TextView) v.findViewById(R.id.tv_cancel);
         generate = (TextView) v.findViewById(R.id.generate);
 
         ed_amount = (EditText) v.findViewById(R.id.ed_amount);
         ed_discount = (EditText) v.findViewById(R.id.ed_discount);
+        ed_partial_amount = (EditText) v.findViewById(R.id.ed_partial_amount);
+        ed_payable_amount = (EditText) v.findViewById(R.id.ed_payable_amount);
 
         radio_group_payment = (RadioGroup) v.findViewById(R.id.radio_group_payment);
         radio_group_payment_mode = (RadioGroup) v.findViewById(R.id.radio_group_payment_mode);
@@ -91,67 +108,118 @@ public class PaymentDetailFragment extends Fragment {
         radio_full = (RadioButton) v.findViewById(R.id.radio_full);
 
 
+        rel_partial_layout = (RelativeLayout) v.findViewById(R.id.rel_partial_layout);
+
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
         generate.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
 
                 if (validate())
                 {
+//                    str_discount = ed_discount.getText().toString();
+//
+//                    total_cost = Float.parseFloat(ed_amount.getText().toString());
+
+//                    if (!(str_discount.equalsIgnoreCase("0.0") || str_discount.equals(null) || str_discount == null || str_discount.matches("")))
+//                    {
+//                        int_discount_per = Float.parseFloat(str_discount);
+//                        int_discounted_amount = (int_discount_per * total_cost) / 100;
+//                        int_amount_to_pay = total_cost - int_discounted_amount;
+//
+//                        str_response_amount = String.valueOf(int_amount_to_pay);
+//
+//                    } else {
+//                        str_amount_to_pay = ed_amount.getText().toString();
+//
+//                        int_amount_to_pay = Float.parseFloat(str_amount_to_pay);
+//
+//                        str_response_amount = String.valueOf(int_amount_to_pay);
+//
+//                        int_discounted_amount = 0;
+//                        str_discounted_amount = "0";
+//                    }
+
+
+
+
+//                    if (str_payment_type.equalsIgnoreCase("partial"))
+//                    {
+//                        int_amount_to_pay = int_amount_to_pay / 2;
+//                    }
+//
+//                    str_amount_to_pay = String.valueOf(int_amount_to_pay);
+//
+//                    Log.e("Amount", "" + str_amount_to_pay);
+
+
+
+//                    global.setPayment_amount(str_amount);
+//                    global.setAmount_to_pay(str_amount_to_pay);
+//                    global.setDiscount(String.valueOf(int_discounted_amount));
+//                    global.setPayment_mode(str_payment_mode);
+
+                    str_response_amount = ed_payable_amount.getText().toString();
+
+                    Float f_total_amount = Float.parseFloat(ed_amount.getText().toString());
+                    Float f_payable_amount = Float.parseFloat(ed_payable_amount.getText().toString());
+                    Float f_discount = 0f;
+                    Float f_amount_paying = 0f;
+
                     str_discount = ed_discount.getText().toString();
-                    total_cost = Float.parseFloat(ed_amount.getText().toString());
 
-                    if (!(str_discount.equalsIgnoreCase("0.0")  || str_discount.equals(null) || str_discount == null || str_discount.matches("")))
+                    if (!(str_discount.equalsIgnoreCase("0.0") || str_discount.equals(null) || str_discount == null || str_discount.matches("")))
                     {
-                        int_discount_per = Float.parseFloat(str_discount);
-                        int_discounted_amount = (int_discount_per * total_cost)/100;
-                        int_amount_to_pay = total_cost - int_discounted_amount;
+                        f_discount = f_total_amount - f_payable_amount;
+                    }
 
-                        str_response_amount = String.valueOf(int_amount_to_pay);
 
+
+//                    if (radio_full.isChecked())
+//                    {
+//                        f_amount_paying = f_payable_amount;
+//                    }
+//                    else
+//                    {
+//                        if (ed_partial_amount.getText().toString().matches(""))
+//                        {
+//                            Toast.makeText(context, "Enter Amount you wanna Pay ", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else
+//                        {
+//                            f_amount_paying = Float.parseFloat(ed_partial_amount.getText().toString());
+//                        }
+//
+//                    }
+
+                    if (radio_full.isChecked())
+                    {
+                        f_amount_paying = f_payable_amount;
                     }
                     else
                     {
-                        str_amount_to_pay = ed_amount.getText().toString();
-
-                        int_amount_to_pay = Float.parseFloat(str_amount_to_pay);
-
-                        str_response_amount = String.valueOf(int_amount_to_pay);
-
-                        int_discounted_amount = 0;
-                        str_discounted_amount = "0";
+                        f_amount_paying = Float.parseFloat(ed_partial_amount.getText().toString());
                     }
 
 
-                    if (str_payment_type.equalsIgnoreCase("partial"))
-                    {
-                        int_amount_to_pay = int_amount_to_pay/2 ;
-                    }
-
-                    str_amount_to_pay = String.valueOf(int_amount_to_pay);
-
-                    Log.e("Amount",""+str_amount_to_pay);
-
-                    global.setPayment_amount(str_amount);
-                    global.setAmount_to_pay(str_amount_to_pay);
-                    global.setDiscount(String.valueOf(int_discounted_amount));
+                    global.setPayment_amount(str_response_amount);
+                    global.setDiscount(String.valueOf(f_discount));
+                    global.setAmount_to_pay(String.valueOf(f_amount_paying));
                     global.setPayment_mode(str_payment_mode);
 
 
-                    if (cn.isNetConnected())
-                    {
+                    if (cn.isNetConnected()) {
                         new PaymentAsyncTask().execute();
-                    }
-                    else {
+                       // Toast.makeText(context, "Testing", Toast.LENGTH_SHORT).show();
+                    } else {
                         Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
 
         });
-        
+
 
         tv_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,16 +234,11 @@ public class PaymentDetailFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
-                if (radio_cash.isChecked())
-                {
+                if (radio_cash.isChecked()) {
                     str_payment_mode = "cash";
-                }
-                else if (radio_mpesa.isChecked())
-                {
+                } else if (radio_mpesa.isChecked()) {
                     str_payment_mode = "mpesa";
-                }
-                else if(radio_insurance.isChecked())
-                {
+                } else if (radio_insurance.isChecked()) {
                     str_payment_mode = "insurance";
                 }
             }
@@ -186,18 +249,23 @@ public class PaymentDetailFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
-                if (radio_full.isChecked())
-                {
+                if (radio_partial.isChecked() || radio_partial_grant.isChecked()) {
+                    rel_partial_layout.setVisibility(View.VISIBLE);
+
+//                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+//                    params.addRule(RelativeLayout.CENTER_HORIZONTAL|RelativeLayout.CENTER_IN_PARENT, clock.getId());
+
+                } else {
+                    rel_partial_layout.setVisibility(View.GONE);
+                }
+
+                if (radio_full.isChecked()) {
                     str_payment_type = "full";
                     str_isFull_paid = "1";
-                }
-                else if (radio_partial.isChecked())
-                {
+                } else if (radio_partial.isChecked()) {
                     str_payment_type = "partial";
                     str_isFull_paid = "0";
-                }
-                else if (radio_partial_grant.isChecked())
-                {
+                } else if (radio_partial_grant.isChecked()) {
                     str_payment_type = "grant";
                     str_isFull_paid = "0";
                 }
@@ -212,20 +280,16 @@ public class PaymentDetailFragment extends Fragment {
 //        }
 
 
-
-        for ( int i =0 ; i< global.getAl_cart_details().size() ; i++)
-        {
+        for (int i = 0; i < global.getAl_cart_details().size(); i++) {
             String str_item_type = global.getAl_cart_details().get(i).get(GlobalConstants.CART_ITEM_TYPE);
 
             if (str_item_type.equalsIgnoreCase("product"))
             {
-                int qt =Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.CART_AMOUNT));
+                int qt = Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.CART_AMOUNT));
                 float each_price = Float.parseFloat(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
 
-                total_cost = total_cost + (qt*each_price);
-            }
-            else
-            {
+                total_cost = total_cost + (qt * each_price);
+            } else {
                 total_cost = total_cost + Float.parseFloat(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
 
             }
@@ -234,6 +298,7 @@ public class PaymentDetailFragment extends Fragment {
 
 
         ed_amount.setText(String.valueOf(total_cost));
+        ed_payable_amount.setText(String.valueOf(total_cost));
         ed_amount.setFocusable(false);
         ed_amount.setClickable(false);
 
@@ -244,26 +309,75 @@ public class PaymentDetailFragment extends Fragment {
 
         str_user_id = global.getAl_login_list().get(0).get(GlobalConstants.USER_ID);
 
+
+        ed_discount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (editable.toString().length() > 0)
+                {
+                    float f_discount = Float.parseFloat(editable.toString());
+                    float f_total_cost = Float.parseFloat(ed_amount.getText().toString());
+
+                    float f_discounted_amount = (f_discount * f_total_cost) / 100;
+                    float f_amount_to_pay = f_total_cost - f_discounted_amount;
+
+                    ed_payable_amount.setText(String.valueOf(f_amount_to_pay));
+
+
+                } else {
+                    ed_payable_amount.setText(String.valueOf(ed_amount.getText().toString()));
+                }
+
+
+            }
+        });
+
+
         return v;
     }
 
+    public boolean validate() {
 
+        if (str_payment_mode.matches(""))
+        {
+            Toast.makeText(getActivity(), "Choose Payment Mode", Toast.LENGTH_SHORT).show();
+        } else if (str_payment_type.matches(""))
+        {
+            Toast.makeText(getActivity(), "Choose Payment Type", Toast.LENGTH_SHORT).show();
+        }
+        else if (radio_partial_grant.isChecked() || radio_partial.isChecked() )
+        {
+            if (ed_partial_amount.getText().toString().matches(""))
+            {
+                Toast.makeText(context, "Enter Amount you wanna Pay ", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                return true;
+            }
 
-    public static PaymentDetailFragment newInstance(String text) {
+        }
+        else
+        {
+            return true;
+        }
 
-        PaymentDetailFragment f = new PaymentDetailFragment();
-        Bundle b = new Bundle();
-        b.putString("msg", text);
-
-        f.setArguments(b);
-
-        return f;
+        return false;
     }
 
 
-
     public class PaymentAsyncTask extends AsyncTask<String, String, String> {
-
 
         String resPonse = "";
         String message = "";
@@ -306,10 +420,9 @@ public class PaymentDetailFragment extends Fragment {
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("payment");
 
-                for (int i=0 ; i< al_str_key.size() ; i++)
-                {
-                    Log.i("Key",""+al_str_key.get(i));
-                    Log.i("Value",""+al_str_value.get(i));
+                for (int i = 0; i < al_str_key.size(); i++) {
+                    Log.i("Key", "" + al_str_key.get(i));
+                    Log.i("Value", "" + al_str_value.get(i));
                 }
 
                 message = ws.PaymentService(context, al_str_key, al_str_value);
@@ -324,20 +437,15 @@ public class PaymentDetailFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
 
-
-            if (message.equalsIgnoreCase("true"))
-            {
+            if (message.equalsIgnoreCase("true")) {
                 new CheckOutAsyncTask().execute();
-            }
-            else {
+            } else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
         }
 
     }
-
-
 
     public class CheckOutAsyncTask extends AsyncTask<String, String, String> {
 
@@ -381,10 +489,9 @@ public class PaymentDetailFragment extends Fragment {
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("checkout_in_cart");
 
-                for (int i =0; i<al_str_key.size() ; i++)
-                {
-                    Log.i("Key",al_str_key.get(i) );
-                    Log.i("Value",al_str_value.get(i) );
+                for (int i = 0; i < al_str_key.size(); i++) {
+                    Log.i("Key", al_str_key.get(i));
+                    Log.i("Value", al_str_value.get(i));
                 }
 
                 message = ws.CheckOutService(context, al_str_key, al_str_value);
@@ -401,34 +508,14 @@ public class PaymentDetailFragment extends Fragment {
 
             gif_loader.setVisibility(View.GONE);
 
-            if (message.equalsIgnoreCase("true"))
-            {
+            if (message.equalsIgnoreCase("true")) {
                 viewPager.setCurrentItem(nextFragment);
-            }
-            else {
+            } else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
         }
 
-    }
-
-
-
-    public boolean validate()
-    {
-        if (str_payment_mode.matches(""))
-        {
-            Toast.makeText(getActivity(), "Choose Payment Mode", Toast.LENGTH_SHORT).show();
-        }
-        else if (str_payment_type.matches(""))
-        {
-            Toast.makeText(getActivity(), "Choose Payment Type", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            return true;
-        }
-        return false;
     }
 
 }
