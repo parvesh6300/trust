@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerInParent="true">
+    android:id="@+id/rel_parent_layout"
+    android:layout_centerInParent="true"
+    >
 
     <LinearLayout
         android:id="@+id/layout_payment"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/addclienttext"
         android:layout_gravity="center"
         android:background="@drawable/form_back"
         android:elevation="4dp"
@@ -273,7 +274,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:layout_marginTop="10dp">
 
             <TextView

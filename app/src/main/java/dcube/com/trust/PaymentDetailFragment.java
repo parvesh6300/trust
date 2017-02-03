@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -56,7 +57,8 @@ public class PaymentDetailFragment extends Fragment {
     float int_discount_per, int_discounted_amount, int_amount_to_pay;
     float total_cost = 0;
 
-    RelativeLayout rel_partial_layout;
+    RelativeLayout rel_partial_layout,rel_parent_layout;
+    LinearLayout layout_payment;
 
     CheckNetConnection cn;
 
@@ -107,8 +109,10 @@ public class PaymentDetailFragment extends Fragment {
         radio_partial_grant = (RadioButton) v.findViewById(R.id.radio_partial_grant);
         radio_full = (RadioButton) v.findViewById(R.id.radio_full);
 
-
+        rel_parent_layout = (RelativeLayout) v.findViewById(R.id.rel_parent_layout);
         rel_partial_layout = (RelativeLayout) v.findViewById(R.id.rel_partial_layout);
+
+        layout_payment = (LinearLayout)v.findViewById(R.id.layout_payment);
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
@@ -249,23 +253,33 @@ public class PaymentDetailFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
-                if (radio_partial.isChecked() || radio_partial_grant.isChecked()) {
+                if (radio_partial.isChecked() || radio_partial_grant.isChecked())
+                {
                     rel_partial_layout.setVisibility(View.VISIBLE);
 
-//                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-//                    params.addRule(RelativeLayout.CENTER_HORIZONTAL|RelativeLayout.CENTER_IN_PARENT, clock.getId());
+//                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)layout_payment.getLayoutParams();
+//                    params.addRule(RelativeLayout.CENTER_IN_PARENT);
+//                  //  params.addRule(RelativeLayout.LEFT_OF);
+//
+//                    layout_payment.setLayoutParams(params);
 
                 } else {
-                    rel_partial_layout.setVisibility(View.GONE);
+                    rel_partial_layout.setVisibility(View.INVISIBLE);
+
                 }
 
-                if (radio_full.isChecked()) {
+                if (radio_full.isChecked())
+                {
                     str_payment_type = "full";
                     str_isFull_paid = "1";
-                } else if (radio_partial.isChecked()) {
+                }
+                else if (radio_partial.isChecked())
+                {
                     str_payment_type = "partial";
                     str_isFull_paid = "0";
-                } else if (radio_partial_grant.isChecked()) {
+                }
+                else if (radio_partial_grant.isChecked())
+                {
                     str_payment_type = "grant";
                     str_isFull_paid = "0";
                 }
