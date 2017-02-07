@@ -108,7 +108,8 @@
 
 
             <LinearLayout
-                android:layout_width="700dp"
+                android:id="@+id/lin_radio_btns"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
@@ -212,25 +213,45 @@
 
                 </RadioGroup>
 
-                <EditText
-                    android:id="@+id/ed_other"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:layout_marginTop="10dp"
-                    android:hint="Specify Reason"
-                    android:gravity="top|left"
-                    android:textColor="@color/textColor"
-                    android:textSize="30sp"
-                    android:visibility="invisible"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:background="@drawable/textarea"
-                    android:typeface="monospace"/>
+
 
 
 
             </LinearLayout>
 
+            <EditText
+                android:id="@+id/ed_other"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Specify Reason"
+                android:gravity="top|left"
+                android:textColor="@color/textColor"
+                android:textSize="30sp"
+                android:visibility="invisible"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_below="@+id/lin_radio_btns"
+                android:background="@drawable/textarea"
+                android:typeface="monospace"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/ed_other"
+                android:layout_below="@+id/tv_expense_label"
+                android:layout_toEndOf="@+id/lin_radio_btns">
+
+                <ImageView
+                    android:id="@+id/image_view"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
 
 
             <RelativeLayout

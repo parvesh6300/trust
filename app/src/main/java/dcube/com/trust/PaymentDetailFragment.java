@@ -53,7 +53,7 @@ public class PaymentDetailFragment extends Fragment {
     String str_payment_mode = "", str_payment_type = "", str_amount = "", str_discount, str_amount_to_pay, str_isFull_paid = "0";
     String str_branch, str_discounted_amount, str_response_amount;
 
-    EditText ed_amount, ed_discount, ed_partial_amount, ed_payable_amount;
+    EditText ed_amount, ed_discount, ed_partial_amount, ed_payable_amount,ed_discount_rsn;
     float int_discount_per, int_discounted_amount, int_amount_to_pay;
     float total_cost = 0;
 
@@ -97,6 +97,7 @@ public class PaymentDetailFragment extends Fragment {
         ed_discount = (EditText) v.findViewById(R.id.ed_discount);
         ed_partial_amount = (EditText) v.findViewById(R.id.ed_partial_amount);
         ed_payable_amount = (EditText) v.findViewById(R.id.ed_payable_amount);
+        ed_discount_rsn = (EditText) v.findViewById(R.id.ed_discount_rsn);
 
         radio_group_payment = (RadioGroup) v.findViewById(R.id.radio_group_payment);
         radio_group_payment_mode = (RadioGroup) v.findViewById(R.id.radio_group_payment_mode);
@@ -361,14 +362,27 @@ public class PaymentDetailFragment extends Fragment {
         return v;
     }
 
+
     public boolean validate() {
+
+        float f_amount = Float.parseFloat(ed_amount.getText().toString());
+        float f_payable = Float.parseFloat(ed_payable_amount.getText().toString());
+
 
         if (str_payment_mode.matches(""))
         {
             Toast.makeText(getActivity(), "Choose Payment Mode", Toast.LENGTH_SHORT).show();
-        } else if (str_payment_type.matches(""))
+        }
+        else if (str_payment_type.matches(""))
         {
             Toast.makeText(getActivity(), "Choose Payment Type", Toast.LENGTH_SHORT).show();
+        }
+        else if(f_amount != f_payable)
+        {
+            if (ed_discount_rsn.getText().toString().matches(""))
+            {
+                Toast.makeText(getActivity(), "Specify Discount Reason", Toast.LENGTH_SHORT).show();
+            }
         }
         else if (radio_partial_grant.isChecked() || radio_partial.isChecked() )
         {

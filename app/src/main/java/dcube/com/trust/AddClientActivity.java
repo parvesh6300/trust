@@ -6,13 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -28,7 +31,7 @@ import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class AddClientActivity extends Activity {
+public class AddClientActivity extends Activity implements View.OnClickListener {
 
     Context context;
 
@@ -42,17 +45,32 @@ public class AddClientActivity extends Activity {
     TextView addclient;
     GifTextView gif_loader;
 
-    String str_age,str_area,str_name,str_contact,str_emer_contact,str_med_his;
-    String str_his_contra,str_sex,str_child,str_hiv_test,str_about_clinic;
+    String str_age,str_area,str_name,str_contact,str_emer_contact,str_med_his,str_emer_name,str_emer_rel;
+    String str_his_contra,str_contra_type,str_sex,str_child,str_hiv_test,str_about_clinic;
 
     EditText ed_name,ed_contact,ed_emer_contact,ed_med_history;
 
     RadioGroup radio_group_contra,radio_group_sex,radio_group_child,radio_group_hiv_test,radio_group_about_clinic;
     RadioButton radio_contra_yes,radio_contra_no,radio_contra_one_time;
     RadioButton radio_male,radio_female;
-    RadioButton radio_child_yes,radio_child_no;
+    RadioButton radio_child_one_two,radio_child_no,radio_child_three;
     RadioButton radio_test_yes_months,radio_test_last_2_yr,radio_test_more_2_yr,radio_test_no;
-    RadioButton radio_social,radio_radio,radio_family,radio_flier,radio_event;
+    RadioButton radio_social,radio_radio,radio_family,radio_flier,radio_event,radio_tv,radio_signage;
+
+    //  Updated add client UI's
+
+    EditText ed_emer_name,ed_emer_rel;
+
+    CheckBox cb_contra_type_condom,cb_contra_type_fem_condom,cb_contra_type_oral,cb_contra_type_emer_pill;
+    CheckBox cb_contra_type_iucd,cb_contra_type_implants,cb_contra_type_calendar,cb_contra_type_other,cb_contra_type_injectables;
+
+    LinearLayout lin_type_of_contra;
+
+    // *****************************************************************
+
+
+    ArrayList<String> al_type_of_contra;
+
 
     WebServices ws;
 
@@ -73,6 +91,8 @@ public class AddClientActivity extends Activity {
         context = this;
 
         getViewById();
+
+        al_type_of_contra = new ArrayList<>();
 
         cn = new CheckNetConnection(this);
 
@@ -168,14 +188,19 @@ public class AddClientActivity extends Activity {
                 if (radio_contra_yes.isChecked())
                 {
                     str_his_contra = "yes";
+                    lin_type_of_contra.setVisibility(View.VISIBLE);
                 }
                else if (radio_contra_no.isChecked())
                 {
                     str_his_contra = "no";
+                    lin_type_of_contra.setVisibility(View.GONE);
+                    al_type_of_contra.clear();
+                    resetCheckList();
                 }
                else if (radio_contra_one_time.isChecked())
                 {
                     str_his_contra = "At one time, not now";
+                    lin_type_of_contra.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -201,9 +226,13 @@ public class AddClientActivity extends Activity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
-                if (radio_child_yes.isChecked())
+                if (radio_child_one_two.isChecked())
                 {
-                    str_child = "yes";
+                    str_child = "1-2";
+                }
+                else if (radio_child_three.isChecked())
+                {
+                    str_child = "3+";
                 }
                else if (radio_child_no.isChecked())
                 {
@@ -262,9 +291,18 @@ public class AddClientActivity extends Activity {
                 {
                     str_about_clinic = "At an Event";
                 }
+                else if (radio_tv.isChecked())
+                {
+                    str_about_clinic = "TV";
+                }
+                else if (radio_signage.isChecked())
+                {
+                    str_about_clinic = "Signage";
+                }
 
             }
         });
+
 
 
         compareValue = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_NAME);
@@ -279,6 +317,149 @@ public class AddClientActivity extends Activity {
         }
 
 
+        cb_contra_type_condom.setOnClickListener(this);
+        cb_contra_type_fem_condom.setOnClickListener(this);
+        cb_contra_type_oral.setOnClickListener(this);
+        cb_contra_type_emer_pill.setOnClickListener(this);
+        cb_contra_type_iucd.setOnClickListener(this);
+        cb_contra_type_implants.setOnClickListener(this);
+        cb_contra_type_calendar.setOnClickListener(this);
+        cb_contra_type_other.setOnClickListener(this);
+        cb_contra_type_injectables.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        if (view == cb_contra_type_condom)
+        {
+            String type = "Condoms";
+
+            if (cb_contra_type_condom.isChecked())
+            {
+                al_type_of_contra.add(type);
+            }
+            else
+            {
+                al_type_of_contra.remove(type);
+            }
+        }
+
+        if (view == cb_contra_type_fem_condom)
+        {
+            String type = "Female condoms";
+
+            if (cb_contra_type_fem_condom.isChecked())
+            {
+                al_type_of_contra.add(type);
+            }
+            else
+            {
+                al_type_of_contra.remove(type);
+            }
+        }
+
+        if (view == cb_contra_type_oral)
+        {
+            String type = "Oral Contraceptive pill";
+
+            if (cb_contra_type_oral.isChecked())
+            {
+                al_type_of_contra.add(type);
+            }
+            else
+            {
+                al_type_of_contra.remove(type);
+            }
+        }
+
+
+        if (view == cb_contra_type_emer_pill)
+        {
+            String type = "Emergency Contraceptive pill ";
+
+            if (cb_contra_type_emer_pill.isChecked())
+            {
+                al_type_of_contra.add(type);
+            }
+            else
+            {
+                al_type_of_contra.remove(type);
+            }
+        }
+
+
+        if (view == cb_contra_type_iucd)
+        {
+            String type = "IUCD";
+
+            if (cb_contra_type_iucd.isChecked())
+            {
+                al_type_of_contra.add(type);
+            }
+            else
+            {
+                al_type_of_contra.remove(type);
+            }
+        }
+
+
+        if (view == cb_contra_type_calendar)
+        {
+            String type = "Calendar method";
+
+            if (cb_contra_type_calendar.isChecked())
+            {
+                al_type_of_contra.add(type);
+            }
+            else
+            {
+                al_type_of_contra.remove(type);
+            }
+        }
+
+        if (view == cb_contra_type_implants)
+        {
+            String type = "Implants";
+
+            if (cb_contra_type_implants.isChecked())
+            {
+                al_type_of_contra.add(type);
+            }
+            else
+            {
+                al_type_of_contra.remove(type);
+            }
+        }
+
+        if (view == cb_contra_type_injectables)
+        {
+            String type = "Injectables";
+
+            if (cb_contra_type_injectables.isChecked())
+            {
+                al_type_of_contra.add(type);
+            }
+            else
+            {
+                al_type_of_contra.remove(type);
+            }
+        }
+
+        if (view == cb_contra_type_other)
+        {
+            String type = "Other";
+
+            if (cb_contra_type_other.isChecked())
+            {
+                al_type_of_contra.add(type);
+            }
+            else
+            {
+                al_type_of_contra.remove(type);
+            }
+        }
 
 
     }
@@ -335,6 +516,12 @@ public class AddClientActivity extends Activity {
         {
             Toast.makeText(AddClientActivity.this, "Contact No. is not of 9 digits", Toast.LENGTH_SHORT).show();
         }
+
+        else if (ed_emer_name.getText().toString().matches(""))
+        {
+            Toast.makeText(AddClientActivity.this, "Enter Name of Emergency Contact ", Toast.LENGTH_SHORT).show();
+        }
+
         else if (ed_emer_contact.getText().toString().matches(""))
         {
             Toast.makeText(AddClientActivity.this, "Enter Emergency Contact No.", Toast.LENGTH_SHORT).show();
@@ -343,6 +530,12 @@ public class AddClientActivity extends Activity {
         {
             Toast.makeText(AddClientActivity.this, "Emer. Contact No. is not of 9 digits", Toast.LENGTH_SHORT).show();
         }
+
+        else if (ed_emer_rel.getText().toString().matches(""))
+        {
+            Toast.makeText(AddClientActivity.this, "Enter Your Relation with the Person", Toast.LENGTH_SHORT).show();
+        }
+
         else if (str_area.equalsIgnoreCase("Select Branch"))
         {
             Toast.makeText(AddClientActivity.this, "Select Area", Toast.LENGTH_SHORT).show();
@@ -354,6 +547,8 @@ public class AddClientActivity extends Activity {
             str_contact = ed_contact.getText().toString().toLowerCase();
             str_emer_contact = ed_emer_contact.getText().toString().toLowerCase();
             str_med_his = ed_med_history.getText().toString().toLowerCase();
+            str_emer_name = ed_emer_name.getText().toString().toLowerCase();
+            str_emer_rel = ed_emer_rel.getText().toString().toLowerCase();
 
             return true;
         }
@@ -393,8 +588,9 @@ public class AddClientActivity extends Activity {
         radio_male = (RadioButton) findViewById(R.id.radio_male);
         radio_female = (RadioButton) findViewById(R.id.radio_female);
 
-        radio_child_yes = (RadioButton) findViewById(R.id.radio_child_yes);
+        radio_child_one_two = (RadioButton) findViewById(R.id.radio_child_one_two);
         radio_child_no = (RadioButton) findViewById(R.id.radio_child_no);
+        radio_child_three = (RadioButton) findViewById(R.id.radio_child_three);
 
         radio_test_yes_months = (RadioButton) findViewById(R.id.radio_test_yes_months);
         radio_test_last_2_yr = (RadioButton) findViewById(R.id.radio_test_last_2_yr);
@@ -406,6 +602,25 @@ public class AddClientActivity extends Activity {
         radio_family = (RadioButton) findViewById(R.id.radio_family);
         radio_flier = (RadioButton) findViewById(R.id.radio_flier);
         radio_event = (RadioButton) findViewById(R.id.radio_event);
+        radio_tv = (RadioButton) findViewById(R.id.radio_tv);
+        radio_signage = (RadioButton) findViewById(R.id.radio_signage);
+
+        // Updated UI views
+
+        ed_emer_name = (EditText) findViewById(R.id.ed_emer_name);
+        ed_emer_rel = (EditText) findViewById(R.id.ed_emer_rel);
+
+        cb_contra_type_condom = (CheckBox) findViewById(R.id.cb_contra_type_condom);
+        cb_contra_type_fem_condom = (CheckBox) findViewById(R.id.cb_contra_type_fem_condom);
+        cb_contra_type_oral = (CheckBox) findViewById(R.id.cb_contra_type_oral);
+        cb_contra_type_emer_pill = (CheckBox) findViewById(R.id.cb_contra_type_emer_pill);
+        cb_contra_type_iucd = (CheckBox) findViewById(R.id.cb_contra_type_iucd);
+        cb_contra_type_implants = (CheckBox) findViewById(R.id.cb_contra_type_implants);
+        cb_contra_type_calendar = (CheckBox) findViewById(R.id.cb_contra_type_calendar);
+        cb_contra_type_other = (CheckBox) findViewById(R.id.cb_contra_type_other);
+        cb_contra_type_injectables = (CheckBox) findViewById(R.id.cb_contra_type_injectables);
+
+        lin_type_of_contra = (LinearLayout) findViewById(R.id.lin_type_of_contra);
 
         setDefaultValues();
     }
@@ -414,17 +629,31 @@ public class AddClientActivity extends Activity {
     {
         radio_contra_yes.setChecked(true);
         radio_male.setChecked(true);
-        radio_child_yes.setChecked(true);
+        radio_child_no.setChecked(true);
         radio_test_yes_months.setChecked(true);
         radio_social.setChecked(true);
 
         str_his_contra = "yes";
         str_sex = "male";
-        str_child = "yes";
+        str_child = "no";
         str_hiv_test = "Yes, Within 6 months";
         str_about_clinic = "Social Media";
     }
 
+    public void resetCheckList()
+    {
+        cb_contra_type_condom.setChecked(false);
+        cb_contra_type_fem_condom.setChecked(false);
+        cb_contra_type_oral.setChecked(false);
+        cb_contra_type_emer_pill.setChecked(false);
+        cb_contra_type_iucd.setChecked(false);
+        cb_contra_type_implants.setChecked(false);
+        cb_contra_type_calendar.setChecked(false);
+        cb_contra_type_other.setChecked(false);
+        cb_contra_type_injectables.setChecked(false);
+
+
+    }
 
 
     public class AddClientAsyncTask extends AsyncTask<String, String, String> {
@@ -448,6 +677,19 @@ public class AddClientActivity extends Activity {
             str_child = str_child.toLowerCase();
             str_hiv_test = str_hiv_test.toLowerCase();
             str_about_clinic = str_about_clinic.toLowerCase();
+
+
+            Log.i("Contra","Type "+al_type_of_contra.size());
+
+            if (al_type_of_contra.size() > 0)
+            {
+                str_contra_type = TextUtils.join(",", al_type_of_contra);
+            }
+            else
+            {
+                str_contra_type = "";
+            }
+
         }
 
         @Override
@@ -472,6 +714,12 @@ public class AddClientActivity extends Activity {
                 al_str_key.add(GlobalConstants.CLIENT_EMER_CONTACT);
                 al_str_value.add(str_emer_contact);
 
+                al_str_key.add(GlobalConstants.CLIENT_EMER_NAME);
+                al_str_value.add(str_emer_name);
+
+                al_str_key.add(GlobalConstants.CLIENT_EMER_RELATION);
+                al_str_value.add(str_emer_rel);
+
                 al_str_key.add(GlobalConstants.CLIENT_AREA);
                 al_str_value.add(str_area);
 
@@ -480,6 +728,9 @@ public class AddClientActivity extends Activity {
 
                 al_str_key.add(GlobalConstants.CLIENT_CONTRA_HISTORY);
                 al_str_value.add(str_his_contra);
+
+                al_str_key.add(GlobalConstants.CLIENT_CONTRA_TYPE);
+                al_str_value.add(str_contra_type);
 
                 al_str_key.add(GlobalConstants.CLIENT_SEX);
                 al_str_value.add(str_sex);
@@ -502,7 +753,7 @@ public class AddClientActivity extends Activity {
                     Log.i("Value",al_str_value.get(i));
                 }
 
-                message = ws.AddClientService(context, al_str_key, al_str_value);
+           //     message = ws.AddClientService(context, al_str_key, al_str_value);
 
 
             } catch (Exception e) {
@@ -515,7 +766,7 @@ public class AddClientActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
 
             if (message.equalsIgnoreCase("true"))
             {

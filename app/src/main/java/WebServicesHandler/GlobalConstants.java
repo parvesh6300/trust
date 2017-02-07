@@ -100,9 +100,12 @@ public class GlobalConstants {
     public static final String CLIENT_AGE = "age";
     public static final String CLIENT_CONTACT = "contact";
     public static final String CLIENT_EMER_CONTACT = "emergency_contact";
+    public static final String CLIENT_EMER_NAME = "emergency_name";
+    public static final String CLIENT_EMER_RELATION = "emergency_relation";
     public static final String CLIENT_AREA = "area";
     public static final String CLIENT_MED_HISTORY = "medical_history";
     public static final String CLIENT_CONTRA_HISTORY = "contraceptive_history";
+    public static final String CLIENT_CONTRA_TYPE = "contraceptive_type";
     public static final String CLIENT_SEX = "sex";
     public static final String CLIENT_CHILD = "children";
     public static final String CLIENT_HIV_TEST = "hiv_tested";

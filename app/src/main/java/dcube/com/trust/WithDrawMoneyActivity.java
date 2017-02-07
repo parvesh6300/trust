@@ -3,12 +3,15 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -32,6 +35,8 @@ public class WithDrawMoneyActivity extends Activity {
 
     EditText ed_other,ed_wd_amount;
 
+    ImageView image_view;
+
     TextView tv_withdraw;
 
     GifTextView gif_loader;
@@ -44,6 +49,8 @@ public class WithDrawMoneyActivity extends Activity {
     String str_exp_rsn="",str_wd_amount,str_branch,str_remarks;
 
     CustomDialogClass cdd;
+
+    private static final int CAMERA_REQUEST = 1888;
 
     CheckNetConnection cn;
 
@@ -59,6 +66,8 @@ public class WithDrawMoneyActivity extends Activity {
         cn = new CheckNetConnection(this);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
+
+        image_view = (ImageView) findViewById(R.id.image_view);
 
         radio_group=(RadioGroup)findViewById(R.id.radio_group);
 
@@ -96,6 +105,8 @@ public class WithDrawMoneyActivity extends Activity {
                 {
                     str_exp_rsn = "Petty Cash";
                     str_remarks = "NA";
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
                 }
                 else if (radio_running_exp.isChecked())
                 {
@@ -449,4 +460,14 @@ public class WithDrawMoneyActivity extends Activity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
+        {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            image_view.setImageBitmap(photo);
+        }
+
+    }
 }

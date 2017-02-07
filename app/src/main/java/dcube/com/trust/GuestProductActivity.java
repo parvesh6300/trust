@@ -550,7 +550,7 @@ public class GuestProductActivity extends Activity {
 
                 buy.setClickable(true);
 
-                startActivity(new Intent(GuestProductActivity.this,GuestReceiptActivity.class));
+                startActivity(new Intent(GuestProductActivity.this,GuestDetailActivity.class));
                 finish();
 
             }

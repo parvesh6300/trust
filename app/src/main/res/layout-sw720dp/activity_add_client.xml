@@ -156,6 +156,52 @@
                     android:layout_marginTop="10dp">
 
                     <TextView
+                        android:id="@+id/emer_name_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="Name of Emer. Contact"
+                        android:textColor="@color/purple"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:typeface="monospace" />
+
+                    <!--<EditText-->
+                        <!--android:id="@+id/emer_areacode"-->
+                        <!--android:layout_width="60dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginLeft="20dp"-->
+                        <!--android:layout_toRightOf="@id/emer_name_text"-->
+                        <!--android:editable="false"-->
+                        <!--android:inputType="phone"-->
+                        <!--android:text="+255"-->
+                        <!--android:textColor="@color/textColor"-->
+                        <!--android:textSize="25sp"-->
+                        <!--android:typeface="monospace" />-->
+
+                    <EditText
+                        android:id="@+id/ed_emer_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/emer_name_text"
+                        android:inputType="text"
+                        android:maxLength="9"
+                        android:textColor="@color/textColor"
+                        android:textSize="25sp"
+                        android:typeface="monospace" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="500dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
                         android:id="@+id/emer_contact_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -182,7 +228,7 @@
 
                     <EditText
                         android:id="@+id/ed_emer_contact"
-                        android:layout_width="200dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@id/emer_areacode"
@@ -193,6 +239,53 @@
                         android:typeface="monospace" />
 
                 </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="500dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/emer_rel_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="Relation With Person"
+                        android:textColor="@color/purple"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:typeface="monospace" />
+
+                    <!--<EditText-->
+                    <!--android:id="@+id/emer_areacode"-->
+                    <!--android:layout_width="60dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_toRightOf="@id/emer_name_text"-->
+                    <!--android:editable="false"-->
+                    <!--android:inputType="phone"-->
+                    <!--android:text="+255"-->
+                    <!--android:textColor="@color/textColor"-->
+                    <!--android:textSize="25sp"-->
+                    <!--android:typeface="monospace" />-->
+
+                    <EditText
+                        android:id="@+id/ed_emer_rel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/emer_rel_text"
+                        android:inputType="text"
+                        android:maxLength="9"
+                        android:textColor="@color/textColor"
+                        android:textSize="25sp"
+                        android:typeface="monospace" />
+
+                </RelativeLayout>
+
+
 
                 <RelativeLayout
                     android:layout_width="500dp"
@@ -326,6 +419,130 @@
 
                 </RelativeLayout>
 
+
+                <LinearLayout
+                    android:id="@+id/lin_type_of_contra"
+                    android:layout_width="500dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_type_of_contra_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerVertical="true"
+                        android:text="Type of Contraceptive used"
+                        android:textColor="@color/purple"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:typeface="monospace" />
+
+
+                    <CheckBox
+                        android:id="@+id/cb_contra_type_condom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/textColor"
+                        android:text="Condoms"
+                        android:typeface="monospace"/>
+
+                    <CheckBox
+                        android:id="@+id/cb_contra_type_fem_condom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/textColor"
+                        android:text="Female Condoms"
+                        android:typeface="monospace"/>
+
+                    <CheckBox
+                        android:id="@+id/cb_contra_type_oral"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/textColor"
+                        android:text="Oral Contraceptive pill"
+                        android:typeface="monospace"/>
+
+
+                    <CheckBox
+                        android:id="@+id/cb_contra_type_emer_pill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/textColor"
+                        android:text="Emergency Contraceptive pill"
+                        android:typeface="monospace"/>
+
+
+                    <CheckBox
+                        android:id="@+id/cb_contra_type_iucd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/textColor"
+                        android:text="IUCD"
+                        android:typeface="monospace"/>
+
+
+                    <CheckBox
+                        android:id="@+id/cb_contra_type_implants"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/textColor"
+                        android:text="Implants"
+                        android:typeface="monospace"/>
+
+
+                    <CheckBox
+                        android:id="@+id/cb_contra_type_injectables"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/textColor"
+                        android:text="Injectables"
+                        android:typeface="monospace"/>
+
+
+                    <CheckBox
+                        android:id="@+id/cb_contra_type_calendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/textColor"
+                        android:text="Calendar method"
+                        android:typeface="monospace"/>
+
+                    <CheckBox
+                        android:id="@+id/cb_contra_type_other"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/textColor"
+                        android:text="Other"
+                        android:typeface="monospace"/>
+
+
+                </LinearLayout>
+
+
+
+
                 <RelativeLayout
                     android:layout_width="500dp"
                     android:layout_height="wrap_content"
@@ -410,17 +627,6 @@
                         android:weightSum="3">
 
                         <RadioButton
-                            android:id="@+id/radio_child_yes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:buttonTint="@color/textColor"
-                            android:text="YES"
-                            android:textColor="@color/textColor"
-                            android:textSize="25sp"
-                            android:typeface="monospace" />
-
-                        <RadioButton
                             android:id="@+id/radio_child_no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -430,6 +636,32 @@
                             android:textColor="@color/textColor"
                             android:textSize="25sp"
                             android:typeface="monospace" />
+
+
+                        <RadioButton
+                            android:id="@+id/radio_child_one_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/textColor"
+                            android:text="1-2"
+                            android:textColor="@color/textColor"
+                            android:textSize="25sp"
+                            android:typeface="monospace" />
+
+
+                        <RadioButton
+                            android:id="@+id/radio_child_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/textColor"
+                            android:text="3+"
+                            android:textColor="@color/textColor"
+                            android:textSize="25sp"
+                            android:typeface="monospace" />
+
+
 
                     </RadioGroup>
 
@@ -593,6 +825,33 @@
                             android:textColor="@color/textColor"
                             android:textSize="30sp"
                             android:typeface="monospace" />
+
+
+                        <RadioButton
+                            android:id="@+id/radio_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/textColor"
+                            android:text="TV"
+                            android:textColor="@color/textColor"
+                            android:textSize="30sp"
+                            android:typeface="monospace" />
+
+
+                        <RadioButton
+                            android:id="@+id/radio_signage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/textColor"
+                            android:text="Signage"
+                            android:textColor="@color/textColor"
+                            android:textSize="30sp"
+                            android:typeface="monospace" />
+
+
+
                     </RadioGroup>
 
                 </RelativeLayout>
