@@ -15,15 +15,31 @@ public class FinanceAdapter extends BaseAdapter {
     private Context context;
 
     public Integer[] mThumbIds = {
-            R.drawable.stockmanagement,
-            R.drawable.salesanalytics,
-            R.drawable.depositmoney,
-            R.drawable.revenue,
+
+            R.drawable.moneybanked,
             R.drawable.operatingexpenses,
-            R.drawable.expense_history,  //expenses_history
-            R.drawable.moneybanked,  //moneybagforten
+            R.drawable.stockmanagement,
+            R.drawable.depositmoney,
             R.drawable.account_history,
+            R.drawable.expense_history,
+            R.drawable.revenue,
+            R.drawable.salesanalytics,
+
+//            R.drawable.stockmanagement,
+//            R.drawable.salesanalytics,
+//            R.drawable.depositmoney,
+//            R.drawable.revenue,
+//            R.drawable.operatingexpenses,
+//            R.drawable.expense_history,  //expenses_history
+//            R.drawable.moneybanked,  //moneybagforten
+//            R.drawable.account_history,
+
     };
+
+//    Order of menu - bank money, operating expense,
+//    stock management ,deposit money, account history, expense history, revenue, sales analytics.
+
+
 
     private static LayoutInflater inflater = null;
 
