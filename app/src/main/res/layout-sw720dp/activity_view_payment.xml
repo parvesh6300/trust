@@ -30,7 +30,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_above="@+id/gif_loader"
+        android:layout_above="@+id/rel_pay"
         android:background="@drawable/form_back"
         android:orientation="vertical">
 
@@ -84,6 +84,9 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/header"
             android:layout_above="@+id/lin_total_cost"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
             android:layout_marginTop="2dp"/>
 
         <LinearLayout
@@ -155,7 +158,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:gravity="center"
-            android:layout_above="@+id/rel_pay"
+           android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             android:background="@color/textColor">
 
@@ -185,31 +188,33 @@
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/rel_pay"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_alignParentBottom="true">
 
-
-            <TextView
-                android:id="@+id/tv_pay"
-                android:layout_width="280dp"
-                android:layout_height="60dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/button_background"
-                android:gravity="center"
-                android:text="Pay"
-                android:textAlignment="gravity"
-                android:textColor="@color/white"
-                android:textSize="35sp"
-                android:typeface="monospace" />
-
-        </RelativeLayout>
 
 
     </RelativeLayout>
 
+
+    <RelativeLayout
+        android:id="@+id/rel_pay"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_above="@+id/gif_loader">
+
+
+        <TextView
+            android:id="@+id/tv_pay"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:text="Pay"
+            android:textAlignment="gravity"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:typeface="monospace" />
+
+    </RelativeLayout>
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
@@ -218,7 +223,7 @@
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:visibility="invisible"
         />
 

@@ -122,7 +122,9 @@
             android:id="@+id/stock_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/form_back"
             android:layout_below="@+id/header1"/>

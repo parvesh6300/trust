@@ -338,6 +338,74 @@ public class WebServices {
 
 
 
+    public static String GetMonthApmtService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        ArrayList<HashMap<String,String>> al_apmt_detail;
+
+        Global global = (Global) context.getApplicationContext();
+
+        String message = "Some Error occured";
+
+        try {
+            global.getAl_apmt_details().clear();
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("GetApmt", "Appointments : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                al_apmt_detail = new ArrayList<>();
+
+                JSONArray jsonArray = jsonObject.getJSONArray("appointments");
+
+                for (int i = 0 ; i< jsonArray.length() ; i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.APMT_ID , jsonObject1.optString(GlobalConstants.APMT_ID));
+                    map.put(GlobalConstants.APMT_CLIENT_ID , jsonObject1.optString(GlobalConstants.APMT_CLIENT_ID));
+                    map.put(GlobalConstants.APMT_CLIENT_NAME , jsonObject1.optString(GlobalConstants.APMT_CLIENT_NAME));
+                    map.put(GlobalConstants.APMT_PLAN_ID , jsonObject1.optString(GlobalConstants.APMT_PLAN_ID));
+                    map.put(GlobalConstants.APMT_SERVICE_ID , jsonObject1.optString(GlobalConstants.APMT_SERVICE_ID));
+                    map.put(GlobalConstants.APMT_SERVICE_NAME , jsonObject1.optString(GlobalConstants.APMT_SERVICE_NAME));
+                    map.put(GlobalConstants.APMT_TIME , jsonObject1.optString(GlobalConstants.APMT_TIME));
+                    map.put(GlobalConstants.APMT_BRANCH , jsonObject1.optString(GlobalConstants.APMT_BRANCH));
+                    map.put(GlobalConstants.APMT_REMARK , jsonObject1.optString(GlobalConstants.APMT_REMARK));
+                    map.put(GlobalConstants.APMT_is_FOLLOW_UP , jsonObject1.optString(GlobalConstants.APMT_is_FOLLOW_UP));
+
+                    al_apmt_detail.add(map);
+                }
+
+                global.setAl_apmt_details(al_apmt_detail);
+
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
     public static String GetPlanService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -1405,6 +1473,8 @@ public class WebServices {
                     al_expense_history.add(map);
                 }
 
+
+                global.setStr_total_expense(jsonObject.optString(GlobalConstants.EXP_TOTAL));
                 global.setAl_expense_details(al_expense_history);
                 return "true";
             }

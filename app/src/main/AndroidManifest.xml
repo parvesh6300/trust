@@ -4,8 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-feature android:name="android.hardware.camera" android:required="false"/>
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:name=".utils.Global"
@@ -137,7 +139,8 @@
         <activity android:name=".HelloChartActivity" />
         <activity android:name=".AccountHistoryActivity" />
         <activity android:name=".UpdatePlanActivity" />
-        <activity android:name=".GuestDetailActivity"></activity>
+        <activity android:name=".GuestDetailActivity" />
+        <activity android:name=".ClientHistoryActivity"></activity>
     </application>
 
 </manifest>

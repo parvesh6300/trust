@@ -600,8 +600,18 @@ public class Global extends Application {
         this.al_expense_details = al_expense_details;
     }
 
-    public ArrayList<HashMap<String,String>> al_expense_details;
+    public ArrayList<HashMap<String,String>> al_expense_details = new ArrayList<>();
 
+
+    public String str_total_expense = "0";
+
+    public String getStr_total_expense() {
+        return str_total_expense;
+    }
+
+    public void setStr_total_expense(String str_total_expense) {
+        this.str_total_expense = str_total_expense;
+    }
 
 
     // ******************************* Pending PAyment Getter and Setter  *************************************************

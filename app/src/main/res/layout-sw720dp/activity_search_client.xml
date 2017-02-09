@@ -135,6 +135,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/header"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
             android:layout_marginTop="10dp" />
 
         <TextView

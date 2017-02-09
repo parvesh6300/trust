@@ -8,8 +8,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,6 +73,8 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
 
 
     ArrayList<String> al_type_of_contra;
+
+    RelativeLayout rel_parent_layout;
 
 
     WebServices ws;
@@ -326,6 +331,8 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         cb_contra_type_calendar.setOnClickListener(this);
         cb_contra_type_other.setOnClickListener(this);
         cb_contra_type_injectables.setOnClickListener(this);
+
+
 
     }
 
@@ -622,8 +629,11 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
 
         lin_type_of_contra = (LinearLayout) findViewById(R.id.lin_type_of_contra);
 
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
+
         setDefaultValues();
     }
+
 
     public void setDefaultValues()
     {
@@ -639,6 +649,7 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         str_hiv_test = "Yes, Within 6 months";
         str_about_clinic = "Social Media";
     }
+
 
     public void resetCheckList()
     {
@@ -782,6 +793,19 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         }
 
     }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+        return true;
+
+    }
+
 
 
 }

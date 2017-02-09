@@ -50,17 +50,21 @@ public class PaymentDetailFragment extends Fragment {
 
     Global global;
 
-    String str_payment_mode = "", str_payment_type = "", str_amount = "", str_discount, str_amount_to_pay, str_isFull_paid = "0";
-    String str_branch, str_discounted_amount, str_response_amount;
+    String str_payment_mode = "", str_payment_type = "", str_amount = "", str_discount="0",  str_isFull_paid = "0";
+    String str_branch, str_response_amount;
 
     EditText ed_amount, ed_discount, ed_partial_amount, ed_payable_amount,ed_discount_rsn;
-    float int_discount_per, int_discounted_amount, int_amount_to_pay;
     float total_cost = 0;
 
     RelativeLayout rel_partial_layout,rel_parent_layout;
     LinearLayout layout_payment;
 
     CheckNetConnection cn;
+
+    RelativeLayout rel_rsn_layout;
+
+    String str_total_cost,str_discount_rsn="",str_amount_paid,str_amount_left;
+
 
     public static PaymentDetailFragment newInstance(String text) {
 
@@ -112,6 +116,7 @@ public class PaymentDetailFragment extends Fragment {
 
         rel_parent_layout = (RelativeLayout) v.findViewById(R.id.rel_parent_layout);
         rel_partial_layout = (RelativeLayout) v.findViewById(R.id.rel_partial_layout);
+        rel_rsn_layout = (RelativeLayout) v.findViewById(R.id.rel_rsn_layout);
 
         layout_payment = (LinearLayout)v.findViewById(R.id.layout_payment);
 
@@ -123,103 +128,92 @@ public class PaymentDetailFragment extends Fragment {
 
                 if (validate())
                 {
-//                    str_discount = ed_discount.getText().toString();
-//
-//                    total_cost = Float.parseFloat(ed_amount.getText().toString());
-
-//                    if (!(str_discount.equalsIgnoreCase("0.0") || str_discount.equals(null) || str_discount == null || str_discount.matches("")))
-//                    {
-//                        int_discount_per = Float.parseFloat(str_discount);
-//                        int_discounted_amount = (int_discount_per * total_cost) / 100;
-//                        int_amount_to_pay = total_cost - int_discounted_amount;
-//
-//                        str_response_amount = String.valueOf(int_amount_to_pay);
-//
-//                    } else {
-//                        str_amount_to_pay = ed_amount.getText().toString();
-//
-//                        int_amount_to_pay = Float.parseFloat(str_amount_to_pay);
-//
-//                        str_response_amount = String.valueOf(int_amount_to_pay);
-//
-//                        int_discounted_amount = 0;
-//                        str_discounted_amount = "0";
-//                    }
-
-
-
-
-//                    if (str_payment_type.equalsIgnoreCase("partial"))
-//                    {
-//                        int_amount_to_pay = int_amount_to_pay / 2;
-//                    }
-//
-//                    str_amount_to_pay = String.valueOf(int_amount_to_pay);
-//
-//                    Log.e("Amount", "" + str_amount_to_pay);
-
-
-
-//                    global.setPayment_amount(str_amount);
-//                    global.setAmount_to_pay(str_amount_to_pay);
-//                    global.setDiscount(String.valueOf(int_discounted_amount));
-//                    global.setPayment_mode(str_payment_mode);
+                    str_total_cost = ed_amount.getText().toString();
 
                     str_response_amount = ed_payable_amount.getText().toString();
 
-                    Float f_total_amount = Float.parseFloat(ed_amount.getText().toString());
-                    Float f_payable_amount = Float.parseFloat(ed_payable_amount.getText().toString());
-                    Float f_discount = 0f;
-                    Float f_amount_paying = 0f;
+                    float f_total_amount = Float.parseFloat(ed_amount.getText().toString());
+                    float f_payable_amount = Float.parseFloat(ed_payable_amount.getText().toString());
+                    float f_discount = 0f;
+                    float f_amount_paying = 0f;
+                    float f_amount_left = 0f;
 
-                    str_discount = ed_discount.getText().toString();
-
-                    if (!(str_discount.equalsIgnoreCase("0.0") || str_discount.equals(null) || str_discount == null || str_discount.matches("")))
+                    if (f_total_amount != f_payable_amount)
                     {
-                        f_discount = f_total_amount - f_payable_amount;
-                    }
+                        if (ed_discount_rsn.getText().toString().matches(""))
+                        {
+                            Toast.makeText(getActivity(), "Specify Discount Reason", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            str_discount = ed_discount.getText().toString();
+                            str_discount_rsn = ed_discount_rsn.getText().toString();
+                            f_discount = f_total_amount - f_payable_amount;
+
+                            if (radio_full.isChecked())
+                            {
+                                f_amount_paying = f_payable_amount;
+                                str_amount_left = "0";
+                            }
+                            else
+                            {
+                                f_amount_paying = Float.parseFloat(ed_partial_amount.getText().toString());
+                                f_amount_left = f_payable_amount - f_amount_paying;
+                                str_amount_left = String.valueOf(f_amount_left);
+                            }
 
 
+                            str_amount_paid = String.valueOf(f_amount_paying);
 
-//                    if (radio_full.isChecked())
-//                    {
-//                        f_amount_paying = f_payable_amount;
-//                    }
-//                    else
-//                    {
-//                        if (ed_partial_amount.getText().toString().matches(""))
-//                        {
-//                            Toast.makeText(context, "Enter Amount you wanna Pay ", Toast.LENGTH_SHORT).show();
-//                        }
-//                        else
-//                        {
-//                            f_amount_paying = Float.parseFloat(ed_partial_amount.getText().toString());
-//                        }
-//
-//                    }
+                            global.setPayment_amount(str_response_amount);
+                            global.setDiscount(String.valueOf(f_discount));
+                            global.setAmount_to_pay(String.valueOf(f_amount_paying));
+                            global.setPayment_mode(str_payment_mode);
 
-                    if (radio_full.isChecked())
-                    {
-                        f_amount_paying = f_payable_amount;
+                            if (cn.isNetConnected())
+                            {
+                                new PaymentAsyncTask().execute();
+
+                            } else
+                            {
+                                Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
                     }
                     else
                     {
-                        f_amount_paying = Float.parseFloat(ed_partial_amount.getText().toString());
+                        if (radio_full.isChecked())
+                        {
+                            f_amount_paying = f_payable_amount;
+                            str_amount_left = "0";
+                        }
+                        else
+                        {
+                            f_amount_paying = Float.parseFloat(ed_partial_amount.getText().toString());
+                            f_amount_left = f_payable_amount - f_amount_paying;
+                            str_amount_left = String.valueOf(f_amount_left);
+                        }
+
+
+                        str_amount_paid = String.valueOf(f_amount_paying);
+
+                        global.setPayment_amount(str_response_amount);
+                        global.setDiscount(String.valueOf(f_discount));
+                        global.setAmount_to_pay(String.valueOf(f_amount_paying));
+                        global.setPayment_mode(str_payment_mode);
+
+                        if (cn.isNetConnected())
+                        {
+                            new PaymentAsyncTask().execute();
+
+                        } else
+                        {
+                            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
 
-                    global.setPayment_amount(str_response_amount);
-                    global.setDiscount(String.valueOf(f_discount));
-                    global.setAmount_to_pay(String.valueOf(f_amount_paying));
-                    global.setPayment_mode(str_payment_mode);
-
-
-                    if (cn.isNetConnected()) {
-                        new PaymentAsyncTask().execute();
-                       // Toast.makeText(context, "Testing", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                    }
                 }
             }
 
@@ -341,6 +335,7 @@ public class PaymentDetailFragment extends Fragment {
 
                 if (editable.toString().length() > 0)
                 {
+                    rel_rsn_layout.setVisibility(View.VISIBLE);
                     float f_discount = Float.parseFloat(editable.toString());
                     float f_total_cost = Float.parseFloat(ed_amount.getText().toString());
 
@@ -351,6 +346,7 @@ public class PaymentDetailFragment extends Fragment {
 
 
                 } else {
+                    rel_rsn_layout.setVisibility(View.GONE);
                     ed_payable_amount.setText(String.valueOf(ed_amount.getText().toString()));
                 }
 
@@ -377,13 +373,13 @@ public class PaymentDetailFragment extends Fragment {
         {
             Toast.makeText(getActivity(), "Choose Payment Type", Toast.LENGTH_SHORT).show();
         }
-        else if(f_amount != f_payable)
-        {
-            if (ed_discount_rsn.getText().toString().matches(""))
-            {
-                Toast.makeText(getActivity(), "Specify Discount Reason", Toast.LENGTH_SHORT).show();
-            }
-        }
+//        else if(f_amount != f_payable)
+//        {
+//            if (ed_discount_rsn.getText().toString().matches(""))
+//            {
+//                Toast.makeText(getActivity(), "Specify Discount Reason", Toast.LENGTH_SHORT).show();
+//            }
+//        }
         else if (radio_partial_grant.isChecked() || radio_partial.isChecked() )
         {
             if (ed_partial_amount.getText().toString().matches(""))
@@ -398,6 +394,19 @@ public class PaymentDetailFragment extends Fragment {
         }
         else
         {
+//            if (f_amount != f_payable)
+//            {
+//                if (ed_discount_rsn.getText().toString().matches(""))
+//                {
+//                    Toast.makeText(getActivity(), "Specify Discount Reason", Toast.LENGTH_SHORT).show();
+//                }
+//                else
+//                {
+//
+//                }
+//            }
+
+
             return true;
         }
 
@@ -440,7 +449,22 @@ public class PaymentDetailFragment extends Fragment {
                 al_str_value.add(str_payment_type);
 
                 al_str_key.add(GlobalConstants.PAYMENT_AMOUNT);
-                al_str_value.add(str_response_amount);
+                al_str_value.add(str_response_amount);   // Amount after discount
+
+                al_str_key.add(GlobalConstants.PAYMENT_FUlL_COST);
+                al_str_value.add(str_total_cost);   //   Total cost
+
+                al_str_key.add(GlobalConstants.PAYMENT_DISCOUNT_PER);
+                al_str_value.add(str_discount);     // Discount Percentage
+
+                al_str_key.add(GlobalConstants.PAYMENT_DISCOUNT_RSN);
+                al_str_value.add(str_discount_rsn);  // Discount Reason
+
+                al_str_key.add(GlobalConstants.PAYMENT_AMOUNT_PAID);
+                al_str_value.add(str_amount_paid);  //  Amount paying by the client
+
+                al_str_key.add(GlobalConstants.PAYMENT_AMOUNT_LEFT);
+                al_str_value.add(str_amount_left);  // Amount left to pay
 
                 al_str_key.add(GlobalConstants.BRANCH);
                 al_str_value.add(str_branch);
@@ -448,7 +472,8 @@ public class PaymentDetailFragment extends Fragment {
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("payment");
 
-                for (int i = 0; i < al_str_key.size(); i++) {
+                for (int i = 0; i < al_str_key.size(); i++)
+                {
                     Log.i("Key", "" + al_str_key.get(i));
                     Log.i("Value", "" + al_str_value.get(i));
                 }

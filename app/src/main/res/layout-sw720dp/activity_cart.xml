@@ -28,7 +28,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/form_back"
         android:orientation="vertical"
-        android:layout_above="@+id/gif_loader"
+        android:layout_above="@+id/tv_check_out"
         android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/addclienttext">
@@ -97,26 +97,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/header1"
-            android:layout_above="@+id/tv_check_out"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
             android:descendantFocusability="beforeDescendants"/>
 
 
-        <TextView
-            android:id="@+id/tv_check_out"
-            android:background="@drawable/button_background"
-            android:layout_width="360dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:text="Check Out"
-            android:gravity="center"
-            android:textSize="35sp"
-            android:typeface="monospace"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"/>
-
     </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_check_out"
+        android:background="@drawable/button_background"
+        android:layout_width="360dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:text="Check Out"
+        android:gravity="center"
+        android:textSize="35sp"
+        android:typeface="monospace"
+        android:layout_above="@+id/gif_loader"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"/>
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"

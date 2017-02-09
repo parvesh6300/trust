@@ -35,7 +35,7 @@ public class ExpenseAdapter extends BaseAdapter {
     Global global;
 
 
-    public ExpenseAdapter(Context mcontext)
+    public ExpenseAdapter(Context mcontext,String str_exp_type)
     {
         this.context= mcontext;
 
@@ -52,11 +52,28 @@ public class ExpenseAdapter extends BaseAdapter {
 
         for (HashMap<String,String> hashmap : global.getAl_expense_details() )
         {
-            al_expense_amount.add(hashmap.get(GlobalConstants.EXP_AMOUNT));
-            al_expense_detail.add(hashmap.get(GlobalConstants.EXP_REASON));
-            al_date.add(hashmap.get(GlobalConstants.EXP_DATE));
-            al_expense_id.add(hashmap.get(GlobalConstants.EXP_ID));
-            al_expense_remark.add(hashmap.get(GlobalConstants.EXP_REMARKS));
+            if (str_exp_type.equalsIgnoreCase(""))
+            {
+                al_expense_amount.add(hashmap.get(GlobalConstants.EXP_AMOUNT));
+                al_expense_detail.add(hashmap.get(GlobalConstants.EXP_REASON));
+                al_date.add(hashmap.get(GlobalConstants.EXP_DATE));
+                al_expense_id.add(hashmap.get(GlobalConstants.EXP_ID));
+                al_expense_remark.add(hashmap.get(GlobalConstants.EXP_REMARKS));
+            }
+            else
+            {
+                if (hashmap.get(GlobalConstants.EXP_REASON).equalsIgnoreCase(str_exp_type))
+                {
+                    al_expense_amount.add(hashmap.get(GlobalConstants.EXP_AMOUNT));
+                    al_expense_detail.add(hashmap.get(GlobalConstants.EXP_REASON));
+                    al_date.add(hashmap.get(GlobalConstants.EXP_DATE));
+                    al_expense_id.add(hashmap.get(GlobalConstants.EXP_ID));
+                    al_expense_remark.add(hashmap.get(GlobalConstants.EXP_REMARKS));
+                }
+
+            }
+
+
         }
 
     }
@@ -101,14 +118,12 @@ public class ExpenseAdapter extends BaseAdapter {
         }
 
 
-
-
         return convertview;
     }
 
     @Override
     public int getCount() {
-        return global.getAl_expense_details().size();
+        return al_expense_detail.size();
     }
 
     @Override

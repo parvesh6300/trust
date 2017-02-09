@@ -1,78 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_1"
-    android:orientation="vertical"
-    tools:context=".ExpenseHistoryActivity">
-
+    tools:context="dcube.com.trust.ClientHistoryActivity">
 
 
     <TextView
+        android:id="@+id/tv_client_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
-        android:text="Account History"
-        android:id="@+id/addclienttext"
+        android:text="Client History"
         android:textSize="35sp"
         android:textStyle="bold"
         android:typeface="monospace"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true" />
 
+
+
     <RelativeLayout
         android:layout_width="700dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_below="@+id/addclienttext"
-        android:layout_above="@+id/rel_back"
         android:orientation="vertical"
         android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/gif_loader"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_client_history"
         android:background="@drawable/form_back">
-
-
-        <RelativeLayout
-            android:id="@+id/rel_ac_balance"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:padding="10dp"
-            android:gravity="center">
-
-
-            <TextView
-                android:id="@+id/tv_balance_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Account Balance : "
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:typeface="monospace" />
-
-
-            <TextView
-                android:id="@+id/tv_total_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="0 Tsh"
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:typeface="monospace"
-                android:layout_toRightOf="@+id/tv_balance_label"
-                android:layout_marginRight="20dp"/>
-
-
-        </RelativeLayout>
-
 
 
         <RelativeLayout
@@ -80,14 +41,13 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/textColor"
-            android:layout_below="@+id/rel_ac_balance"
             android:gravity="center">
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="140dp"
                 android:layout_height="60dp"
-                android:text="Date"
+                android:text="DATE"
                 android:textSize="30sp"
                 android:textAlignment="center"
                 android:typeface="monospace"
@@ -101,13 +61,12 @@
                 android:id="@+id/tv_expense"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Transaction"
+                android:text="ITEM"
                 android:textSize="30sp"
                 android:textAlignment="center"
                 android:typeface="monospace"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:layout_marginStart="30dp"
                 android:textColor="@color/white"
                 android:layout_toEndOf="@+id/tv_date"
                 android:layout_toStartOf="@+id/tv_amount"
@@ -118,7 +77,7 @@
                 android:id="@+id/tv_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:text="Amount"
+                android:text="VISITS"
                 android:textSize="30sp"
                 android:textAlignment="center"
                 android:typeface="monospace"
@@ -126,16 +85,14 @@
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="60dp"
+                android:layout_marginEnd="70dp"
                 />
 
 
         </RelativeLayout>
 
-
-
         <ListView
-            android:id="@+id/list_expense"
+            android:id="@+id/list_history"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/rel_header"
@@ -143,36 +100,6 @@
             android:scrollbarSize="10dp"
             android:scrollbarThumbVertical="@drawable/custom_scroll_style"
             android:padding="20dp"/>
-
-
-
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/rel_back"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@+id/gif_loader">
-
-
-        <TextView
-            android:id="@+id/tv_submit"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/button_background"
-            android:gravity="center"
-            android:text="Back"
-            android:typeface="monospace"
-            android:textAlignment="gravity"
-            android:textColor="@color/white"
-            android:textSize="35sp"
-
-            />
 
     </RelativeLayout>
 
@@ -183,10 +110,11 @@
         android:layout_height="60dp"
         android:background="@drawable/loading"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:visibility="invisible"
         />
+
 
 </RelativeLayout>

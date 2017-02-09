@@ -69,6 +69,9 @@
             android:layout_height="850dp"
             android:layout_above="@+id/tv_select_plan"
             android:layout_below="@+id/lin_header"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
             android:layout_marginBottom="30dp"/>
 
 

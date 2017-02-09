@@ -39,6 +39,7 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
     TextView tv_date_from,tv_date_to;
 
     DatePickerDialog dpd_from,dpd_to;
+
     GifTextView gif_loader;
     WebServices ws;
     Context context = ProductSoldHistory.this;

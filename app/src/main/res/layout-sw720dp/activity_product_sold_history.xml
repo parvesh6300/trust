@@ -199,7 +199,9 @@
                 android:id="@+id/lv_sold_products"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="none"
+                android:fadeScrollbars="false"
+                android:scrollbarSize="10dp"
+                android:scrollbarThumbVertical="@drawable/custom_scroll_style"
                 />
 
 

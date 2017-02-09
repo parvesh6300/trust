@@ -30,10 +30,10 @@ public class WithDrawMoneyActivity extends Activity {
 
     RadioGroup radio_group;
 
-    RadioButton radio_other,radio_petty_cash,radio_running_exp;
+    RadioButton radio_other,radio_petty_cash,radio_running_exp,radio_dkt_commodity,radio_non_dkt,radio_marketing;
     RadioButton radio_commodity,radio_salary,radio_rent,radio_consultancy,radio_equipment;
 
-    EditText ed_other,ed_wd_amount;
+    EditText ed_other,ed_wd_amount,ed_petty_rsn;
 
     ImageView image_view;
 
@@ -46,7 +46,7 @@ public class WithDrawMoneyActivity extends Activity {
     WebServices ws;
     Global global;
     String str_user_id;
-    String str_exp_rsn="",str_wd_amount,str_branch,str_remarks;
+    String str_exp_rsn="",str_wd_amount,str_branch,str_remarks,str_pety_rsn;
 
     CustomDialogClass cdd;
 
@@ -80,8 +80,13 @@ public class WithDrawMoneyActivity extends Activity {
         radio_consultancy=(RadioButton)findViewById(R.id.radio_consultancy);
         radio_equipment=(RadioButton)findViewById(R.id.radio_equipment);
 
-        ed_other=(EditText)findViewById(R.id.ed_other);
+        radio_dkt_commodity = (RadioButton) findViewById(R.id.radio_dkt_commodity);
+        radio_non_dkt = (RadioButton) findViewById(R.id.radio_non_dkt);
+        radio_marketing = (RadioButton) findViewById(R.id.radio_marketing);
+
+        ed_other=      (EditText)findViewById(R.id.ed_other);
         ed_wd_amount = (EditText) findViewById(R.id.ed_wd_amount);
+        ed_petty_rsn = (EditText) findViewById(R.id.ed_petty_rsn);
 
         tv_withdraw=(TextView)findViewById(R.id.tv_withdraw);
 
@@ -92,13 +97,23 @@ public class WithDrawMoneyActivity extends Activity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
+
                 if (radio_other.isChecked())
                 {
                     ed_other.setVisibility(View.VISIBLE);
                 }
                 else
                 {
-                    ed_other.setVisibility(View.INVISIBLE);
+                    ed_other.setVisibility(View.GONE);
+                }
+
+                if (radio_petty_cash.isChecked())
+                {
+                    ed_petty_rsn.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    ed_petty_rsn.setVisibility(View.GONE);
                 }
 
 
@@ -117,6 +132,21 @@ public class WithDrawMoneyActivity extends Activity {
                 else if (radio_commodity.isChecked())
                 {
                     str_exp_rsn = "Commodities";
+                    str_remarks = "NA";
+                }
+                else if (radio_dkt_commodity.isChecked())
+                {
+                    str_exp_rsn = "DKT commodities";
+                    str_remarks = "NA";
+                }
+                else if (radio_non_dkt.isChecked())
+                {
+                    str_exp_rsn = "Non DKT commodities";
+                    str_remarks = "NA";
+                }
+                else if (radio_marketing.isChecked())
+                {
+                    str_exp_rsn = "Marketing";
                     str_remarks = "NA";
                 }
                 else if (radio_salary.isChecked())
@@ -149,6 +179,7 @@ public class WithDrawMoneyActivity extends Activity {
         });
 
 
+
         tv_withdraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,29 +198,93 @@ public class WithDrawMoneyActivity extends Activity {
                 }
                 else
                 {
-                    if (str_exp_rsn.equalsIgnoreCase("other"))
+
+                    if (radio_petty_cash.isChecked() || radio_other.isChecked() )
                     {
-                        str_remarks = ed_other.getText().toString();
+                        if (radio_petty_cash.isChecked())
+                        {
+                            if (ed_petty_rsn.getText().toString().matches(""))
+                            {
+                                Toast.makeText(WithDrawMoneyActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                str_pety_rsn = ed_petty_rsn.getText().toString();
+                            }
+                        }
+                        else if (radio_other.isChecked())
+                        {
+                            if (ed_other.getText().toString().matches(""))
+                            {
+                                Toast.makeText(WithDrawMoneyActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                str_remarks = ed_other.getText().toString();
+                            }
+                        }
+                        else
+                        {
+                            str_wd_amount = ed_wd_amount.getText().toString().trim();
+                            new GetBranchBalanceAsyncTask().execute();
+                        }
+
+                    }
+                    else
+                    {
+                        str_wd_amount = ed_wd_amount.getText().toString().trim();
+                        new GetBranchBalanceAsyncTask().execute();
+                    }
+/*
+
+                    if (str_exp_rsn.equalsIgnoreCase("other") )
+                    {
+                        if (ed_other.getText().toString().matches(""))
+                        {
+                            Toast.makeText(WithDrawMoneyActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            str_remarks = ed_other.getText().toString();
+                        }
                     }
                     else
                     {
                         str_remarks = "NA";
                     }
 
-                    new GetBranchBalanceAsyncTask().execute();
-                    str_wd_amount = ed_wd_amount.getText().toString();
+                    if (radio_petty_cash.isChecked())
+                    {
+                        if (ed_petty_rsn.getText().toString().matches(""))
+                        {
+                            Toast.makeText(WithDrawMoneyActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            str_wd_amount = ed_wd_amount.getText().toString().trim();
+                            str_pety_rsn = ed_petty_rsn.getText().toString();
+                            new GetBranchBalanceAsyncTask().execute();
+                        }
+                    }
+                    else
+                    {
+                        str_wd_amount = ed_wd_amount.getText().toString().trim();
+                        str_pety_rsn = "" ;
+                        new GetBranchBalanceAsyncTask().execute();
+                    }
+
+                    */
 
                 }
-
 
             }
         });
 
 
-
         str_user_id = global.getAl_login_list().get(0).get(GlobalConstants.USER_ID);
 
     }
+
 
     public class CustomDialogClass extends Dialog {
 
@@ -285,6 +380,9 @@ public class WithDrawMoneyActivity extends Activity {
 
                 al_str_key.add(GlobalConstants.WD_REASON);
                 al_str_value.add(str_exp_rsn);
+
+                al_str_key.add(GlobalConstants.WD_PETTY_RSN);
+                al_str_value.add(str_pety_rsn);
 
                 al_str_key.add(GlobalConstants.WD_REMARK);
                 al_str_value.add(str_remarks);

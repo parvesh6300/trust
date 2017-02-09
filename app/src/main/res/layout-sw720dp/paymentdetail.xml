@@ -159,8 +159,10 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rel_rsn_layout"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:visibility="gone"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp">
 

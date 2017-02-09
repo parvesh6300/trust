@@ -126,8 +126,8 @@
 
     <TextView
         android:id="@+id/buy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="230dp"
+        android:layout_height="60dp"
         android:text="Next"
         android:textSize="35sp"
         android:textAlignment="gravity"
@@ -135,9 +135,12 @@
         android:layout_marginTop="40sp"
         android:typeface="monospace"
         android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/button_background"
         android:layout_below="@+id/rel_radio_layout"
         android:layout_centerHorizontal="true"
         />
+
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"

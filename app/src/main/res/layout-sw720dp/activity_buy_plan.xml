@@ -115,6 +115,9 @@
             android:id="@+id/servicelist"
             android:layout_marginTop="5dp"
             android:layout_below="@id/header1"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
             android:choiceMode="multipleChoice"/>
 
     </RelativeLayout>

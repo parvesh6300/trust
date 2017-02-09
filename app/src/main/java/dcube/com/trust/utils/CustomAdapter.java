@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
@@ -24,19 +25,47 @@ public class CustomAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
 
-    public CustomAdapter(Activity activity) {
+    public CustomAdapter(Activity activity,String keyword) {
 
         context = activity.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        name = new ArrayList<>();
+        branch = new ArrayList<>();
+        contact = new ArrayList<>();
+
         global = (Global) activity.getApplicationContext();
+
+        for (HashMap<String,String> hashMap :global.getAl_src_client_details() )
+        {
+            if(keyword.equalsIgnoreCase(""))
+            {
+                name.add(hashMap.get(GlobalConstants.SRC_CLIENT_NAME));
+                branch.add(hashMap.get(GlobalConstants.SRC_CLIENT_AREA));
+                contact.add(hashMap.get(GlobalConstants.SRC_CLIENT_CONTACT));
+            }
+            else
+            {
+                if (hashMap.get(GlobalConstants.SRC_CLIENT_NAME).toLowerCase().contains(keyword.toLowerCase()) ||
+                        hashMap.get(GlobalConstants.SRC_CLIENT_CONTACT).toLowerCase().contains(keyword.toLowerCase())
+                        )
+                {
+                    name.add(hashMap.get(GlobalConstants.SRC_CLIENT_NAME));
+                    branch.add(hashMap.get(GlobalConstants.SRC_CLIENT_AREA));
+                    contact.add(hashMap.get(GlobalConstants.SRC_CLIENT_CONTACT));
+                }
+
+            }
+
+
+        }
 
     }
 
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-         return global.getAl_src_client_details().size();
+         return name.size();
     }
 
     @Override
@@ -70,9 +99,15 @@ public class CustomAdapter extends BaseAdapter {
         holder.branch = (TextView) rowView.findViewById(R.id.branch);
         holder.contact = (TextView) rowView.findViewById(R.id.contact);
 
-        holder.name.setText(global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_NAME));   //name.get(position)
-        holder.branch.setText(global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_AREA));
-        holder.contact.setText(global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_CONTACT));
+
+        //global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_NAME)
+        holder.name.setText(name.get(position));
+
+        //global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_AREA)
+        holder.branch.setText(branch.get(position));
+
+        //global.getAl_src_client_details().get(position).get(GlobalConstants.SRC_CLIENT_CONTACT)
+        holder.contact.setText(contact.get(position));
 
         return rowView;
     }

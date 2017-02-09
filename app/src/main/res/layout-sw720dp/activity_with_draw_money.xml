@@ -30,13 +30,14 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_below="@+id/addclienttext"
-        android:layout_above="@+id/gif_loader">
+        android:layout_above="@+id/rel_withdraw_layout">
 
         <RelativeLayout
             android:layout_width="650dp"
             android:layout_height="match_parent"
             android:background="@drawable/form_back"
             android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:gravity="center">
 
             <RelativeLayout
@@ -45,8 +46,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_centerHorizontal="true">
 
                 <TextView
@@ -112,7 +113,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
                 android:orientation="vertical"
                 android:padding="10dp"
                 android:layout_below="@+id/tv_expense_label">
@@ -132,6 +132,25 @@
                         android:textColor="@color/purple"
                         android:textSize="35sp"
                         android:typeface="monospace"
+                        />
+
+                    <EditText
+                        android:id="@+id/ed_petty_rsn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:hint="Specify Reason"
+                        android:gravity="top|left"
+                        android:textColor="@color/textColor"
+                        android:textSize="30sp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:layout_above="@+id/rel_withdraw_layout"
+                        android:layout_below="@+id/lin_radio_btns"
+                        android:background="@drawable/textarea"
+                        android:typeface="monospace"
+                        android:visibility="gone"
                         />
 
                     <RadioButton
@@ -201,6 +220,42 @@
                         />
 
                     <RadioButton
+                        android:id="@+id/radio_dkt_commodity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="DKT commodities"
+                        android:textColor="@color/purple"
+                        android:textSize="35sp"
+                        android:typeface="monospace"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/radio_non_dkt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Non DKT commodities"
+                        android:textColor="@color/purple"
+                        android:textSize="35sp"
+                        android:typeface="monospace"
+                        />
+
+
+
+                    <RadioButton
+                        android:id="@+id/radio_marketing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Marketing"
+                        android:textColor="@color/purple"
+                        android:textSize="35sp"
+                        android:typeface="monospace"
+                        />
+
+
+                    <RadioButton
                         android:id="@+id/radio_other"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -215,23 +270,21 @@
 
 
 
-
-
             </LinearLayout>
 
             <EditText
                 android:id="@+id/ed_other"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Specify Reason"
                 android:gravity="top|left"
                 android:textColor="@color/textColor"
                 android:textSize="30sp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:paddingStart="10dp"
+                android:layout_marginBottom="10dp"
                 android:paddingEnd="10dp"
                 android:layout_below="@+id/lin_radio_btns"
                 android:background="@drawable/textarea"
@@ -254,33 +307,37 @@
             </RelativeLayout>
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="40dp">
-
-
-                <TextView
-                    android:id="@+id/tv_withdraw"
-                    android:layout_width="280dp"
-                    android:layout_height="60dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/button_background"
-                    android:gravity="center"
-                    android:text="WithDraw"
-                    android:typeface="monospace"
-                    android:textAlignment="gravity"
-                    android:textColor="@color/white"
-                    android:textSize="35sp" />
-
-            </RelativeLayout>
-
 
         </RelativeLayout>
 
 
+
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rel_withdraw_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:layout_above="@+id/gif_loader"
+        android:layout_marginBottom="10dp">
+
+
+        <TextView
+            android:id="@+id/tv_withdraw"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:text="WithDraw"
+            android:typeface="monospace"
+            android:textAlignment="gravity"
+            android:textColor="@color/white"
+            android:textSize="35sp" />
 
     </RelativeLayout>
 
@@ -293,7 +350,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:visibility="invisible"
         />
 

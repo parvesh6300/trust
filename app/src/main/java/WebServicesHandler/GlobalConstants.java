@@ -105,7 +105,7 @@ public class GlobalConstants {
     public static final String CLIENT_AREA = "area";
     public static final String CLIENT_MED_HISTORY = "medical_history";
     public static final String CLIENT_CONTRA_HISTORY = "contraceptive_history";
-    public static final String CLIENT_CONTRA_TYPE = "contraceptive_type";
+    public static final String CLIENT_CONTRA_TYPE = "contraceptive_types";
     public static final String CLIENT_SEX = "sex";
     public static final String CLIENT_CHILD = "children";
     public static final String CLIENT_HIV_TEST = "hiv_tested";
@@ -182,6 +182,12 @@ public class GlobalConstants {
     public static final String PAYMENT_DISCOUNT = "discounted";
     public static final String PAYMENT_IS_FULL_PAID = "is_full_paid";
 
+    public static final String PAYMENT_FUlL_COST = "was_full_cost";
+    public static final String PAYMENT_DISCOUNT_PER = "discount_percentage";
+    public static final String PAYMENT_DISCOUNT_RSN = "discount_reason";
+    public static final String PAYMENT_AMOUNT_PAID = "amount_paid";
+    public static final String PAYMENT_AMOUNT_LEFT = "amount_left";
+
 
     // ************************************* View Order VARIABLES  ****************************************************
 
@@ -229,7 +235,9 @@ public class GlobalConstants {
     public static final String EXP_ID = "expense_id";
     public static final String EXP_DATE = "created";
     public static final String EXP_REMARKS = "remarks";
-
+    public static final String EXP_TOTAL = "total";
+    public static final String EXP_DATE_FROM = "start_date";
+    public static final String EXP_DATE_TO = "end_date";
 
     // *************************************  PENDING PAYMENT VARIABLES  ****************************************************
 
@@ -258,6 +266,7 @@ public class GlobalConstants {
     public static final String WD_USER_ID = "user_id";
     public static final String WD_DATE = "created";
     public static final String WD_REMARK = "remarks";
+    public static final String WD_PETTY_RSN = "remarks";
 
 
     // *************************************  REVENUE VARIABLES  ****************************************************

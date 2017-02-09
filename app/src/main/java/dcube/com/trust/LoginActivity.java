@@ -184,14 +184,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 al_str_key.add(GlobalConstants.LOGIN_PASSWORD);
                 al_str_value.add(str_password);
 
-
-//                if (role_id == 2) {
-//                    al_str_value.add(String.valueOf(2));
-//                }
-//                else {
-//                    al_str_value.add(String.valueOf(3));
-//                }
-
                 al_str_key.add(GlobalConstants.LOGIN_DEVICE_TYPE);
                 al_str_value.add("android");
 
@@ -263,6 +255,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         }
 
     }
+
+
 
     @Override
     public void onBackPressed() {

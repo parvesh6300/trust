@@ -29,8 +29,6 @@ public class CalendarCustomView extends LinearLayout
 	// for logging
 	private static final String LOGTAG = "Calendar View";
 
-	// how many days to show, defaults to six weeks, 42 days
-	private static final int DAYS_COUNT = 42;
 
 	// default date format
 	private static final String DATE_FORMAT1 = "MMM";
@@ -44,6 +42,9 @@ public class CalendarCustomView extends LinearLayout
 
 	// current displayed month
 	private Calendar currentDate = Calendar.getInstance();
+
+	// how many days to show, defaults to six weeks, 42 days
+	private static final int DAYS_COUNT = 42;
 
 	//event handling
 	private EventHandler eventHandler = null;
@@ -342,7 +343,6 @@ public class CalendarCustomView extends LinearLayout
 					for (Date eventDate : eventDays)
 					{
 
-//  eventDate.getDate() == day &&
 						if (eventDate.getDate() == day && eventDate.getMonth() == month && eventDate.getYear() == year)
 						{
 							// mark this day for event
@@ -360,7 +360,6 @@ public class CalendarCustomView extends LinearLayout
 							((TextView)view).setTextColor(getResources().getColor(R.color.textColor));
 							view.setBackgroundResource(R.drawable.white_circle);
 						}
-
 					}
 				}
 
@@ -379,6 +378,7 @@ public class CalendarCustomView extends LinearLayout
 			return view;
 		}
 	}
+
 	/**
 	 * Assign event handler to be passed needed events
 	 */

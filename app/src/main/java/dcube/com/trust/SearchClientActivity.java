@@ -41,7 +41,7 @@ public class SearchClientActivity extends Activity {
 
     TextView tv_no_client;
 
-    String src_keyword,str_branch = "Select Branch";
+    String src_keyword="",str_branch = "Select Branch";
 
     GifTextView gif_loader;
 
@@ -143,23 +143,35 @@ public class SearchClientActivity extends Activity {
 
                 Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
-                if(s.length() > 1)
+                if(s.length() == 0)
                 {
-                    if (cn.isNetConnected())
-                    {
-                        src_keyword = s.toString();
-                        searchlist.setVisibility(View.VISIBLE);
-                        new SearchClientAsyncTask().execute();
-                    }
-                    else {
-                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                    }
-
+                    src_keyword = "";
+                    new SearchClientAsyncTask().execute();
                 }
                 else
                 {
-                    searchlist.setVisibility(View.GONE);
+
+                    if (cn.isNetConnected())
+                    {
+                        src_keyword = s.toString();
+                        // new SearchClientAsyncTask().execute();
+                        tv_no_client.setVisibility(View.GONE);
+                        searchlist.setVisibility(View.VISIBLE);
+
+                        listadapter = new CustomAdapter(SearchClientActivity.this,src_keyword);
+                        searchlist.setAdapter(listadapter);
+                        listadapter.notifyDataSetChanged();
+
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 }
+
+
             }
         });
 
@@ -180,7 +192,16 @@ public class SearchClientActivity extends Activity {
         });
 
 
-        listadapter = new CustomAdapter(SearchClientActivity.this);
+        if (cn.isNetConnected())
+        {
+            new SearchClientAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
 
@@ -249,6 +270,7 @@ public class SearchClientActivity extends Activity {
                 }
                 else
                 {
+                    listadapter = new CustomAdapter(SearchClientActivity.this,"");
                     tv_no_client.setVisibility(View.GONE);
                     searchlist.setVisibility(View.VISIBLE);
                     searchlist.setAdapter(listadapter);

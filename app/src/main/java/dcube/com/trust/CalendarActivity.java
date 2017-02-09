@@ -189,7 +189,7 @@ public class CalendarActivity extends Activity
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
 
             if (message.equalsIgnoreCase("true"))
             {
@@ -217,6 +217,82 @@ public class CalendarActivity extends Activity
         }
 
     }
+
+
+
+
+    public class GetMonthApmtAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+          //  gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.APMT_DATE);
+                al_str_value.add(str_date);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_appointments");
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
+
+                message = ws.GetAppointmentService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.INVISIBLE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                tv_apmt_size.setText(String.valueOf(global.getAl_apmt_details().size()));
+
+                list.setVisibility(View.VISIBLE);
+                try
+                {
+                    calendarListAdapter= new CalendarListAdapter(context);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                list.setAdapter(calendarListAdapter);
+                calendarListAdapter.notifyDataSetChanged();
+
+            }
+            else
+            {
+                tv_apmt_size.setText(String.valueOf(0));
+
+                list.setVisibility(View.INVISIBLE);
+                //  Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
 
 }
 

@@ -114,13 +114,16 @@
             android:id="@+id/servicelist"
             android:layout_marginTop="10dp"
             android:layout_below="@id/header1"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
             android:choiceMode="multipleChoice"/>
 
     </RelativeLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
         android:text="Add to Cart"
         android:textSize="35sp"
         android:textAlignment="gravity"
@@ -129,6 +132,8 @@
         android:typeface="monospace"
         android:textStyle="bold"
         android:id="@+id/buy"
+        android:gravity="center"
+        android:background="@drawable/button_background"
         android:layout_above="@+id/gif_loader"
         android:layout_centerHorizontal="true" />
 

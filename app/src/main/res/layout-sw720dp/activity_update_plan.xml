@@ -49,6 +49,9 @@
             android:id="@+id/lv_products"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
             android:layout_above="@+id/tv_services"
             android:layout_below="@+id/tv_products"/>
 
@@ -71,6 +74,9 @@
             android:id="@+id/lv_services"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
             android:layout_above="@+id/tv_update_plan"
             android:layout_below="@+id/tv_services"/>
 
