@@ -189,6 +189,10 @@ public class GlobalConstants {
     public static final String PAYMENT_AMOUNT_LEFT = "amount_left";
 
 
+    public static final String GUEST_BUY_INFO = "buyer_info";
+    public static final String GUEST_BUY_REMARK = "buyer_info_remark";
+
+
     // ************************************* View Order VARIABLES  ****************************************************
 
     public static final String ORDER_ID = "order_id";
