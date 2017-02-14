@@ -140,18 +140,33 @@ public class StockAdapter extends BaseAdapter {
 
         holder.tv_product.setText(name.get(i));
         holder.tv_category.setText(category.get(i));
+
+        int stock = Integer.parseInt(in_stock.get(i));
+
+        if (stock < 21)
+        {
+            holder.tv_quantity.setBackgroundResource(R.drawable.red_circle);
+        }
+
+
         holder.tv_quantity.setText(in_stock.get(i));
+
+
 
 
         if (al_status.get(i).equalsIgnoreCase("0"))
         {
-            holder.tv_status.setBackgroundResource(R.drawable.red_circle);
-            holder.tv_status.setText(al_quantity.get(i));
+            //holder.tv_status.setBackgroundResource(R.drawable.red_circle);
+            holder.tv_status.setTextColor(mcontext.getResources().getColor(R.color.yellow));
+            holder.tv_status.setText("Requested");
+           // holder.tv_status.setText(al_quantity.get(i));
         }
         else if (al_status.get(i).equalsIgnoreCase("1"))
         {
-            holder.tv_status.setBackgroundResource(R.drawable.green_circle);
-            holder.tv_status.setText(al_quantity.get(i));
+           // holder.tv_status.setBackgroundResource(R.drawable.green_circle);
+            holder.tv_status.setTextColor(mcontext.getResources().getColor(R.color.green));
+            holder.tv_status.setText("Approved");
+          //  holder.tv_status.setText(al_quantity.get(i));
         }
         else
         {
@@ -257,15 +272,18 @@ public class StockAdapter extends BaseAdapter {
         return name.size();
     }
 
+
     @Override
     public Object getItem(int i) {
         return i;
     }
 
+
     @Override
     public long getItemId(int i) {
         return i;
     }
+
 
 
     public void showAlertDialog()
@@ -408,6 +426,8 @@ public class StockAdapter extends BaseAdapter {
         }
 
     }
+
+
 
     public class GetStockProductAsyncTask extends AsyncTask<String, String, String> {
 

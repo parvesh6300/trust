@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/rel_parent_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -115,6 +116,7 @@
         android:textColor="@color/white"
         android:text="Check Out"
         android:gravity="center"
+        android:textStyle="bold"
         android:textSize="35sp"
         android:typeface="monospace"
         android:layout_above="@+id/gif_loader"

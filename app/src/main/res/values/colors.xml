@@ -21,7 +21,8 @@
     <color name="mdtp_accent_color_dark">#603375</color>
 
     <color name="red">#F16767</color>
-    <color name="green">#28A98C</color>
+    <color name="green">#FF368C28</color>
+    <color name="yellow">#FFF4B114</color>
 
 
     <color name="divider">#DDDDDD</color>

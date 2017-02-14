@@ -8,11 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 public class FinanceAdapter extends BaseAdapter {
 
     private Context context;
+
+    Global global;
 
     public Integer[] mThumbIds = {
 
@@ -39,15 +42,15 @@ public class FinanceAdapter extends BaseAdapter {
 //    Order of menu - bank money, operating expense,
 //    stock management ,deposit money, account history, expense history, revenue, sales analytics.
 
-
-
     private static LayoutInflater inflater = null;
 
     public FinanceAdapter(Context context) {
 
         this.context = context;
 
-        context = context.getApplicationContext();
+        global = (Global) context.getApplicationContext();
+
+//        context = context.getApplicationContext();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -87,11 +90,22 @@ public class FinanceAdapter extends BaseAdapter {
 
         holder.image.setImageResource(mThumbIds[position]);
 
-//        if(position==0)
-//        {
-//            holder.notify.setVisibility(View.VISIBLE);
-//            holder.notify.setText("2");
-//        }
+        if(position==2)
+        {
+
+            for (int i=0 ; i < global.getAl_stock_product().size() ; i++ )
+            {
+                int stock = Integer.parseInt(global.getAl_stock_product().get(i).get(GlobalConstants.PRODUCT_IN_STOCK));
+
+                if (stock < 21)
+                {
+                    holder.notify.setVisibility(View.VISIBLE);
+                    holder.notify.setText("!");
+                }
+
+            }
+
+        }
 
 
         /*rowView.setOnClickListener(new View.OnClickListener() {

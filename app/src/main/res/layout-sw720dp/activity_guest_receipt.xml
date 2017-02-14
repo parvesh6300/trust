@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="Amount(Tsh) :"
+                android:text="Amount(TZS) :"
                 android:textColor="@color/purple"
                 android:textSize="30sp"
                 android:typeface="monospace" />

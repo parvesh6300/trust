@@ -44,6 +44,12 @@ public class GenerateInvoiceActivity extends FragmentActivity {
 
     }
 
+
+    /**
+     * View Pager is used
+     */
+
+
     private class MyPagerAdapter extends FragmentPagerAdapter {
 
         public MyPagerAdapter(FragmentManager fm) {
@@ -76,8 +82,14 @@ public class GenerateInvoiceActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * User can't go back from this activity
+     */
+
     @Override
     public void onBackPressed() {
 
     }
+
+
 }

@@ -90,7 +90,7 @@
             android:id="@+id/tv_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4000 Tsh"
+            android:text="4000 TZS"
             android:textSize="35sp"
             android:gravity="center"
             android:textColor="@color/purple"

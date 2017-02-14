@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import pl.droidsonroids.gif.GifTextView;
@@ -45,6 +48,7 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
 
     CheckNetConnection cn;
 
+    RelativeLayout rel_parent_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,8 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
         global = (Global) getApplicationContext();
 
         cn = new CheckNetConnection(context);
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         buy = (TextView) findViewById(R.id.buy);
 
@@ -141,13 +147,30 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
         });
 
 
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(GuestDetailActivity.this);
+                return false;
+            }
+        });
+
+
+
+
+
         ed_institution.addTextChangedListener(this);
         ed_retail_client.addTextChangedListener(this);
         ed_name.addTextChangedListener(this);
 
-
     }
 
+
+    /**
+     * Checks whether user has entered required fields
+     * @return boolean
+     */
 
     public boolean validate()
     {
@@ -184,6 +207,11 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
     }
 
 
+    /**
+     * Hit web service and check out the items present in cart
+     */
+
+
     public class CheckOutAsyncTask extends AsyncTask<String, String, String> {
 
         String message = "";
@@ -193,6 +221,9 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
         protected void onPreExecute() {
 
             payment_id = String.valueOf(global.getPayment_id());
+
+            gif_loader.setVisibility(View.VISIBLE);
+
         }
 
         @Override
@@ -268,8 +299,16 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
 
     }
 
+
+    /**
+     * User can't go back
+     */
+
     @Override
     public void onBackPressed() {
        // super.onBackPressed();
     }
+
+
+
 }

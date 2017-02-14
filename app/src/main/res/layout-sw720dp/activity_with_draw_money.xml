@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/rel_parent_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_1"
     android:orientation="vertical"
-    tools:context="dcube.com.trust.WithDrawMoneyActivity">
+    tools:context=".OperatingExpensesActivity">
 
     <TextView
         android:id="@+id/addclienttext"
@@ -79,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    android:text="Tsh"
+                    android:text="TZS"
                     android:textColor="@color/purple"
                     android:textSize="30sp"
                     android:textStyle="bold"

@@ -5,9 +5,11 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.AccountHistoryAdapter;
 import dcube.com.trust.utils.ExpenseAdapter;
@@ -41,6 +44,8 @@ public class AccountHistoryActivity extends Activity {
 
     AccountHistoryAdapter adapter;
 
+    RelativeLayout rel_parent_layout;
+
     CheckNetConnection cn;
 
     @Override
@@ -53,6 +58,8 @@ public class AccountHistoryActivity extends Activity {
         global = (Global) getApplicationContext();
 
         cn = new CheckNetConnection(this);
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -86,10 +93,24 @@ public class AccountHistoryActivity extends Activity {
         }
 
 
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(AccountHistoryActivity.this);
+
+                return false;
+            }
+        });
 
 
 
     }
+
+
+    /**
+     * Calls the web service and get account history
+     */
 
 
     public class AccountHistoryAsyncTask extends AsyncTask<String, String, String> {
@@ -154,6 +175,10 @@ public class AccountHistoryActivity extends Activity {
 
 
 
+    /**
+     * Calls the web service and get current balance of Branch
+     */
+
     public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -200,7 +225,7 @@ public class AccountHistoryActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_branch_balance()+" Tsh");
+                tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

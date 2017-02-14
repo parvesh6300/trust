@@ -109,6 +109,12 @@ public class ViewServicesActivity extends Activity {
 
     }
 
+
+    /**
+     * Renew Confirmation dialog
+     */
+
+
     public class CustomDialogClass extends Dialog {
 
         public Activity c;
@@ -176,6 +182,11 @@ public class ViewServicesActivity extends Activity {
             });
         }
     }
+
+
+    /**
+     * Hit the server and get availed services
+     */
 
 
     public class ViewServiceAsyncTask extends AsyncTask<String, String, String> {

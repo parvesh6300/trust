@@ -6,10 +6,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.MoneyBankedAdapter;
@@ -41,6 +44,8 @@ public class MoneyBankedActivity extends Activity {
     CustomDialogClass cdd;
     String str_deposit_amount;
 
+    RelativeLayout rel_parent_layout;
+
     CheckNetConnection cn;
 
     Context context;
@@ -54,6 +59,8 @@ public class MoneyBankedActivity extends Activity {
         context = this;
 
         cn = new CheckNetConnection(context);
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         global = (Global) context.getApplicationContext();
 
@@ -105,6 +112,20 @@ public class MoneyBankedActivity extends Activity {
         });
 
 
+
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(MoneyBankedActivity.this);
+
+                return false;
+            }
+        });
+
+
+
+
         if (cn.isNetConnected())
         {
             new GetBranchBalanceAsyncTask().execute();
@@ -118,6 +139,10 @@ public class MoneyBankedActivity extends Activity {
 
     }
 
+
+    /**
+     * Transaction custom dialog
+     */
 
     public class CustomDialogClass extends Dialog {
 
@@ -148,15 +173,15 @@ public class MoneyBankedActivity extends Activity {
 
             float account_total = Float.parseFloat(global.getStr_branch_balance());
 
-            tv_account_total.setText("Account Total : "+global.getStr_branch_balance()+" Tsh");
+            tv_account_total.setText("Account Total : "+global.getStr_branch_balance()+" TZS");
 
-            tv_deposit_money.setText("Money to Bank : "+str_deposit_amount+" Tsh");
+            tv_deposit_money.setText("Money to Bank : "+str_deposit_amount+" TZS");
 
             float deposit_amount = Float.parseFloat(str_deposit_amount);
 
             float balance = account_total - deposit_amount;
 
-            tv_balance.setText("Projected Balance : "+String.valueOf(balance)+" Tsh");
+            tv_balance.setText("Projected Balance : "+String.valueOf(balance)+" TZS");
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -181,6 +206,11 @@ public class MoneyBankedActivity extends Activity {
 
         }
     }
+
+
+    /**
+     * hit the service and bank the money
+     */
 
 
     public class MoneyBankAsyncTask extends AsyncTask<String, String, String> {
@@ -249,6 +279,10 @@ public class MoneyBankedActivity extends Activity {
 
     }
 
+    /**
+     * Hit the service and get the money bank history
+     */
+
 
     public class MoneyBankHistoryAsyncTask extends AsyncTask<String, String, String> {
 
@@ -311,6 +345,10 @@ public class MoneyBankedActivity extends Activity {
     }
 
 
+    /**
+     * Hit the service and get the branch balance
+     */
+
     public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -370,6 +408,10 @@ public class MoneyBankedActivity extends Activity {
     }
 
 
+    /**
+     * SHow confirmation dialog
+     */
+
     public void showDoneDialog() {
 
         final Dialog doneDialog = new Dialog(context);
@@ -402,6 +444,9 @@ public class MoneyBankedActivity extends Activity {
     }
 
 
+    /**
+     * Insufficient amount dialog
+     */
 
     public void insufficientDialog() {
 
@@ -416,8 +461,8 @@ public class MoneyBankedActivity extends Activity {
         TextView tv_account_total = (TextView) doneDialog.findViewById(R.id.tv_account_total);
         TextView tv_wd_amount = (TextView) doneDialog.findViewById(R.id.tv_wd_amount);
 
-        tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" Tsh");
-        tv_wd_amount.setText("MONEY TO BANK : "+str_deposit_amount+" Tsh");
+        tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" TZS");
+        tv_wd_amount.setText("MONEY TO BANK : "+str_deposit_amount+" TZS");
 
         tv_ok.setOnClickListener(new View.OnClickListener() {
             @Override

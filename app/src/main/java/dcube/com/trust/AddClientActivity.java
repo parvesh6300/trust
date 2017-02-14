@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,6 +28,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
@@ -150,6 +150,7 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
 //
 //            }
 //        });
+
 
         area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -322,6 +323,17 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         }
 
 
+
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(AddClientActivity.this);
+                return false;
+            }
+        });
+
+
         cb_contra_type_condom.setOnClickListener(this);
         cb_contra_type_fem_condom.setOnClickListener(this);
         cb_contra_type_oral.setOnClickListener(this);
@@ -471,6 +483,10 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
 
     }
 
+    /**
+     * Custom dialog to show Added Successfully
+     */
+
     public class CustomDialogClass extends Dialog{
 
         public Activity c;
@@ -508,6 +524,10 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
     }
 
 
+    /**
+     * Check whether all the required fields are filled or not
+     * @return boolean
+     */
 
     public boolean validate()
     {
@@ -563,6 +583,10 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         return false;
     }
 
+
+    /**
+     * Fetch all the views id from the xml
+     */
 
 
     public void getViewById()
@@ -635,6 +659,10 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
     }
 
 
+    /**
+     * Set default value of Radio buttons
+     */
+
     public void setDefaultValues()
     {
         radio_contra_yes.setChecked(true);
@@ -650,6 +678,10 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         str_about_clinic = "Social Media";
     }
 
+
+    /**
+     * Reset all values of the Check boxes
+     */
 
     public void resetCheckList()
     {
@@ -667,6 +699,11 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
     }
 
 
+    /**
+     * Add Client details to server
+     */
+
+
     public class AddClientAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -677,6 +714,8 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         protected void onPreExecute() {
 
             gif_loader.setVisibility(View.VISIBLE);
+
+            addclient.setClickable(false);
 
             str_name = str_name.toLowerCase();
             str_age = str_age.toLowerCase();
@@ -779,6 +818,8 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
 
             gif_loader.setVisibility(View.INVISIBLE);
 
+            addclient.setClickable(true);
+
             if (message.equalsIgnoreCase("true"))
             {
                 CustomDialogClass cdd=new CustomDialogClass(AddClientActivity.this);
@@ -794,17 +835,6 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
 
     }
 
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-
-        return true;
-
-    }
 
 
 

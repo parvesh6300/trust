@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.PlanListAdapter;
@@ -52,6 +55,8 @@ public class BuyPlanActivity extends Activity{
 
     PlanDialogClass dialog;
 
+    RelativeLayout rel_parent_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +68,8 @@ public class BuyPlanActivity extends Activity{
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         servicelist = (ListView) findViewById(R.id.servicelist);
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         buy = (TextView) findViewById(R.id.buy);
         search = (EditText) findViewById(R.id.search);
@@ -160,10 +167,31 @@ public class BuyPlanActivity extends Activity{
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
+
+
+
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(BuyPlanActivity.this);
+                return false;
+            }
+        });
+
+
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).
                 get(GlobalConstants.SRC_CLIENT_ID);
 
+
+
+
     }
+
+
+    /**
+     * Custom dialog shows the elements in plan
+     */
 
 
     public class PlanDialogClass extends Dialog {
@@ -242,6 +270,10 @@ public class BuyPlanActivity extends Activity{
     }
 
 
+    /**
+     * Hit web service and get list of plans
+     */
+
 
     public class GetPlanAsyncTask extends AsyncTask<String, String, String> {
 
@@ -300,6 +332,11 @@ public class BuyPlanActivity extends Activity{
         }
 
     }
+
+
+    /**
+     * Hit web service and add plan to cart
+     */
 
 
     public class AddPlanCartAsyncTask extends AsyncTask<String, String, String> {
@@ -381,6 +418,11 @@ public class BuyPlanActivity extends Activity{
         }
 
     }
+
+
+    /**
+     * Hit web service and get details of the plan elements
+     */
 
 
     public class GetPlanDataAsyncTask extends AsyncTask<String, String, String> {

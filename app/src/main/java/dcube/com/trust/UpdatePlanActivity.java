@@ -6,8 +6,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.ViewPlanProductAdapter;
@@ -39,6 +42,8 @@ public class UpdatePlanActivity extends Activity {
     WebServices ws;
 
     CheckNetConnection cn;
+
+    RelativeLayout rel_parent_layout;
 
     ArrayList<String> al_element_id;
     ArrayList<String> al_element_type;
@@ -66,6 +71,7 @@ public class UpdatePlanActivity extends Activity {
         lv_products = (ListView) findViewById(R.id.lv_products);
         lv_services = (ListView) findViewById(R.id.lv_services);
 
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         tv_update_plan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +88,17 @@ public class UpdatePlanActivity extends Activity {
         str_plan_id = global.getStr_selected_plan_id();
 
 
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(UpdatePlanActivity.this);
+                return false;
+            }
+        });
+
+
+
         if (cn.isNetConnected())
         {
             new GetPlanDataAsyncTask().execute();
@@ -93,6 +110,9 @@ public class UpdatePlanActivity extends Activity {
     }
 
 
+    /**
+     * Hit web service and get elements of plan
+     */
 
     public class GetPlanDataAsyncTask extends AsyncTask<String, String, String> {
 
@@ -162,6 +182,10 @@ public class UpdatePlanActivity extends Activity {
 
     }
 
+
+    /**
+     * Hit the web service and update the availed plan
+     */
 
     public class UpdatePlanAsyncTask extends AsyncTask<String, String, String> {
 
@@ -257,6 +281,10 @@ public class UpdatePlanActivity extends Activity {
     }
 
 
+    /**
+     * Custom confirmation dialog
+     */
+
     public void showAlertDialog()
     {
 
@@ -292,6 +320,11 @@ public class UpdatePlanActivity extends Activity {
     }
 
 
+    /**
+     * Add elements in arraylist and ready to send data to server
+     */
+
+
     public void addElements()
     {
         al_element_id = new ArrayList<String>();
@@ -321,30 +354,17 @@ public class UpdatePlanActivity extends Activity {
                     al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
                 }
 
-//                        if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
-//                        {
-//                            al_element_type.add("Service");
-//                            al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
-//                        }
-
             }
 
             for (int i=0 ; i < global.getAl_view_plan_details().size() ; i++)
             {
-//                        if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Product"))
-//                        {
-//                            al_element_type.add("Product");
-//                            al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
-//                        }
 
                 if (global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Service"))
                 {
                     al_element_type.add("Service");
                     al_element_id.add(global.getAl_view_plan_details().get(i).get(GlobalConstants.PLAN_ELEMENT_ID));
                 }
-
             }
-
 
             if (cn.isNetConnected())
             {

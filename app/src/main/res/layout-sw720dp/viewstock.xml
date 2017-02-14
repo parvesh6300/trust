@@ -57,19 +57,19 @@
 
     <TextView
         android:id="@+id/tv_status"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/circle"
-        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:textColor="@color/red"
         android:textSize="30sp"
         android:gravity="center"
         android:typeface="monospace"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
         android:layout_alignParentEnd="true"/>
 
+
+    <!--android:background="@drawable/circle"-->
 
 
 </RelativeLayout>

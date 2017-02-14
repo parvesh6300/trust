@@ -105,8 +105,6 @@ public class SplashActivity extends Activity {
 
 
 
-
-
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
@@ -114,6 +112,10 @@ public class SplashActivity extends Activity {
         finish();
     }
 
+
+    /**
+     * Set login details in shared preferences
+     */
 
     public void setSharedPreferences()
     {
@@ -126,6 +128,10 @@ public class SplashActivity extends Activity {
         editor.apply();
     }
 
+
+    /**
+     * Checks whether user is logged in or not
+     */
 
     public void getSharePreferences()
     {
@@ -141,6 +147,10 @@ public class SplashActivity extends Activity {
 
     }
 
+
+    /**
+     * Hit the service and open role respective screen
+     */
 
 
     public class OkHttpHandlerAsyncTask extends AsyncTask<String, String, String> {
@@ -243,5 +253,5 @@ public class SplashActivity extends Activity {
         }
 
 
-        }
+    }
 }

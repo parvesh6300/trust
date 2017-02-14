@@ -25,8 +25,6 @@ public class ClientHistoryActivity extends Activity {
 
 
 
-
-
     }
 
 

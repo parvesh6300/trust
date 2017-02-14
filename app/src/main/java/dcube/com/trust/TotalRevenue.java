@@ -459,7 +459,7 @@ public class TotalRevenue extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_branch_balance()+" Tsh");
+                tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

@@ -240,6 +240,10 @@ public class HelloChartActivity extends Activity {
     }
 
 
+    /**
+     * Set the corners and range of points
+     */
+
     public void resetViewport()
     {
         // Reset viewport height range to (0,100)
@@ -263,6 +267,10 @@ public class HelloChartActivity extends Activity {
 
     }
 
+
+    /**
+     * Create lines and data points
+     */
 
     private void generateData() {
 
@@ -350,6 +358,9 @@ public class HelloChartActivity extends Activity {
     }
 
 
+    /**
+     * Hit web service and get the dates and revenue
+     */
 
     public class TotalRevenueAsyncTask extends AsyncTask<String, String, String> {
 
@@ -414,6 +425,10 @@ public class HelloChartActivity extends Activity {
     }
 
 
+    /**
+     * Shows the value of point clicked
+     */
+
     private class ValueTouchListener implements LineChartOnValueSelectListener {
 
         @Override
@@ -432,6 +447,10 @@ public class HelloChartActivity extends Activity {
 
     }
 
+
+    /**
+     * Hit web service and get branch balance
+     */
 
 
     public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
@@ -482,7 +501,7 @@ public class HelloChartActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_branch_balance()+" Tsh");
+                tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

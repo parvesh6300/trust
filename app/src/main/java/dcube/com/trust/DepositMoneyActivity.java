@@ -6,10 +6,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.DepositAdapter;
 import dcube.com.trust.utils.Global;
@@ -49,6 +52,8 @@ public class DepositMoneyActivity extends Activity {
 
     GetBranchBalance get_balance;
 
+    RelativeLayout rel_parent_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -58,9 +63,12 @@ public class DepositMoneyActivity extends Activity {
 
         global = (Global) getApplicationContext();
 
+
         cn = new CheckNetConnection(this);
 
         get_balance = new GetBranchBalance(this);
+
+        rel_parent_layout = (RelativeLayout)  findViewById(R.id.rel_parent_layout);
 
         list_deposit=(ListView)findViewById(R.id.list_deposit);
 
@@ -112,13 +120,6 @@ public class DepositMoneyActivity extends Activity {
         {
             new GetBranchBalanceAsyncTask().execute();
             new DepositHistoryAsyncTask().execute();
-
-//            branch_balance = get_balance.branchBalance();
-//
-//            Log.e("Branch","Balance "+branch_balance);
-//
-//            tv_total_amount.setText(branch_balance+" Tsh");
-
         }
         else
         {
@@ -126,9 +127,22 @@ public class DepositMoneyActivity extends Activity {
         }
 
 
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(DepositMoneyActivity.this);
+               // hideSoftKeyboard(DepositMoneyActivity.this);
+                return false;
+            }
+        });
+
     }
 
 
+    /**
+     * Custom dialog show details of transaction
+     */
 
     public class CustomDialogClass extends Dialog {
 
@@ -210,6 +224,11 @@ public class DepositMoneyActivity extends Activity {
     }
 
 
+    /**
+     * Hit web service and get branch balance
+     */
+
+
     public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -256,7 +275,7 @@ public class DepositMoneyActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_branch_balance()+" Tsh");
+                tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
@@ -266,6 +285,10 @@ public class DepositMoneyActivity extends Activity {
 
     }
 
+
+    /**
+     * Hit web service and deposit money for user
+     */
 
 
     public class DepositMoneyAsyncTask extends AsyncTask<String, String, String> {
@@ -340,6 +363,10 @@ public class DepositMoneyActivity extends Activity {
     }
 
 
+    /**
+     * Custom dialog show money deposited
+     */
+
     public void showDoneDialog() {
 
         final Dialog doneDialog = new Dialog(context);
@@ -370,6 +397,11 @@ public class DepositMoneyActivity extends Activity {
             }
         });
     }
+
+
+    /**
+     * Hit web service and get deposit history
+     */
 
 
     public class DepositHistoryAsyncTask extends AsyncTask<String, String, String> {
@@ -426,6 +458,18 @@ public class DepositMoneyActivity extends Activity {
         }
 
     }
+
+
+
+//    public static void hideSoftKeyboard(Activity activity)
+//    {
+//        InputMethodManager inputMethodManager = (InputMethodManager)
+//                activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+//
+//        inputMethodManager.hideSoftInputFromWindow(
+//                activity.getCurrentFocus().getWindowToken(), 0);
+//    }
+
 
 
 

@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.CartAdapter;
 import dcube.com.trust.utils.Global;
@@ -44,6 +47,8 @@ public class CartActivity extends Activity {
     CartAdapter adapter;
 
 
+    RelativeLayout rel_parent_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +64,9 @@ public class CartActivity extends Activity {
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         tv_check_out = (TextView) findViewById(R.id.tv_check_out);
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
+
 
         tv_check_out.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +91,17 @@ public class CartActivity extends Activity {
                 }
 
 
+            }
+        });
+
+
+
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(CartActivity.this);
+                return false;
             }
         });
 
@@ -117,6 +136,10 @@ public class CartActivity extends Activity {
 
     }
 
+
+    /**
+     * Custom Confirmation Dialog
+     */
 
     public class CustomDialogClass extends Dialog {
 
@@ -164,7 +187,9 @@ public class CartActivity extends Activity {
 
              }
 
-            tv_message.setText("Your order total is: "+total_cost+" Tsh");
+
+            tv_message.setText("Your order total is: "+total_cost+" TZS");
+
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -189,6 +214,10 @@ public class CartActivity extends Activity {
         }
     }
 
+
+    /**
+     * Hit web service and get items of cart
+     */
 
 
     public class GetCartItemsAsyncTask extends AsyncTask<String, String, String> {
@@ -256,6 +285,14 @@ public class CartActivity extends Activity {
     }
 
 
+
+    /**
+     * Show loader visibility
+     * @param context
+     * @param show boolean
+     */
+
+
     public void loader(Context context, boolean show)
     {
         if (show)
@@ -272,6 +309,11 @@ public class CartActivity extends Activity {
 
     }
 
+
+    /**
+     * Updates the list after updating the cart
+     * @param context
+     */
 
 
     public void updateList(Context context)

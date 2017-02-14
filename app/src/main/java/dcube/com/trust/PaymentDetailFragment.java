@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import pl.droidsonroids.gif.GifTextView;
@@ -355,8 +357,26 @@ public class PaymentDetailFragment extends Fragment {
         });
 
 
+
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(getActivity());
+
+                return false;
+            }
+        });
+
+
+
         return v;
     }
+
+    /**
+     * Check whether required fields are filled or not
+     * @return boolean
+     */
 
 
     public boolean validate() {
@@ -413,6 +433,10 @@ public class PaymentDetailFragment extends Fragment {
         return false;
     }
 
+
+    /**
+     * Hit the payment service
+     */
 
     public class PaymentAsyncTask extends AsyncTask<String, String, String> {
 
@@ -499,6 +523,11 @@ public class PaymentDetailFragment extends Fragment {
         }
 
     }
+
+    /**
+     * Hit the service and check out the items in cart
+     */
+
 
     public class CheckOutAsyncTask extends AsyncTask<String, String, String> {
 

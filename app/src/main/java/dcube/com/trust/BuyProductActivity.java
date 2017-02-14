@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.ProductListAdapter;
@@ -43,6 +46,8 @@ public class BuyProductActivity extends Activity{
 
     CustomDialogClass cdd;
 
+    RelativeLayout rel_parent_layout;
+
     CheckNetConnection cn;
 
     @Override
@@ -54,6 +59,8 @@ public class BuyProductActivity extends Activity{
         global = (Global) getApplicationContext();
 
         cn = new CheckNetConnection(this);
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         productlist = (ListView) findViewById(R.id.productlist);
 
@@ -138,9 +145,23 @@ public class BuyProductActivity extends Activity{
         }
 
 
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(BuyProductActivity.this);
+                return false;
+            }
+        });
+
+
 
     }
 
+
+    /**
+     * Hit the web service and get list of products
+     */
 
 
     public class GetPruductAsyncTask extends AsyncTask<String, String, String> {
@@ -196,6 +217,12 @@ public class BuyProductActivity extends Activity{
         }
 
     }
+
+
+    /**
+     * Custom dialog shows the list of selected products
+     */
+
 
 
     public class CustomDialogClass extends Dialog {
@@ -257,6 +284,10 @@ public class BuyProductActivity extends Activity{
         }
     }
 
+
+    /**
+     * Add selected products to the cart
+     */
 
 
     public class AddToCartAsyncTask extends AsyncTask<String, String, String> {

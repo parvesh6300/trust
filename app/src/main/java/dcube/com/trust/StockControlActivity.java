@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.StockAdapter;
@@ -43,6 +46,9 @@ public class StockControlActivity extends Activity {
     CheckNetConnection cn;
     String str_branch;
 
+    RelativeLayout rel_parent_layout;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +58,8 @@ public class StockControlActivity extends Activity {
         global = (Global) getApplicationContext();
 
         cn = new CheckNetConnection(this);
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         tv_quantity = (TextView) findViewById(R.id.tv_quantity);
 
@@ -105,6 +113,15 @@ public class StockControlActivity extends Activity {
             }
         });
 
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(StockControlActivity.this);
+                return false;
+            }
+        });
+
 
         if (cn.isNetConnected())
         {
@@ -115,6 +132,11 @@ public class StockControlActivity extends Activity {
         }
 
     }
+
+
+    /**
+     * Hit the web service and get the products in stock
+     */
 
 
     public class GetStockProductAsyncTask extends AsyncTask<String, String, String> {
@@ -181,16 +203,32 @@ public class StockControlActivity extends Activity {
     }
 
 
+    /**
+     * Show loader
+     * @param context
+     */
+
     public void startLoader(Context context)
     {
         gif_loader.setVisibility(View.VISIBLE);
 
     }
 
+    /**
+     * Invisible loader
+     * @param context
+     */
+
     public void stopLoader(Context context)
     {
         gif_loader.setVisibility(View.INVISIBLE);
     }
+
+
+    /**
+     * Get the updated stock list
+     * @param context
+     */
 
 
     public void updateList(Context context)

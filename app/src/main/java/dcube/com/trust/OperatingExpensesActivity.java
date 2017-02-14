@@ -8,12 +8,14 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +23,13 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class WithDrawMoneyActivity extends Activity {
+public class OperatingExpensesActivity extends Activity {
 
     RadioGroup radio_group;
 
@@ -46,13 +49,15 @@ public class WithDrawMoneyActivity extends Activity {
     WebServices ws;
     Global global;
     String str_user_id;
-    String str_exp_rsn="",str_wd_amount,str_branch,str_remarks,str_pety_rsn;
+    String str_exp_rsn="",str_wd_amount="",str_branch="",str_remarks="",str_pety_rsn="";
 
     CustomDialogClass cdd;
 
     private static final int CAMERA_REQUEST = 1888;
 
     CheckNetConnection cn;
+
+    RelativeLayout rel_parent_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,8 @@ public class WithDrawMoneyActivity extends Activity {
         context = this;
 
         global = (Global) getApplicationContext();
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         cn = new CheckNetConnection(this);
 
@@ -186,15 +193,15 @@ public class WithDrawMoneyActivity extends Activity {
 
                 if (ed_wd_amount.getText().toString().matches(""))
                 {
-                    Toast.makeText(WithDrawMoneyActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OperatingExpensesActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
                 }
                 else if (ed_wd_amount.getText().toString().equalsIgnoreCase("0"))
                 {
-                    Toast.makeText(WithDrawMoneyActivity.this, "Amount should be greater than 0", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OperatingExpensesActivity.this, "Amount should be greater than 0", Toast.LENGTH_SHORT).show();
                 }
                 else if (str_exp_rsn.matches(""))
                 {
-                    Toast.makeText(WithDrawMoneyActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OperatingExpensesActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -205,29 +212,33 @@ public class WithDrawMoneyActivity extends Activity {
                         {
                             if (ed_petty_rsn.getText().toString().matches(""))
                             {
-                                Toast.makeText(WithDrawMoneyActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OperatingExpensesActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
                             }
                             else
                             {
-                                str_pety_rsn = ed_petty_rsn.getText().toString();
+                                str_remarks = ed_petty_rsn.getText().toString();  //str_pety_rsn
+                                str_wd_amount = ed_wd_amount.getText().toString().trim();
+                                new GetBranchBalanceAsyncTask().execute();
                             }
                         }
                         else if (radio_other.isChecked())
                         {
                             if (ed_other.getText().toString().matches(""))
                             {
-                                Toast.makeText(WithDrawMoneyActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OperatingExpensesActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
                             }
                             else
                             {
                                 str_remarks = ed_other.getText().toString();
+                                str_wd_amount = ed_wd_amount.getText().toString().trim();
+                                new GetBranchBalanceAsyncTask().execute();
                             }
                         }
-                        else
-                        {
-                            str_wd_amount = ed_wd_amount.getText().toString().trim();
-                            new GetBranchBalanceAsyncTask().execute();
-                        }
+//                        else
+//                        {
+//                            str_wd_amount = ed_wd_amount.getText().toString().trim();
+//                            new GetBranchBalanceAsyncTask().execute();
+//                        }
 
                     }
                     else
@@ -241,7 +252,7 @@ public class WithDrawMoneyActivity extends Activity {
                     {
                         if (ed_other.getText().toString().matches(""))
                         {
-                            Toast.makeText(WithDrawMoneyActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(OperatingExpensesActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
@@ -257,7 +268,7 @@ public class WithDrawMoneyActivity extends Activity {
                     {
                         if (ed_petty_rsn.getText().toString().matches(""))
                         {
-                            Toast.makeText(WithDrawMoneyActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(OperatingExpensesActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
@@ -281,9 +292,24 @@ public class WithDrawMoneyActivity extends Activity {
         });
 
 
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(OperatingExpensesActivity.this);
+                return false;
+            }
+        });
+
+
+
         str_user_id = global.getAl_login_list().get(0).get(GlobalConstants.USER_ID);
 
     }
+
+    /**
+     * Show the details of transaction
+     */
 
 
     public class CustomDialogClass extends Dialog {
@@ -316,9 +342,9 @@ public class WithDrawMoneyActivity extends Activity {
             float wd_amount = Float.parseFloat(str_wd_amount);
             float balance = account_total - wd_amount ;
 
-            tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" Tsh");
-            tv_wd_amount.setText("WITHDRAW : "+str_wd_amount+" Tsh");
-            tv_balance.setText("PROJECTED BALANCE : "+String.valueOf(balance)+" Tsh");
+            tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" TZS");
+            tv_wd_amount.setText("WITHDRAW : "+str_wd_amount+" TZS");
+            tv_balance.setText("PROJECTED BALANCE : "+String.valueOf(balance)+" TZS");
 
 
             confirm.setOnClickListener(new View.OnClickListener() {
@@ -349,6 +375,10 @@ public class WithDrawMoneyActivity extends Activity {
         }
     }
 
+
+    /**
+     * Hit the web service and withdraw the money
+     */
 
     public class WithDrawMoneyAsyncTask extends AsyncTask<String, String, String> {
 
@@ -381,8 +411,8 @@ public class WithDrawMoneyActivity extends Activity {
                 al_str_key.add(GlobalConstants.WD_REASON);
                 al_str_value.add(str_exp_rsn);
 
-                al_str_key.add(GlobalConstants.WD_PETTY_RSN);
-                al_str_value.add(str_pety_rsn);
+//                al_str_key.add(GlobalConstants.WD_PETTY_RSN);
+//                al_str_value.add(str_pety_rsn);
 
                 al_str_key.add(GlobalConstants.WD_REMARK);
                 al_str_value.add(str_remarks);
@@ -429,6 +459,10 @@ public class WithDrawMoneyActivity extends Activity {
     }
 
 
+    /**
+     * Amount not sufficient dialog
+     */
+
     public void insufficientDialog() {
 
         final Dialog doneDialog = new Dialog(context);
@@ -442,8 +476,8 @@ public class WithDrawMoneyActivity extends Activity {
         TextView tv_account_total = (TextView) doneDialog.findViewById(R.id.tv_account_total);
         TextView tv_wd_amount = (TextView) doneDialog.findViewById(R.id.tv_wd_amount);
 
-        tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" Tsh");
-        tv_wd_amount.setText("WITHDRAW : "+str_wd_amount+" Tsh");
+        tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" TZS");
+        tv_wd_amount.setText("WITHDRAW : "+str_wd_amount+" TZS");
 
         tv_ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -454,6 +488,10 @@ public class WithDrawMoneyActivity extends Activity {
         });
     }
 
+
+    /**
+     * Custom confirmation dialog
+     */
 
     public void showDoneDialog() {
 
@@ -486,6 +524,10 @@ public class WithDrawMoneyActivity extends Activity {
         });
     }
 
+
+    /**
+     * Hit service and get the branch balance
+     */
 
 
     public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
@@ -541,7 +583,7 @@ public class WithDrawMoneyActivity extends Activity {
 
                 if (account_total > wd_amount)
                 {
-                    cdd = new CustomDialogClass(WithDrawMoneyActivity.this);
+                    cdd = new CustomDialogClass(OperatingExpensesActivity.this);
                     cdd.show();
                 }
                 else
@@ -557,6 +599,14 @@ public class WithDrawMoneyActivity extends Activity {
         }
 
     }
+
+
+    /**
+     * Show clicked pic in imageview
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
 
 
     @Override

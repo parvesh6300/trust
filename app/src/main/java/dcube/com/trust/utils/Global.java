@@ -541,7 +541,7 @@ public class Global extends Application {
         this.al_stock_product = al_stock_product;
     }
 
-    public ArrayList<HashMap<String,String>> al_stock_product;
+    public ArrayList<HashMap<String,String>> al_stock_product = new ArrayList<>();
 
 
     public ArrayList<HashMap<String, String>> getAl_product_sold() {

@@ -107,6 +107,11 @@ public class ViewAppointmentActivity extends Activity {
     }
 
 
+    /**
+     * Custom Dialog used to book follow up
+     */
+
+
     public class CustomDialogClass extends Dialog implements TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener {
 
         public Activity c;
@@ -273,6 +278,12 @@ public class ViewAppointmentActivity extends Activity {
             tv_datepick.setText(d);
         }
 
+
+        /**
+         * Check whether all required fields are filled
+         * @return
+         */
+
         public boolean validate()
         {
             if (tv_datepick.getText().toString().matches("Date"))
@@ -301,6 +312,10 @@ public class ViewAppointmentActivity extends Activity {
 
     }
 
+
+    /**
+     * Hit the service and get the booked appointments
+     */
 
 
     public class GetAppointmentAsyncTask extends AsyncTask<String, String, String> {
@@ -359,6 +374,11 @@ public class ViewAppointmentActivity extends Activity {
         }
 
     }
+
+
+    /**
+     * Hit the service and add apoointment
+     */
 
 
 
@@ -437,6 +457,12 @@ public class ViewAppointmentActivity extends Activity {
         }
 
     }
+
+
+    /**
+     * Custom Dialog shows added Successfully
+     */
+
 
     public class DialogClass extends Dialog {
 

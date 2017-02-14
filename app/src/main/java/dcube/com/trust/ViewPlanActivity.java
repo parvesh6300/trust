@@ -96,6 +96,12 @@ public class ViewPlanActivity extends Activity {
     }
 
 
+    /**
+     * Renew confirmation dialog
+     */
+
+
+
     public class CustomDialogClass extends Dialog {
 
         public Activity c;
@@ -187,6 +193,10 @@ public class ViewPlanActivity extends Activity {
         });
 
     }
+
+    /**
+     * Hit the web service and get availed planns
+     */
 
 
     public class ViewPlanAsyncTask extends AsyncTask<String, String, String> {

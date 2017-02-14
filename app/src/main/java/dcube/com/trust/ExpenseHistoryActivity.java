@@ -226,6 +226,11 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
     }
 
+
+    /**
+     * Custom dialog of expense details
+     */
+
     public class CustomDialogClass extends Dialog {
 
         public Activity c;
@@ -251,7 +256,7 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
             tv_expense_reason = (TextView) findViewById(R.id.tv_expense_reason);
             tv_expense_amount = (TextView) findViewById(R.id.tv_expense_amount);
 
-            tv_expense_amount.setText("Expense Amount : "+str_amount+" Tsh");
+            tv_expense_amount.setText("Expense Amount : "+str_amount+" TZS");
             tv_expense_reason.setText("Expense : "+str_reason);
 
             confirm.setOnClickListener(new View.OnClickListener() {
@@ -283,6 +288,9 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
     }
 
 
+    /**
+     * Hit web service and Add expense to database
+     */
 
     public class AddExpenseAsyncTask extends AsyncTask<String, String, String> {
 
@@ -351,6 +359,10 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
     }
 
+    /**
+     * Custom expense deposited dialog
+     */
+
 
     public void showDoneDialog() {
 
@@ -383,6 +395,10 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
         });
     }
 
+
+    /**
+     * Hit web service and show expense history
+     */
 
 
     public class ExpenseHistoryAsyncTask extends AsyncTask<String, String, String> {
@@ -483,7 +499,7 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
                 list_expense.setAdapter(expenseAdapter);
                 expenseAdapter.notifyDataSetChanged();
 
-                tv_total_expense.setText(global.getStr_total_expense()+" Tsh");
+                tv_total_expense.setText(global.getStr_total_expense()+" TZS");
 
             }
             else

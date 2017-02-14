@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.CustomAdapter;
 import dcube.com.trust.utils.Global;
@@ -52,6 +55,8 @@ public class SearchClientActivity extends Activity {
     WebServices ws;
     int pos;
 
+    RelativeLayout rel_parent_layout;
+
     ArrayAdapter<String> spinnerArrayAdapter;
 
     CheckNetConnection cn;
@@ -66,6 +71,8 @@ public class SearchClientActivity extends Activity {
         global = (Global) getApplicationContext();
 
         cn = new CheckNetConnection(this);
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -192,6 +199,18 @@ public class SearchClientActivity extends Activity {
         });
 
 
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(SearchClientActivity.this);
+                return false;
+            }
+        });
+
+
+
+
         if (cn.isNetConnected())
         {
             new SearchClientAsyncTask().execute();
@@ -203,6 +222,11 @@ public class SearchClientActivity extends Activity {
 
 
     }
+
+
+    /**
+     * Hit the service and seacrh clients
+     */
 
 
     public class SearchClientAsyncTask extends AsyncTask<String, String, String> {

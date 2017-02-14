@@ -124,6 +124,10 @@ public class NurseHomeActivity extends Activity {
 
     }
 
+    /**
+     * Set the login details in shared preferences
+     */
+
 
     public void setSharedPreferences()
     {

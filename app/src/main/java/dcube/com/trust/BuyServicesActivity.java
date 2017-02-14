@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.ServiceListAdapter;
@@ -44,6 +47,8 @@ public class BuyServicesActivity extends Activity {
     String str_client_id;
     CheckNetConnection cn;
 
+    RelativeLayout rel_parent_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,8 @@ public class BuyServicesActivity extends Activity {
 
         cn = new CheckNetConnection(this);
 
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
+
         servicelist = (ListView) findViewById(R.id.servicelist);
 
         buy = (TextView) findViewById(R.id.buy);
@@ -60,8 +67,7 @@ public class BuyServicesActivity extends Activity {
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
-
-
+        
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +128,18 @@ public class BuyServicesActivity extends Activity {
         });
 
 
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(BuyServicesActivity.this);
+
+                return false;
+            }
+        });
+
+
+
         if (cn.isNetConnected())
         {
             new GetServiceAsyncTask().execute();
@@ -131,10 +149,16 @@ public class BuyServicesActivity extends Activity {
         }
 
 
+
+
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
 
     }
 
+
+    /**
+     * Custom dialog shows the list of selected services
+     */
 
 
     public class CustomDialogClass extends Dialog {
@@ -210,6 +234,11 @@ public class BuyServicesActivity extends Activity {
     }
 
 
+    /**
+     * Hit web service and get list of services
+     */
+
+
     public class GetServiceAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -264,6 +293,10 @@ public class BuyServicesActivity extends Activity {
 
     }
 
+
+    /**
+     *  Add Selected service to the cart
+     */
 
 
     public class AddServiceCartAsyncTask extends AsyncTask<String, String, String> {

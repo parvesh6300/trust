@@ -144,6 +144,10 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
     }
 
 
+    /**
+     * Hit the service and check qty of products sold
+     */
+
     public class ProductSoldAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();

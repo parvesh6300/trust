@@ -11,10 +11,12 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.GuestProductListAdapter;
@@ -52,6 +55,8 @@ public class GuestProductActivity extends Activity {
 
     CheckNetConnection cn;
 
+    RelativeLayout rel_parent_layout;
+
     public static Handler h;
 
     @Override
@@ -60,6 +65,8 @@ public class GuestProductActivity extends Activity {
         setContentView(R.layout.activity_product);
 
         global = (Global) getApplicationContext();
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         productlist = (ListView) findViewById(R.id.productlist);
 
@@ -137,6 +144,16 @@ public class GuestProductActivity extends Activity {
             }
         });
 
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(GuestProductActivity.this);
+
+                return false;
+            }
+        });
+
 
 
         if (cn.isNetConnected())
@@ -182,6 +199,9 @@ public class GuestProductActivity extends Activity {
     }
 
 
+    /**
+     * Hit web service and shows the list of products in stock
+     */
 
     public class GetPruductAsyncTask extends AsyncTask<String, String, String> {
 
@@ -240,6 +260,10 @@ public class GuestProductActivity extends Activity {
 
     }
 
+
+    /**
+     * Custom dialog shows the selected products of the user
+     */
 
     public class CustomDialogClass extends Dialog {
 
@@ -321,6 +345,10 @@ public class GuestProductActivity extends Activity {
     }
 
 
+    /**
+     * Hit web service and add selected products to cart
+     */
+
 
     public class AddToCartAsyncTask extends AsyncTask<String, String, String> {
 
@@ -388,8 +416,6 @@ public class GuestProductActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-
-
             if (message.equalsIgnoreCase("true"))
             {
                 Log.i("Added","To cart");
@@ -404,6 +430,10 @@ public class GuestProductActivity extends Activity {
 
     }
 
+
+    /**
+     * Hit web service and make payment for selected products
+     */
 
 
     public class PaymentAsyncTask extends AsyncTask<String, String, String> {
@@ -467,10 +497,14 @@ public class GuestProductActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-
             if (message.equalsIgnoreCase("true"))
             {
-                new CheckOutAsyncTask().execute();
+                buy.setClickable(true);
+
+                startActivity(new Intent(GuestProductActivity.this,GuestDetailActivity.class));
+                finish();
+
+                // new CheckOutAsyncTask().execute();
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

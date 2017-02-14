@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,6 +22,7 @@ import java.util.HashMap;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
@@ -67,6 +70,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
+    RelativeLayout rel_parent_layout;
+
     CheckNetConnection cn;
 
     @Override
@@ -77,6 +82,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         global = (Global) getApplicationContext();
 
         cn = new CheckNetConnection(this);
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         role = "nurse";
 
@@ -95,6 +102,17 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         forgot = (TextView) findViewById(R.id.forgot);
         signin = (TextView) findViewById(R.id.signin);
         forgot.setPaintFlags(forgot.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(LoginActivity.this);
+                return false;
+            }
+        });
+
 
         nurse.setOnClickListener(this);
         finance.setOnClickListener(this);
@@ -133,6 +151,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
             case R.id.signin: {
 
+                Log.i("Sign","in clicked");
 
                 if (validate())
                 {
@@ -159,6 +178,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
 
+    /**
+     * Hit web service and check user exists or not
+     */
+
     public class OkHttpHandlerAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -169,6 +192,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         protected void onPreExecute() {
 
             gif_loader.setVisibility(View.VISIBLE);
+
+            signin.setClickable(false);
         }
 
         @Override
@@ -207,6 +232,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         protected void onPostExecute(String s) {
 
             gif_loader.setVisibility(View.GONE);
+
+            signin.setClickable(true);
 
             if (message.equalsIgnoreCase("true"))
             {
@@ -257,6 +284,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
 
+    /**
+     * User tap two times to close the app
+     */
 
     @Override
     public void onBackPressed() {
@@ -276,6 +306,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
 
+    /**
+     * Save login details in shared preferences
+     */
+
     public void setSharedPreferences()
     {
         pref = getSharedPreferences(login_pref,MODE_PRIVATE);
@@ -291,6 +325,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         editor.apply();
     }
 
+
+    /**
+     * Checks whether user has entered the required fields
+     * @return boolean
+     */
 
     public boolean validate()
     {

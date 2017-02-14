@@ -324,6 +324,12 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
     }
 
 
+    /**
+     *  Validates whether all required fields are filled or not
+     * @return boolean
+     */
+
+
     public boolean validate()
     {
         if (ed_name.getText().toString().matches(""))
@@ -364,6 +370,10 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
         return false;
     }
 
+
+    /**
+     *  Calls the web service and get Services respective to branch
+     */
 
     public class GetServiceAsyncTask extends AsyncTask<String, String, String> {
 
@@ -429,6 +439,9 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
     }
 
 
+    /**
+     *  Add appointment for the user
+     */
 
     public class AddAppointmentAsyncTask extends AsyncTask<String, String, String> {
 
@@ -508,6 +521,9 @@ public class AddAppointmentActivity extends FragmentActivity implements OnTimeSe
     }
 
 
+    /**
+     *  Custom dialog of Added Successfully
+     */
 
     public class CustomDialogClass extends Dialog {
 

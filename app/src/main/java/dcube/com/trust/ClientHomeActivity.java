@@ -178,6 +178,11 @@ public class ClientHomeActivity extends Activity {
 
     }
 
+
+    /**
+     * Save login details in shared preferences
+     */
+
     public void setSharedPreferences()
     {
         pref = getSharedPreferences(login_pref,MODE_PRIVATE);
@@ -190,6 +195,9 @@ public class ClientHomeActivity extends Activity {
     }
 
 
+    /**
+     * Get list of items in cart
+     */
 
 
     public class GetCartItemsAsyncTask extends AsyncTask<String, String, String> {

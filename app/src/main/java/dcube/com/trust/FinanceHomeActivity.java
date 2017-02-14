@@ -1,18 +1,26 @@
 package dcube.com.trust;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.FinanceAdapter;
 import dcube.com.trust.utils.Global;
+import okhttp3.OkHttpClient;
 
 public class FinanceHomeActivity extends Activity {
 
@@ -30,6 +38,11 @@ public class FinanceHomeActivity extends Activity {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
+    WebServices ws;
+    Context context = this;
+
+    CheckNetConnection cn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +51,12 @@ public class FinanceHomeActivity extends Activity {
 
         adapter = new FinanceAdapter(this);
 
+        cn = new CheckNetConnection(context);
+
         global = (Global) getApplicationContext();
 
         gridView = (GridView) findViewById(R.id.grid_view);
-        gridView.setAdapter(adapter);
+
 
         tv_user_name = (TextView) findViewById(R.id.tv_user_name);
         tv_logout = (TextView) findViewById(R.id.tv_logout);
@@ -50,6 +65,9 @@ public class FinanceHomeActivity extends Activity {
 
         global.setStr_branch_balance("0");
         global.setStr_total_sale("0");
+
+        gridView.setAdapter(adapter);
+
 
         tv_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +95,7 @@ public class FinanceHomeActivity extends Activity {
                         break;
 
                     case 1:
-                        startActivity(new Intent(FinanceHomeActivity.this,WithDrawMoneyActivity.class));//ProductSoldHistory
+                        startActivity(new Intent(FinanceHomeActivity.this,OperatingExpensesActivity.class));//ProductSoldHistory
                         break;
 
                     case 2:
@@ -89,7 +107,7 @@ public class FinanceHomeActivity extends Activity {
                         break;
 
                     case 4:
-                        startActivity(new Intent(FinanceHomeActivity.this,AccountHistoryActivity.class));//WithDrawMoneyActivity
+                        startActivity(new Intent(FinanceHomeActivity.this,AccountHistoryActivity.class));//OperatingExpensesActivity
                         break;
 
                     case 5:
@@ -109,7 +127,24 @@ public class FinanceHomeActivity extends Activity {
         });
 
 
+
+        if (cn.isNetConnected())
+        {
+            new GetStockProductAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(FinanceHomeActivity.this, "Check Net Connection", Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
+
+
+    /**
+     * Tap two times to close the app
+     */
 
 
     @Override
@@ -130,6 +165,10 @@ public class FinanceHomeActivity extends Activity {
     }
 
 
+    /**
+     * Set login details in shared preferences
+     */
+
 
     public void setSharedPreferences()
     {
@@ -140,6 +179,66 @@ public class FinanceHomeActivity extends Activity {
         editor.putBoolean(is_logged_in_pref,false);
 
         editor.apply();
+    }
+
+
+    /**
+     * Hit web service and get stock products details
+     */
+
+
+    public class GetStockProductAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+        String str_client_id;
+
+        @Override
+        protected void onPreExecute() {
+
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+//                al_str_key.add(GlobalConstants.BRANCH);
+//                al_str_value.add(str_branch);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_stock_request"); //get_products_in_stock
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
+
+                message = ws.GetProductStockService(context, al_str_key, al_str_value);  //GetProductStockService
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                gridView.setAdapter(adapter);
+            }
+
+        }
+
     }
 
 

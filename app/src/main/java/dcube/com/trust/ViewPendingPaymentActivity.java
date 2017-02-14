@@ -120,6 +120,11 @@ public class ViewPendingPaymentActivity extends Activity {
     }
 
 
+    /**
+     * Hit the service and do pending payment
+     */
+
+
     public class PendingPaymentAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -273,6 +278,10 @@ public class ViewPendingPaymentActivity extends Activity {
 
     }
 
+
+    /**
+     * Hit the service and clear pending payment
+     */
 
     public class ClearPendingPaymentAsyncTask extends AsyncTask<String, String, String> {
 

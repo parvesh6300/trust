@@ -146,6 +146,11 @@ public class CalendarActivity extends Activity
     }
 
 
+    /**
+     * Hit web service and get list of appointments
+     */
+
+
     public class GetAppointmentAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();

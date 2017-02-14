@@ -68,6 +68,7 @@ public class AddPlanAppointmentActivity extends FragmentActivity implements Time
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_plan_appointment);
 
@@ -243,6 +244,10 @@ public class AddPlanAppointmentActivity extends FragmentActivity implements Time
         date.setText(d);
     }
 
+    /**
+     * Validates wheter user filled the required fields
+     * @return boolean
+     */
 
     public boolean validate()
     {
@@ -278,6 +283,10 @@ public class AddPlanAppointmentActivity extends FragmentActivity implements Time
         return false;
     }
 
+
+    /**
+     * Add appointment of the user for availed plan service
+     */
 
     public class AddAppointmentAsyncTask extends AsyncTask<String, String, String> {
 
@@ -349,6 +358,10 @@ public class AddPlanAppointmentActivity extends FragmentActivity implements Time
         }
 
     }
+
+    /**
+     * Custom dialog to show Appointment Added Succesfully
+     */
 
 
     public class CustomDialogClass extends Dialog {
