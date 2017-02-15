@@ -122,6 +122,10 @@ public class FinanceHomeActivity extends Activity {
                         startActivity(new Intent(FinanceHomeActivity.this,ProductSoldHistory.class));//AccountHistoryActivity
                         break;
 
+                    case 8:
+                        startActivity(new Intent(FinanceHomeActivity.this,PettyCashActivity.class));
+                        break;
+
                 }
             }
         });

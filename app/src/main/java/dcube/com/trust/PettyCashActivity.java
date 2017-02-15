@@ -3,37 +3,41 @@ package dcube.com.trust;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
-import dcube.com.trust.utils.DepositAdapter;
 import dcube.com.trust.utils.Global;
+import dcube.com.trust.utils.PettyCashAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class DepositMoneyActivity extends Activity {
+public class PettyCashActivity extends Activity {
 
     Context context = this;
-    ListView list_deposit;
+    ListView list_history;
 
-    DepositAdapter depositAdapter;
-
-   TextView tv_total_amount,tv_deposit;
+    TextView tv_total_amount,tv_withdraw,tv_receipt;
 
     EditText ed_deposit_amount,ed_remark;
 
@@ -44,8 +48,6 @@ public class DepositMoneyActivity extends Activity {
     String str_deposit_amount,str_remark,str_branch;
     WebServices ws;
 
-    CustomDialogClass cdd;
-
     CheckNetConnection cn;
 
     String branch_balance;
@@ -54,15 +56,29 @@ public class DepositMoneyActivity extends Activity {
 
     RelativeLayout rel_parent_layout;
 
+    CustomDialogClass cdd;
+
+    ImageView iv_receipt;
+
+    PettyCashAdapter adapter;
+
+    public static final String UPLOAD_KEY = "image";
+
+    Bitmap photo;
+    public static HashMap<String,String> data;
+
+    private final int CAMERA_REQUEST = 1888;
+
+    public boolean is_pic_selected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_deposit_money);
+        setContentView(R.layout.activity_petty_cash);
 
         global = (Global) getApplicationContext();
-
 
         cn = new CheckNetConnection(this);
 
@@ -70,10 +86,13 @@ public class DepositMoneyActivity extends Activity {
 
         rel_parent_layout = (RelativeLayout)  findViewById(R.id.rel_parent_layout);
 
-        list_deposit=(ListView)findViewById(R.id.list_deposit);
+        list_history=(ListView)findViewById(R.id.list_history);
 
         tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
-        tv_deposit=(TextView)findViewById(R.id.tv_deposit);
+        tv_withdraw=(TextView)findViewById(R.id.tv_withdraw);
+        tv_receipt = (TextView) findViewById(R.id.tv_receipt);
+
+        iv_receipt = (ImageView)findViewById(R.id.iv_receipt);
 
         ed_deposit_amount=(EditText)findViewById(R.id.ed_deposit_amount);
         ed_remark = (EditText) findViewById(R.id.ed_remark);
@@ -82,18 +101,21 @@ public class DepositMoneyActivity extends Activity {
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
+//        adapter = new PettyCashAdapter(context);
+//        list_history.setAdapter(adapter);
 
-        tv_deposit.setOnClickListener(new View.OnClickListener() {
+
+        tv_withdraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (ed_deposit_amount.getText().toString().matches(""))
                 {
-                    Toast.makeText(DepositMoneyActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Enter Amount", Toast.LENGTH_SHORT).show();
                 }
                 else if (ed_deposit_amount.getText().toString().equalsIgnoreCase("0"))
                 {
-                    Toast.makeText(DepositMoneyActivity.this, "Amount should be greater than 0", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Amount should be greater than 0", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -108,34 +130,34 @@ public class DepositMoneyActivity extends Activity {
                         str_remark = ed_remark.getText().toString();
                     }
 
-                    cdd = new CustomDialogClass(DepositMoneyActivity.this);
+                    cdd = new CustomDialogClass(PettyCashActivity.this);
                     cdd.show();
                 }
 
             }
         });
 
-
-        if (cn.isNetConnected())
-        {
-            new GetBranchBalanceAsyncTask().execute();
-            new DepositHistoryAsyncTask().execute();
-        }
-        else
-        {
-            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-        }
-
-
         rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
-                HideKeyboard.hideSoftKeyboard(DepositMoneyActivity.this);
-               // hideSoftKeyboard(DepositMoneyActivity.this);
+                HideKeyboard.hideSoftKeyboard(PettyCashActivity.this);
+                // hideSoftKeyboard(DepositMoneyActivity.this);
                 return false;
             }
         });
+
+
+
+        tv_receipt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        });
+
 
     }
 
@@ -175,20 +197,20 @@ public class DepositMoneyActivity extends Activity {
             branch_balance = global.getStr_branch_balance();
 
             tv_total_amount.setText("ACCOUNT TOTAL : "+branch_balance);
-            tv_deposit.setText("DEPOSIT : "+str_deposit_amount);
+            tv_deposit.setText("WITHDRAW : "+str_deposit_amount);
 
             if (! branch_balance.equalsIgnoreCase(null))
             {
                 int_total_amount = Float.parseFloat(branch_balance);
                 int_deposit = Float.parseFloat(str_deposit_amount);
-                int_balance = int_total_amount + int_deposit;
+                int_balance = int_total_amount - int_deposit;
 
                 tv_balance.setText("PROJECTED BALANCE : "+String.valueOf(int_balance));
 
             }
             else
             {
-                Toast.makeText(DepositMoneyActivity.this, "Account is very low", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Account is very low", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -201,7 +223,13 @@ public class DepositMoneyActivity extends Activity {
                     if (cn.isNetConnected())
                     {
                         tv_deposit.setClickable(false);
-                        new DepositMoneyAsyncTask().execute();
+
+                        if (is_pic_selected)
+                        {
+                            sendImage(photo);
+                        }
+
+                        new WdPettyCashAsyncTask().execute();
                     }
                     else
                     {
@@ -223,75 +251,32 @@ public class DepositMoneyActivity extends Activity {
         }
     }
 
-
     /**
-     * Hit web service and get branch balance
+     * Save image in imageview
+     * @param requestCode
+     * @param resultCode
+     * @param data
      */
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
+        {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            iv_receipt.setImageBitmap(photo);
 
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-
-        @Override
-        protected void onPreExecute() {
-
-
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_branch_balance");
-
-                for (int i =0 ; i < al_str_key.size() ; i++)
-                {
-                    Log.i("Key",""+ al_str_key.get(i));
-                    Log.i("Value",""+ al_str_value.get(i));
-                }
-
-                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            if (message.equalsIgnoreCase("true"))
-            {
-                tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
-            }
-            else {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
+            is_pic_selected = true;
 
         }
-
     }
 
 
     /**
-     * Hit web service and deposit money for user
+     * Hit the service and send petty cash
      */
 
-
-    public class DepositMoneyAsyncTask extends AsyncTask<String, String, String> {
+    public class WdPettyCashAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
@@ -302,6 +287,8 @@ public class DepositMoneyActivity extends Activity {
 
             gif_loader.setVisibility(View.VISIBLE);
 
+            tv_withdraw.setClickable(false);
+
         }
 
         @Override
@@ -315,17 +302,20 @@ public class DepositMoneyActivity extends Activity {
                 al_str_key.add(GlobalConstants.USER_BRANCH_ID);
                 al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
-                al_str_key.add(GlobalConstants.DEPOSIT_AMOUNT);
+                al_str_key.add(GlobalConstants.PT_AMOUNT);
                 al_str_value.add(str_deposit_amount);
 
-                al_str_key.add(GlobalConstants.DEPOSIT_REMARKS);
+                al_str_key.add(GlobalConstants.PT_REASON);
                 al_str_value.add(str_remark);
 
-                al_str_key.add(GlobalConstants.BRANCH);
-                al_str_value.add(str_branch);
+                if (is_pic_selected)
+                {
+                    al_str_key.add(GlobalConstants.PT_IMAGE);
+                    al_str_value.add(data.get(UPLOAD_KEY));
+                }
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("deposits");
+                al_str_value.add("add_receipt");
 
                 for (int i =0 ; i < al_str_key.size() ; i++)
                 {
@@ -333,7 +323,7 @@ public class DepositMoneyActivity extends Activity {
                     Log.i("Value",""+ al_str_value.get(i));
                 }
 
-                message = ws.DepositMoneyService(context, al_str_key, al_str_value);
+                message = ws.WdPettyCashService(context, al_str_key, al_str_value);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -347,115 +337,54 @@ public class DepositMoneyActivity extends Activity {
 
             gif_loader.setVisibility(View.INVISIBLE);
 
-            tv_deposit.setClickable(true);
+            tv_withdraw.setClickable(true);
 
             if (message.equalsIgnoreCase("true"))
             {
-                showDoneDialog();
-
-            }
-            else {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-    }
-
-
-    /**
-     * Custom dialog show money deposited
-     */
-
-    public void showDoneDialog() {
-
-        final Dialog doneDialog = new Dialog(context);
-
-        doneDialog.setContentView(R.layout.stockalertdialog);
-
-        //doneDialog.create();
-        doneDialog.show();
-
-        TextView tv_yes = (TextView) doneDialog.findViewById(R.id.tv_yes);
-        TextView tv_no = (TextView) doneDialog.findViewById(R.id.tv_no);
-        TextView tv_message = (TextView) doneDialog.findViewById(R.id.tv_message);
-        TextView tv_title = (TextView) doneDialog.findViewById(R.id.tv_title);
-
-        tv_title.setText("Confirmation Dialog");
-        tv_message.setText("Money Deposited");
-        tv_yes.setText("OK");
-        tv_no.setVisibility(View.GONE);
-
-        tv_yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                cdd.dismiss();
-                doneDialog.cancel();
                 finish();
-
             }
-        });
-    }
-
-
-    /**
-     * Hit web service and get deposit history
-     */
-
-
-    public class DepositHistoryAsyncTask extends AsyncTask<String, String, String> {
-
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-
-        @Override
-        protected void onPreExecute() {
-
-            gif_loader.setVisibility(View.VISIBLE);
-
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("deposits_history");
-
-                message = ws.DepositHistoryService(context, al_str_key, al_str_value);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            gif_loader.setVisibility(View.INVISIBLE);
-
-            if (message.equalsIgnoreCase("true"))
+            else
             {
-                depositAdapter= new DepositAdapter(context);
-                list_deposit.setAdapter(depositAdapter);
-
-            }
-            else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
         }
+
+    }
+
+
+    /**
+     * Convert image into string
+     * @param bmp
+     * @return
+     */
+
+
+    public String getStringImage(Bitmap bmp)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+
+    /**
+     * Save image in Hash map
+     * @param params
+     */
+
+
+    public void sendImage(Bitmap... params)
+    {
+        Bitmap bitmap = params[0];
+
+        String uploadImage = getStringImage(bitmap);
+
+        data = new HashMap<>();
+
+        data.put(UPLOAD_KEY, uploadImage);
 
     }
 

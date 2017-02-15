@@ -87,6 +87,7 @@ public class GuestProductActivity extends Activity {
         str_client_id = two_letters+"_GUEST";
 
 
+
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

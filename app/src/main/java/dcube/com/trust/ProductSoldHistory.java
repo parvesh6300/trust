@@ -236,9 +236,13 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
                 soldProductAdapter= new SoldProductAdapter(context);
                 lv_sold_products.setAdapter(soldProductAdapter);
+                lv_sold_products.setVisibility(View.VISIBLE);
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+
+                lv_sold_products.setVisibility(View.INVISIBLE);
+
             }
 
         }

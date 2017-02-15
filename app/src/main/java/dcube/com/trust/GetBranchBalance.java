@@ -13,8 +13,9 @@ import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 
 /**
- * Created by Sagar on 20/01/17.
+ * Created by Rohit on 20/01/17.
  */
+
 public class GetBranchBalance {
 
     String str_balance;
@@ -22,6 +23,8 @@ public class GetBranchBalance {
     Context context;
 
     Global global;
+
+    String message = "";
 
     WebServices ws;
 
@@ -44,8 +47,57 @@ public class GetBranchBalance {
     }
 
 
+    public String getBalance()
+    {
 
-    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+
+                    ArrayList<String> al_str_key = new ArrayList<>();
+                    ArrayList<String> al_str_value = new ArrayList<>();
+
+                    al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                    al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                    al_str_key.add(GlobalConstants.ACTION);
+                    al_str_value.add("get_branch_balance");
+
+                    for (int i =0 ; i < al_str_key.size() ; i++)
+                    {
+                        Log.i("Key",""+ al_str_key.get(i));
+                        Log.i("Value",""+ al_str_value.get(i));
+                    }
+
+                    message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        thread.start();
+
+        if (message.equalsIgnoreCase("true"))
+        {
+            return global.getStr_branch_balance();
+        }
+
+        else
+        {
+            return "0";
+        }
+
+    }
+
+
+
+    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String>
+    {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";

@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 import WebServicesHandler.GlobalConstants;
@@ -29,7 +28,6 @@ public class DepositAdapter extends BaseAdapter {
 
     Global global;
 
-    Calendar cl= Calendar.getInstance();
 
     public DepositAdapter(Context mcontext)
     {
@@ -78,7 +76,7 @@ public class DepositAdapter extends BaseAdapter {
         holder.tv_year.setText("'"+date[0]);
 
         holder.tv_detail.setText(al_deposit_detail.get(pos));
-        holder.tv_amount.setText(al_deposit_amount.get(pos)+" Tsh");
+        holder.tv_amount.setText(al_deposit_amount.get(pos)+" TZS");
 
         return convertview;
     }

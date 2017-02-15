@@ -1,12 +1,15 @@
 package WebServicesHandler;
 
 /**
- * Created by Sagar on 06/12/16.
+ * Created by Rohit on 06/12/16.
  */
 public class GlobalConstants {
 
 
-    public static final String TRUST_URL = "http://dcubetechnologies.com/Trust_Backend/api/webservice.php";
+   // public static final String TRUST_URL = "http://dcubetechnologies.com/Trust_Backend/api/webservice.php";
+
+    public static final String TRUST_URL = "http://dcubetechnologies.com/Trust_Backend/api/webservice_rajpal.php";
+
 
     //http://dcubetechnologies.com/Trust_Backend/src/api/webservice.php
 
@@ -292,6 +295,12 @@ public class GlobalConstants {
     public static final String BRANCH_BALANCE = "net_balance";
 
 
+    // *************************************  Petty Cash VARIABLES  ****************************************************
+
+
+    public static final String PT_AMOUNT = "Amount";
+    public static final String PT_REASON = "Reason";
+    public static final String PT_IMAGE = "Image";
 
 }
 

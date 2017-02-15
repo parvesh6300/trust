@@ -131,37 +131,41 @@
             android:name=".GuestProductActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-
-        <activity android:name=".UpdatePlanActivity"
+        <activity
+            android:name=".UpdatePlanActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"/>
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
 
         <!-- <activity android:name=".TestFragment" /> -->
-        <activity android:name=".AddPlanAppointmentActivity"
+        <activity
+            android:name=".AddPlanAppointmentActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"/>
-
-        <activity android:name=".GuestReceiptActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
+        <activity
+            android:name=".GuestReceiptActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"/>
-
-        <activity android:name=".GraphActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
+        <activity
+            android:name=".GraphActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"/>
-
-        <activity android:name=".HelloChartActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
+        <activity
+            android:name=".HelloChartActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"/>
-
-        <activity android:name=".AccountHistoryActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
+        <activity
+            android:name=".AccountHistoryActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"/>
-
-        <activity android:name=".GuestDetailActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
+        <activity
+            android:name=".GuestDetailActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"/>
-
-        <activity android:name=".ClientHistoryActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
+        <activity
+            android:name=".ClientHistoryActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
+        <activity android:name=".PettyCashActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"/>
 

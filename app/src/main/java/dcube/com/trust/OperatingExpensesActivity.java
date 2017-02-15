@@ -61,7 +61,9 @@ public class OperatingExpensesActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_with_draw_money);
 
         context = this;
@@ -619,4 +621,8 @@ public class OperatingExpensesActivity extends Activity {
         }
 
     }
+
+
+
+
 }
