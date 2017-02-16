@@ -104,7 +104,7 @@ public class PendingPaymentAdapter extends BaseAdapter {
         }
 
 
-        holder.tv_cost.setText(al_product_cost.get(pos)+" Tsh");
+        holder.tv_cost.setText(al_product_cost.get(pos)+" TZS");
 
 
         return convertview;

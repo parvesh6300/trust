@@ -254,12 +254,6 @@ public class PaymentDetailFragment extends Fragment {
                 {
                     rel_partial_layout.setVisibility(View.VISIBLE);
 
-//                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)layout_payment.getLayoutParams();
-//                    params.addRule(RelativeLayout.CENTER_IN_PARENT);
-//                  //  params.addRule(RelativeLayout.LEFT_OF);
-//
-//                    layout_payment.setLayoutParams(params);
-
                 } else {
                     rel_partial_layout.setVisibility(View.INVISIBLE);
 
@@ -414,6 +408,7 @@ public class PaymentDetailFragment extends Fragment {
         }
         else
         {
+
 //            if (f_amount != f_payable)
 //            {
 //                if (ed_discount_rsn.getText().toString().matches(""))
@@ -447,6 +442,8 @@ public class PaymentDetailFragment extends Fragment {
         protected void onPreExecute() {
 
             gif_loader.setVisibility(View.VISIBLE);
+
+            generate.setClickable(false);
 
         }
 
@@ -528,7 +525,6 @@ public class PaymentDetailFragment extends Fragment {
      * Hit the service and check out the items in cart
      */
 
-
     public class CheckOutAsyncTask extends AsyncTask<String, String, String> {
 
         String message = "";
@@ -588,7 +584,9 @@ public class PaymentDetailFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
+
+            generate.setClickable(true);
 
             if (message.equalsIgnoreCase("true")) {
                 viewPager.setCurrentItem(nextFragment);

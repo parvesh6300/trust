@@ -106,7 +106,7 @@ public class ExpenseAdapter extends BaseAdapter {
         holder.tv_date.setText(date[2]);
 
 
-        holder.tv_amount.setText(al_expense_amount.get(pos)+" Tsh");
+        holder.tv_amount.setText(al_expense_amount.get(pos)+" TZS");
 
         if (al_expense_detail.get(pos).equalsIgnoreCase("other"))
         {
