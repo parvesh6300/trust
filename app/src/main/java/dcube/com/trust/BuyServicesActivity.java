@@ -27,6 +27,7 @@ import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.ServiceListAdapter;
 import dcube.com.trust.utils.ServiceSelectedAdapter;
+import dcube.com.trust.utils.TestServiceAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
@@ -34,6 +35,9 @@ public class BuyServicesActivity extends Activity {
 
     ListView servicelist;
     ServiceListAdapter adapter;
+
+    TestServiceAdapter test_adapter;
+
     GifTextView gif_loader;
     TextView buy;
 
@@ -112,15 +116,21 @@ public class BuyServicesActivity extends Activity {
 
                 if (s.length() > 1)
                 {
-                    adapter = new ServiceListAdapter(BuyServicesActivity.this, s.toString());
-                    servicelist.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                    test_adapter = new TestServiceAdapter(context,s.toString());
+                    servicelist.setAdapter(test_adapter);
+                    test_adapter.notifyDataSetChanged();
+//                    adapter = new ServiceListAdapter(BuyServicesActivity.this, s.toString());
+//                    servicelist.setAdapter(adapter);
+//                    adapter.notifyDataSetChanged();
                 }
                 else
                 {
-                    adapter = new ServiceListAdapter(BuyServicesActivity.this, "");
-                    servicelist.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                    test_adapter = new TestServiceAdapter(context,"");
+                    servicelist.setAdapter(test_adapter);
+                    test_adapter.notifyDataSetChanged();
+//                    adapter = new ServiceListAdapter(BuyServicesActivity.this, "");
+//                    servicelist.setAdapter(adapter);
+//                    adapter.notifyDataSetChanged();
                 }
 
 
@@ -159,7 +169,6 @@ public class BuyServicesActivity extends Activity {
     /**
      * Custom dialog shows the list of selected services
      */
-
 
     public class CustomDialogClass extends Dialog {
 
@@ -284,9 +293,12 @@ public class BuyServicesActivity extends Activity {
             }
             else
             {
-                adapter = new ServiceListAdapter(BuyServicesActivity.this,"");
-                servicelist.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                test_adapter = new TestServiceAdapter(context,"");
+                servicelist.setAdapter(test_adapter);
+                test_adapter.notifyDataSetChanged();
+//                adapter = new ServiceListAdapter(BuyServicesActivity.this,"");
+//                servicelist.setAdapter(adapter);
+//                adapter.notifyDataSetChanged();
             }
 
         }

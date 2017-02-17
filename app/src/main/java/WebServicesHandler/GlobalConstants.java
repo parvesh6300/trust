@@ -6,9 +6,9 @@ package WebServicesHandler;
 public class GlobalConstants {
 
 
-   // public static final String TRUST_URL = "http://dcubetechnologies.com/Trust_Backend/api/webservice.php";
+    public static final String TRUST_URL = "http://dcubetechnologies.com/Trust_Backend/api/webservice.php";
 
-    public static final String TRUST_URL = "http://dcubetechnologies.com/Trust_Backend/api/webservice_rajpal.php";
+   // public static final String TRUST_URL = "http://dcubetechnologies.com/Trust_Backend/api/webservice_rajpal.php";
 
 
     //http://dcubetechnologies.com/Trust_Backend/src/api/webservice.php
@@ -299,8 +299,13 @@ public class GlobalConstants {
 
 
     public static final String PT_AMOUNT = "Amount";
-    public static final String PT_REASON = "Reason";
+    public static final String PT_REASON = "reason";
     public static final String PT_IMAGE = "Image";
+    public static final String PT_CASH = "petty_cash";
+    public static final String PT_CREATED = "created";
+
+    public static final String PT_DATE_FROM = "From";
+    public static final String PT_DATE_TO = "To";
 
 }
 

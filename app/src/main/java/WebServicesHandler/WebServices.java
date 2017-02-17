@@ -1176,7 +1176,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("Deposit", "History : " + response);
+            Log.i("PettyCash", "History : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -1823,6 +1823,173 @@ public class WebServices {
             if (status.equalsIgnoreCase("1"))
             {
                 global.setStr_branch_balance(jsonObject.optString(GlobalConstants.BRANCH_BALANCE));
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+    public static String GetPettyBalanceService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        Global global = (Global) context.getApplicationContext();
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Branch", "Balance : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                JSONArray jsonArray = jsonObject.getJSONArray("info");
+
+                for (int i = 0 ; i<jsonArray.length() ; i++)
+                {
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    global.setStr_petty_balance(jsonObject1.optString(GlobalConstants.PT_CASH));
+
+                }
+
+
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+
+    public static String PettyHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        ArrayList<HashMap<String,String>> al_petty_history;
+
+        Global global = (Global) context.getApplicationContext();
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("PettyCash", "History : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                al_petty_history = new ArrayList<>();
+
+                JSONArray jsonArray = jsonObject.getJSONArray("info");
+
+             //   global.setInt_ac_balance(jsonObject.getInt(GlobalConstants.AC_BALANCE));
+
+                for (int i = 0 ; i< jsonArray.length() ; i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.PT_CASH , jsonObject1.optString(GlobalConstants.PT_CASH));
+                    map.put(GlobalConstants.PT_REASON , jsonObject1.optString(GlobalConstants.PT_REASON));
+                    map.put(GlobalConstants.PT_CREATED , jsonObject1.optString(GlobalConstants.PT_CREATED));
+
+                    al_petty_history.add(map);
+                }
+
+                global.setAl_petty_details(al_petty_history);
+                return "true";
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+    public static String GetClientInfoService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        ArrayList<HashMap<String,String>> al_client_info;
+
+        Global global = (Global) context.getApplicationContext();
+
+        try {
+
+            al_client_info = new ArrayList<>();
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Client", "Info : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                JSONArray jsonArray = jsonObject.getJSONArray("info");
+
+                for (int i = 0 ; i<jsonArray.length() ; i++)
+                {
+                    HashMap<String,String> map = new HashMap<>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.CLIENT_ID , jsonObject1.optString(GlobalConstants.CLIENT_ID));
+                    map.put(GlobalConstants.USER_CREATED , jsonObject1.optString(GlobalConstants.USER_CREATED));
+                    map.put(GlobalConstants.CLIENT_NAME , jsonObject1.optString(GlobalConstants.CLIENT_NAME));
+                    map.put(GlobalConstants.USER_BRANCH_ID , jsonObject1.optString(GlobalConstants.USER_BRANCH_ID));
+                    map.put(GlobalConstants.CLIENT_AGE , jsonObject1.optString(GlobalConstants.CLIENT_AGE));
+                    map.put(GlobalConstants.CLIENT_SEX , jsonObject1.optString(GlobalConstants.CLIENT_SEX));
+                    map.put(GlobalConstants.CLIENT_CONTACT , jsonObject1.optString(GlobalConstants.CLIENT_CONTACT));
+                    map.put(GlobalConstants.CLIENT_EMER_CONTACT , jsonObject1.optString(GlobalConstants.CLIENT_EMER_CONTACT));
+                    map.put(GlobalConstants.CLIENT_EMER_NAME , jsonObject1.optString(GlobalConstants.CLIENT_EMER_NAME));
+                    map.put(GlobalConstants.CLIENT_EMER_RELATION , jsonObject1.optString(GlobalConstants.CLIENT_EMER_RELATION));
+                    map.put(GlobalConstants.CLIENT_CONTRA_TYPE , jsonObject1.optString(GlobalConstants.CLIENT_CONTRA_TYPE));
+                    map.put(GlobalConstants.CLIENT_AREA , jsonObject1.optString(GlobalConstants.CLIENT_AREA));
+                    map.put(GlobalConstants.CLIENT_MED_HISTORY , jsonObject1.optString(GlobalConstants.CLIENT_MED_HISTORY));
+                    map.put(GlobalConstants.CLIENT_CONTRA_HISTORY , jsonObject1.optString(GlobalConstants.CLIENT_CONTRA_HISTORY));
+                    map.put(GlobalConstants.CLIENT_CHILD , jsonObject1.optString(GlobalConstants.CLIENT_CHILD));
+                    map.put(GlobalConstants.CLIENT_HIV_TEST , jsonObject1.optString(GlobalConstants.CLIENT_HIV_TEST));
+                    map.put(GlobalConstants.SRC_CLIENT_HOW_U_REACH , jsonObject1.optString(GlobalConstants.SRC_CLIENT_HOW_U_REACH));
+
+                    al_client_info.add(map);
+                }
+
+                global.setAl_client_info(al_client_info);
+
                 return "true";
             }
 

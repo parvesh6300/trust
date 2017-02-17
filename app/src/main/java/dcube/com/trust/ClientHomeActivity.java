@@ -139,6 +139,11 @@ public class ClientHomeActivity extends Activity {
                         startActivity(new Intent(ClientHomeActivity.this,ClientHistoryActivity.class));
                         break;
 
+                    case 9:
+
+                        startActivity(new Intent(ClientHomeActivity.this,ClientInfoActivity.class));
+                        break;
+
                 }
             }
         });

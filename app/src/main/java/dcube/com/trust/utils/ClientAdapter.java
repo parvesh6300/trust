@@ -24,6 +24,7 @@ public class ClientAdapter extends BaseAdapter {
             R.drawable.viewservices,
             R.drawable.pendingpayment,
             R.drawable.generateinvoice,
+            R.drawable.addnewappointment,
     };
 
     private static LayoutInflater inflater = null;

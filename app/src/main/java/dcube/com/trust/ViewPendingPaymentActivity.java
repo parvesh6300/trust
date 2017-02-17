@@ -99,7 +99,6 @@ public class ViewPendingPaymentActivity extends Activity {
                     Log.i("Exception","Occurs");
                 }
 
-
             }
         });
 

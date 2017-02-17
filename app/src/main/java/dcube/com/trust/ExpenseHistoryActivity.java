@@ -222,8 +222,6 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
             dpd_to.setMaxDate(now);
         }
 
-
-
     }
 
 

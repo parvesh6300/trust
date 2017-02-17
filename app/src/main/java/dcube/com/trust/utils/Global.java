@@ -731,6 +731,43 @@ public class Global extends Application {
     }
 
 
+    // ******************************* Petty Cash Getter and Setter  *************************************************
+
+    public String getStr_petty_balance() {
+        return str_petty_balance;
+    }
+
+    public void setStr_petty_balance(String str_petty_balance) {
+        this.str_petty_balance = str_petty_balance;
+    }
+
+    public String str_petty_balance;
+
+    public ArrayList<HashMap<String, String>> getAl_petty_details() {
+        return al_petty_details;
+    }
+
+    public void setAl_petty_details(ArrayList<HashMap<String, String>> al_petty_details) {
+        this.al_petty_details = al_petty_details;
+    }
+
+    public ArrayList<HashMap<String,String>> al_petty_details;
+
+
+    // ******************************* Client Info Getter and Setter  *************************************************
+
+
+    public ArrayList<HashMap<String,String>> al_client_info;
+
+
+    public ArrayList<HashMap<String, String>> getAl_client_info() {
+        return al_client_info;
+    }
+
+    public void setAl_client_info(ArrayList<HashMap<String, String>> al_client_info) {
+        this.al_client_info = al_client_info;
+    }
+
 
     @Override
     public void onCreate() {

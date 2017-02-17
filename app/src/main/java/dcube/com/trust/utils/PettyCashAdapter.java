@@ -18,7 +18,6 @@ import dcube.com.trust.R;
  */
 public class PettyCashAdapter extends BaseAdapter {
 
-
     public static LayoutInflater inflater;
     Context context;
     ArrayList<String> al_petty_detail = new ArrayList<>();
@@ -38,10 +37,11 @@ public class PettyCashAdapter extends BaseAdapter {
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        for (HashMap<String, String> hashmap : global.getAl_deposit_details()) {
-            al_date.add(hashmap.get(GlobalConstants.DEPOSIT_DATE));
-            al_petty_amount.add(hashmap.get(GlobalConstants.DEPOSIT_AMOUNT));
-            al_petty_detail.add(hashmap.get(GlobalConstants.DEPOSIT_REMARKS));
+        for (HashMap<String, String> hashmap : global.getAl_petty_details())
+        {
+            al_date.add(hashmap.get(GlobalConstants.PT_CREATED));
+            al_petty_amount.add(hashmap.get(GlobalConstants.PT_CASH));
+            al_petty_detail.add(hashmap.get(GlobalConstants.PT_REASON));
         }
     }
 
