@@ -194,6 +194,7 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
         if (cn.isNetConnected())
         {
             new GetPettyBalanceAsyncTask().execute();
+
         }
         else
         {
@@ -203,7 +204,6 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
         lin_date_from.setOnClickListener(this);
         lin_date_to.setOnClickListener(this);
-
 
     }
 
@@ -373,7 +373,8 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
      */
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
 
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
         {
@@ -390,7 +391,8 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
      * Hit the service and send petty cash
      */
 
-    public class WdPettyCashAsyncTask extends AsyncTask<String, String, String> {
+    public class WdPettyCashAsyncTask extends AsyncTask<String, String, String>
+    {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
@@ -517,7 +519,7 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
         @Override
         protected void onPreExecute() {
 
-            gif_loader.setVisibility(View.INVISIBLE);
+            gif_loader.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -552,7 +554,9 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.INVISIBLE);
+         //   gif_loader.setVisibility(View.INVISIBLE);
+
+            new PettyHistoryAsyncTask().execute();
 
             if (message.equalsIgnoreCase("true"))
             {
@@ -583,7 +587,7 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
         @Override
         protected void onPreExecute() {
 
-            gif_loader.setVisibility(View.VISIBLE);
+          //  gif_loader.setVisibility(View.VISIBLE);
 
 
             if (is_date_selected)
@@ -627,11 +631,15 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
                 al_str_key.add(GlobalConstants.USER_BRANCH_ID);
                 al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
-                al_str_key.add(GlobalConstants.EXP_DATE_FROM);
-                al_str_value.add(format_date_from);
 
-                al_str_key.add(GlobalConstants.EXP_DATE_TO);
-                al_str_value.add(format_date_to);
+                if (is_date_selected)
+                {
+                    al_str_key.add(GlobalConstants.EXP_DATE_FROM);
+                    al_str_value.add(format_date_from);
+
+                    al_str_key.add(GlobalConstants.EXP_DATE_TO);
+                    al_str_value.add(format_date_to);
+                }
 
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("petty_cash_by_date");

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
- * Created by Sagar on 30/11/16.
+ * Created by Rohit on 30/11/16.
  */
 public class ServiceListAdapter extends BaseAdapter{
 
@@ -86,6 +87,8 @@ public class ServiceListAdapter extends BaseAdapter{
         TextView name;
         TextView service_cost;
         ImageView iv;
+        LinearLayout lin_row;
+
     }
 
     @Override
@@ -94,13 +97,14 @@ public class ServiceListAdapter extends BaseAdapter{
         // TODO Auto-generated method stub
         final Holder holder = new Holder();
 
-        final View rowView;
+        final View rowView ;
 
         rowView = inflater.inflate(R.layout.buy_service_item,viewGroup, false);
 
         holder.name = (TextView) rowView.findViewById(R.id.name);
         holder.service_cost = (TextView) rowView.findViewById(R.id.service_cost);
         holder.iv = (ImageView) rowView.findViewById(R.id.iv);
+        holder.lin_row = (LinearLayout) rowView.findViewById(R.id.lin_row);
 
         holder.name.setText(name.get(position));
         holder.service_cost.setText(serviceCost.get(position));

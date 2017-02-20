@@ -112,25 +112,18 @@ public class BuyServicesActivity extends Activity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
-
                 if (s.length() > 1)
                 {
-                    test_adapter = new TestServiceAdapter(context,s.toString());
-                    servicelist.setAdapter(test_adapter);
-                    test_adapter.notifyDataSetChanged();
-//                    adapter = new ServiceListAdapter(BuyServicesActivity.this, s.toString());
-//                    servicelist.setAdapter(adapter);
-//                    adapter.notifyDataSetChanged();
+                    adapter = new ServiceListAdapter(BuyServicesActivity.this, s.toString());
+                    servicelist.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }
                 else
                 {
-                    test_adapter = new TestServiceAdapter(context,"");
-                    servicelist.setAdapter(test_adapter);
-                    test_adapter.notifyDataSetChanged();
-//                    adapter = new ServiceListAdapter(BuyServicesActivity.this, "");
-//                    servicelist.setAdapter(adapter);
-//                    adapter.notifyDataSetChanged();
+
+                    adapter = new ServiceListAdapter(BuyServicesActivity.this, "");
+                    servicelist.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }
 
 
@@ -157,8 +150,6 @@ public class BuyServicesActivity extends Activity {
         else {
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
-
-
 
 
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
@@ -293,12 +284,10 @@ public class BuyServicesActivity extends Activity {
             }
             else
             {
-                test_adapter = new TestServiceAdapter(context,"");
-                servicelist.setAdapter(test_adapter);
-                test_adapter.notifyDataSetChanged();
-//                adapter = new ServiceListAdapter(BuyServicesActivity.this,"");
-//                servicelist.setAdapter(adapter);
-//                adapter.notifyDataSetChanged();
+
+                adapter = new ServiceListAdapter(BuyServicesActivity.this,"");
+                servicelist.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
         }

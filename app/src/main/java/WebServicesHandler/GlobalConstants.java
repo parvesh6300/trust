@@ -246,6 +246,9 @@ public class GlobalConstants {
     public static final String EXP_DATE_FROM = "start_date";
     public static final String EXP_DATE_TO = "end_date";
 
+    public static final String EXP_NET_BALANCE = "net_balance";
+
+
     // *************************************  PENDING PAYMENT VARIABLES  ****************************************************
 
     public static final String PEND_ID = "id";
@@ -269,7 +272,7 @@ public class GlobalConstants {
 
 
     public static final String WD_AMOUNT = "amount";
-    public static final String WD_REASON = "reason";
+    public static final String WD_REASON = "expense_reason";
     public static final String WD_USER_ID = "user_id";
     public static final String WD_DATE = "created";
     public static final String WD_REMARK = "remarks";

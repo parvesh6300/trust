@@ -25,6 +25,8 @@ public class ProductListAdapter extends BaseAdapter {
     Global global;
     int quantity;
 
+    int[] updated_qty;
+
     ArrayList<String> name = new ArrayList<>();
     ArrayList<String> product_id = new ArrayList<>();
     ArrayList<String> SKU = new ArrayList<>();
@@ -79,12 +81,17 @@ public class ProductListAdapter extends BaseAdapter {
 
                     }
                 }
+
+
+                updated_qty = new int[name.size()];
             }
 
         }catch(Exception e)
         {
 
         }
+
+
 
     }
 
@@ -134,6 +141,7 @@ public class ProductListAdapter extends BaseAdapter {
         holder.name.setText(name.get(position));
         holder.category.setText(category.get(position));
 
+        holder.quantity.setText(String.valueOf(updated_qty[position]));
 
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,12 +201,12 @@ public class ProductListAdapter extends BaseAdapter {
                 }
 
 
-                global.setAl_select_product(selected_product_id);
-                global.setAl_selected_product_quantity(selected_product_quantity);
-                global.setAl_selected_product_category(selected_product_category);
-                global.setAl_selected_product_price(selected_product_price);
-                global.setAl_selected_product_sku(selected_product_sku);
-                global.setAl_selected_product_name(selected_product_name);
+//                global.setAl_select_product(selected_product_id);
+//                global.setAl_selected_product_quantity(selected_product_quantity);
+//                global.setAl_selected_product_category(selected_product_category);
+//                global.setAl_selected_product_price(selected_product_price);
+//                global.setAl_selected_product_sku(selected_product_sku);
+//                global.setAl_selected_product_name(selected_product_name);
 
             }
         });
@@ -238,12 +246,12 @@ public class ProductListAdapter extends BaseAdapter {
 
                     Log.i("Product","id "+selected_product_id);
 
-                    global.setAl_select_product(selected_product_id);
-                    global.setAl_selected_product_quantity(selected_product_quantity);
-                    global.setAl_selected_product_category(selected_product_category);
-                    global.setAl_selected_product_price(selected_product_price);
-                    global.setAl_selected_product_sku(selected_product_sku);
-                    global.setAl_selected_product_name(selected_product_name);
+//                    global.setAl_select_product(selected_product_id);
+//                    global.setAl_selected_product_quantity(selected_product_quantity);
+//                    global.setAl_selected_product_category(selected_product_category);
+//                    global.setAl_selected_product_price(selected_product_price);
+//                    global.setAl_selected_product_sku(selected_product_sku);
+//                    global.setAl_selected_product_name(selected_product_name);
 
 
                 }
@@ -303,6 +311,8 @@ public class ProductListAdapter extends BaseAdapter {
 
                     if (quantity > 0)
                     {
+                        updated_qty[position] = quantity;
+
                         if (max_stock > quantity)
                         {
                             if (selected_product_id.contains(product_id.get(position)))
@@ -322,12 +332,14 @@ public class ProductListAdapter extends BaseAdapter {
 
                             }
 
-                            global.setAl_select_product(selected_product_id);
-                            global.setAl_selected_product_quantity(selected_product_quantity);
-                            global.setAl_selected_product_category(selected_product_category);
-                            global.setAl_selected_product_price(selected_product_price);
-                            global.setAl_selected_product_sku(selected_product_sku);
-                            global.setAl_selected_product_name(selected_product_name);
+                            setArrayListInGlobal();
+
+//                            global.setAl_select_product(selected_product_id);
+//                            global.setAl_selected_product_quantity(selected_product_quantity);
+//                            global.setAl_selected_product_category(selected_product_category);
+//                            global.setAl_selected_product_price(selected_product_price);
+//                            global.setAl_selected_product_sku(selected_product_sku);
+//                            global.setAl_selected_product_name(selected_product_name);
                         }
                         else
                         {
@@ -337,6 +349,8 @@ public class ProductListAdapter extends BaseAdapter {
                     }
                     else
                     {
+
+                        updated_qty[position] = 0;
 
                         if (selected_product_id.contains(product_id.get(position)))
                         {
@@ -351,12 +365,14 @@ public class ProductListAdapter extends BaseAdapter {
 
                         }
 
-                        global.setAl_select_product(selected_product_id);
-                        global.setAl_selected_product_quantity(selected_product_quantity);
-                        global.setAl_selected_product_category(selected_product_category);
-                        global.setAl_selected_product_price(selected_product_price);
-                        global.setAl_selected_product_sku(selected_product_sku);
-                        global.setAl_selected_product_name(selected_product_name);
+                        setArrayListInGlobal();
+
+//                        global.setAl_select_product(selected_product_id);
+//                        global.setAl_selected_product_quantity(selected_product_quantity);
+//                        global.setAl_selected_product_category(selected_product_category);
+//                        global.setAl_selected_product_price(selected_product_price);
+//                        global.setAl_selected_product_sku(selected_product_sku);
+//                        global.setAl_selected_product_name(selected_product_name);
 
 
                         Toast.makeText(context, "Quantity should be greater than 0", Toast.LENGTH_SHORT).show();
@@ -376,6 +392,21 @@ public class ProductListAdapter extends BaseAdapter {
 
         return rowView;
     }
+
+
+    public void setArrayListInGlobal()
+    {
+        global.setAl_select_product(selected_product_id);
+        global.setAl_selected_product_quantity(selected_product_quantity);
+        global.setAl_selected_product_category(selected_product_category);
+        global.setAl_selected_product_price(selected_product_price);
+        global.setAl_selected_product_sku(selected_product_sku);
+        global.setAl_selected_product_name(selected_product_name);
+
+    }
+
+
+
 
 
 }

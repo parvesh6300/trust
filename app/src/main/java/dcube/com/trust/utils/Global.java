@@ -613,6 +613,16 @@ public class Global extends Application {
         this.str_total_expense = str_total_expense;
     }
 
+    public String str_exp_bal = "0";
+
+    public String getStr_exp_bal() {
+        return str_exp_bal;
+    }
+
+    public void setStr_exp_bal(String str_exp_bal) {
+        this.str_exp_bal = str_exp_bal;
+    }
+
 
     // ******************************* Pending PAyment Getter and Setter  *************************************************
 

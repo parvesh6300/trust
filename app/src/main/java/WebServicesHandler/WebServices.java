@@ -1876,6 +1876,47 @@ public class WebServices {
         return message;
     }
 
+    public static String GetExpenseBalanceService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        Global global = (Global) context.getApplicationContext();
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Branch", "Balance : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                JSONArray jsonArray = jsonObject.getJSONArray("info");
+
+                for (int i =0 ; i < jsonArray.length() ; i++)
+                {
+                    JSONObject object = jsonArray.getJSONObject(i);
+
+                    global.setStr_exp_bal(object.optString(GlobalConstants.EXP_NET_BALANCE));
+
+                }
+
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
 
 
     public static String PettyHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)

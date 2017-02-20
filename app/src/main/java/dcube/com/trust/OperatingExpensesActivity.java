@@ -33,14 +33,14 @@ public class OperatingExpensesActivity extends Activity {
 
     RadioGroup radio_group;
 
-    RadioButton radio_other,radio_petty_cash,radio_running_exp,radio_dkt_commodity,radio_non_dkt,radio_marketing;
+    RadioButton radio_other,radio_running_exp,radio_dkt_commodity,radio_non_dkt,radio_marketing;
     RadioButton radio_commodity,radio_salary,radio_rent,radio_consultancy,radio_equipment;
 
     EditText ed_other,ed_wd_amount,ed_petty_rsn;
 
     ImageView image_view;
 
-    TextView tv_withdraw;
+    TextView tv_withdraw,tv_total_amount;
 
     GifTextView gif_loader;
 
@@ -81,7 +81,7 @@ public class OperatingExpensesActivity extends Activity {
         radio_group=(RadioGroup)findViewById(R.id.radio_group);
 
         radio_other=(RadioButton)findViewById(R.id.radio_other);
-        radio_petty_cash=(RadioButton)findViewById(R.id.radio_petty_cash);
+     //   radio_petty_cash=(RadioButton)findViewById(R.id.radio_petty_cash);
         radio_running_exp=(RadioButton)findViewById(R.id.radio_running_exp);
         radio_commodity=(RadioButton)findViewById(R.id.radio_commodity);
         radio_salary=(RadioButton)findViewById(R.id.radio_salary);
@@ -98,6 +98,7 @@ public class OperatingExpensesActivity extends Activity {
         ed_petty_rsn = (EditText) findViewById(R.id.ed_petty_rsn);
 
         tv_withdraw=(TextView)findViewById(R.id.tv_withdraw);
+        tv_total_amount = (TextView) findViewById(R.id.tv_total_amount);
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
@@ -113,27 +114,27 @@ public class OperatingExpensesActivity extends Activity {
                 }
                 else
                 {
-                    ed_other.setVisibility(View.GONE);
+                    ed_other.setVisibility(View.INVISIBLE);
                 }
 
-                if (radio_petty_cash.isChecked())
-                {
-                    ed_petty_rsn.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    ed_petty_rsn.setVisibility(View.GONE);
-                }
-
-
-                if (radio_petty_cash.isChecked())
-                {
-                    str_exp_rsn = "Petty Cash";
-                    str_remarks = "NA";
-                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                }
-                else if (radio_running_exp.isChecked())
+//                if (radio_petty_cash.isChecked())
+//                {
+//                    ed_petty_rsn.setVisibility(View.VISIBLE);
+//                }
+//                else
+//                {
+//                    ed_petty_rsn.setVisibility(View.GONE);
+//                }
+//
+//
+//                if (radio_petty_cash.isChecked())
+//                {
+//                    str_exp_rsn = "Petty Cash";
+//                    str_remarks = "NA";
+//                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
+//                }
+                 if (radio_running_exp.isChecked())
                 {
                     str_exp_rsn = "Running Expenses";
                     str_remarks = "NA";
@@ -208,23 +209,9 @@ public class OperatingExpensesActivity extends Activity {
                 else
                 {
 
-                    if (radio_petty_cash.isChecked() || radio_other.isChecked() )
+                    if (radio_other.isChecked() )
                     {
-                        if (radio_petty_cash.isChecked())
-                        {
-                            if (ed_petty_rsn.getText().toString().matches(""))
-                            {
-                                Toast.makeText(OperatingExpensesActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                str_remarks = ed_petty_rsn.getText().toString();  //str_pety_rsn
-                                str_wd_amount = ed_wd_amount.getText().toString().trim();
-                                new GetBranchBalanceAsyncTask().execute();
-                            }
-                        }
-                        else if (radio_other.isChecked())
-                        {
+
                             if (ed_other.getText().toString().matches(""))
                             {
                                 Toast.makeText(OperatingExpensesActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
@@ -232,61 +219,26 @@ public class OperatingExpensesActivity extends Activity {
                             else
                             {
                                 str_remarks = ed_other.getText().toString();
-                                str_wd_amount = ed_wd_amount.getText().toString().trim();
-                                new GetBranchBalanceAsyncTask().execute();
+
+                                validateAmount();
+
+
+                               // new GetBranchBalanceAsyncTask().execute();
                             }
-                        }
-//                        else
-//                        {
-//                            str_wd_amount = ed_wd_amount.getText().toString().trim();
-//                            new GetBranchBalanceAsyncTask().execute();
-//                        }
 
                     }
                     else
                     {
-                        str_wd_amount = ed_wd_amount.getText().toString().trim();
-                        new GetBranchBalanceAsyncTask().execute();
-                    }
-/*
 
-                    if (str_exp_rsn.equalsIgnoreCase("other") )
-                    {
-                        if (ed_other.getText().toString().matches(""))
-                        {
-                            Toast.makeText(OperatingExpensesActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            str_remarks = ed_other.getText().toString();
-                        }
-                    }
-                    else
-                    {
-                        str_remarks = "NA";
+                        validateAmount();
+//                        str_wd_amount = ed_wd_amount.getText().toString().trim();
+//
+//                        cdd = new CustomDialogClass(OperatingExpensesActivity.this);
+//                        cdd.show();
+
+                       // new GetBranchBalanceAsyncTask().execute();
                     }
 
-                    if (radio_petty_cash.isChecked())
-                    {
-                        if (ed_petty_rsn.getText().toString().matches(""))
-                        {
-                            Toast.makeText(OperatingExpensesActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            str_wd_amount = ed_wd_amount.getText().toString().trim();
-                            str_pety_rsn = ed_petty_rsn.getText().toString();
-                            new GetBranchBalanceAsyncTask().execute();
-                        }
-                    }
-                    else
-                    {
-                        str_wd_amount = ed_wd_amount.getText().toString().trim();
-                        str_pety_rsn = "" ;
-                        new GetBranchBalanceAsyncTask().execute();
-                    }
-
-                    */
 
                 }
 
@@ -306,6 +258,17 @@ public class OperatingExpensesActivity extends Activity {
 
 
         str_user_id = global.getAl_login_list().get(0).get(GlobalConstants.USER_ID);
+
+
+        if (cn.isNetConnected())
+        {
+            new GetExpBalanceAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(OperatingExpensesActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
@@ -340,11 +303,11 @@ public class OperatingExpensesActivity extends Activity {
             tv_wd_amount = (TextView) findViewById(R.id.tv_wd_amount);
             tv_balance = (TextView) findViewById(R.id.tv_balance);
 
-            float account_total = Float.parseFloat(global.getStr_branch_balance());
+            float account_total = Float.parseFloat(global.getStr_exp_bal());
             float wd_amount = Float.parseFloat(str_wd_amount);
             float balance = account_total - wd_amount ;
 
-            tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" TZS");
+            tv_account_total.setText("EXPENSE BALANCE : "+global.getStr_exp_bal()+" TZS");
             tv_wd_amount.setText("WITHDRAW : "+str_wd_amount+" TZS");
             tv_balance.setText("PROJECTED BALANCE : "+String.valueOf(balance)+" TZS");
 
@@ -423,7 +386,7 @@ public class OperatingExpensesActivity extends Activity {
                 al_str_value.add(str_branch);
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("add_in_expense");
+                al_str_value.add("add_expenses");
 
                 for (int i = 0 ; i<al_str_key.size() ; i++)
                 {
@@ -532,7 +495,7 @@ public class OperatingExpensesActivity extends Activity {
      */
 
 
-    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
+    public class GetExpBalanceAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
@@ -556,7 +519,7 @@ public class OperatingExpensesActivity extends Activity {
                 al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_branch_balance");
+                al_str_value.add("get_expense_balance");
 
                 for (int i =0 ; i < al_str_key.size() ; i++)
                 {
@@ -564,7 +527,7 @@ public class OperatingExpensesActivity extends Activity {
                     Log.i("Value",""+ al_str_value.get(i));
                 }
 
-                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+                message = ws.GetExpenseBalanceService(context, al_str_key, al_str_value);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -580,18 +543,20 @@ public class OperatingExpensesActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                float account_total = Float.parseFloat(global.getStr_branch_balance());
-                float wd_amount = Float.parseFloat(str_wd_amount);
 
-                if (account_total > wd_amount)
-                {
-                    cdd = new CustomDialogClass(OperatingExpensesActivity.this);
-                    cdd.show();
-                }
-                else
-                {
-                    insufficientDialog();
-                }
+                tv_total_amount.setText(global.getStr_exp_bal()+" TZS");
+//                float account_total = Float.parseFloat(global.getStr_branch_balance());
+//                float wd_amount = Float.parseFloat(str_wd_amount);
+//
+//                if (account_total > wd_amount)
+//                {
+//                    cdd = new CustomDialogClass(OperatingExpensesActivity.this);
+//                    cdd.show();
+//                }
+//                else
+//                {
+//                    insufficientDialog();
+//                }
 
             }
             else {
@@ -618,6 +583,30 @@ public class OperatingExpensesActivity extends Activity {
         {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             image_view.setImageBitmap(photo);
+        }
+
+    }
+
+
+
+
+
+    public void validateAmount()
+    {
+        str_wd_amount = ed_wd_amount.getText().toString().trim();
+
+        int wd_amount = Integer.parseInt(str_wd_amount);
+        int exp_bal = Integer.parseInt(global.getStr_exp_bal());
+
+        if (exp_bal > wd_amount)
+        {
+            cdd = new CustomDialogClass(OperatingExpensesActivity.this);
+            cdd.show();
+
+        }
+        else
+        {
+            insufficientDialog();
         }
 
     }

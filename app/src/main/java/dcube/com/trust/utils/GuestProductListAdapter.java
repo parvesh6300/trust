@@ -28,6 +28,8 @@ public class GuestProductListAdapter extends BaseAdapter {
     public Global global;
     int quantity;
 
+    int[] updated_qty;
+
     ArrayList<String> selected_quantity = new ArrayList<>();
 
 
@@ -60,12 +62,6 @@ public class GuestProductListAdapter extends BaseAdapter {
         category = new ArrayList<>();
         price = new ArrayList<>();
 
-//        selected_product_id = new ArrayList<>();
-//        selected_product_quantity = new ArrayList<>();
-//        selected_product_name = new ArrayList<>();
-//        selected_product_sku = new ArrayList<>();
-//        selected_product_category = new ArrayList<>();
-//        selected_product_price = new ArrayList<>();
 
         global = (Global) activity.getApplicationContext();
 
@@ -100,6 +96,8 @@ public class GuestProductListAdapter extends BaseAdapter {
                         }
                     }
                 }
+
+                updated_qty = new int[name.size()];
 
             }
 
@@ -156,6 +154,8 @@ public class GuestProductListAdapter extends BaseAdapter {
         holder.name.setText(name.get(position));
         holder.category.setText(category.get(position));
 
+        holder.quantity.setText(String.valueOf(updated_qty[position]));
+
 
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,11 +173,13 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                 if (quantity > 0)
                 {
+                   // updated_qty[position] = quantity;
 
                     if (selected_product_id.contains(product_id.get(position)))
                     {
                         int pos = selected_product_id.indexOf(product_id.get(position));
                         selected_product_quantity.set(pos, String.valueOf(quantity));
+
                     }
                     else
                     {
@@ -193,6 +195,8 @@ public class GuestProductListAdapter extends BaseAdapter {
                 }
                 else
                 {
+                   // updated_qty[position] = 0;
+
                     try {
 
 
@@ -217,13 +221,6 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                 }
 
-//                global.setAl_select_product(selected_product_id);
-//                global.setAl_selected_product_quantity(selected_product_quantity);
-//                global.setAl_selected_product_category(selected_product_category);
-//                global.setAl_selected_product_price(selected_product_price);
-//                global.setAl_selected_product_sku(selected_product_sku);
-//                global.setAl_selected_product_name(selected_product_name);
-
             }
         });
 
@@ -239,6 +236,8 @@ public class GuestProductListAdapter extends BaseAdapter {
                 if (max_stock > quantity )
                 {
                     quantity = quantity + 1;
+
+                 //   updated_qty[position] = quantity;
 
                     holder.quantity.setText(String.valueOf(quantity));
 
@@ -259,13 +258,6 @@ public class GuestProductListAdapter extends BaseAdapter {
                         selected_product_price.add(price.get(position));
 
                     }
-
-//                    global.setAl_select_product(selected_product_id);
-//                    global.setAl_selected_product_quantity(selected_product_quantity);
-//                    global.setAl_selected_product_category(selected_product_category);
-//                    global.setAl_selected_product_price(selected_product_price);
-//                    global.setAl_selected_product_sku(selected_product_sku);
-//                    global.setAl_selected_product_name(selected_product_name);
 
 
                 }
@@ -325,6 +317,7 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                     if (quantity > 0)
                     {
+                        updated_qty[position] = quantity;
 
                         if (max_stock > quantity)
                         {
@@ -348,13 +341,6 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                             setArrayListInGlobalList();
 
-//                            global.setAl_select_product(selected_product_id);
-//                            global.setAl_selected_product_quantity(selected_product_quantity);
-//                            global.setAl_selected_product_category(selected_product_category);
-//                            global.setAl_selected_product_price(selected_product_price);
-//                            global.setAl_selected_product_sku(selected_product_sku);
-//                            global.setAl_selected_product_name(selected_product_name);
-
                         }
                         else
                         {
@@ -364,6 +350,8 @@ public class GuestProductListAdapter extends BaseAdapter {
                     }
                     else
                     {
+
+                        updated_qty[position] = 0;
 
                         if (selected_product_id.contains(product_id.get(position)))
                         {
@@ -379,14 +367,6 @@ public class GuestProductListAdapter extends BaseAdapter {
                         }
 
                         setArrayListInGlobalList();
-//                        global.setAl_select_product(selected_product_id);
-//                        global.setAl_selected_product_quantity(selected_product_quantity);
-//                        global.setAl_selected_product_category(selected_product_category);
-//                        global.setAl_selected_product_price(selected_product_price);
-//                        global.setAl_selected_product_sku(selected_product_sku);
-//                        global.setAl_selected_product_name(selected_product_name);
-
-
 
                         Toast.makeText(context, "Quantity should be greater than 0", Toast.LENGTH_SHORT).show();
                     }
@@ -394,6 +374,9 @@ public class GuestProductListAdapter extends BaseAdapter {
 
                     Log.i("Product","id "+selected_product_id);
                     Log.i("Product","Qty "+selected_product_quantity);
+
+                    Log.i("Array","Qty "+updated_qty[position]);
+
 
                 }
                 catch (Exception e)

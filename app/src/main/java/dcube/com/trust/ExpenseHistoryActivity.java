@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import java.util.Date;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.ExpenseAdapter;
 import dcube.com.trust.utils.Global;
@@ -40,6 +43,8 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
     ExpenseAdapter expenseAdapter;
 
     LinearLayout lin_date_from,lin_date_to;
+
+    RelativeLayout rel_parent_layout;
 
     ArrayAdapter<String> spinnerArrayAdapter;
 
@@ -87,6 +92,8 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
         lin_date_from=(LinearLayout)findViewById(R.id.lin_date_from);
         lin_date_to=(LinearLayout)findViewById(R.id.lin_date_to);
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         tv_date_from=(TextView)findViewById(R.id.tv_date_from);
         tv_date_to=(TextView)findViewById(R.id.tv_date_to);
@@ -158,6 +165,16 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
         lin_date_to.setOnClickListener(this);
 
 
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(ExpenseHistoryActivity.this);
+                return false;
+            }
+        });
+
+
     }
 
     @Override
@@ -222,6 +239,7 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
             dpd_to.setMaxDate(now);
         }
 
+
     }
 
 
@@ -278,6 +296,7 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
                 public void onClick(View view) {
 
                     dismiss();
+
                 }
             });
 

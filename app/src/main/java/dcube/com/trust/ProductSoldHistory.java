@@ -49,6 +49,8 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
     String str_branch;
     Global global;
 
+    public boolean isDateSelected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,18 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
         cn = new CheckNetConnection(this);
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
+
+
+        if (cn.isNetConnected())
+        {
+            new ProductSoldAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
+
 
     }
 
@@ -131,6 +145,7 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
             if (cn.isNetConnected())
             {
+                isDateSelected = true;
                 new ProductSoldAsyncTask().execute();
             }
             else
@@ -162,30 +177,35 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
             gif_loader.setVisibility(View.VISIBLE);
 
-            str_date_from = tv_date_from.getText().toString();
-            str_date_to = tv_date_to.getText().toString();
+            if (isDateSelected)
+            {
+                str_date_from = tv_date_from.getText().toString();
+                str_date_to = tv_date_to.getText().toString();
 
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date;
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date;
 
-            try {
+                try {
 
-                date = format.parse(str_date_from+" 00:00:00");
-                Log.e("From","Date "+date);
+                    date = format.parse(str_date_from+" 00:00:00");
+                    Log.e("From","Date "+date);
 
-                format_date_from = format.format(date);
-                Log.e("From","Str "+format_date_from);
+                    format_date_from = format.format(date);
+                    Log.e("From","Str "+format_date_from);
 
-                date = format.parse(str_date_to+" 00:00:00");
-                Log.e("From","Date "+date);
+                    date = format.parse(str_date_to+" 00:00:00");
+                    Log.e("From","Date "+date);
 
-                format_date_to = format.format(date);
-                Log.e("From","Str "+format_date_to);
+                    format_date_to = format.format(date);
+                    Log.e("From","Str "+format_date_to);
 
 
-            } catch (ParseException e) {
-                e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
             }
+
 
         }
 
@@ -200,11 +220,14 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
                 al_str_key.add(GlobalConstants.USER_BRANCH_ID);
                 al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
-                al_str_key.add(GlobalConstants.SOLD_START_DATE);
-                al_str_value.add(format_date_from);
+                if (isDateSelected)
+                {
+                    al_str_key.add(GlobalConstants.SOLD_START_DATE);
+                    al_str_value.add(format_date_from);
 
-                al_str_key.add(GlobalConstants.SOLD_END_DATE);
-                al_str_value.add(format_date_to);
+                    al_str_key.add(GlobalConstants.SOLD_END_DATE);
+                    al_str_value.add(format_date_to);
+                }
 
                 al_str_key.add(GlobalConstants.BRANCH);
                 al_str_value.add(str_branch);
@@ -229,6 +252,8 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
         protected void onPostExecute(String s) {
 
             gif_loader.setVisibility(View.INVISIBLE);
+
+            isDateSelected = false;
 
             if (message.equalsIgnoreCase("true"))
             {
