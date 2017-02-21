@@ -86,7 +86,7 @@
 
         <TextView
             android:id="@+id/tv_amount"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="4000 TZS"
             android:textSize="35sp"
@@ -94,8 +94,7 @@
             android:layout_gravity="center"
             android:typeface="monospace"
             android:layout_centerInParent="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="30dp"/>
+            android:layout_alignParentEnd="true" />
 
 
     </RelativeLayout>

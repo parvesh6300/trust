@@ -587,7 +587,7 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
         @Override
         protected void onPreExecute() {
 
-          //  gif_loader.setVisibility(View.VISIBLE);
+            gif_loader.setVisibility(View.VISIBLE);
 
 
             if (is_date_selected)
@@ -634,10 +634,10 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
                 if (is_date_selected)
                 {
-                    al_str_key.add(GlobalConstants.EXP_DATE_FROM);
+                    al_str_key.add(GlobalConstants.PT_DATE_FROM);
                     al_str_value.add(format_date_from);
 
-                    al_str_key.add(GlobalConstants.EXP_DATE_TO);
+                    al_str_key.add(GlobalConstants.PT_DATE_TO);
                     al_str_value.add(format_date_to);
                 }
 

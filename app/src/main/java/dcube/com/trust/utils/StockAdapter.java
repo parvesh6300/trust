@@ -26,7 +26,7 @@ import dcube.com.trust.StockControlActivity;
 import okhttp3.OkHttpClient;
 
 /**
- * Created by Sagar on 14/10/16.
+ * Created by Rohit on 14/10/16.
  */
 public class StockAdapter extends BaseAdapter {
 

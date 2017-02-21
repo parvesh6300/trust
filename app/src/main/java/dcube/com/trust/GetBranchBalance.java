@@ -16,7 +16,7 @@ import okhttp3.OkHttpClient;
  * Created by Rohit on 20/01/17.
  */
 
-public class GetBranchBalance {
+public class GetBranchBalance  {
 
     String str_balance;
 
@@ -92,6 +92,66 @@ public class GetBranchBalance {
             return "0";
         }
 
+    }
+
+
+
+    public String getBranchBal()
+    {
+
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+
+
+                try {
+
+                    ArrayList<String> al_str_key = new ArrayList<>();
+                    ArrayList<String> al_str_value = new ArrayList<>();
+
+                    al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                    al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                    al_str_key.add(GlobalConstants.ACTION);
+                    al_str_value.add("get_branch_balance");
+
+                    for (int i =0 ; i < al_str_key.size() ; i++)
+                    {
+                        Log.i("Key",""+ al_str_key.get(i));
+                        Log.i("Value",""+ al_str_value.get(i));
+                    }
+
+                    message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                return null;
+            }
+
+
+            @Override
+            protected void onPostExecute(String s) {
+
+                if (message.equalsIgnoreCase("true"))
+                {
+                    Log.e("Branch","Balance in global"+global.getStr_branch_balance());
+                    str_balance = global.getStr_branch_balance();
+
+                }
+                else
+                {
+                    Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }.execute();
+
+
+        Log.i("Branch","Bal "+str_balance);
+
+        return str_balance;
     }
 
 

@@ -1517,6 +1517,36 @@ public class WebServices {
         return message;
     }
 
+    public static String UpdateExpenseService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        Global global = (Global) context.getApplicationContext();
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Update", "Expense : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
 
     public static String PendingPaymentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
@@ -1876,6 +1906,7 @@ public class WebServices {
         return message;
     }
 
+
     public static String GetExpenseBalanceService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -1954,7 +1985,7 @@ public class WebServices {
 
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                    map.put(GlobalConstants.PT_CASH , jsonObject1.optString(GlobalConstants.PT_CASH));
+                    map.put(GlobalConstants.PT_AMOUNT , jsonObject1.optString(GlobalConstants.PT_AMOUNT));
                     map.put(GlobalConstants.PT_REASON , jsonObject1.optString(GlobalConstants.PT_REASON));
                     map.put(GlobalConstants.PT_CREATED , jsonObject1.optString(GlobalConstants.PT_CREATED));
 

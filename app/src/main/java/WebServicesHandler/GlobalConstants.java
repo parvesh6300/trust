@@ -301,14 +301,22 @@ public class GlobalConstants {
     // *************************************  Petty Cash VARIABLES  ****************************************************
 
 
-    public static final String PT_AMOUNT = "Amount";
+    public static final String PT_AMOUNT = "amount";
     public static final String PT_REASON = "reason";
-    public static final String PT_IMAGE = "Image";
+    public static final String PT_IMAGE = "image";
     public static final String PT_CASH = "petty_cash";
     public static final String PT_CREATED = "created";
 
-    public static final String PT_DATE_FROM = "From";
-    public static final String PT_DATE_TO = "To";
+    public static final String PT_DATE_FROM = "start_date";
+    public static final String PT_DATE_TO = "end_date";
+
+
+    // *************************************  Cash In Hand VARIABLES  ****************************************************
+
+
+    public static final String HAND_REASON = "reason";
+    public static final String HAND_AMOUNT = "amount";
+
 
 }
 

@@ -530,4 +530,26 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
     }
 
 
+
+    public void loader(Context context,boolean show)
+    {
+        if (show)
+        {
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            gif_loader.setVisibility(View.INVISIBLE);
+        }
+
+    }
+
+
+
+    public void updateList(Context context)
+    {
+        new ExpenseHistoryAsyncTask().execute();
+    }
+
+
 }

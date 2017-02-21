@@ -126,6 +126,9 @@ public class FinanceHomeActivity extends Activity {
                         startActivity(new Intent(FinanceHomeActivity.this,PettyCashActivity.class));
                         break;
 
+                    case 9:
+                        startActivity(new Intent(FinanceHomeActivity.this,WithDrawMoneyActivity.class));
+                        break;
                 }
             }
         });

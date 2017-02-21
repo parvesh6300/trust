@@ -49,7 +49,7 @@ public class OperatingExpensesActivity extends Activity {
     WebServices ws;
     Global global;
     String str_user_id;
-    String str_exp_rsn="",str_wd_amount="",str_branch="",str_remarks="",str_pety_rsn="";
+    String str_exp_rsn="",str_wd_amount="",str_branch="",str_remarks="";
 
     CustomDialogClass cdd;
 
@@ -64,7 +64,7 @@ public class OperatingExpensesActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_with_draw_money);
+        setContentView(R.layout.activity_operating_exp);
 
         context = this;
 

@@ -53,7 +53,7 @@ public class PettyCashAdapter extends BaseAdapter {
         for (HashMap<String, String> hashmap : global.getAl_petty_details())
         {
             al_date.add(hashmap.get(GlobalConstants.PT_CREATED));
-            al_petty_amount.add(hashmap.get(GlobalConstants.PT_CASH));
+            al_petty_amount.add(hashmap.get(GlobalConstants.PT_AMOUNT));
             al_petty_detail.add(hashmap.get(GlobalConstants.PT_REASON));
         }
     }

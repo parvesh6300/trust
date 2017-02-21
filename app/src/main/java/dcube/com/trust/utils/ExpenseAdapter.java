@@ -2,7 +2,9 @@ package dcube.com.trust.utils;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import java.util.HashMap;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.WebServices;
+import dcube.com.trust.ExpenseHistoryActivity;
 import dcube.com.trust.R;
 
 /**
@@ -42,8 +46,12 @@ public class ExpenseAdapter extends BaseAdapter {
 
     CheckNetConnection cn;
 
+    WebServices ws;
 
     CustomDialogClass cdd;
+
+    String str_upd_remark,str_upd_amount,str_upd_rsn,str_upd_exp_id;
+
 
     public ExpenseAdapter(Context mcontext,String str_exp_type)
     {
@@ -196,6 +204,9 @@ public class ExpenseAdapter extends BaseAdapter {
             ed_amount= (EditText) findViewById(R.id.ed_amount);
             ed_reason = (EditText) findViewById(R.id.ed_reason);
 
+            ed_reason.setEnabled(false);
+
+
             String[] date_time = al_date.get(pos).split("\\s+");
 
             String[] date = date_time[0].split("-");
@@ -227,6 +238,11 @@ public class ExpenseAdapter extends BaseAdapter {
                     }
                     else
                     {
+                        str_upd_exp_id = al_expense_id.get(pos);
+                        str_upd_amount = ed_amount.getText().toString();
+                        str_upd_remark = ed_remark.getText().toString();
+                        str_upd_rsn = ed_reason.getText().toString();
+
                         showAlertDialog();
                     }
 
@@ -268,7 +284,11 @@ public class ExpenseAdapter extends BaseAdapter {
                 {
                     cdd.cancel();
 
+                    new UpdateExpenseAsyncTask().execute();
+
                     alertDialog.dismiss();
+
+
                 }
                 else
                 {
@@ -287,6 +307,79 @@ public class ExpenseAdapter extends BaseAdapter {
         });
     }
 
+
+
+    public class UpdateExpenseAsyncTask extends AsyncTask<String, String, String> {
+
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            ((ExpenseHistoryActivity)context).loader(context,true);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.EXP_AMOUNT);
+                al_str_value.add(str_upd_amount);
+
+                al_str_key.add(GlobalConstants.EXP_REASON);
+                al_str_value.add(str_upd_rsn);
+
+                al_str_key.add(GlobalConstants.EXP_REMARKS);
+                al_str_value.add(str_upd_remark);
+
+                al_str_key.add(GlobalConstants.EXP_ID);
+                al_str_value.add(str_upd_exp_id);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("edit_expense");
+
+                Log.i("Key",""+al_str_key);
+                Log.i("Value",""+al_str_value);
+
+                message = ws.UpdateExpenseService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+          //  ((ExpenseHistoryActivity)context).loader(context,false);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                ((ExpenseHistoryActivity)context).updateList(context);
+                notifyDataSetChanged();
+            }
+            else
+            {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 
 
 

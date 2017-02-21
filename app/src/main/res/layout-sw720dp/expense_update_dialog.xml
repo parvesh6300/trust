@@ -122,6 +122,8 @@
                 android:textColor="@color/textColor"
                 android:textSize="30sp"
                 android:text="Reason"
+                android:editable="false"
+                android:clickable="false"
                 android:typeface="monospace" />
 
 
