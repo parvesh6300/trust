@@ -201,13 +201,6 @@ public class ProductListAdapter extends BaseAdapter {
                 }
 
 
-//                global.setAl_select_product(selected_product_id);
-//                global.setAl_selected_product_quantity(selected_product_quantity);
-//                global.setAl_selected_product_category(selected_product_category);
-//                global.setAl_selected_product_price(selected_product_price);
-//                global.setAl_selected_product_sku(selected_product_sku);
-//                global.setAl_selected_product_name(selected_product_name);
-
             }
         });
 
@@ -245,14 +238,6 @@ public class ProductListAdapter extends BaseAdapter {
                     }
 
                     Log.i("Product","id "+selected_product_id);
-
-//                    global.setAl_select_product(selected_product_id);
-//                    global.setAl_selected_product_quantity(selected_product_quantity);
-//                    global.setAl_selected_product_category(selected_product_category);
-//                    global.setAl_selected_product_price(selected_product_price);
-//                    global.setAl_selected_product_sku(selected_product_sku);
-//                    global.setAl_selected_product_name(selected_product_name);
-
 
                 }
                 else
@@ -333,13 +318,6 @@ public class ProductListAdapter extends BaseAdapter {
                             }
 
                             setArrayListInGlobal();
-
-//                            global.setAl_select_product(selected_product_id);
-//                            global.setAl_selected_product_quantity(selected_product_quantity);
-//                            global.setAl_selected_product_category(selected_product_category);
-//                            global.setAl_selected_product_price(selected_product_price);
-//                            global.setAl_selected_product_sku(selected_product_sku);
-//                            global.setAl_selected_product_name(selected_product_name);
                         }
                         else
                         {
@@ -366,13 +344,6 @@ public class ProductListAdapter extends BaseAdapter {
                         }
 
                         setArrayListInGlobal();
-
-//                        global.setAl_select_product(selected_product_id);
-//                        global.setAl_selected_product_quantity(selected_product_quantity);
-//                        global.setAl_selected_product_category(selected_product_category);
-//                        global.setAl_selected_product_price(selected_product_price);
-//                        global.setAl_selected_product_sku(selected_product_sku);
-//                        global.setAl_selected_product_name(selected_product_name);
 
 
                         Toast.makeText(context, "Quantity should be greater than 0", Toast.LENGTH_SHORT).show();

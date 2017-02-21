@@ -127,8 +127,6 @@ public class GuestProductActivity extends Activity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
-
                 if(s.length() > 1)
                 {
                     adapter = new GuestProductListAdapter(GuestProductActivity.this,s.toString());
