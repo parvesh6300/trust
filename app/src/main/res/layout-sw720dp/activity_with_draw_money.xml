@@ -23,215 +23,276 @@
         android:typeface="monospace"/>
 
 
-    <LinearLayout
-        android:layout_width="700dp"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:paddingBottom="50dp"
-        android:paddingTop="30dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/form_back">
+        android:layout_centerInParent="true">
 
-
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/lin_bra_bal"
             android:layout_width="700dp"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_gravity="center"
-            android:layout_marginBottom="30dp"
-            android:gravity="center">
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="50dp"
+            android:paddingTop="30dp"
+            android:background="@drawable/form_back">
 
 
-            <TextView
-                android:id="@+id/tv_balance_label"
-                android:layout_width="wrap_content"
+
+            <RelativeLayout
+                android:layout_width="700dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:gravity="center">
+
+
+                <TextView
+                    android:id="@+id/tv_total_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:text="Branch Balance : "
+                    android:textColor="@color/purple"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
+
+
+                <TextView
+                    android:id="@+id/tv_bank_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:text="0 TZS"
+                    android:textColor="@color/purple"
+                    android:textSize="30sp"
+                    android:typeface="monospace"
+                    android:layout_toRightOf="@+id/tv_total_label"
+                    android:layout_marginRight="20dp"/>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="700dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Cash In Hand : "
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:typeface="monospace" />
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <EditText
+                    android:id="@+id/ed_wd_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_toEndOf="@+id/tv_amount_label"
+                    android:hint="Enter amount"
+                    android:inputType="number"
+                    android:textSize="30sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toStartOf="@+id/tv_tzss_label"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/tv_tzss_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TZS"
+                    android:textColor="@color/purple"
+                    android:textSize="30sp"
+                    android:typeface="monospace"
+                    android:layout_centerInParent="true"
+                    android:layout_toStartOf="@+id/tv_wd_amount"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/tv_wd_amount"
+                    android:layout_width="250dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/button_background"
+                    android:gravity="center"
+                    android:text="WithDraw Balance"
+                    android:layout_alignParentRight="true"
+                    android:typeface="monospace"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
 
 
-            <TextView
-                android:id="@+id/tv_total_amount"
-                android:layout_width="wrap_content"
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="700dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="50dp"
+            android:paddingTop="30dp"
+            android:layout_below="@+id/lin_bra_bal"
+            android:background="@drawable/form_back">
+
+
+            <RelativeLayout
+                android:layout_width="700dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:gravity="center">
+
+
+                <TextView
+                    android:id="@+id/tv_balance_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:text="Cash In Hand : "
+                    android:textColor="@color/purple"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
+
+
+                <TextView
+                    android:id="@+id/tv_total_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:text="0 TZS"
+                    android:textColor="@color/purple"
+                    android:textSize="30sp"
+                    android:typeface="monospace"
+                    android:layout_toRightOf="@+id/tv_balance_label"
+                    android:layout_marginRight="20dp"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="700dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="0 TZS"
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:typeface="monospace"
-                android:layout_toRightOf="@+id/tv_balance_label"
-                android:layout_marginRight="20dp"/>
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <EditText
+                    android:id="@+id/ed_petty_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_toEndOf="@+id/tv_amount_label"
+                    android:hint="Enter amount"
+                    android:inputType="number"
+                    android:textSize="30sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toStartOf="@+id/tv_tsh_label"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/tv_tsh_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TZS"
+                    android:textColor="@color/purple"
+                    android:textSize="30sp"
+                    android:typeface="monospace"
+                    android:layout_centerInParent="true"
+                    android:layout_toStartOf="@+id/tv_assign_petty"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/tv_assign_petty"
+                    android:layout_width="250dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/button_background"
+                    android:gravity="center"
+                    android:text="Assign Petty Cash"
+                    android:layout_alignParentRight="true"
+                    android:typeface="monospace"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
 
 
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="700dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            </RelativeLayout>
 
-            <EditText
-                android:id="@+id/ed_petty_amount"
-                android:layout_width="match_parent"
+
+
+            <RelativeLayout
+                android:layout_width="700dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_toEndOf="@+id/tv_amount_label"
-                android:hint="Enter amount"
-                android:inputType="number"
-                android:textSize="30sp"
-                android:layout_marginEnd="10dp"
-                android:layout_centerInParent="true"
-                android:layout_toStartOf="@+id/tv_tsh_label"
-                android:typeface="monospace" />
+                android:layout_marginTop="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
 
-            <TextView
-                android:id="@+id/tv_tsh_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TZS"
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:typeface="monospace"
-                android:layout_centerInParent="true"
-                android:layout_toStartOf="@+id/tv_assign_petty"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"/>
+                <EditText
+                    android:id="@+id/ed_exp_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_toEndOf="@+id/tv_amount_label"
+                    android:hint="Enter amount"
+                    android:inputType="number"
+                    android:textSize="30sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toStartOf="@+id/tv_tzs_label"
+                    android:typeface="monospace" />
 
-            <TextView
-                android:id="@+id/tv_assign_petty"
-                android:layout_width="250dp"
-                android:layout_height="80dp"
-                android:background="@drawable/button_background"
-                android:gravity="center"
-                android:text="Assign Petty Cash"
-                android:layout_alignParentRight="true"
-                android:typeface="monospace"
-                android:textAlignment="gravity"
-                android:textColor="@color/white"
-                android:textSize="30sp" />
+                <TextView
+                    android:id="@+id/tv_tzs_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TZS"
+                    android:textColor="@color/purple"
+                    android:textSize="30sp"
+                    android:typeface="monospace"
+                    android:layout_centerInParent="true"
+                    android:layout_toStartOf="@+id/tv_assign_exp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"/>
 
+                <TextView
+                    android:id="@+id/tv_assign_exp"
+                    android:layout_width="250dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/button_background"
+                    android:gravity="center"
+                    android:text="Assign Expense Balance"
+                    android:layout_alignParentRight="true"
+                    android:typeface="monospace"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
 
-
-        </RelativeLayout>
-
-
-
-        <RelativeLayout
-            android:layout_width="700dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
-
-            <EditText
-                android:id="@+id/ed_exp_amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_toEndOf="@+id/tv_amount_label"
-                android:hint="Enter amount"
-                android:inputType="number"
-                android:textSize="30sp"
-                android:layout_marginEnd="10dp"
-                android:layout_centerInParent="true"
-                android:layout_toStartOf="@+id/tv_tzs_label"
-                android:typeface="monospace" />
-
-            <TextView
-                android:id="@+id/tv_tzs_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TZS"
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:typeface="monospace"
-                android:layout_centerInParent="true"
-                android:layout_toStartOf="@+id/tv_assign_exp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"/>
-
-            <TextView
-                android:id="@+id/tv_assign_exp"
-                android:layout_width="250dp"
-                android:layout_height="80dp"
-                android:background="@drawable/button_background"
-                android:gravity="center"
-                android:text="Assign Expense Balance"
-                android:layout_alignParentRight="true"
-                android:typeface="monospace"
-                android:textAlignment="gravity"
-                android:textColor="@color/white"
-                android:textSize="30sp" />
+            </RelativeLayout>
 
 
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="700dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
-
-            <EditText
-                android:id="@+id/ed_wd_amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_toEndOf="@+id/tv_amount_label"
-                android:hint="Enter amount"
-                android:inputType="number"
-                android:textSize="30sp"
-                android:layout_marginEnd="10dp"
-                android:layout_centerInParent="true"
-                android:layout_toStartOf="@+id/tv_tzss_label"
-                android:typeface="monospace" />
-
-            <TextView
-                android:id="@+id/tv_tzss_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TZS"
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:typeface="monospace"
-                android:layout_centerInParent="true"
-                android:layout_toStartOf="@+id/tv_wd_amount"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"/>
-
-            <TextView
-                android:id="@+id/tv_wd_amount"
-                android:layout_width="250dp"
-                android:layout_height="80dp"
-                android:background="@drawable/button_background"
-                android:gravity="center"
-                android:text="WithDraw Balance"
-                android:layout_alignParentRight="true"
-                android:typeface="monospace"
-                android:textAlignment="gravity"
-                android:textColor="@color/white"
-                android:textSize="30sp" />
-
-
-
-        </RelativeLayout>
+        </LinearLayout>
 
 
 
 
-    </LinearLayout>
+    </RelativeLayout>
+
 
 
 

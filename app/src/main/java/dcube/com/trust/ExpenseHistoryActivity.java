@@ -488,7 +488,7 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
                 }
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_in_expense");
+                al_str_value.add("get_expense_history");
 
                 Log.i("Key",""+al_str_key);
                 Log.i("Value",""+al_str_value);

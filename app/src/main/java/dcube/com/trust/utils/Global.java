@@ -741,6 +741,22 @@ public class Global extends Application {
     }
 
 
+    // ******************************* BANK Branch Balance Getter and Setter  *************************************************
+
+
+    public String getStr_bank_bra_bal() {
+        return str_bank_bra_bal;
+    }
+
+    public void setStr_bank_bra_bal(String str_bank_bra_bal) {
+        this.str_bank_bra_bal = str_bank_bra_bal;
+    }
+
+    public String str_bank_bra_bal;
+
+
+
+
     // ******************************* Petty Cash Getter and Setter  *************************************************
 
     public String getStr_petty_balance() {
@@ -764,6 +780,8 @@ public class Global extends Application {
     public ArrayList<HashMap<String,String>> al_petty_details;
 
 
+
+
     // ******************************* Client Info Getter and Setter  *************************************************
 
 
@@ -776,7 +794,24 @@ public class Global extends Application {
 
     public void setAl_client_info(ArrayList<HashMap<String, String>> al_client_info) {
         this.al_client_info = al_client_info;
+
     }
+
+
+    // ******************************* Cash in hand Getter and Setter  *************************************************
+
+
+    public String getStr_cash_in_hand_balance() {
+        return str_cash_in_hand_balance;
+    }
+
+    public void setStr_cash_in_hand_balance(String str_cash_in_hand_balance) {
+        this.str_cash_in_hand_balance = str_cash_in_hand_balance;
+    }
+
+    public String str_cash_in_hand_balance;
+
+
 
 
     @Override

@@ -22,12 +22,10 @@ public class PlanListAdapter extends BaseAdapter {
     Context context;
     Global global;
     int selectedIndex = -1;
-    boolean isSelected = false;
+
 
     ArrayList<String> al_selected_plan;
     ArrayList<String> al_plan_name;
-//    ArrayList<String> al_product_name;
-//    ArrayList<String> al_service_name;
     ArrayList<String> al_plan_id;
     ArrayList<String> al_plan_cost;
 
@@ -57,7 +55,6 @@ public class PlanListAdapter extends BaseAdapter {
                 }
                 else
                 {
-//hashmap.get(GlobalConstants.PLAN_ID).toLowerCase().contains(search.toLowerCase()) ||
 
                     if (hashmap.get(GlobalConstants.PLAN_NAME).toLowerCase().contains(search.toLowerCase()))
                     {
@@ -105,12 +102,10 @@ public class PlanListAdapter extends BaseAdapter {
         rowView = inflater.inflate(R.layout.buy_plan_item, parent, false);
 
         holder.name = (TextView) rowView.findViewById(R.id.name);
-    //    holder.product_cost = (TextView) rowView.findViewById(R.id.product_cost);
         holder.plan_cost = (TextView) rowView.findViewById(R.id.plan_cost);
         holder.iv = (ImageView) rowView.findViewById(R.id.iv);
 
         holder.name.setText(al_plan_name.get(position));
-     //   holder.product_cost.setText(global.getAl_plan_details().get(position).get(GlobalConstants.PLAN_ITEM_NAME));
         holder.plan_cost.setText(al_plan_cost.get(position));
 
 /*

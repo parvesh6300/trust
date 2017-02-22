@@ -316,6 +316,14 @@ public class GlobalConstants {
 
     public static final String HAND_REASON = "reason";
     public static final String HAND_AMOUNT = "amount";
+    public static final String HAND_NET_BAL = "net_balance";
+
+
+
+    // ************************************* Branch Balance VARIABLES  ****************************************************
+
+    public static final String BANK_BRANCH_BALANCE = "net_balance";
+
 
 
 }

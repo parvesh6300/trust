@@ -2,7 +2,6 @@ package dcube.com.trust.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import dcube.com.trust.R;
 /**
  * Created by Rohit on 30/11/16.
  */
+
 public class ServiceListAdapter extends BaseAdapter{
 
 
@@ -30,6 +30,8 @@ public class ServiceListAdapter extends BaseAdapter{
     int selectedIndex = -1;
 
     boolean isSelected = false;
+
+    public boolean[] is_selected;
 
     ArrayList<String> name ;
     ArrayList<String> serviceCost;
@@ -50,7 +52,6 @@ public class ServiceListAdapter extends BaseAdapter{
         name = new ArrayList<>();
         serviceCost = new ArrayList<>();
         service_id = new ArrayList<>();
-
 
         try {
 
@@ -79,6 +80,7 @@ public class ServiceListAdapter extends BaseAdapter{
 
         }
 
+        is_selected = new boolean[name.size()];
 
 
     }
@@ -90,6 +92,7 @@ public class ServiceListAdapter extends BaseAdapter{
         LinearLayout lin_row;
 
     }
+
 
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup)
@@ -109,6 +112,23 @@ public class ServiceListAdapter extends BaseAdapter{
         holder.name.setText(name.get(position));
         holder.service_cost.setText(serviceCost.get(position));
 
+        if (is_selected[position])
+        {
+            holder.iv.setVisibility(View.VISIBLE);
+            rowView.setBackgroundColor(context.getResources().getColor(R.color.purple));
+            holder.name.setTextColor(context.getResources().getColor(R.color.white));
+            holder.service_cost.setTextColor(context.getResources().getColor(R.color.white));
+
+        }
+        else
+        {
+            holder.iv.setVisibility(View.INVISIBLE);
+            rowView.setBackgroundColor(context.getResources().getColor(R.color.white));
+            holder.name.setTextColor(context.getResources().getColor(R.color.textColor));
+            holder.service_cost.setTextColor(context.getResources().getColor(R.color.textColor));
+
+        }
+
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,21 +137,25 @@ public class ServiceListAdapter extends BaseAdapter{
                 if(holder.iv.getVisibility() == View.INVISIBLE)
                 {
                     holder.iv.setVisibility(View.VISIBLE);
-                    rowView.setBackgroundColor(Color.parseColor("#603370"));    // Purple
-                    holder.name.setTextColor(Color.parseColor("#FFFFFF"));      // white
-                    holder.service_cost.setTextColor(Color.parseColor("#FFFFFF"));      // white
+                    rowView.setBackgroundColor(context.getResources().getColor(R.color.purple));
+                    holder.name.setTextColor(context.getResources().getColor(R.color.white));
+                    holder.service_cost.setTextColor(context.getResources().getColor(R.color.white));
 
                     al_selected_service.add(service_id.get(position));
+
+                    is_selected[position] = true;
 
                 }
                 else
                 {
                     holder.iv.setVisibility(View.INVISIBLE);
-                    rowView.setBackgroundColor(Color.parseColor("#FFFFFF"));    // white
-                    holder.name.setTextColor(Color.parseColor("#45265f"));      // text color
-                    holder.service_cost.setTextColor(Color.parseColor("#45265f"));      // text color
+                    rowView.setBackgroundColor(context.getResources().getColor(R.color.white));
+                    holder.name.setTextColor(context.getResources().getColor(R.color.textColor));
+                    holder.service_cost.setTextColor(context.getResources().getColor(R.color.textColor));
 
                     al_selected_service.remove(service_id.get(position));
+
+                    is_selected[position] = false;
 
                 }
 

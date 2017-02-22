@@ -122,9 +122,6 @@ public class BuyPlanActivity extends Activity{
                     Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                 }
 
-
-
-
             }
         });
 
@@ -138,8 +135,6 @@ public class BuyPlanActivity extends Activity{
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void afterTextChanged(Editable s) {
-
-                Log.e("TextWatcherTest", "afterTextChanged:\t" +s.toString());
 
                 if (s.length() > 1)
                 {
@@ -184,8 +179,6 @@ public class BuyPlanActivity extends Activity{
                 get(GlobalConstants.SRC_CLIENT_ID);
 
 
-
-
     }
 
 
@@ -194,7 +187,8 @@ public class BuyPlanActivity extends Activity{
      */
 
 
-    public class PlanDialogClass extends Dialog {
+    public class PlanDialogClass extends Dialog
+    {
 
         public Context c;
 
@@ -275,7 +269,8 @@ public class BuyPlanActivity extends Activity{
      */
 
 
-    public class GetPlanAsyncTask extends AsyncTask<String, String, String> {
+    public class GetPlanAsyncTask extends AsyncTask<String, String, String>
+    {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
@@ -339,7 +334,8 @@ public class BuyPlanActivity extends Activity{
      */
 
 
-    public class AddPlanCartAsyncTask extends AsyncTask<String, String, String> {
+    public class AddPlanCartAsyncTask extends AsyncTask<String, String, String>
+    {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
@@ -425,7 +421,8 @@ public class BuyPlanActivity extends Activity{
      */
 
 
-    public class GetPlanDataAsyncTask extends AsyncTask<String, String, String> {
+    public class GetPlanDataAsyncTask extends AsyncTask<String, String, String>
+    {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";

@@ -134,7 +134,8 @@ public class OperatingExpensesActivity extends Activity {
 //                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 //                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
 //                }
-                 if (radio_running_exp.isChecked())
+
+                if (radio_running_exp.isChecked())
                 {
                     str_exp_rsn = "Running Expenses";
                     str_remarks = "NA";
@@ -428,7 +429,8 @@ public class OperatingExpensesActivity extends Activity {
      * Amount not sufficient dialog
      */
 
-    public void insufficientDialog() {
+    public void insufficientDialog()
+    {
 
         final Dialog doneDialog = new Dialog(context);
 
@@ -458,7 +460,8 @@ public class OperatingExpensesActivity extends Activity {
      * Custom confirmation dialog
      */
 
-    public void showDoneDialog() {
+    public void showDoneDialog()
+    {
 
         final Dialog doneDialog = new Dialog(context);
 
@@ -495,7 +498,8 @@ public class OperatingExpensesActivity extends Activity {
      */
 
 
-    public class GetExpBalanceAsyncTask extends AsyncTask<String, String, String> {
+    public class GetExpBalanceAsyncTask extends AsyncTask<String, String, String>
+    {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
@@ -586,9 +590,6 @@ public class OperatingExpensesActivity extends Activity {
         }
 
     }
-
-
-
 
 
     public void validateAmount()

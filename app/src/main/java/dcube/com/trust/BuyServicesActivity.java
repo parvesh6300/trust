@@ -71,7 +71,6 @@ public class BuyServicesActivity extends Activity {
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
-        
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override

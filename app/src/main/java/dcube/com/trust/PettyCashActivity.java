@@ -118,9 +118,6 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
-//        adapter = new PettyCashAdapter(context);
-//        list_history.setAdapter(adapter);
-
 
         tv_withdraw.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -642,7 +639,7 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
                 }
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("petty_cash_by_date");
+                al_str_value.add("get_petty_cash_history");
 
                 Log.i("Key",""+al_str_key);
                 Log.i("Value",""+al_str_value);
