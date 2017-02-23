@@ -25,7 +25,7 @@ import dcube.com.trust.ExpenseHistoryActivity;
 import dcube.com.trust.R;
 
 /**
- * Created by Sagar on 18/10/16.
+ * Created by Rohit on 18/10/16.
  */
 public class ExpenseAdapter extends BaseAdapter {
 
@@ -120,11 +120,9 @@ public class ExpenseAdapter extends BaseAdapter {
 
         String[] date = date_time[0].split("-");
 
-
         holder.tv_month.setText(date[1]+" ");
         holder.tv_year.setText("'"+date[0]);
         holder.tv_date.setText(date[2]);
-
 
         holder.tv_amount.setText(al_expense_amount.get(pos)+" TZS");
 
@@ -243,6 +241,10 @@ public class ExpenseAdapter extends BaseAdapter {
                         str_upd_remark = ed_remark.getText().toString();
                         str_upd_rsn = ed_reason.getText().toString();
 
+                        al_expense_remark.set(pos,str_upd_remark);
+                        al_expense_amount.set(pos,str_upd_amount);
+                        al_expense_detail.set(pos,str_upd_rsn);
+
                         showAlertDialog();
                     }
 
@@ -360,11 +362,11 @@ public class ExpenseAdapter extends BaseAdapter {
         @Override
         protected void onPostExecute(String s) {
 
-          //  ((ExpenseHistoryActivity)context).loader(context,false);
+            ((ExpenseHistoryActivity)context).loader(context,false);
 
             if (message.equalsIgnoreCase("true"))
             {
-                ((ExpenseHistoryActivity)context).updateList(context);
+               // ((ExpenseHistoryActivity)context).updateList(context);
                 notifyDataSetChanged();
             }
             else
@@ -375,6 +377,7 @@ public class ExpenseAdapter extends BaseAdapter {
         }
 
     }
+
 
     @Override
     public void notifyDataSetChanged() {

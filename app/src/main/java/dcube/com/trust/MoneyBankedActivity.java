@@ -134,8 +134,6 @@ public class MoneyBankedActivity extends Activity {
         {
             new GetBranchBalanceAsyncTask().execute();
 
-         //   new GetBalanceAsyncTask().execute();
-
             new MoneyBankHistoryAsyncTask().execute();
         }
         else
@@ -481,45 +479,6 @@ public class MoneyBankedActivity extends Activity {
 
 
 
-    public class GetBalanceAsyncTask extends AsyncTask<String, String, String> {
-
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-        String balance;
-
-        @Override
-        protected void onPreExecute() {
-
-            gif_loader.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            balance = getBalance.getBalance();
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            gif_loader.setVisibility(View.INVISIBLE);
-
-            tv_total_amount.setText(balance);
-
-//            if (message.equalsIgnoreCase("true"))
-//            {
-//
-//            }
-//            else {
-//                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-//            }
-
-        }
-
-    }
 
 
 }

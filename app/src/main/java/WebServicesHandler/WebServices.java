@@ -1485,7 +1485,7 @@ public class WebServices {
             {
                 al_expense_history = new ArrayList<>();
 
-                JSONArray jsonArray = jsonObject.getJSONArray("get_in_expense");
+                JSONArray jsonArray = jsonObject.getJSONArray("get_expense_history");
 
                 for (int i = 0 ; i< jsonArray.length() ; i++)
                 {
@@ -1831,6 +1831,93 @@ public class WebServices {
     }
 
 
+
+    public static String BranchBalanceHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        ArrayList<HashMap<String,String>> al_branch_bal_history;
+
+        Global global = (Global) context.getApplicationContext();
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Branch", "Balance History : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                al_branch_bal_history = new ArrayList<>();
+
+                JSONArray jsonArray = jsonObject.getJSONArray("branch_balance_history");
+
+                for (int i = 0 ; i< jsonArray.length() ; i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.BRANCH_BALANCE_ID , jsonObject1.optString(GlobalConstants.BRANCH_BALANCE_ID));
+                    map.put(GlobalConstants.BRANCH_BAL_CREATED , jsonObject1.optString(GlobalConstants.BRANCH_BAL_CREATED));
+                    map.put(GlobalConstants.BRANCH_BAL_AMOUNT , jsonObject1.optString(GlobalConstants.BRANCH_BAL_AMOUNT));
+                    map.put(GlobalConstants.BRANCH_BAL_RSN , jsonObject1.optString(GlobalConstants.BRANCH_BAL_RSN));
+
+                    al_branch_bal_history.add(map);
+                }
+
+                global.setAl_branch_bal_his(al_branch_bal_history);
+
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+    public static String UpdateBranchBalService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        Global global = (Global) context.getApplicationContext();
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Update", "Expense : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
     public static String GetBranchBalanceService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -1852,7 +1939,18 @@ public class WebServices {
 
             if (status.equalsIgnoreCase("1"))
             {
-                global.setStr_branch_balance(jsonObject.optString(GlobalConstants.BRANCH_BALANCE));
+                JSONArray jsonArray = jsonObject.getJSONArray("info");
+
+                for (int i =0 ; i<jsonArray.length() ; i++)
+                {
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    global.setStr_branch_balance(jsonObject1.optString(GlobalConstants.BRANCH_BALANCE));
+
+                }
+
+
+
                 return "true";
             }
 
@@ -1985,6 +2083,7 @@ public class WebServices {
 
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
+                    map.put(GlobalConstants.PT_ID , jsonObject1.optString(GlobalConstants.PT_ID));
                     map.put(GlobalConstants.PT_AMOUNT , jsonObject1.optString(GlobalConstants.PT_AMOUNT));
                     map.put(GlobalConstants.PT_REASON , jsonObject1.optString(GlobalConstants.PT_REASON));
                     map.put(GlobalConstants.PT_CREATED , jsonObject1.optString(GlobalConstants.PT_CREATED));
@@ -1997,6 +2096,37 @@ public class WebServices {
             }
 
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+    public static String UpdatePettyService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        Global global = (Global) context.getApplicationContext();
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Update", "Petty : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                return "true";
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -2082,7 +2212,7 @@ public class WebServices {
 
             response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
 
-            Log.i("Deposit", "Money : " + response);
+            Log.i("Assign", "Cash : " + response);
 
             JSONObject jsonObject = new JSONObject(response);
 
@@ -2144,6 +2274,92 @@ public class WebServices {
         return message;
     }
 
+    public static String CashInHandHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        ArrayList<HashMap<String,String>> al_cash_in_hand_his;
+
+        Global global = (Global) context.getApplicationContext();
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Cash", "in hand History : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                al_cash_in_hand_his = new ArrayList<>();
+
+                JSONArray jsonArray = jsonObject.getJSONArray("cash_in_hand_history");
+
+                for (int i = 0 ; i< jsonArray.length() ; i++)
+                {
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    map.put(GlobalConstants.HAND_HIS_ID , jsonObject1.optString(GlobalConstants.HAND_HIS_ID));
+                    map.put(GlobalConstants.HAND_HIS_AMOUNT , jsonObject1.optString(GlobalConstants.HAND_HIS_AMOUNT));
+                    map.put(GlobalConstants.HAND_HIS_CREATED , jsonObject1.optString(GlobalConstants.HAND_HIS_CREATED));
+                    map.put(GlobalConstants.HAND_HIS_REASON , jsonObject1.optString(GlobalConstants.HAND_HIS_REASON));
+
+                    al_cash_in_hand_his.add(map);
+                }
+
+
+                global.setAl_cash_in_hand_his(al_cash_in_hand_his);
+                return "true";
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
+    public static String UpdateCashInHandService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        Global global = (Global) context.getApplicationContext();
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Update", "Expense : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
 
     public static String GetBankBranchBalanceService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {

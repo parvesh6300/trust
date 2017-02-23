@@ -752,8 +752,18 @@ public class Global extends Application {
         this.str_bank_bra_bal = str_bank_bra_bal;
     }
 
+
     public String str_bank_bra_bal;
 
+    public ArrayList<HashMap<String, String>> getAl_branch_bal_his() {
+        return al_branch_bal_his;
+    }
+
+    public void setAl_branch_bal_his(ArrayList<HashMap<String, String>> al_branch_bal_his) {
+        this.al_branch_bal_his = al_branch_bal_his;
+    }
+
+    public ArrayList<HashMap<String,String>> al_branch_bal_his;
 
 
 
@@ -810,6 +820,16 @@ public class Global extends Application {
     }
 
     public String str_cash_in_hand_balance;
+
+    public ArrayList<HashMap<String, String>> getAl_cash_in_hand_his() {
+        return al_cash_in_hand_his;
+    }
+
+    public void setAl_cash_in_hand_his(ArrayList<HashMap<String, String>> al_cash_in_hand_his) {
+        this.al_cash_in_hand_his = al_cash_in_hand_his;
+    }
+
+    public ArrayList<HashMap<String,String>> al_cash_in_hand_his;
 
 
 

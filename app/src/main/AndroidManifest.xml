@@ -169,13 +169,15 @@
             android:name=".PettyCashActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity android:name=".ClientInfoActivity"
+        <activity
+            android:name=".ClientInfoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity android:name=".WithDrawMoneyActivity"
+        <activity
+            android:name=".WithDrawMoneyActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-
+        <activity android:name=".CashInHandHistory"></activity>
     </application>
 
 </manifest>

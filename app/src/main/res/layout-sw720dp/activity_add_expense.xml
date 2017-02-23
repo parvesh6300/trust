@@ -282,7 +282,8 @@
             android:fadeScrollbars="false"
             android:scrollbarSize="10dp"
             android:scrollbarThumbVertical="@drawable/custom_scroll_style"
-            android:padding="20dp"/>
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"/>
 
     </RelativeLayout>
 

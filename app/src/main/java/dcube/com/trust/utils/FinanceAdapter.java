@@ -28,8 +28,8 @@ public class FinanceAdapter extends BaseAdapter {
             R.drawable.revenue,
             R.drawable.salesanalytics,
             R.drawable.pettycash,
-            R.drawable.cashin
-
+            R.drawable.cashin,
+            R.drawable.moneybanked
     };
 
 //    Order of menu - bank money, operating expense,

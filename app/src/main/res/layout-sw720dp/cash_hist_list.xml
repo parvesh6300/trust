@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp">
 
         <RelativeLayout
+            android:id="@+id/rel_date"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:padding="2dp"
             android:background="@drawable/dategradient">
 
@@ -23,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20"
-                android:textSize="40sp"
+                android:textSize="45sp"
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"
                 android:textStyle="bold"
@@ -55,7 +57,7 @@
                 android:id="@+id/tv_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="'16"
+                android:text="'20"
                 android:textSize="24sp"
                 android:layout_marginTop="2dp"
                 android:layout_below="@+id/divider"
@@ -69,30 +71,34 @@
 
         <TextView
             android:id="@+id/tv_detail"
-            android:layout_width="350dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sales Deposit"
             android:textSize="35sp"
             android:textColor="@color/purple"
             android:layout_gravity="center"
-            android:typeface="monospace"
             android:gravity="center"
-            android:layout_marginLeft="20dp"/>
+            android:typeface="monospace"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/rel_date"
+            android:layout_marginStart="20dp"
+            android:layout_toStartOf="@+id/tv_amount" />
 
 
         <TextView
             android:id="@+id/tv_amount"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="4000 TZS"
             android:textSize="35sp"
             android:textColor="@color/purple"
             android:layout_gravity="center"
             android:typeface="monospace"
-            android:layout_marginStart="20dp" />
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <View

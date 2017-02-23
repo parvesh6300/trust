@@ -20,58 +20,72 @@ import java.util.HashMap;
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
-import dcube.com.trust.PettyCashActivity;
+import dcube.com.trust.CashInHandHistory;
 import dcube.com.trust.R;
 
 /**
- * Created by Rohit on 15/02/17.
+ * Created by Rohit on 23/02/17.
  */
+public class CashHistoryAdapter extends BaseAdapter {
 
-public class PettyCashAdapter extends BaseAdapter {
+    Context context;
 
     public static LayoutInflater inflater;
-    Context context;
-    ArrayList<String> al_petty_detail = new ArrayList<>();
-    ArrayList<String> al_petty_amount = new ArrayList<>();
-    ArrayList<String> al_date = new ArrayList<>();
-    ArrayList<String> al_petty_id = new ArrayList<>();
+
+    ArrayList<String> al_cash_detail= new ArrayList<>();
+    ArrayList<String> al_cash_amount= new ArrayList<>();
+    ArrayList<String> al_date= new ArrayList<>();
+    ArrayList<String> al_cash_id= new ArrayList<>();
 
     Global global;
-
-    CustomDialogClass cdd;
 
     CheckNetConnection cn;
 
     WebServices ws;
 
-    String str_upd_remark,str_upd_amount,str_upd_rsn,str_upd_pety_id;
+    CustomDialogClass cdd;
 
-    public PettyCashAdapter(Context mcontext) {
+    String str_upd_amount,str_upd_rsn,str_upd_hand_id;
 
-        this.context = mcontext;
-        al_date = new ArrayList<>();
-        al_petty_detail = new ArrayList<>();
-        al_petty_amount = new ArrayList<>();
+
+    public CashHistoryAdapter(Context mcontext)
+    {
+        this.context= mcontext;
+
+        this.al_date= new ArrayList<>();
+        this.al_cash_detail= new ArrayList<>();
+        this.al_cash_amount= new ArrayList<>();
+
 
         global = (Global) context.getApplicationContext();
 
+        inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
         cn = new CheckNetConnection(context);
 
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        for (HashMap<String, String> hashmap : global.getAl_petty_details())
+        for (HashMap<String,String> hashmap : global.getAl_cash_in_hand_his() )
         {
-            al_date.add(hashmap.get(GlobalConstants.PT_CREATED));
-            al_petty_amount.add(hashmap.get(GlobalConstants.PT_AMOUNT));
-            al_petty_detail.add(hashmap.get(GlobalConstants.PT_REASON));
-            al_petty_id.add(hashmap.get(GlobalConstants.PT_ID));
+
+            al_cash_amount.add(hashmap.get(GlobalConstants.HAND_AMOUNT));
+            al_cash_detail.add(hashmap.get(GlobalConstants.HAND_HIS_REASON));
+            al_date.add(hashmap.get(GlobalConstants.HAND_HIS_CREATED));
+            al_cash_id.add(hashmap.get(GlobalConstants.HAND_HIS_ID));
+
         }
+
     }
+
+    public class ViewHolder{
+
+        TextView tv_date,tv_month,tv_year,tv_detail,tv_amount;
+    }
+
 
 
     @Override
     public int getCount() {
-        return al_petty_detail.size();
+        return al_cash_amount.size();
     }
 
     @Override
@@ -85,71 +99,47 @@ public class PettyCashAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int pos, View convertView, ViewGroup viewGroup) {
+    public View getView(final int pos, View convertview, ViewGroup viewGroup) {
 
-        View vi = convertView;
-        ViewHolder holder;
+        ViewHolder holder= new ViewHolder();
 
-        if (convertView == null) {
+        convertview= inflater.inflate(R.layout.cash_hist_list,null);
 
-            /****** Inflate tabitem.xml file for each row ( Defined below ) *******/
-            vi = inflater.inflate(R.layout.petty_cash_list, null);
-
-            /****** View Holder Object to contain tabitem.xml file elements ******/
-
-            holder = new ViewHolder();
-
-            holder.tv_date= (TextView)vi.findViewById(R.id.tv_date);
-            holder.tv_month= (TextView)vi.findViewById(R.id.tv_month);
-            holder.tv_year= (TextView)vi.findViewById(R.id.tv_year);
-            holder.tv_detail= (TextView)vi.findViewById(R.id.tv_detail);
-            holder.tv_amount= (TextView)vi.findViewById(R.id.tv_amount);
-
-
-            /************  Set holder with LayoutInflater ************/
-            vi.setTag(holder);
-        }
-        else
-        {
-            holder = (ViewHolder) vi.getTag();
-
-        }
+        holder.tv_date= (TextView)convertview.findViewById(R.id.tv_date);
+        holder.tv_month= (TextView)convertview.findViewById(R.id.tv_month);
+        holder.tv_year= (TextView)convertview.findViewById(R.id.tv_year);
+        holder.tv_detail= (TextView)convertview.findViewById(R.id.tv_detail);
+        holder.tv_amount= (TextView)convertview.findViewById(R.id.tv_amount);
 
         String[] date_time = al_date.get(pos).split("\\s+");
 
         String[] date = date_time[0].split("-");
 
-        holder.tv_date.setText(date[2]);
+
         holder.tv_month.setText(date[1]+" ");
         holder.tv_year.setText("'"+date[0]);
-
-        holder.tv_detail.setText(al_petty_detail.get(pos));
-        holder.tv_amount.setText(al_petty_amount.get(pos)+" TZS");
+        holder.tv_date.setText(date[2]);
 
 
-        vi.setOnClickListener(new View.OnClickListener() {
+        holder.tv_amount.setText(al_cash_amount.get(pos)+" TZS");
+
+        holder.tv_detail.setText(al_cash_detail.get(pos));
+
+
+        convertview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 cdd = new CustomDialogClass(context,pos);
                 cdd.show();
-
             }
         });
 
 
-        return vi;
-    }
-
-    public static class ViewHolder {
-
-        public TextView tv_detail;
-        public TextView tv_amount;
-        public TextView tv_date,tv_month,tv_year;
+        return convertview;
 
 
     }
-
 
 
     public class CustomDialogClass extends Dialog {
@@ -157,7 +147,7 @@ public class PettyCashAdapter extends BaseAdapter {
         public Context ctx;
 
         TextView tv_date,tv_month,tv_year,cancel,confirm;
-        EditText ed_remark,ed_amount;
+        EditText ed_amount,ed_reason;
 
         int pos;
 
@@ -178,7 +168,7 @@ public class PettyCashAdapter extends BaseAdapter {
 
             requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-            setContentView(R.layout.petty_cash_update_dialog);
+            setContentView(R.layout.cash_update_dialog);
 
             confirm = (TextView) findViewById(R.id.confirm);
             cancel = (TextView) findViewById(R.id.cancel);
@@ -186,8 +176,11 @@ public class PettyCashAdapter extends BaseAdapter {
             tv_month= (TextView)findViewById(R.id.tv_month);
             tv_year= (TextView) findViewById(R.id.tv_year);
 
-            ed_remark= (EditText) findViewById(R.id.ed_remark);
             ed_amount= (EditText) findViewById(R.id.ed_amount);
+            ed_reason = (EditText) findViewById(R.id.ed_reason);
+
+            ed_reason.setEnabled(false);
+
 
             String[] date_time = al_date.get(pos).split("\\s+");
 
@@ -197,17 +190,17 @@ public class PettyCashAdapter extends BaseAdapter {
             tv_month.setText(date[1]+" ");
             tv_year.setText("'"+date[0]);
 
-            ed_remark.setText(al_petty_detail.get(pos));
-            ed_amount.setText(al_petty_amount.get(pos));
+            ed_amount.setText(al_cash_amount.get(pos));
+            ed_reason.setText(al_cash_detail.get(pos));
 
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    if (ed_remark.getText().toString().matches(""))
+                    if (ed_reason.getText().toString().matches(""))
                     {
-                        Toast.makeText(context, "Enter Remark", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Enter Reason", Toast.LENGTH_SHORT).show();
                     }
                     else if (ed_amount.getText().toString().matches(""))
                     {
@@ -215,12 +208,12 @@ public class PettyCashAdapter extends BaseAdapter {
                     }
                     else
                     {
-                        str_upd_pety_id = al_petty_id.get(pos);
+                        str_upd_hand_id = al_cash_id.get(pos);
                         str_upd_amount = ed_amount.getText().toString();
-                        str_upd_remark = ed_remark.getText().toString();
+                        str_upd_rsn = ed_reason.getText().toString();
 
-                        al_petty_detail.set(pos,str_upd_remark);
-                        al_petty_amount.set(pos,str_upd_amount);
+                        al_cash_amount.set(pos,str_upd_amount);
+                        al_cash_detail.set(pos,str_upd_rsn);
 
                         showAlertDialog();
                     }
@@ -263,9 +256,11 @@ public class PettyCashAdapter extends BaseAdapter {
                 {
                     cdd.cancel();
 
-                    new UpdatePettyAsyncTask().execute();
+                    new UpdateExpenseAsyncTask().execute();
 
                     alertDialog.dismiss();
+
+
                 }
                 else
                 {
@@ -286,14 +281,14 @@ public class PettyCashAdapter extends BaseAdapter {
 
 
 
-    public class UpdatePettyAsyncTask extends AsyncTask<String, String, String> {
+    public class UpdateExpenseAsyncTask extends AsyncTask<String, String, String> {
 
         String message = "";
 
         @Override
         protected void onPreExecute() {
 
-            ((PettyCashActivity)context).loader(context,true);
+            ((CashInHandHistory)context).loader(context,true);
         }
 
         @Override
@@ -307,22 +302,22 @@ public class PettyCashAdapter extends BaseAdapter {
                 al_str_key.add(GlobalConstants.USER_BRANCH_ID);
                 al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
-                al_str_key.add(GlobalConstants.PT_AMOUNT);
+                al_str_key.add(GlobalConstants.HAND_HIS_AMOUNT);
                 al_str_value.add(str_upd_amount);
 
-                al_str_key.add(GlobalConstants.PT_REASON);
-                al_str_value.add(str_upd_remark);
+                al_str_key.add(GlobalConstants.HAND_HIS_REASON);
+                al_str_value.add(str_upd_rsn);
 
-                al_str_key.add(GlobalConstants.PT_ID);
-                al_str_value.add(str_upd_pety_id);
+                al_str_key.add(GlobalConstants.HAND_HIS_ID);
+                al_str_value.add(str_upd_hand_id);
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("edit_petty_cash");
+                al_str_value.add("edit_cash_in_hand");
 
                 Log.i("Key",""+al_str_key);
                 Log.i("Value",""+al_str_value);
 
-                message = ws.UpdatePettyService(context, al_str_key, al_str_value);
+                message = ws.UpdateCashInHandService(context, al_str_key, al_str_value);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -334,11 +329,11 @@ public class PettyCashAdapter extends BaseAdapter {
         @Override
         protected void onPostExecute(String s) {
 
-            ((PettyCashActivity)context).loader(context,false);
+            ((CashInHandHistory)context).loader(context,false);
 
             if (message.equalsIgnoreCase("true"))
             {
-               // ((PettyCashActivity)context).updateList(context);
+                // ((ExpenseHistoryActivity)context).updateList(context);
                 notifyDataSetChanged();
             }
             else
@@ -349,6 +344,15 @@ public class PettyCashAdapter extends BaseAdapter {
         }
 
     }
+
+
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
+
 
 
 

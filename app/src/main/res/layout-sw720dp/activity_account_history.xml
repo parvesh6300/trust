@@ -1,41 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/rel_parent_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rel_parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_1"
-    android:orientation="vertical"
-    tools:context=".ExpenseHistoryActivity">
-
+    android:orientation="vertical">
 
 
     <TextView
+        android:id="@+id/addclienttext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
         android:text="Account History"
-        android:id="@+id/addclienttext"
+        android:textColor="@color/white"
         android:textSize="35sp"
         android:textStyle="bold"
-        android:typeface="monospace"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true" />
+        android:typeface="monospace" />
 
-    <RelativeLayout
+
+
+
+    <LinearLayout
+        android:id="@+id/lin_date_layout"
         android:layout_width="700dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/form_back"
         android:layout_below="@+id/addclienttext"
-        android:layout_above="@+id/rel_back"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/form_back">
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
 
 
         <RelativeLayout
@@ -43,8 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_gravity="center"
-            android:padding="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="10dp">
 
 
             <TextView
@@ -64,15 +61,133 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="20dp"
+                android:layout_toRightOf="@+id/tv_balance_label"
                 android:text="0 TZS"
                 android:textColor="@color/purple"
                 android:textSize="30sp"
-                android:typeface="monospace"
-                android:layout_toRightOf="@+id/tv_balance_label"
-                android:layout_marginRight="20dp"/>
+                android:typeface="monospace" />
 
 
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/textColor"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Date From"
+                android:textAlignment="gravity"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Date To"
+                android:textAlignment="gravity"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/form_back"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="1">
+
+
+            <LinearLayout
+                android:id="@+id/lin_date_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="85dp"
+                android:layout_weight=".5">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/cal_icon" />
+
+                <TextView
+                    android:id="@+id/tv_date_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Select Date"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/purple"
+                    android:textSize="30sp"
+                    android:typeface="monospace" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lin_date_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_weight=".5">
+
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/cal_icon" />
+
+                <TextView
+                    android:id="@+id/tv_date_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Select Date"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/purple"
+                    android:textSize="30sp"
+                    android:typeface="monospace" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="700dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rel_back"
+        android:layout_below="@+id/lin_date_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/form_back"
+        android:gravity="center"
+        android:orientation="vertical">
 
 
 
@@ -81,58 +196,53 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/textColor"
-            android:layout_below="@+id/rel_ac_balance"
             android:gravity="center">
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="140dp"
                 android:layout_height="60dp"
-                android:text="Date"
-                android:textSize="30sp"
-                android:textAlignment="center"
-                android:typeface="monospace"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="@color/white"
                 android:layout_marginStart="10dp"
-                />
+                android:gravity="center"
+                android:text="Date"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
 
             <TextView
                 android:id="@+id/tv_expense"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Transaction"
-                android:textSize="30sp"
-                android:textAlignment="center"
-                android:typeface="monospace"
-                android:textStyle="bold"
-                android:gravity="center"
                 android:layout_marginStart="30dp"
-                android:textColor="@color/white"
                 android:layout_toEndOf="@+id/tv_date"
                 android:layout_toStartOf="@+id/tv_amount"
-                />
+                android:gravity="center"
+                android:text="Transaction"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
 
 
             <TextView
                 android:id="@+id/tv_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:text="Amount"
-                android:textSize="30sp"
-                android:textAlignment="center"
-                android:typeface="monospace"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="@color/white"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="60dp"
-                />
+                android:gravity="center"
+                android:text="Amount"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
 
 
         </RelativeLayout>
-
 
 
         <ListView
@@ -141,11 +251,10 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/rel_header"
             android:fadeScrollbars="false"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
             android:scrollbarSize="10dp"
-            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
-            android:padding="20dp"/>
-
-
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style" />
 
 
     </RelativeLayout>
@@ -155,9 +264,9 @@
         android:id="@+id/rel_back"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:gravity="center"
+        android:layout_above="@+id/gif_loader"
         android:layout_marginBottom="10dp"
-        android:layout_above="@+id/gif_loader">
+        android:gravity="center">
 
 
         <TextView
@@ -168,10 +277,10 @@
             android:background="@drawable/button_background"
             android:gravity="center"
             android:text="Back"
-            android:typeface="monospace"
             android:textAlignment="gravity"
             android:textColor="@color/white"
             android:textSize="35sp"
+            android:typeface="monospace"
 
             />
 
@@ -182,12 +291,11 @@
         android:id="@+id/gif_loader"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/loading"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:visibility="invisible"
-        />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/loading"
+        android:visibility="invisible" />
 
 </RelativeLayout>

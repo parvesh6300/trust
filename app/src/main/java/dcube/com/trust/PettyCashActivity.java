@@ -704,4 +704,22 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
     }
 
 
+    public void loader(Context context,boolean show)
+    {
+        if (show)
+        {
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            gif_loader.setVisibility(View.INVISIBLE);
+        }
+
+    }
+
+    public void updateList(Context context)
+    {
+        new PettyHistoryAsyncTask().execute();
+    }
+
 }

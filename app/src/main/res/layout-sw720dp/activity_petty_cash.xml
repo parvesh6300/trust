@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/rel_parent_layout"
+<RelativeLayout android:id="@+id/rel_parent_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_1"
-    tools:context="dcube.com.trust.PettyCashActivity">
+    tools:context="dcube.com.trust.PettyCashActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/tv_header"
@@ -340,7 +340,8 @@
             android:fadeScrollbars="false"
             android:scrollbarSize="10dp"
             android:scrollbarThumbVertical="@drawable/custom_scroll_style"
-            android:padding="20dp"/>
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"/>
 
     </LinearLayout>
 

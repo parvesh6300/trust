@@ -211,7 +211,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                 al_str_value.add(str_amount);
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("assign_cash_in_hand");
+                al_str_value.add("add_petty_cash");
 
                 for (int i =0 ; i < al_str_key.size() ; i++)
                 {
@@ -252,7 +252,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
      * Hit Service and assign money
      */
 
-    public class AssignBraBalAsyncTask extends AsyncTask<String, String, String>
+    public class AssignCashInHandAsyncTask extends AsyncTask<String, String, String>
     {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -284,7 +284,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                 al_str_value.add(str_amount);
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("assign_branch_balance");
+                al_str_value.add("assign_cash_in_hand");
 
                 for (int i =0 ; i < al_str_key.size() ; i++)
                 {
@@ -383,7 +383,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
                         if (is_branch_bal)
                         {
-                            new AssignBraBalAsyncTask().execute();
+                            new AssignCashInHandAsyncTask().execute();
                         }
                         else
                         {

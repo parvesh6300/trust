@@ -301,6 +301,7 @@ public class GlobalConstants {
     // *************************************  Petty Cash VARIABLES  ****************************************************
 
 
+    public static final String PT_ID = "id";
     public static final String PT_AMOUNT = "amount";
     public static final String PT_REASON = "reason";
     public static final String PT_IMAGE = "image";
@@ -318,12 +319,19 @@ public class GlobalConstants {
     public static final String HAND_AMOUNT = "amount";
     public static final String HAND_NET_BAL = "net_balance";
 
+    public static final String HAND_HIS_ID = "id";
+    public static final String HAND_HIS_AMOUNT = "amount";
+    public static final String HAND_HIS_REASON = "reason";
+    public static final String HAND_HIS_CREATED = "created";
 
 
     // ************************************* Branch Balance VARIABLES  ****************************************************
 
     public static final String BANK_BRANCH_BALANCE = "net_balance";
-
+    public static final String BRANCH_BALANCE_ID = "id";
+    public static final String BRANCH_BAL_AMOUNT = "amount";
+    public static final String BRANCH_BAL_RSN = "reason";
+    public static final String BRANCH_BAL_CREATED = "created";
 
 
 }

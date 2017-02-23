@@ -129,6 +129,11 @@ public class FinanceHomeActivity extends Activity {
                     case 9:
                         startActivity(new Intent(FinanceHomeActivity.this,WithDrawMoneyActivity.class));
                         break;
+
+                    case 10:
+                        startActivity(new Intent(FinanceHomeActivity.this,CashInHandHistory.class));
+                        break;
+
                 }
             }
         });

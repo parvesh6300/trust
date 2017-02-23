@@ -114,14 +114,6 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
-        tv_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                finish();
-
-            }
-        });
 
 
 
@@ -163,6 +155,7 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
         lin_date_from.setOnClickListener(this);
         lin_date_to.setOnClickListener(this);
+        tv_submit.setOnClickListener(this);
 
 
         rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
@@ -237,6 +230,11 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
             now.add(Calendar.DATE,0);
             dpd_to.setMaxDate(now);
+        }
+
+        if (view == tv_submit)
+        {
+            finish();
         }
 
 
