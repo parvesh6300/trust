@@ -231,8 +231,6 @@ public class AccountHistoryAdapter extends BaseAdapter {
     }
 
 
-
-
     public void showAlertDialog()
     {
         final Dialog alertDialog = new Dialog(context);
@@ -275,7 +273,6 @@ public class AccountHistoryAdapter extends BaseAdapter {
             }
         });
     }
-
 
 
     public class UpdateExpenseAsyncTask extends AsyncTask<String, String, String> {
