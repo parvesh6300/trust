@@ -291,6 +291,7 @@ public class GlobalConstants {
     public static final String MONEY_BANKED_HIS_AMOUNT = "amount";
     public static final String MONEY_BANKED_DATE = "date";
     public static final String MONEY_BANKED_REASON = "reason";
+    public static final String MONEY_BANKED_ID = "id";
 
 
     // ************************************* Branch Balance VARIABLES  ****************************************************

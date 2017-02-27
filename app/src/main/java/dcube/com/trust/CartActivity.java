@@ -46,7 +46,6 @@ public class CartActivity extends Activity {
     public static Handler h;
     CartAdapter adapter;
 
-
     RelativeLayout rel_parent_layout;
 
     @Override

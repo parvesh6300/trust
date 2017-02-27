@@ -113,10 +113,20 @@
             >
 
             <EditText
-                android:id="@+id/ed_amount"
+                android:id="@+id/ed_reason"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:inputType="textNoSuggestions"
+                android:textColor="@color/textColor"
+                android:textSize="30sp"
+                android:text="Reason"
+                android:typeface="monospace" />
+
+            <EditText
+                android:id="@+id/ed_amount"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
                 android:inputType="number"
                 android:textColor="@color/textColor"
                 android:textSize="30sp"
@@ -124,6 +134,7 @@
                 android:layout_marginTop="20dp"
                 android:text="amount field"
                 android:layout_toStartOf="@+id/tzs_label"
+                android:layout_below="@+id/ed_reason"
                 />
 
             <TextView
@@ -137,7 +148,8 @@
                 android:layout_marginTop="20dp"
                 android:typeface="monospace"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:layout_below="@+id/ed_reason"/>
 
 
 

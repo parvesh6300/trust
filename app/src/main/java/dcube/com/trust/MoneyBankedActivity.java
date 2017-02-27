@@ -317,8 +317,8 @@ public class MoneyBankedActivity extends Activity {
 
                 for (int i =0 ; i < al_str_key.size() ; i++)
                 {
-                    Log.e("Key",""+ al_str_key.get(i));
-                    Log.e("Value",""+ al_str_value.get(i));
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
                 }
 
                 message = ws.MoneyBankHistoryService(context, al_str_key, al_str_value);
@@ -478,7 +478,23 @@ public class MoneyBankedActivity extends Activity {
     }
 
 
+    public void loader(Context context,boolean show)
+    {
+        if (show)
+        {
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            gif_loader.setVisibility(View.INVISIBLE);
+        }
 
+    }
+
+    public void updateBalance(Context context)
+    {
+        new GetBranchBalanceAsyncTask().execute();
+    }
 
 
 }

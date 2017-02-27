@@ -107,7 +107,6 @@ public class AccountHistoryAdapter extends BaseAdapter {
         holder.tv_detail.setText(al_money_detail.get(pos));
         holder.tv_amount.setText(al_money_amount.get(pos));
 
-
         convertview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

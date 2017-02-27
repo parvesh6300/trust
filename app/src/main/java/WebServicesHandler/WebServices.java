@@ -18,7 +18,7 @@ import java.util.HashMap;
 import dcube.com.trust.utils.Global;
 
 /**
- * Created by Sagar on 06/12/16.
+ * Created by Rohit on 06/12/16.
  */
 
 public class WebServices {
@@ -1342,7 +1342,6 @@ public class WebServices {
     }
 
 
-
     public static String ProductSoldService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -1396,7 +1395,6 @@ public class WebServices {
 
         return message;
     }
-
 
 
     public static String UpdateStockService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
@@ -1517,6 +1515,7 @@ public class WebServices {
         return message;
     }
 
+
     public static String UpdateExpenseService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -1547,6 +1546,7 @@ public class WebServices {
 
         return message;
     }
+
 
     public static String PendingPaymentService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
@@ -1688,7 +1688,6 @@ public class WebServices {
     }
 
 
-
     public static String RevenueService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -1774,7 +1773,6 @@ public class WebServices {
     }
 
 
-
     public static String MoneyBankHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -1810,8 +1808,8 @@ public class WebServices {
 
                     map.put(GlobalConstants.MONEY_BANKED_DATE , jsonObject1.optString(GlobalConstants.MONEY_BANKED_DATE));
                     map.put(GlobalConstants.MONEY_BANKED_HIS_AMOUNT , jsonObject1.optString(GlobalConstants.MONEY_BANKED_HIS_AMOUNT));
-                    map.put(GlobalConstants.MONEY_BANKED_REASON , jsonObject1.optString(GlobalConstants.MONEY_BANKED_REASON
-                    ));
+                    map.put(GlobalConstants.MONEY_BANKED_REASON , jsonObject1.optString(GlobalConstants.MONEY_BANKED_REASON));
+                    map.put(GlobalConstants.MONEY_BANKED_ID , jsonObject1.optString(GlobalConstants.MONEY_BANKED_ID));
 
                     al_money_bank_history.add(map);
                 }
@@ -1829,7 +1827,6 @@ public class WebServices {
 
         return message;
     }
-
 
 
     public static String BranchBalanceHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
@@ -2047,7 +2044,6 @@ public class WebServices {
     }
 
 
-
     public static String PettyHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -2202,6 +2198,7 @@ public class WebServices {
         return message;
     }
 
+
     public static String AssignCashInHandService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -2273,6 +2270,7 @@ public class WebServices {
 
         return message;
     }
+
 
     public static String CashInHandHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
@@ -2361,6 +2359,7 @@ public class WebServices {
         return message;
     }
 
+
     public static String GetBankBranchBalanceService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;
@@ -2404,12 +2403,44 @@ public class WebServices {
     }
 
 
+    public static String UpdateMoneyBankService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        Global global = (Global) context.getApplicationContext();
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Update", "MoneyBank : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
 
     public static String callApiWithPerameter(String url, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues) throws Exception {
 
         StringBuilder result;
         String data = null;
-        for (int i = 0; i < mParemeterKeys.size(); i++) {
+        for (int i = 0; i < mParemeterKeys.size(); i++)
+        {
             if (i == 0)
                 data = URLEncoder.encode(mParemeterKeys.get(i), "UTF-8") + "=" + URLEncoder.encode(mParemeterValues.get(i), "UTF-8");
             else {

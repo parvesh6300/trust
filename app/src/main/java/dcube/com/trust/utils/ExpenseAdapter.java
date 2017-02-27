@@ -366,7 +366,7 @@ public class ExpenseAdapter extends BaseAdapter {
 
             if (message.equalsIgnoreCase("true"))
             {
-               // ((ExpenseHistoryActivity)context).updateList(context);
+                ((ExpenseHistoryActivity)context).updateList(context);
                 notifyDataSetChanged();
             }
             else
