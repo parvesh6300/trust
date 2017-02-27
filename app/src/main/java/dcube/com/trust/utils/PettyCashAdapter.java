@@ -339,6 +339,9 @@ public class PettyCashAdapter extends BaseAdapter {
             if (message.equalsIgnoreCase("true"))
             {
                // ((PettyCashActivity)context).updateList(context);
+
+                ((PettyCashActivity)context).updateBalance(context);
+
                 notifyDataSetChanged();
             }
             else

@@ -75,9 +75,6 @@ public class MoneyBankedActivity extends Activity {
         tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
         tv_deposit=(TextView)findViewById(R.id.tv_deposit);
 
-//
-//        View header = getLayoutInflater().inflate(R.layout.moneybankedlistheader, lv_money_banked, false);
-//        lv_money_banked.addHeaderView(header, null, false);
 
         tv_deposit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,12 +103,9 @@ public class MoneyBankedActivity extends Activity {
                     else
                     {
                         insufficientDialog();
-                      //  Toast.makeText(MoneyBankedActivity.this, "Money to be Banked, is less than Account Balance", Toast.LENGTH_SHORT).show();
                     }
 
-
                 }
-
             }
         });
 

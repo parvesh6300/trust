@@ -704,6 +704,7 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
     }
 
 
+
     public void loader(Context context,boolean show)
     {
         if (show)
@@ -717,9 +718,17 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
     }
 
+
+
     public void updateList(Context context)
     {
         new PettyHistoryAsyncTask().execute();
+    }
+
+
+    public void updateBalance(Context context)
+    {
+        new GetPettyBalanceAsyncTask().execute();
     }
 
 }
