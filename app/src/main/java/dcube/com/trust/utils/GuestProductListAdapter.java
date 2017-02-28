@@ -62,7 +62,6 @@ public class GuestProductListAdapter extends BaseAdapter {
         category = new ArrayList<>();
         price = new ArrayList<>();
 
-
         global = (Global) activity.getApplicationContext();
 
         try {

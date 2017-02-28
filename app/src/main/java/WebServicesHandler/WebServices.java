@@ -1380,6 +1380,8 @@ public class WebServices {
                     map.put(GlobalConstants.PRODUCT_ID , jsonObject1.optString(GlobalConstants.PRODUCT_ID));
                     map.put(GlobalConstants.PRODUCT_NAME , jsonObject1.optString(GlobalConstants.PRODUCT_NAME));
                     map.put(GlobalConstants.PRODUCT_QUANTITY , jsonObject1.optString(GlobalConstants.PRODUCT_QUANTITY));
+                    map.put(GlobalConstants.PRODUCT_CATEGORY , jsonObject1.optString(GlobalConstants.PRODUCT_CATEGORY));
+                    map.put(GlobalConstants.PRODUCT_CATEGORY_ID , jsonObject1.optString(GlobalConstants.PRODUCT_CATEGORY_ID));
 
                     al_product_sold.add(map);
                 }

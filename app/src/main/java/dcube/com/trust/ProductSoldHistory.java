@@ -4,10 +4,15 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +27,7 @@ import java.util.Date;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
+import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.SoldProductAdapter;
@@ -40,6 +46,8 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
     DatePickerDialog dpd_from,dpd_to;
 
+    EditText search;
+
     GifTextView gif_loader;
     WebServices ws;
     Context context = ProductSoldHistory.this;
@@ -51,6 +59,8 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
     public boolean isDateSelected;
 
+    RelativeLayout rel_parent_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +68,7 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
         global = (Global) getApplicationContext();
 
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
         //getSupportActionBar().hide();
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -66,16 +77,60 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
         lin_date_from=(LinearLayout)findViewById(R.id.lin_date_from);
         lin_date_to=(LinearLayout)findViewById(R.id.lin_date_to);
 
+        search = (EditText) findViewById(R.id.search);
+
         tv_date_from=(TextView)findViewById(R.id.tv_date_from);
         tv_date_to=(TextView)findViewById(R.id.tv_date_to);
        // tv_total_sale = (TextView) findViewById(R.id.tv_total_sale);
 
-        lin_date_from.setOnClickListener(this);
-        lin_date_to.setOnClickListener(this);
-
         cn = new CheckNetConnection(this);
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
+
+
+        search.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(s.length() > 1)
+                {
+                    Log.e("Keyword",""+s.toString());
+
+                    soldProductAdapter= new SoldProductAdapter(context,s.toString());
+                    lv_sold_products.setAdapter(soldProductAdapter);
+                    soldProductAdapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    soldProductAdapter= new SoldProductAdapter(context,"");
+                    lv_sold_products.setAdapter(soldProductAdapter);
+                    soldProductAdapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+
+
+        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(ProductSoldHistory.this);
+
+                return false;
+            }
+        });
+
 
 
         if (cn.isNetConnected())
@@ -87,7 +142,8 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
-
+        lin_date_from.setOnClickListener(this);
+        lin_date_to.setOnClickListener(this);
 
     }
 
@@ -259,11 +315,14 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
             {
                // tv_total_sale.setText("Total Sale : "+global.getStr_total_sale());
 
-                soldProductAdapter= new SoldProductAdapter(context);
+                soldProductAdapter= new SoldProductAdapter(context,"");
                 lv_sold_products.setAdapter(soldProductAdapter);
                 lv_sold_products.setVisibility(View.VISIBLE);
+                soldProductAdapter.notifyDataSetChanged();
+
             }
-            else {
+            else
+            {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
 
                 lv_sold_products.setVisibility(View.INVISIBLE);

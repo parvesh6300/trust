@@ -28,7 +28,7 @@ public class FinanceAdapter extends BaseAdapter {
             R.drawable.revenue,
             R.drawable.salesanalytics,
             R.drawable.pettycash,
-            R.drawable.cashin,
+            R.drawable.withdraw_money,  //cashin  withdraw  w
             R.drawable.cash_history_logo   //cash_history
     };
 

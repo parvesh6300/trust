@@ -1,6 +1,7 @@
 package dcube.com.trust.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
 /**
- * Created by Sagar on 14/10/16.
+ * Created by Rohit on 14/10/16.
  */
 public class SoldProductAdapter extends BaseAdapter {
 
@@ -33,7 +34,7 @@ public class SoldProductAdapter extends BaseAdapter {
     public LayoutInflater inflater;
 
 
-    public SoldProductAdapter(Context context)
+    public SoldProductAdapter(Context context,String search)
     {
 
         this.mcontext=context;
@@ -41,11 +42,49 @@ public class SoldProductAdapter extends BaseAdapter {
 
         inflater= (LayoutInflater) mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        for (HashMap<String,String> hashmap : global.getAl_product_sold())
+        Log.i("Adapter","Call");
+
+
+
+        try
         {
-            al_quantity.add(hashmap.get(GlobalConstants.PRODUCT_QUANTITY));
-            al_product_name.add(hashmap.get(GlobalConstants.PRODUCT_NAME));
-            al_product_id.add(hashmap.get(GlobalConstants.PRODUCT_ID));
+            Log.i("Size",""+global.getAl_product_sold().size());
+
+            if (global.getAl_product_sold().size() > 0)
+            {
+                for (HashMap<String,String> hashmap : global.getAl_product_sold())
+                {
+                    if(search.equalsIgnoreCase(""))
+                    {
+                        al_quantity.add(hashmap.get(GlobalConstants.PRODUCT_QUANTITY));
+                        al_product_name.add(hashmap.get(GlobalConstants.PRODUCT_NAME));
+                        al_product_id.add(hashmap.get(GlobalConstants.PRODUCT_ID));
+                        al_category.add(hashmap.get(GlobalConstants.PRODUCT_CATEGORY));
+
+                        Log.e("Empty",hashmap.get(GlobalConstants.PRODUCT_NAME));
+
+                    }
+                    else
+                    {
+                        if(hashmap.get(GlobalConstants.PRODUCT_NAME).toLowerCase().contains(search.toLowerCase()) ||
+                                hashmap.get(GlobalConstants.PRODUCT_CATEGORY).toLowerCase().contains(search.toLowerCase()))
+                        {
+                            al_quantity.add(hashmap.get(GlobalConstants.PRODUCT_QUANTITY));
+                            al_product_name.add(hashmap.get(GlobalConstants.PRODUCT_NAME));
+                            al_product_id.add(hashmap.get(GlobalConstants.PRODUCT_ID));
+                            al_category.add(hashmap.get(GlobalConstants.PRODUCT_CATEGORY));
+
+                            Log.e("Search",hashmap.get(GlobalConstants.PRODUCT_NAME));
+
+                        }
+                    }
+                }
+
+            }
+
+        }
+        catch (Exception e)
+        {
 
         }
 
@@ -59,10 +98,8 @@ public class SoldProductAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertview, ViewGroup viewGroup) {
 
-
         convertview= inflater.inflate(R.layout.salesanalyticslist, viewGroup, false );
         holder= new ViewHolder();
-
 
         holder.tv_product_name= (TextView)convertview.findViewById(R.id.tv_product_name);
         holder.tv_quantity= (TextView)convertview.findViewById(R.id.tv_quantity);
@@ -71,8 +108,7 @@ public class SoldProductAdapter extends BaseAdapter {
 
         holder.tv_product_name.setText(al_product_name.get(position));
         holder.tv_quantity.setText(al_quantity.get(position));
-
-   //     holder.tv_product_category.setText(al_category.get(position));
+        holder.tv_product_category.setText(al_category.get(position));
 
         return convertview;
     }
