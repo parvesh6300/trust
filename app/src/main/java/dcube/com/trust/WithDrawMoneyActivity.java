@@ -483,7 +483,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
         @Override
         protected void onPreExecute() {
 
-            gif_loader.setVisibility(View.VISIBLE);
+         //   gif_loader.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -583,7 +583,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.INVISIBLE);
+         //   gif_loader.setVisibility(View.INVISIBLE);
 
             if (message.equalsIgnoreCase("true"))
             {

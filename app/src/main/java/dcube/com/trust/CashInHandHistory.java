@@ -45,7 +45,7 @@ public class CashInHandHistory extends Activity implements DatePickerDialog.OnDa
 
     CashHistoryAdapter adapter;
 
-    TextView tv_submit;
+    TextView tv_submit,tv_total_amount;
 
     boolean is_date_selected;
 
@@ -66,6 +66,7 @@ public class CashInHandHistory extends Activity implements DatePickerDialog.OnDa
         tv_date_from=(TextView)findViewById(R.id.tv_date_from);
         tv_date_to=(TextView)findViewById(R.id.tv_date_to);
         tv_submit=(TextView)findViewById(R.id.tv_submit);
+        tv_total_amount = (TextView) findViewById(R.id.tv_total_amount);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -79,7 +80,8 @@ public class CashInHandHistory extends Activity implements DatePickerDialog.OnDa
 
         if (cn.isNetConnected())
         {
-            new CashHistoryAsyncTask().execute();
+            new GetCashInHandBalanceAsyncTask().execute();
+
         }
         else
         {
@@ -290,6 +292,73 @@ public class CashInHandHistory extends Activity implements DatePickerDialog.OnDa
         }
 
     }
+
+
+    /**
+     * Hit web service and get Cash in hand balance
+     */
+
+
+    public class GetCashInHandBalanceAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+               gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_cash_in_hand_balance");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.GetCashInHandBalanceService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+          //  gif_loader.setVisibility(View.INVISIBLE);
+
+            new CashHistoryAsyncTask().execute();
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                tv_total_amount.setText(global.getStr_cash_in_hand_balance()+" TZS");
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
 
 
 }

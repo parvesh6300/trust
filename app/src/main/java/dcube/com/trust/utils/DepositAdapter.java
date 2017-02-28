@@ -95,8 +95,9 @@ public class DepositAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
-                cdd = new CustomDialogClass(context,pos);
-                cdd.show();
+//                cdd = new CustomDialogClass(context,pos);
+//                cdd.show();
+
             }
         });
 

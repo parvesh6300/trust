@@ -96,7 +96,7 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
         get_balance = new GetBranchBalance(this);
 
-        rel_parent_layout = (RelativeLayout)  findViewById(R.id.rel_parent_layout);
+        rel_parent_layout = (RelativeLayout)findViewById(R.id.rel_parent_layout);
 
         list_history=(ListView)findViewById(R.id.list_history);
 
@@ -191,7 +191,6 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
         if (cn.isNetConnected())
         {
             new GetPettyBalanceAsyncTask().execute();
-
         }
         else
         {
@@ -375,7 +374,7 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
         {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            photo = (Bitmap) data.getExtras().get("data");
             iv_receipt.setImageBitmap(photo);
 
             is_pic_selected = true;
