@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    android:text="Enter Amount"
+                    android:text="Enter Amount :"
                     android:textColor="@color/purple"
                     android:textSize="30sp"
                     android:textStyle="bold"

@@ -30,7 +30,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
     EditText ed_petty_amount,ed_exp_amount,ed_wd_amount;
 
-    TextView tv_assign_petty,tv_assign_exp,tv_wd_amount,tv_total_amount,tv_bank_balance;
+    TextView tv_assign_petty,tv_assign_exp,tv_wd_amount,tv_total_amount,tv_bank_balance,tv_submit;
 
     Context context = this;
 
@@ -67,6 +67,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
         tv_wd_amount = (TextView) findViewById(R.id.tv_wd_amount);
         tv_total_amount = (TextView) findViewById(R.id.tv_total_amount);
         tv_bank_balance = (TextView) findViewById(R.id.tv_bank_balance);
+        tv_submit = (TextView) findViewById(R.id.tv_submit);
 
         ed_petty_amount = (EditText)findViewById(R.id.ed_petty_amount);
         ed_exp_amount = (EditText)findViewById(R.id.ed_exp_amount);
@@ -75,6 +76,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
         tv_assign_exp.setOnClickListener(this);
         tv_wd_amount.setOnClickListener(this);
         tv_assign_petty.setOnClickListener(this);
+        tv_submit.setOnClickListener(this);
 
 
         rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
@@ -150,6 +152,11 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
         }
 
+        if (view == tv_submit)
+        {
+            finish();
+        }
+
 
     }
 
@@ -179,7 +186,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
      * Hit Service and assign money
      */
 
-    public class AssignMoneyAsyncTask extends AsyncTask<String, String, String>
+    public class AssignPettyCashAsyncTask extends AsyncTask<String, String, String>
     {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -387,11 +394,20 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                         }
                         else
                         {
-                            new AssignMoneyAsyncTask().execute();
+                            if(str_rsn.equalsIgnoreCase("EXPENSE"))
+                            {
+                                new AssignExpenseBalanceAsyncTask().execute();
+                            }
+                            else if (str_rsn.equalsIgnoreCase("PETTY CASH"))
+                            {
+                                new AssignPettyCashAsyncTask().execute();
+                            }
+                            else
+                            {
+                                Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            }
+
                         }
-
-
-
 
                     }
                     else {
@@ -598,6 +614,75 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
     }
 
 
+    /**
+     * Hit Service and assign money
+     */
+
+    public class AssignExpenseBalanceAsyncTask extends AsyncTask<String, String, String>
+    {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.HAND_EXP_REASON);
+                al_str_value.add(str_rsn);
+
+                al_str_key.add(GlobalConstants.HAND_AMOUNT);
+                al_str_value.add(str_amount);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("add_expense_balance");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.AssignExpenseBalService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.INVISIBLE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                finish();
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
 
 
 

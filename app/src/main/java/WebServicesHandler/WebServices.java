@@ -2230,6 +2230,35 @@ public class WebServices {
         return message;
     }
 
+    public static String AssignExpenseBalService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Assign", "Cash : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
 
     public static String GetCashInHandBalanceService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
@@ -2435,6 +2464,63 @@ public class WebServices {
 
         return message;
     }
+
+
+    public static String ClientHistoryService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+        Global global = (Global) context.getApplicationContext();
+        ArrayList<HashMap<String ,String>> al_client_history;
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Client", "History : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                JSONArray jsonArray = jsonObject.getJSONArray("client_sales_history");
+
+                al_client_history = new ArrayList<>();
+
+                for (int i=0 ; i < jsonArray.length() ; i++)
+                {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+
+                    HashMap<String,String> map = new HashMap<>();
+
+                    map.put(GlobalConstants.CLIENT_HIS_ITEM_TYPE ,obj.optString(GlobalConstants.CLIENT_HIS_ITEM_TYPE) );
+                    map.put(GlobalConstants.CLIENT_HIS_ITEM_ID ,obj.optString(GlobalConstants.CLIENT_HIS_ITEM_ID) );
+                    map.put(GlobalConstants.CLIENT_HIS_AMOUNT ,obj.optString(GlobalConstants.CLIENT_HIS_AMOUNT) );
+                    map.put(GlobalConstants.CLIENT_HIS_ITEM_NAME ,obj.optString(GlobalConstants.CLIENT_HIS_ITEM_NAME) );
+                    map.put(GlobalConstants.CLIENT_HIS_DATE ,obj.optString(GlobalConstants.CLIENT_HIS_DATE) );
+
+                    al_client_history.add(map);
+
+                }
+
+                global.setAl_client_sales_history(al_client_history);
+
+                return "true";
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
 
 
     public static String callApiWithPerameter(String url, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues) throws Exception {

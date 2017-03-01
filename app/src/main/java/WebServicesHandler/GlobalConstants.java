@@ -318,6 +318,7 @@ public class GlobalConstants {
 
     public static final String HAND_REASON = "reason";
     public static final String HAND_AMOUNT = "amount";
+    public static final String HAND_EXP_REASON = "expense_reason";
     public static final String HAND_NET_BAL = "net_balance";
 
     public static final String HAND_HIS_ID = "id";
@@ -333,6 +334,16 @@ public class GlobalConstants {
     public static final String BRANCH_BAL_AMOUNT = "amount";
     public static final String BRANCH_BAL_RSN = "reason";
     public static final String BRANCH_BAL_CREATED = "created";
+
+
+    // *************************************  CLIENT SALES HISTORY VARIABLES  ****************************************************
+
+    public static final String CLIENT_HIS_ITEM_TYPE = "item_type";
+    public static final String CLIENT_HIS_ITEM_ID = "item_id";
+    public static final String CLIENT_HIS_AMOUNT= "amount";
+    public static final String CLIENT_HIS_ITEM_NAME = "item_name";
+    public static final String CLIENT_HIS_DATE = "created";
+
 
 
 }

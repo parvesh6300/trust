@@ -117,23 +117,6 @@ public class OperatingExpensesActivity extends Activity {
                     ed_other.setVisibility(View.INVISIBLE);
                 }
 
-//                if (radio_petty_cash.isChecked())
-//                {
-//                    ed_petty_rsn.setVisibility(View.VISIBLE);
-//                }
-//                else
-//                {
-//                    ed_petty_rsn.setVisibility(View.GONE);
-//                }
-//
-//
-//                if (radio_petty_cash.isChecked())
-//                {
-//                    str_exp_rsn = "Petty Cash";
-//                    str_remarks = "NA";
-//                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
-//                }
 
                 if (radio_running_exp.isChecked())
                 {

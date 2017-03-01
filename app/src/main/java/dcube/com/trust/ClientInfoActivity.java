@@ -21,7 +21,7 @@ import pl.droidsonroids.gif.GifTextView;
 
 public class ClientInfoActivity extends Activity {
 
-    TextView tv_name,tv_branch,tv_contact,tv_age,tv_his_contra;
+    TextView tv_name,tv_branch,tv_contact,tv_age,tv_his_contra,tv_submit;
     EditText ed_med_history;
 
     Context context = this;
@@ -52,6 +52,7 @@ public class ClientInfoActivity extends Activity {
         tv_contact = (TextView) findViewById(R.id.tv_contact);
         tv_age = (TextView) findViewById(R.id.tv_age);
         tv_his_contra = (TextView) findViewById(R.id.tv_his_contra);
+        tv_submit = (TextView) findViewById(R.id.tv_submit);
 
         ed_med_history = (EditText) findViewById(R.id.ed_med_history);
 
@@ -59,10 +60,28 @@ public class ClientInfoActivity extends Activity {
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
 
 
+        tv_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+
         if (cn.isNetConnected())
         {
             new GetClientInfoAsyncTask().execute();
         }
+        else
+        {
+            Toast.makeText(ClientInfoActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+
 
     }
 
@@ -119,7 +138,7 @@ public class ClientInfoActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
 
             if (message.equalsIgnoreCase("true"))
             {

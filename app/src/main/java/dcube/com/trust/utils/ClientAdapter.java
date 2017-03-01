@@ -23,7 +23,7 @@ public class ClientAdapter extends BaseAdapter {
             R.drawable.buyservices,
             R.drawable.viewservices,
             R.drawable.pendingpayment,
-            R.drawable.generateinvoice,
+            R.drawable.client_history,
             R.drawable.clent_info_new,
     };
 

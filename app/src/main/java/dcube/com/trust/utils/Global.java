@@ -832,6 +832,21 @@ public class Global extends Application {
     public ArrayList<HashMap<String,String>> al_cash_in_hand_his;
 
 
+    // ******************************* Client History Getter and Setter  *************************************************
+
+    public ArrayList<HashMap<String,String>> al_client_sales_history;
+
+
+    public ArrayList<HashMap<String, String>> getAl_client_sales_history() {
+        return al_client_sales_history;
+    }
+
+    public void setAl_client_sales_history(ArrayList<HashMap<String, String>> al_client_sales_history) {
+        this.al_client_sales_history = al_client_sales_history;
+    }
+
+
+
 
 
     @Override

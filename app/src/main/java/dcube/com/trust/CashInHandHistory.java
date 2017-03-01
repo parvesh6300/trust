@@ -81,7 +81,6 @@ public class CashInHandHistory extends Activity implements DatePickerDialog.OnDa
         if (cn.isNetConnected())
         {
             new GetCashInHandBalanceAsyncTask().execute();
-
         }
         else
         {
