@@ -109,26 +109,9 @@ public class ClientHistoryAdapter extends BaseAdapter {
         holder.tv_item_type.setText(al_item_type.get(pos));
         holder.tv_item_name.setText(al_item_name.get(pos));
         holder.tv_amount.setText(al_item_visits.get(pos));
-//
-//        if (al_item_type.get(pos).equalsIgnoreCase("product"))
-//        {
-//            holder.tv_item_name.setText(al_item_name.get(pos)+" ("+al_item_visits.get(pos)+")");
-//            holder.tv_amount.setText("");
-//        }
-//        else
-//        {
-//            holder.tv_item_name.setText(al_item_name.get(pos));
-//            holder.tv_amount.setText(al_item_visits.get(pos));
-//        }
-
-
 
         return convertview;
     }
-
-
-
-
 
 
 }

@@ -69,13 +69,12 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
 
     LinearLayout lin_type_of_contra;
 
-    // *****************************************************************
+    // *********************************  Updations ********************************
 
 
     ArrayList<String> al_type_of_contra;
 
     RelativeLayout rel_parent_layout;
-
 
     WebServices ws;
 

@@ -1,7 +1,6 @@
 package dcube.com.trust.utils;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +41,8 @@ public class SoldProductAdapter extends BaseAdapter {
 
         inflater= (LayoutInflater) mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        Log.i("Adapter","Call");
-
-
-
         try
         {
-            Log.i("Size",""+global.getAl_product_sold().size());
 
             if (global.getAl_product_sold().size() > 0)
             {
@@ -61,8 +55,6 @@ public class SoldProductAdapter extends BaseAdapter {
                         al_product_id.add(hashmap.get(GlobalConstants.PRODUCT_ID));
                         al_category.add(hashmap.get(GlobalConstants.PRODUCT_CATEGORY));
 
-                        Log.e("Empty",hashmap.get(GlobalConstants.PRODUCT_NAME));
-
                     }
                     else
                     {
@@ -73,8 +65,6 @@ public class SoldProductAdapter extends BaseAdapter {
                             al_product_name.add(hashmap.get(GlobalConstants.PRODUCT_NAME));
                             al_product_id.add(hashmap.get(GlobalConstants.PRODUCT_ID));
                             al_category.add(hashmap.get(GlobalConstants.PRODUCT_CATEGORY));
-
-                            Log.e("Search",hashmap.get(GlobalConstants.PRODUCT_NAME));
 
                         }
                     }

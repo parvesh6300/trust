@@ -115,8 +115,6 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
 
-
-
         if (cn.isNetConnected())
         {
             new ExpenseHistoryAsyncTask().execute();
@@ -130,7 +128,6 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
         sp_exp_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-
 
                 if (pos == 0 || pos ==1)
                 {
@@ -152,6 +149,7 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
             }
         });
+
 
         lin_date_from.setOnClickListener(this);
         lin_date_to.setOnClickListener(this);

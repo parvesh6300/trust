@@ -56,9 +56,7 @@ public class ClientInfoActivity extends Activity {
 
         ed_med_history = (EditText) findViewById(R.id.ed_med_history);
 
-
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
-
 
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +64,6 @@ public class ClientInfoActivity extends Activity {
                 finish();
             }
         });
-
 
 
         if (cn.isNetConnected())
@@ -78,14 +75,7 @@ public class ClientInfoActivity extends Activity {
             Toast.makeText(ClientInfoActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
-
-
-
-
-
     }
-
-
 
 
     /**

@@ -82,7 +82,7 @@ public class ExpenseAdapter extends BaseAdapter {
             }
             else
             {
-                if (hashmap.get(GlobalConstants.EXP_REASON).equalsIgnoreCase(str_exp_type))
+                if (hashmap.get(GlobalConstants.EXP_REASON).toLowerCase().equalsIgnoreCase(str_exp_type.toLowerCase()))
                 {
                     al_expense_amount.add(hashmap.get(GlobalConstants.EXP_AMOUNT));
                     al_expense_detail.add(hashmap.get(GlobalConstants.EXP_REASON));

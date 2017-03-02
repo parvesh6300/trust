@@ -104,8 +104,6 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
                 if(s.length() > 1)
                 {
-                    Log.e("Keyword",""+s.toString());
-
                     soldProductAdapter= new SoldProductAdapter(context,s.toString());
                     lv_sold_products.setAdapter(soldProductAdapter);
                     soldProductAdapter.notifyDataSetChanged();
@@ -313,8 +311,6 @@ public class ProductSoldHistory extends FragmentActivity implements OnDateSetLis
 
             if (message.equalsIgnoreCase("true"))
             {
-               // tv_total_sale.setText("Total Sale : "+global.getStr_total_sale());
-
                 soldProductAdapter= new SoldProductAdapter(context,"");
                 lv_sold_products.setAdapter(soldProductAdapter);
                 lv_sold_products.setVisibility(View.VISIBLE);

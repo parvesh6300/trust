@@ -77,7 +77,8 @@ public class SplashActivity extends Activity {
                         {
                             new OkHttpHandlerAsyncTask().execute();
                         }
-                        else {
+                        else
+                        {
 
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -86,8 +87,7 @@ public class SplashActivity extends Activity {
                                 }
                             });
 
-                          }
-
+                        }
 
                     }
                     else
