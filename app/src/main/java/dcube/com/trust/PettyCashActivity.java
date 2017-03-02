@@ -384,7 +384,7 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
 
     /**
-     * Hit the service and send petty cash
+     * Hit the service and assign petty cash
      */
 
     public class WdPettyCashAsyncTask extends AsyncTask<String, String, String>
@@ -703,6 +703,12 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
     }
 
 
+    /**
+     * Show loader
+     * @param context
+     * @param show boolean
+     */
+
 
     public void loader(Context context,boolean show)
     {
@@ -718,12 +724,21 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
     }
 
 
+    /**
+     * Hit Service and update list
+     * @param context
+     */
 
     public void updateList(Context context)
     {
         new PettyHistoryAsyncTask().execute();
     }
 
+
+    /**
+     * Hit service and update balance
+     * @param context
+     */
 
     public void updateBalance(Context context)
     {

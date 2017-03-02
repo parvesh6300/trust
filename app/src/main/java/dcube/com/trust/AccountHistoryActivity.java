@@ -364,6 +364,13 @@ public class AccountHistoryActivity extends Activity implements DatePickerDialog
     }
 
 
+    /**
+     * Show Loader
+     * @param context
+     * @param show boolean
+     */
+
+
     public void loader(Context context,boolean show)
     {
         if (show)

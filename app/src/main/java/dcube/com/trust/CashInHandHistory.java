@@ -168,6 +168,11 @@ public class CashInHandHistory extends Activity implements DatePickerDialog.OnDa
 
     }
 
+    /**
+     * Hit Service and get cash history
+     */
+
+
     public class CashHistoryAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
@@ -278,6 +283,11 @@ public class CashInHandHistory extends Activity implements DatePickerDialog.OnDa
     }
 
 
+    /**
+     * Show loader
+     * @param context
+     * @param show boolean
+     */
 
     public void loader(Context context,boolean show)
     {

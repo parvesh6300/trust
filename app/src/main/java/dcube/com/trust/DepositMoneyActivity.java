@@ -118,11 +118,6 @@ public class DepositMoneyActivity extends Activity {
 
         if (cn.isNetConnected())
         {
-
-           // get_balance.getBalance();
-
-         //   tv_total_amount.setText(get_balance.getBranchBal()+" TZS");
-
             new GetBranchBalanceAsyncTask().execute();
             new DepositHistoryAsyncTask().execute();
         }

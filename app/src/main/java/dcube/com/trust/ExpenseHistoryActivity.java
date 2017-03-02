@@ -372,10 +372,10 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
     }
 
+
     /**
      * Custom expense deposited dialog
      */
-
 
     public void showDoneDialog() {
 
@@ -526,6 +526,11 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
     }
 
 
+    /**
+     * Show loader
+     * @param context
+     * @param show boolean
+     */
 
     public void loader(Context context,boolean show)
     {
@@ -540,6 +545,11 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
     }
 
+
+    /**
+     * Updates the Expense List
+     * @param context
+     */
 
 
     public void updateList(Context context)

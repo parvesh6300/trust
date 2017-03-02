@@ -215,12 +215,6 @@ public class OperatingExpensesActivity extends Activity {
                     {
 
                         validateAmount();
-//                        str_wd_amount = ed_wd_amount.getText().toString().trim();
-//
-//                        cdd = new CustomDialogClass(OperatingExpensesActivity.this);
-//                        cdd.show();
-
-                       // new GetBranchBalanceAsyncTask().execute();
                     }
 
 
@@ -440,7 +434,7 @@ public class OperatingExpensesActivity extends Activity {
 
 
     /**
-     * Custom confirmation dialog
+     * Custom Done dialog
      */
 
     public void showDoneDialog()
@@ -477,7 +471,7 @@ public class OperatingExpensesActivity extends Activity {
 
 
     /**
-     * Hit service and get the branch balance
+     * Hit service and get the Expense balance
      */
 
 
@@ -532,18 +526,7 @@ public class OperatingExpensesActivity extends Activity {
             {
 
                 tv_total_amount.setText(global.getStr_exp_bal()+" TZS");
-//                float account_total = Float.parseFloat(global.getStr_branch_balance());
-//                float wd_amount = Float.parseFloat(str_wd_amount);
-//
-//                if (account_total > wd_amount)
-//                {
-//                    cdd = new CustomDialogClass(OperatingExpensesActivity.this);
-//                    cdd.show();
-//                }
-//                else
-//                {
-//                    insufficientDialog();
-//                }
+
 
             }
             else {
@@ -574,6 +557,10 @@ public class OperatingExpensesActivity extends Activity {
 
     }
 
+
+    /**
+     * Validate Amount is sufficient or not
+     */
 
     public void validateAmount()
     {

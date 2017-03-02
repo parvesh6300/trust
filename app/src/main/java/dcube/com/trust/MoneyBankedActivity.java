@@ -472,6 +472,13 @@ public class MoneyBankedActivity extends Activity {
     }
 
 
+    /**
+     * Show Loader
+     * @param context
+     * @param show boolean
+     */
+
+
     public void loader(Context context,boolean show)
     {
         if (show)
@@ -484,6 +491,13 @@ public class MoneyBankedActivity extends Activity {
         }
 
     }
+
+
+    /**
+     * Hit Service and Update Balance
+     * @param context
+     */
+
 
     public void updateBalance(Context context)
     {
