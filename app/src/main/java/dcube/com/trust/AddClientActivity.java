@@ -343,8 +343,6 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         cb_contra_type_other.setOnClickListener(this);
         cb_contra_type_injectables.setOnClickListener(this);
 
-
-
     }
 
     @Override
@@ -802,7 +800,7 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
                     Log.i("Value",al_str_value.get(i));
                 }
 
-           //     message = ws.AddClientService(context, al_str_key, al_str_value);
+               message = ws.AddClientService(context, al_str_key, al_str_value);
 
 
             } catch (Exception e) {

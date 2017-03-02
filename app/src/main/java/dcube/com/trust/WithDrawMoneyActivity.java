@@ -183,7 +183,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
 
     /**
-     * Hit Service and assign money
+     * Hit Service and assign Petty Cash
      */
 
     public class AssignPettyCashAsyncTask extends AsyncTask<String, String, String>
@@ -551,7 +551,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
 
     /**
-     * Hit web service and get Cash in hand balance
+     * Hit web service and get Bank Balance
      */
 
 

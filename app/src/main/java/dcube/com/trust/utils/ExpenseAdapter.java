@@ -111,7 +111,6 @@ public class ExpenseAdapter extends BaseAdapter {
         convertview= inflater.inflate(R.layout.expenselist,null);
 
 
-
         holder.tv_date= (TextView)convertview.findViewById(R.id.tv_date);
         holder.tv_month= (TextView)convertview.findViewById(R.id.tv_month);
         holder.tv_year= (TextView)convertview.findViewById(R.id.tv_year);
