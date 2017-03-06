@@ -326,7 +326,7 @@ public class Global extends Application {
 
     public ArrayList<HashMap<String,String>> al_cart_details;
 
-    public int total_cart_items;
+    public int total_cart_items=0;
 
     public int getTotal_cart_items() {
         return total_cart_items;
@@ -627,7 +627,7 @@ public class Global extends Application {
     // ******************************* Pending PAyment Getter and Setter  *************************************************
 
 
-    public ArrayList<HashMap<String,String>> al_pend_pmt_details;
+    public ArrayList<HashMap<String,String>> al_pend_pmt_details = new ArrayList<>();
 
     public ArrayList<HashMap<String, String>> getAl_pend_pmt_details() {
         return al_pend_pmt_details;

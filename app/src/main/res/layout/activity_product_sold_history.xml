@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_1"
     android:orientation="vertical"
+    android:id="@+id/rel_parent_layout"
     tools:context="dcube.com.trust.ProductSoldHistory">
 
     <TextView
+        android:id="@+id/tv_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -15,22 +18,57 @@
         android:text="Product Sold History"
         android:textAlignment="gravity"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:typeface="monospace"/>
 
+    <RelativeLayout
+        android:layout_width="750dp"
+        android:layout_height="80dp"
+        android:background="@drawable/searchback"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/search_layout"
+        android:layout_below="@id/tv_header">
+
+        <EditText
+            android:layout_width="700dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="Search By Brand or Name"
+            android:typeface="monospace"
+            android:layout_marginLeft="20dp"
+            android:textColorHint="@color/graytext"
+            android:textSize="25sp"
+            android:paddingStart="10dp"
+            android:id="@+id/search"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/searchbutton"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"/>
+
+    </RelativeLayout>
+
 
     <LinearLayout
-        android:layout_width="500dp"
-        android:layout_height="700dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="700dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:layout_below="@+id/search_layout"
         android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/gif_loader"
+        android:layout_centerHorizontal="true"
         >
 
 
         <LinearLayout
-            android:layout_width="500dp"
+            android:layout_width="700dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/form_back">
@@ -50,7 +88,7 @@
                     android:text="Date From"
                     android:textAlignment="gravity"
                     android:textColor="@color/white"
-                    android:textSize="30sp"
+                    android:textSize="35sp"
                     android:textStyle="bold"
                     android:typeface="monospace"/>
 
@@ -62,7 +100,7 @@
                     android:text="Date To"
                     android:textAlignment="gravity"
                     android:textColor="@color/white"
-                    android:textSize="30sp"
+                    android:textSize="35sp"
                     android:textStyle="bold"
                     android:typeface="monospace"/>
 
@@ -84,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
-                    android:layout_marginLeft="40dp">
+                    android:layout_marginLeft="85dp">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -99,7 +137,7 @@
                         android:text="Select Date"
                         android:textAlignment="gravity"
                         android:textColor="@color/purple"
-                        android:textSize="25sp"
+                        android:textSize="30sp"
                         android:layout_marginLeft="10dp"
                         android:typeface="monospace"/>
 
@@ -112,7 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
-                    android:layout_marginLeft="40dp">
+                    android:layout_marginLeft="90dp">
 
 
                     <ImageView
@@ -128,7 +166,7 @@
                         android:text="Select Date"
                         android:textAlignment="gravity"
                         android:textColor="@color/purple"
-                        android:textSize="25sp"
+                        android:textSize="30sp"
                         android:layout_marginLeft="10dp"
                         android:typeface="monospace"/>
 
@@ -145,7 +183,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_marginTop="30dp"
             android:background="@drawable/form_back">
@@ -153,8 +191,8 @@
 
             <LinearLayout
                 android:id="@+id/header1"
-                android:layout_width="500dp"
-                android:layout_height="40dp"
+                android:layout_width="700dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/textColor"
                 android:orientation="horizontal"
@@ -167,10 +205,10 @@
                     android:layout_weight="2"
                     android:text="PRODUCT"
                     android:textColor="@color/white"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:textStyle="bold"
                     android:typeface="monospace"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_marginLeft="40dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -180,7 +218,7 @@
                     android:gravity="center"
                     android:text="QUANTITY"
                     android:textColor="@color/white"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:textStyle="bold"
                     android:typeface="monospace"
                     android:layout_marginLeft="140dp"/>
@@ -192,8 +230,25 @@
             <ListView
                 android:id="@+id/lv_sold_products"
                 android:layout_width="match_parent"
-                android:layout_height="480dp"
+                android:layout_height="match_parent"
+                android:fadeScrollbars="false"
+                android:scrollbarSize="10dp"
+                android:scrollbarThumbVertical="@drawable/custom_scroll_style"
                 />
+
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_total_sale"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:text="Total Sale : 0"-->
+                <!--android:textColor="@color/purple"-->
+                <!--android:textSize="35sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:typeface="monospace" />-->
 
         </LinearLayout>
 
@@ -203,13 +258,15 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/loading"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="30dp"
         android:layout_gravity="center_horizontal"
-        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
         />
 
 
-</LinearLayout>
+</RelativeLayout>

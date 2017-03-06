@@ -30,7 +30,7 @@ import dcube.com.trust.utils.Global;
 import pl.droidsonroids.gif.GifTextView;
 
 /**
- * Created by yadi on 14/10/16.
+ * Created by Rohit on 14/10/16.
  */
 
 public class PaymentDetailFragment extends Fragment {
@@ -208,8 +208,8 @@ public class PaymentDetailFragment extends Fragment {
                         if (cn.isNetConnected())
                         {
                             new PaymentAsyncTask().execute();
-
-                        } else
+                        }
+                        else
                         {
                             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                         }
@@ -294,9 +294,10 @@ public class PaymentDetailFragment extends Fragment {
                 float each_price = Float.parseFloat(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
 
                 total_cost = total_cost + (qt * each_price);
-            } else {
+            }
+            else
+            {
                 total_cost = total_cost + Float.parseFloat(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
-
             }
 
         }

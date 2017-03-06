@@ -73,10 +73,9 @@ public class ViewServicesActivity extends Activity {
                 global.setServiceAppointment(true);
                 startActivity(new Intent(ViewServicesActivity.this,CalendarActivity.class));
 
-//                cdd= new CustomDialogClass(ViewServicesActivity.this);
-//                cdd.show();
             }
         });
+        
 
         str_client_id = global.getAl_src_client_details().get(global.getSelected_client()).get(GlobalConstants.SRC_CLIENT_ID);
 
@@ -85,7 +84,8 @@ public class ViewServicesActivity extends Activity {
         {
             new ViewServiceAsyncTask().execute();
         }
-        else {
+        else
+        {
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 

@@ -28,7 +28,7 @@ import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class LoginActivity extends Activity implements View.OnClickListener {
+public class LoginActivity extends Activity implements View.OnClickListener,View.OnTouchListener {
 
     static String role;
     RelativeLayout nurse;
@@ -83,8 +83,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         cn = new CheckNetConnection(this);
 
-        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
-
         role = "nurse";
 
         nurse = (RelativeLayout) findViewById(R.id.nurse);
@@ -92,6 +90,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         ed_user_name = (EditText) findViewById(R.id.ed_user_name);
         ed_pwd = (EditText) findViewById(R.id.ed_pwd);
+
+        rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -104,19 +104,21 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         forgot.setPaintFlags(forgot.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
 
-        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                HideKeyboard.hideSoftKeyboard(LoginActivity.this);
-                return false;
-            }
-        });
+//        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//
+//                HideKeyboard.hideSoftKeyboard(LoginActivity.this);
+//                return false;
+//            }
+//        });
 
 
         nurse.setOnClickListener(this);
         finance.setOnClickListener(this);
         signin.setOnClickListener(this);
+        rel_parent_layout.setOnClickListener(this);
+        //rel_parent_layout.setOnTouchListener(this);
     }
 
     @Override
@@ -170,11 +172,31 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     }
                 }
 
+            }
 
+            case R.id.rel_parent_layout:
+            {
+                if (ed_pwd.isClickable() || ed_user_name.isClickable()  || ed_pwd.isFocusable() || ed_user_name.isFocusable())
+                {
+                    HideKeyboard.hideSoftKeyboard(LoginActivity.this);
+                }
 
 
             }
+
         }
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+
+        if (v==rel_parent_layout)
+        {
+            HideKeyboard.hideSoftKeyboard(LoginActivity.this);
+
+        }
+
+        return false;
     }
 
 

@@ -156,10 +156,6 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
             }
         });
 
-
-
-
-
         ed_institution.addTextChangedListener(this);
         ed_retail_client.addTextChangedListener(this);
         ed_name.addTextChangedListener(this);

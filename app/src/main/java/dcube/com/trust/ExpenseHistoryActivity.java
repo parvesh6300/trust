@@ -102,7 +102,7 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
         list_expense= (ListView)findViewById(R.id.list_expense);
 
-        ed_expense_amount=(EditText)findViewById(R.id.ed_expense_amount);
+       // ed_expense_amount=(EditText)findViewById(R.id.ed_expense_amount);
         ed_reason=(EditText)findViewById(R.id.ed_reason);
 
         tv_total_expense = (TextView) findViewById(R.id.tv_total_expense);

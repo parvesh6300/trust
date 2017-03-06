@@ -76,7 +76,7 @@ public class OperatingExpensesActivity extends Activity {
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
-        image_view = (ImageView) findViewById(R.id.image_view);
+      //  image_view = (ImageView) findViewById(R.id.image_view);
 
         radio_group=(RadioGroup)findViewById(R.id.radio_group);
 
@@ -95,7 +95,7 @@ public class OperatingExpensesActivity extends Activity {
 
         ed_other=      (EditText)findViewById(R.id.ed_other);
         ed_wd_amount = (EditText) findViewById(R.id.ed_wd_amount);
-        ed_petty_rsn = (EditText) findViewById(R.id.ed_petty_rsn);
+      //  ed_petty_rsn = (EditText) findViewById(R.id.ed_petty_rsn);
 
         tv_withdraw=(TextView)findViewById(R.id.tv_withdraw);
         tv_total_amount = (TextView) findViewById(R.id.tv_total_amount);

@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/iv_product_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:src="@drawable/buyplan"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"/>
@@ -40,7 +40,7 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="Item Description"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textColor="@color/purple"
             android:layout_gravity="center"
             android:typeface="monospace"
@@ -51,19 +51,18 @@
 
         <TextView
             android:id="@+id/ed_quantity"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:background="@drawable/circle"
             android:textColor="@color/white"
-            android:textSize="25sp"
+            android:textSize="30sp"
             android:gravity="center"
             android:typeface="monospace"
-            android:text="1"
+            android:text="0"
             android:textColorHint="@color/white"
             android:textStyle="bold"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="35dp"
             android:inputType="number"
-            android:maxLength="2"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/tv_desc"/>
 
@@ -100,7 +99,7 @@
             android:layout_height="wrap_content"
             android:text="Price"
             android:textSize="30sp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="110dp"
             android:textColor="@color/purple"
             android:layout_gravity="center_vertical"
             android:typeface="monospace"
@@ -112,8 +111,8 @@
 
         <ImageView
             android:id="@+id/iv_cancel"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/cancel_purple"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"/>

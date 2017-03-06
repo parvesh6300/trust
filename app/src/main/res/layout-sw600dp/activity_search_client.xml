@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_1"
+    android:id="@+id/rel_parent_layout"
     tools:context="dcube.com.trust.SearchClientActivity">
 
     <ImageView
@@ -17,7 +18,7 @@
 
     <RelativeLayout
         android:id="@+id/spin"
-        android:layout_width="640dp"
+        android:layout_width="520dp"
         android:layout_height="80dp"
         android:layout_below="@+id/toplogo"
         android:layout_centerHorizontal="true"
@@ -26,18 +27,17 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="600dp"
+            android:layout_width="480dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_centerInParent="true"
-            />
+            android:layout_centerInParent="true" />
 
     </RelativeLayout>
 
 
     <RelativeLayout
         android:id="@+id/search_layout"
-        android:layout_width="640dp"
+        android:layout_width="520dp"
         android:layout_height="80dp"
         android:layout_below="@id/spin"
         android:layout_centerHorizontal="true"
@@ -46,7 +46,7 @@
 
         <EditText
             android:id="@+id/search"
-            android:layout_width="450dp"
+            android:layout_width="500dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:background="@android:color/transparent"
@@ -72,9 +72,10 @@
 
 
     <RelativeLayout
-        android:layout_width="600dp"
-        android:layout_height="900dp"
+        android:layout_width="500dp"
+        android:layout_height="match_parent"
         android:layout_below="@id/search_layout"
+        android:layout_above="@+id/gif_loader"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/form_back">
@@ -82,7 +83,7 @@
 
         <LinearLayout
             android:id="@+id/header"
-            android:layout_width="600dp"
+            android:layout_width="500dp"
             android:layout_height="60dp"
             android:layout_centerHorizontal="true"
             android:background="@color/textColor"
@@ -136,7 +137,7 @@
 
         <TextView
             android:id="@+id/tv_no_client"
-            android:layout_width="600dp"
+            android:layout_width="500dp"
             android:layout_height="100dp"
             android:text="No Client Found"
             android:textSize="35sp"
@@ -153,13 +154,13 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
-        android:visibility="gone"
+        android:layout_marginBottom="20dp"
+        android:visibility="invisible"
         />
 
 </RelativeLayout>

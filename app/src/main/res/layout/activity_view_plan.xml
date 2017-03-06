@@ -14,7 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
         android:text="Plans Availed"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:typeface="monospace"
         android:layout_marginTop="20dp"
@@ -23,20 +23,19 @@
 
 
     <LinearLayout
-        android:layout_width="500dp"
-        android:layout_height="700dp"
+        android:layout_width="650dp"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/header"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/gif_loader"
         android:orientation="vertical"
         android:background="@drawable/form_back">
 
 
-
-
-
         <LinearLayout
-            android:layout_width="500dp"
+            android:layout_width="650dp"
             android:layout_height="60dp"
             android:orientation="horizontal"
             android:weightSum="2"
@@ -47,9 +46,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Plan"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:typeface="monospace" />
@@ -60,9 +59,10 @@
                 android:text="Expiry Date"
                 android:layout_weight="0.5"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:layout_marginStart="20dp"
                 android:typeface="monospace" />
 
 
@@ -71,16 +71,19 @@
 
         <ListView
             android:id="@+id/lv_plan"
-            android:layout_width="match_parent"
-            android:layout_height="530dp"/>
+            android:layout_width="630dp"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
+            android:layout_height="match_parent"/>
 
 
         <TextView
             android:id="@+id/tv_select_plan"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:text="Select Plan to Upgrade"
-            android:textSize="25sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:typeface="monospace"
             android:gravity="center"
@@ -100,10 +103,8 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         />
-
-
 
 
 </RelativeLayout>

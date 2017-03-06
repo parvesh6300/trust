@@ -263,4 +263,11 @@ public class ClientHomeActivity extends Activity {
 
     }
 
+
+    @Override
+    protected void onResume() {
+
+        tv_notify.setText(String.valueOf(global.getTotal_cart_items()));
+        super.onResume();
+    }
 }

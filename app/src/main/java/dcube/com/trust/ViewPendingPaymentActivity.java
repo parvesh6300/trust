@@ -80,7 +80,7 @@ public class ViewPendingPaymentActivity extends Activity {
 
                 try{
 
-                    if (global.al_pend_pmt_details.size() > 0)
+                    if (global.getAl_pend_pmt_details().size() > 0)
                     {
                         if (cn.isNetConnected())
                         {

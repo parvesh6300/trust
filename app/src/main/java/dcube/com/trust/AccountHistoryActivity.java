@@ -77,7 +77,6 @@ public class AccountHistoryActivity extends Activity implements DatePickerDialog
 
         list_account= (ListView)findViewById(R.id.list_expense);
 
-        ed_expense_amount=(EditText)findViewById(R.id.ed_expense_amount);
         ed_reason=(EditText)findViewById(R.id.ed_reason);
         tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
         tv_submit=(TextView)findViewById(R.id.tv_submit);

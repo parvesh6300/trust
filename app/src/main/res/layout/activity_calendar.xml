@@ -27,37 +27,72 @@
     <dcube.com.trust.CalendarCustomView
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="520dp"
         android:layout_below="@id/header"/>
-    
+
+    <RelativeLayout
+        android:id="@+id/rel_apmt_size"
+        android:layout_width="700dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/calendar_view">
+
+        <TextView
+            android:id="@+id/tv_apmt_label"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:textColor="@color/textColor"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            android:text="No. of Appointments : "
+            />
+
+        <TextView
+            android:id="@+id/tv_apmt_size"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:textColor="@color/textColor"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            android:text="4"
+            android:layout_toEndOf="@+id/tv_apmt_label"
+            />
+
+
+    </RelativeLayout>
+
+
+
     <ListView
-        android:layout_width="500dp"
-        android:layout_height="200dp"
-        android:layout_below="@+id/calendar_view"
+        android:layout_width="700dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel_apmt_size"
+        android:layout_above="@+id/rel_continue"
         android:id="@+id/list"
         android:layout_centerHorizontal="true"
         android:fadeScrollbars="false"
         android:scrollbarSize="10dp"
+        android:layout_marginTop="20dp"
         android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
 
 
-    <pl.droidsonroids.gif.GifTextView
-        android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/loading"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
-        android:visibility="gone"
-        />
+
 
 
     <RelativeLayout
+        android:id="@+id/rel_continue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/list"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="70dp"
         android:layout_alignParentBottom="true">
 
         <TextView
@@ -73,5 +108,17 @@
             android:layout_centerInParent="true" />
 
     </RelativeLayout>
+
+    <pl.droidsonroids.gif.GifTextView
+        android:id="@+id/gif_loader"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/loading"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:elevation="2dp"
+        android:visibility="invisible"
+        />
 
 </RelativeLayout>

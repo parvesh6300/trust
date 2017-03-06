@@ -57,6 +57,8 @@ public class InvoiceFragment extends Fragment  {
                     ClientHomeActivity.h.sendEmptyMessage(0);
                 }
 
+                global.setTotal_cart_items(0);
+
                 getActivity().startActivity(new Intent(getActivity(),ClientHomeActivity.class));
                 getActivity().finish();
 

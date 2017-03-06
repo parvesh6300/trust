@@ -47,8 +47,7 @@ public class CustomAdapter extends BaseAdapter {
             else
             {
                 if (hashMap.get(GlobalConstants.SRC_CLIENT_NAME).toLowerCase().contains(keyword.toLowerCase()) ||
-                        hashMap.get(GlobalConstants.SRC_CLIENT_CONTACT).toLowerCase().contains(keyword.toLowerCase())
-                        )
+                        hashMap.get(GlobalConstants.SRC_CLIENT_CONTACT).toLowerCase().contains(keyword.toLowerCase()))
                 {
                     name.add(hashMap.get(GlobalConstants.SRC_CLIENT_NAME));
                     branch.add(hashMap.get(GlobalConstants.SRC_CLIENT_AREA));

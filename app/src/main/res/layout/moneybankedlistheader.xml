@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="Account Balance(Tsh) :"
+        android:text="Account Balance(TZS) :"
         android:textColor="@color/purple"
         android:textSize="25sp"
         android:textStyle="bold"

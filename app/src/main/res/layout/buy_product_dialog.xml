@@ -1,74 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="500dp"
-    android:layout_height="350dp"
+    android:layout_height="430dp"
     android:background="@color/white"
     android:orientation="vertical"
     android:elevation="3dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Confirm Expense"
-        android:textColor="@color/white"
-        android:typeface="monospace"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:id="@+id/header"
-        android:background="@color/textColor"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
         android:weightSum="3"
-        android:layout_centerInParent="true">
+        android:background="@color/textColor"
+        android:id="@+id/header1">
 
         <TextView
-            android:id="@+id/tv_expense_amount"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Expense Amount : 10,00,000 TZS"
-            android:textColor="@color/textColor"
+            android:text="PRODUCT"
+            android:textColor="@color/white"
             android:typeface="monospace"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="172dp"
+            android:layout_height="wrap_content"
+            android:text="QUANTITY"
+            android:textColor="@color/white"
+            android:typeface="monospace"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center" />
 
         <TextView
-            android:id="@+id/tv_expense_reason"
-            android:layout_width="wrap_content"
+            android:layout_width="166dp"
             android:layout_height="wrap_content"
-            android:text="Expense : Salary "
-            android:textColor="@color/textColor"
+            android:text="TOTAL COST"
+            android:textColor="@color/white"
             android:typeface="monospace"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center" />
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="BALANCE : 7,50,000 Tsh"-->
-            <!--android:textColor="@color/textColor"-->
-            <!--android:typeface="monospace"-->
-            <!--android:textSize="25sp"-->
-            <!--android:textStyle="bold"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:gravity="center" />-->
-
 
     </LinearLayout>
 
+    <ListView
+        android:id="@+id/selected_product_list"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_below="@+id/header1"
+        android:layout_above="@+id/dialog_footer"/>
+
     <LinearLayout
+        android:id="@+id/dialog_footer"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"

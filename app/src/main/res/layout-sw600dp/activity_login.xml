@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/rel_parent_layout"
     android:background="@drawable/trustbackground"
     tools:context="dcube.com.trust.LoginActivity">
 
@@ -10,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="250dp"
         android:text="Sign In"
         android:typeface="monospace"
         android:textColor="@color/white"
@@ -18,11 +20,11 @@
         android:id="@+id/signin_text"/>
 
     <LinearLayout
-        android:layout_width="600dp"
+        android:layout_width="500dp"
         android:layout_height="500dp"
         android:background="@drawable/containerbox"
         android:orientation="vertical"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="270dp"
         android:layout_centerHorizontal="true">
 
         <RelativeLayout
@@ -43,6 +45,7 @@
                 android:layout_width="350dp"
                 android:layout_height="match_parent"
                 android:hint="Username"
+                android:text="rohit@gmail.com"
                 android:typeface="monospace"
                 android:textSize="30sp"
                 android:textColor="@color/textColor"
@@ -68,6 +71,7 @@
                 android:layout_width="350dp"
                 android:layout_height="match_parent"
                 android:hint="Password"
+                android:text="123"
                 android:textSize="30sp"
                 android:textColor="@color/textColor"
                 android:typeface="monospace"
@@ -171,13 +175,13 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp"
-        android:visibility="gone"
+        android:layout_marginBottom="20dp"
+        android:visibility="invisible"
         />
 
 

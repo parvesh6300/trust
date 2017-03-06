@@ -3,29 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dcube.com.trust.GenerateInvoiceActivity"
-    android:background="@drawable/background_1">
+    android:layout_centerInParent="true"
+    android:background="@drawable/background_1"
+    tools:context="dcube.com.trust.GenerateInvoiceActivity">
 
     <TextView
+        android:id="@+id/addclienttext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/white"
-        android:text="Generate Invoice"
-        android:id="@+id/addclienttext"
-        android:textSize="30sp"
-        android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:typeface="monospace"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="Generate Invoice"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:typeface="monospace" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="500dp"
-            android:layout_height="700dp"
-            android:elevation="4dp"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/addclienttext"
-            android:layout_centerHorizontal="true" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="600dp"
+        android:layout_height="1100dp"
+        android:layout_below="@id/addclienttext"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:elevation="4dp" />
 
 </RelativeLayout>

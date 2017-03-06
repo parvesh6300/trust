@@ -81,12 +81,13 @@
             android:typeface="monospace"
             android:layout_centerInParent="true"
             android:layout_toEndOf="@+id/rel_date"
+            android:layout_marginStart="20dp"
             android:layout_toStartOf="@+id/tv_amount" />
 
 
         <TextView
             android:id="@+id/tv_amount"
-            android:layout_width="130dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="4000 TZS"
             android:textSize="35sp"

@@ -751,6 +751,7 @@ public class WebServices {
             else
             {
                 global.getAl_cart_details().clear();
+                global.setTotal_cart_items(0);
             }
 
         } catch (Exception e) {

@@ -1,12 +1,361 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:id="@+id/rel_parent_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="dcube.com.trust.PettyCashActivity">
+    android:background="@drawable/background_1"
+    tools:context="dcube.com.trust.PettyCashActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:text="Petty Cash"
+        android:textAlignment="gravity"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:typeface="monospace"/>
+
+
+    <LinearLayout
+        android:layout_width="700dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/tv_header"
+        android:layout_above="@+id/gif_loader"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/form_back">
+
+
+        <RelativeLayout
+            android:layout_width="700dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/tv_balance_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="Petty Cash Balance : "
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+
+            <TextView
+                android:id="@+id/tv_total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="0 TZS"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:typeface="monospace"
+                android:layout_toRightOf="@+id/tv_balance_label"
+                android:layout_marginRight="20dp"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="700dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+
+            <TextView
+                android:id="@+id/tv_amount_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Enter Amount :"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/ed_deposit_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/tv_amount_label"
+                android:hint="Enter amount"
+                android:inputType="number"
+                android:textSize="30sp"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@+id/tv_tsh_label"
+                android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/tv_tsh_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="TZS"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:typeface="monospace"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="700dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+
+            <TextView
+                android:id="@+id/tv_remark_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Reason : "
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/ed_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/tv_remark_label"
+                android:hint="Enter Remark"
+                android:textSize="30sp"
+                android:typeface="monospace"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="700dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:paddingRight="20dp"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/tv_receipt"
+                android:layout_width="220dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Add Receipt "
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:typeface="monospace"
+                android:gravity="center"
+                android:layout_toStartOf="@+id/iv_receipt"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/button_background"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"/>
+
+           <ImageView
+               android:id="@+id/iv_receipt"
+               android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:background="@drawable/image_border"
+               android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp">
+
+
+            <TextView
+                android:id="@+id/tv_withdraw"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_background"
+                android:gravity="center"
+                android:text="WithDraw"
+                android:typeface="monospace"
+                android:textAlignment="gravity"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_date_labels"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@color/textColor">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Date From"
+                android:textAlignment="gravity"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Date To"
+                android:textAlignment="gravity"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lin_date_calendars"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:gravity="center"
+            android:background="@drawable/form_back">
+
+
+            <LinearLayout
+                android:id="@+id/lin_date_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:gravity="center"
+                android:layout_marginLeft="60dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/cal_icon" />
+
+                <TextView
+                    android:id="@+id/tv_date_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Select Date"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/purple"
+                    android:textSize="30sp"
+                    android:layout_marginLeft="10dp"
+                    android:typeface="monospace"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lin_date_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:gravity="center"
+                android:layout_marginLeft="70dp">
+
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/cal_icon" />
+
+                <TextView
+                    android:id="@+id/tv_date_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Select Date"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/purple"
+                    android:textSize="30sp"
+                    android:layout_marginLeft="10dp"
+                    android:typeface="monospace"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_history"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Petty Cash History"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:typeface="monospace"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@color/textColor"
+            android:textColor="@color/white"/>
+
+
+        <ListView
+            android:id="@+id/list_history"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"/>
+
+    </LinearLayout>
+
+
+    <pl.droidsonroids.gif.GifTextView
+        android:id="@+id/gif_loader"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/loading"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible" />
+
 
 </RelativeLayout>
