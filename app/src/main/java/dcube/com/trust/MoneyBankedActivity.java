@@ -95,15 +95,19 @@ public class MoneyBankedActivity extends Activity {
                     float account_total = Float.parseFloat(global.getStr_branch_balance());
                     float deposit_amount = Float.parseFloat(str_deposit_amount);
 
-                    if (account_total > deposit_amount)
-                    {
-                        cdd = new CustomDialogClass(MoneyBankedActivity.this);
-                        cdd.show();
-                    }
-                    else
-                    {
-                        insufficientDialog();
-                    }
+
+                    cdd = new CustomDialogClass(MoneyBankedActivity.this);
+                    cdd.show();
+
+//                    if (account_total > deposit_amount)
+//                    {
+//                        cdd = new CustomDialogClass(MoneyBankedActivity.this);
+//                        cdd.show();
+//                    }
+//                    else
+//                    {
+//                        insufficientDialog();
+//                    }
 
                 }
             }
@@ -178,7 +182,7 @@ public class MoneyBankedActivity extends Activity {
 
             float deposit_amount = Float.parseFloat(str_deposit_amount);
 
-            float balance = account_total - deposit_amount;
+            float balance = account_total + deposit_amount;
 
             tv_balance.setText("Projected Balance : "+String.valueOf(balance)+" TZS");
 

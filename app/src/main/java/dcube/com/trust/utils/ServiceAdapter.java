@@ -12,10 +12,9 @@ import java.util.HashMap;
 
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
-import dcube.com.trust.utils.Global;
 
 /**
- * Created by Sagar on 30/11/16.
+ * Created by Rohit on 30/11/16.
  */
 public class ServiceAdapter extends BaseAdapter {
 

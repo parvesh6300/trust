@@ -16,7 +16,7 @@ import dcube.com.trust.R;
 import dcube.com.trust.UpdatePlanActivity;
 
 /**
- * Created by Sagar on 20/10/16.
+ * Created by Rohit on 20/10/16.
  */
 public class PlanAdapter extends BaseAdapter {
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="500dp"
+    android:layout_width="400dp"
     android:layout_height="400dp"
     android:background="@color/white"
     android:orientation="vertical"
@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:weightSum="2"
         android:background="@color/textColor"
@@ -20,7 +20,7 @@
             android:text="SERVICE"
             android:textColor="@color/white"
             android:typeface="monospace"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -45,7 +45,7 @@
             android:text="COST"
             android:textColor="@color/white"
             android:typeface="monospace"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -55,7 +55,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="265dp"
         android:id="@+id/selected_product_list"
         android:layout_below="@+id/header1"/>
 
@@ -73,7 +73,7 @@
             android:layout_width="133dp"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center"
             android:typeface="monospace"
             android:text="Total"
@@ -86,7 +86,7 @@
             android:layout_width="133dp"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center"
             android:typeface="monospace"
             android:textStyle="bold"
@@ -97,7 +97,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:weightSum="2"
         android:background="@color/textColor"
@@ -109,7 +109,7 @@
             android:text="CANCEL"
             android:textColor="@color/white"
             android:typeface="monospace"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -122,7 +122,7 @@
             android:text="CONFIRM"
             android:textColor="@color/white"
             android:typeface="monospace"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_gravity="center"

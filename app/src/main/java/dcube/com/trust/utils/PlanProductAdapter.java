@@ -48,21 +48,6 @@ public class PlanProductAdapter extends BaseAdapter
 
         Log.e("Plan","id "+str_plan_id);
 
-//        for ( int i = 0 ; i < global.getAl_element_plan().size() ; i++)
-//        {
-//            Log.e("List","Plan id "+global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ID));
-//
-//            if(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ID).equalsIgnoreCase(str_plan_id))
-//            {
-//                if (global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_TYPE).equalsIgnoreCase("Product"))
-//                {
-//                    name.add(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_NAME));
-//                    quantity.add(global.getAl_element_plan().get(i).get(GlobalConstants.PLAN_ELEMENT_QUANTITY));
-//
-//                }
-//
-//            }
-//        }
 
         for (HashMap<String,String> hashmap : global.getAl_element_plan())
         {

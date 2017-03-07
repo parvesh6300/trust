@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="2dp">
 
 
     <RelativeLayout
@@ -26,7 +26,7 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="Item Name"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textColor="@color/purple"
             android:layout_gravity="center"
             android:typeface="monospace"
@@ -37,10 +37,10 @@
 
         <TextView
             android:id="@+id/tv_desc"
-            android:layout_width="180dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:text="Item Description"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="@color/purple"
             android:layout_gravity="center"
             android:typeface="monospace"
@@ -51,17 +51,17 @@
 
         <TextView
             android:id="@+id/ed_quantity"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/circle"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center"
             android:typeface="monospace"
             android:text="0"
             android:textColorHint="@color/white"
             android:textStyle="bold"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="10dp"
             android:inputType="number"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/tv_desc"/>
@@ -95,11 +95,11 @@
 
         <TextView
             android:id="@+id/tv_price"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="Price"
-            android:textSize="30sp"
-            android:layout_marginStart="110dp"
+            android:textSize="25sp"
+            android:layout_marginStart="70dp"
             android:textColor="@color/purple"
             android:layout_gravity="center_vertical"
             android:typeface="monospace"

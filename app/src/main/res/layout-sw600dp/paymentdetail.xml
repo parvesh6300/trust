@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/rel_parent_layout"
+    android:layout_centerInParent="true"
+    >
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
+        android:id="@+id/layout_payment"
         android:layout_width="600dp"
-        android:layout_height="800dp"
-        android:layout_below="@id/addclienttext"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:background="@drawable/form_back"
         android:elevation="4dp"
-        android:orientation="vertical"
-        android:id="@+id/layout_payment"
-        android:padding="20dp">
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/hiv_text"
@@ -34,16 +35,15 @@
                 android:layout_centerVertical="true"
                 android:text="Payment Mode"
                 android:textColor="@color/purple"
-                android:textSize="35sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
             <RadioGroup
                 android:id="@+id/radio_group_payment_mode"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="140dp"
                 android:layout_below="@id/hiv_text"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:weightSum="4">
 
@@ -56,7 +56,7 @@
                     android:checked="false"
                     android:text="mPesa"
                     android:textColor="@color/textColor"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:typeface="monospace" />
 
                 <RadioButton
@@ -68,7 +68,7 @@
                     android:checked="false"
                     android:text="Cash"
                     android:textColor="@color/textColor"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:typeface="monospace" />
 
                 <RadioButton
@@ -80,7 +80,7 @@
                     android:checked="false"
                     android:text="Insurance"
                     android:textColor="@color/textColor"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:typeface="monospace" />
 
             </RadioGroup>
@@ -89,9 +89,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal">
 
             <TextView
                 android:id="@+id/contact_text"
@@ -99,16 +98,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="Amount(Tsh) "
+                android:text="Amount(TZS) "
                 android:textColor="@color/purple"
-                android:textSize="35sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
             <EditText
                 android:id="@+id/ed_amount"
                 android:layout_width="160dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@id/contact_text"
@@ -119,16 +118,16 @@
                 android:inputType="number"
                 android:paddingRight="10dp"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:typeface="monospace" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/tv_disc_label"
@@ -138,14 +137,14 @@
                 android:layout_centerVertical="true"
                 android:text="Discount %"
                 android:textColor="@color/purple"
-                android:textSize="35sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
             <EditText
                 android:id="@+id/ed_discount"
                 android:layout_width="130dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/tv_disc_label"
                 android:background="@drawable/textarea"
@@ -153,16 +152,92 @@
                 android:inputType="number"
                 android:paddingRight="10dp"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
+                android:textSize="25sp"
+                android:maxLength="2"
                 android:typeface="monospace" />
 
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rel_rsn_layout"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="50dp"
+            android:visibility="gone"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_disc_rsn_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Reason "
+                android:textColor="@color/purple"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+            <EditText
+                android:id="@+id/ed_discount_rsn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/tv_disc_rsn_label"
+                android:background="@drawable/textarea"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:typeface="monospace" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_payable_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Payable Amount(TZS) "
+                android:textColor="@color/purple"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+            <EditText
+                android:id="@+id/ed_payable_amount"
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/tv_payable_amount"
+                android:background="@drawable/textarea"
+                android:clickable="false"
+                android:editable="false"
+                android:gravity="right|center_vertical"
+                android:inputType="number"
+                android:paddingRight="10dp"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:typeface="monospace" />
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/heard_text"
@@ -173,16 +248,15 @@
                 android:layout_centerVertical="true"
                 android:text="Payment "
                 android:textColor="@color/purple"
-                android:textSize="35sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
             <RadioGroup
                 android:id="@+id/radio_group_payment"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="150dp"
                 android:layout_below="@id/heard_text"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:weightSum="3">
 
@@ -195,7 +269,7 @@
                     android:checked="false"
                     android:text="Partial payment received"
                     android:textColor="@color/textColor"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:typeface="monospace" />
 
                 <RadioButton
@@ -207,7 +281,7 @@
                     android:checked="false"
                     android:text="Partial payment received with grant"
                     android:textColor="@color/textColor"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:typeface="monospace" />
 
                 <RadioButton
@@ -219,73 +293,115 @@
                     android:checked="false"
                     android:text="Full payment received "
                     android:textColor="@color/textColor"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:typeface="monospace" />
 
             </RadioGroup>
+
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rel_partial_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_partial_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Pay (TZS) "
+                android:textColor="@color/purple"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+            <EditText
+                android:id="@+id/ed_partial_amount"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/tv_partial_label"
+                android:background="@drawable/textarea"
+                android:clickable="false"
+                android:editable="false"
+                android:gravity="right|center_vertical"
+                android:inputType="number"
+                android:paddingRight="10dp"
+                android:textColor="@color/textColor"
+                android:textSize="30sp"
+                android:typeface="monospace" />
 
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/generate"
                 android:layout_width="200dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@drawable/buttonback"
                 android:gravity="center"
                 android:text="Generate"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:typeface="monospace" />
 
 
             <TextView
                 android:id="@+id/tv_cancel"
                 android:layout_width="200dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@drawable/buttonback"
                 android:gravity="center"
                 android:text="Cancel"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:typeface="monospace" />
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
 
 
     </LinearLayout>
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/layout_payment">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_payment"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
 
         <pl.droidsonroids.gif.GifTextView
             android:id="@+id/gif_loader"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/loading"
-            android:visibility="gone"/>
+            android:visibility="invisible"
+            />
 
     </RelativeLayout>
 

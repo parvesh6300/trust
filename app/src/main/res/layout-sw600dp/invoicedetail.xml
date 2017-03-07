@@ -2,12 +2,14 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp">
 
     <LinearLayout
         android:id="@+id/id_receipt"
-        android:layout_width="600dp"
-        android:layout_height="600dp"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
         android:layout_below="@id/addclienttext"
         android:layout_centerInParent="true"
         android:background="@drawable/receipt_back"
@@ -29,7 +31,7 @@
                 android:layout_centerVertical="true"
                 android:text="Amount(Tsh) :"
                 android:textColor="@color/purple"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:typeface="monospace" />
 
             <TextView
@@ -41,7 +43,7 @@
                 android:layout_toRightOf="@id/contact_text"
                 android:text="2300"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -61,7 +63,7 @@
                 android:layout_centerVertical="true"
                 android:text="Discount      :"
                 android:textColor="@color/purple"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:typeface="monospace" />
 
             <TextView
@@ -73,7 +75,7 @@
                 android:layout_toRightOf="@id/discount_text"
                 android:text="230"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -93,7 +95,7 @@
                 android:layout_centerVertical="true"
                 android:text="Net Amount Paid:"
                 android:textColor="@color/purple"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:typeface="monospace" />
 
             <TextView
@@ -105,7 +107,7 @@
                 android:layout_toRightOf="@id/_text"
                 android:text="2070"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -144,17 +146,17 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_below="@+id/id_receipt"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/tv_continue"
             android:background="@drawable/button_background"
             android:layout_width="230dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:textColor="@color/white"
             android:text="Continue"
             android:gravity="center"
-            android:textSize="35sp"
+            android:textSize="25sp"
             android:typeface="monospace"
             android:layout_centerInParent="true" />
 

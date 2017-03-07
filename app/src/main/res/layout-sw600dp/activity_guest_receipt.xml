@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Generate Invoice"
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:textAlignment="gravity"
         android:gravity="center_horizontal"
@@ -22,8 +22,8 @@
 
     <LinearLayout
         android:id="@+id/id_receipt"
-        android:layout_width="600dp"
-        android:layout_height="600dp"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
         android:layout_below="@id/addclienttext"
         android:layout_centerInParent="true"
         android:background="@drawable/receipt_back"
@@ -166,11 +166,11 @@
             android:id="@+id/tv_continue"
             android:background="@drawable/button_background"
             android:layout_width="230dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:textColor="@color/white"
             android:text="Continue"
             android:gravity="center"
-            android:textSize="35sp"
+            android:textSize="30sp"
             android:typeface="monospace"
             android:layout_marginBottom="20dp"
             android:layout_centerHorizontal="true"/>

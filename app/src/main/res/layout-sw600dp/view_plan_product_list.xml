@@ -2,9 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:orientation="horizontal"
-    android:layout_marginTop="15dp">
+    android:layout_height="80dp"
+    android:orientation="horizontal">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -18,7 +17,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/name"
             android:textColor="@color/textColor"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center"
             android:typeface="monospace"
             android:text="Fiesta"
@@ -30,7 +29,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/category"
             android:textColor="@color/textColor"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:gravity="center"
             android:typeface="monospace"
             android:text="Condom"
@@ -62,12 +61,12 @@
             android:layout_centerVertical="true"/>
 
         <EditText
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:id="@+id/quantity"
             android:background="@drawable/circle"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center"
             android:typeface="monospace"
             android:text="0"

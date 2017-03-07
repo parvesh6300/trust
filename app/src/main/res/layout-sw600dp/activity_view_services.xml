@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     android:background="@drawable/background_1"
     tools:context="dcube.com.trust.ViewPlanActivity">
 
@@ -14,23 +16,25 @@
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
         android:text="Services Availed"
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:typeface="monospace"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true" />
 
     <LinearLayout
-        android:layout_width="650dp"
+        android:layout_width="match_parent"
         android:layout_height="1100dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/header"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical"
+        android:layout_above="@+id/gif_loader"
         android:background="@drawable/form_back">
 
         <LinearLayout
-            android:layout_width="650dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
             android:background="@color/textColor"
@@ -44,17 +48,18 @@
                 android:textSize="30sp"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:layout_marginStart="130dp"
+                android:layout_marginStart="90dp"
                 android:typeface="monospace" />
 
             <TextView
-                android:layout_width="350dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Expiry Date"
                 android:textColor="@color/white"
                 android:textSize="30sp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:layout_marginStart="20dp"
                 android:typeface="monospace" />
 
         </LinearLayout>
@@ -63,7 +68,7 @@
         <ListView
             android:id="@+id/lv_services"
             android:layout_width="match_parent"
-            android:layout_height="900dp"/>
+            android:layout_height="match_parent"/>
 
 
         <TextView
@@ -84,13 +89,13 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
-        android:visibility="gone"
+        android:layout_marginBottom="10dp"
+        android:visibility="invisible"
         />
 
 

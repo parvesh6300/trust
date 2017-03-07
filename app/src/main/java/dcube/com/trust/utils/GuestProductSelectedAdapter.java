@@ -11,7 +11,7 @@ import android.widget.TextView;
 import dcube.com.trust.R;
 
 /**
- * Created by Sagar on 21/12/16.
+ * Created by Rohit on 21/12/16.
  */
 public class GuestProductSelectedAdapter extends BaseAdapter {
 
