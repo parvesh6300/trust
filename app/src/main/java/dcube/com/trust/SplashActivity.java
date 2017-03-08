@@ -16,6 +16,7 @@ import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
+import pl.droidsonroids.gif.GifTextView;
 
 public class SplashActivity extends Activity {
 
@@ -39,6 +40,8 @@ public class SplashActivity extends Activity {
     WebServices ws;
     Global global;
 
+    GifTextView gif_loader;
+
     String str_username,str_password,str_role,str_device_token;
     CheckNetConnection cn;
 
@@ -52,6 +55,8 @@ public class SplashActivity extends Activity {
         setSharedPreferences();
 
         global = (Global) getApplicationContext();
+
+        gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         cn = new CheckNetConnection(this);
 
@@ -161,6 +166,7 @@ public class SplashActivity extends Activity {
 
         @Override
         protected void onPreExecute() {
+
 
         }
 

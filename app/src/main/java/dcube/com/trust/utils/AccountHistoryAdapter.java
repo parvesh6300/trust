@@ -326,7 +326,7 @@ public class AccountHistoryAdapter extends BaseAdapter {
 
             if (message.equalsIgnoreCase("true"))
             {
-                // ((ExpenseHistoryActivity)context).updateList(context);
+                 ((AccountHistoryActivity)context).updateList(context);
                 notifyDataSetChanged();
             }
             else

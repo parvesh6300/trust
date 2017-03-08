@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rel_parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     android:background="@drawable/background_1"
-    android:orientation="vertical"
-    tools:context=".ExpenseHistoryActivity">
-
+    android:orientation="vertical">
 
 
     <TextView
+        android:id="@+id/addclienttext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/white"
-        android:text="Account History"
-        android:id="@+id/addclienttext"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        android:typeface="monospace"
         android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true" />
+        android:text="Account History"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="monospace" />
+
+
+
 
     <LinearLayout
-        android:layout_width="700dp"
-        android:layout_height="1150dp"
-        android:layout_gravity="center"
+        android:id="@+id/lin_date_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/form_back"
+        android:layout_below="@+id/addclienttext"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@drawable/form_back">
+        android:orientation="vertical">
 
 
         <RelativeLayout
+            android:id="@+id/rel_ac_balance"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
-            android:padding="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="10dp">
 
 
             <TextView
@@ -47,7 +53,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Account Balance : "
                 android:textColor="@color/purple"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -57,117 +63,241 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="0 Tsh"
-                android:textColor="@color/purple"
-                android:textSize="30sp"
-                android:typeface="monospace"
+                android:layout_marginRight="20dp"
                 android:layout_toRightOf="@+id/tv_balance_label"
-                android:layout_marginRight="20dp"/>
+                android:text="0 TZS"
+                android:textColor="@color/purple"
+                android:textSize="25sp"
+                android:typeface="monospace" />
 
 
         </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/textColor"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Date From"
+                android:textAlignment="gravity"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Date To"
+                android:textAlignment="gravity"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/form_back"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="1">
+
+
+            <LinearLayout
+                android:id="@+id/lin_date_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_weight=".5">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/cal_icon" />
+
+                <TextView
+                    android:id="@+id/tv_date_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Select Date"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/purple"
+                    android:textSize="25sp"
+                    android:typeface="monospace" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lin_date_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_weight=".5">
+
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/cal_icon" />
+
+                <TextView
+                    android:id="@+id/tv_date_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Select Date"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/purple"
+                    android:textSize="25sp"
+                    android:typeface="monospace" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rel_back"
+        android:layout_below="@+id/lin_date_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/form_back"
+        android:gravity="center"
+        android:orientation="vertical">
+
 
 
         <RelativeLayout
+            android:id="@+id/rel_header"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:background="@color/textColor"
             android:gravity="center">
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="140dp"
-                android:layout_height="60dp"
-                android:text="Date"
-                android:textSize="30sp"
-                android:textAlignment="center"
-                android:typeface="monospace"
-                android:textStyle="bold"
+                android:layout_height="50dp"
                 android:gravity="center"
+                android:text="Date"
+                android:textAlignment="center"
                 android:textColor="@color/white"
-                android:layout_marginStart="10dp"
-                />
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
 
             <TextView
                 android:id="@+id/tv_expense"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Transaction"
-                android:textSize="30sp"
-                android:textAlignment="center"
-                android:typeface="monospace"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginStart="30dp"
-                android:textColor="@color/white"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_toEndOf="@+id/tv_date"
                 android:layout_toStartOf="@+id/tv_amount"
-                />
+                android:gravity="center"
+                android:text="Transaction"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
 
 
             <TextView
                 android:id="@+id/tv_amount"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:text="Amount"
-                android:textSize="30sp"
-                android:textAlignment="center"
-                android:typeface="monospace"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="@color/white"
+                android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="60dp"
-                />
+                android:layout_marginEnd="40dp"
+                android:gravity="center"
+                android:text="Amount"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
 
 
         </RelativeLayout>
-
 
 
         <ListView
             android:id="@+id/list_expense"
             android:layout_width="match_parent"
-            android:layout_height="900dp"
-            android:scrollbars="none"
-            android:padding="20dp"/>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rel_header"
+            android:fadeScrollbars="false"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style" />
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp">
+    </RelativeLayout>
 
 
-            <TextView
-                android:id="@+id/tv_submit"
-                android:layout_width="250dp"
-                android:layout_height="60dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/button_background"
-                android:gravity="center"
-                android:text="Back"
-                android:typeface="monospace"
-                android:textAlignment="gravity"
-                android:textColor="@color/white"
-                android:textSize="35sp"
-                />
+    <RelativeLayout
+        android:id="@+id/rel_back"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_above="@+id/gif_loader"
+        android:layout_marginBottom="10dp"
+        android:gravity="center">
 
-        </RelativeLayout>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_submit"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:text="Back"
+            android:textAlignment="gravity"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:typeface="monospace"
+
+            />
+
+    </RelativeLayout>
 
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/loading"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
-        android:visibility="gone"
-        />
+        android:background="@drawable/loading"
+        android:visibility="invisible" />
 
-</LinearLayout>
+</RelativeLayout>

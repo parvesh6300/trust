@@ -383,5 +383,10 @@ public class AccountHistoryActivity extends Activity implements DatePickerDialog
 
     }
 
+    public void updateList(Context context)
+    {
+        new GetBranchBalanceAsyncTask().execute();
+    }
+
 
 }

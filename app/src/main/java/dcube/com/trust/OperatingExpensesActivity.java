@@ -206,7 +206,6 @@ public class OperatingExpensesActivity extends Activity {
 
                                 validateAmount();
 
-
                                // new GetBranchBalanceAsyncTask().execute();
                             }
 

@@ -10,11 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <RelativeLayout
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:padding="2dp"
             android:layout_gravity="center"
             android:gravity="center"
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"
                 android:textStyle="bold"
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rohit Ref No.328432164621"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textColor="@color/purple"
                 android:typeface="monospace"
 
@@ -111,7 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4000"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textColor="@color/purple"
         android:gravity="center"
         android:typeface="monospace"

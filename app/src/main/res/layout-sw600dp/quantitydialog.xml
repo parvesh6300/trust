@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="500dp"
+    android:layout_width="400dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:text="Request Stock"
         android:textSize="30sp"
         android:textColor="@color/white"
@@ -29,20 +29,20 @@
 
 
         <!--<TextView-->
-            <!--android:id="@+id/tv_quantity"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:text="0"-->
-            <!--android:textSize="80sp"-->
-            <!--android:typeface="monospace"/>-->
+        <!--android:id="@+id/tv_quantity"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:text="0"-->
+        <!--android:textSize="80sp"-->
+        <!--android:typeface="monospace"/>-->
 
 
 
         <EditText
             android:id="@+id/tv_quantity"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/circle"
             android:textColor="@color/white"
             android:textSize="30sp"
@@ -85,24 +85,24 @@
 
     </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5sp"
-            android:layout_below="@+id/tv_quantity"
-            android:background="@color/divider" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5sp"
+        android:layout_below="@+id/tv_quantity"
+        android:background="@color/divider" />
 
 
-        <TextView
-            android:id="@+id/tv_current_time"
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:textAlignment="gravity"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginTop="5sp"
-            android:text="2016 Oct 14 10:00"
-            android:textSize="35sp"
-            android:textColor="@color/textColor"
-            android:typeface="monospace"/>
+    <TextView
+        android:id="@+id/tv_current_time"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="5sp"
+        android:text="2016 Oct 14 10:00"
+        android:textSize="25sp"
+        android:textColor="@color/textColor"
+        android:typeface="monospace"/>
 
 
 
@@ -126,9 +126,8 @@
             android:id="@+id/tv_product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
             android:text="Product"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:textColor="@color/textColor"
@@ -139,31 +138,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Category"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:typeface="monospace"
             android:textColor="@color/textColor"
             android:layout_below="@+id/tv_product_name"/>
 
         <!--<ImageView-->
-            <!--android:layout_width="40sp"-->
-            <!--android:layout_height="40sp"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:src="@drawable/forwardarrow" />-->
+        <!--android:layout_width="40sp"-->
+        <!--android:layout_height="40sp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:src="@drawable/forwardarrow" />-->
 
     </RelativeLayout>
 
 
     <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.5sp"-->
-        <!--android:layout_below="@+id/tv_quantity"-->
-        <!--android:layout_marginTop="5sp"-->
-        <!--android:background="@color/divider" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0.5sp"-->
+    <!--android:layout_below="@+id/tv_quantity"-->
+    <!--android:layout_marginTop="5sp"-->
+    <!--android:background="@color/divider" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:background="@color/textColor">
 
@@ -175,7 +174,7 @@
             android:text="Cancel"
             android:layout_weight=".6"
             android:textAlignment="gravity"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:typeface="monospace"
             android:textStyle="bold"
             android:gravity="center_horizontal|center_vertical"
@@ -189,7 +188,7 @@
             android:text="Request Stock"
             android:layout_weight=".4"
             android:textAlignment="gravity"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:typeface="monospace"
             android:textStyle="bold"
             android:gravity="center_horizontal|center_vertical"

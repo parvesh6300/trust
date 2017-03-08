@@ -6,70 +6,80 @@
     android:orientation="horizontal"
     android:paddingLeft="40dp"
     android:paddingRight="40dp"
-    android:paddingBottom="5dp"
     android:id="@+id/rel_row">
 
-
-    <TextView
-        android:id="@+id/tv_product"
-        android:layout_width="210dp"
+    <RelativeLayout
+        android:id="@+id/rel_product_detail"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
-        android:textSize="30sp"
-        android:typeface="monospace"
-        android:text="Fiesta"
-        android:layout_gravity="center"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"/>
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/tv_category"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
-        android:textSize="25sp"
-        android:typeface="monospace"
-        android:text="Condom"
-        android:layout_below="@+id/tv_product"
-        android:layout_gravity="center"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"/>
+        <TextView
+            android:id="@+id/tv_product"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="25sp"
+            android:typeface="monospace"
+            android:text="Fiesta"
+            android:layout_gravity="center"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="20sp"
+            android:typeface="monospace"
+            android:text="Condom"
+            android:layout_below="@+id/tv_product"
+            android:layout_gravity="center"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+
 
 
     <TextView
         android:id="@+id/tv_quantity"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/circle"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:gravity="center"
         android:typeface="monospace"
         android:text="0"
         android:textStyle="bold"
+        android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
         android:layout_marginEnd="30dp"
-        android:layout_toEndOf="@+id/tv_product"
-        android:layout_marginStart="80dp"
+        android:layout_toEndOf="@+id/rel_product_detail"
+        android:layout_marginStart="40dp"
         />
 
     <TextView
         android:id="@+id/tv_status"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/circle"
-        android:textColor="@color/white"
-        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:textColor="@color/red"
+        android:textSize="25sp"
         android:gravity="center"
         android:typeface="monospace"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
+        android:text="Requested"
+        android:layout_centerInParent="true"
         android:layout_alignParentEnd="true"/>
 
+
+    <!--android:background="@drawable/circle"-->
 
 
 </RelativeLayout>

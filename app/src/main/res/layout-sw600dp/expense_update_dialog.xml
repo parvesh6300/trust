@@ -16,7 +16,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="UPDATE MONEY BANK DETAILS"
+            android:text="UPDATE EXPENSE DETAILS"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -37,7 +37,7 @@
         <RelativeLayout
 
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:layout_centerInParent="true"
             android:background="@drawable/dategradient"
             android:padding="2dp">
@@ -51,7 +51,7 @@
                 android:letterSpacing="0.1"
                 android:text="20"
                 android:textColor="@color/white"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -71,7 +71,7 @@
                 android:layout_marginTop="2dp"
                 android:text="OCT "
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -84,7 +84,7 @@
                 android:layout_toRightOf="@+id/tv_month"
                 android:text="'16"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -112,30 +112,48 @@
             android:layout_centerInParent="true"
             >
 
+
             <EditText
                 android:id="@+id/ed_reason"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:inputType="textNoSuggestions"
                 android:textColor="@color/textColor"
                 android:textSize="25sp"
                 android:text="Reason"
+                android:editable="false"
+                android:clickable="false"
                 android:typeface="monospace" />
+
+
+            <EditText
+                android:id="@+id/ed_remark"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:inputType="textNoSuggestions"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                android:text="remark"
+                android:layout_below="@+id/ed_reason"
+                android:typeface="monospace" />
+
+
 
             <EditText
                 android:id="@+id/ed_amount"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
                 android:inputType="number"
                 android:textColor="@color/textColor"
                 android:textSize="25sp"
                 android:typeface="monospace"
                 android:layout_marginTop="20dp"
-                android:text="amount field"
+                android:text="amount"
                 android:layout_toStartOf="@+id/tzs_label"
-                android:layout_below="@+id/ed_reason"
-                />
+                android:layout_below="@+id/ed_remark"/>
 
             <TextView
                 android:id="@+id/tzs_label"
@@ -147,9 +165,9 @@
                 android:textSize="25sp"
                 android:layout_marginTop="30dp"
                 android:typeface="monospace"
+                android:layout_below="@+id/ed_remark"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="20dp"
-                android:layout_below="@+id/ed_reason"/>
+                android:layout_marginRight="20dp"/>
 
 
 
