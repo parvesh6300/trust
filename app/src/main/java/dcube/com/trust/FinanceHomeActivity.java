@@ -57,7 +57,6 @@ public class FinanceHomeActivity extends Activity {
 
         gridView = (GridView) findViewById(R.id.grid_view);
 
-
         tv_user_name = (TextView) findViewById(R.id.tv_user_name);
         tv_logout = (TextView) findViewById(R.id.tv_logout);
 

@@ -523,9 +523,7 @@ public class OperatingExpensesActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-
                 tv_total_amount.setText(global.getStr_exp_bal()+" TZS");
-
 
             }
             else {
