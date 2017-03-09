@@ -58,7 +58,7 @@
                         android:layout_centerVertical="true"
                         android:text="Name  "
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -88,7 +88,7 @@
                         android:layout_centerVertical="true"
                         android:text="Age Group"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -120,7 +120,7 @@
                         android:layout_centerVertical="true"
                         android:text="Contact"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -165,7 +165,7 @@
                         android:layout_centerVertical="true"
                         android:text="Name of Emer. Contact"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -211,7 +211,7 @@
                         android:layout_centerVertical="true"
                         android:text="Emer. Contact"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -256,7 +256,7 @@
                         android:layout_centerVertical="true"
                         android:text="Relation With Person"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -303,7 +303,7 @@
                         android:layout_centerVertical="true"
                         android:text="Area"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -337,7 +337,7 @@
                         android:layout_centerVertical="true"
                         android:text="Medical History"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -372,7 +372,7 @@
                         android:layout_centerVertical="true"
                         android:text="History of Contraceptives used"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -439,7 +439,7 @@
                         android:layout_centerVertical="true"
                         android:text="Type of Contraceptive used"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -448,7 +448,7 @@
                         android:id="@+id/cb_contra_type_condom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/textColor"
                         android:text="Condoms"
@@ -458,7 +458,7 @@
                         android:id="@+id/cb_contra_type_fem_condom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/textColor"
                         android:text="Female Condoms"
@@ -468,7 +468,7 @@
                         android:id="@+id/cb_contra_type_oral"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/textColor"
                         android:text="Oral Contraceptive pill"
@@ -479,7 +479,7 @@
                         android:id="@+id/cb_contra_type_emer_pill"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/textColor"
                         android:text="Emergency Contraceptive pill"
@@ -490,7 +490,7 @@
                         android:id="@+id/cb_contra_type_iucd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/textColor"
                         android:text="IUCD"
@@ -501,7 +501,7 @@
                         android:id="@+id/cb_contra_type_implants"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/textColor"
                         android:text="Implants"
@@ -512,7 +512,7 @@
                         android:id="@+id/cb_contra_type_injectables"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/textColor"
                         android:text="Injectables"
@@ -523,7 +523,7 @@
                         android:id="@+id/cb_contra_type_calendar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/textColor"
                         android:text="Calendar method"
@@ -533,7 +533,7 @@
                         android:id="@+id/cb_contra_type_other"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/textColor"
                         android:text="Other"
@@ -560,7 +560,7 @@
                         android:layout_centerVertical="true"
                         android:text="Sex"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -615,7 +615,7 @@
                         android:layout_centerVertical="true"
                         android:text="Have Children"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -684,7 +684,7 @@
                         android:layout_centerVertical="true"
                         android:text="Ever Tested for HIV?"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -705,7 +705,7 @@
                             android:buttonTint="@color/textColor"
                             android:text="Yes, Within 6 months"
                             android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:typeface="monospace" />
 
                         <RadioButton
@@ -716,7 +716,7 @@
                             android:buttonTint="@color/textColor"
                             android:text="Yes, Within last 2 years"
                             android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:typeface="monospace" />
 
                         <RadioButton
@@ -727,7 +727,7 @@
                             android:buttonTint="@color/textColor"
                             android:text="Yes, More than 2 years"
                             android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:typeface="monospace" />
 
                         <RadioButton
@@ -738,7 +738,7 @@
                             android:buttonTint="@color/textColor"
                             android:text="No"
                             android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:typeface="monospace" />
 
                     </RadioGroup>
@@ -760,7 +760,7 @@
                         android:layout_centerVertical="true"
                         android:text="How you heard about clinic?"
                         android:textColor="@color/purple"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:typeface="monospace" />
 
@@ -781,7 +781,7 @@
                             android:buttonTint="@color/textColor"
                             android:text="Social Media"
                             android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:typeface="monospace" />
 
                         <RadioButton
@@ -792,7 +792,7 @@
                             android:buttonTint="@color/textColor"
                             android:text="Radio"
                             android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:typeface="monospace" />
 
                         <RadioButton
@@ -803,7 +803,7 @@
                             android:buttonTint="@color/textColor"
                             android:text="Friends / Family "
                             android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:typeface="monospace" />
 
                         <RadioButton
@@ -814,7 +814,7 @@
                             android:buttonTint="@color/textColor"
                             android:text="Flier"
                             android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:typeface="monospace" />
 
                         <RadioButton
@@ -825,7 +825,7 @@
                             android:buttonTint="@color/textColor"
                             android:text="At an Event"
                             android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:typeface="monospace" />
 
 
@@ -837,7 +837,7 @@
                             android:buttonTint="@color/textColor"
                             android:text="TV"
                             android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:typeface="monospace" />
 
 
@@ -849,7 +849,7 @@
                             android:buttonTint="@color/textColor"
                             android:text="Signage"
                             android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:typeface="monospace" />
 
 
@@ -860,8 +860,8 @@
 
                 <TextView
                     android:id="@+id/addclient"
-                    android:layout_width="360dp"
-                    android:layout_height="60dp"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
@@ -869,7 +869,7 @@
                     android:gravity="center"
                     android:text="Add Client"
                     android:textColor="@color/white"
-                    android:textSize="34sp"
+                    android:textSize="25sp"
                     android:typeface="monospace" />
 
                 <!--<View-->

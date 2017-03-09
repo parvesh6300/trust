@@ -70,6 +70,7 @@ public class NurseHomeActivity extends Activity {
             }
         });
 
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -108,7 +109,8 @@ public class NurseHomeActivity extends Activity {
 
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
 
         if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
         {

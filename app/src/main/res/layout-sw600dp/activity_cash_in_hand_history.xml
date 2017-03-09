@@ -262,8 +262,7 @@
                 android:scrollbarSize="10dp"
                 android:scrollbarThumbVertical="@drawable/custom_scroll_style"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                />
+                android:paddingEnd="10dp" />
 
         </LinearLayout>
 
@@ -273,7 +272,7 @@
     <RelativeLayout
         android:id="@+id/rel_back"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="10dp"
         android:layout_above="@+id/gif_loader"
         android:layout_marginTop="10dp">
