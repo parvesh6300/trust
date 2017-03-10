@@ -2,8 +2,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:layout_width="600dp"
-    android:layout_height="50dp"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:gravity="center"
     android:weightSum="3">
 
     <TextView
@@ -12,7 +13,7 @@
         android:id="@+id/name"
         android:layout_weight="1"
         android:textColor="@color/textColor"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:gravity="center"
         android:typeface="monospace"
         android:textStyle="bold"
@@ -25,7 +26,7 @@
         android:id="@+id/branch"
         android:layout_weight="1"
         android:textColor="@color/textColor"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:gravity="center"
         android:typeface="monospace"
@@ -38,7 +39,7 @@
         android:id="@+id/contact"
         android:layout_weight="1"
         android:textColor="@color/textColor"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:gravity="center"
         android:typeface="monospace"

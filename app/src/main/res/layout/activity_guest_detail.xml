@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     android:background="@drawable/background_1"
     tools:context="dcube.com.trust.GuestDetailActivity">
 
@@ -13,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guest Details"
-        android:textSize="35sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textAlignment="gravity"
         android:gravity="center_horizontal"
@@ -24,13 +26,13 @@
 
     <RelativeLayout
         android:id="@+id/rel_radio_layout"
-        android:layout_width="700dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_centerVertical="true"
         android:background="@drawable/form_back"
         android:gravity="center"
-        android:padding="20dp">
+        android:padding="10dp">
 
 
         <RadioGroup
@@ -43,17 +45,17 @@
             <RadioButton
                 android:id="@+id/radio_retail"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:buttonTint="@color/textColor"
                 android:text="Retail client"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:typeface="monospace" />
 
             <EditText
                 android:id="@+id/ed_retail_client"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="40dp"
                 android:layout_below="@id/historytext"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="10dp"
@@ -61,7 +63,7 @@
                 android:gravity="top|left"
                 android:padding="5dp"
                 android:textColor="@color/textColor"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:typeface="monospace"
                 android:visibility="invisible"/>
 
@@ -69,19 +71,19 @@
             <RadioButton
                 android:id="@+id/radio_institution"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:buttonTint="@color/textColor"
                 android:text="Institution"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
-                android:layout_marginTop="30dp"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
                 android:typeface="monospace" />
 
 
             <EditText
                 android:id="@+id/ed_institution"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="40dp"
                 android:layout_below="@id/historytext"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="10dp"
@@ -89,7 +91,7 @@
                 android:gravity="top|left"
                 android:padding="5dp"
                 android:textColor="@color/textColor"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:typeface="monospace"
                 android:visibility="invisible"/>
 
@@ -97,19 +99,19 @@
             <RadioButton
                 android:id="@+id/radio_name"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:buttonTint="@color/textColor"
                 android:text="Name"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
-                android:layout_marginTop="30dp"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
                 android:typeface="monospace" />
 
 
             <EditText
                 android:id="@+id/ed_name"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="40dp"
                 android:layout_below="@id/historytext"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="10dp"
@@ -117,7 +119,7 @@
                 android:gravity="top|left"
                 android:padding="5dp"
                 android:textColor="@color/textColor"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:typeface="monospace"
                 android:visibility="invisible"/>
 
@@ -128,10 +130,10 @@
 
     <TextView
         android:id="@+id/buy"
-        android:layout_width="230dp"
-        android:layout_height="60dp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
         android:text="Next"
-        android:textSize="35sp"
+        android:textSize="20sp"
         android:textAlignment="gravity"
         android:textColor="@color/white"
         android:layout_marginTop="40sp"
@@ -146,8 +148,8 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"

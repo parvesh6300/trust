@@ -10,15 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="4dp">
 
         <RelativeLayout
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/dategradient">
 
 
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20"
-                android:textSize="40sp"
+                android:textSize="18sp"
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"
                 android:textStyle="bold"
@@ -47,20 +47,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="OCT "
-                android:textSize="24sp"
+                android:textSize="15sp"
                 android:layout_marginTop="2dp"
                 android:textColor="@color/white"
                 android:typeface="monospace"
                 android:layout_below="@+id/divider"
                 android:textStyle="bold"
-                android:layout_marginLeft="15dp"/>
+                android:layout_marginLeft="5dp"/>
 
             <TextView
                 android:id="@+id/tv_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="'16"
-                android:textSize="24sp"
+                android:textSize="15sp"
                 android:layout_marginTop="2dp"
                 android:layout_below="@+id/divider"
                 android:textStyle="bold"
@@ -82,11 +82,13 @@
 
             <TextView
                 android:id="@+id/tv_detail"
-                android:layout_width="400dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:textSize="18sp"
                 android:text="Money Banked"
                 android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_gravity="center"
                 android:textColor="@color/purple"
                 android:typeface="monospace" />
@@ -109,16 +111,16 @@
 
     <TextView
         android:id="@+id/tv_amount"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="18sp"
         android:textColor="@color/purple"
         android:gravity="center"
         android:typeface="monospace"
         android:textStyle="bold"
         android:text="1000"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="10dp"
         android:layout_alignParentRight="true" />
 
     <!--<View-->

@@ -253,7 +253,7 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.GONE);
+            gif_loader.setVisibility(View.INVISIBLE);
 
             signin.setClickable(true);
 

@@ -6,12 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_1"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     tools:context="dcube.com.trust.SearchClientActivity">
 
     <ImageView
         android:id="@+id/toplogo"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:src="@drawable/logo_white" />
@@ -19,8 +21,8 @@
 
     <RelativeLayout
         android:id="@+id/spin"
-        android:layout_width="640dp"
-        android:layout_height="80dp"
+        android:layout_width="400dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/toplogo"
         android:layout_centerHorizontal="true"
         android:gravity="center"
@@ -28,9 +30,11 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="600dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
             android:layout_centerInParent="true"
             />
 
@@ -39,33 +43,33 @@
 
     <RelativeLayout
         android:id="@+id/search_layout"
-        android:layout_width="640dp"
-        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_below="@id/spin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/searchback">
 
         <EditText
             android:id="@+id/search"
-            android:layout_width="450dp"
+            android:layout_width="380dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
             android:background="@android:color/transparent"
             android:hint="Search Client : Name, Contact"
             android:textColorHint="@color/graytext"
             android:singleLine="true"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:paddingStart="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="30dp"
             android:typeface="monospace" />
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:src="@drawable/searchbutton" />
 
     </RelativeLayout>
@@ -74,23 +78,24 @@
 
 
     <RelativeLayout
-        android:layout_width="600dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/search_layout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_above="@+id/gif_loader"
         android:background="@drawable/form_back">
 
 
         <LinearLayout
             android:id="@+id/header"
-            android:layout_width="600dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
             android:layout_centerHorizontal="true"
             android:background="@color/textColor"
             android:orientation="horizontal"
+            android:gravity="center"
             android:weightSum="3">
 
             <TextView
@@ -101,7 +106,7 @@
                 android:gravity="center"
                 android:text="Name"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -113,7 +118,7 @@
                 android:text="Branch"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -125,7 +130,7 @@
                 android:text="Contact"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -138,15 +143,14 @@
             android:layout_below="@+id/header"
             android:fadeScrollbars="false"
             android:scrollbarSize="10dp"
-            android:scrollbarThumbVertical="@drawable/custom_scroll_style"
-            android:layout_marginTop="10dp" />
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style" />
 
         <TextView
             android:id="@+id/tv_no_client"
-            android:layout_width="600dp"
-            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:text="No Client Found"
-            android:textSize="35sp"
+            android:textSize="20sp"
             android:textColor="@color/textColor"
             android:textStyle="bold"
             android:typeface="monospace"
@@ -160,12 +164,12 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:visibility="invisible"
         />
 

@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     tools:context="dcube.com.trust.NurseHomeActivity"
     android:background="@drawable/background_1">
 
     <ImageView
         android:id="@+id/iv_trust_logo"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
         android:src="@drawable/logo_white"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
@@ -20,11 +22,11 @@
         android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="110dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
         android:text="Hi, User Name"
         android:textColor="@color/white"
-        android:textSize="35sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="monospace"
         android:layout_below="@+id/iv_trust_logo"/>
@@ -32,13 +34,13 @@
 
     <TextView
         android:id="@+id/tv_logout"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="110dp"
+        android:layout_marginStart="20dp"
         android:text="Logout"
         android:textColor="@color/purple"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="monospace"
         android:gravity="center"
@@ -83,15 +85,17 @@
 
     <GridView
         android:id="@+id/grid_view"
-        android:layout_width="600dp"
+        android:layout_width="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_height="fill_parent"
         android:numColumns="3"
         android:columnWidth="200dp"
-        android:horizontalSpacing="40dp"
-        android:verticalSpacing="30dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:layout_marginTop="330dp"
+        android:layout_below="@+id/tv_logout"
         android:stretchMode="columnWidth" />
 
 </RelativeLayout>

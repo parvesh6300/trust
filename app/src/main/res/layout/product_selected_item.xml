@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="500dp"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="4">
 
     <RelativeLayout
-        android:layout_width="133dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
@@ -16,11 +17,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="Fiesta"
             android:textColor="@color/textColor"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:typeface="monospace" />
 
@@ -32,10 +33,10 @@
             android:layout_below="@+id/name"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:text="Condom"
             android:textColor="@color/textColor"
-            android:textSize="30sp"
+            android:textSize="12sp"
             android:typeface="monospace" />
 
     </RelativeLayout>
@@ -49,32 +50,33 @@
         android:gravity="right"
         android:text="1000"
         android:textColor="@color/textColor"
-        android:textSize="30sp"
+        android:textSize="15sp"
+        android:layout_marginStart="5dp"
         android:typeface="monospace" />
 
 
     <TextView
         android:id="@+id/quantity"
-        android:layout_width="43dp"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
         android:text=" x 2"
         android:textColor="@color/textColor"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:typeface="monospace" />
 
     <TextView
         android:id="@+id/price"
-        android:layout_width="133dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
         android:text="1,500"
         android:textColor="@color/textColor"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:typeface="monospace" />
 

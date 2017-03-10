@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     tools:context=".CalendarActivity"
     android:background="@drawable/background_1">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="40dp"
         android:id="@+id/header">
 
         <TextView
@@ -19,7 +21,7 @@
             android:text="Calendar"
             android:textColor="@color/white"
             android:layout_centerInParent="true"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:typeface="monospace"/>
         
     </RelativeLayout>
@@ -27,25 +29,25 @@
     <dcube.com.trust.CalendarCustomView
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="520dp"
+        android:layout_height="300dp"
         android:layout_below="@id/header"/>
 
     <RelativeLayout
         android:id="@+id/rel_apmt_size"
-        android:layout_width="700dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:background="@color/white"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/calendar_view">
 
         <TextView
             android:id="@+id/tv_apmt_label"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
             android:textColor="@color/textColor"
-            android:textSize="35sp"
+            android:textSize="15sp"
             android:gravity="center"
             android:textStyle="bold"
             android:typeface="monospace"
@@ -55,10 +57,10 @@
         <TextView
             android:id="@+id/tv_apmt_size"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
             android:background="@color/white"
             android:textColor="@color/textColor"
-            android:textSize="35sp"
+            android:textSize="15sp"
             android:gravity="center"
             android:textStyle="bold"
             android:typeface="monospace"
@@ -72,7 +74,7 @@
 
 
     <ListView
-        android:layout_width="700dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rel_apmt_size"
         android:layout_above="@+id/rel_continue"
@@ -80,10 +82,8 @@
         android:layout_centerHorizontal="true"
         android:fadeScrollbars="false"
         android:scrollbarSize="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
-
-
 
 
 
@@ -92,18 +92,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/gif_loader"
         android:layout_alignParentBottom="true">
 
         <TextView
             android:id="@+id/tv_continue"
             android:background="@drawable/button_background"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:textColor="@color/white"
             android:text="Continue"
             android:gravity="center"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:typeface="monospace"
             android:layout_centerInParent="true" />
 
@@ -111,12 +112,12 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:elevation="2dp"
         android:visibility="invisible"
         />

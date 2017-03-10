@@ -7,48 +7,48 @@
     <!-- date toolbar -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
         android:weightSum="3">
 
         <!-- prev button -->
         <TextView
             android:id="@+id/calendar_prev_button"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:alpha="0.6"
             android:gravity="center"
             android:text="Month"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:typeface="monospace" />
 
         <!-- date title -->
         <TextView
             android:id="@+id/calendar_month_display"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Month"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:typeface="monospace" />
 
         <!-- next button -->
         <TextView
             android:id="@+id/calendar_next_button"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:alpha="0.6"
             android:gravity="center"
             android:text="Month"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:typeface="monospace" />
 
@@ -57,23 +57,23 @@
     <TextView
         android:id="@+id/year"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:text="year"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:typeface="monospace" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:gravity="center">
 
         <LinearLayout
             android:id="@+id/calendar_header"
-            android:layout_width="700dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:gravity="center_vertical"
@@ -86,7 +86,7 @@
                 android:gravity="center_horizontal"
                 android:text="S"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -97,7 +97,7 @@
                 android:gravity="center_horizontal"
                 android:text="M"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -108,7 +108,7 @@
                 android:gravity="center_horizontal"
                 android:text="T"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -119,7 +119,7 @@
                 android:gravity="center_horizontal"
                 android:text="W"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -130,7 +130,7 @@
                 android:gravity="center_horizontal"
                 android:text="T"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -141,7 +141,7 @@
                 android:gravity="center_horizontal"
                 android:text="F"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -152,7 +152,7 @@
                 android:gravity="center_horizontal"
                 android:text="S"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -162,8 +162,8 @@
 
     <!-- days view -->
     <RelativeLayout
-        android:layout_width="700dp"
-        android:layout_height="700dp"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center">
 
@@ -172,10 +172,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:numColumns="7"
-            android:verticalSpacing="15dp" />
+            android:verticalSpacing="10dp" />
 
     </RelativeLayout>
 
