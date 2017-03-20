@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_1"
     android:orientation="vertical"
-    android:padding="10sp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
     android:gravity="center"
     tools:context=".StockControlActivity">
 
@@ -20,14 +21,14 @@
         android:text="View Stock"
         android:textAlignment="gravity"
         android:textColor="@color/white"
-        android:textSize="35sp"
+        android:textSize="20sp"
         android:typeface="monospace"
         android:textStyle="bold"/>
 
 
     <RelativeLayout
-        android:layout_width="700dp"
-        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:background="@drawable/searchback"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
@@ -36,20 +37,21 @@
         android:layout_below="@id/header">
 
         <EditText
-            android:layout_width="650dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:hint="Search By Brand or Name"
             android:typeface="monospace"
-            android:layout_marginLeft="20dp"
             android:textColorHint="@color/graytext"
-            android:textSize="25sp"
+            android:textSize="15sp"
+            android:layout_marginStart="5dp"
             android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:id="@+id/search"/>
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/searchbutton"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -60,12 +62,12 @@
 
     <RelativeLayout
         android:id="@+id/list_layout"
-        android:layout_width="650dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/search_layout"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/gif_loader"
         android:background="@drawable/form_back">
@@ -74,7 +76,7 @@
         <LinearLayout
             android:id="@+id/header1"
             android:layout_width="650dp"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
             android:background="@color/textColor"
             android:orientation="horizontal"
@@ -87,10 +89,11 @@
                 android:layout_weight="1"
                 android:text="PRODUCT"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
-                android:layout_marginLeft="40dp"/>
+                android:paddingStart="3dp"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -100,7 +103,7 @@
                 android:gravity="center"
                 android:text="QUANTITY"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -112,7 +115,7 @@
                 android:gravity="center"
                 android:text="STATUS"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
@@ -136,10 +139,10 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/loading"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

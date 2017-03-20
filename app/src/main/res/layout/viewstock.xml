@@ -4,68 +4,68 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingLeft="40dp"
-    android:paddingRight="40dp"
-    android:paddingBottom="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:id="@+id/rel_row">
 
 
     <TextView
         android:id="@+id/tv_product"
-        android:layout_width="210dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:textColor="@color/textColor"
-        android:textSize="30sp"
+        android:textSize="18sp"
         android:typeface="monospace"
         android:text="Fiesta"
         android:layout_gravity="center"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tv_category"
-        android:layout_width="210dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:textColor="@color/textColor"
-        android:textSize="25sp"
+        android:textSize="15sp"
         android:typeface="monospace"
         android:text="Condom"
         android:layout_below="@+id/tv_product"
         android:layout_gravity="center"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"/>
+        android:layout_alignParentStart="true" />
 
 
     <TextView
         android:id="@+id/tv_quantity"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/circle"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:gravity="center"
         android:typeface="monospace"
         android:text="0"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_centerInParent="true"
         android:layout_toEndOf="@+id/tv_product"
-        android:layout_marginStart="80dp"
         />
 
     <TextView
         android:id="@+id/tv_status"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="40dp"
         android:textColor="@color/red"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:gravity="center"
         android:typeface="monospace"
         android:textStyle="bold"
+        android:text="Approved"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_centerInParent="true"
         android:layout_alignParentEnd="true"/>
 
 
