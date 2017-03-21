@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     android:background="@drawable/background_1"
     tools:context="dcube.com.trust.AddAppointmentActivity">
 
@@ -12,16 +14,16 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:text="New Appointment"
         android:textColor="@color/white"
-        android:textSize="35sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="monospace" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="600dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -31,147 +33,157 @@
 
 
         <LinearLayout
-            android:layout_width="500dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:weightSum="2">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Name"
                 android:textColor="@color/purple"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
+                android:layout_marginStart="10dp"
                 android:typeface="monospace" />
 
             <EditText
                 android:id="@+id/ed_name"
-                android:layout_width="350dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:editable="false"
                 android:inputType="textNoSuggestions"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
+                android:textSize="15sp"
+                android:layout_marginEnd="10dp"
                 android:typeface="monospace" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="500dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:weightSum="2">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Contact"
                 android:textColor="@color/purple"
-                android:textSize="30sp"
+                android:textSize="15sp"
+                android:layout_marginStart="10dp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
 
             <EditText
                 android:id="@+id/ed_contact"
-                android:layout_width="350dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:editable="false"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
+                android:textSize="15sp"
+                android:layout_marginEnd="10dp"
                 android:typeface="monospace" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="500dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:weightSum="2">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Service"
                 android:textColor="@color/purple"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
+                android:layout_marginStart="10dp"
                 android:typeface="monospace" />
 <!--//com.weiwangcn.betterspinner.library.BetterSpinner-->
             <Spinner
                 android:id="@+id/service"
-                android:layout_width="350dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:textSize="30sp"
+                android:textSize="15sp"
+                android:layout_marginEnd="10dp"
                 android:typeface="monospace" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="500dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:weightSum="2">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Remarks"
                 android:textColor="@color/purple"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
+                android:layout_marginStart="10dp"
                 android:typeface="monospace" />
 
             <EditText
                 android:id="@+id/ed_remarks"
-                android:layout_width="350dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:editable="false"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
+                android:textSize="15sp"
+                android:layout_marginEnd="10dp"
                 android:typeface="monospace" />
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_width="500dp"
-            android:layout_height="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:weightSum="2">
 
             <RelativeLayout
                 android:id="@+id/datepicker"
-                android:layout_width="220dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/textarea">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/cal_icon" />
@@ -186,28 +198,29 @@
                     android:layout_marginRight="20dp"
                     android:text="Date"
                     android:textColor="@color/textColor"
-                    android:textSize="30sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:typeface="monospace" />
 
             </RelativeLayout>
 
             <View
-                android:layout_width="40dp"
+                android:layout_width="20dp"
                 android:layout_height="match_parent" />
 
             <RelativeLayout
                 android:id="@+id/timepicker"
-                android:layout_width="220dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/textarea">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="10dp"
                     android:src="@drawable/clock" />
 
                 <TextView
@@ -216,10 +229,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="40dp"
                     android:text="Time"
                     android:textColor="@color/textColor"
-                    android:textSize="30sp"
+                    android:textSize="15sp"
+                    android:layout_marginEnd="10dp"
                     android:textStyle="bold"
                     android:typeface="monospace" />
 
@@ -229,29 +242,29 @@
 
         <TextView
             android:id="@+id/add"
-            android:layout_width="330dp"
-            android:layout_height="70dp"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button_background"
             android:gravity="center"
             android:text="Add Appointment"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            android:layout_marginBottom="20dp"
+            android:textSize="15sp"
+            android:layout_marginBottom="10dp"
             android:typeface="monospace" />
 
     </LinearLayout>
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/loading"
-        android:visibility="gone" />
+        android:visibility="invisible" />
 
 
 </RelativeLayout>
