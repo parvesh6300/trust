@@ -6,13 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BuyPlanActivity"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     android:background="@drawable/background_1">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Select Plan"
-        android:textSize="35sp"
+        android:textSize="20sp"
         android:textAlignment="gravity"
         android:gravity="center_horizontal"
         android:textColor="@color/white"
@@ -22,8 +24,8 @@
         android:typeface="monospace"/>
 
     <RelativeLayout
-        android:layout_width="700dp"
-        android:layout_height="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:background="@drawable/searchback"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -31,20 +33,22 @@
         android:layout_below="@id/header">
 
         <EditText
-            android:layout_width="700dp"
-            android:layout_height="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:background="@android:color/transparent"
             android:hint="Search By Brand or Name"
             android:typeface="monospace"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:paddingEnd="30dp"
             android:textColorHint="@color/graytext"
-            android:textSize="25sp"
+            android:textSize="15sp"
             android:paddingStart="10dp"
             android:id="@+id/search"/>
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/searchbutton"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -53,7 +57,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="650dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:background="@drawable/form_back"
@@ -65,7 +69,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
             android:orientation="horizontal"
             android:weightSum="2"
             android:background="@color/textColor"
@@ -77,7 +81,7 @@
                 android:text="PLAN"
                 android:textColor="@color/white"
                 android:typeface="monospace"
-                android:textSize="28sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:layout_gravity="center"
@@ -102,7 +106,7 @@
                 android:text="COST"
                 android:textColor="@color/white"
                 android:typeface="monospace"
-                android:textSize="28sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:layout_gravity="center"
@@ -139,12 +143,12 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:visibility="invisible"
         />
 

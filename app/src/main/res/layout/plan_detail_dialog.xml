@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="500dp"
-    android:layout_height="700dp"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
     tools:context="dcube.com.trust.UpdatePlanActivity">
 
     <TextView
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:text="Plan Details"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:background="@color/textColor"
         android:textStyle="bold"
         android:typeface="monospace" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="1150dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/header"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/form_back"
         android:orientation="vertical">
 
@@ -38,12 +38,12 @@
             <TextView
                 android:id="@+id/tv_products"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:text="Products"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -53,12 +53,12 @@
             <TextView
                 android:id="@+id/tv_product_qty"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:text="Quantity"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -66,8 +66,6 @@
                 android:typeface="monospace" />
 
         </LinearLayout>
-
-
 
 
         <ListView
@@ -88,12 +86,12 @@
             <TextView
                 android:id="@+id/tv_service"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:text="Services"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -103,12 +101,12 @@
             <TextView
                 android:id="@+id/tv_service_qty"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:text="Visits"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -116,7 +114,6 @@
                 android:typeface="monospace" />
 
         </LinearLayout>
-
 
 
         <ListView
@@ -129,7 +126,7 @@
         <LinearLayout
             android:id="@+id/lin_bottom"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
             android:orientation="horizontal"
             android:weightSum="2"
             android:gravity="center"
@@ -140,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="Cancel"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:gravity="center"
@@ -153,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="Add to Cart"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:gravity="center"

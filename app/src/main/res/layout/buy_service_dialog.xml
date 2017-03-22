@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="500dp"
-    android:layout_height="400dp"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="300dp"
     android:background="@color/white"
     android:orientation="vertical"
     android:elevation="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
         android:weightSum="2"
         android:background="@color/textColor"
@@ -20,7 +21,7 @@
             android:text="SERVICE"
             android:textColor="@color/white"
             android:typeface="monospace"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -45,7 +46,7 @@
             android:text="COST"
             android:textColor="@color/white"
             android:typeface="monospace"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -55,8 +56,9 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="match_parent"
         android:id="@+id/selected_product_list"
+        android:layout_above="@+id/lin_row"
         android:layout_below="@+id/header1"/>
 
 
@@ -66,14 +68,14 @@
         android:orientation="horizontal"
         android:weightSum="2"
         android:id="@+id/lin_row"
-        android:layout_below="@+id/selected_product_list">
+        android:layout_above="@+id/lin_footer">
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="133dp"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:gravity="center"
             android:typeface="monospace"
             android:text="Total"
@@ -86,7 +88,7 @@
             android:layout_width="133dp"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:gravity="center"
             android:typeface="monospace"
             android:textStyle="bold"
@@ -96,8 +98,9 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lin_footer"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
         android:weightSum="2"
         android:background="@color/textColor"
@@ -109,7 +112,7 @@
             android:text="CANCEL"
             android:textColor="@color/white"
             android:typeface="monospace"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -122,7 +125,7 @@
             android:text="CONFIRM"
             android:textColor="@color/white"
             android:typeface="monospace"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_gravity="center"

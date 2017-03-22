@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     android:background="@drawable/background_1"
     tools:context="dcube.com.trust.UpdatePlanActivity">
 
@@ -14,20 +16,20 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Plans Availed"
         android:textColor="@color/white"
-        android:textSize="35sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="monospace" />
 
     <RelativeLayout
-        android:layout_width="700dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/header"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_above="@+id/gif_loader"
         android:background="@drawable/form_back"
         android:orientation="vertical">
@@ -35,12 +37,12 @@
         <TextView
             android:id="@+id/tv_products"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:text="Products"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:gravity="center"
             android:background="@color/textColor"
@@ -60,12 +62,12 @@
         <TextView
             android:id="@+id/tv_services"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:text="Services"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_centerInParent="true"
@@ -85,13 +87,13 @@
         <TextView
             android:id="@+id/tv_update_plan"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="30dp"
             android:text="UPDATE"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:typeface="monospace"
             android:gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:textColor="@color/white"
             android:layout_alignParentBottom="true"
             android:background="@color/textColor"/>
@@ -101,12 +103,12 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:visibility="invisible"
         />
 

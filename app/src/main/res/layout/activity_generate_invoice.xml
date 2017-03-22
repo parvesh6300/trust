@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     android:background="@drawable/background_1"
     tools:context="dcube.com.trust.GenerateInvoiceActivity">
 
@@ -13,20 +16,20 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Generate Invoice"
         android:textColor="@color/white"
-        android:textSize="35sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="monospace" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
-        android:layout_width="600dp"
-        android:layout_height="1100dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/addclienttext"
         android:layout_centerInParent="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:elevation="4dp" />
 
 </RelativeLayout>

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     android:background="@drawable/background_1"
     tools:context="dcube.com.trust.ViewPlanActivity">
 
@@ -14,7 +16,7 @@
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
         android:text="Plans Availed"
-        android:textSize="35sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="monospace"
         android:layout_marginTop="20dp"
@@ -23,20 +25,20 @@
 
 
     <LinearLayout
-        android:layout_width="650dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/header"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_above="@+id/gif_loader"
         android:orientation="vertical"
         android:background="@drawable/form_back">
 
 
         <LinearLayout
-            android:layout_width="650dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:orientation="horizontal"
             android:weightSum="2"
             android:background="@color/textColor"
@@ -48,7 +50,7 @@
                 android:text="Plan"
                 android:layout_weight="1"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:typeface="monospace" />
@@ -59,7 +61,7 @@
                 android:text="Expiry Date"
                 android:layout_weight="0.5"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:layout_marginStart="20dp"
@@ -71,7 +73,7 @@
 
         <ListView
             android:id="@+id/lv_plan"
-            android:layout_width="630dp"
+            android:layout_width="match_parent"
             android:fadeScrollbars="false"
             android:scrollbarSize="10dp"
             android:scrollbarThumbVertical="@drawable/custom_scroll_style"
@@ -81,9 +83,9 @@
         <TextView
             android:id="@+id/tv_select_plan"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="40dp"
             android:text="Select Plan to Upgrade"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:typeface="monospace"
             android:gravity="center"
@@ -97,12 +99,12 @@
 
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif_loader"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/loading"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:visibility="invisible"
         />
 
