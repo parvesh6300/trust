@@ -151,7 +151,13 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
-                HideKeyboard.hideSoftKeyboard(GuestDetailActivity.this);
+                if (ed_name.getVisibility() == View.VISIBLE  ||
+                        ed_retail_client.getVisibility() == View.VISIBLE ||
+                        ed_name.getVisibility() == View.VISIBLE)
+                {
+                    HideKeyboard.hideSoftKeyboard(GuestDetailActivity.this);
+                }
+
                 return false;
             }
         });

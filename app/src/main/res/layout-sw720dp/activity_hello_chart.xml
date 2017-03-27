@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:text="Total Revenue Collected : "
+                    android:text="Total Sales : "
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="30sp"
@@ -129,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="5,00,000 TZS"
+                    android:text="0 TZS"
                     android:textColor="@color/white"
                     android:textSize="35sp"
                     android:typeface="monospace" />

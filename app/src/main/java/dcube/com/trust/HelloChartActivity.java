@@ -504,6 +504,8 @@ public class HelloChartActivity extends Activity {
                 tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
             }
             else {
+
+                tv_total_amount.setText("0 TZS");
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
