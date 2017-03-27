@@ -33,7 +33,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class HelloChartActivity extends Activity {
+public class RevenueActivity extends Activity {
 
 
     Context context = this;

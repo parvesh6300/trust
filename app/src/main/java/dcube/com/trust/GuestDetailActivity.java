@@ -95,8 +95,6 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
                     }
                 }
 
-
-
 //                startActivity(new Intent(GuestDetailActivity.this,GuestReceiptActivity.class));
 //                finish();
 
@@ -151,9 +149,7 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
-                if (ed_name.getVisibility() == View.VISIBLE  ||
-                        ed_retail_client.getVisibility() == View.VISIBLE ||
-                        ed_name.getVisibility() == View.VISIBLE)
+                if (edittextIsVisible())
                 {
                     HideKeyboard.hideSoftKeyboard(GuestDetailActivity.this);
                 }
@@ -310,6 +306,20 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
     public void onBackPressed() {
        // super.onBackPressed();
     }
+
+
+    public boolean edittextIsVisible()
+    {
+        if (ed_name.getVisibility() == View.VISIBLE  || ed_retail_client.getVisibility() == View.VISIBLE ||
+                ed_institution.getVisibility() == View.VISIBLE)
+        {
+            return true;
+        }
+
+
+        return false;
+    }
+
 
 
 

@@ -102,7 +102,7 @@ public class FinanceHomeActivity extends Activity {
                         break;
 
                     case 3:
-                        startActivity(new Intent(FinanceHomeActivity.this,DepositMoneyActivity.class)); // HelloChartActivity
+                        startActivity(new Intent(FinanceHomeActivity.this,DepositMoneyActivity.class)); // RevenueActivity
                         break;
 
                     case 4:
@@ -114,7 +114,7 @@ public class FinanceHomeActivity extends Activity {
                         break;
 
                     case 6:
-                        startActivity(new Intent(FinanceHomeActivity.this,HelloChartActivity.class));//MoneyBankedActivity
+                        startActivity(new Intent(FinanceHomeActivity.this,RevenueActivity.class));//MoneyBankedActivity
                         break;
 
                     case 7:
