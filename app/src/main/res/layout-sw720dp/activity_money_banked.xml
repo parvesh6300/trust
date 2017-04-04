@@ -71,6 +71,40 @@
         </RelativeLayout>
 
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp">
+
+
+            <TextView
+                android:id="@+id/tv_money_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Money To be banked : "
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+
+            <TextView
+                android:id="@+id/tv_money_bank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="20dp"
+                android:text="0 TZS"
+                android:layout_toRightOf="@+id/tv_money_label"
+                android:textColor="@color/purple"
+                android:textSize="30sp"
+                android:typeface="monospace" />
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="wrap_content"

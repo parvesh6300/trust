@@ -1962,6 +1962,49 @@ public class WebServices {
     }
 
 
+
+    public static String GetMoneyToBankService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
+    {
+        String response;
+
+        String message = "Some Error occured";
+
+        Global global = (Global) context.getApplicationContext();
+
+        try {
+
+            response = callApiWithPerameter(GlobalConstants.TRUST_URL,mParemeterKeys,mParemeterValues);
+
+            Log.i("Money", "To bank Balance : " + response);
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            String status = jsonObject.optString(GlobalConstants.STATUS);
+            message = jsonObject.optString(GlobalConstants.MESSAGE);
+
+            if (status.equalsIgnoreCase("1"))
+            {
+                JSONArray jsonArray = jsonObject.getJSONArray("info");
+
+                for (int i =0 ; i<jsonArray.length() ; i++)
+                {
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                    global.setStr_money_to_bank(jsonObject1.optString(GlobalConstants.BRANCH_BALANCE));
+
+                }
+
+                return "true";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+
     public static String GetPettyBalanceService(Context context, ArrayList<String> mParemeterKeys, ArrayList<String> mParemeterValues)
     {
         String response;

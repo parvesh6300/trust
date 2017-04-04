@@ -393,6 +393,12 @@ public class RevenueActivity extends Activity {
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("get_revenue");
 
+                for (int i=0;i<al_str_key.size(); i++)
+                {
+                    Log.i("Key",""+al_str_key.get(i));
+                    Log.i("Value",""+al_str_value.get(i));
+                }
+
                 message = ws.RevenueService(context, al_str_key, al_str_value);
 
 

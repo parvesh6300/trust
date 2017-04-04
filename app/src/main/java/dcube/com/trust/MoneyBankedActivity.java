@@ -33,7 +33,7 @@ public class MoneyBankedActivity extends Activity {
 
     MoneyBankedAdapter moneyBankedAdapter;
 
-    TextView tv_total_amount,tv_deposit;
+    TextView tv_total_amount,tv_deposit,tv_money_bank;
 
     EditText ed_deposit_amount;
     GifTextView gif_loader;
@@ -71,9 +71,12 @@ public class MoneyBankedActivity extends Activity {
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         lv_money_banked=(ListView)findViewById(R.id.lv_money_banked);
+
         ed_deposit_amount=(EditText)findViewById(R.id.ed_deposit_amount);
+
         tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
         tv_deposit=(TextView)findViewById(R.id.tv_deposit);
+        tv_money_bank = (TextView) findViewById(R.id.tv_money_bank);
 
 
         tv_deposit.setOnClickListener(new View.OnClickListener() {
@@ -92,22 +95,22 @@ public class MoneyBankedActivity extends Activity {
                 {
                     str_deposit_amount = ed_deposit_amount.getText().toString();
 
-                    float account_total = Float.parseFloat(global.getStr_branch_balance());
+                    float account_total = Float.parseFloat(global.getStr_money_to_bank());
                     float deposit_amount = Float.parseFloat(str_deposit_amount);
 
 
-                    cdd = new CustomDialogClass(MoneyBankedActivity.this);
-                    cdd.show();
+//                    cdd = new CustomDialogClass(MoneyBankedActivity.this);
+//                    cdd.show();
 
-//                    if (account_total > deposit_amount)
-//                    {
-//                        cdd = new CustomDialogClass(MoneyBankedActivity.this);
-//                        cdd.show();
-//                    }
-//                    else
-//                    {
-//                        insufficientDialog();
-//                    }
+                    if (account_total > deposit_amount)
+                    {
+                        cdd = new CustomDialogClass(MoneyBankedActivity.this);
+                        cdd.show();
+                    }
+                    else
+                    {
+                        insufficientDialog();
+                    }
 
                 }
             }
@@ -130,7 +133,9 @@ public class MoneyBankedActivity extends Activity {
 
         if (cn.isNetConnected())
         {
-            new GetMoneyBankBalanceAsyncTask().execute();
+            new GetBranchBalanceAsyncTask().execute();
+
+            new GetMoneyToBankAsyncTask().execute();
 
             new MoneyBankHistoryAsyncTask().execute();
         }
@@ -174,15 +179,15 @@ public class MoneyBankedActivity extends Activity {
             tv_account_total = (TextView) findViewById(R.id.tv_account_total);
             tv_deposit_money = (TextView) findViewById(R.id.tv_deposit_money);
 
-            float account_total = Float.parseFloat(global.getStr_branch_balance());
+            float account_total = Float.parseFloat(global.getStr_money_to_bank());
 
-            tv_account_total.setText("Account Total : "+global.getStr_branch_balance()+" TZS");
+            tv_account_total.setText("Account Total : "+global.getStr_money_to_bank()+" TZS");
 
             tv_deposit_money.setText("Money to Bank : "+str_deposit_amount+" TZS");
 
             float deposit_amount = Float.parseFloat(str_deposit_amount);
 
-            float balance = account_total + deposit_amount;
+            float balance = account_total - deposit_amount;
 
             tv_balance.setText("Projected Balance : "+String.valueOf(balance)+" TZS");
 
@@ -273,10 +278,13 @@ public class MoneyBankedActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
+                ed_deposit_amount.setText("");
+
                 showDoneDialog();
 
             }
-            else {
+            else
+            {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
@@ -314,7 +322,7 @@ public class MoneyBankedActivity extends Activity {
                 al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("money_banked");
+                al_str_value.add("money_banked_history");
 
                 for (int i =0 ; i < al_str_key.size() ; i++)
                 {
@@ -354,7 +362,71 @@ public class MoneyBankedActivity extends Activity {
      * Hit the service and get the branch balance
      */
 
-    public class GetMoneyBankBalanceAsyncTask extends AsyncTask<String, String, String> {
+    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("get_branch_balance");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.INVISIBLE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+
+
+    /**
+     * Hit the service and get the money to be bank balance
+     */
+
+    public class GetMoneyToBankAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
@@ -386,7 +458,7 @@ public class MoneyBankedActivity extends Activity {
                     Log.i("Value",""+ al_str_value.get(i));
                 }
 
-                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+                message = ws.GetMoneyToBankService(context, al_str_key, al_str_value);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -402,7 +474,7 @@ public class MoneyBankedActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
+                tv_money_bank.setText(global.getStr_money_to_bank()+" TZS");
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
@@ -444,7 +516,9 @@ public class MoneyBankedActivity extends Activity {
                 doneDialog.cancel();
                // finish();
 
-                new GetMoneyBankBalanceAsyncTask().execute();
+                new GetMoneyToBankAsyncTask().execute();
+
+                new GetBranchBalanceAsyncTask().execute();
 
                 new MoneyBankHistoryAsyncTask().execute();
 
@@ -470,7 +544,7 @@ public class MoneyBankedActivity extends Activity {
         TextView tv_account_total = (TextView) doneDialog.findViewById(R.id.tv_account_total);
         TextView tv_wd_amount = (TextView) doneDialog.findViewById(R.id.tv_wd_amount);
 
-        tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" TZS");
+        tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_money_to_bank()+" TZS");
         tv_wd_amount.setText("MONEY TO BANK : "+str_deposit_amount+" TZS");
 
         tv_ok.setOnClickListener(new View.OnClickListener() {
@@ -512,7 +586,9 @@ public class MoneyBankedActivity extends Activity {
 
     public void updateBalance(Context context)
     {
-        new GetMoneyBankBalanceAsyncTask().execute();
+        new GetBranchBalanceAsyncTask().execute();
+
+        new GetMoneyToBankAsyncTask().execute();
     }
 
 

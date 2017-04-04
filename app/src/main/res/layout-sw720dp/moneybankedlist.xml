@@ -80,19 +80,20 @@
             <!---->
             <!--android:layout_marginRight="10dp">-->
 
-            <TextView
-                android:id="@+id/tv_detail"
-                android:layout_width="400dp"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:text="Money Banked"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textColor="@color/purple"
-                android:typeface="monospace" />
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:text="Money Banked"
+            android:textColor="@color/purple"
+            android:textSize="30sp"
+            android:typeface="monospace" />
 
 
-            <!--<TextView-->
+        <!--<TextView-->
                 <!--android:id="@+id/tv_payment_detail"-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
@@ -109,7 +110,7 @@
 
     <TextView
         android:id="@+id/tv_amount"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:textColor="@color/purple"
@@ -118,7 +119,7 @@
         android:textStyle="bold"
         android:text="1000"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="50dp"
         android:layout_alignParentRight="true" />
 
     <!--<View-->

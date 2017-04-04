@@ -730,7 +730,7 @@ public class Global extends Application {
     // ******************************* Branch Balance Getter and Setter  *************************************************
 
 
-    public String str_branch_balance;
+    public String str_branch_balance="0";
 
     public String getStr_branch_balance() {
         return str_branch_balance;
@@ -739,6 +739,22 @@ public class Global extends Application {
     public void setStr_branch_balance(String str_branch_balance) {
         this.str_branch_balance = str_branch_balance;
     }
+
+
+    // ******************************* Money to bank Balance Getter and Setter  *************************************************
+
+
+    public String getStr_money_to_bank() {
+        return str_money_to_bank;
+    }
+
+    public void setStr_money_to_bank(String str_money_to_bank) {
+        this.str_money_to_bank = str_money_to_bank;
+    }
+
+    public String str_money_to_bank="0";
+
+
 
 
     // ******************************* BANK Branch Balance Getter and Setter  *************************************************
