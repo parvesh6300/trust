@@ -158,6 +158,7 @@ public class PaymentDetailFragment extends Fragment {
                                 f_amount_paying = f_payable_amount;
                                 str_amount_left = "0";
                             }
+
                             else
                             {
                                 f_amount_paying = Float.parseFloat(ed_partial_amount.getText().toString());
