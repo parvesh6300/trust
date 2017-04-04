@@ -472,6 +472,9 @@ public class GuestProductActivity extends Activity {
                 al_str_key.add(GlobalConstants.PAYMENT_AMOUNT);
                 al_str_value.add(str_amount_to_pay);
 
+                al_str_key.add(GlobalConstants.PAYMENT_AMOUNT_PAID);
+                al_str_value.add(str_amount_to_pay);
+
                 al_str_key.add(GlobalConstants.BRANCH);
                 al_str_value.add(str_branch);
 

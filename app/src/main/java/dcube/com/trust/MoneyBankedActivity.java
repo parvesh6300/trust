@@ -130,7 +130,7 @@ public class MoneyBankedActivity extends Activity {
 
         if (cn.isNetConnected())
         {
-            new GetBranchBalanceAsyncTask().execute();
+            new GetMoneyBankBalanceAsyncTask().execute();
 
             new MoneyBankHistoryAsyncTask().execute();
         }
@@ -245,6 +245,9 @@ public class MoneyBankedActivity extends Activity {
                 al_str_key.add(GlobalConstants.MONEY_BANKED_AMOUNT);
                 al_str_value.add(str_deposit_amount);
 
+                al_str_key.add(GlobalConstants.MONEY_BANKED_REASON);
+                al_str_value.add("Money Banked");
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("bank_money");
 
@@ -351,7 +354,7 @@ public class MoneyBankedActivity extends Activity {
      * Hit the service and get the branch balance
      */
 
-    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
+    public class GetMoneyBankBalanceAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";
@@ -375,7 +378,7 @@ public class MoneyBankedActivity extends Activity {
                 al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
                 al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_branch_balance");
+                al_str_value.add("get_money_to_be_banked");
 
                 for (int i =0 ; i < al_str_key.size() ; i++)
                 {
@@ -439,7 +442,11 @@ public class MoneyBankedActivity extends Activity {
 
                 cdd.dismiss();
                 doneDialog.cancel();
-                finish();
+               // finish();
+
+                new GetMoneyBankBalanceAsyncTask().execute();
+
+                new MoneyBankHistoryAsyncTask().execute();
 
             }
         });
@@ -505,7 +512,7 @@ public class MoneyBankedActivity extends Activity {
 
     public void updateBalance(Context context)
     {
-        new GetBranchBalanceAsyncTask().execute();
+        new GetMoneyBankBalanceAsyncTask().execute();
     }
 
 

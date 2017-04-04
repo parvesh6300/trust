@@ -434,7 +434,7 @@ public class PaymentDetailFragment extends Fragment {
      * Hit the payment service
      */
 
-    public class PaymentAsyncTask extends AsyncTask<String, String, String> {
+    private class PaymentAsyncTask extends AsyncTask<String, String, String> {
 
         String resPonse = "";
         String message = "";
@@ -526,7 +526,7 @@ public class PaymentDetailFragment extends Fragment {
      * Hit the service and check out the items in cart
      */
 
-    public class CheckOutAsyncTask extends AsyncTask<String, String, String> {
+    private class CheckOutAsyncTask extends AsyncTask<String, String, String> {
 
         String message = "";
         String payment_id;
@@ -589,9 +589,12 @@ public class PaymentDetailFragment extends Fragment {
 
             generate.setClickable(true);
 
-            if (message.equalsIgnoreCase("true")) {
+            if (message.equalsIgnoreCase("true"))
+            {
                 viewPager.setCurrentItem(nextFragment);
-            } else {
+            }
+            else
+            {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 

@@ -439,7 +439,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
         float total_balance = Float.parseFloat(total_bal);  //global.getStr_cash_in_hand_balance()
         float wd_amount = Float.parseFloat(str_amount);
 
-        if (total_balance > wd_amount)
+        if (total_balance >= wd_amount)
         {
             cd = new CustomDialogClass(this,total_bal,is_branch_bal);
             cd.show();

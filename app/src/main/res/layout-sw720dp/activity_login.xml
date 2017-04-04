@@ -45,7 +45,7 @@
                 android:layout_width="350dp"
                 android:layout_height="match_parent"
                 android:hint="Username"
-                android:text="rohit@gmail.com"
+                android:text="abc"
                 android:typeface="monospace"
                 android:textSize="30sp"
                 android:textColor="@color/textColor"

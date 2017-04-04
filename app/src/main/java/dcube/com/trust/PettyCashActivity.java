@@ -148,7 +148,7 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
                     float account_total = Float.parseFloat(global.getStr_petty_balance());
                     float wd_amount = Float.parseFloat(str_deposit_amount);
 
-                    if (account_total > wd_amount)
+                    if (account_total >= wd_amount)
                     {
                         cdd = new CustomDialogClass(PettyCashActivity.this);
                         cdd.show();

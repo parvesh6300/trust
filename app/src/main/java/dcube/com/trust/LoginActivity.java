@@ -104,21 +104,12 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
         forgot.setPaintFlags(forgot.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
 
-//        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//
-//                HideKeyboard.hideSoftKeyboard(LoginActivity.this);
-//                return false;
-//            }
-//        });
-
 
         nurse.setOnClickListener(this);
         finance.setOnClickListener(this);
         signin.setOnClickListener(this);
         rel_parent_layout.setOnClickListener(this);
-        //rel_parent_layout.setOnTouchListener(this);
+
     }
 
     @Override
@@ -261,14 +252,16 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
             {
                 setSharedPreferences();
 
-                if (role.equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)) )  //role_id == 2
+                Log.e("Role","WS "+global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE));
+                Log.e("Role","Chose "+role);
+
+                if (role.equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)) )  //role = nurse only
                 {
                     Intent i = new Intent(LoginActivity.this, NurseHomeActivity.class);
                     startActivity(i);
                     finish();
                 }
-
-                else if (role.equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role_id == 3
+                else if (role.equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role = finance only
                 {
                     Intent i = new Intent(LoginActivity.this, FinanceHomeActivity.class);
                     startActivity(i);

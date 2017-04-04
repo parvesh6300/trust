@@ -1,12 +1,14 @@
 package dcube.com.trust;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,8 @@ public class ViewPendingPaymentActivity extends Activity {
     String str_amount_to_pay;
     String str_payment_mode = "cash";
     String str_branch;
+
+    CustomDialogClass cdd;
 
     CheckNetConnection cn;
 
@@ -84,7 +88,9 @@ public class ViewPendingPaymentActivity extends Activity {
                     {
                         if (cn.isNetConnected())
                         {
-                            new ClearPendingPaymentAsyncTask().execute();
+                            cdd = new CustomDialogClass(ViewPendingPaymentActivity.this);
+                            cdd.show();
+                         //   new ClearPendingPaymentAsyncTask().execute();
                         }
                         else
                         {
@@ -203,80 +209,6 @@ public class ViewPendingPaymentActivity extends Activity {
     }
 
 
-    public class PaymentAsyncTask extends AsyncTask<String, String, String> {
-
-        String resPonse = "";
-        String message = "";
-
-        @Override
-        protected void onPreExecute() {
-
-            gif_loader.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
-
-                al_str_key.add(GlobalConstants.PAYMENT_CLIENT_ID);
-                al_str_value.add(str_client_id);
-
-                al_str_key.add(GlobalConstants.PAYMENT_USER_ID);
-                al_str_value.add(str_user_id);
-
-                al_str_key.add(GlobalConstants.PAYMENT_MODE);
-                al_str_value.add("");
-
-                al_str_key.add(GlobalConstants.PAYMENT_TYPE);
-                al_str_value.add("");
-
-                al_str_key.add(GlobalConstants.PAYMENT_AMOUNT);
-                al_str_value.add(str_amount_to_pay);
-
-                al_str_key.add(GlobalConstants.BRANCH);
-                al_str_value.add(str_branch);
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("payment");
-
-                for (int i=0 ; i< al_str_key.size() ; i++)
-                {
-                    Log.i("Key",""+al_str_key.get(i));
-                    Log.i("Value",""+al_str_value.get(i));
-                }
-
-                message = ws.PaymentService(context, al_str_key, al_str_value);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-
-            if (message.equalsIgnoreCase("true"))
-            {
-                Log.i("Message",message);
-                new ClearPendingPaymentAsyncTask().execute();
-            }
-            else {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-    }
-
 
     /**
      * Hit the service and clear pending payment
@@ -351,6 +283,60 @@ public class ViewPendingPaymentActivity extends Activity {
 
     }
 
+
+    /**
+     * Custom Confirmation Dialog
+     */
+
+    public class CustomDialogClass extends Dialog {
+
+        public Activity c;
+
+        public TextView cancel;
+        public TextView confirm,tv_message;
+
+        public CustomDialogClass(Activity a) {
+            super(a);
+            // TODO Auto-generated constructor stub
+            this.c = a;
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+            setContentView(R.layout.confirm_clear_pend_pay_dialog);
+
+            confirm = (TextView) findViewById(R.id.tv_yes);
+            cancel = (TextView) findViewById(R.id.tv_no);
+            tv_message = (TextView) findViewById(R.id.tv_message);
+
+
+            tv_message.setText("Your Pending Amount is: "+str_amount_to_pay+" TZS");
+
+
+            confirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    new ClearPendingPaymentAsyncTask().execute();
+
+                    dismiss();
+                  //  context.startActivity(new Intent(ViewPendingPaymentActivity.this,GenerateInvoiceActivity.class));
+                }
+            });
+
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    dismiss();
+                }
+            });
+        }
+    }
 
 
 

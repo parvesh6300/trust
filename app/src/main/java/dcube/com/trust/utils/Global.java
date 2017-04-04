@@ -777,7 +777,7 @@ public class Global extends Application {
         this.str_petty_balance = str_petty_balance;
     }
 
-    public String str_petty_balance;
+    public String str_petty_balance ="0";
 
     public ArrayList<HashMap<String, String>> getAl_petty_details() {
         return al_petty_details;

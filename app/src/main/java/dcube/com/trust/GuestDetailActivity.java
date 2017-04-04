@@ -40,7 +40,7 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
 
     GifTextView gif_loader;
 
-    String str_client_id = "guest",str_user_id,str_branch;
+    String str_client_id,str_user_id,str_branch;
 
     String str_buyer_info="",str_buyer_remark="";
 
@@ -78,6 +78,13 @@ public class GuestDetailActivity extends Activity implements TextWatcher {
 
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_NAME);
         str_user_id = global.getAl_login_list().get(0).get(GlobalConstants.USER_ID);
+
+        str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_NAME);
+
+        String two_letters = str_branch.substring(0,2).toUpperCase();
+
+        str_client_id = two_letters+"_GUEST";
+
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
