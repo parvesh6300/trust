@@ -150,6 +150,7 @@ public class PaymentDetailFragment extends Fragment {
                         {
                             str_discount = ed_discount.getText().toString();
                             str_discount_rsn = ed_discount_rsn.getText().toString();
+
                             f_discount = f_total_amount - f_payable_amount;
 
                             if (radio_full.isChecked())
