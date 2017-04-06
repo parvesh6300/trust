@@ -419,7 +419,7 @@ public class OperatingExpensesActivity extends Activity {
         TextView tv_account_total = (TextView) doneDialog.findViewById(R.id.tv_account_total);
         TextView tv_wd_amount = (TextView) doneDialog.findViewById(R.id.tv_wd_amount);
 
-        tv_account_total.setText("ACCOUNT TOTAL : "+global.getStr_branch_balance()+" TZS");
+        tv_account_total.setText("EXPENSE BALANCE : "+global.getStr_exp_bal()+" TZS");
         tv_wd_amount.setText("WITHDRAW : "+str_wd_amount+" TZS");
 
         tv_ok.setOnClickListener(new View.OnClickListener() {

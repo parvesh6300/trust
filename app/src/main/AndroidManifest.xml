@@ -79,10 +79,7 @@
             android:name=".ProductSoldHistory"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".TotalRevenue"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".OperatingExpensesActivity"
             android:screenOrientation="portrait"
@@ -145,10 +142,7 @@
             android:name=".GuestReceiptActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity
-            android:name=".GraphActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
+
         <activity
             android:name=".RevenueActivity"
             android:screenOrientation="portrait"

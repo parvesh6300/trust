@@ -113,11 +113,8 @@ public class AddPlanAppointmentActivity extends FragmentActivity implements Time
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, al_service_name);
 //        service.setAdapter(adapter);
 
-
         Calendar now = Calendar.getInstance();
         int_today = now.get(Calendar.DATE);
-
-
 
 //        service.setOnItemClickListener( new AdapterView.OnItemClickListener() {
 //            @Override

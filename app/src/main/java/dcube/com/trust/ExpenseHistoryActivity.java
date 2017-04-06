@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -29,7 +28,6 @@ import java.util.Date;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
-import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.ExpenseAdapter;
 import dcube.com.trust.utils.Global;
@@ -156,14 +154,14 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
         tv_submit.setOnClickListener(this);
 
 
-        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                HideKeyboard.hideSoftKeyboard(ExpenseHistoryActivity.this);
-                return false;
-            }
-        });
+//        rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//
+//                HideKeyboard.hideSoftKeyboard(ExpenseHistoryActivity.this);
+//                return false;
+//            }
+//        });
 
 
     }
