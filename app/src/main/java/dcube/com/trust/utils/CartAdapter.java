@@ -3,7 +3,10 @@ package dcube.com.trust.utils;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -267,6 +270,77 @@ public class CartAdapter extends BaseAdapter {
 
             }
         });
+
+
+        tv_quantity1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                try {
+                    quantity =  Integer.parseInt(s.toString());
+
+                    int max_stock = Integer.parseInt(global.getAl_cart_details().get(position).get(GlobalConstants.GET_CART_MAX_STOCK));
+
+                    if (quantity > max_stock)
+                    {
+                        String qt = s.toString();
+
+                        String[] q = new String[qt.length()];
+
+                        q[0] =  qt.substring(0,qt.length()-1);
+
+                        tv_quantity1.setText(q[0]);
+
+                    }
+                }
+                catch (Exception e)
+                {
+
+                }
+
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                try {
+                    quantity =  Integer.parseInt(s.toString());
+
+                    int max_stock = Integer.parseInt(global.getAl_cart_details().get(position).get(GlobalConstants.GET_CART_MAX_STOCK));
+
+                    if (quantity > 0)
+                    {
+                        if (max_stock > quantity)
+                        {
+                            quantity = Integer.parseInt(tv_quantity1.getText().toString());
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Quantity should be greater than 0", Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                }
+                catch (Exception e)
+                {
+                    Log.e("Exception","in cart "+e.getMessage());
+                }
+
+
+
+            }
+        });
+
+
 
 
     }

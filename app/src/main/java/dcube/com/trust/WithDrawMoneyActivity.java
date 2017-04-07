@@ -260,7 +260,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
      */
 
     public class AssignCashInHandAsyncTask extends AsyncTask<String, String, String>
-    {
+     {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";

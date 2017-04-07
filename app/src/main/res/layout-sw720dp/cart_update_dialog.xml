@@ -52,7 +52,6 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:maxLength="2"
             android:inputType="number"
             android:layout_centerInParent="true"/>
 
