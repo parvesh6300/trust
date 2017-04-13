@@ -6,10 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +40,7 @@ public class ViewPendingPaymentActivity extends Activity {
     WebServices ws;
     String str_client_id,str_user_id;
     String str_amount_to_pay;
-    String str_payment_mode = "cash";
+    String str_payment_mode="";
     String str_branch;
 
     CustomDialogClass cdd;
@@ -226,6 +229,8 @@ public class ViewPendingPaymentActivity extends Activity {
             gif_loader.setVisibility(View.VISIBLE);
 
             order_id = global.getAl_order_id().get(count);
+
+            global.setPayment_mode(str_payment_mode);
         }
 
         @Override
@@ -241,11 +246,11 @@ public class ViewPendingPaymentActivity extends Activity {
                 al_str_key.add(GlobalConstants.USER_BRANCH_ID);
                 al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
-//                al_str_key.add(GlobalConstants.PAYMENT_ID);
-//                al_str_value.add(String.valueOf(global.getPayment_id()));
-//
-//                al_str_key.add(GlobalConstants.PEND_ORDER_ID);
-//                al_str_value.add(order_id);
+                al_str_key.add(GlobalConstants.PAYMENT_MODE);
+                al_str_value.add(str_payment_mode);
+
+                al_str_key.add(GlobalConstants.PEND_AMOUNT);
+                al_str_value.add(str_amount_to_pay);
 //
 //                al_str_key.add(GlobalConstants.BRANCH);
 //                al_str_value.add(str_branch);
@@ -292,6 +297,9 @@ public class ViewPendingPaymentActivity extends Activity {
 
         public Activity c;
 
+        RadioGroup rg_payment_mode;
+        RadioButton radio_cash,radio_mpesa;
+
         public TextView cancel;
         public TextView confirm,tv_message;
 
@@ -307,23 +315,53 @@ public class ViewPendingPaymentActivity extends Activity {
 
             requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-            setContentView(R.layout.confirm_clear_pend_pay_dialog);
+            setContentView(R.layout.choose_payment_mode_dialog);  //confirm_clear_pend_pay_dialog
 
             confirm = (TextView) findViewById(R.id.tv_yes);
             cancel = (TextView) findViewById(R.id.tv_no);
             tv_message = (TextView) findViewById(R.id.tv_message);
 
+            rg_payment_mode = (RadioGroup) findViewById(R.id.rg_payment_mode);
+
+            radio_cash = (RadioButton) findViewById(R.id.radio_cash);
+            radio_mpesa = (RadioButton) findViewById(R.id.radio_mpesa);
 
             tv_message.setText("Your Pending Amount is: "+str_amount_to_pay+" TZS");
+
+
+            rg_payment_mode.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+
+                    if (checkedId == radio_cash.getId())
+                    {
+                        str_payment_mode = "cash";
+                    }
+                    else if (checkedId == radio_mpesa.getId())
+                    {
+                        str_payment_mode = "mpesa";
+                    }
+
+
+                }
+            });
+
 
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    new ClearPendingPaymentAsyncTask().execute();
+                    if (str_payment_mode.equalsIgnoreCase(""))
+                    {
+                        Toast.makeText(c, "Choose Payment Mode", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        dismiss();
+                        new ClearPendingPaymentAsyncTask().execute();
+                    }
 
-                    dismiss();
                   //  context.startActivity(new Intent(ViewPendingPaymentActivity.this,GenerateInvoiceActivity.class));
                 }
             });
