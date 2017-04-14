@@ -140,7 +140,7 @@ public class PaymentDetailFragment extends Fragment {
                     float f_amount_paying = 0f;
                     float f_amount_left = 0f;
 
-                    if (f_total_amount != f_payable_amount)
+                    if (f_total_amount != f_payable_amount)    // Means Discount is given
                     {
                         if (ed_discount_rsn.getText().toString().matches(""))
                         {
@@ -165,7 +165,6 @@ public class PaymentDetailFragment extends Fragment {
                                 str_amount_left = String.valueOf(f_amount_left);
                             }
 
-
                             str_amount_paid = String.valueOf(f_amount_paying);
 
                             global.setPayment_amount(str_response_amount);
@@ -173,18 +172,27 @@ public class PaymentDetailFragment extends Fragment {
                             global.setAmount_to_pay(String.valueOf(f_amount_paying));
                             global.setPayment_mode(str_payment_mode);
 
-                            if (cn.isNetConnected())
-                            {
-                                new PaymentAsyncTask().execute();
+                           if (!radio_full.isChecked())
+                           {
+                               if (f_amount_paying > f_payable_amount)
+                               {
+                                   Toast.makeText(getActivity(), "Fill Correct Amount", Toast.LENGTH_SHORT).show();
+                               }
+                               else
+                               {
+                                  makePayment();
+                               }
+                           }
+                           else
+                           {
+                               makePayment();
+                           }
 
-                            } else
-                            {
-                                Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                            }
+
                         }
 
                     }
-                    else
+                    else            // Discount is not given
                     {
                         if (radio_full.isChecked())
                         {
@@ -206,13 +214,20 @@ public class PaymentDetailFragment extends Fragment {
                         global.setAmount_to_pay(String.valueOf(f_amount_paying));
                         global.setPayment_mode(str_payment_mode);
 
-                        if (cn.isNetConnected())
+                        if (!radio_full.isChecked())
                         {
-                            new PaymentAsyncTask().execute();
+                            if (f_amount_paying > f_payable_amount)
+                            {
+                                Toast.makeText(getActivity(), "Fill Correct Amount", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                makePayment();
+                            }
                         }
                         else
                         {
-                            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                            makePayment();
                         }
                     }
 
@@ -286,7 +301,8 @@ public class PaymentDetailFragment extends Fragment {
 //        }
 
 
-        for (int i = 0; i < global.getAl_cart_details().size(); i++) {
+        for (int i = 0; i < global.getAl_cart_details().size(); i++)
+        {
             String str_item_type = global.getAl_cart_details().get(i).get(GlobalConstants.CART_ITEM_TYPE);
 
             if (str_item_type.equalsIgnoreCase("product"))
@@ -343,7 +359,9 @@ public class PaymentDetailFragment extends Fragment {
                     ed_payable_amount.setText(String.valueOf(f_amount_to_pay));
 
 
-                } else {
+                }
+                else
+                {
                     rel_rsn_layout.setVisibility(View.GONE);
                     ed_payable_amount.setText(String.valueOf(ed_amount.getText().toString()));
                 }
@@ -368,6 +386,22 @@ public class PaymentDetailFragment extends Fragment {
 
         return v;
     }
+
+
+    public void makePayment()
+    {
+        if (cn.isNetConnected())
+        {
+            new PaymentAsyncTask().execute();
+
+        } else
+        {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
 
     /**
      * Check whether required fields are filled or not

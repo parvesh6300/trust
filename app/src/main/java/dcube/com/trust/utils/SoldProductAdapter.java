@@ -98,7 +98,7 @@ public class SoldProductAdapter extends BaseAdapter {
 
         holder.tv_product_name.setText(al_product_name.get(position));
         holder.tv_quantity.setText(al_quantity.get(position));
-        holder.tv_product_category.setText(al_category.get(position));
+//        holder.tv_product_category.setText(al_category.get(position));
 
         return convertview;
     }

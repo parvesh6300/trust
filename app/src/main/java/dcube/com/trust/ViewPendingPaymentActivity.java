@@ -346,8 +346,6 @@ public class ViewPendingPaymentActivity extends Activity {
                 }
             });
 
-
-
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
