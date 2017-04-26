@@ -32,7 +32,6 @@ import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
-import pl.droidsonroids.gif.GifTextView;
 
 public class AddClientActivity extends Activity implements View.OnClickListener {
 
@@ -46,7 +45,7 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
     Spinner area;
 
     TextView addclient;
-    GifTextView gif_loader;
+   // GifTextView gif_loader;
 
     String str_age,str_area,str_name,str_contact,str_emer_contact,str_med_his,str_emer_name,str_emer_rel;
     String str_his_contra,str_contra_type,str_sex,str_child,str_hiv_test,str_about_clinic;
@@ -76,6 +75,8 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
 
     RelativeLayout rel_parent_layout;
 
+    LinearLayout lin_detail;
+
     WebServices ws;
 
     String[] ITEMS = {"Select Branch","Arusha","Dar Es Salaam","Dodoma","Mbeya","Morogoro","Mwanza","Zanzibar"};
@@ -85,6 +86,10 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
     Global global;
 
     String compareValue;
+
+   // ProgressDialog dialog;
+
+    Dialog progress_dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,6 +179,8 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
                 {
                     if (cn.isNetConnected())
                     {
+                        Log.e("Add Client","Clicked");
+
                         new AddClientAsyncTask().execute();
                     }
                     else {
@@ -326,6 +333,15 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                HideKeyboard.hideSoftKeyboard(AddClientActivity.this);
+                return false;
+            }
+        });
+
+        lin_detail.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
 
                 HideKeyboard.hideSoftKeyboard(AddClientActivity.this);
                 return false;
@@ -588,7 +604,7 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
 
     public void getViewById()
     {
-        gif_loader = (GifTextView) findViewById(R.id.gif_loader);
+      //  gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
         age_group = (Spinner) findViewById(R.id.age_group);
         area = (Spinner) findViewById(R.id.area);
@@ -649,7 +665,7 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         cb_contra_type_injectables = (CheckBox) findViewById(R.id.cb_contra_type_injectables);
 
         lin_type_of_contra = (LinearLayout) findViewById(R.id.lin_type_of_contra);
-
+        lin_detail = (LinearLayout) findViewById(R.id.lin_detail);
         rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         setDefaultValues();
@@ -710,7 +726,10 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         @Override
         protected void onPreExecute() {
 
-            gif_loader.setVisibility(View.VISIBLE);
+           // gif_loader.setVisibility(View.VISIBLE);
+
+         //   progress_dialog = new ProgressDialog(AddClientActivity.this);
+            showProgressDialog();
 
             addclient.setClickable(false);
 
@@ -724,7 +743,6 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
             str_child = str_child.toLowerCase();
             str_hiv_test = str_hiv_test.toLowerCase();
             str_about_clinic = str_about_clinic.toLowerCase();
-
 
             Log.i("Contra","Type "+al_type_of_contra.size());
 
@@ -813,9 +831,11 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
         @Override
         protected void onPostExecute(String s) {
 
-            gif_loader.setVisibility(View.INVISIBLE);
+         //   gif_loader.setVisibility(View.INVISIBLE);
 
             addclient.setClickable(true);
+
+            progress_dialog.dismiss();
 
             if (message.equalsIgnoreCase("true"))
             {
@@ -834,6 +854,46 @@ public class AddClientActivity extends Activity implements View.OnClickListener 
 
 
 
+//    public void createProgressDialog() {
+//
+//
+//        try {
+//            dialog.show();
+//        } catch (WindowManager.BadTokenException e) {
+//
+//        }
+//        dialog.setCancelable(false);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        dialog.setContentView(R.layout.progress_dialog_add_contact);
+//        // dialog.setMessage(Message);
+//
+//    }
+
+
+    public void showProgressDialog() {
+
+        progress_dialog = new Dialog(context);
+
+        progress_dialog.setContentView(R.layout.progress_dialog);
+
+        progress_dialog.setCancelable(false);
+
+        //doneDialog.create();
+        progress_dialog.show();
+
+        Button btn_cancel = (Button) progress_dialog.findViewById(R.id.btn_cancel);
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                progress_dialog.dismiss();
+
+                addclient.setClickable(true);
+
+            }
+        });
+    }
 
 }
 

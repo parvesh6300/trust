@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -195,8 +196,8 @@ public class BuyPlanActivity extends Activity{
 
         public Context c;
 
-        public TextView tv_cancel;
-        public TextView tv_add_to_cart;
+        public Button tv_cancel;
+        public Button tv_add_to_cart;
 
         public ListView lv_products,lv_services;
 
@@ -218,8 +219,8 @@ public class BuyPlanActivity extends Activity{
 
             setContentView(R.layout.plan_detail_dialog);
 
-            tv_add_to_cart = (TextView) findViewById(R.id.tv_add_to_cart);
-            tv_cancel = (TextView) findViewById(R.id.tv_cancel);
+            tv_add_to_cart = (Button) findViewById(R.id.tv_add_to_cart);
+            tv_cancel = (Button) findViewById(R.id.tv_cancel);
 
             lv_services = (ListView) findViewById(R.id.lv_services);
             lv_products = (ListView) findViewById(R.id.lv_products);

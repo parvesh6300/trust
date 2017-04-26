@@ -32,8 +32,10 @@ import pl.droidsonroids.gif.GifTextView;
 
 public class SearchClientActivity extends Activity {
 
-    String[] ITEMS = {"All","Arusha","Dar Es Salaam","Dodoma","Mbeya","Morogoro","Mwanza","Zanzibar"};
+   // String[] ITEMS = {"All","Arusha","Dar Es Salaam","Dodoma","Mbeya","Morogoro","Mwanza","Zanzibar"};
     Spinner branch;
+
+    String[] ITEMS = {"All","Dodoma","Mwanza","Arusha","Dar Es Salaam","Morogoro","Mbeya","Zanzibar","Kahama"};
 
     Context context = SearchClientActivity.this;
     ListView searchlist;
@@ -44,7 +46,7 @@ public class SearchClientActivity extends Activity {
 
     TextView tv_no_client;
 
-    String src_keyword="",str_branch = "Select Branch";
+    String src_keyword="",str_branch = "Select Branch",str_branch_id="";
 
     GifTextView gif_loader;
 
@@ -91,11 +93,13 @@ public class SearchClientActivity extends Activity {
 
         compareValue = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_NAME);
 
-        if (!compareValue.equals(null))
-        {
-            int spinnerPosition = spinnerArrayAdapter.getPosition(compareValue);
-            branch.setSelection(spinnerPosition);
-        }
+        branch.setSelection(0);
+
+//        if (!compareValue.equals(null))
+//        {
+//            int spinnerPosition = spinnerArrayAdapter.getPosition(compareValue);
+//            branch.setSelection(spinnerPosition);
+//        }
 
         branch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -104,28 +108,30 @@ public class SearchClientActivity extends Activity {
                 if (pos == 0)
                 {
                     str_branch = "";
+                    str_branch_id = "";
                 }
                 else
                 {
                     str_branch = adapterView.getItemAtPosition(pos).toString();
+                    str_branch_id = String.valueOf(pos);
                 }
 
                 if (cn.isNetConnected())
                 {
-                    if (src_keyword != null && !src_keyword.isEmpty() && !src_keyword.equals("null"))
-                    {
-                        new SearchClientAsyncTask().execute();
-                    }
-                    else
-                    {
-                        src_keyword = "";
 
-                    }
-
-
+                    new SearchClientAsyncTask().execute();
+//                    if (src_keyword != null && !src_keyword.isEmpty() && !src_keyword.equals("null"))
+//                    {
+//                        new SearchClientAsyncTask().execute();
+//                    }
+//                    else
+//                    {
+//                        src_keyword = "";
+//                    }
 
                 }
-                else {
+                else
+                {
                     Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                 }
 
@@ -246,13 +252,14 @@ public class SearchClientActivity extends Activity {
 
         @Override
         protected String doInBackground(String... params) {
+
             try {
 
                 ArrayList<String> al_str_key = new ArrayList<>();
                 ArrayList<String> al_str_value = new ArrayList<>();
 
                 al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+                al_str_value.add(str_branch_id);  //global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID)
 
                 al_str_key.add(GlobalConstants.SRC_CLIENT_KEYWORD);
                 al_str_value.add(src_keyword);
@@ -314,5 +321,19 @@ public class SearchClientActivity extends Activity {
 
     }
 
+    @Override
+    protected void onResume() {
 
+        if (cn.isNetConnected())
+        {
+            new SearchClientAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
+        super.onResume();
+
+    }
 }

@@ -33,6 +33,46 @@ public class Global extends Application {
 
     public ArrayList<HashMap<String,String>> al_login_list;
 
+    public String str_un = "";
+    public String str_pwd="";
+
+    public String getStr_role() {
+        return str_role;
+    }
+
+    public void setStr_role(String str_role) {
+        this.str_role = str_role;
+    }
+
+    public String str_role="";
+
+    public String getStr_un() {
+        return str_un;
+    }
+
+    public void setStr_un(String str_un) {
+        this.str_un = str_un;
+    }
+
+    public String getStr_pwd() {
+        return str_pwd;
+    }
+
+    public void setStr_pwd(String str_pwd) {
+        this.str_pwd = str_pwd;
+    }
+
+    public int getInt_role_id() {
+        return int_role_id;
+    }
+
+    public void setInt_role_id(int int_role_id) {
+        this.int_role_id = int_role_id;
+    }
+
+    public int int_role_id=2;
+
+
 
 
     // ******************************* PRoduct Details Getter and Setter  *************************************************

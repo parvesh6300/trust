@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -144,8 +145,8 @@ public class CartActivity extends Activity {
 
         public Activity c;
 
-        public TextView cancel;
-        public TextView confirm,tv_message;
+        public Button cancel,confirm;
+        public TextView tv_message;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -161,8 +162,8 @@ public class CartActivity extends Activity {
 
             setContentView(R.layout.cart_confirm_dialog);
 
-            confirm = (TextView) findViewById(R.id.tv_yes);
-            cancel = (TextView) findViewById(R.id.tv_no);
+            confirm = (Button) findViewById(R.id.tv_yes);
+            cancel = (Button) findViewById(R.id.tv_no);
             tv_message = (TextView) findViewById(R.id.tv_message);
 
             total_cost =0;

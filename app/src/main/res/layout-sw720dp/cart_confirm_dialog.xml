@@ -59,7 +59,7 @@
         android:weightSum="1"
         android:background="@color/textColor">
 
-        <TextView
+        <Button
             android:id="@+id/tv_no"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -69,10 +69,11 @@
             android:textSize="30sp"
             android:typeface="monospace"
             android:textStyle="bold"
+            android:background="@color/textColor"
             android:gravity="center_horizontal|center_vertical"
             android:textColor="@color/white"/>
 
-        <TextView
+        <Button
             android:id="@+id/tv_yes"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -82,6 +83,7 @@
             android:textSize="30sp"
             android:typeface="monospace"
             android:textStyle="bold"
+            android:background="@color/textColor"
             android:gravity="center_horizontal|center_vertical"
             android:textColor="@color/white"/>
 

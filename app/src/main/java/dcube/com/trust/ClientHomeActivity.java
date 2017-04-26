@@ -86,6 +86,22 @@ public class ClientHomeActivity extends Activity {
         });
 
 
+//        public Integer[] mThumbIds = {
+//                R.drawable.buyplan,
+//                R.drawable.buyservices,
+//                R.drawable.buyproducts,
+//                R.drawable.viewplans,
+//                R.drawable.viewservices,
+//                R.drawable.client_history,
+//                R.drawable.clent_info_new,
+//                R.drawable.viewappointment,
+//                R.drawable.addnewappointment,
+//                R.drawable.pendingpayment,
+//        };
+
+
+
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -94,14 +110,14 @@ public class ClientHomeActivity extends Activity {
                 {
                     case 0:
 
-                        global.setServiceAppointment(false);
-                        global.setAppointmentSelected(true);
-                        startActivity(new Intent(ClientHomeActivity.this,CalendarActivity.class));
+//                        global.setServiceAppointment(false);
+//                        global.setAppointmentSelected(true);
+                        startActivity(new Intent(ClientHomeActivity.this,BuyPlanActivity.class));
                         break;
 
                     case 1:
 
-                        startActivity(new Intent(ClientHomeActivity.this,ViewAppointmentActivity.class));
+                        startActivity(new Intent(ClientHomeActivity.this,BuyServicesActivity.class));
                         break;
 
                     case 2:
@@ -111,37 +127,39 @@ public class ClientHomeActivity extends Activity {
 
                     case 3:
 
-                        startActivity(new Intent(ClientHomeActivity.this,BuyPlanActivity.class));
+                        startActivity(new Intent(ClientHomeActivity.this,ViewPlanActivity.class));
                         break;
 
                     case 4:
 
-                        startActivity(new Intent(ClientHomeActivity.this,ViewPlanActivity.class));
+                        startActivity(new Intent(ClientHomeActivity.this,ViewServicesActivity.class));
                         break;
 
                     case 5:
 
-                        startActivity(new Intent(ClientHomeActivity.this,BuyServicesActivity.class));
+                        startActivity(new Intent(ClientHomeActivity.this,ClientHistoryActivity.class));
                         break;
 
                     case 6:
 
-                        startActivity(new Intent(ClientHomeActivity.this,ViewServicesActivity.class));
+                        startActivity(new Intent(ClientHomeActivity.this,ClientInfoActivity.class));
                         break;
 
                     case 7:
 
-                        startActivity(new Intent(ClientHomeActivity.this,ViewPendingPaymentActivity.class));
+                        startActivity(new Intent(ClientHomeActivity.this,ViewAppointmentActivity.class));
                         break;
 
                     case 8:
 
-                        startActivity(new Intent(ClientHomeActivity.this,ClientHistoryActivity.class));
+                        global.setServiceAppointment(false);
+                        global.setAppointmentSelected(true);
+                        startActivity(new Intent(ClientHomeActivity.this,CalendarActivity.class));
                         break;
 
                     case 9:
 
-                        startActivity(new Intent(ClientHomeActivity.this,ClientInfoActivity.class));
+                        startActivity(new Intent(ClientHomeActivity.this,ViewPendingPaymentActivity.class));
                         break;
 
                 }

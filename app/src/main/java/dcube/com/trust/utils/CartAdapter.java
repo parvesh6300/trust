@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -206,8 +207,8 @@ public class CartAdapter extends BaseAdapter {
         TextView tv_minus = (TextView) dialog.findViewById(R.id.tv_minus);
         TextView tv_product_name = (TextView) dialog.findViewById(R.id.tv_product_name);
         TextView tv_product_cat = (TextView) dialog.findViewById(R.id.tv_product_cat);
-        TextView tv_request = (TextView) dialog.findViewById(R.id.tv_request);
-        TextView tv_cancel = (TextView) dialog.findViewById(R.id.tv_cancel);
+        Button tv_request = (Button) dialog.findViewById(R.id.tv_request);
+        Button tv_cancel = (Button) dialog.findViewById(R.id.tv_cancel);
 
         dialog.setCancelable(false);
         dialog.show();

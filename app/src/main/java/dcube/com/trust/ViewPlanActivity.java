@@ -106,8 +106,8 @@ public class ViewPlanActivity extends Activity {
 
         public Activity c;
 
-        public TextView tv_configure,tv_plan_price;
-        public TextView confirm,tv_plan_name;
+        public TextView tv_plan_name,tv_plan_price;
+        public Button confirm,tv_configure;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -122,8 +122,8 @@ public class ViewPlanActivity extends Activity {
 
             setContentView(R.layout.renewplan_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            tv_configure = (TextView) findViewById(R.id.tv_configure);
+            confirm = (Button) findViewById(R.id.confirm);
+            tv_configure = (Button) findViewById(R.id.tv_configure);
             tv_plan_name = (TextView) findViewById(R.id.tv_plan_name);
             tv_plan_price = (TextView) findViewById(R.id.tv_plan_price);
 

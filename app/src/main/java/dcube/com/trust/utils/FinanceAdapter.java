@@ -20,17 +20,19 @@ public class FinanceAdapter extends BaseAdapter {
     public Integer[] mThumbIds = {
 
             R.drawable.moneybanked,
-            R.drawable.operatingexpenses,
-            R.drawable.stockmanagement,
             R.drawable.depositmoney,
-            R.drawable.account_history,
-            R.drawable.expense_history,
-            R.drawable.salesanalytics,
-            R.drawable.revenue,
+            R.drawable.stockmanagement,
+            R.drawable.withdraw_money,
             R.drawable.pettycash,
-            R.drawable.withdraw_money,  //cashin  withdraw  w
-            R.drawable.cash_history_logo   //cash_history
+            R.drawable.operatingexpenses,
+            R.drawable.account_history,
+            R.drawable.cash_history_logo,
+            R.drawable.expense_history,
+            R.drawable.revenue,  //cashin  withdraw  w
+            R.drawable.salesanalytics   //cash_history
     };
+
+
 
 //    Order of menu - bank money, operating expense,
 //    stock management ,deposit money, account history, expense history, revenue, sales analytics.

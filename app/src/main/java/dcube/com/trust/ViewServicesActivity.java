@@ -119,8 +119,8 @@ public class ViewServicesActivity extends Activity {
 
         public Activity c;
 
-        public TextView cancel,tv_service_cost;
-        public TextView confirm,tv_service_name;
+        public Button cancel,confirm;
+        public TextView tv_service_cost,tv_service_name;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -136,8 +136,8 @@ public class ViewServicesActivity extends Activity {
 
             setContentView(R.layout.renew_service_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
+            confirm = (Button) findViewById(R.id.confirm);
+            cancel = (Button) findViewById(R.id.cancel);
             tv_service_cost = (TextView) findViewById(R.id.tv_service_cost);
             tv_service_name = (TextView) findViewById(R.id.tv_service_name);
 

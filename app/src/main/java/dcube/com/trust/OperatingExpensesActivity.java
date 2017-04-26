@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -258,8 +259,8 @@ public class OperatingExpensesActivity extends Activity {
 
         public Activity c;
 
-        public TextView cancel,tv_account_total,tv_wd_amount;
-        public TextView confirm,tv_balance;
+        public TextView tv_balance,tv_account_total,tv_wd_amount;
+        public Button confirm,cancel;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -273,8 +274,8 @@ public class OperatingExpensesActivity extends Activity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.withdraw_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
+            confirm = (Button) findViewById(R.id.confirm);
+            cancel = (Button) findViewById(R.id.cancel);
 
             tv_account_total = (TextView) findViewById(R.id.tv_account_total);
             tv_wd_amount = (TextView) findViewById(R.id.tv_wd_amount);
@@ -415,7 +416,7 @@ public class OperatingExpensesActivity extends Activity {
         //doneDialog.create();
         doneDialog.show();
 
-        TextView tv_ok = (TextView) doneDialog.findViewById(R.id.tv_ok);
+        Button tv_ok = (Button) doneDialog.findViewById(R.id.tv_ok);
         TextView tv_account_total = (TextView) doneDialog.findViewById(R.id.tv_account_total);
         TextView tv_wd_amount = (TextView) doneDialog.findViewById(R.id.tv_wd_amount);
 
@@ -446,8 +447,8 @@ public class OperatingExpensesActivity extends Activity {
         //doneDialog.create();
         doneDialog.show();
 
-        TextView tv_yes = (TextView) doneDialog.findViewById(R.id.tv_yes);
-        TextView tv_no = (TextView) doneDialog.findViewById(R.id.tv_no);
+        Button tv_yes = (Button) doneDialog.findViewById(R.id.tv_yes);
+        Button tv_no = (Button) doneDialog.findViewById(R.id.tv_no);
         TextView tv_message = (TextView) doneDialog.findViewById(R.id.tv_message);
         TextView tv_title = (TextView) doneDialog.findViewById(R.id.tv_title);
 

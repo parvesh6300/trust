@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -148,8 +149,8 @@ public class DepositMoneyActivity extends Activity {
 
         public Activity c;
 
-        public TextView cancel;
-        public TextView confirm,tv_deposit,tv_total_amount,tv_balance;
+        public Button cancel,confirm;
+        public TextView tv_deposit,tv_total_amount,tv_balance;
 
         float int_total_amount,int_deposit,int_balance;
 
@@ -166,8 +167,8 @@ public class DepositMoneyActivity extends Activity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.deposit_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
+            confirm = (Button) findViewById(R.id.confirm);
+            cancel = (Button) findViewById(R.id.cancel);
             tv_deposit = (TextView) findViewById(R.id.tv_deposit);
             tv_balance = (TextView) findViewById(R.id.tv_balance);
             tv_total_amount = (TextView) findViewById(R.id.tv_total_amount);
@@ -376,8 +377,8 @@ public class DepositMoneyActivity extends Activity {
         //doneDialog.create();
         doneDialog.show();
 
-        TextView tv_yes = (TextView) doneDialog.findViewById(R.id.tv_yes);
-        TextView tv_no = (TextView) doneDialog.findViewById(R.id.tv_no);
+        Button tv_yes = (Button) doneDialog.findViewById(R.id.tv_yes);
+        Button tv_no = (Button) doneDialog.findViewById(R.id.tv_no);
         TextView tv_message = (TextView) doneDialog.findViewById(R.id.tv_message);
         TextView tv_title = (TextView) doneDialog.findViewById(R.id.tv_title);
 

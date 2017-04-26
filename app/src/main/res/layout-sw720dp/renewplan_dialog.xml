@@ -107,7 +107,7 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
-        <TextView
+        <Button
             android:id="@+id/tv_configure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -118,9 +118,11 @@
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:elevation="3dp"
+            android:background="@color/textColor"
             android:typeface="monospace" />
 
-        <TextView
+        <Button
             android:id="@+id/confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -131,6 +133,8 @@
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:elevation="3dp"
+            android:background="@color/textColor"
             android:typeface="monospace" />
 
     </LinearLayout>

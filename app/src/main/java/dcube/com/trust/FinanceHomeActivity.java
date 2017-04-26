@@ -79,9 +79,21 @@ public class FinanceHomeActivity extends Activity {
             }
         });
 
-//        Order of menu - bank money, operating expense,
-//                stock management ,deposit money, account history, expense history, revenue, sales analytics.
 
+
+
+//        R.drawable.moneybanked,
+//                R.drawable.depositmoney,
+//                R.drawable.stockmanagement,
+//                R.drawable.withdraw_money,
+//                R.drawable.pettycash,
+//                R.drawable.operatingexpenses,
+//                R.drawable.account_history,
+//                R.drawable.cash_history_logo,
+//                R.drawable.expense_history,
+//                R.drawable.revenue,  //cashin  withdraw  w
+//                R.drawable.salesanalytics   //ca
+//
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,7 +106,7 @@ public class FinanceHomeActivity extends Activity {
                         break;
 
                     case 1:
-                        startActivity(new Intent(FinanceHomeActivity.this,OperatingExpensesActivity.class));//ProductSoldHistory
+                        startActivity(new Intent(FinanceHomeActivity.this,DepositMoneyActivity.class));//ProductSoldHistory
                         break;
 
                     case 2:
@@ -102,35 +114,35 @@ public class FinanceHomeActivity extends Activity {
                         break;
 
                     case 3:
-                        startActivity(new Intent(FinanceHomeActivity.this,DepositMoneyActivity.class)); // RevenueActivity
+                        startActivity(new Intent(FinanceHomeActivity.this,WithDrawMoneyActivity.class)); // RevenueActivity
                         break;
 
                     case 4:
-                        startActivity(new Intent(FinanceHomeActivity.this,AccountHistoryActivity.class));//OperatingExpensesActivity
+                        startActivity(new Intent(FinanceHomeActivity.this,PettyCashActivity.class));//OperatingExpensesActivity
                         break;
 
                     case 5:
-                        startActivity(new Intent(FinanceHomeActivity.this,ExpenseHistoryActivity.class));//ExpenseHistoryActivity
+                        startActivity(new Intent(FinanceHomeActivity.this,OperatingExpensesActivity.class));//ExpenseHistoryActivity
                         break;
 
                     case 6:
-                        startActivity(new Intent(FinanceHomeActivity.this,RevenueActivity.class));//MoneyBankedActivity
+                        startActivity(new Intent(FinanceHomeActivity.this,AccountHistoryActivity.class));//MoneyBankedActivity
                         break;
 
                     case 7:
-                        startActivity(new Intent(FinanceHomeActivity.this,ProductSoldHistory.class));//AccountHistoryActivity
+                        startActivity(new Intent(FinanceHomeActivity.this,CashInHandHistory.class));//AccountHistoryActivity
                         break;
 
                     case 8:
-                        startActivity(new Intent(FinanceHomeActivity.this,PettyCashActivity.class));
+                        startActivity(new Intent(FinanceHomeActivity.this,ExpenseHistoryActivity.class));
                         break;
 
                     case 9:
-                        startActivity(new Intent(FinanceHomeActivity.this,WithDrawMoneyActivity.class));
+                        startActivity(new Intent(FinanceHomeActivity.this,RevenueActivity.class));
                         break;
 
                     case 10:
-                        startActivity(new Intent(FinanceHomeActivity.this,CashInHandHistory.class));
+                        startActivity(new Intent(FinanceHomeActivity.this,ProductSoldHistory.class));
                         break;
 
                 }

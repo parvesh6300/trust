@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -280,8 +281,8 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
         public Activity c;
 
-        public TextView cancel;
-        public TextView confirm,tv_deposit,tv_total_amount,tv_balance;
+        public Button cancel,confirm;
+        public TextView tv_deposit,tv_total_amount,tv_balance;
 
         float int_total_amount,int_deposit,int_balance;
 
@@ -298,8 +299,8 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.deposit_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
+            confirm = (Button) findViewById(R.id.confirm);
+            cancel = (Button) findViewById(R.id.cancel);
             tv_deposit = (TextView) findViewById(R.id.tv_deposit);
             tv_balance = (TextView) findViewById(R.id.tv_balance);
             tv_total_amount = (TextView) findViewById(R.id.tv_total_amount);
@@ -686,7 +687,7 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
         //doneDialog.create();
         doneDialog.show();
 
-        TextView tv_ok = (TextView) doneDialog.findViewById(R.id.tv_ok);
+        Button tv_ok = (Button) doneDialog.findViewById(R.id.tv_ok);
         TextView tv_account_total = (TextView) doneDialog.findViewById(R.id.tv_account_total);
         TextView tv_wd_amount = (TextView) doneDialog.findViewById(R.id.tv_wd_amount);
 

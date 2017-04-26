@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -188,8 +189,8 @@ public class StockAdapter extends BaseAdapter {
                 TextView tv_current_time = (TextView) dialog.findViewById(R.id.tv_current_time);
                 TextView tv_product_name = (TextView) dialog.findViewById(R.id.tv_product_name);
                 TextView tv_product_cat = (TextView) dialog.findViewById(R.id.tv_product_cat);
-                TextView tv_request = (TextView) dialog.findViewById(R.id.tv_request);
-                TextView tv_cancel = (TextView) dialog.findViewById(R.id.tv_cancel);
+                Button tv_request = (Button) dialog.findViewById(R.id.tv_request);
+                Button tv_cancel = (Button) dialog.findViewById(R.id.tv_cancel);
 
                 dialog.setCancelable(false);
                 dialog.show();
@@ -295,8 +296,8 @@ public class StockAdapter extends BaseAdapter {
         //alertDialog.create();
         alertDialog.show();
 
-        TextView tv_yes = (TextView) alertDialog.findViewById(R.id.tv_yes);
-        TextView tv_no = (TextView) alertDialog.findViewById(R.id.tv_no);
+        Button tv_yes = (Button) alertDialog.findViewById(R.id.tv_yes);
+        Button tv_no = (Button) alertDialog.findViewById(R.id.tv_no);
 
         tv_yes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,8 +342,8 @@ public class StockAdapter extends BaseAdapter {
         //doneDialog.create();
         doneDialog.show();
 
-        TextView tv_yes = (TextView) doneDialog.findViewById(R.id.tv_yes);
-        TextView tv_no = (TextView) doneDialog.findViewById(R.id.tv_no);
+        Button tv_yes = (Button) doneDialog.findViewById(R.id.tv_yes);
+        Button tv_no = (Button) doneDialog.findViewById(R.id.tv_no);
         TextView tv_message = (TextView) doneDialog.findViewById(R.id.tv_message);
         TextView tv_title = (TextView) doneDialog.findViewById(R.id.tv_title);
 

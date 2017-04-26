@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -294,8 +295,8 @@ public class UpdatePlanActivity extends Activity {
         //alertDialog.create();
         alertDialog.show();
 
-        TextView tv_yes = (TextView) alertDialog.findViewById(R.id.tv_yes);
-        TextView tv_no = (TextView) alertDialog.findViewById(R.id.tv_no);
+        Button tv_yes = (Button) alertDialog.findViewById(R.id.tv_yes);
+        Button tv_no = (Button) alertDialog.findViewById(R.id.tv_no);
         TextView tv_message = (TextView) alertDialog.findViewById(R.id.tv_message);
 
         tv_message.setText("Are you Sure ?");

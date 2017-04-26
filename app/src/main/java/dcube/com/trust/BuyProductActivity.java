@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -229,8 +230,8 @@ public class BuyProductActivity extends Activity{
 
         public Activity c;
 
-        public TextView cancel;
-        public TextView confirm;
+        public Button cancel;
+        public Button confirm;
 
         public ListView selected;
 
@@ -250,8 +251,8 @@ public class BuyProductActivity extends Activity{
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.buy_product_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
+            confirm = (Button) findViewById(R.id.confirm);
+            cancel = (Button) findViewById(R.id.cancel);
             selected = (ListView) findViewById(R.id.selected_product_list);
 
             selectedAdapter = new ProductSelectedAdapter(BuyProductActivity.this);

@@ -10,6 +10,7 @@ import android.support.annotation.IdRes;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -300,8 +301,8 @@ public class ViewPendingPaymentActivity extends Activity {
         RadioGroup rg_payment_mode;
         RadioButton radio_cash,radio_mpesa;
 
-        public TextView cancel;
-        public TextView confirm,tv_message;
+        public Button cancel,confirm;
+        public TextView tv_message;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -317,8 +318,8 @@ public class ViewPendingPaymentActivity extends Activity {
 
             setContentView(R.layout.choose_payment_mode_dialog);  //confirm_clear_pend_pay_dialog
 
-            confirm = (TextView) findViewById(R.id.tv_yes);
-            cancel = (TextView) findViewById(R.id.tv_no);
+            confirm = (Button) findViewById(R.id.tv_yes);
+            cancel = (Button) findViewById(R.id.tv_no);
             tv_message = (TextView) findViewById(R.id.tv_message);
 
             rg_payment_mode = (RadioGroup) findViewById(R.id.rg_payment_mode);

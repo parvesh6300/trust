@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -147,8 +148,9 @@ public class MoneyBankedAdapter extends BaseAdapter {
 
         public Context ctx;
 
-        TextView tv_date,tv_month,tv_year,cancel,confirm;
+        TextView tv_date,tv_month,tv_year;
         EditText ed_reason,ed_amount;
+        Button cancel,confirm;
 
         int pos;
 
@@ -171,8 +173,8 @@ public class MoneyBankedAdapter extends BaseAdapter {
 
             setContentView(R.layout.money_bank_update_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
+            confirm = (Button) findViewById(R.id.confirm);
+            cancel = (Button) findViewById(R.id.cancel);
             tv_date= (TextView) findViewById(R.id.tv_date);
             tv_month= (TextView)findViewById(R.id.tv_month);
             tv_year= (TextView) findViewById(R.id.tv_year);
@@ -241,8 +243,8 @@ public class MoneyBankedAdapter extends BaseAdapter {
         //alertDialog.create();
         alertDialog.show();
 
-        TextView tv_yes = (TextView) alertDialog.findViewById(R.id.tv_yes);
-        TextView tv_no = (TextView) alertDialog.findViewById(R.id.tv_no);
+        Button tv_yes = (Button) alertDialog.findViewById(R.id.tv_yes);
+        Button tv_no = (Button) alertDialog.findViewById(R.id.tv_no);
 
         tv_yes.setOnClickListener(new View.OnClickListener() {
             @Override

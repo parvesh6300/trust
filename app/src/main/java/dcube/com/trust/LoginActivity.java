@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
@@ -28,8 +27,9 @@ import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class LoginActivity extends Activity implements View.OnClickListener,View.OnTouchListener {
+public class LoginActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
 
+    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
     static String role;
     RelativeLayout nurse;
     RelativeLayout finance;
@@ -41,26 +41,20 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
     TextView signin;
     EditText ed_user_name;
     EditText ed_pwd;
-
     String str_user_name;
-    String str_password;
-    String str_device_token;
+
+    Boolean is_first_login = true;
+    Boolean is_logged_in = false;
+    Boolean is_sec_log_in = false;
 
     GifTextView gif_loader;
-
     int role_id = 2;
-
     WebServices ws;
-
     Context context = LoginActivity.this;
-
     Global global;
 
-    ArrayList<HashMap<String, String>> al_login_user;
 
-    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
-    private long mBackPressed;
-
+    String sec_login = "is_Second_Login";
     String login_pref = "Login_pref";
     String is_logged_in_pref = "Logged_in_pref";
     String user_name_pref = "user_name";
@@ -70,9 +64,11 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
-    RelativeLayout rel_parent_layout;
+    String str_username=" ", str_password=" ", str_role, str_device_token;
 
+    RelativeLayout rel_parent_layout;
     CheckNetConnection cn;
+    private long mBackPressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +76,8 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
         setContentView(R.layout.activity_login);
 
         global = (Global) getApplicationContext();
+
+        //getSharePreferences();
 
         cn = new CheckNetConnection(this);
 
@@ -102,7 +100,6 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
         forgot = (TextView) findViewById(R.id.forgot);
         signin = (TextView) findViewById(R.id.signin);
         forgot.setPaintFlags(forgot.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
 
 
         nurse.setOnClickListener(this);
@@ -144,21 +141,18 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
 
             case R.id.signin: {
 
-                Log.i("Sign","in clicked");
+                Log.i("Sign", "in clicked");
 
-                if (validate())
-                {
+                if (validate()) {
                     str_user_name = ed_user_name.getText().toString().trim();
                     str_password = ed_pwd.getText().toString().trim();
 
                     str_device_token = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                             Settings.Secure.ANDROID_ID);
 
-                    if (cn.isNetConnected())
-                    {
+                    if (cn.isNetConnected()) {
                         new OkHttpHandlerAsyncTask().execute();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(LoginActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -166,14 +160,12 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
             }
 
             case R.id.rel_parent_layout:
-            {
-                if (ed_pwd.isClickable() || ed_user_name.isClickable()  || ed_pwd.isFocusable() || ed_user_name.isFocusable())
                 {
-                    HideKeyboard.hideSoftKeyboard(LoginActivity.this);
+                    if (ed_pwd.isClickable() || ed_user_name.isClickable() || ed_pwd.isFocusable() || ed_user_name.isFocusable())
+                    {
+                        HideKeyboard.hideSoftKeyboard(LoginActivity.this);
+                    }
                 }
-
-
-            }
 
         }
     }
@@ -181,8 +173,7 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
-        if (v==rel_parent_layout)
-        {
+        if (v == rel_parent_layout) {
             HideKeyboard.hideSoftKeyboard(LoginActivity.this);
 
         }
@@ -190,6 +181,131 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
         return false;
     }
 
+    /**
+     * User tap two times to close the app
+     */
+
+    @Override
+    public void onBackPressed() {
+
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
+        }
+
+        mBackPressed = System.currentTimeMillis();
+
+    }
+
+    /**
+     * Save login details in shared preferences
+     */
+
+    public void setSharedPreferences() {
+
+        pref = getSharedPreferences(login_pref, MODE_PRIVATE);
+
+        editor = pref.edit();
+
+        editor.putBoolean(is_logged_in_pref, true);
+        editor.putBoolean(sec_login, false);
+
+        editor.putString(user_name_pref, ed_user_name.getText().toString().trim());
+        editor.putString(password_pref, ed_pwd.getText().toString().trim());
+        editor.putString(role_key,role); //String.valueOf(role_id)
+
+        editor.apply();
+
+        global.setStr_un(ed_user_name.getText().toString().trim());
+        global.setStr_pwd(ed_pwd.getText().toString().trim());
+        global.setStr_role(role);
+        global.setInt_role_id(role_id);
+
+    }
+
+    /**
+     * Checks whether user has entered the required fields
+     *
+     * @return boolean
+     */
+
+    public boolean validate()
+    {
+        if (ed_user_name.getText().toString().trim().matches(""))
+        {
+            Toast.makeText(LoginActivity.this, "Enter Username", Toast.LENGTH_SHORT).show();
+        }
+        else if (ed_pwd.getText().toString().trim().matches(""))
+        {
+            Toast.makeText(LoginActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    @Override
+    protected void onResume() {
+
+        Log.e("On","Resume");
+        setEdValues();
+      //  getSharePreferences();
+        super.onResume();
+    }
+
+    /**
+     * Checks whether user is logged in or not
+     */
+
+    public void getSharePreferences() {
+
+
+        pref = getSharedPreferences(login_pref, MODE_PRIVATE);
+
+        is_sec_log_in = pref.getBoolean(sec_login, false);
+
+        Log.e("is_sec_log_in",""+pref.getBoolean(sec_login,true));
+
+        is_logged_in = pref.getBoolean(is_logged_in_pref, false);
+
+        str_username = pref.getString(user_name_pref, " ");
+        str_password = pref.getString(password_pref, " ");
+        str_role = pref.getString(role_key, "2");    // 2 is for nurse and 3 for finance
+
+    }
+
+
+    public void setEdValues() {
+
+        ed_user_name.setText(global.getStr_un());
+        ed_pwd.setText(global.getStr_pwd());
+        role = global.getStr_role();  //str_role
+
+        Log.e("Strrole",""+role);
+
+        if (role.equalsIgnoreCase("nurse"))   // 2
+        {
+            nurse_radio.setImageResource(R.drawable.radioselected);
+            finance_radio.setImageResource(R.drawable.radiounselected);
+        }
+        else if (role.equalsIgnoreCase("finance"))
+        {
+            nurse_radio.setImageResource(R.drawable.radiounselected);
+            finance_radio.setImageResource(R.drawable.radioselected);
+        }
+        else
+        {
+            nurse_radio.setImageResource(R.drawable.radioselected);
+            finance_radio.setImageResource(R.drawable.radiounselected);
+        }
+
+    }
 
     /**
      * Hit web service and check user exists or not
@@ -252,10 +368,10 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
             {
                 setSharedPreferences();
 
-                Log.e("Role","WS "+global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE));
-                Log.e("Role","Chose "+role);
+                Log.e("Role", "WS " + global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE));
+                Log.e("Role", "Chose " + role);
 
-                if (role.equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)) )  //role = nurse only
+                if (role.equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role = nurse only
                 {
                     Intent i = new Intent(LoginActivity.this, NurseHomeActivity.class);
                     startActivity(i);
@@ -269,14 +385,11 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
                 }
                 else if (global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE).equalsIgnoreCase("nurse_finance"))
                 {
-                    if (role.equalsIgnoreCase("nurse"))
-                    {
+                    if (role.equalsIgnoreCase("nurse")) {
                         Intent i = new Intent(LoginActivity.this, NurseHomeActivity.class);
                         startActivity(i);
                         finish();
-                    }
-                    else
-                    {
+                    } else {
                         Intent i = new Intent(LoginActivity.this, FinanceHomeActivity.class);
                         startActivity(i);
                         finish();
@@ -287,8 +400,7 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
                     Toast.makeText(LoginActivity.this, "Verify your Role again", Toast.LENGTH_SHORT).show();
                 }
 
-            }
-            else {
+            } else {
 
                 Toast.makeText(LoginActivity.this, "" + message, Toast.LENGTH_SHORT).show();
 
@@ -296,74 +408,8 @@ public class LoginActivity extends Activity implements View.OnClickListener,View
 
         }
 
-    }
-
-
-    /**
-     * User tap two times to close the app
-     */
-
-    @Override
-    public void onBackPressed() {
-
-        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
-        {
-            super.onBackPressed();
-            return;
-        }
-        else
-        {
-            Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
-        }
-
-        mBackPressed = System.currentTimeMillis();
 
     }
-
-
-    /**
-     * Save login details in shared preferences
-     */
-
-    public void setSharedPreferences()
-    {
-        pref = getSharedPreferences(login_pref,MODE_PRIVATE);
-
-        editor = pref.edit();
-
-        editor.putBoolean(is_logged_in_pref,true);
-
-        editor.putString(user_name_pref,ed_user_name.getText().toString().trim());
-        editor.putString(password_pref, ed_pwd.getText().toString().trim());
-        editor.putString(role_key , String.valueOf(role_id));
-
-        editor.apply();
-    }
-
-
-    /**
-     * Checks whether user has entered the required fields
-     * @return boolean
-     */
-
-    public boolean validate()
-    {
-        if (ed_user_name.getText().toString().trim().matches(""))
-        {
-            Toast.makeText(LoginActivity.this, "Enter Username", Toast.LENGTH_SHORT).show();
-        }
-        else if (ed_pwd.getText().toString().trim().matches(""))
-        {
-            Toast.makeText(LoginActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            return true;
-        }
-
-        return false;
-
-    }
-
 
 }
 

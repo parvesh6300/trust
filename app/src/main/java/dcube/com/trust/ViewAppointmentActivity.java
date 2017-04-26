@@ -116,8 +116,8 @@ public class ViewAppointmentActivity extends Activity {
 
         public Activity c;
 
-        public TextView tv_cancel, tv_timepick, tv_datepick;
-        public TextView tv_add;
+        public TextView  tv_timepick, tv_datepick;
+        public Button tv_add,tv_cancel;
         public RelativeLayout datepicker, timepicker;
         public EditText ed_note;
 
@@ -141,8 +141,8 @@ public class ViewAppointmentActivity extends Activity {
             tv_datepick = (TextView) findViewById(R.id.tv_datepick);
             tv_timepick = (TextView) findViewById(R.id.tv_timepick);
 
-            tv_add = (TextView) findViewById(R.id.tv_add);
-            tv_cancel = (TextView) findViewById(R.id.tv_cancel);
+            tv_add = (Button) findViewById(R.id.tv_add);
+            tv_cancel = (Button) findViewById(R.id.tv_cancel);
 
             datepicker.setOnClickListener(new View.OnClickListener() {
                 @Override

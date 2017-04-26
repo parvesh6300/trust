@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -27,7 +28,6 @@ import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.ServiceListAdapter;
 import dcube.com.trust.utils.ServiceSelectedAdapter;
-import dcube.com.trust.utils.TestServiceAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
@@ -36,7 +36,6 @@ public class BuyServicesActivity extends Activity {
     ListView servicelist;
     ServiceListAdapter adapter;
 
-    TestServiceAdapter test_adapter;
 
     GifTextView gif_loader;
     TextView buy;
@@ -164,8 +163,8 @@ public class BuyServicesActivity extends Activity {
 
         public Activity c;
 
-        public TextView cancel;
-        public TextView confirm,tv_service_cost;
+        public Button cancel,confirm;
+        public TextView tv_service_cost;
 
         public ListView selected;
 
@@ -188,8 +187,8 @@ public class BuyServicesActivity extends Activity {
 
             setContentView(R.layout.buy_service_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
+            confirm = (Button) findViewById(R.id.confirm);
+            cancel = (Button) findViewById(R.id.cancel);
             tv_service_cost = (TextView) findViewById(R.id.tv_service_cost);
             selected = (ListView) findViewById(R.id.selected_product_list);
 

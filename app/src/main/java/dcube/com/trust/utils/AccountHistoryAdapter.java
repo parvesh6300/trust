@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -238,8 +239,8 @@ public class AccountHistoryAdapter extends BaseAdapter {
         //alertDialog.create();
         alertDialog.show();
 
-        TextView tv_yes = (TextView) alertDialog.findViewById(R.id.tv_yes);
-        TextView tv_no = (TextView) alertDialog.findViewById(R.id.tv_no);
+        Button tv_yes = (Button) alertDialog.findViewById(R.id.tv_yes);
+        Button tv_no = (Button) alertDialog.findViewById(R.id.tv_no);
 
         tv_yes.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -245,8 +246,8 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
         public Activity c;
 
-        public TextView cancel,tv_expense_amount;
-        public TextView confirm,tv_expense_reason;
+        public Button cancel,confirm;
+        public TextView tv_expense_amount,tv_expense_reason;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -261,8 +262,8 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
 
             setContentView(R.layout.addexpense_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
+            confirm = (Button) findViewById(R.id.confirm);
+            cancel = (Button) findViewById(R.id.cancel);
             tv_expense_reason = (TextView) findViewById(R.id.tv_expense_reason);
             tv_expense_amount = (TextView) findViewById(R.id.tv_expense_amount);
 
@@ -384,8 +385,8 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
         //doneDialog.create();
         doneDialog.show();
 
-        TextView tv_yes = (TextView) doneDialog.findViewById(R.id.tv_yes);
-        TextView tv_no = (TextView) doneDialog.findViewById(R.id.tv_no);
+        Button tv_yes = (Button) doneDialog.findViewById(R.id.tv_yes);
+        Button tv_no = (Button) doneDialog.findViewById(R.id.tv_no);
         TextView tv_message = (TextView) doneDialog.findViewById(R.id.tv_message);
         TextView tv_title = (TextView) doneDialog.findViewById(R.id.tv_title);
 

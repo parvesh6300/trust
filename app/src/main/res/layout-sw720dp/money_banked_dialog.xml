@@ -81,7 +81,7 @@
         android:background="@color/textColor"
         android:layout_alignParentBottom="true">
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
@@ -90,11 +90,12 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_weight="1"
+            android:background="@color/textColor"
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/cancel"/>
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Confirm"
@@ -105,6 +106,7 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
+            android:background="@color/textColor"
             android:id="@+id/confirm"/>
 
     </LinearLayout>

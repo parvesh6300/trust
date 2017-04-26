@@ -70,7 +70,7 @@
         android:background="@color/textColor"
         android:layout_alignParentBottom="true">
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CANCEL"
@@ -81,9 +81,11 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
+            android:elevation="3dp"
+            android:background="@color/textColor"
             android:id="@+id/cancel"/>
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CONFIRM"
@@ -91,7 +93,9 @@
             android:typeface="monospace"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:elevation="3dp"
             android:layout_weight="1"
+            android:background="@color/textColor"
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/confirm"/>

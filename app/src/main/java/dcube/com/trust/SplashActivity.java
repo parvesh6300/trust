@@ -86,7 +86,6 @@ public class SplashActivity extends Activity {
                         }
                         else
                         {
-
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -148,9 +147,9 @@ public class SplashActivity extends Activity {
 
         is_logged_in = pref.getBoolean(is_logged_in_pref,false);
 
-        str_username = pref.getString(user_name_pref,"rohit@gmail.com");
-        str_password = pref.getString(password_pref,"123");
-        str_role = pref.getString(role_key,"2");
+        str_username = pref.getString(user_name_pref,"");
+        str_password = pref.getString(password_pref,"");
+        str_role = pref.getString(role_key,"2");    // 2 is for nurse and 3 for finance
 
     }
 

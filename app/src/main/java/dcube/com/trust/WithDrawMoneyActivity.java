@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,6 +51,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_with_draw_money);
@@ -90,15 +92,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
         });
 
 
-        if (cn.isNetConnected())
-        {
-            new GetBankBalanceAsyncTask().execute();
-            new GetCashInHandBalanceAsyncTask().execute();
-        }
-        else
-        {
-            Toast.makeText(WithDrawMoneyActivity.this, "Check Net Connection", Toast.LENGTH_SHORT).show();
-        }
+        callWebServices();
 
     }
 
@@ -242,7 +236,10 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
             if (message.equalsIgnoreCase("true"))
             {
-                finish();
+                Toast.makeText(context, "Petty Cash Assigned", Toast.LENGTH_SHORT).show();
+
+                callWebServices();
+               // finish();
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
@@ -315,7 +312,9 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
             if (message.equalsIgnoreCase("true"))
             {
-                finish();
+                Toast.makeText(context, "Balance Assigned", Toast.LENGTH_SHORT).show();
+                callWebServices();
+               // finish();
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
@@ -336,8 +335,8 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
         public Activity c;
 
-        public TextView cancel,tv_account_total,tv_wd_amount;
-        public TextView confirm,tv_balance,tv_rsn;
+        public TextView tv_account_total,tv_wd_amount,tv_balance,tv_rsn;
+        public Button confirm,cancel;
 
         String str_total;
 
@@ -362,8 +361,8 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
             setContentView(R.layout.cash_in_hand_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
+            confirm = (Button) findViewById(R.id.confirm);
+            cancel = (Button) findViewById(R.id.cancel);
 
             tv_account_total = (TextView) findViewById(R.id.tv_account_total);
             tv_wd_amount = (TextView) findViewById(R.id.tv_wd_amount);
@@ -467,7 +466,7 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
         //doneDialog.create();
         doneDialog.show();
 
-        TextView tv_ok = (TextView) doneDialog.findViewById(R.id.tv_ok);
+        Button tv_ok = (Button) doneDialog.findViewById(R.id.tv_ok);
         TextView tv_account_total = (TextView) doneDialog.findViewById(R.id.tv_account_total);
         TextView tv_wd_amount = (TextView) doneDialog.findViewById(R.id.tv_wd_amount);
 
@@ -674,9 +673,13 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
             if (message.equalsIgnoreCase("true"))
             {
-                finish();
+                Toast.makeText(context, "Expense Balance Assigned", Toast.LENGTH_SHORT).show();
+
+                callWebServices();
+                //finish();
             }
-            else {
+            else
+            {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
@@ -684,6 +687,20 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
     }
 
+
+
+    public void callWebServices()
+    {
+        if (cn.isNetConnected())
+        {
+            new GetBankBalanceAsyncTask().execute();
+            new GetCashInHandBalanceAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(WithDrawMoneyActivity.this, "Check Net Connection", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 }

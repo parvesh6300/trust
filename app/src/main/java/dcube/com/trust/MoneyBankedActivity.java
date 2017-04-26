@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -33,7 +34,7 @@ public class MoneyBankedActivity extends Activity {
 
     MoneyBankedAdapter moneyBankedAdapter;
 
-    TextView tv_total_amount,tv_deposit,tv_money_bank;
+    TextView tv_deposit,tv_money_bank;
 
     EditText ed_deposit_amount;
     GifTextView gif_loader;
@@ -74,7 +75,7 @@ public class MoneyBankedActivity extends Activity {
 
         ed_deposit_amount=(EditText)findViewById(R.id.ed_deposit_amount);
 
-        tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
+       // tv_total_amount=(TextView)findViewById(R.id.tv_total_amount);
         tv_deposit=(TextView)findViewById(R.id.tv_deposit);
         tv_money_bank = (TextView) findViewById(R.id.tv_money_bank);
 
@@ -133,7 +134,7 @@ public class MoneyBankedActivity extends Activity {
 
         if (cn.isNetConnected())
         {
-            new GetBranchBalanceAsyncTask().execute();
+          //  new GetBranchBalanceAsyncTask().execute();
 
             new GetMoneyToBankAsyncTask().execute();
 
@@ -156,8 +157,8 @@ public class MoneyBankedActivity extends Activity {
 
         public Activity c;
 
-        public TextView cancel,tv_account_total,tv_deposit_money;
-        public TextView confirm,tv_balance;
+        public TextView tv_balance,tv_account_total,tv_deposit_money;
+        public Button confirm,cancel;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -173,8 +174,8 @@ public class MoneyBankedActivity extends Activity {
 
             setContentView(R.layout.money_banked_dialog);
 
-            confirm = (TextView) findViewById(R.id.confirm);
-            cancel = (TextView) findViewById(R.id.cancel);
+            confirm = (Button) findViewById(R.id.confirm);
+            cancel = (Button) findViewById(R.id.cancel);
             tv_balance = (TextView) findViewById(R.id.tv_balance);
             tv_account_total = (TextView) findViewById(R.id.tv_account_total);
             tv_deposit_money = (TextView) findViewById(R.id.tv_deposit_money);
@@ -358,67 +359,7 @@ public class MoneyBankedActivity extends Activity {
     }
 
 
-    /**
-     * Hit the service and get the branch balance
-     */
 
-    public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
-
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-
-        @Override
-        protected void onPreExecute() {
-
-            gif_loader.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_branch_balance");
-
-                for (int i =0 ; i < al_str_key.size() ; i++)
-                {
-                    Log.i("Key",""+ al_str_key.get(i));
-                    Log.i("Value",""+ al_str_value.get(i));
-                }
-
-                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            gif_loader.setVisibility(View.INVISIBLE);
-
-            if (message.equalsIgnoreCase("true"))
-            {
-                tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
-            }
-            else {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-    }
 
 
 
@@ -498,8 +439,8 @@ public class MoneyBankedActivity extends Activity {
         //doneDialog.create();
         doneDialog.show();
 
-        TextView tv_yes = (TextView) doneDialog.findViewById(R.id.tv_yes);
-        TextView tv_no = (TextView) doneDialog.findViewById(R.id.tv_no);
+        Button tv_yes = (Button) doneDialog.findViewById(R.id.tv_yes);
+        Button tv_no = (Button) doneDialog.findViewById(R.id.tv_no);
         TextView tv_message = (TextView) doneDialog.findViewById(R.id.tv_message);
         TextView tv_title = (TextView) doneDialog.findViewById(R.id.tv_title);
 
@@ -518,7 +459,7 @@ public class MoneyBankedActivity extends Activity {
 
                 new GetMoneyToBankAsyncTask().execute();
 
-                new GetBranchBalanceAsyncTask().execute();
+//                new GetBranchBalanceAsyncTask().execute();
 
                 new MoneyBankHistoryAsyncTask().execute();
 
@@ -540,7 +481,7 @@ public class MoneyBankedActivity extends Activity {
         //doneDialog.create();
         doneDialog.show();
 
-        TextView tv_ok = (TextView) doneDialog.findViewById(R.id.tv_ok);
+        Button tv_ok = (Button) doneDialog.findViewById(R.id.tv_ok);
         TextView tv_account_total = (TextView) doneDialog.findViewById(R.id.tv_account_total);
         TextView tv_wd_amount = (TextView) doneDialog.findViewById(R.id.tv_wd_amount);
 
@@ -586,7 +527,7 @@ public class MoneyBankedActivity extends Activity {
 
     public void updateBalance(Context context)
     {
-        new GetBranchBalanceAsyncTask().execute();
+       // new GetBranchBalanceAsyncTask().execute();
 
         new GetMoneyToBankAsyncTask().execute();
     }

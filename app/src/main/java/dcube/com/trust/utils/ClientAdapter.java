@@ -15,17 +15,18 @@ public class ClientAdapter extends BaseAdapter {
     private Context context;
 
     public Integer[] mThumbIds = {
-            R.drawable.addnewappointment,
-            R.drawable.viewappointment,
-            R.drawable.buyproducts,
             R.drawable.buyplan,
-            R.drawable.viewplans,
             R.drawable.buyservices,
+            R.drawable.buyproducts,
+            R.drawable.viewplans,
             R.drawable.viewservices,
-            R.drawable.pendingpayment,
             R.drawable.client_history,
             R.drawable.clent_info_new,
+            R.drawable.viewappointment,
+            R.drawable.addnewappointment,
+            R.drawable.pendingpayment,
     };
+
 
     private static LayoutInflater inflater = null;
 
