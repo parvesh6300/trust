@@ -117,17 +117,6 @@ public class DepositMoneyActivity extends Activity {
         });
 
 
-        if (cn.isNetConnected())
-        {
-            new GetBranchBalanceAsyncTask().execute();
-            new DepositHistoryAsyncTask().execute();
-        }
-        else
-        {
-            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-        }
-
-
         rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -137,6 +126,10 @@ public class DepositMoneyActivity extends Activity {
                 return false;
             }
         });
+
+
+
+        callWebServices();
 
     }
 
@@ -352,6 +345,8 @@ public class DepositMoneyActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
+                callWebServices();
+
                 showDoneDialog();
 
             }
@@ -393,7 +388,12 @@ public class DepositMoneyActivity extends Activity {
 
                 cdd.dismiss();
                 doneDialog.cancel();
-                finish();
+
+                ed_deposit_amount.setText("");
+                ed_remark.setText("");
+
+
+               // finish();
 
             }
         });
@@ -456,6 +456,21 @@ public class DepositMoneyActivity extends Activity {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
+        }
+
+    }
+
+
+    public void callWebServices()
+    {
+        if (cn.isNetConnected())
+        {
+            new GetBranchBalanceAsyncTask().execute();
+            new DepositHistoryAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
     }

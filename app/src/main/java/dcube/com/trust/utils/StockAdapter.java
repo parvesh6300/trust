@@ -23,7 +23,7 @@ import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.R;
-import dcube.com.trust.StockControlActivity;
+import dcube.com.trust.StockManagementActivity;
 import okhttp3.OkHttpClient;
 
 /**
@@ -372,7 +372,7 @@ public class StockAdapter extends BaseAdapter {
         @Override
         protected void onPreExecute() {
 
-            ((StockControlActivity)mcontext).startLoader(mcontext);
+            ((StockManagementActivity)mcontext).startLoader(mcontext);
         }
 
         @Override
@@ -413,11 +413,13 @@ public class StockAdapter extends BaseAdapter {
         @Override
         protected void onPostExecute(String s) {
 
-            ((StockControlActivity)mcontext).stopLoader(mcontext);
+            ((StockManagementActivity)mcontext).stopLoader(mcontext);
 
             if (message.equalsIgnoreCase("true")) {
 
-                ((StockControlActivity)mcontext).updateList(mcontext);
+                Toast.makeText(mcontext, "Stock Requested", Toast.LENGTH_SHORT).show();
+
+                ((StockManagementActivity)mcontext).updateList(mcontext);
                // new GetStockProductAsyncTask().execute();
                // showDoneDialog();
             } else {
@@ -428,67 +430,6 @@ public class StockAdapter extends BaseAdapter {
 
     }
 
-
-
-    public class GetStockProductAsyncTask extends AsyncTask<String, String, String> {
-
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-        String str_client_id;
-
-        @Override
-        protected void onPreExecute() {
-
-            ((StockControlActivity)mcontext).startLoader(mcontext);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
-
-                al_str_key.add(GlobalConstants.BRANCH);
-                al_str_value.add(str_branch);
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("get_stock_request"); //get_products_in_stock
-
-                Log.i("Key",""+al_str_key);
-                Log.i("Value",""+al_str_value);
-
-                message = ws.GetProductStockService(mcontext, al_str_key, al_str_value);  //GetProductStockService
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return "";
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            ((StockControlActivity)mcontext).stopLoader(mcontext);
-
-            if (message.equalsIgnoreCase("true")) {
-
-                notifyDataSetChanged();
-                showDoneDialog();
-            }
-            else {
-                Toast.makeText(mcontext, "" + message, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-    }
 
     @Override
     public void notifyDataSetChanged() {

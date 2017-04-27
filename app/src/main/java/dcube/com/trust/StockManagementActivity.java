@@ -26,7 +26,7 @@ import dcube.com.trust.utils.StockAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class StockControlActivity extends Activity {
+public class StockManagementActivity extends Activity {
 
     TextView tv_quantity;
 
@@ -41,7 +41,7 @@ public class StockControlActivity extends Activity {
     Global global;
     GifTextView gif_loader;
     WebServices ws;
-    Context context = StockControlActivity.this;
+    Context context = StockManagementActivity.this;
 
     CheckNetConnection cn;
     String str_branch;
@@ -117,7 +117,7 @@ public class StockControlActivity extends Activity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
-                HideKeyboard.hideSoftKeyboard(StockControlActivity.this);
+                HideKeyboard.hideSoftKeyboard(StockManagementActivity.this);
                 return false;
             }
         });

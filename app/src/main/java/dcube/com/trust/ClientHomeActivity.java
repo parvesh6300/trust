@@ -30,7 +30,7 @@ public class ClientHomeActivity extends Activity {
     TextView tv_user_name;
     Global global;
 
-    TextView tv_logout,tv_notify;
+    TextView tv_logout,tv_notify,tv_back;
 
     String login_pref = "Login_pref";
     String is_logged_in_pref = "Logged_in_pref";
@@ -57,6 +57,8 @@ public class ClientHomeActivity extends Activity {
         tv_logout = (TextView) findViewById(R.id.tv_logout);
         tv_user_name = (TextView) findViewById(R.id.tv_user_name) ;
         tv_notify = (TextView) findViewById(R.id.notify);
+
+        tv_back = (TextView) findViewById(R.id.tv_back) ;
 
         adapter = new ClientAdapter(this);
 
@@ -86,20 +88,16 @@ public class ClientHomeActivity extends Activity {
         });
 
 
-//        public Integer[] mThumbIds = {
-//                R.drawable.buyplan,
-//                R.drawable.buyservices,
-//                R.drawable.buyproducts,
-//                R.drawable.viewplans,
-//                R.drawable.viewservices,
-//                R.drawable.client_history,
-//                R.drawable.clent_info_new,
-//                R.drawable.viewappointment,
-//                R.drawable.addnewappointment,
-//                R.drawable.pendingpayment,
-//        };
 
+        tv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                SearchClientActivity.h.sendEmptyMessage(0);
+
+                finish();
+            }
+        });
 
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

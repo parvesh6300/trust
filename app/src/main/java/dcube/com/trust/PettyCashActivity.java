@@ -179,26 +179,9 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
 
 
-        tv_receipt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        callWebServices();
 
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-            }
-        });
-
-
-        if (cn.isNetConnected())
-        {
-            new GetPettyBalanceAsyncTask().execute();
-        }
-        else
-        {
-            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-        }
-
-
+        tv_receipt.setOnClickListener(this);
         lin_date_from.setOnClickListener(this);
         lin_date_to.setOnClickListener(this);
 
@@ -229,7 +212,6 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
             {
                 Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
             }
-
 
         }
 
@@ -268,6 +250,11 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
             dpd_to.setMaxDate(now);
         }
 
+        if (view == tv_receipt)
+        {
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        }
 
 
     }
@@ -454,7 +441,20 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
             if (message.equalsIgnoreCase("true"))
             {
-                finish();
+
+                Toast.makeText(context, "Receipt Added Successfully", Toast.LENGTH_SHORT).show();
+                
+                ed_deposit_amount.setText("");
+                ed_remark.setText("");
+               // iv_receipt.refreshDrawableState();
+
+                iv_receipt.setImageBitmap(null);
+
+                is_pic_selected = false;
+
+                callWebServices();
+
+               // finish();
             }
             else
             {
@@ -746,4 +746,20 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
         new GetPettyBalanceAsyncTask().execute();
     }
 
+
+    public void callWebServices()
+    {
+        if (cn.isNetConnected())
+        {
+            new GetPettyBalanceAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
 }
+

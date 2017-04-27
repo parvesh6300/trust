@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -62,6 +64,8 @@ public class SearchClientActivity extends Activity {
     ArrayAdapter<String> spinnerArrayAdapter;
 
     CheckNetConnection cn;
+
+    public static Handler h;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,6 +219,21 @@ public class SearchClientActivity extends Activity {
         });
 
 
+        h = new Handler() {
+
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+
+                switch(msg.what) {
+
+                    case 0:
+                        finish();
+                        break;
+
+                }
+            }
+
+        };
 
 
         if (cn.isNetConnected())

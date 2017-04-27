@@ -210,7 +210,7 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
         editor = pref.edit();
 
         editor.putBoolean(is_logged_in_pref, true);
-        editor.putBoolean(sec_login, false);
+        editor.putBoolean(sec_login, true);
 
         editor.putString(user_name_pref, ed_user_name.getText().toString().trim());
         editor.putString(password_pref, ed_pwd.getText().toString().trim());
@@ -250,12 +250,13 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
 
     }
 
+
     @Override
     protected void onResume() {
 
         Log.e("On","Resume");
-        setEdValues();
-      //  getSharePreferences();
+     //   setEdValues();
+        getSharePreferences();
         super.onResume();
     }
 
@@ -274,9 +275,40 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
 
         is_logged_in = pref.getBoolean(is_logged_in_pref, false);
 
-        str_username = pref.getString(user_name_pref, " ");
-        str_password = pref.getString(password_pref, " ");
-        str_role = pref.getString(role_key, "2");    // 2 is for nurse and 3 for finance
+        if (is_sec_log_in)
+        {
+            str_username = pref.getString(user_name_pref, " ");
+            str_password = pref.getString(password_pref, " ");
+            str_role = pref.getString(role_key, "2");    // 2 is for nurse and 3 for finance
+
+            ed_user_name.setText(str_username);
+            ed_pwd.setText(str_password);
+            role = str_role ;
+
+            if (role.equalsIgnoreCase("nurse"))   // 2
+            {
+                nurse_radio.setImageResource(R.drawable.radioselected);
+                finance_radio.setImageResource(R.drawable.radiounselected);
+            }
+            else if (role.equalsIgnoreCase("finance"))
+            {
+                nurse_radio.setImageResource(R.drawable.radiounselected);
+                finance_radio.setImageResource(R.drawable.radioselected);
+            }
+            else
+            {
+                nurse_radio.setImageResource(R.drawable.radiounselected);
+                finance_radio.setImageResource(R.drawable.radioselected);
+            }
+
+
+
+            Log.e("Pref","UN "+str_username);
+            Log.e("Pref","PWD "+str_password);
+            Log.e("Pref","Role "+role);
+
+        }
+
 
     }
 
@@ -301,8 +333,8 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
         }
         else
         {
-            nurse_radio.setImageResource(R.drawable.radioselected);
-            finance_radio.setImageResource(R.drawable.radiounselected);
+            nurse_radio.setImageResource(R.drawable.radiounselected);
+            finance_radio.setImageResource(R.drawable.radioselected);
         }
 
     }

@@ -102,7 +102,7 @@ public class FinanceHomeActivity extends Activity {
                 switch (i)
                 {
                     case 0:
-                        startActivity(new Intent(FinanceHomeActivity.this,MoneyBankedActivity.class));//StockControlActivity
+                        startActivity(new Intent(FinanceHomeActivity.this,MoneyBankedActivity.class));//StockManagementActivity
                         break;
 
                     case 1:
@@ -110,7 +110,7 @@ public class FinanceHomeActivity extends Activity {
                         break;
 
                     case 2:
-                        startActivity(new Intent(FinanceHomeActivity.this,StockControlActivity.class));//DepositMoneyActivity
+                        startActivity(new Intent(FinanceHomeActivity.this,StockManagementActivity.class));//DepositMoneyActivity
                         break;
 
                     case 3:

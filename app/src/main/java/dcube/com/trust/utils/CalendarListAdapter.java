@@ -21,6 +21,7 @@ import dcube.com.trust.R;
 public class CalendarListAdapter extends BaseAdapter {
 
     public Context context;
+    ArrayList<String> al_client_contact = new ArrayList<>();
     ArrayList<String> al_client_name = new ArrayList<>();
     ArrayList<String> al_time = new ArrayList<>();
 
@@ -43,6 +44,8 @@ public class CalendarListAdapter extends BaseAdapter {
         for (HashMap<String,String> hashmap : global.getAl_apmt_details())
         {
             al_client_name.add(hashmap.get(GlobalConstants.APMT_CLIENT_NAME));
+
+            al_client_contact.add(hashmap.get(GlobalConstants.APMT_CLIENT_CONTACT));
 
             formatted_time = ft.FormatTime(hashmap.get(GlobalConstants.APMT_TIME));
 
@@ -69,7 +72,7 @@ public class CalendarListAdapter extends BaseAdapter {
 
     public class ViewHolder{
 
-        TextView tv_name,tv_time;
+        TextView tv_name,tv_time,tv_contact;
     }
 
     @Override
@@ -80,9 +83,11 @@ public class CalendarListAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.calendar_list,viewGroup,false);
 
         holder.tv_name= (TextView)convertView.findViewById(R.id.tv_name);
+        holder.tv_contact= (TextView)convertView.findViewById(R.id.tv_contact);
         holder.tv_time= (TextView)convertView.findViewById(R.id.tv_time);
 
         holder.tv_name.setText(al_client_name.get(i));
+        holder.tv_contact.setText("("+al_client_contact.get(i)+")");
         holder.tv_time.setText(al_time.get(i));
 
         return convertView;

@@ -1,7 +1,6 @@
 package dcube.com.trust.utils;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +43,9 @@ public class PlanProductAdapter extends BaseAdapter
 
         int pos = global.getPlan_selected_pos();
 
-        String str_plan_id = global.getAl_element_plan().get(pos).get(GlobalConstants.PLAN_ID);
-
-        Log.e("Plan","id "+str_plan_id);
+//        String str_plan_id = global.getAl_element_plan().get(pos).get(GlobalConstants.PLAN_ID);
+//
+//        Log.e("Plan","id "+str_plan_id);
 
 
         for (HashMap<String,String> hashmap : global.getAl_element_plan())

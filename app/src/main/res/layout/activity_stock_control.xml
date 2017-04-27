@@ -10,7 +10,7 @@
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
     android:gravity="center"
-    tools:context=".StockControlActivity">
+    tools:context=".StockManagementActivity">
 
     <TextView
         android:id="@+id/header"

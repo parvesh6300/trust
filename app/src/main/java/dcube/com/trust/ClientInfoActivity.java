@@ -34,6 +34,10 @@ public class ClientInfoActivity extends Activity {
 
     WebServices ws;
 
+    //***** Updations ******************
+
+    TextView tv_sex,tv_emer_contact,tv_emer_rel,tv_children,tv_hiv_test;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,14 @@ public class ClientInfoActivity extends Activity {
         tv_age = (TextView) findViewById(R.id.tv_age);
         tv_his_contra = (TextView) findViewById(R.id.tv_his_contra);
         tv_submit = (TextView) findViewById(R.id.tv_submit);
+
+        tv_sex = (TextView) findViewById(R.id.tv_sex);
+        tv_emer_contact = (TextView) findViewById(R.id.tv_emer_contact);
+        tv_emer_rel = (TextView) findViewById(R.id.tv_emer_rel);
+        tv_children = (TextView) findViewById(R.id.tv_children);
+        tv_hiv_test = (TextView) findViewById(R.id.tv_hiv_test);
+
+
 
         ed_med_history = (EditText) findViewById(R.id.ed_med_history);
 
@@ -138,6 +150,14 @@ public class ClientInfoActivity extends Activity {
                 tv_age.setText(global.getAl_client_info().get(0).get(GlobalConstants.CLIENT_AGE));
                 tv_his_contra.setText(global.getAl_client_info().get(0).get(GlobalConstants.CLIENT_CONTRA_HISTORY));
                 ed_med_history.setText(global.getAl_client_info().get(0).get(GlobalConstants.CLIENT_MED_HISTORY));
+
+                tv_sex.setText(global.getAl_client_info().get(0).get(GlobalConstants.CLIENT_SEX));
+                tv_emer_contact.setText(global.getAl_client_info().get(0).get(GlobalConstants.CLIENT_EMER_CONTACT));
+                tv_emer_rel.setText(global.getAl_client_info().get(0).get(GlobalConstants.CLIENT_EMER_RELATION));
+                tv_children.setText(global.getAl_client_info().get(0).get(GlobalConstants.CLIENT_CHILD));
+                tv_hiv_test.setText(global.getAl_client_info().get(0).get(GlobalConstants.CLIENT_HIV_TEST));
+
+
             }
             else
             {

@@ -186,6 +186,15 @@ public class BuyPlanActivity extends Activity{
     }
 
 
+    @Override
+    public void onBackPressed() {
+       // super.onBackPressed();
+
+        ClientHomeActivity.h.sendEmptyMessage(0);
+        startActivity(new Intent(BuyPlanActivity.this,ClientHomeActivity.class));
+        finish();
+    }
+
     /**
      * Custom dialog shows the elements in plan
      */
@@ -406,9 +415,11 @@ public class BuyPlanActivity extends Activity{
 
             if (message.equalsIgnoreCase("true"))
             {
-                ClientHomeActivity.h.sendEmptyMessage(0);
-                startActivity(new Intent(BuyPlanActivity.this,ClientHomeActivity.class));
-                finish();
+                Toast.makeText(context, "Plan Added", Toast.LENGTH_SHORT).show();
+
+//                ClientHomeActivity.h.sendEmptyMessage(0);
+//                startActivity(new Intent(BuyPlanActivity.this,ClientHomeActivity.class));
+//                finish();
             }
             else
             {

@@ -313,6 +313,7 @@ public class WebServices {
                     map.put(GlobalConstants.APMT_ID , jsonObject1.optString(GlobalConstants.APMT_ID));
                     map.put(GlobalConstants.APMT_CLIENT_ID , jsonObject1.optString(GlobalConstants.APMT_CLIENT_ID));
                     map.put(GlobalConstants.APMT_CLIENT_NAME , jsonObject1.optString(GlobalConstants.APMT_CLIENT_NAME));
+                    map.put(GlobalConstants.APMT_CLIENT_CONTACT , jsonObject1.optString(GlobalConstants.APMT_CLIENT_CONTACT));
                     map.put(GlobalConstants.APMT_PLAN_ID , jsonObject1.optString(GlobalConstants.APMT_PLAN_ID));
                     map.put(GlobalConstants.APMT_SERVICE_ID , jsonObject1.optString(GlobalConstants.APMT_SERVICE_ID));
                     map.put(GlobalConstants.APMT_SERVICE_NAME , jsonObject1.optString(GlobalConstants.APMT_SERVICE_NAME));

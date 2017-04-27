@@ -176,154 +176,6 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
     }
 
 
-    /**
-     * Hit Service and assign Petty Cash
-     */
-
-    public class AssignPettyCashAsyncTask extends AsyncTask<String, String, String>
-    {
-
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-
-        @Override
-        protected void onPreExecute() {
-
-            gif_loader.setVisibility(View.VISIBLE);
-
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
-
-                al_str_key.add(GlobalConstants.HAND_REASON);
-                al_str_value.add(str_rsn);
-
-                al_str_key.add(GlobalConstants.HAND_AMOUNT);
-                al_str_value.add(str_amount);
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("add_petty_cash");
-
-                for (int i =0 ; i < al_str_key.size() ; i++)
-                {
-                    Log.i("Key",""+ al_str_key.get(i));
-                    Log.i("Value",""+ al_str_value.get(i));
-                }
-
-                message = ws.AssignCashInHandService(context, al_str_key, al_str_value);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            gif_loader.setVisibility(View.INVISIBLE);
-
-            if (message.equalsIgnoreCase("true"))
-            {
-                Toast.makeText(context, "Petty Cash Assigned", Toast.LENGTH_SHORT).show();
-
-                callWebServices();
-               // finish();
-            }
-            else {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-    }
-
-
-
-
-    /**
-     * Hit Service and assign money
-     */
-
-    public class AssignCashInHandAsyncTask extends AsyncTask<String, String, String>
-     {
-
-        OkHttpClient httpClient = new OkHttpClient();
-        String resPonse = "";
-        String message = "";
-
-        @Override
-        protected void onPreExecute() {
-
-            gif_loader.setVisibility(View.VISIBLE);
-
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            try {
-
-                ArrayList<String> al_str_key = new ArrayList<>();
-                ArrayList<String> al_str_value = new ArrayList<>();
-
-                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
-                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
-
-                al_str_key.add(GlobalConstants.HAND_REASON);
-                al_str_value.add(str_rsn);
-
-                al_str_key.add(GlobalConstants.HAND_AMOUNT);
-                al_str_value.add(str_amount);
-
-                al_str_key.add(GlobalConstants.ACTION);
-                al_str_value.add("assign_cash_in_hand");
-
-                for (int i =0 ; i < al_str_key.size() ; i++)
-                {
-                    Log.i("Key",""+ al_str_key.get(i));
-                    Log.i("Value",""+ al_str_value.get(i));
-                }
-
-                message = ws.AssignCashInHandService(context, al_str_key, al_str_value);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            gif_loader.setVisibility(View.INVISIBLE);
-
-            if (message.equalsIgnoreCase("true"))
-            {
-                Toast.makeText(context, "Balance Assigned", Toast.LENGTH_SHORT).show();
-                callWebServices();
-               // finish();
-            }
-            else {
-                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-    }
-
 
 
     /**
@@ -675,6 +527,8 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
             {
                 Toast.makeText(context, "Expense Balance Assigned", Toast.LENGTH_SHORT).show();
 
+                ed_exp_amount.setText("");
+
                 callWebServices();
                 //finish();
             }
@@ -686,6 +540,158 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
         }
 
     }
+
+    /**
+     * Hit Service and assign Petty Cash
+     */
+
+    public class AssignPettyCashAsyncTask extends AsyncTask<String, String, String>
+    {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.HAND_REASON);
+                al_str_value.add(str_rsn);
+
+                al_str_key.add(GlobalConstants.HAND_AMOUNT);
+                al_str_value.add(str_amount);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("add_petty_cash");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.AssignCashInHandService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.INVISIBLE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                Toast.makeText(context, "Petty Cash Assigned", Toast.LENGTH_SHORT).show();
+
+                ed_petty_amount.setText("");
+
+                callWebServices();
+                // finish();
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
+
+    /**
+     * Hit Service and assign money
+     */
+
+    public class AssignCashInHandAsyncTask extends AsyncTask<String, String, String>
+    {
+
+        OkHttpClient httpClient = new OkHttpClient();
+        String resPonse = "";
+        String message = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            gif_loader.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                ArrayList<String> al_str_key = new ArrayList<>();
+                ArrayList<String> al_str_value = new ArrayList<>();
+
+                al_str_key.add(GlobalConstants.USER_BRANCH_ID);
+                al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
+
+                al_str_key.add(GlobalConstants.HAND_REASON);
+                al_str_value.add(str_rsn);
+
+                al_str_key.add(GlobalConstants.HAND_AMOUNT);
+                al_str_value.add(str_amount);
+
+                al_str_key.add(GlobalConstants.ACTION);
+                al_str_value.add("assign_cash_in_hand");
+
+                for (int i =0 ; i < al_str_key.size() ; i++)
+                {
+                    Log.i("Key",""+ al_str_key.get(i));
+                    Log.i("Value",""+ al_str_value.get(i));
+                }
+
+                message = ws.AssignCashInHandService(context, al_str_key, al_str_value);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            gif_loader.setVisibility(View.INVISIBLE);
+
+            if (message.equalsIgnoreCase("true"))
+            {
+                Toast.makeText(context, "Balance Assigned", Toast.LENGTH_SHORT).show();
+
+                ed_wd_amount.setText("");
+
+                callWebServices();
+                // finish();
+            }
+            else {
+                Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+
 
 
 

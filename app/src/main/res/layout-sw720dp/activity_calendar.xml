@@ -84,9 +84,6 @@
         android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
 
 
-
-
-
     <RelativeLayout
         android:id="@+id/rel_continue"
         android:layout_width="match_parent"

@@ -121,6 +121,7 @@ public class GlobalConstants {
 
     public static final String APMT_CLIENT_ID = "client_id";
     public static final String APMT_CLIENT_NAME = "client_name";
+    public static final String APMT_CLIENT_CONTACT = "contact";
     public static final String APMT_ID = "appointment_id";
     public static final String APMT_PLAN_ID = "plan_id";
     public static final String APMT_SERVICE_ID = "service_id";

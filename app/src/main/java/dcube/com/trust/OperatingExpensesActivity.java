@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,7 +21,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
@@ -36,8 +39,9 @@ public class OperatingExpensesActivity extends Activity {
 
     RadioButton radio_other,radio_running_exp,radio_dkt_commodity,radio_non_dkt,radio_marketing;
     RadioButton radio_commodity,radio_salary,radio_rent,radio_consultancy,radio_equipment;
+    RadioButton radio_cleaning,radio_internet,radio_security;
 
-    EditText ed_other,ed_wd_amount,ed_petty_rsn;
+    EditText ed_other,ed_wd_amount;
 
     ImageView image_view;
 
@@ -54,11 +58,22 @@ public class OperatingExpensesActivity extends Activity {
 
     CustomDialogClass cdd;
 
-    private static final int CAMERA_REQUEST = 1888;
-
     CheckNetConnection cn;
 
     RelativeLayout rel_parent_layout;
+
+    public boolean is_pic_selected;
+    public static final String UPLOAD_KEY = "image";
+
+    Bitmap photo;
+    public static HashMap<String,String> data;
+
+    ImageView iv_receipt;
+
+    private final int CAMERA_REQUEST = 1888;
+
+    TextView tv_receipt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +90,10 @@ public class OperatingExpensesActivity extends Activity {
 
         cn = new CheckNetConnection(this);
 
+        tv_receipt = (TextView) findViewById(R.id.tv_receipt);
+
+        iv_receipt = (ImageView)findViewById(R.id.iv_receipt);
+
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
       //  image_view = (ImageView) findViewById(R.id.image_view);
@@ -89,6 +108,10 @@ public class OperatingExpensesActivity extends Activity {
         radio_rent=(RadioButton)findViewById(R.id.radio_rent);
         radio_consultancy=(RadioButton)findViewById(R.id.radio_consultancy);
         radio_equipment=(RadioButton)findViewById(R.id.radio_equipment);
+
+        radio_cleaning=(RadioButton)findViewById(R.id.radio_cleaning);
+        radio_internet=(RadioButton)findViewById(R.id.radio_internet);
+        radio_security=(RadioButton)findViewById(R.id.radio_security);
 
         radio_dkt_commodity = (RadioButton) findViewById(R.id.radio_dkt_commodity);
         radio_non_dkt = (RadioButton) findViewById(R.id.radio_non_dkt);
@@ -164,6 +187,21 @@ public class OperatingExpensesActivity extends Activity {
                     str_exp_rsn = "Equipment";
                     str_remarks = "NA";
                 }
+                else if (radio_internet.isChecked())
+                {
+                    str_exp_rsn = "Internet";
+                    str_remarks = "NA";
+                }
+                else if (radio_security.isChecked())
+                {
+                    str_exp_rsn = "Security";
+                    str_remarks = "NA";
+                }
+                else if (radio_cleaning.isChecked())
+                {
+                    str_exp_rsn = "Cleaning";
+                    str_remarks = "NA";
+                }
                 else if (radio_other.isChecked())
                 {
                     str_exp_rsn = "other";
@@ -223,6 +261,16 @@ public class OperatingExpensesActivity extends Activity {
             }
         });
 
+        tv_receipt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        });
+
+
 
         rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -238,17 +286,12 @@ public class OperatingExpensesActivity extends Activity {
         str_user_id = global.getAl_login_list().get(0).get(GlobalConstants.USER_ID);
 
 
-        if (cn.isNetConnected())
-        {
-            new GetExpBalanceAsyncTask().execute();
-        }
-        else
-        {
-            Toast.makeText(OperatingExpensesActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-        }
-
+       callWebServices();
 
     }
+
+
+
 
     /**
      * Show the details of transaction
@@ -296,6 +339,12 @@ public class OperatingExpensesActivity extends Activity {
 
                     if (cn.isNetConnected())
                     {
+
+                        if (is_pic_selected)
+                        {
+                            sendImage(photo);
+                        }
+
                         dismiss();
                         new WithDrawMoneyAsyncTask().execute();
                     }
@@ -354,6 +403,12 @@ public class OperatingExpensesActivity extends Activity {
                 al_str_key.add(GlobalConstants.WD_REASON);
                 al_str_value.add(str_exp_rsn);
 
+                if (is_pic_selected)
+                {
+                    al_str_key.add(GlobalConstants.PT_IMAGE);
+                    al_str_value.add(data.get(UPLOAD_KEY));
+                }
+
 //                al_str_key.add(GlobalConstants.WD_PETTY_RSN);
 //                al_str_value.add(str_pety_rsn);
 
@@ -389,6 +444,16 @@ public class OperatingExpensesActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
+                callWebServices();
+
+                ed_wd_amount.setText("");
+                ed_other.setText("");
+                // iv_receipt.refreshDrawableState();
+
+                iv_receipt.setImageBitmap(null);
+
+                is_pic_selected = false;
+
                 showDoneDialog();
             }
             else {
@@ -463,7 +528,8 @@ public class OperatingExpensesActivity extends Activity {
 
                 cdd.dismiss();
                 doneDialog.cancel();
-                finish();
+
+              //  finish();
 
             }
         });
@@ -549,11 +615,53 @@ public class OperatingExpensesActivity extends Activity {
     {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
         {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            image_view.setImageBitmap(photo);
+            photo = (Bitmap) data.getExtras().get("data");
+            iv_receipt.setImageBitmap(photo);
+
+            is_pic_selected = true;
+
         }
 
     }
+
+
+    /**
+     * Convert image into string
+     * @param bmp
+     * @return
+     */
+
+
+    public String getStringImage(Bitmap bmp)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+
+    /**
+     * Save image in Hash map
+     * @param params
+     */
+
+
+    public void sendImage(Bitmap... params)
+    {
+        Bitmap bitmap = params[0];
+
+        String uploadImage = getStringImage(bitmap);
+
+        data = new HashMap<>();
+
+        data.put(UPLOAD_KEY, uploadImage);
+
+    }
+
+
+
 
 
     /**
@@ -581,6 +689,18 @@ public class OperatingExpensesActivity extends Activity {
     }
 
 
+    public void callWebServices()
+    {
+        if (cn.isNetConnected())
+        {
+            new GetExpBalanceAsyncTask().execute();
+        }
+        else
+        {
+            Toast.makeText(OperatingExpensesActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
 
 }

@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:padding="10sp"
     android:gravity="center"
-    tools:context=".StockControlActivity">
+    tools:context=".StockManagementActivity">
 
     <TextView
         android:id="@+id/header"
