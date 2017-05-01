@@ -27,6 +27,7 @@ import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.Global;
+import lecho.lib.hellocharts.formatter.SimpleAxisValueFormatter;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
@@ -117,7 +118,6 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
 
         tv_date_from=(TextView)findViewById(R.id.tv_date_from);
         tv_date_to=(TextView)findViewById(R.id.tv_date_to);
-
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -312,7 +312,8 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
      * Create lines and data points
      */
 
-    private void generateData() {
+    private void generateData()
+    {
 
         List<Line> lines = new ArrayList<Line>();
 
@@ -385,9 +386,17 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
 //            axisX = new Axis();
 //        }
 
+        SimpleAxisValueFormatter formatter = new SimpleAxisValueFormatter();
+
+        formatter.setDecimalDigitsNumber(0);
+
         axisX = new Axis();
 
+      //  axisX.setFormatter(formatter);
+        axisY.setFormatter(formatter);
+
         axisX.setTextSize(20);
+
         axisY.setTextSize(20);
         axisY.setMaxLabelChars(10);
 
@@ -631,7 +640,6 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
     /**
      * Hit web service and get branch balance
      */
-
 
     public class GetBranchBalanceAsyncTask extends AsyncTask<String, String, String> {
 
