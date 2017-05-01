@@ -214,45 +214,61 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
 
         Arrays.sort(int_stock_arr_sorted , Collections.<Integer>reverseOrder());
 
-        if ( count == 12 )
+//        if ( count == 12 )
+//        {
+//            dateArr = new String[global.getAl_on_date().size()];
+//            dateArr = global.getAl_on_date().toArray(dateArr);
+//        }
+//        else if (count == 24)
+//        {
+//            for (int i=0; i < count; i++)
+//            {
+//                String[] date_time = global.getAl_on_date().get(i).split("\\s+");
+//
+//                String[] date = date_time[1].split(":");
+//
+//                al_time.add(date[0]);
+//
+//            }
+//
+//            dateArr = new String[al_time.size()];
+//            dateArr = al_time.toArray(dateArr);
+//     //       Arrays.sort(dateArr , Collections.<String>reverseOrder());
+//
+//        }
+//        else
+//        {
+//            for (int i=0; i < count; i++)
+//            {
+//                String[] date_time = global.getAl_on_date().get(i).split("\\s+");
+//
+//                String[] date = date_time[0].split("-");
+//
+//                al_time.add(date[2]);
+//
+//            }
+//            dateArr = new String[al_time.size()];
+//            dateArr = al_time.toArray(dateArr);
+//
+//       //     Arrays.sort(dateArr , Collections.<String>reverseOrder());
+//
+//        }
+
+
+        for (int i=0; i < count; i++)
         {
-            dateArr = new String[global.getAl_on_date().size()];
-            dateArr = global.getAl_on_date().toArray(dateArr);
-        }
-        else if (count == 24)
-        {
-            for (int i=0; i < count; i++)
-            {
-                String[] date_time = global.getAl_on_date().get(i).split("\\s+");
+            String[] date_time = global.getAl_on_date().get(i).split("\\s+");
 
-                String[] date = date_time[1].split(":");
+            String[] date = date_time[0].split("-");
 
-                al_time.add(date[0]);
-
-            }
-
-            dateArr = new String[al_time.size()];
-            dateArr = al_time.toArray(dateArr);
-     //       Arrays.sort(dateArr , Collections.<String>reverseOrder());
+            al_time.add(date[2]);
 
         }
-        else
-        {
-            for (int i=0; i < count; i++)
-            {
-                String[] date_time = global.getAl_on_date().get(i).split("\\s+");
+        dateArr = new String[al_time.size()];
+        dateArr = al_time.toArray(dateArr);
 
-                String[] date = date_time[0].split("-");
 
-                al_time.add(date[2]);
 
-            }
-            dateArr = new String[al_time.size()];
-            dateArr = al_time.toArray(dateArr);
-
-       //     Arrays.sort(dateArr , Collections.<String>reverseOrder());
-
-        }
         for (int i =0 ; i < count ; i++)
         {
             int_date_arr_sorted[i] = Integer.parseInt(dateArr[i]);
@@ -336,38 +352,40 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
         Axis axisX;
         Axis axisY = new Axis().setHasLines(true);
 
+//
+//        /*
+//        This if shows the week days in X axis
+//         */
+//        if (global.getAl_was_sum().size() == 7)
+//        {
+//            for (int i =0 ; i <7 ; i++)
+//            {
+//                axisValues.add(new AxisValue(Float.parseFloat(dateArr[i])).setLabel(days[i]));
+//            }
+//
+//            axisX = new Axis(axisValues);
+//
+//        }
+//         /*
+//        This if shows the months in X axis
+//         */
+//        else if (global.getAl_was_sum().size() == 12)
+//        {
+//            for (int i =0 ; i < 12 ; i++)
+//            {
+//                axisValues.add(new AxisValue(Float.parseFloat(dateArr[i])).setLabel(months[i]));
+//            }
+//
+//            axisX = new Axis(axisValues);
+//
+//        }
+//
+//        else
+//        {
+//            axisX = new Axis();
+//        }
 
-        /*
-        This if shows the week days in X axis
-         */
-        if (global.getAl_was_sum().size() == 7)
-        {
-            for (int i =0 ; i <7 ; i++)
-            {
-                axisValues.add(new AxisValue(Float.parseFloat(dateArr[i])).setLabel(days[i]));
-            }
-
-            axisX = new Axis(axisValues);
-
-        }
-         /*
-        This if shows the months in X axis
-         */
-        else if (global.getAl_was_sum().size() == 12)
-        {
-            for (int i =0 ; i < 12 ; i++)
-            {
-                axisValues.add(new AxisValue(Float.parseFloat(dateArr[i])).setLabel(months[i]));
-            }
-
-            axisX = new Axis(axisValues);
-
-        }
-
-        else
-        {
-            axisX = new Axis();
-        }
+        axisX = new Axis();
 
         axisX.setTextSize(20);
         axisY.setTextSize(20);
@@ -418,6 +436,8 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
     {
         if(view == lin_date_from)
         {
+
+         //   new TotalRevenueAsyncTask().execute();
 
             Calendar now = Calendar.getInstance();
             dpd_from = DatePickerDialog.newInstance(RevenueActivity.this,
@@ -512,8 +532,8 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
                 al_str_key.add(GlobalConstants.USER_BRANCH_ID);
                 al_str_value.add(global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH_ID));
 
-//                al_str_key.add(GlobalConstants.REVENUE_AS_PER);
-//                al_str_value.add(str_as_per);
+                al_str_key.add(GlobalConstants.REVENUE_AS_PER);
+                al_str_value.add("monthly");
 
                 al_str_key.add(GlobalConstants.BRANCH);
                 al_str_value.add(str_branch);
@@ -537,7 +557,7 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
                     Log.i("Value",""+al_str_value.get(i));
                 }
 
-                message = ws.RevenueService(context, al_str_key, al_str_value);
+                message = WebServices.RevenueService(context, al_str_key, al_str_value);
 
 
             } catch (Exception e) {
@@ -580,9 +600,22 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
         @Override
         public void onValueSelected(int lineIndex, int pointIndex, PointValue value)
         {
+            String str_point = value.toString();
 
-            Toast.makeText(context, "Selected: " + value, Toast.LENGTH_SHORT).show();
-            Log.i("Selected",""+value);
+            // BREAK point values in x and y
+            String[] array_point_values = str_point.split("=");
+
+            // Value containing value of x
+            String[] array_x = array_point_values[1].split(",");
+
+            String str_time = array_x[0];
+            String str_revenue = array_point_values[2].replace("]","").trim();
+
+            Log.e("str_time",""+str_time);
+            Log.e("str_revenue",""+str_revenue);
+
+            Toast.makeText(context, "Date "+str_time+" Revenue "+str_revenue, Toast.LENGTH_LONG).show();
+
         }
 
         @Override
@@ -631,7 +664,7 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
                     Log.i("Value",""+ al_str_value.get(i));
                 }
 
-                message = ws.GetBranchBalanceService(context, al_str_key, al_str_value);
+                message = WebServices.GetBranchBalanceService(context, al_str_key, al_str_value);
 
             } catch (Exception e) {
                 e.printStackTrace();
