@@ -167,8 +167,6 @@ public class BuyPlanActivity extends Activity{
         }
 
 
-
-
         rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -184,8 +182,6 @@ public class BuyPlanActivity extends Activity{
 
 
     }
-
-
 
 
     @Override

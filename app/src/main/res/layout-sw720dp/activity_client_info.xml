@@ -34,7 +34,9 @@
 
         <ScrollView
             android:layout_width="600dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:scrollbarSize="10dp"
+            android:scrollbarThumbVertical="@drawable/custom_scroll_style">
 
 
             <LinearLayout

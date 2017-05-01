@@ -34,7 +34,7 @@ public class ClientInfoActivity extends Activity {
 
     WebServices ws;
 
-    //***** Updations ******************
+    //********************************* Updations ******************************
 
     TextView tv_sex,tv_emer_contact,tv_emer_rel,tv_children,tv_hiv_test;
 
@@ -63,7 +63,6 @@ public class ClientInfoActivity extends Activity {
         tv_emer_rel = (TextView) findViewById(R.id.tv_emer_rel);
         tv_children = (TextView) findViewById(R.id.tv_children);
         tv_hiv_test = (TextView) findViewById(R.id.tv_hiv_test);
-
 
 
         ed_med_history = (EditText) findViewById(R.id.ed_med_history);

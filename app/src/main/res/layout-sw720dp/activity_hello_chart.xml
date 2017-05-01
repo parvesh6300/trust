@@ -7,7 +7,7 @@
     android:background="@drawable/background_1"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context="dcube.com.trust.TotalRevenue">
+    tools:context="dcube.com.trust.RevenueActivity">
 
 
     <RelativeLayout
@@ -46,61 +46,164 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:background="@drawable/form_back"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:orientation="vertical">
 
-
-            <RadioGroup
-                android:id="@+id/radio_group"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@color/textColor">
 
 
-                <RadioButton
-                    android:id="@+id/radio_daily"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Daily"
-                    android:textColor="@color/purple"
+                    android:layout_weight=".5"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Date From"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/white"
                     android:textSize="35sp"
                     android:textStyle="bold"
-                    android:typeface="monospace" />
+                    android:typeface="monospace"/>
 
-                <RadioButton
-                    android:id="@+id/radio_weekly"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Weekly"
-                    android:textColor="@color/purple"
+                    android:layout_weight=".5"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Date To"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/white"
                     android:textSize="35sp"
                     android:textStyle="bold"
-                    android:typeface="monospace" />
+                    android:typeface="monospace"/>
 
-                <RadioButton
-                    android:id="@+id/radio_monthly"
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:weightSum="1"
+                android:background="@drawable/form_back">
+
+
+                <LinearLayout
+                    android:id="@+id/lin_date_from"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Monthly"
-                    android:textColor="@color/purple"
-                    android:textSize="35sp"
-                    android:textStyle="bold"
-                    android:typeface="monospace" />
+                    android:layout_weight=".5"
+                    android:layout_marginLeft="85dp">
 
-                <RadioButton
-                    android:id="@+id/radio_yearly"
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/cal_icon" />
+
+                    <TextView
+                        android:id="@+id/tv_date_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="Select Date"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/purple"
+                        android:textSize="30sp"
+                        android:layout_marginLeft="10dp"
+                        android:typeface="monospace"/>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lin_date_to"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Yearly"
-                    android:textColor="@color/purple"
-                    android:textSize="35sp"
-                    android:textStyle="bold"
-                    android:typeface="monospace" />
+                    android:layout_weight=".5"
+                    android:layout_marginLeft="90dp">
 
 
-            </RadioGroup>
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/cal_icon" />
+
+                    <TextView
+                        android:id="@+id/tv_date_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="Select Date"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/purple"
+                        android:textSize="30sp"
+                        android:layout_marginLeft="10dp"
+                        android:typeface="monospace"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <!--<RadioGroup-->
+                <!--android:id="@+id/radio_group"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/radio_daily"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Daily"-->
+                    <!--android:textColor="@color/purple"-->
+                    <!--android:textSize="35sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:typeface="monospace" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/radio_weekly"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:text="Weekly"-->
+                    <!--android:textColor="@color/purple"-->
+                    <!--android:textSize="35sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:typeface="monospace" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/radio_monthly"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:text="Monthly"-->
+                    <!--android:textColor="@color/purple"-->
+                    <!--android:textSize="35sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:typeface="monospace" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/radio_yearly"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:text="Yearly"-->
+                    <!--android:textColor="@color/purple"-->
+                    <!--android:textSize="35sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:typeface="monospace" />-->
+
+
+            <!--</RadioGroup>-->
 
 
             <LinearLayout
@@ -108,6 +211,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
+                android:layout_marginBottom="10dp"
                 android:background="@color/textColor"
                 android:orientation="horizontal">
 
@@ -167,7 +271,7 @@
             android:layout_height="600dp"
             android:layout_gravity="center"
             android:layout_marginEnd="15dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="30dp" />
 
 
     </LinearLayout>

@@ -55,13 +55,10 @@
     <RelativeLayout
         android:layout_width="650dp"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/form_back"
+        android:id="@+id/list_layout"
         android:layout_below="@+id/search_layout"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_above="@+id/gif_loader"
-        android:id="@+id/list_layout">
+        android:layout_centerHorizontal="true">
 
         <LinearLayout
             android:layout_width="match_parent"
