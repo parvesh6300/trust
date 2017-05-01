@@ -181,7 +181,7 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
         if (cn.isNetConnected())
         {
             new GetBranchBalanceAsyncTask().execute();
-            new TotalRevenueAsyncTask().execute();
+          //  new TotalRevenueAsyncTask().execute();
         }
         else {
             Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
@@ -430,6 +430,7 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
 
 
     }
+
 
     @Override
     public void onClick(View view)
