@@ -83,9 +83,13 @@ public class ServiceSelectedAdapter extends BaseAdapter {
         holder.tv_name = (TextView) rowView.findViewById(R.id.tv_name);
         holder.tv_service_cost = (TextView) rowView.findViewById(R.id.tv_service_cost);
 
-
         holder.tv_name.setText(global.getAl_selected_service().get(position).get(GlobalConstants.SERVICE_NAME));   //service_name.get(position)
-        holder.tv_service_cost.setText(global.getAl_selected_service().get(position).get(GlobalConstants.SERVICE_PRICE));
+
+        String formatted_service_cost = global.getAl_selected_service().get(position).get(GlobalConstants.SERVICE_PRICE);
+
+        formatted_service_cost = FormatString.getCommaInString(formatted_service_cost);
+
+        holder.tv_service_cost.setText(formatted_service_cost);
 
         return rowView;
     }

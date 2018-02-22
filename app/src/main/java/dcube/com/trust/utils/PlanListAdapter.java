@@ -106,7 +106,12 @@ public class PlanListAdapter extends BaseAdapter {
         holder.iv = (ImageView) rowView.findViewById(R.id.iv);
 
         holder.name.setText(al_plan_name.get(position));
-        holder.plan_cost.setText(al_plan_cost.get(position));
+
+        String formatted_plan_cost = al_plan_cost.get(position);
+
+        formatted_plan_cost = FormatString.getCommaInString(formatted_plan_cost);
+
+        holder.plan_cost.setText(formatted_plan_cost);       //al_plan_cost.get(position)
 
 /*
         rowView.setOnClickListener(new View.OnClickListener() {

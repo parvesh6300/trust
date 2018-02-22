@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,18 +17,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.DepositAdapter;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class DepositMoneyActivity extends Activity {
+public class DepositMoneyActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener
+//TimePickerDialog.OnTimeSetListener,
+{
 
     Context context = this;
     ListView list_deposit;
@@ -55,6 +65,20 @@ public class DepositMoneyActivity extends Activity {
 
     RelativeLayout rel_parent_layout;
 
+    RelativeLayout datepicker;
+    //RelativeLayout timepicker;
+
+    int int_selected_day;
+    int int_today;
+
+    TextView date;
+ //   TextView time;
+
+    String str_time_pick,str_date,str_time;
+
+    String format_time = "",format_date = "";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -63,7 +87,6 @@ public class DepositMoneyActivity extends Activity {
         setContentView(R.layout.activity_deposit_money);
 
         global = (Global) getApplicationContext();
-
 
         cn = new CheckNetConnection(this);
 
@@ -81,6 +104,16 @@ public class DepositMoneyActivity extends Activity {
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
+        datepicker = (RelativeLayout) findViewById(R.id.datepicker);
+
+      //  timepicker = (RelativeLayout) findViewById(R.id.timepicker);
+
+        date = (TextView) findViewById(R.id.tv_date_label);
+
+     //   time = (TextView) findViewById(R.id.tv_time_label);
+
+
+
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
 
@@ -96,6 +129,14 @@ public class DepositMoneyActivity extends Activity {
                 {
                     Toast.makeText(DepositMoneyActivity.this, "Amount should be greater than 0", Toast.LENGTH_SHORT).show();
                 }
+                else if (date.getText().toString().matches("Date"))
+                {
+                    Toast.makeText(DepositMoneyActivity.this, "Specify Date", Toast.LENGTH_SHORT).show();
+                }
+//                else if (time.getText().toString().matches("Time"))
+//                {
+//                    Toast.makeText(DepositMoneyActivity.this, "Specify Time", Toast.LENGTH_SHORT).show();
+//                }
                 else
                 {
                     str_deposit_amount = ed_deposit_amount.getText().toString();
@@ -108,6 +149,9 @@ public class DepositMoneyActivity extends Activity {
                     {
                         str_remark = ed_remark.getText().toString();
                     }
+
+                    str_date = date.getText().toString();
+                    str_time =  "00:00:00";        //str_time_pick ; //time.getText().toString();
 
                     cdd = new CustomDialogClass(DepositMoneyActivity.this);
                     cdd.show();
@@ -129,10 +173,112 @@ public class DepositMoneyActivity extends Activity {
 
 
 
+
+        datepicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar now = Calendar.getInstance();
+
+
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        DepositMoneyActivity.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                dpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
+
+                now.add(Calendar.DATE,0);
+                //dpd.setMinDate(now);
+
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+
+                dpd.setMaxDate(now);
+
+            }
+        });
+
+        /*
+
+        timepicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar now = Calendar.getInstance();
+
+                int_today = now.get(Calendar.DATE);
+
+                int hour = now.get(Calendar.HOUR_OF_DAY);
+                int min = now.get(Calendar.MINUTE);
+                int sec = now.get(Calendar.SECOND);
+
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        DepositMoneyActivity.this,
+                        now.get(Calendar.HOUR_OF_DAY),
+                        now.get(Calendar.MINUTE),
+                        false);
+
+                tpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
+
+                if (int_today == int_selected_day)
+                {
+                    //tpd.setMinTime(now.get(Calendar.HOUR_OF_DAY),Calendar.MINUTE,Calendar.SECOND);
+                    tpd.setMaxTime(hour,min,sec);
+                }
+
+                tpd.show(getFragmentManager(), "Timepickerdialog"); //Datepickerdialog
+
+
+
+            }
+        });
+
+
+        */
+
         callWebServices();
 
     }
 
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
+        String d = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+
+        int_selected_day = dayOfMonth;
+
+        date.setText(d);
+    }
+
+    /*
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+
+        String str_format_time="";
+
+        str_time_pick = hourOfDay+":"+minute+":"+second;
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try
+        {
+            Date date = format.parse("2017-01-30 "+str_time_pick);
+            str_format_time = new SimpleDateFormat("hh:mm a").format(date);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        Log.i("Time","Picker "+str_format_time);
+
+        time.setText(str_format_time);
+    }
+
+*/
 
     /**
      * Custom dialog show details of transaction
@@ -168,8 +314,22 @@ public class DepositMoneyActivity extends Activity {
 
             branch_balance = global.getStr_branch_balance();
 
-            tv_total_amount.setText("ACCOUNT TOTAL : "+branch_balance);
-            tv_deposit.setText("DEPOSIT : "+str_deposit_amount);
+            String bra_bal =  branch_balance;
+
+            bra_bal = FormatString.getCommaInString(bra_bal);
+
+            tv_total_amount.setText("ACCOUNT TOTAL : "+bra_bal);
+
+           // tv_total_amount.setText("ACCOUNT TOTAL : "+branch_balance);
+
+
+            String deposit_amnt =  str_deposit_amount;
+
+            deposit_amnt = FormatString.getCommaInString(deposit_amnt);
+
+            tv_deposit.setText("DEPOSIT : "+deposit_amnt);
+
+          //  tv_deposit.setText("DEPOSIT : "+str_deposit_amount);
 
             if (! branch_balance.equalsIgnoreCase(null))
             {
@@ -177,7 +337,11 @@ public class DepositMoneyActivity extends Activity {
                 int_deposit = Float.parseFloat(str_deposit_amount);
                 int_balance = int_total_amount + int_deposit;
 
-                tv_balance.setText("PROJECTED BALANCE : "+String.valueOf(int_balance));
+                String str_bal =  String.valueOf(int_balance);
+
+                str_bal = FormatString.getCommaInString(str_bal);
+
+                tv_balance.setText("PROJECTED BALANCE : "+str_bal);  //String.valueOf(int_balance)
 
             }
             else
@@ -194,6 +358,23 @@ public class DepositMoneyActivity extends Activity {
 
                     if (cn.isNetConnected())
                     {
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                        try {
+
+                            Date date = format.parse(str_date+" "+str_time);
+                            Log.e("Date","Format "+date);
+
+                            format_time = format.format(date);
+                            Log.e("Time","Format "+format_time);
+
+                            format_date = new SimpleDateFormat("yyyy-MM-dd").format(date);
+                            Log.e("Date","Format "+format_date);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
                         tv_deposit.setClickable(false);
                         new DepositMoneyAsyncTask().execute();
                     }
@@ -269,9 +450,16 @@ public class DepositMoneyActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
+                String bra_bal =  global.getStr_branch_balance();
+
+                bra_bal = FormatString.getCommaInString(bra_bal);
+
+                tv_total_amount.setText(bra_bal+" TZS");
+
+               // tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
             }
-            else {
+            else
+            {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
@@ -318,6 +506,9 @@ public class DepositMoneyActivity extends Activity {
                 al_str_key.add(GlobalConstants.BRANCH);
                 al_str_value.add(str_branch);
 
+                al_str_key.add(GlobalConstants.CREATED);
+                al_str_value.add(format_time);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("deposits");
 
@@ -345,12 +536,16 @@ public class DepositMoneyActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
+                date.setText("Date");
+
+               // time.setText("Time");
+
                 callWebServices();
 
                 showDoneDialog();
-
             }
-            else {
+            else
+            {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 
@@ -405,7 +600,7 @@ public class DepositMoneyActivity extends Activity {
      */
 
 
-    public class DepositHistoryAsyncTask extends AsyncTask<String, String, String> {
+    private class DepositHistoryAsyncTask extends AsyncTask<String, String, String> {
 
         OkHttpClient httpClient = new OkHttpClient();
         String resPonse = "";

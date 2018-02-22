@@ -121,8 +121,11 @@ public class CashHistoryAdapter extends BaseAdapter {
         holder.tv_year.setText("'"+date[0]);
         holder.tv_date.setText(date[2]);
 
+        String formatted_cash_amnt = al_cash_amount.get(pos);
 
-        holder.tv_amount.setText(al_cash_amount.get(pos)+" TZS");
+        formatted_cash_amnt = FormatString.getCommaInString(formatted_cash_amnt);
+
+        holder.tv_amount.setText(formatted_cash_amnt+" TZS");  //al_cash_amount.get(pos)
 
         holder.tv_detail.setText(al_cash_detail.get(pos));
 

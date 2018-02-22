@@ -26,6 +26,7 @@ import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import pl.droidsonroids.gif.GifTextView;
 
@@ -318,9 +319,14 @@ public class PaymentDetailFragment extends Fragment {
 
         }
 
+        String formatted_total_cost = String.valueOf(total_cost);
 
-        ed_amount.setText(String.valueOf(total_cost));
-        ed_payable_amount.setText(String.valueOf(total_cost));
+        formatted_total_cost = FormatString.getCommaInString(formatted_total_cost);
+
+        ed_amount.setText(formatted_total_cost);            //String.valueOf(total_cost)
+
+        ed_payable_amount.setText(String.valueOf(total_cost));        //String.valueOf(total_cost)
+
         ed_amount.setFocusable(false);
         ed_amount.setClickable(false);
 
@@ -349,20 +355,30 @@ public class PaymentDetailFragment extends Fragment {
                 if (editable.toString().length() > 0)
                 {
                     rel_rsn_layout.setVisibility(View.VISIBLE);
+
                     float f_discount = Float.parseFloat(editable.toString());
-                    float f_total_cost = Float.parseFloat(ed_amount.getText().toString());
+
+                    final String amnt = ed_amount.getText().toString().replace(",", "");
+
+                  //  quantity =  Integer.parseInt(s);
+
+                    float f_total_cost = Float.parseFloat(amnt);        //ed_amount.getText().toString()
 
                     float f_discounted_amount = (f_discount * f_total_cost) / 100;
                     float f_amount_to_pay = f_total_cost - f_discounted_amount;
 
-                    ed_payable_amount.setText(String.valueOf(f_amount_to_pay));
+                    String formatted_payable_amnt = String.valueOf(f_amount_to_pay);
 
+                    formatted_payable_amnt = FormatString.getCommaInString(formatted_payable_amnt);
+
+                    ed_payable_amount.setText(formatted_payable_amnt);        //String.valueOf(f_amount_to_pay)
 
                 }
                 else
                 {
                     rel_rsn_layout.setVisibility(View.GONE);
-                    ed_payable_amount.setText(String.valueOf(ed_amount.getText().toString()));
+
+                    ed_payable_amount.setText(ed_amount.getText().toString());
                 }
 
 

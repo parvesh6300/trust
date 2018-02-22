@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,18 +16,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
 
-public class WithDrawMoneyActivity extends Activity implements View.OnClickListener{
+public class WithDrawMoneyActivity extends FragmentActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener
+//TimePickerDialog.OnTimeSetListener,
+{
 
 
     EditText ed_petty_amount,ed_exp_amount,ed_wd_amount;
@@ -48,6 +58,20 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
     String str_rsn,str_amount;
 
     CustomDialogClass cd;
+
+    RelativeLayout datepicker;
+    //RelativeLayout timepicker;
+
+    int int_selected_day;
+    int int_today;
+
+    TextView date;
+   // TextView time;
+
+    String str_time_pick,str_date,str_time;
+
+    String format_time = "",format_date = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +99,14 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
         ed_exp_amount = (EditText)findViewById(R.id.ed_exp_amount);
         ed_wd_amount = (EditText)findViewById(R.id.ed_wd_amount);
 
-        tv_assign_exp.setOnClickListener(this);
-        tv_wd_amount.setOnClickListener(this);
-        tv_assign_petty.setOnClickListener(this);
-        tv_submit.setOnClickListener(this);
+        datepicker = (RelativeLayout) findViewById(R.id.datepicker);
+
+       // timepicker = (RelativeLayout) findViewById(R.id.timepicker);
+
+        date = (TextView) findViewById(R.id.datepick);
+
+      //  time = (TextView) findViewById(R.id.timepick);
+
 
 
         rel_parent_layout.setOnTouchListener(new View.OnTouchListener() {
@@ -92,7 +120,19 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
         });
 
 
+
+
         callWebServices();
+
+
+        tv_assign_exp.setOnClickListener(this);
+        tv_wd_amount.setOnClickListener(this);
+        tv_assign_petty.setOnClickListener(this);
+        tv_submit.setOnClickListener(this);
+
+        datepicker.setOnClickListener(this);
+      //  timepicker.setOnClickListener(this);
+
 
     }
 
@@ -110,6 +150,10 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                 str_rsn = "EXPENSE";
                 str_amount = ed_exp_amount.getText().toString();
 
+                str_date = date.getText().toString();
+                str_time =  "00:00:00";           // str_time_pick ; //time.getText().toString();
+
+
                 validateAmount(global.getStr_cash_in_hand_balance(),false);
 
             }
@@ -124,6 +168,10 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
                 str_rsn = "PETTY CASH";
                 str_amount = ed_petty_amount.getText().toString();
+
+                str_date = date.getText().toString();
+                str_time =  "00:00:00";           // str_time_pick ; //time.getText().toString();
+
 
                 validateAmount(global.getStr_cash_in_hand_balance(),false);
             }
@@ -140,6 +188,10 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                 str_rsn = "WITHDRAW";
                 str_amount = ed_wd_amount.getText().toString();
 
+                str_date = date.getText().toString();
+                str_time =  "00:00:00";           // str_time_pick ;; //time.getText().toString();
+
+
                 validateAmount(global.getStr_bank_bra_bal(),true);
 
             }
@@ -151,9 +203,102 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
             finish();
         }
 
+        if (view == datepicker)
+        {
+            Calendar now = Calendar.getInstance();
+
+
+            DatePickerDialog dpd = DatePickerDialog.newInstance(
+                    WithDrawMoneyActivity.this,
+                    now.get(Calendar.YEAR),
+                    now.get(Calendar.MONTH),
+                    now.get(Calendar.DAY_OF_MONTH)
+            );
+            dpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
+
+            now.add(Calendar.DATE,0);
+            //dpd.setMinDate(now);
+
+            dpd.show(getFragmentManager(), "Datepickerdialog");
+
+            dpd.setMaxDate(now);
+        }
+
+        /*
+
+        if (view == timepicker)
+        {
+            Calendar now = Calendar.getInstance();
+
+            int_today = now.get(Calendar.DATE);
+
+            int hour = now.get(Calendar.HOUR_OF_DAY);
+            int min = now.get(Calendar.MINUTE);
+            int sec = now.get(Calendar.SECOND);
+
+            TimePickerDialog tpd = TimePickerDialog.newInstance(
+                    WithDrawMoneyActivity.this,
+                    now.get(Calendar.HOUR_OF_DAY),
+                    now.get(Calendar.MINUTE),
+                    false);
+
+            tpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
+
+            if (int_today == int_selected_day)
+            {
+                //tpd.setMinTime(now.get(Calendar.HOUR_OF_DAY),Calendar.MINUTE,Calendar.SECOND);
+                tpd.setMaxTime(hour,min,sec);
+            }
+
+            tpd.show(getFragmentManager(), "Timepickerdialog"); //Datepickerdialog
+
+
+        }
+
+        */
+
 
     }
 
+
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
+        String d = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+
+        int_selected_day = dayOfMonth;
+
+        date.setText(d);
+    }
+
+    /*
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+
+        String str_format_time="";
+
+        str_time_pick = hourOfDay+":"+minute+":"+second;
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try
+        {
+            Date date = format.parse("2017-01-30 "+str_time_pick);
+            str_format_time = new SimpleDateFormat("hh:mm a").format(date);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        Log.i("Time","Picker "+str_format_time);
+
+        time.setText(str_format_time);
+    }
+
+    */
 
     /**
      * Validate edittext is empty or filled
@@ -167,6 +312,14 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
         {
             Toast.makeText(context, "Enter Amount", Toast.LENGTH_SHORT).show();
         }
+        else if (date.getText().toString().matches("Date"))
+        {
+            Toast.makeText(context, "Specify Date", Toast.LENGTH_SHORT).show();
+        }
+//        else if (time.getText().toString().matches("Time"))
+//        {
+//            Toast.makeText(context, "Specify Time", Toast.LENGTH_SHORT).show();
+//        }
         else
         {
             return true;
@@ -225,9 +378,27 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
             float wd_amount = Float.parseFloat(str_amount);
             float balance = account_total - wd_amount ;
 
-            tv_account_total.setText("ACCOUNT TOTAL : "+str_total+" TZS");  //global.getStr_cash_in_hand_balance()
-            tv_wd_amount.setText("AMOUNT : "+str_amount+" TZS");
-            tv_balance.setText("PROJECTED BALANCE : "+String.valueOf(balance)+" TZS");
+            String str_formatted_total =  str_total;
+
+            str_formatted_total = FormatString.getCommaInString(str_formatted_total);
+
+
+            tv_account_total.setText("ACCOUNT TOTAL : "+str_formatted_total+" TZS");   //str_total
+
+
+            String str_formatted_amount =  str_amount;
+
+            str_formatted_amount = FormatString.getCommaInString(str_formatted_amount);
+
+            tv_wd_amount.setText("AMOUNT : "+str_formatted_amount+" TZS");  //str_amount
+
+
+            String str_formatted_bal =  String.valueOf(balance);
+
+            str_formatted_bal = FormatString.getCommaInString(str_formatted_bal);
+
+            tv_balance.setText("PROJECTED BALANCE : "+str_formatted_bal+" TZS");  //String.valueOf(balance)
+
             tv_rsn.setText("REASON : "+str_rsn);
 
 
@@ -238,6 +409,24 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                     if (cn.isNetConnected())
                     {
                         dismiss();
+
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                        try {
+
+                            Date date = format.parse(str_date+" "+str_time);
+                            Log.e("Date","Format "+date);
+
+                            format_time = format.format(date);
+                            Log.e("Time","Format "+format_time);
+
+                            format_date = new SimpleDateFormat("yyyy-MM-dd").format(date);
+                            Log.e("Date","Format "+format_date);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
 
                         if (is_branch_bal)
                         {
@@ -389,7 +578,14 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_cash_in_hand_balance()+" TZS");
+
+                String cash_in_hand =  global.getStr_cash_in_hand_balance();
+
+                cash_in_hand = FormatString.getCommaInString(cash_in_hand);
+
+                tv_total_amount.setText(cash_in_hand+" TZS");
+
+               // tv_total_amount.setText(global.getStr_cash_in_hand_balance()+" TZS");
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
@@ -454,7 +650,15 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_bank_balance.setText(global.getStr_bank_bra_bal()+" TZS");
+
+                String bra_bal =  global.getStr_bank_bra_bal();
+
+                bra_bal = FormatString.getCommaInString(bra_bal);
+
+                tv_bank_balance.setText(bra_bal+" TZS");
+
+               // tv_bank_balance.setText(global.getStr_bank_bra_bal()+" TZS");
+
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
@@ -500,6 +704,9 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                 al_str_key.add(GlobalConstants.HAND_AMOUNT);
                 al_str_value.add(str_amount);
 
+                al_str_key.add(GlobalConstants.CREATED);
+                al_str_value.add(format_time);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("add_expense_balance");
 
@@ -528,6 +735,10 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                 Toast.makeText(context, "Expense Balance Assigned", Toast.LENGTH_SHORT).show();
 
                 ed_exp_amount.setText("");
+
+                date.setText("Date");
+
+             //   time.setText("Time");
 
                 callWebServices();
                 //finish();
@@ -579,6 +790,9 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("add_petty_cash");
 
+                al_str_key.add(GlobalConstants.CREATED);
+                al_str_value.add(format_time);
+
                 for (int i =0 ; i < al_str_key.size() ; i++)
                 {
                     Log.i("Key",""+ al_str_key.get(i));
@@ -604,6 +818,10 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                 Toast.makeText(context, "Petty Cash Assigned", Toast.LENGTH_SHORT).show();
 
                 ed_petty_amount.setText("");
+
+                date.setText("Date");
+
+              //  time.setText("Time");
 
                 callWebServices();
                 // finish();
@@ -652,6 +870,9 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                 al_str_key.add(GlobalConstants.HAND_AMOUNT);
                 al_str_value.add(str_amount);
 
+                al_str_key.add(GlobalConstants.CREATED);
+                al_str_value.add(format_time);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("assign_cash_in_hand");
 
@@ -680,6 +901,10 @@ public class WithDrawMoneyActivity extends Activity implements View.OnClickListe
                 Toast.makeText(context, "Balance Assigned", Toast.LENGTH_SHORT).show();
 
                 ed_wd_amount.setText("");
+
+                date.setText("Date");
+
+               // time.setText("Time");
 
                 callWebServices();
                 // finish();

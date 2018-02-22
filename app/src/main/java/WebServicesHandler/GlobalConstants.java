@@ -17,6 +17,7 @@ public class GlobalConstants {
     public static final String MESSAGE = "msg";
     public static final String ACTION = "action";
     public static final String BRANCH = "branch";
+    public static final String CREATED = "created";
 
     // *************************************  LOGIN VARIABLES  ****************************************************
 

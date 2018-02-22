@@ -25,6 +25,7 @@ import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.ServiceListAdapter;
 import dcube.com.trust.utils.ServiceSelectedAdapter;
@@ -226,7 +227,11 @@ public class BuyServicesActivity extends Activity {
                         Float.parseFloat(global.getAl_selected_service().get(count).get(GlobalConstants.SERVICE_PRICE));
             }
 
-            tv_service_cost.setText(String.valueOf(int_service_price));
+            String formatted_service_cost = String.valueOf(int_service_price);
+
+            formatted_service_cost = FormatString.getCommaInString(formatted_service_cost);
+
+            tv_service_cost.setText(formatted_service_cost);  //   String.valueOf(int_service_price)
 
         }
     }

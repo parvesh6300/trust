@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 
 /**
@@ -72,9 +73,23 @@ public class InvoiceFragment extends Fragment  {
         Log.i("Discount","Amount "+global.getDiscount());
         Log.i("Payment","Mode "+global.getPayment_mode());
 
-        tv_amount.setText(global.getPayment_amount());
-        tv_discount.setText(global.getDiscount());
-        tv_netamount.setText(global.getAmount_to_pay());
+        String formatted_pmnt_amnt = global.getPayment_amount();
+
+        formatted_pmnt_amnt = FormatString.getCommaInString(formatted_pmnt_amnt);
+
+        tv_amount.setText(formatted_pmnt_amnt);      //global.getPayment_amount()
+
+        String formatted_dscnt = global.getDiscount();
+
+        formatted_dscnt = FormatString.getCommaInString(formatted_dscnt);
+
+        tv_discount.setText(formatted_dscnt);      //global.getDiscount()
+
+        String formatted_amnt = global.getAmount_to_pay();
+
+        formatted_amnt = FormatString.getCommaInString(formatted_amnt);
+
+        tv_netamount.setText(formatted_amnt);     //global.getAmount_to_pay()
         tv_mode.setText("By "+global.getPayment_mode());
 
 

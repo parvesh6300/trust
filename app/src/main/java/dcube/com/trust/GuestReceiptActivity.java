@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 
 public class GuestReceiptActivity extends Activity {
@@ -48,9 +49,15 @@ public class GuestReceiptActivity extends Activity {
         Log.e("Discount","Amount "+global.getDiscount());
         Log.e("Payment","Mode "+global.getPayment_mode());
 
-        tv_amount.setText(global.getPayment_amount());
+        String formatted_payment_amnt = global.getPayment_amount();
+
+        formatted_payment_amnt = FormatString.getCommaInString(formatted_payment_amnt);
+
+        tv_amount.setText(formatted_payment_amnt);       // global.getPayment_amount()
+
         tv_discount.setText("0");
-        tv_netamount.setText(global.getPayment_amount());
+
+        tv_netamount.setText(formatted_payment_amnt);    // global.getPayment_amount()
 //        tv_mode.setText("By "+global.getPayment_mode());
 
     }

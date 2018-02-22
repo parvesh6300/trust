@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.ServiceAdapter;
 import okhttp3.OkHttpClient;
@@ -142,7 +143,12 @@ public class ViewServicesActivity extends Activity {
             tv_service_name = (TextView) findViewById(R.id.tv_service_name);
 
             tv_service_name.setText(global.getAl_view_service_details().get(position).get(GlobalConstants.ORDER_ITEM_NAME));
-            tv_service_cost.setText(global.getAl_view_service_details().get(position).get(GlobalConstants.ORDER_ITEM_PRICE));
+
+            String formatted_srvc_cost = global.getAl_view_service_details().get(position).get(GlobalConstants.ORDER_ITEM_PRICE);
+
+            formatted_srvc_cost = FormatString.getCommaInString(formatted_srvc_cost);
+
+            tv_service_cost.setText(formatted_srvc_cost);      //global.getAl_view_service_details().get(position).get(GlobalConstants.ORDER_ITEM_PRICE)
 
 
             confirm.setOnClickListener(new View.OnClickListener() {

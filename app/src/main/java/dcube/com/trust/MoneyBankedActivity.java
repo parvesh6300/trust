@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,18 +17,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.MoneyBankedAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class MoneyBankedActivity extends Activity {
+public class MoneyBankedActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener
+//TimePickerDialog.OnTimeSetListener,
+{
 
 
     ListView lv_money_banked;
@@ -53,6 +63,22 @@ public class MoneyBankedActivity extends Activity {
 
     GetBranchBalance getBalance;
 
+    RelativeLayout datepicker;
+   // RelativeLayout timepicker;
+
+    int int_selected_day;
+    int int_today;
+
+    TextView date;
+   // TextView time;
+
+    String str_time_pick,str_date,str_time;
+
+    String format_time = "",format_date = "";
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +94,14 @@ public class MoneyBankedActivity extends Activity {
         global = (Global) context.getApplicationContext();
 
         getBalance = new GetBranchBalance(context);
+
+        datepicker = (RelativeLayout) findViewById(R.id.datepicker);
+
+       // timepicker = (RelativeLayout) findViewById(R.id.timepicker);
+
+        date = (TextView) findViewById(R.id.datepick);
+
+      //  time = (TextView) findViewById(R.id.timepick);
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
@@ -86,12 +120,20 @@ public class MoneyBankedActivity extends Activity {
 
                 if (ed_deposit_amount.getText().toString().matches(""))
                 {
-                    Toast.makeText(MoneyBankedActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Enter Amount", Toast.LENGTH_SHORT).show();
                 }
                 else if ((ed_deposit_amount.getText().toString().equalsIgnoreCase("0")))
                 {
-                    Toast.makeText(MoneyBankedActivity.this, "Amount should be greater than 0", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Amount should be greater than 0", Toast.LENGTH_SHORT).show();
                 }
+                else if (date.getText().toString().matches("Date"))
+                {
+                    Toast.makeText(context, "Specify Date", Toast.LENGTH_SHORT).show();
+                }
+//                else if (time.getText().toString().matches("Time"))
+//                {
+//                    Toast.makeText(context, "Specify Time", Toast.LENGTH_SHORT).show();
+//                }
                 else
                 {
                     str_deposit_amount = ed_deposit_amount.getText().toString();
@@ -99,6 +141,8 @@ public class MoneyBankedActivity extends Activity {
                     float account_total = Float.parseFloat(global.getStr_money_to_bank());
                     float deposit_amount = Float.parseFloat(str_deposit_amount);
 
+                    str_date = date.getText().toString();
+                    str_time =  "00:00:00";           // str_time_pick ; //time.getText().toString();
 
 //                    cdd = new CustomDialogClass(MoneyBankedActivity.this);
 //                    cdd.show();
@@ -130,6 +174,69 @@ public class MoneyBankedActivity extends Activity {
         });
 
 
+        datepicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar now = Calendar.getInstance();
+
+
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        MoneyBankedActivity.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                dpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
+
+                now.add(Calendar.DATE,0);
+                //dpd.setMinDate(now);
+
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+
+                dpd.setMaxDate(now);
+
+            }
+        });
+
+        /*
+
+        timepicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar now = Calendar.getInstance();
+
+                int_today = now.get(Calendar.DATE);
+
+                int hour = now.get(Calendar.HOUR_OF_DAY);
+                int min = now.get(Calendar.MINUTE);
+                int sec = now.get(Calendar.SECOND);
+
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        MoneyBankedActivity.this,
+                        now.get(Calendar.HOUR_OF_DAY),
+                        now.get(Calendar.MINUTE),
+                        false);
+
+                tpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
+
+                if (int_today == int_selected_day)
+                {
+                    //tpd.setMinTime(now.get(Calendar.HOUR_OF_DAY),Calendar.MINUTE,Calendar.SECOND);
+                    tpd.setMaxTime(hour,min,sec);
+                }
+
+                tpd.show(getFragmentManager(), "Timepickerdialog"); //Datepickerdialog
+
+
+
+            }
+        });
+
+
+        */
+
 
 
         if (cn.isNetConnected())
@@ -148,6 +255,43 @@ public class MoneyBankedActivity extends Activity {
 
     }
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
+        String d = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+
+        int_selected_day = dayOfMonth;
+
+        date.setText(d);
+    }
+
+    /*
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+
+        String str_format_time="";
+
+        str_time_pick = hourOfDay+":"+minute+":"+second;
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try
+        {
+            Date date = format.parse("2017-01-30 "+str_time_pick);
+            str_format_time = new SimpleDateFormat("hh:mm a").format(date);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        Log.i("Time","Picker "+str_format_time);
+
+        time.setText(str_format_time);
+    }
+
+    */
 
     /**
      * Transaction custom dialog
@@ -159,6 +303,8 @@ public class MoneyBankedActivity extends Activity {
 
         public TextView tv_balance,tv_account_total,tv_deposit_money;
         public Button confirm,cancel;
+
+        private String str_bal;
 
         public CustomDialogClass(Activity a) {
             super(a);
@@ -176,21 +322,32 @@ public class MoneyBankedActivity extends Activity {
 
             confirm = (Button) findViewById(R.id.confirm);
             cancel = (Button) findViewById(R.id.cancel);
+
             tv_balance = (TextView) findViewById(R.id.tv_balance);
             tv_account_total = (TextView) findViewById(R.id.tv_account_total);
             tv_deposit_money = (TextView) findViewById(R.id.tv_deposit_money);
 
             float account_total = Float.parseFloat(global.getStr_money_to_bank());
 
-            tv_account_total.setText("Account Total : "+global.getStr_money_to_bank()+" TZS");
+            String money_to_bank = global.getStr_money_to_bank();
 
-            tv_deposit_money.setText("Money to Bank : "+str_deposit_amount+" TZS");
+            money_to_bank = FormatString.getCommaInString(money_to_bank);
+
+            tv_account_total.setText("Account Total : "+money_to_bank+" TZS");  //global.getStr_money_to_bank()
 
             float deposit_amount = Float.parseFloat(str_deposit_amount);
 
+            str_deposit_amount = FormatString.getCommaInString(str_deposit_amount);
+
+            tv_deposit_money.setText("Money to Bank : "+str_deposit_amount+" TZS");
+
             float balance = account_total - deposit_amount;
 
-            tv_balance.setText("Projected Balance : "+String.valueOf(balance)+" TZS");
+            str_bal = String.valueOf(balance);
+
+            str_bal = FormatString.getCommaInString(str_bal);
+
+            tv_balance.setText("Projected Balance : "+str_bal+" TZS");
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -198,7 +355,33 @@ public class MoneyBankedActivity extends Activity {
 
                     dismiss();
 
-                    new MoneyBankAsyncTask().execute();
+                    if (cn.isNetConnected())
+                    {
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                        try {
+
+                            Date date = format.parse(str_date+" "+str_time);
+                            Log.e("Date","Format "+date);
+
+                            format_time = format.format(date);
+                            Log.e("Time","Format "+format_time);
+
+                            format_date = new SimpleDateFormat("yyyy-MM-dd").format(date);
+                            Log.e("Date","Format "+format_date);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        new MoneyBankAsyncTask().execute();
+                    }
+                    else
+                    {
+                        Toast.makeText(MoneyBankedActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+
 
                 }
             });
@@ -254,6 +437,9 @@ public class MoneyBankedActivity extends Activity {
                 al_str_key.add(GlobalConstants.MONEY_BANKED_REASON);
                 al_str_value.add("Money Banked");
 
+                al_str_key.add(GlobalConstants.CREATED);
+                al_str_value.add(format_time);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("bank_money");
 
@@ -279,6 +465,10 @@ public class MoneyBankedActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
+                date.setText("Date");
+
+               // time.setText("Time");
+
                 ed_deposit_amount.setText("");
 
                 showDoneDialog();
@@ -360,9 +550,6 @@ public class MoneyBankedActivity extends Activity {
 
 
 
-
-
-
     /**
      * Hit the service and get the money to be bank balance
      */
@@ -415,7 +602,13 @@ public class MoneyBankedActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_money_bank.setText(global.getStr_money_to_bank()+" TZS");
+
+                String money_to_bank =  global.getStr_money_to_bank(); // global.getStr_money_to_bank()
+
+                money_to_bank = FormatString.getCommaInString(money_to_bank);
+
+                tv_money_bank.setText(money_to_bank+" TZS");
+
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
@@ -531,6 +724,8 @@ public class MoneyBankedActivity extends Activity {
 
         new GetMoneyToBankAsyncTask().execute();
     }
+
+
 
 
 }

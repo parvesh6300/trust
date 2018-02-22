@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dcube.com.trust">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="dcube.com.trust">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
-    <application
-        android:name=".utils.Global"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application android:name=".utils.Global" android:allowBackup="true"
+        android:icon="@drawable/trust_app_icon" android:label="@string/app_name"
+        android:supportsRtl="true" android:theme="@style/AppTheme">
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,155 +18,81 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".CalendarActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".CalendarActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".FinanceHomeActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".FinanceHomeActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".NurseHomeActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".NurseHomeActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ClientHomeActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".ClientHomeActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".LoginActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".LoginActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".AddClientActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".AddClientActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".SearchClientActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".SearchClientActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".GenerateInvoiceActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".GenerateInvoiceActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".StockManagementActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".StockManagementActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ProductCategoryActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".ProductCategoryActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".BuyProductActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".BuyProductActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity
-            android:name=".AddAppointmentActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".AddAppointmentActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ProductSoldHistory"
-            android:screenOrientation="portrait"
+        <activity android:name=".ProductSoldHistory" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name=".OperatingExpensesActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".OperatingExpensesActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".DepositMoneyActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".DepositMoneyActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ExpenseHistoryActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".ExpenseHistoryActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".BuyPlanActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".BuyPlanActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ViewAppointmentActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".ViewAppointmentActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ViewPendingPaymentActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".ViewPendingPaymentActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ViewPlanActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".ViewPlanActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".MoneyBankedActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".MoneyBankedActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".CartActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".CartActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".BuyServicesActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".BuyServicesActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ViewServicesActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".ViewServicesActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".GuestProductActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".GuestProductActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity
-            android:name=".UpdatePlanActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".UpdatePlanActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
 
         <!-- <activity android:name=".TestFragment" /> -->
-        <activity
-            android:name=".AddPlanAppointmentActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".AddPlanAppointmentActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity
-            android:name=".GuestReceiptActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".GuestReceiptActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-
-        <activity
-            android:name=".RevenueActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".RevenueActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity
-            android:name=".AccountHistoryActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".AccountHistoryActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity
-            android:name=".GuestDetailActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".GuestDetailActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity
-            android:name=".ClientHistoryActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".ClientHistoryActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity
-            android:name=".PettyCashActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".PettyCashActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity
-            android:name=".ClientInfoActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".ClientInfoActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity
-            android:name=".WithDrawMoneyActivity"
-            android:screenOrientation="portrait"
+        <activity android:name=".WithDrawMoneyActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan" />
-        <activity android:name=".CashInHandHistory"></activity>
+        <activity android:name=".CashInHandHistory" />
     </application>
 
 </manifest>

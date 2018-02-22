@@ -126,7 +126,11 @@ public class ExpenseAdapter extends BaseAdapter {
         holder.tv_year.setText("'"+date[0]);
         holder.tv_date.setText(date[2]);
 
-        holder.tv_amount.setText(al_expense_amount.get(pos)+" TZS");
+        String formatted_exp_amount = al_expense_amount.get(pos);
+
+        formatted_exp_amount = FormatString.getCommaInString(formatted_exp_amount);
+
+        holder.tv_amount.setText(formatted_exp_amount+" TZS");  //al_expense_amount.get(pos)
 
         if (al_expense_detail.get(pos).equalsIgnoreCase("other"))
         {

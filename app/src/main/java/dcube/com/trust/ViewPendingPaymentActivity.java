@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.PendingPaymentAdapter;
 import okhttp3.OkHttpClient;
@@ -177,10 +178,21 @@ public class ViewPendingPaymentActivity extends Activity {
 
             gif_loader.setVisibility(View.INVISIBLE);
 
-            if (message.equalsIgnoreCase("true")) {
+            if (message.equalsIgnoreCase("true"))
+            {
 
-                tv_paid_amount.setText(global.getPendAmountPaid());
-                tv_total_cost.setText(global.getPendTotalCost());
+
+                String formatted_pend_amnt = global.getPendAmountPaid();
+
+                formatted_pend_amnt = FormatString.getCommaInString(formatted_pend_amnt);
+
+                tv_paid_amount.setText(formatted_pend_amnt);     //global.getPendAmountPaid()
+
+                String formatted_total_cost = global.getPendTotalCost();
+
+                formatted_total_cost = FormatString.getCommaInString(formatted_total_cost);
+
+                tv_total_cost.setText(formatted_total_cost);        //global.getPendTotalCost()
 
                 paymentAdapter = new PendingPaymentAdapter(context);
                 lv_payment_details.setAdapter(paymentAdapter);
@@ -193,13 +205,20 @@ public class ViewPendingPaymentActivity extends Activity {
 //
 //                tv_pending_amount.setText(str_amount_to_pay);
 
+
+
                 float f_paid_amount = Float.parseFloat(global.getPendAmountPaid());
                 float f_total_cost = Float.parseFloat(global.getPendTotalCost());
                 float f_pending_amount = f_total_cost - f_paid_amount;
 
+
                 str_amount_to_pay  = String.valueOf(f_pending_amount);
 
-                tv_pending_amount.setText(str_amount_to_pay);
+                String formatted_amnt_to_pay = str_amount_to_pay;
+
+                formatted_amnt_to_pay = FormatString.getCommaInString(formatted_amnt_to_pay);
+
+                tv_pending_amount.setText(formatted_amnt_to_pay);        //str_amount_to_pay
 
             }
             else {

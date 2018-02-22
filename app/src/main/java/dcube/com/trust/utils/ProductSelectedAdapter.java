@@ -69,15 +69,31 @@ public class ProductSelectedAdapter extends BaseAdapter {
 
         holder.name.setText(global.getAl_selected_product_name().get(position));
 
-        holder.product_cost.setText(global.getAl_selected_product_price().get(position));
+        String formatted_prdct_cost = global.getAl_selected_product_price().get(position);
+
+        formatted_prdct_cost = FormatString.getCommaInString(formatted_prdct_cost);
+
+        holder.product_cost.setText(formatted_prdct_cost);  // global.getAl_selected_product_price().get(position)
 
         int int_quantity = Integer.parseInt(global.getAl_selected_product_quantity().get(position));
         int int_product_cost = Integer.parseInt(global.getAl_selected_product_price().get(position));
         int total_cost = int_quantity * int_product_cost;
 
-        holder.price.setText(String.valueOf(total_cost));
+        String formatted_total_cost = String.valueOf(total_cost);
 
-        holder.quantity.setText(" x "+global.getAl_selected_product_quantity().get(position));
+        formatted_total_cost = FormatString.getCommaInString(formatted_total_cost);
+
+        holder.price.setText(formatted_total_cost);       //String.valueOf(total_cost)
+
+
+
+        String formatted_qnty =global.getAl_selected_product_quantity().get(position);
+
+        formatted_qnty = FormatString.getCommaInString(formatted_qnty);
+
+        holder.quantity.setText(" x "+formatted_qnty); //global.getAl_selected_product_quantity().get(position)
+
+
         holder.category.setText(global.getAl_selected_product_category().get(position));
 
 

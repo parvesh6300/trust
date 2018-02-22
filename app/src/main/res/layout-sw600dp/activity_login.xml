@@ -53,11 +53,12 @@
                 android:layout_width="350dp"
                 android:layout_height="match_parent"
                 android:hint="Username"
-                android:text="rohit@gmail.com"
+
                 android:typeface="monospace"
                 android:textSize="30sp"
                 android:textColor="@color/textColor"
                 android:layout_centerInParent="true"/>
+            <!--android:text="rohit@gmail.com"-->
 
         </RelativeLayout>
 
@@ -79,12 +80,14 @@
                 android:layout_width="350dp"
                 android:layout_height="match_parent"
                 android:hint="Password"
-                android:text="123"
+
                 android:textSize="30sp"
                 android:textColor="@color/textColor"
                 android:typeface="monospace"
                 android:inputType="textPassword"
                 android:layout_centerInParent="true"/>
+
+            <!--android:text="123"-->
 
         </RelativeLayout>
 
@@ -168,16 +171,16 @@
             android:textSize="35sp"
             android:typeface="monospace"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/greyed_out"
-            android:text="Forgot Password"
-            android:id="@+id/forgot"
-            android:typeface="monospace"
-            android:gravity="center"
-            android:layout_marginTop="20dp"/>
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="20sp"-->
+            <!--android:textColor="@color/greyed_out"-->
+            <!--android:text="Forgot Password"-->
+            <!--android:id="@+id/forgot"-->
+            <!--android:typeface="monospace"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_marginTop="20dp"/>-->
 
     </LinearLayout>
 

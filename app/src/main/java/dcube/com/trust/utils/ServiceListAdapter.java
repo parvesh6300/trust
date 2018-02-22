@@ -110,7 +110,12 @@ public class ServiceListAdapter extends BaseAdapter{
         holder.lin_row = (LinearLayout) rowView.findViewById(R.id.lin_row);
 
         holder.name.setText(name.get(position));
-        holder.service_cost.setText(serviceCost.get(position));
+
+        String formatted_service_cost = serviceCost.get(position);
+
+        formatted_service_cost = FormatString.getCommaInString(formatted_service_cost);
+
+        holder.service_cost.setText(formatted_service_cost); //serviceCost.get(position)
 
         if (is_selected[position])
         {

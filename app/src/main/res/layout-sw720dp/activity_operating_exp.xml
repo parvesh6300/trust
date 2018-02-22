@@ -133,15 +133,95 @@
 
         </RelativeLayout>
 
+
+        <LinearLayout
+            android:id="@+id/lin_date_picker_layout"
+            android:layout_width="500dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:weightSum="2"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/amount_layout"
+            android:gravity="center"
+            >
+
+            <RelativeLayout
+                android:id="@+id/datepicker"
+                android:layout_width="220dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/textarea">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/cal_icon" />
+
+                <TextView
+                    android:id="@+id/datepick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:text="Date"
+                    android:textColor="@color/textColor"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
+
+            </RelativeLayout>
+
+            <!--<View-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="match_parent" />-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/timepicker"-->
+                <!--android:layout_width="220dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/textarea">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:src="@drawable/clock" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/timepick"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginRight="40dp"-->
+                    <!--android:text="Time"-->
+                    <!--android:textColor="@color/textColor"-->
+                    <!--android:textSize="30sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:typeface="monospace" />-->
+
+            <!--</RelativeLayout>-->
+
+        </LinearLayout>
+
+
         <RelativeLayout
             android:id="@+id/rel_receipt"
             android:layout_width="700dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/amount_layout"
+            android:layout_below="@+id/lin_date_picker_layout"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:paddingRight="20dp"
+
+            >
 
 
             <TextView

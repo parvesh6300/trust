@@ -27,6 +27,7 @@ import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.AccountHistoryAdapter;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
@@ -352,7 +353,11 @@ public class AccountHistoryActivity extends Activity implements DatePickerDialog
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
+                String formatted_bal =  global.getStr_branch_balance();
+
+                formatted_bal = FormatString.getCommaInString(formatted_bal);
+
+                tv_total_amount.setText(formatted_bal+" TZS");  //global.getStr_branch_balance()
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

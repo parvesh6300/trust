@@ -20,6 +20,8 @@ import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import dcube.com.trust.R;
 
+import static dcube.com.trust.R.id.tv_amount;
+
 /**
  * Created by Rohit on 18/10/16.
  */
@@ -78,7 +80,7 @@ public class DepositAdapter extends BaseAdapter {
         holder.tv_month= (TextView)convertview.findViewById(R.id.tv_month);
         holder.tv_year= (TextView)convertview.findViewById(R.id.tv_year);
         holder.tv_detail= (TextView)convertview.findViewById(R.id.tv_detail);
-        holder.tv_amount= (TextView)convertview.findViewById(R.id.tv_amount);
+        holder.tv_amount= (TextView)convertview.findViewById(tv_amount);
 
         String[] date_time = al_date.get(pos).split("\\s+");
 
@@ -89,7 +91,14 @@ public class DepositAdapter extends BaseAdapter {
         holder.tv_year.setText("'"+date[0]);
 
         holder.tv_detail.setText(al_deposit_detail.get(pos));
-        holder.tv_amount.setText(al_deposit_amount.get(pos)+" TZS");
+
+        String str_amount =  al_deposit_amount.get(pos);
+
+        str_amount = FormatString.getCommaInString(str_amount);
+
+        holder.tv_amount.setText(str_amount+" TZS");
+
+       // holder.tv_amount.setText(al_deposit_amount.get(pos)+" TZS");
 
 
         convertview.setOnClickListener(new View.OnClickListener() {

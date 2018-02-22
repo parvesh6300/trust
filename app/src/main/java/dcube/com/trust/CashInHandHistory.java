@@ -23,6 +23,7 @@ import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.CashHistoryAdapter;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
@@ -358,7 +359,11 @@ public class CashInHandHistory extends Activity implements DatePickerDialog.OnDa
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_cash_in_hand_balance()+" TZS");
+                String formatted_cash_in_hand = global.getStr_cash_in_hand_balance();
+
+                formatted_cash_in_hand = FormatString.getCommaInString(formatted_cash_in_hand);
+
+                tv_total_amount.setText(formatted_cash_in_hand+" TZS");  //global.getStr_cash_in_hand_balance()
             }
             else {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

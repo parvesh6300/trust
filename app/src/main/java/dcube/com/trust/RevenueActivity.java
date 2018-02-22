@@ -26,6 +26,7 @@ import java.util.List;
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import lecho.lib.hellocharts.formatter.SimpleAxisValueFormatter;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
@@ -195,7 +196,7 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
 
 
 
-    public void drawWeeklyGraph()
+    public void sortData()
     {
         int count =  global.getAl_on_date().size();
 
@@ -266,7 +267,6 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
         }
         dateArr = new String[al_time.size()];
         dateArr = al_time.toArray(dateArr);
-
 
 
         for (int i =0 ; i < count ; i++)
@@ -586,7 +586,7 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
 
             if (message.equalsIgnoreCase("true"))
             {
-                drawWeeklyGraph();
+                sortData();
                 generateData();
                 resetViewport();
             }
@@ -689,7 +689,11 @@ public class RevenueActivity extends FragmentActivity implements DatePickerDialo
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_branch_balance()+" TZS");
+                String formatted_bra_bal = global.getStr_branch_balance();
+
+                formatted_bra_bal = FormatString.getCommaInString(formatted_bra_bal);
+
+                tv_total_amount.setText(formatted_bra_bal+" TZS");  //global.getStr_branch_balance()
             }
             else {
 

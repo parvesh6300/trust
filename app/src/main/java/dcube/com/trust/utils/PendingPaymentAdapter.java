@@ -103,8 +103,11 @@ public class PendingPaymentAdapter extends BaseAdapter {
             holder.tv_product_name.setText(al_product_name.get(pos));
         }
 
+        String formatted_prdct_cost = al_product_cost.get(pos);
 
-        holder.tv_cost.setText(al_product_cost.get(pos)+" TZS");
+        formatted_prdct_cost = FormatString.getCommaInString(formatted_prdct_cost);
+
+        holder.tv_cost.setText(formatted_prdct_cost+" TZS");        //al_product_cost.get(pos)
 
 
         return convertview;

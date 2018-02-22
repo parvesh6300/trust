@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -30,17 +29,22 @@ import pl.droidsonroids.gif.GifTextView;
 public class LoginActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
 
     private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
-    static String role;
+    String role;
+
     RelativeLayout nurse;
     RelativeLayout finance;
+
     ImageView nurse_radio;
     ImageView finance_radio;
+
     TextView nurse_text;
     TextView finance_text;
-    TextView forgot;
+    //TextView forgot;
     TextView signin;
+
     EditText ed_user_name;
     EditText ed_pwd;
+
     String str_user_name;
 
     Boolean is_first_login = true;
@@ -97,9 +101,9 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
         finance_radio = (ImageView) findViewById(R.id.finance_radio);
         nurse_text = (TextView) findViewById(R.id.nurse_text);
         finance_text = (TextView) findViewById(R.id.finance_text);
-        forgot = (TextView) findViewById(R.id.forgot);
+     //   forgot = (TextView) findViewById(forgot);
         signin = (TextView) findViewById(R.id.signin);
-        forgot.setPaintFlags(forgot.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+    //    forgot.setPaintFlags(forgot.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
 
         nurse.setOnClickListener(this);
@@ -121,6 +125,7 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
                 finance_radio.setImageResource(R.drawable.radiounselected);
                 finance_text.setTextColor(getResources().getColor(R.color.greyed_out));
 
+                role = null;
                 role = "nurse";
                 role_id = 2;
 
@@ -135,15 +140,18 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
                 nurse_text.setTextColor(getResources().getColor(R.color.greyed_out));
 
                 role_id = 3;
+                role = null;
                 role = "finance";
                 break;
             }
 
-            case R.id.signin: {
+            case R.id.signin:
+                {
 
                 Log.i("Sign", "in clicked");
 
-                if (validate()) {
+                if (validate())
+                {
                     str_user_name = ed_user_name.getText().toString().trim();
                     str_password = ed_pwd.getText().toString().trim();
 
@@ -156,8 +164,8 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
                         Toast.makeText(LoginActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 }
-
-            }
+                break;
+                }
 
             case R.id.rel_parent_layout:
                 {
@@ -165,6 +173,7 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
                     {
                         HideKeyboard.hideSoftKeyboard(LoginActivity.this);
                     }
+                    break;
                 }
 
         }
@@ -403,25 +412,43 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
                 Log.e("Role", "WS " + global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE));
                 Log.e("Role", "Chose " + role);
 
-                if (role.equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role = nurse only
+                if (role.equals(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role = nurse only
                 {
-                    Intent i = new Intent(LoginActivity.this, NurseHomeActivity.class);
-                    startActivity(i);
-                    finish();
-                }
-                else if (role.equalsIgnoreCase(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role = finance only
-                {
-                    Intent i = new Intent(LoginActivity.this, FinanceHomeActivity.class);
-                    startActivity(i);
-                    finish();
-                }
-                else if (global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE).equalsIgnoreCase("nurse_finance"))
-                {
-                    if (role.equalsIgnoreCase("nurse")) {
+                    if (role.equalsIgnoreCase("nurse"))
+                    {
+                        Log.i("if", "case role = nurse only" );
                         Intent i = new Intent(LoginActivity.this, NurseHomeActivity.class);
                         startActivity(i);
                         finish();
-                    } else {
+                    }
+                    else
+                    {
+                        Log.i("if", "case role = finance only" );
+                        Intent i = new Intent(LoginActivity.this, FinanceHomeActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+
+                }
+//                else if (role.equals(global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE)))  //role = finance only
+//                {
+//                    Log.i("if", "case role = finance only" );
+//                    Intent i = new Intent(LoginActivity.this, FinanceHomeActivity.class);
+//                    startActivity(i);
+//                    finish();
+//                }
+                else if (global.getAl_login_list().get(0).get(GlobalConstants.USER_ROLE).equalsIgnoreCase("nurse_finance"))
+                {
+                    Log.i("if", "case role = nurse_finance only" );
+
+                    if (role.equalsIgnoreCase("nurse"))
+                    {
+                        Intent i = new Intent(LoginActivity.this, NurseHomeActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                    else
+                    {
                         Intent i = new Intent(LoginActivity.this, FinanceHomeActivity.class);
                         startActivity(i);
                         finish();

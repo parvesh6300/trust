@@ -106,7 +106,12 @@ public class AccountHistoryAdapter extends BaseAdapter {
         holder.tv_year.setText(date[0]);
 
         holder.tv_detail.setText(al_money_detail.get(pos));
-        holder.tv_amount.setText(al_money_amount.get(pos));
+
+        String formatted_amount = al_money_amount.get(pos);
+
+        formatted_amount = FormatString.getCommaInString(formatted_amount);
+
+        holder.tv_amount.setText(formatted_amount);  //al_money_amount.get(pos)
 
         convertview.setOnClickListener(new View.OnClickListener() {
             @Override

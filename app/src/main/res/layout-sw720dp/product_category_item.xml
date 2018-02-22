@@ -52,7 +52,8 @@
             android:typeface="monospace"
             android:id="@+id/minus"
             android:layout_gravity="center"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            />
 
         <EditText
             android:layout_width="70dp"
@@ -67,7 +68,8 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:inputType="number"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            />
 
 
         <TextView

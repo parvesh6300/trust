@@ -25,6 +25,7 @@ import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.CartAdapter;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
@@ -177,6 +178,8 @@ public class CartActivity extends Activity {
                     int qt =Integer.parseInt(global.getAl_cart_details().get(i).get(GlobalConstants.CART_AMOUNT));
                     float each_price = Float.parseFloat(global.getAl_cart_details().get(i).get(GlobalConstants.GET_CART_ITEM_PRICE));
 
+
+
                     total_cost = total_cost + (qt*each_price);
                 }
                 else
@@ -187,8 +190,11 @@ public class CartActivity extends Activity {
 
              }
 
+            String formatted_total_cost = String.valueOf(total_cost);
 
-            tv_message.setText("Your order total is: "+total_cost+" TZS");
+            formatted_total_cost = FormatString.getCommaInString(formatted_total_cost);
+
+            tv_message.setText("Your order total is: "+formatted_total_cost+" TZS");      //total_cost
 
 
             confirm.setOnClickListener(new View.OnClickListener() {

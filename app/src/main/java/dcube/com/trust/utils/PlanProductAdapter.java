@@ -78,7 +78,13 @@ public class PlanProductAdapter extends BaseAdapter
         holder.tv_quantity = (TextView) rowView.findViewById(R.id.tv_quantity);
 
         holder.name.setText(name.get(pos));
-        holder.tv_quantity.setText(quantity.get(pos));
+
+
+        String formatted_qnty = String.valueOf(quantity.get(pos));
+
+        formatted_qnty = FormatString.getCommaInString(formatted_qnty);
+
+        holder.tv_quantity.setText(formatted_qnty);       //quantity.get(pos)
 
         return rowView;
     }

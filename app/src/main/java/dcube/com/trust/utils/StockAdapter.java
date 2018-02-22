@@ -150,7 +150,11 @@ public class StockAdapter extends BaseAdapter {
         }
 
 
-        holder.tv_quantity.setText(in_stock.get(i));
+        String amount = in_stock.get(i);
+
+        amount = FormatString.getCommaInString(amount);
+
+        holder.tv_quantity.setText(amount);       //in_stock.get(i)
 
 
 

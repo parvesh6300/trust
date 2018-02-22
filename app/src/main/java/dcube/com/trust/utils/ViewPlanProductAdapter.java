@@ -108,6 +108,10 @@ public class ViewPlanProductAdapter extends BaseAdapter {
         holder.minus = (TextView) rowView.findViewById(R.id.minus);
 
         holder.name.setText(name.get(position));
+
+
+
+
         holder.quantity.setText(al_quantity.get(position));
 
 

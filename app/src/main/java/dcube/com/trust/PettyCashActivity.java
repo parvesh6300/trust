@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -35,18 +36,21 @@ import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import dcube.com.trust.utils.PettyCashAdapter;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class PettyCashActivity extends Activity implements DatePickerDialog.OnDateSetListener,View.OnClickListener {
+public class PettyCashActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener,View.OnClickListener
+//,TimePickerDialog.OnTimeSetListener
+{
 
     Context context = this;
     ListView list_history;
 
     LinearLayout lin_date_from,lin_date_to;
-    DatePickerDialog dpd_from,dpd_to;
+    DatePickerDialog dpd_from,dpd_to,dpd_withdraw;
 
     TextView tv_total_amount,tv_withdraw,tv_receipt;
 
@@ -84,6 +88,19 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
     public boolean is_pic_selected;
     boolean is_date_selected;
 
+    RelativeLayout datepicker;
+ //   RelativeLayout timepicker;
+
+    int int_selected_day;
+    int int_today;
+
+    TextView date;
+   // TextView time;
+
+    String str_time_pick,str_date,str_time;
+
+    String format_time = "",format_date = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -117,6 +134,15 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
         gif_loader = (GifTextView) findViewById(R.id.gif_loader);
 
+
+        datepicker = (RelativeLayout) findViewById(R.id.datepicker);
+
+       // timepicker = (RelativeLayout) findViewById(R.id.timepicker);
+
+        date = (TextView) findViewById(R.id.datepick);
+
+      //  time = (TextView) findViewById(R.id.timepick);
+
         str_branch = global.getAl_login_list().get(0).get(GlobalConstants.USER_BRANCH);
 
 
@@ -132,6 +158,14 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
                 {
                     Toast.makeText(context, "Amount should be greater than 0", Toast.LENGTH_SHORT).show();
                 }
+                else if (date.getText().toString().matches("Date"))
+                {
+                    Toast.makeText(context, "Specify Date", Toast.LENGTH_SHORT).show();
+                }
+//                else if (time.getText().toString().matches("Time"))
+//                {
+//                    Toast.makeText(context, "Specify Time", Toast.LENGTH_SHORT).show();
+//                }
                 else
                 {
                     str_deposit_amount = ed_deposit_amount.getText().toString();
@@ -149,6 +183,10 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
                     float account_total = Float.parseFloat(global.getStr_petty_balance());
                     float wd_amount = Float.parseFloat(str_deposit_amount);
 
+                    str_date = date.getText().toString();
+                    str_time =  "00:00:00";           // str_time_pick ; //time.getText().toString();
+
+
                     if (account_total >= wd_amount)
                     {
                         cdd = new CustomDialogClass(PettyCashActivity.this);
@@ -159,9 +197,9 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
                         insufficientDialog();
                     }
 
-
 //                    cdd = new CustomDialogClass(PettyCashActivity.this);
 //                    cdd.show();
+
                 }
 
             }
@@ -178,12 +216,50 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
         });
 
 
+/*
+
+        timepicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar now = Calendar.getInstance();
+
+                int_today = now.get(Calendar.DATE);
+
+                int hour = now.get(Calendar.HOUR_OF_DAY);
+                int min = now.get(Calendar.MINUTE);
+                int sec = now.get(Calendar.SECOND);
+
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        PettyCashActivity.this,
+                        now.get(Calendar.HOUR_OF_DAY),
+                        now.get(Calendar.MINUTE),
+                        false);
+
+                tpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
+
+                if (int_today == int_selected_day)
+                {
+                    //tpd.setMinTime(now.get(Calendar.HOUR_OF_DAY),Calendar.MINUTE,Calendar.SECOND);
+                    tpd.setMaxTime(hour,min,sec);
+                }
+
+                tpd.show(getFragmentManager(), "Timepickerdialog"); //Datepickerdialog
+
+
+
+            }
+        });
+
+        */
+
 
         callWebServices();
 
         tv_receipt.setOnClickListener(this);
         lin_date_from.setOnClickListener(this);
         lin_date_to.setOnClickListener(this);
+        datepicker.setOnClickListener(this);
 
     }
 
@@ -212,10 +288,49 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
             {
                 Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
             }
-
         }
 
+        if (view == dpd_withdraw)
+        {
+            String d = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+
+            int_selected_day = dayOfMonth;
+
+            date.setText(d);
+        }
+
+
     }
+
+
+    /*
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+
+        String str_format_time="";
+
+        str_time_pick = hourOfDay+":"+minute+":"+second;
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try
+        {
+            Date date = format.parse("2017-01-30 "+str_time_pick);
+            str_format_time = new SimpleDateFormat("hh:mm a").format(date);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        Log.i("Time","Picker "+str_format_time);
+
+        time.setText(str_format_time);
+    }
+
+*/
+
 
     @Override
     public void onClick(View view) {
@@ -250,11 +365,30 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
             dpd_to.setMaxDate(now);
         }
 
+        if (view == datepicker)
+        {
+            Calendar now = Calendar.getInstance();
+
+            dpd_withdraw = DatePickerDialog.newInstance(PettyCashActivity.this,
+                    now.get(Calendar.YEAR),
+                    now.get(Calendar.MONTH),
+                    now.get(Calendar.DAY_OF_MONTH)
+            );
+            dpd_withdraw.show(getFragmentManager(), "Datepickerdialog");
+
+            now.add(Calendar.DATE,0);
+            dpd_withdraw.setMaxDate(now);
+
+
+        }
+
         if (view == tv_receipt)
         {
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_REQUEST);
         }
+
+
 
 
     }
@@ -294,8 +428,18 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
             branch_balance = global.getStr_petty_balance();
 
-            tv_total_amount.setText("ACCOUNT TOTAL : "+branch_balance);
-            tv_deposit.setText("WITHDRAW : "+str_deposit_amount);
+            String formatted_branch_balance =  global.getStr_petty_balance();
+
+            formatted_branch_balance = FormatString.getCommaInString(formatted_branch_balance);
+
+            tv_total_amount.setText("ACCOUNT TOTAL : "+formatted_branch_balance);  //branch_balance
+
+
+            String formatted_deposit_amount =  str_deposit_amount;
+
+            formatted_deposit_amount = FormatString.getCommaInString(formatted_deposit_amount);
+
+            tv_deposit.setText("WITHDRAW : "+formatted_deposit_amount); // str_deposit_amount
 
             if (! branch_balance.equalsIgnoreCase(null))
             {
@@ -303,7 +447,11 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
                 int_deposit = Float.parseFloat(str_deposit_amount);
                 int_balance = int_total_amount - int_deposit;
 
-                tv_balance.setText("PROJECTED BALANCE : "+String.valueOf(int_balance));
+                String formatted_balance =  String.valueOf(int_balance);
+
+                formatted_balance = FormatString.getCommaInString(formatted_balance);
+
+                tv_balance.setText("PROJECTED BALANCE : "+formatted_balance);  //String.valueOf(int_balance)
 
             }
             else
@@ -326,6 +474,24 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
                         {
                             sendImage(photo);
                         }
+
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                        try {
+
+                            Date date = format.parse(str_date+" "+str_time);
+                            Log.e("Date","Format "+date);
+
+                            format_time = format.format(date);
+                            Log.e("Time","Format "+format_time);
+
+                            format_date = new SimpleDateFormat("yyyy-MM-dd").format(date);
+                            Log.e("Date","Format "+format_date);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
 
                         new WdPettyCashAsyncTask().execute();
                     }
@@ -414,6 +580,9 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
                     al_str_value.add(data.get(UPLOAD_KEY));
                 }
 
+                al_str_key.add(GlobalConstants.CREATED);
+                al_str_value.add(format_time);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("add_receipt");
 
@@ -441,6 +610,10 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
             if (message.equalsIgnoreCase("true"))
             {
+
+                date.setText("Date");
+
+              //  time.setText("Time");
 
                 Toast.makeText(context, "Receipt Added Successfully", Toast.LENGTH_SHORT).show();
                 
@@ -557,9 +730,14 @@ public class PettyCashActivity extends Activity implements DatePickerDialog.OnDa
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_petty_balance()+" TZS");
+                String formatted_petty_bal =  global.getStr_petty_balance();
+
+                formatted_petty_bal = FormatString.getCommaInString(formatted_petty_bal);
+
+                tv_total_amount.setText(formatted_petty_bal+" TZS");  //global.getStr_petty_balance()
             }
-            else {
+            else
+            {
                 Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
             }
 

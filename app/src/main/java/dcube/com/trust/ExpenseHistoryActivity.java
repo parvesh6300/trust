@@ -31,6 +31,7 @@ import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.WebServices;
 import dcube.com.trust.utils.ExpenseAdapter;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
@@ -511,7 +512,11 @@ public class ExpenseHistoryActivity extends Activity implements DatePickerDialog
                 list_expense.setAdapter(expenseAdapter);
                 expenseAdapter.notifyDataSetChanged();
 
-                tv_total_expense.setText(global.getStr_total_expense()+" TZS");
+                String formatted_total_exp = global.getStr_total_expense();
+
+                formatted_total_exp = FormatString.getCommaInString(formatted_total_exp);
+
+                tv_total_expense.setText(formatted_total_exp+" TZS");  //global.getStr_total_expense()
 
             }
             else

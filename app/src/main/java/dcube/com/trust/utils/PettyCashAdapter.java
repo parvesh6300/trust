@@ -125,7 +125,12 @@ public class PettyCashAdapter extends BaseAdapter {
         holder.tv_year.setText("'"+date[0]);
 
         holder.tv_detail.setText(al_petty_detail.get(pos));
-        holder.tv_amount.setText(al_petty_amount.get(pos)+" TZS");
+
+        String formatted_petty_amnt =  al_petty_amount.get(pos);
+
+        formatted_petty_amnt = FormatString.getCommaInString(formatted_petty_amnt);
+
+        holder.tv_amount.setText(formatted_petty_amnt+" TZS");  //al_petty_amount.get(pos)
 
 
         vi.setOnClickListener(new View.OnClickListener() {

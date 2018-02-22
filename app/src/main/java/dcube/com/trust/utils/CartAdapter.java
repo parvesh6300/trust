@@ -118,15 +118,26 @@ public class CartAdapter extends BaseAdapter {
 
         if (str_item_type.equalsIgnoreCase("product"))
         {
-            holder.ed_quantity.setText(al_item_quantity.get(pos));
+            String formatted_qnty = al_item_quantity.get(pos);
+
+            formatted_qnty = FormatString.getCommaInString(formatted_qnty);
+
+            //holder.ed_quantity.setText(al_item_quantity.get(pos));
+
+            holder.ed_quantity.setText(formatted_qnty);
+
             holder.ed_quantity.setFocusable(true);
             holder.ed_quantity.setClickable(true);
             holder.ed_quantity.setInputType(InputType.TYPE_CLASS_NUMBER);
 
             int each_price = Integer.parseInt(str_price);
-            int qt = Integer.parseInt(holder.ed_quantity.getText().toString());
+            int qt = Integer.parseInt(al_item_quantity.get(pos));        //holder.ed_quantity.getText().toString()
 
-            holder.tv_price.setText(String.valueOf(each_price * qt));
+            String formatted_item_cost = String.valueOf(each_price * qt);
+
+            formatted_item_cost = FormatString.getCommaInString(formatted_item_cost);
+
+            holder.tv_price.setText(formatted_item_cost);      //String.valueOf(each_price * qt)
 
         }
         else
@@ -135,7 +146,11 @@ public class CartAdapter extends BaseAdapter {
             holder.ed_quantity.setFocusable(false);
             holder.ed_quantity.setClickable(false);
 
-            holder.tv_price.setText(str_price);
+            String formatted_price = str_price;
+
+            formatted_price = FormatString.getCommaInString(formatted_price);
+
+            holder.tv_price.setText(formatted_price);     //str_price
 
         }
 
@@ -215,14 +230,25 @@ public class CartAdapter extends BaseAdapter {
 
         tv_product_name.setText(al_item_name.get(position));
         tv_product_cat.setText(al_item_type.get(position));
-        tv_quantity1.setText(al_item_quantity.get(position));
+
+
+        String formatted_qnty = al_item_quantity.get(position);
+
+        formatted_qnty = FormatString.getCommaInString(formatted_qnty);
+
+        tv_quantity1.setText(formatted_qnty);     //al_item_quantity.get(position)
 
 
         tv_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                quantity = Integer.parseInt(tv_quantity1.getText().toString());
+                final String s = tv_quantity1.getText().toString().replace(",", "");
+
+                quantity =  Integer.parseInt(s);     //holder.quantity.getText().toString()
+
+                //quantity = Integer.parseInt(tv_quantity1.getText().toString());
+
                 int max_stock = Integer.parseInt(global.getAl_cart_details().get(position).get(GlobalConstants.GET_CART_MAX_STOCK));
 
                 if (quantity > max_stock)
@@ -232,7 +258,12 @@ public class CartAdapter extends BaseAdapter {
                 else
                 {
                     quantity++;
-                    tv_quantity1.setText(String.valueOf(quantity));
+
+                    String formatted_qnty = String.valueOf(quantity);
+
+                    formatted_qnty = FormatString.getCommaInString(formatted_qnty);
+
+                    tv_quantity1.setText(formatted_qnty);        //String.valueOf(quantity)
                 }
 
             }
@@ -243,11 +274,22 @@ public class CartAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
+                final String s = tv_quantity1.getText().toString().replace(",", "");
+
+                quantity =  Integer.parseInt(s);
+
                 if (quantity > 0) {
                     quantity--;
                 }
 
-                tv_quantity1.setText(String.valueOf(quantity));
+                String formatted_qnty = String.valueOf(quantity);
+
+                formatted_qnty = FormatString.getCommaInString(formatted_qnty);
+
+              //  tv_quantity1.setText(String.valueOf(quantity));
+
+                tv_quantity1.setText(formatted_qnty);
+
             }
         });
 
@@ -265,7 +307,11 @@ public class CartAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
-                quantity = Integer.parseInt(tv_quantity1.getText().toString());
+                final String s = tv_quantity1.getText().toString().replace(",", "");
+
+                quantity =  Integer.parseInt(s);
+
+              //  quantity = Integer.parseInt(tv_quantity1.getText().toString());
 
                 new UpdateCartItemAsyncTask().execute();
 
@@ -280,22 +326,35 @@ public class CartAdapter extends BaseAdapter {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
 
                 try {
-                    quantity =  Integer.parseInt(s.toString());
+
+                    final String s = charSequence.toString().replace(",", "");
+
+                    quantity = Integer.parseInt(s);       //Integer.parseInt(charSequence.toString())
+
+
+                  //  quantity =  Integer.parseInt(s.toString());
 
                     int max_stock = Integer.parseInt(global.getAl_cart_details().get(position).get(GlobalConstants.GET_CART_MAX_STOCK));
 
                     if (quantity > max_stock)
                     {
-                        String qt = s.toString();
+                        String qt = charSequence.toString();
 
                         String[] q = new String[qt.length()];
 
                         q[0] =  qt.substring(0,qt.length()-1);
 
-                        tv_quantity1.setText(q[0]);
+                        String formatted_qnty = q[0];
+
+                        formatted_qnty = FormatString.getCommaInString(formatted_qnty);
+
+                        tv_quantity1.setText(formatted_qnty);  //q[0]
+
+
+                       // tv_quantity1.setText(q[0]);
 
                     }
                 }
@@ -309,10 +368,16 @@ public class CartAdapter extends BaseAdapter {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(Editable editable) {
 
                 try {
-                    quantity =  Integer.parseInt(s.toString());
+
+                    final String s = editable.toString().replace(",", "");
+
+                    quantity =  Integer.parseInt(s);     //editable.toString()
+
+
+                  //  quantity =  Integer.parseInt(editable.toString());
 
                     int max_stock = Integer.parseInt(global.getAl_cart_details().get(position).get(GlobalConstants.GET_CART_MAX_STOCK));
 
@@ -320,7 +385,7 @@ public class CartAdapter extends BaseAdapter {
                     {
                         if (max_stock > quantity)
                         {
-                            quantity = Integer.parseInt(tv_quantity1.getText().toString());
+                            quantity = Integer.parseInt(s);      //tv_quantity1.getText().toString()
                         }
                     }
                     else

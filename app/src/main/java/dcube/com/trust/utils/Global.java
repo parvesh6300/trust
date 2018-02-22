@@ -364,7 +364,7 @@ public class Global extends Application {
         this.al_cart_details = al_cart_details;
     }
 
-    public ArrayList<HashMap<String,String>> al_cart_details;
+    public ArrayList<HashMap<String,String>> al_cart_details = new ArrayList<>();
 
     public int total_cart_items=0;
 

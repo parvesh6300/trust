@@ -147,23 +147,28 @@ public class ProductListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
-                quantity =  Integer.parseInt(holder.quantity.getText().toString());
+                final String s = holder.quantity.getText().toString().replace(",", "");
 
-                if(Integer.parseInt(holder.quantity.getText().toString()) > 0)
+                quantity =  Integer.parseInt(s);     //holder.quantity.getText().toString()
+
+                if(quantity > 0)            //Integer.parseInt(holder.quantity.getText().toString()) > 0
                 {
                     quantity = quantity - 1;
                 }
 
-                holder.quantity.setText(String.valueOf(quantity));
+                String formatted_qnty = String.valueOf(quantity);
+
+                formatted_qnty = FormatString.getCommaInString(formatted_qnty);
+
+                holder.quantity.setText(formatted_qnty);        //  String.valueOf(quantity)
 
                 if (quantity > 0)
                 {
                     if (selected_product_id.contains(product_id.get(position)))
                     {
-
                         int pos = selected_product_id.indexOf(product_id.get(position));
 
-                        selected_product_quantity.set(pos , holder.quantity.getText().toString());
+                        selected_product_quantity.set(pos , String.valueOf(quantity));      //holder.quantity.getText().toString()
                    }
                     else
                     {
@@ -209,7 +214,9 @@ public class ProductListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
-                quantity =  Integer.parseInt(holder.quantity.getText().toString());
+                final String s = holder.quantity.getText().toString().replace(",", "");
+
+                quantity =  Integer.parseInt(s);     //holder.quantity.getText().toString()
 
                 int max_stock = Integer.parseInt(in_stock.get(position));
 
@@ -217,13 +224,17 @@ public class ProductListAdapter extends BaseAdapter {
                 {
                     quantity = quantity + 1;
 
-                    holder.quantity.setText(String.valueOf(quantity));
+                    String formatted_qnty = String.valueOf(quantity);
+
+                    formatted_qnty = FormatString.getCommaInString(formatted_qnty);
+
+                    holder.quantity.setText(formatted_qnty); //String.valueOf(quantity)
 
                     if (selected_product_id.contains(product_id.get(position)))
                     {
                         int pos = selected_product_id.indexOf(product_id.get(position));
 
-                        selected_product_quantity.set(pos , holder.quantity.getText().toString());
+                        selected_product_quantity.set(pos , String.valueOf(quantity));  //holder.quantity.getText().toString()
 
                     }
                     else
@@ -261,21 +272,28 @@ public class ProductListAdapter extends BaseAdapter {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
                 try {
-                    quantity =  Integer.parseInt(charSequence.toString());
+
+                    final String s = charSequence.toString().replace(",", "");
+
+                    quantity = Integer.parseInt(s);       //Integer.parseInt(charSequence.toString())
 
                     int max_stock = Integer.parseInt(in_stock.get(position));
 
                     if (quantity > max_stock)
                     {
-                        String qt = charSequence.toString();
+                        String qt = s;  //charSequence.toString()
 
                         String[] q = new String[qt.length()];
 
                         q[0] =  qt.substring(0,qt.length()-1);
 
-                        holder.quantity.setText(q[0]);
+                        String formatted_qnty = q[0];
 
+                        formatted_qnty = FormatString.getCommaInString(formatted_qnty);
+
+                        holder.quantity.setText(formatted_qnty);  //q[0]
                     }
+
                 }
                 catch (Exception e)
                 {
@@ -290,7 +308,9 @@ public class ProductListAdapter extends BaseAdapter {
 
                 try {
 
-                    quantity =  Integer.parseInt(editable.toString());
+                    final String s = editable.toString().replace(",", "");
+
+                    quantity =  Integer.parseInt(s);     //editable.toString()
 
                     int max_stock = Integer.parseInt(in_stock.get(position));
 
@@ -304,7 +324,7 @@ public class ProductListAdapter extends BaseAdapter {
                             {
                                 int pos = selected_product_id.indexOf(product_id.get(position));
 
-                                selected_product_quantity.set(pos , editable.toString());
+                                selected_product_quantity.set(pos , String.valueOf(quantity));      //editable.toString()
                             }
                             else
                             {

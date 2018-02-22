@@ -305,6 +305,10 @@ public class GuestProductActivity extends Activity {
                 amount_to_pay = amount_to_pay + (qt*each_price);
             }
 
+//            String formatted_bra_bal = global.getStr_branch_balance();
+//
+//            formatted_bra_bal = FormatString.getCommaInString(formatted_bra_bal);
+
             str_amount_to_pay = String.valueOf(amount_to_pay);
 
             global.setPayment_amount(str_amount_to_pay);

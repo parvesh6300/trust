@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -21,19 +22,28 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
 import java.io.ByteArrayOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import WebServicesHandler.CheckNetConnection;
 import WebServicesHandler.GlobalConstants;
 import WebServicesHandler.HideKeyboard;
 import WebServicesHandler.WebServices;
+import dcube.com.trust.utils.FormatString;
 import dcube.com.trust.utils.Global;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.gif.GifTextView;
 
-public class OperatingExpensesActivity extends Activity {
+public class OperatingExpensesActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener
+//TimePickerDialog.OnTimeSetListener,
+{
 
     RadioGroup radio_group;
 
@@ -74,6 +84,18 @@ public class OperatingExpensesActivity extends Activity {
 
     TextView tv_receipt;
 
+    RelativeLayout datepicker;
+ //   RelativeLayout timepicker;
+
+    int int_selected_day;
+    int int_today;
+
+    TextView date;
+//    TextView time;
+
+    String str_time_pick,str_date,str_time;
+
+    String format_time = "",format_date = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +111,14 @@ public class OperatingExpensesActivity extends Activity {
         rel_parent_layout = (RelativeLayout) findViewById(R.id.rel_parent_layout);
 
         cn = new CheckNetConnection(this);
+
+        datepicker = (RelativeLayout) findViewById(R.id.datepicker);
+
+      //  timepicker = (RelativeLayout) findViewById(R.id.timepicker);
+
+        date = (TextView) findViewById(R.id.datepick);
+
+     //   time = (TextView) findViewById(R.id.timepick);
 
         tv_receipt = (TextView) findViewById(R.id.tv_receipt);
 
@@ -229,6 +259,14 @@ public class OperatingExpensesActivity extends Activity {
                 {
                     Toast.makeText(OperatingExpensesActivity.this, "Specify Reason", Toast.LENGTH_SHORT).show();
                 }
+                else if (date.getText().toString().matches("Date"))
+                {
+                    Toast.makeText(OperatingExpensesActivity.this, "Specify Date", Toast.LENGTH_SHORT).show();
+                }
+//                else if (time.getText().toString().matches("Time"))
+//                {
+//                    Toast.makeText(OperatingExpensesActivity.this, "Specify Time", Toast.LENGTH_SHORT).show();
+//                }
                 else
                 {
 
@@ -282,6 +320,67 @@ public class OperatingExpensesActivity extends Activity {
         });
 
 
+        datepicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar now = Calendar.getInstance();
+
+
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        OperatingExpensesActivity.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                dpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
+
+                now.add(Calendar.DATE,0);
+                //dpd.setMinDate(now);
+
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+
+                dpd.setMaxDate(now);
+
+            }
+        });
+
+        /*
+
+        timepicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar now = Calendar.getInstance();
+
+                int_today = now.get(Calendar.DATE);
+
+                int hour = now.get(Calendar.HOUR_OF_DAY);
+                int min = now.get(Calendar.MINUTE);
+                int sec = now.get(Calendar.SECOND);
+
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        OperatingExpensesActivity.this,
+                        now.get(Calendar.HOUR_OF_DAY),
+                        now.get(Calendar.MINUTE),
+                        false);
+
+                tpd.setAccentColor(getResources().getColor(R.color.mdtp_accent_color));
+
+                if (int_today == int_selected_day)
+                {
+                    //tpd.setMinTime(now.get(Calendar.HOUR_OF_DAY),Calendar.MINUTE,Calendar.SECOND);
+                    tpd.setMaxTime(hour,min,sec);
+                }
+
+                tpd.show(getFragmentManager(), "Timepickerdialog"); //Datepickerdialog
+
+
+
+            }
+        });
+
+*/
 
         str_user_id = global.getAl_login_list().get(0).get(GlobalConstants.USER_ID);
 
@@ -290,6 +389,44 @@ public class OperatingExpensesActivity extends Activity {
 
     }
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
+        String d = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+
+        int_selected_day = dayOfMonth;
+
+        date.setText(d);
+    }
+
+    /*
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+
+        String str_format_time="";
+
+        str_time_pick = hourOfDay+":"+minute+":"+second;
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try
+        {
+            Date date = format.parse("2017-01-30 "+str_time_pick);
+            str_format_time = new SimpleDateFormat("hh:mm a").format(date);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        Log.i("Time","Picker "+str_format_time);
+
+        time.setText(str_format_time);
+    }
+
+
+    */
 
 
 
@@ -328,9 +465,24 @@ public class OperatingExpensesActivity extends Activity {
             float wd_amount = Float.parseFloat(str_wd_amount);
             float balance = account_total - wd_amount ;
 
-            tv_account_total.setText("EXPENSE BALANCE : "+global.getStr_exp_bal()+" TZS");
-            tv_wd_amount.setText("WITHDRAW : "+str_wd_amount+" TZS");
-            tv_balance.setText("PROJECTED BALANCE : "+String.valueOf(balance)+" TZS");
+            String formatted_exp_bal =  global.getStr_exp_bal();
+
+            formatted_exp_bal = FormatString.getCommaInString(formatted_exp_bal);
+
+            tv_account_total.setText("EXPENSE BALANCE : "+formatted_exp_bal+" TZS");  //global.getStr_exp_bal()
+
+            String formatted_wd_amount =  str_wd_amount;
+
+            formatted_wd_amount = FormatString.getCommaInString(formatted_wd_amount);
+
+            tv_wd_amount.setText("WITHDRAW : "+formatted_wd_amount+" TZS");
+
+
+            String formatted_bal =  String.valueOf(balance);
+
+            formatted_bal = FormatString.getCommaInString(formatted_bal);
+
+            tv_balance.setText("PROJECTED BALANCE : "+formatted_bal+" TZS");  //String.valueOf(balance)
 
 
             confirm.setOnClickListener(new View.OnClickListener() {
@@ -346,6 +498,24 @@ public class OperatingExpensesActivity extends Activity {
                         }
 
                         dismiss();
+
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                        try {
+
+                            Date date = format.parse(str_date+" "+str_time);
+                            Log.e("Date","Format "+date);
+
+                            format_time = format.format(date);
+                            Log.e("Time","Format "+format_time);
+
+                            format_date = new SimpleDateFormat("yyyy-MM-dd").format(date);
+                            Log.e("Date","Format "+format_date);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
                         new WithDrawMoneyAsyncTask().execute();
                     }
                     else {
@@ -418,6 +588,9 @@ public class OperatingExpensesActivity extends Activity {
                 al_str_key.add(GlobalConstants.BRANCH);
                 al_str_value.add(str_branch);
 
+                al_str_key.add(GlobalConstants.CREATED);
+                al_str_value.add(format_time);
+
                 al_str_key.add(GlobalConstants.ACTION);
                 al_str_value.add("add_expenses");
 
@@ -444,6 +617,11 @@ public class OperatingExpensesActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
+
+                date.setText("Date");
+
+              //  time.setText("Time");
+
                 callWebServices();
 
                 ed_wd_amount.setText("");
@@ -590,7 +768,11 @@ public class OperatingExpensesActivity extends Activity {
 
             if (message.equalsIgnoreCase("true"))
             {
-                tv_total_amount.setText(global.getStr_exp_bal()+" TZS");
+                String formatted_exp_bal =  global.getStr_exp_bal();
+
+                formatted_exp_bal = FormatString.getCommaInString(formatted_exp_bal);
+
+                tv_total_amount.setText(formatted_exp_bal+" TZS");  //global.getStr_exp_bal()
 
             }
             else {
@@ -677,6 +859,9 @@ public class OperatingExpensesActivity extends Activity {
 
         if (exp_bal > wd_amount)
         {
+            str_date = date.getText().toString();
+            str_time =  "00:00:00";           // str_time_pick ;
+
             cdd = new CustomDialogClass(OperatingExpensesActivity.this);
             cdd.show();
 
